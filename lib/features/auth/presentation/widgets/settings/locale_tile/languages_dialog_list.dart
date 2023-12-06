@@ -23,7 +23,13 @@ class LanguagesDialogList extends StatelessWidget {
                   horizontal: AppConst.defaultPadding,
                 ),
                 leading: Radio<LocaleClass>(
-                    value: e, groupValue: null, onChanged: (a) {}),
+                  value: e,
+                  groupValue:
+                      cubit.appLocale.languageCode == e.locale.languageCode
+                          ? e
+                          : null,
+                  onChanged: (val) {},
+                ),
                 title: Text(e.languageName),
                 trailing: e.isDeviceLang ? Text(S.of(context).system) : null,
                 onTap: () {
