@@ -17,7 +17,7 @@ class RecoverAccountButton extends StatelessWidget {
           text: S.of(context).forgetPassword,
           children: [
             TextSpan(
-              style: TextStyle(color: AppColor.active(context)),
+              style: const TextStyle(color: AppColor.active),
               text: S.of(context).recover,
             )
           ],

@@ -19,7 +19,7 @@ class OutlinedButtonText extends StatelessWidget {
         text: text,
         children: [
           TextSpan(
-            style: TextStyle(color: AppColor.active(context)),
+            style: const TextStyle(color: AppColor.active),
             text: activeText,
           )
         ],

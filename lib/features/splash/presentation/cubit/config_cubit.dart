@@ -1,4 +1,5 @@
 import 'package:data_sharing_organizing/core/utils/config/locale/locale_handler.dart';
+import 'package:data_sharing_organizing/core/utils/config/themes/app_theme.dart';
 import 'package:data_sharing_organizing/core/utils/constants/app_strings.dart';
 import 'package:data_sharing_organizing/core/utils/services/dependency.dart';
 import 'package:equatable/equatable.dart';
@@ -28,4 +29,8 @@ class ConfigCubit extends Cubit<ConfigState> {
     pref.setString(AppStrings.locale, lang);
     emit(ChangeLanguage(lang));
   }
+
+  bool get appIsDark =>
+      themeMode == ThemeMode.dark ||
+      (themeMode == ThemeMode.system && AppTheme.isDarkMode());
 }

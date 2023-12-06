@@ -4,15 +4,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 
+import 'data/my_check_box_theme_data.dart';
+import 'data/my_switch_theme_data.dart';
+
 class AppTheme {
   static ThemeData lightMode = ThemeData(
     useMaterial3: true,
     fontFamily: AppStrings.inter,
-    checkboxTheme: CheckboxThemeData(
-      fillColor: MaterialStateProperty.resolveWith<Color?>(
-        (states) => _activeColor(states, AppColor.activeLight),
-      ),
-    ),
+    checkboxTheme: MyCheckboxThemeData.light(),
+    switchTheme: MySwitchThemeData.light(),
     colorScheme: ColorScheme.fromSeed(
       seedColor: AppColor.primary,
       brightness: Brightness.light,
@@ -26,12 +26,8 @@ class AppTheme {
   );
   static ThemeData darkMode = ThemeData(
     useMaterial3: true,
-    checkboxTheme: CheckboxThemeData(
-      checkColor: const MaterialStatePropertyAll(Colors.white60),
-      fillColor: MaterialStateProperty.resolveWith<Color?>(
-        (states) => _activeColor(states, AppColor.activeDark),
-      ),
-    ),
+    checkboxTheme: MyCheckboxThemeData.dark(),
+    switchTheme: MySwitchThemeData.dark(),
     colorScheme: ColorScheme.fromSeed(
       seedColor: AppColor.primary,
       brightness: Brightness.dark,
@@ -48,20 +44,6 @@ class AppTheme {
   static bool isDarkMode() {
     final SchedulerBinding s = SchedulerBinding.instance;
     final Brightness brightness = s.platformDispatcher.platformBrightness;
-    return brightness == Brightness.dark;
-  }
-
-  static Color? _activeColor(Set<MaterialState> states, Color activeColor) {
-    if (states.contains(MaterialState.selected)) {
-      return activeColor;
-    }
-    return null;
-  }
-}
-
-extension ThemeEx on BuildContext {
-  bool get isDarkMode {
-    final Brightness brightness = MediaQuery.platformBrightnessOf(this);
     return brightness == Brightness.dark;
   }
 }
