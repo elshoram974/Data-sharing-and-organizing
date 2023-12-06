@@ -1,1 +1,21 @@
-{}
+{
+    "sharikna": "Sharikna",
+    "welcomeBack": "Welcome back!",
+    "enterYourCredentialsToContinue": "Enter your credentials to continue.",
+    "emailAddress": "Email address",
+    "password": "Password",
+    "forgetPassword": "Forget password ? ",
+    "recover": "Recover",
+    "rememberMe": "Remember me",
+    "login": "Login",
+    "doNotHaveAnAccount": "Don't have an account ? ",
+    "signUp": "Sign up",
+    "showPassword": "Show password",
+    "hidePassword": "Hide password",
+    "settings": "Settings",
+    "language": "Language",
+    "darkMode": "Dark mode",
+    "goTo": "Go to",
+    "system": "System"
+    
+}

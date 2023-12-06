@@ -21,5 +21,27 @@ class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'en';
 
   final messages = _notInlinedMessages(_notInlinedMessages);
-  static Map<String, Function> _notInlinedMessages(_) => <String, Function>{};
+  static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "darkMode": MessageLookupByLibrary.simpleMessage("Dark mode"),
+        "doNotHaveAnAccount":
+            MessageLookupByLibrary.simpleMessage("Don\'t have an account ? "),
+        "emailAddress": MessageLookupByLibrary.simpleMessage("Email address"),
+        "enterYourCredentialsToContinue": MessageLookupByLibrary.simpleMessage(
+            "Enter your credentials to continue."),
+        "forgetPassword":
+            MessageLookupByLibrary.simpleMessage("Forget password ? "),
+        "goTo": MessageLookupByLibrary.simpleMessage("Go to"),
+        "hidePassword": MessageLookupByLibrary.simpleMessage("Hide password"),
+        "language": MessageLookupByLibrary.simpleMessage("Language"),
+        "login": MessageLookupByLibrary.simpleMessage("Login"),
+        "password": MessageLookupByLibrary.simpleMessage("Password"),
+        "recover": MessageLookupByLibrary.simpleMessage("Recover"),
+        "rememberMe": MessageLookupByLibrary.simpleMessage("Remember me"),
+        "settings": MessageLookupByLibrary.simpleMessage("Settings"),
+        "sharikna": MessageLookupByLibrary.simpleMessage("Sharikna"),
+        "showPassword": MessageLookupByLibrary.simpleMessage("Show password"),
+        "signUp": MessageLookupByLibrary.simpleMessage("Sign up"),
+        "system": MessageLookupByLibrary.simpleMessage("System"),
+        "welcomeBack": MessageLookupByLibrary.simpleMessage("Welcome back!")
+      };
 }

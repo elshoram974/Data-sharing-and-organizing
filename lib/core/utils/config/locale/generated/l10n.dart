@@ -49,6 +49,186 @@ class S {
   static S? maybeOf(BuildContext context) {
     return Localizations.of<S>(context, S);
   }
+
+  /// `Sharikna`
+  String get sharikna {
+    return Intl.message(
+      'Sharikna',
+      name: 'sharikna',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Welcome back!`
+  String get welcomeBack {
+    return Intl.message(
+      'Welcome back!',
+      name: 'welcomeBack',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter your credentials to continue.`
+  String get enterYourCredentialsToContinue {
+    return Intl.message(
+      'Enter your credentials to continue.',
+      name: 'enterYourCredentialsToContinue',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Email address`
+  String get emailAddress {
+    return Intl.message(
+      'Email address',
+      name: 'emailAddress',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Password`
+  String get password {
+    return Intl.message(
+      'Password',
+      name: 'password',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Forget password ? `
+  String get forgetPassword {
+    return Intl.message(
+      'Forget password ? ',
+      name: 'forgetPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Recover`
+  String get recover {
+    return Intl.message(
+      'Recover',
+      name: 'recover',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Remember me`
+  String get rememberMe {
+    return Intl.message(
+      'Remember me',
+      name: 'rememberMe',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Login`
+  String get login {
+    return Intl.message(
+      'Login',
+      name: 'login',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Don't have an account ? `
+  String get doNotHaveAnAccount {
+    return Intl.message(
+      'Don\'t have an account ? ',
+      name: 'doNotHaveAnAccount',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sign up`
+  String get signUp {
+    return Intl.message(
+      'Sign up',
+      name: 'signUp',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Show password`
+  String get showPassword {
+    return Intl.message(
+      'Show password',
+      name: 'showPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Hide password`
+  String get hidePassword {
+    return Intl.message(
+      'Hide password',
+      name: 'hidePassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Settings`
+  String get settings {
+    return Intl.message(
+      'Settings',
+      name: 'settings',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Language`
+  String get language {
+    return Intl.message(
+      'Language',
+      name: 'language',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Dark mode`
+  String get darkMode {
+    return Intl.message(
+      'Dark mode',
+      name: 'darkMode',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Go to`
+  String get goTo {
+    return Intl.message(
+      'Go to',
+      name: 'goTo',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `System`
+  String get system {
+    return Intl.message(
+      'System',
+      name: 'system',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

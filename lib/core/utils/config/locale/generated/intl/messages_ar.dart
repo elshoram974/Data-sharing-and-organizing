@@ -21,5 +21,30 @@ class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'ar';
 
   final messages = _notInlinedMessages(_notInlinedMessages);
-  static Map<String, Function> _notInlinedMessages(_) => <String, Function>{};
+  static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "darkMode": MessageLookupByLibrary.simpleMessage("الوضع المظلم"),
+        "doNotHaveAnAccount":
+            MessageLookupByLibrary.simpleMessage("ليس لديك حساب ؟ "),
+        "emailAddress":
+            MessageLookupByLibrary.simpleMessage("عنوان البريد الإلكتروني"),
+        "enterYourCredentialsToContinue": MessageLookupByLibrary.simpleMessage(
+            "أدخل بيانات اعتمادك للمتابعة."),
+        "forgetPassword":
+            MessageLookupByLibrary.simpleMessage("هل نسيت كلمة المرور ؟ "),
+        "goTo": MessageLookupByLibrary.simpleMessage("اذهب الي"),
+        "hidePassword":
+            MessageLookupByLibrary.simpleMessage("إخفاء كلمة المرور"),
+        "language": MessageLookupByLibrary.simpleMessage("اللغة"),
+        "login": MessageLookupByLibrary.simpleMessage("تسجيل الدخول"),
+        "password": MessageLookupByLibrary.simpleMessage("كلمة المرور"),
+        "recover": MessageLookupByLibrary.simpleMessage("استعادة"),
+        "rememberMe": MessageLookupByLibrary.simpleMessage("تذكرني"),
+        "settings": MessageLookupByLibrary.simpleMessage("الإعدادات"),
+        "sharikna": MessageLookupByLibrary.simpleMessage("شاركنا"),
+        "showPassword":
+            MessageLookupByLibrary.simpleMessage("إظهار كلمة المرور"),
+        "signUp": MessageLookupByLibrary.simpleMessage("التسجيل"),
+        "system": MessageLookupByLibrary.simpleMessage("النظام"),
+        "welcomeBack": MessageLookupByLibrary.simpleMessage("مرحبًا بعودتك!")
+      };
 }
