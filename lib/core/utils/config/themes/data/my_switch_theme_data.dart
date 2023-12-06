@@ -15,8 +15,7 @@ abstract final class MySwitchThemeData {
         Icon(
           Icons.circle_outlined,
           color: Colors.black,
-          fill: 0.1,
-          size: 28,
+          size: 30,
         ),
       ),
       materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
@@ -34,8 +33,7 @@ abstract final class MySwitchThemeData {
         Icon(
           Icons.circle_outlined,
           color: Colors.black,
-          fill: 0.1,
-          size: 28,
+          size: 30,
         ),
       ),
       materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
