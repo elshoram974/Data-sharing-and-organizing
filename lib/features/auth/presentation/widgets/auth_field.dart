@@ -1,4 +1,5 @@
 import 'package:data_sharing_organizing/core/shared/default_field.dart';
+import 'package:data_sharing_organizing/core/utils/constants/app_color.dart';
 import 'package:data_sharing_organizing/core/utils/styles.dart';
 import 'package:flutter/material.dart';
 
@@ -61,7 +62,7 @@ class AuthField extends StatelessWidget {
             fillColor: Colors.white,
             hintStyle: AppStyle.styleRegular15.copyWith(fontSize: 18),
             style: const TextStyle(fontSize: 18, color: Colors.black87),
-            suffixIconColor: Colors.black,
+            suffixIconColor: AppColor.gray,
             suffix: suffix != null
                 ? IconButton(
                     padding: const EdgeInsets.symmetric(horizontal: 20),

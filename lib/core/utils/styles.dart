@@ -1,7 +1,9 @@
 import 'package:data_sharing_organizing/core/utils/constants/app_strings.dart';
 import 'package:flutter/material.dart';
 
-abstract class AppStyle {
+import 'constants/app_color.dart';
+
+abstract final class AppStyle {
   const AppStyle();
   // static const TextStyle styleMedium14 = TextStyle(
   //   fontSize: 14,
@@ -20,8 +22,12 @@ abstract class AppStyle {
   );
   static const TextStyle styleRegular15 = TextStyle(
     fontSize: 15,
-    color: Color(0xFF949494),
+    color: AppColor.gray,
     fontWeight: FontWeight.normal,
+  );
+  static const TextStyle styleBold20 = TextStyle(
+    fontSize: 20,
+    fontWeight: FontWeight.bold,
   );
   static const TextStyle styleRegular24 = TextStyle(
     fontSize: 24,

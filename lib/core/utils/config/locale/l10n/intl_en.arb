@@ -16,6 +16,7 @@
     "language": "Language",
     "darkMode": "Dark mode",
     "goTo": "Go to",
-    "system": "System"
+    "system": "System",
+    "back": "Back"
     
 }

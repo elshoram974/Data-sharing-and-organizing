@@ -1,9 +1,7 @@
-import 'package:data_sharing_organizing/core/utils/config/locale/generated/l10n.dart';
 import 'package:data_sharing_organizing/core/utils/constants/app_constants.dart';
-import 'package:data_sharing_organizing/routes.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 
+import 'auth_app_bar.dart';
 import 'auth_logo.dart';
 import 'intro_auth_widget.dart';
 
@@ -14,11 +12,13 @@ class AuthBody extends StatelessWidget {
     required this.introBody,
     this.children = const <Widget>[],
     this.showSettingsButton = true,
+    this.showBackButton = true,
   });
 
   final String introHeader;
   final String introBody;
   final bool showSettingsButton;
+  final bool showBackButton;
   final List<Widget> children;
 
   @override
@@ -30,18 +30,9 @@ class AuthBody extends StatelessWidget {
       child: CustomScrollView(
         physics: const BouncingScrollPhysics(),
         slivers: [
-          SliverAppBar(
-            automaticallyImplyLeading: false,
-            actions: [
-              Visibility(
-                visible: showSettingsButton,
-                child: IconButton(
-                  onPressed: () => context.push(AppRoute.authSettingsScreen),
-                  tooltip: S.of(context).settings,
-                  icon: const Icon(Icons.settings_outlined),
-                ),
-              ),
-            ],
+          AuthAppBar(
+            showBackButton: showBackButton,
+            showSettingsButton: showSettingsButton,
           ),
           const AuthLogo(),
           IntroAuthWidget(

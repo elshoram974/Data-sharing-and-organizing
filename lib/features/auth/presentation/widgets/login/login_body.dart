@@ -12,6 +12,7 @@ class LoginBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AuthBody(
+      showBackButton: false,
       introHeader: S.of(context).welcomeBack,
       introBody: S.of(context).enterYourCredentialsToContinue,
       children: const [
