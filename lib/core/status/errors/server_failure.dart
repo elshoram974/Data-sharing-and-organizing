@@ -1,16 +1,8 @@
+// ! Failure --------------------------
+
 import 'package:dio/dio.dart';
 
-abstract class Status {
-  const Status();
-}
-
-class Success extends Status {}
-
-// ! Failure --------------------------
-class Failure extends Status {
-  final String error;
-  const Failure(this.error);
-}
+import 'failure.dart';
 
 class ServerFailure extends Failure {
   ServerFailure(super.error);
