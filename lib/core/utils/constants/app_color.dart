@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-abstract class AppColor {
+abstract final class AppColor {
   const AppColor();
 
   static const int _primaryInt = 0xFFF5576C;

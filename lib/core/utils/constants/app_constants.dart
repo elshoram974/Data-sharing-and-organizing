@@ -1,4 +1,4 @@
-abstract class AppConst {
+abstract final class AppConst {
   const AppConst();
 
   static const double borderRadius = 15;

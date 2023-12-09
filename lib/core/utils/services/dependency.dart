@@ -16,7 +16,6 @@ void getItSingleton() {
   //     remoteDataSource: HomeRemoteDataSourceImp(APIServices(Dio())),
   //   ),
   // );
-  SharedPreferences.getInstance();
   // getIt.registerSingleton<>(
   // );
 }
