@@ -18,7 +18,7 @@ abstract final class AuthRoutes {
   static const String _recoverScreen = 'recoverScreen';
   static const String recoverScreen = '$loginScreen/$_recoverScreen';
   
-  static const String _codeVerificationScreen = 'recoverScreen';
+  static const String _codeVerificationScreen = 'codeVerificationScreen';
   static const String codeVerificationScreen = '$loginScreen/$_codeVerificationScreen';
 
   static GoRoute call() {
