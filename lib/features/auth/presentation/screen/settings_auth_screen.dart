@@ -1,5 +1,4 @@
 import 'package:data_sharing_organizing/core/utils/config/locale/generated/l10n.dart';
-import 'package:data_sharing_organizing/core/utils/constants/app_constants.dart';
 import 'package:flutter/material.dart';
 
 import '../widgets/auth_body.dart';
@@ -28,7 +27,6 @@ class AuthSettingsScreen extends StatelessWidget {
           DarkModeListTile(color: color, style: style),
           SizedBox(height: h * 0.06),
           const ReturnToLogin(),
-          const SizedBox(height: 2 * AppConst.defaultPadding),
         ],
       ),
     );

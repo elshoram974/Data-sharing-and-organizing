@@ -47,6 +47,9 @@ class AuthBody extends StatelessWidget {
               children: children,
             ),
           ),
+          const SliverToBoxAdapter(
+            child: SizedBox(height: 2 * AppConst.defaultPadding),
+          ),
         ],
       ),
     );

@@ -1,5 +1,4 @@
 import 'package:data_sharing_organizing/core/utils/config/locale/generated/l10n.dart';
-import 'package:data_sharing_organizing/core/utils/constants/app_constants.dart';
 import 'package:flutter/material.dart';
 
 import '../auth_body.dart';
@@ -18,7 +17,6 @@ class LoginBody extends StatelessWidget {
       children: const [
         LoginFields(),
         LoginButtons(),
-        SizedBox(height: 2 * AppConst.defaultPadding),
       ],
     );
   }
