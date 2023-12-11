@@ -28,18 +28,20 @@ class LanguagesDialogList extends StatelessWidget {
                       cubit.appLocale.languageCode == e.locale.languageCode
                           ? e
                           : null,
-                  onChanged: (val) {},
+                  onChanged: (val) => selectLang(context, cubit, e),
                 ),
                 title: Text(e.languageName),
                 trailing: e.isDeviceLang ? Text(S.of(context).system) : null,
-                onTap: () {
-                  context.pop();
-                  cubit.changeLocale(e.locale.languageCode);
-                },
+                onTap: () => selectLang(context, cubit, e),
               ),
             )
             .toList(),
       ),
     );
+  }
+
+  void selectLang(BuildContext context, ConfigCubit cubit, LocaleClass e) {
+    context.pop();
+    cubit.changeLocale(e.locale.languageCode);
   }
 }
