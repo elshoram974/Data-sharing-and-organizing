@@ -24,7 +24,7 @@
     "noNeed": "No need ? ",
     "goBack": "Go back",
     "codeVerification": "Code verification",
-    "enterDigitCodeThatHasBeenSentToYourEmail": "Enter the 5-digit code that has been sent to your email",
+    "enterDigitCodeThatHasBeenSentToYourEmail": "Enter the 6-digit code that has been sent to your email",
     "verify": "Verify",
     "noCodeReceived": "No code received? ",
     "resend": "Resend"

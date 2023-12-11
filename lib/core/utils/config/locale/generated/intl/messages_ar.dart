@@ -32,7 +32,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("عنوان البريد الإلكتروني"),
         "enterDigitCodeThatHasBeenSentToYourEmail":
             MessageLookupByLibrary.simpleMessage(
-                "أدخل الرمز المكون من 5 أرقام الذي تم إرساله إلى بريدك الإلكتروني"),
+                "أدخل الرمز المكون من 6 أرقام الذي تم إرساله إلى بريدك الإلكتروني"),
         "enterYourCredentialsToContinue": MessageLookupByLibrary.simpleMessage(
             "أدخل بيانات اعتمادك للمتابعة."),
         "forgetPassword":

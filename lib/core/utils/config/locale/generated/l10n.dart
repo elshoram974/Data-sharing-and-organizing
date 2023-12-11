@@ -292,10 +292,10 @@ class S {
     );
   }
 
-  /// `Enter the 5-digit code that has been sent to your email`
+  /// `Enter the 6-digit code that has been sent to your email`
   String get enterDigitCodeThatHasBeenSentToYourEmail {
     return Intl.message(
-      'Enter the 5-digit code that has been sent to your email',
+      'Enter the 6-digit code that has been sent to your email',
       name: 'enterDigitCodeThatHasBeenSentToYourEmail',
       desc: '',
       args: [],

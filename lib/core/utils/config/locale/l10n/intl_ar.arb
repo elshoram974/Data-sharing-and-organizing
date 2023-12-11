@@ -24,7 +24,7 @@
     "noNeed": "لا تحتاج للمساعدة؟ ",
     "goBack": "العودة",
     "codeVerification": "تحقق من الرمز",
-    "enterDigitCodeThatHasBeenSentToYourEmail": "أدخل الرمز المكون من 5 أرقام الذي تم إرساله إلى بريدك الإلكتروني",
+    "enterDigitCodeThatHasBeenSentToYourEmail": "أدخل الرمز المكون من 6 أرقام الذي تم إرساله إلى بريدك الإلكتروني",
     "verify": "التحقق",
     "noCodeReceived": "لم يتم استلام رمز؟ ",
     "resend": "إعادة الإرسال"
