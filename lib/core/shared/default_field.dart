@@ -1,4 +1,5 @@
 import 'package:data_sharing_organizing/core/utils/constants/app_constants.dart';
+import 'package:data_sharing_organizing/core/utils/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -86,6 +87,10 @@ class MyDefaultField extends StatelessWidget {
         fillColor: fillColor,
         suffixIconColor: suffixIconColor,
         border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(AppConst.borderRadius),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: AppStyle.styleRegular15.color!),
           borderRadius: BorderRadius.circular(AppConst.borderRadius),
         ),
         alignLabelWithHint: alignLabelWithHint,
