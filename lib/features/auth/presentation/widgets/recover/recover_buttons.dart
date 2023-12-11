@@ -1,4 +1,5 @@
 import 'package:data_sharing_organizing/core/utils/config/locale/generated/l10n.dart';
+import 'package:data_sharing_organizing/core/utils/config/routes/routes.dart';
 import 'package:data_sharing_organizing/core/utils/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -17,7 +18,7 @@ class RecoverButtons extends StatelessWidget {
         const SizedBox(height: 53),
         AuthFilledButton(
           text: S.of(context).sendRequest,
-          onPressed: () {},
+          onPressed: () => context.push(AppRoute.codeVerificationScreen),
         ),
         const SizedBox(height: 8),
         AuthRichButton(
