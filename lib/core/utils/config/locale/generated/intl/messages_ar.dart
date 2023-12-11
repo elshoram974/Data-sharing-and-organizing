@@ -32,14 +32,19 @@ class MessageLookup extends MessageLookupByLibrary {
             "أدخل بيانات اعتمادك للمتابعة."),
         "forgetPassword":
             MessageLookupByLibrary.simpleMessage("هل نسيت كلمة المرور ؟ "),
+        "goBack": MessageLookupByLibrary.simpleMessage("العودة"),
         "goTo": MessageLookupByLibrary.simpleMessage("اذهب الي"),
         "hidePassword":
             MessageLookupByLibrary.simpleMessage("إخفاء كلمة المرور"),
         "language": MessageLookupByLibrary.simpleMessage("اللغة"),
         "login": MessageLookupByLibrary.simpleMessage("تسجيل الدخول"),
+        "noNeed": MessageLookupByLibrary.simpleMessage("لا تحتاج للمساعدة؟"),
         "password": MessageLookupByLibrary.simpleMessage("كلمة المرور"),
         "recover": MessageLookupByLibrary.simpleMessage("استعادة"),
+        "recoverYourAccount":
+            MessageLookupByLibrary.simpleMessage("استعادة حسابك"),
         "rememberMe": MessageLookupByLibrary.simpleMessage("تذكرني"),
+        "sendRequest": MessageLookupByLibrary.simpleMessage("إرسال الطلب"),
         "settings": MessageLookupByLibrary.simpleMessage("الإعدادات"),
         "sharikna": MessageLookupByLibrary.simpleMessage("شاركنا"),
         "showPassword":

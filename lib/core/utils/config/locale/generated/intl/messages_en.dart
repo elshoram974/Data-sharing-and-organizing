@@ -31,13 +31,18 @@ class MessageLookup extends MessageLookupByLibrary {
             "Enter your credentials to continue."),
         "forgetPassword":
             MessageLookupByLibrary.simpleMessage("Forget password ? "),
+        "goBack": MessageLookupByLibrary.simpleMessage("Go back"),
         "goTo": MessageLookupByLibrary.simpleMessage("Go to"),
         "hidePassword": MessageLookupByLibrary.simpleMessage("Hide password"),
         "language": MessageLookupByLibrary.simpleMessage("Language"),
         "login": MessageLookupByLibrary.simpleMessage("Login"),
+        "noNeed": MessageLookupByLibrary.simpleMessage("No need ?"),
         "password": MessageLookupByLibrary.simpleMessage("Password"),
         "recover": MessageLookupByLibrary.simpleMessage("Recover"),
+        "recoverYourAccount":
+            MessageLookupByLibrary.simpleMessage("Recover your account"),
         "rememberMe": MessageLookupByLibrary.simpleMessage("Remember me"),
+        "sendRequest": MessageLookupByLibrary.simpleMessage("Send request"),
         "settings": MessageLookupByLibrary.simpleMessage("Settings"),
         "sharikna": MessageLookupByLibrary.simpleMessage("Sharikna"),
         "showPassword": MessageLookupByLibrary.simpleMessage("Show password"),

@@ -239,6 +239,48 @@ class S {
       args: [],
     );
   }
+
+  /// `Recover your account`
+  String get recoverYourAccount {
+    return Intl.message(
+      'Recover your account',
+      name: 'recoverYourAccount',
+      desc: '',
+      args: [],
+    );
+  }
+
+  // skipped getter for the 'enterYourEmailBelowToRequestPasswordRecovery.' key
+
+  /// `Send request`
+  String get sendRequest {
+    return Intl.message(
+      'Send request',
+      name: 'sendRequest',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No need ?`
+  String get noNeed {
+    return Intl.message(
+      'No need ?',
+      name: 'noNeed',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Go back`
+  String get goBack {
+    return Intl.message(
+      'Go back',
+      name: 'goBack',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

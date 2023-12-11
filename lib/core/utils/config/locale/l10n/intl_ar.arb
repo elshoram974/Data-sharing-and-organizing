@@ -17,7 +17,10 @@
     "darkMode": "الوضع المظلم",
     "goTo": "اذهب الي",
     "system": "النظام",
-    "back": "رجوع"
-
-
+    "back": "رجوع",
+    "recoverYourAccount": "استعادة حسابك",
+    "enterYourEmailBelowToRequestPasswordRecovery.": "أدخل بريدك الإلكتروني أدناه لطلب استعادة كلمة المرور.",
+    "sendRequest": "إرسال الطلب",
+    "noNeed": "لا تحتاج للمساعدة؟",
+    "goBack": "العودة"
 }
