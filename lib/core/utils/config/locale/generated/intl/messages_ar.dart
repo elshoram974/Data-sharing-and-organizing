@@ -38,7 +38,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("إخفاء كلمة المرور"),
         "language": MessageLookupByLibrary.simpleMessage("اللغة"),
         "login": MessageLookupByLibrary.simpleMessage("تسجيل الدخول"),
-        "noNeed": MessageLookupByLibrary.simpleMessage("لا تحتاج للمساعدة؟"),
+        "noNeed": MessageLookupByLibrary.simpleMessage("لا تحتاج للمساعدة؟ "),
         "password": MessageLookupByLibrary.simpleMessage("كلمة المرور"),
         "recover": MessageLookupByLibrary.simpleMessage("استعادة"),
         "recoverYourAccount":

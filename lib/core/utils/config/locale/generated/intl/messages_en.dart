@@ -36,7 +36,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "hidePassword": MessageLookupByLibrary.simpleMessage("Hide password"),
         "language": MessageLookupByLibrary.simpleMessage("Language"),
         "login": MessageLookupByLibrary.simpleMessage("Login"),
-        "noNeed": MessageLookupByLibrary.simpleMessage("No need ?"),
+        "noNeed": MessageLookupByLibrary.simpleMessage("No need ? "),
         "password": MessageLookupByLibrary.simpleMessage("Password"),
         "recover": MessageLookupByLibrary.simpleMessage("Recover"),
         "recoverYourAccount":

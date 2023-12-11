@@ -262,10 +262,10 @@ class S {
     );
   }
 
-  /// `No need ?`
+  /// `No need ? `
   String get noNeed {
     return Intl.message(
-      'No need ?',
+      'No need ? ',
       name: 'noNeed',
       desc: '',
       args: [],
