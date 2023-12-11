@@ -1,3 +1,4 @@
+import 'package:data_sharing_organizing/features/auth/presentation/screen/recover_screen.dart';
 import 'package:data_sharing_organizing/features/auth/presentation/screen/settings_auth_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -12,6 +13,9 @@ abstract class AppRoute {
 
   static const String _authSettingsScreen = 'authSettingsScreen';
   static const String authSettingsScreen = '$loginScreen/$_authSettingsScreen';
+  
+  static const String _recoverScreen = 'recoverScreen';
+  static const String recoverScreen = '$loginScreen/$_recoverScreen';
 
   static const String homeScreen = '/homeScreen';
 
@@ -39,6 +43,15 @@ abstract class AppRoute {
               context: context,
               state: state,
               child: const AuthSettingsScreen(),
+            ),
+          ),
+          GoRoute(
+            path: _recoverScreen,
+            pageBuilder: (context, state) => _buildPageWithDefaultTransition(
+              offset: const Offset(-1, 0),
+              context: context,
+              state: state,
+              child: const RecoverScreen(),
             ),
           ),
         ],
