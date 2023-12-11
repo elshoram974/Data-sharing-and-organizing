@@ -302,7 +302,25 @@ class S {
     );
   }
 
-  // skipped getter for the 'noCodeReceived? ' key
+  /// `Verify`
+  String get verify {
+    return Intl.message(
+      'Verify',
+      name: 'verify',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No code received? `
+  String get noCodeReceived {
+    return Intl.message(
+      'No code received? ',
+      name: 'noCodeReceived',
+      desc: '',
+      args: [],
+    );
+  }
 
   /// `Resend`
   String get resend {

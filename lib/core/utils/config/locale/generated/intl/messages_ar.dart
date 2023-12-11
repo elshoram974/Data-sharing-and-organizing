@@ -43,6 +43,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("إخفاء كلمة المرور"),
         "language": MessageLookupByLibrary.simpleMessage("اللغة"),
         "login": MessageLookupByLibrary.simpleMessage("تسجيل الدخول"),
+        "noCodeReceived":
+            MessageLookupByLibrary.simpleMessage("لم يتم استلام رمز؟ "),
         "noNeed": MessageLookupByLibrary.simpleMessage("لا تحتاج للمساعدة؟ "),
         "password": MessageLookupByLibrary.simpleMessage("كلمة المرور"),
         "recover": MessageLookupByLibrary.simpleMessage("استعادة"),
@@ -57,6 +59,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("إظهار كلمة المرور"),
         "signUp": MessageLookupByLibrary.simpleMessage("التسجيل"),
         "system": MessageLookupByLibrary.simpleMessage("النظام"),
+        "verify": MessageLookupByLibrary.simpleMessage("التحقق"),
         "welcomeBack": MessageLookupByLibrary.simpleMessage("مرحبًا بعودتك!")
       };
 }

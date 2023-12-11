@@ -41,6 +41,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "hidePassword": MessageLookupByLibrary.simpleMessage("Hide password"),
         "language": MessageLookupByLibrary.simpleMessage("Language"),
         "login": MessageLookupByLibrary.simpleMessage("Login"),
+        "noCodeReceived":
+            MessageLookupByLibrary.simpleMessage("No code received? "),
         "noNeed": MessageLookupByLibrary.simpleMessage("No need ? "),
         "password": MessageLookupByLibrary.simpleMessage("Password"),
         "recover": MessageLookupByLibrary.simpleMessage("Recover"),
@@ -54,6 +56,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "showPassword": MessageLookupByLibrary.simpleMessage("Show password"),
         "signUp": MessageLookupByLibrary.simpleMessage("Sign up"),
         "system": MessageLookupByLibrary.simpleMessage("System"),
+        "verify": MessageLookupByLibrary.simpleMessage("Verify"),
         "welcomeBack": MessageLookupByLibrary.simpleMessage("Welcome back!")
       };
 }
