@@ -11,7 +11,9 @@ class AuthRichButton extends StatelessWidget {
     required this.buttonText,
     this.onTap,
     this.align = TextAlign.center,
+    this.padding = EdgeInsets.zero,
   });
+  final EdgeInsetsGeometry padding;
   final Widget? prefix;
   final TextAlign align;
   final String prefixText;
@@ -21,7 +23,7 @@ class AuthRichButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 25),
+      padding: padding,
       child: RichText(
         textAlign: align,
         text: TextSpan(
@@ -30,7 +32,10 @@ class AuthRichButton extends StatelessWidget {
             if (prefix != null)
               WidgetSpan(
                 alignment: PlaceholderAlignment.middle,
-                child: prefix!,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 3.5),
+                  child: prefix!,
+                ),
               ),
             TextSpan(
               text: prefixText,

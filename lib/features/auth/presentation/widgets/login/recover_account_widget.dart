@@ -11,6 +11,7 @@ class RecoverAccountButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AuthRichButton(
+      padding: const EdgeInsets.only(top: 25),
       align: TextAlign.end,
       prefixText: S.of(context).forgetPassword,
       buttonText: S.of(context).recover,
