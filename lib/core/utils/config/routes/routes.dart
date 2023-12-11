@@ -11,6 +11,7 @@ abstract class AppRoute {
   static const String loginScreen = AuthRoutes.loginScreen;
   static const String authSettingsScreen = AuthRoutes.authSettingsScreen;
   static const String recoverScreen = AuthRoutes.recoverScreen;
+  static const String codeVerificationScreen = AuthRoutes.codeVerificationScreen;
   // * ------ End authorization screens ------ *//
 
   static const String homeScreen = '/homeScreen';

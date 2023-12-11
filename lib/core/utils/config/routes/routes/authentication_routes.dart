@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../../../features/auth/presentation/screen/code_verification_screen.dart';
 import '../../../../../features/auth/presentation/screen/login_screen.dart';
 import '../../../../../features/auth/presentation/screen/recover_screen.dart';
 import '../../../../../features/auth/presentation/screen/settings_auth_screen.dart';
@@ -16,6 +17,9 @@ abstract final class AuthRoutes {
 
   static const String _recoverScreen = 'recoverScreen';
   static const String recoverScreen = '$loginScreen/$_recoverScreen';
+  
+  static const String _codeVerificationScreen = 'recoverScreen';
+  static const String codeVerificationScreen = '$loginScreen/$_codeVerificationScreen';
 
   static GoRoute call() {
     return GoRoute(
@@ -43,6 +47,15 @@ abstract final class AuthRoutes {
             context: context,
             state: state,
             child: const RecoverScreen(),
+          ),
+        ),
+        GoRoute(
+          path: _codeVerificationScreen,
+          pageBuilder: (context, state) => MyCustomTransition.slideTransition(
+            offset: const Offset(-1, 0),
+            context: context,
+            state: state,
+            child: const CodeVerificationScreen(),
           ),
         ),
       ],
