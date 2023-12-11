@@ -22,5 +22,9 @@
     "enterYourEmailBelowToRequestPasswordRecovery.": "أدخل بريدك الإلكتروني أدناه لطلب استعادة كلمة المرور.",
     "sendRequest": "إرسال الطلب",
     "noNeed": "لا تحتاج للمساعدة؟ ",
-    "goBack": "العودة"
+    "goBack": "العودة",
+    "codeVerification": "تحقق من الرمز",
+    "enterDigitCodeThatHasBeenSentToYourEmail": "أدخل الرمز المكون من 5 أرقام الذي تم إرساله إلى بريدك الإلكتروني",
+    "noCodeReceived? ": "لم يتم استلام رمز؟ ",
+    "resend": "إعادة الإرسال"
 }

@@ -281,6 +281,38 @@ class S {
       args: [],
     );
   }
+
+  /// `Code verification`
+  String get codeVerification {
+    return Intl.message(
+      'Code verification',
+      name: 'codeVerification',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter the 5-digit code that has been sent to your email`
+  String get enterDigitCodeThatHasBeenSentToYourEmail {
+    return Intl.message(
+      'Enter the 5-digit code that has been sent to your email',
+      name: 'enterDigitCodeThatHasBeenSentToYourEmail',
+      desc: '',
+      args: [],
+    );
+  }
+
+  // skipped getter for the 'noCodeReceived? ' key
+
+  /// `Resend`
+  String get resend {
+    return Intl.message(
+      'Resend',
+      name: 'resend',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

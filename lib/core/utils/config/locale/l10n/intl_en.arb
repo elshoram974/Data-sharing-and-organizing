@@ -22,5 +22,9 @@
     "enterYourEmailBelowToRequestPasswordRecovery.": "Enter your email below to request password recovery.",
     "sendRequest": "Send request",
     "noNeed": "No need ? ",
-    "goBack": "Go back"
+    "goBack": "Go back",
+    "codeVerification": "Code verification",
+    "enterDigitCodeThatHasBeenSentToYourEmail": "Enter the 5-digit code that has been sent to your email",
+    "noCodeReceived? ": "No code received? ",
+    "resend": "Resend"
 }

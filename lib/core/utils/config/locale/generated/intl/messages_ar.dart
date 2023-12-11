@@ -23,11 +23,16 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "back": MessageLookupByLibrary.simpleMessage("رجوع"),
+        "codeVerification":
+            MessageLookupByLibrary.simpleMessage("تحقق من الرمز"),
         "darkMode": MessageLookupByLibrary.simpleMessage("الوضع المظلم"),
         "doNotHaveAnAccount":
             MessageLookupByLibrary.simpleMessage("ليس لديك حساب ؟ "),
         "emailAddress":
             MessageLookupByLibrary.simpleMessage("عنوان البريد الإلكتروني"),
+        "enterDigitCodeThatHasBeenSentToYourEmail":
+            MessageLookupByLibrary.simpleMessage(
+                "أدخل الرمز المكون من 5 أرقام الذي تم إرساله إلى بريدك الإلكتروني"),
         "enterYourCredentialsToContinue": MessageLookupByLibrary.simpleMessage(
             "أدخل بيانات اعتمادك للمتابعة."),
         "forgetPassword":
@@ -44,6 +49,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "recoverYourAccount":
             MessageLookupByLibrary.simpleMessage("استعادة حسابك"),
         "rememberMe": MessageLookupByLibrary.simpleMessage("تذكرني"),
+        "resend": MessageLookupByLibrary.simpleMessage("إعادة الإرسال"),
         "sendRequest": MessageLookupByLibrary.simpleMessage("إرسال الطلب"),
         "settings": MessageLookupByLibrary.simpleMessage("الإعدادات"),
         "sharikna": MessageLookupByLibrary.simpleMessage("شاركنا"),
