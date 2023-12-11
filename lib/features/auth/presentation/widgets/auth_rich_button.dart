@@ -10,8 +10,10 @@ class AuthRichButton extends StatelessWidget {
     required this.prefixText,
     required this.buttonText,
     this.onTap,
+    this.align = TextAlign.center,
   });
   final Widget? prefix;
+  final TextAlign align;
   final String prefixText;
   final String buttonText;
   final void Function()? onTap;
@@ -21,7 +23,7 @@ class AuthRichButton extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(top: 25),
       child: RichText(
-        textAlign: TextAlign.end,
+        textAlign: align,
         text: TextSpan(
           style: AppStyle.styleRegular15,
           children: [
