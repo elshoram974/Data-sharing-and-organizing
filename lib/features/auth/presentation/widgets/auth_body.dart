@@ -1,7 +1,7 @@
 import 'package:data_sharing_organizing/core/utils/constants/app_constants.dart';
 import 'package:flutter/material.dart';
 
-import 'auth_app_bar.dart';
+import 'auth_app_bar/auth_app_bar.dart';
 import 'auth_logo.dart';
 import 'intro_auth_widget.dart';
 

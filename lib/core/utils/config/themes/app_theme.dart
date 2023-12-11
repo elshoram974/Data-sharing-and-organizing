@@ -5,6 +5,7 @@ import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 
 import 'data/my_check_box_theme_data.dart';
+import 'data/my_list_tile_theme_data.dart';
 import 'data/my_switch_theme_data.dart';
 
 class AppTheme {
@@ -13,6 +14,7 @@ class AppTheme {
     fontFamily: AppStrings.inter,
     checkboxTheme: MyCheckboxThemeData.light(),
     switchTheme: MySwitchThemeData.light(),
+    listTileTheme: MyListTileThemeData.light(),
     colorScheme: ColorScheme.fromSeed(
       seedColor: AppColor.primary,
       brightness: Brightness.light,
@@ -28,6 +30,7 @@ class AppTheme {
     useMaterial3: true,
     checkboxTheme: MyCheckboxThemeData.dark(),
     switchTheme: MySwitchThemeData.dark(),
+    listTileTheme: MyListTileThemeData.dark(),
     colorScheme: ColorScheme.fromSeed(
       seedColor: AppColor.primary,
       brightness: Brightness.dark,
