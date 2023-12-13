@@ -23,8 +23,13 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "back": MessageLookupByLibrary.simpleMessage("رجوع"),
+        "businessAccount": MessageLookupByLibrary.simpleMessage("حساب الشركة"),
         "codeVerification":
             MessageLookupByLibrary.simpleMessage("تحقق من الرمز"),
+        "confirmPassword":
+            MessageLookupByLibrary.simpleMessage("تأكيد كلمة المرور"),
+        "createYourOwenEmail":
+            MessageLookupByLibrary.simpleMessage("أنشئ بريدك الإلكتروني الخاص"),
         "darkMode": MessageLookupByLibrary.simpleMessage("الوضع المظلم"),
         "doNotHaveAnAccount":
             MessageLookupByLibrary.simpleMessage("ليس لديك حساب ؟ "),
@@ -41,11 +46,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "goTo": MessageLookupByLibrary.simpleMessage("اذهب الي"),
         "hidePassword":
             MessageLookupByLibrary.simpleMessage("إخفاء كلمة المرور"),
+        "individualAccount": MessageLookupByLibrary.simpleMessage("حساب فردي"),
         "language": MessageLookupByLibrary.simpleMessage("اللغة"),
         "login": MessageLookupByLibrary.simpleMessage("تسجيل الدخول"),
+        "name": MessageLookupByLibrary.simpleMessage("الاسم"),
         "noCodeReceived":
             MessageLookupByLibrary.simpleMessage("لم يتم استلام رمز؟ "),
         "noNeed": MessageLookupByLibrary.simpleMessage("لا تحتاج للمساعدة؟ "),
+        "oR": MessageLookupByLibrary.simpleMessage("أو"),
         "password": MessageLookupByLibrary.simpleMessage("كلمة المرور"),
         "recover": MessageLookupByLibrary.simpleMessage("استعادة"),
         "recoverYourAccount":

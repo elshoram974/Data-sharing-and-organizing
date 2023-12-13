@@ -27,5 +27,11 @@
     "enterDigitCodeThatHasBeenSentToYourEmail": "Enter the 6-digit code that has been sent to your email",
     "verify": "Verify",
     "noCodeReceived": "No code received? ",
-    "resend": "Resend"
+    "resend": "Resend",
+    "createYourOwenEmail": "Create your owen email",
+    "name": "Name",
+    "confirmPassword": "Confirm Password",
+    "businessAccount": "Business account",
+    "oR": "OR",
+    "individualAccount": "Individual account"
 }

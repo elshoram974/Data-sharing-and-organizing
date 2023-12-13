@@ -27,5 +27,11 @@
     "enterDigitCodeThatHasBeenSentToYourEmail": "أدخل الرمز المكون من 6 أرقام الذي تم إرساله إلى بريدك الإلكتروني",
     "verify": "التحقق",
     "noCodeReceived": "لم يتم استلام رمز؟ ",
-    "resend": "إعادة الإرسال"
+    "resend": "إعادة الإرسال",
+    "createYourOwenEmail": "أنشئ بريدك الإلكتروني الخاص",
+    "name": "الاسم",
+    "confirmPassword": "تأكيد كلمة المرور",
+    "businessAccount": "حساب الشركة",
+    "oR": "أو",
+    "individualAccount": "حساب فردي"
 }

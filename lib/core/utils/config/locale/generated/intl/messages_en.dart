@@ -23,8 +23,14 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "back": MessageLookupByLibrary.simpleMessage("Back"),
+        "businessAccount":
+            MessageLookupByLibrary.simpleMessage("Business account"),
         "codeVerification":
             MessageLookupByLibrary.simpleMessage("Code verification"),
+        "confirmPassword":
+            MessageLookupByLibrary.simpleMessage("Confirm Password"),
+        "createYourOwenEmail":
+            MessageLookupByLibrary.simpleMessage("Create your owen email"),
         "darkMode": MessageLookupByLibrary.simpleMessage("Dark mode"),
         "doNotHaveAnAccount":
             MessageLookupByLibrary.simpleMessage("Don\'t have an account ? "),
@@ -39,11 +45,15 @@ class MessageLookup extends MessageLookupByLibrary {
         "goBack": MessageLookupByLibrary.simpleMessage("Go back"),
         "goTo": MessageLookupByLibrary.simpleMessage("Go to"),
         "hidePassword": MessageLookupByLibrary.simpleMessage("Hide password"),
+        "individualAccount":
+            MessageLookupByLibrary.simpleMessage("Individual account"),
         "language": MessageLookupByLibrary.simpleMessage("Language"),
         "login": MessageLookupByLibrary.simpleMessage("Login"),
+        "name": MessageLookupByLibrary.simpleMessage("Name"),
         "noCodeReceived":
             MessageLookupByLibrary.simpleMessage("No code received? "),
         "noNeed": MessageLookupByLibrary.simpleMessage("No need ? "),
+        "oR": MessageLookupByLibrary.simpleMessage("OR"),
         "password": MessageLookupByLibrary.simpleMessage("Password"),
         "recover": MessageLookupByLibrary.simpleMessage("Recover"),
         "recoverYourAccount":

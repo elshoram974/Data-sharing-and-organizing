@@ -331,6 +331,66 @@ class S {
       args: [],
     );
   }
+
+  /// `Create your owen email`
+  String get createYourOwenEmail {
+    return Intl.message(
+      'Create your owen email',
+      name: 'createYourOwenEmail',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Name`
+  String get name {
+    return Intl.message(
+      'Name',
+      name: 'name',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Confirm Password`
+  String get confirmPassword {
+    return Intl.message(
+      'Confirm Password',
+      name: 'confirmPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Business account`
+  String get businessAccount {
+    return Intl.message(
+      'Business account',
+      name: 'businessAccount',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `OR`
+  String get oR {
+    return Intl.message(
+      'OR',
+      name: 'oR',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Individual account`
+  String get individualAccount {
+    return Intl.message(
+      'Individual account',
+      name: 'individualAccount',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
