@@ -19,6 +19,7 @@ class AuthField extends StatelessWidget {
     this.validator,
     this.suffixTooltip,
     this.textInputAction = TextInputAction.next,
+    this.textDirection = TextDirection.ltr,
   });
 
   final String label;
@@ -29,6 +30,7 @@ class AuthField extends StatelessWidget {
   final bool obscureText;
   final IconData? suffix;
   final TextInputAction textInputAction;
+  final TextDirection? textDirection;
 
   final void Function(String?)? onSaved;
   final void Function()? onEditingComplete;
@@ -48,6 +50,7 @@ class AuthField extends StatelessWidget {
           const SizedBox(height: 5),
           MyDefaultField(
             autofillHints: autofillHints,
+            textDirection: textDirection,
             keyboardType: keyboardType,
             hintText: hint,
             textInputAction: textInputAction,

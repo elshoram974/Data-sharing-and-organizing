@@ -15,6 +15,7 @@ class SignUpFields extends StatelessWidget {
           AuthField(
             label: S.of(context).name,
             hint: S.of(context).name,
+            textDirection: null,
             autofillHints: const [AutofillHints.name],
             keyboardType: TextInputType.name,
           ),
