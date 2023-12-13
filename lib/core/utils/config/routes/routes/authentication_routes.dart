@@ -1,3 +1,4 @@
+import 'package:data_sharing_organizing/features/auth/presentation/screen/sign_up_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -20,6 +21,9 @@ abstract final class AuthRoutes {
   
   static const String _codeVerificationScreen = 'codeVerificationScreen';
   static const String codeVerificationScreen = '$loginScreen/$_codeVerificationScreen';
+  
+  static const String _signUpScreen = 'signUpScreen';
+  static const String signUpScreen = '$loginScreen/$_signUpScreen';
 
   static GoRoute call() {
     return GoRoute(
@@ -56,6 +60,15 @@ abstract final class AuthRoutes {
             context: context,
             state: state,
             child: const CodeVerificationScreen(),
+          ),
+        ),
+        GoRoute(
+          path: _signUpScreen,
+          pageBuilder: (context, state) => MyCustomTransition.slideTransition(
+            offset: const Offset(-1, 0),
+            context: context,
+            state: state,
+            child: const SignUpScreen(),
           ),
         ),
       ],
