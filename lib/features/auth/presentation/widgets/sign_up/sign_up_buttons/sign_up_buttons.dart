@@ -1,8 +1,11 @@
 import 'package:data_sharing_organizing/core/utils/config/locale/generated/l10n.dart';
+import 'package:data_sharing_organizing/core/utils/config/routes/routes.dart';
+import 'package:data_sharing_organizing/core/utils/constants/app_constants.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../auth_filled_button.dart';
-import '../remember_me_widget.dart';
+import '../choose_account_type.dart';
 
 class SignUpButtons extends StatelessWidget {
   const SignUpButtons({super.key});
@@ -12,11 +15,13 @@ class SignUpButtons extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        const RememberMeWidget(),
+        const SizedBox(height: 3 * AppConst.defaultPadding),
+        const ChooseAccountType(),
         AuthFilledButton(
           text: S.of(context).signUp,
           onPressed: () {
             // Register Fn
+            context.push(AppRoute.codeVerificationScreen);
           },
         ),
       ],
