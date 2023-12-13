@@ -382,11 +382,11 @@ class S {
     );
   }
 
-  /// `Individual account`
-  String get individualAccount {
+  /// `Personal account`
+  String get personalAccount {
     return Intl.message(
-      'Individual account',
-      name: 'individualAccount',
+      'Personal account',
+      name: 'personalAccount',
       desc: '',
       args: [],
     );

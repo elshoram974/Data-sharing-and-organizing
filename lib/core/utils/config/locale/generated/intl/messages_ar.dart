@@ -46,7 +46,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "goTo": MessageLookupByLibrary.simpleMessage("اذهب الي"),
         "hidePassword":
             MessageLookupByLibrary.simpleMessage("إخفاء كلمة المرور"),
-        "individualAccount": MessageLookupByLibrary.simpleMessage("حساب فردي"),
         "language": MessageLookupByLibrary.simpleMessage("اللغة"),
         "login": MessageLookupByLibrary.simpleMessage("تسجيل الدخول"),
         "name": MessageLookupByLibrary.simpleMessage("الاسم"),
@@ -55,6 +54,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "noNeed": MessageLookupByLibrary.simpleMessage("لا تحتاج للمساعدة؟ "),
         "oR": MessageLookupByLibrary.simpleMessage("أو"),
         "password": MessageLookupByLibrary.simpleMessage("كلمة المرور"),
+        "personalAccount": MessageLookupByLibrary.simpleMessage("حساب خاص"),
         "recover": MessageLookupByLibrary.simpleMessage("استعادة"),
         "recoverYourAccount":
             MessageLookupByLibrary.simpleMessage("استعادة حسابك"),

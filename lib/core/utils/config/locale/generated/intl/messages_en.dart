@@ -45,8 +45,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "goBack": MessageLookupByLibrary.simpleMessage("Go back"),
         "goTo": MessageLookupByLibrary.simpleMessage("Go to"),
         "hidePassword": MessageLookupByLibrary.simpleMessage("Hide password"),
-        "individualAccount":
-            MessageLookupByLibrary.simpleMessage("Individual account"),
         "language": MessageLookupByLibrary.simpleMessage("Language"),
         "login": MessageLookupByLibrary.simpleMessage("Login"),
         "name": MessageLookupByLibrary.simpleMessage("Name"),
@@ -55,6 +53,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "noNeed": MessageLookupByLibrary.simpleMessage("No need ? "),
         "oR": MessageLookupByLibrary.simpleMessage("OR"),
         "password": MessageLookupByLibrary.simpleMessage("Password"),
+        "personalAccount":
+            MessageLookupByLibrary.simpleMessage("Personal account"),
         "recover": MessageLookupByLibrary.simpleMessage("Recover"),
         "recoverYourAccount":
             MessageLookupByLibrary.simpleMessage("Recover your account"),
