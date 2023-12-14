@@ -5,7 +5,7 @@ import 'package:hive/hive.dart';
 part 'auth_user_entity.g.dart';
 
 @HiveType(typeId: 2)
-final class AuthUserEntity extends Equatable {
+class AuthUserEntity extends Equatable {
   @HiveField(0)
   final String name;
   @HiveField(1)
