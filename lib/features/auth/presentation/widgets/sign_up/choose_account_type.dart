@@ -1,6 +1,6 @@
 import 'package:data_sharing_organizing/core/utils/config/locale/generated/l10n.dart';
 import 'package:data_sharing_organizing/core/utils/constants/app_constants.dart';
-import 'package:data_sharing_organizing/core/utils/enums/account_type_enum.dart';
+import 'package:data_sharing_organizing/core/utils/enums/account_type/account_type_enum.dart';
 import 'package:flutter/material.dart';
 
 import 'sign_up_buttons/account_type_widget.dart';
