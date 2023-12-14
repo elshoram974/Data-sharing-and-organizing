@@ -1,6 +1,6 @@
 import 'package:data_sharing_organizing/core/utils/constants/app_strings.dart';
 import 'package:data_sharing_organizing/core/utils/enums/account_type/account_type_enum.dart';
-import 'package:data_sharing_organizing/features/auth/domain/entities/user_entity.dart';
+import 'package:data_sharing_organizing/features/auth/domain/entities/auth_user_entity.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -12,12 +12,13 @@ Future<void> localInstance() async {
     Hive.initFlutter(),
   ]);
   _registerAdapterFn();
-  await Hive.openBox<UserEntity>(AppStrings.userBox);
+  await Hive.openBox<AuthUserEntity>(AppStrings.userBox);
 }
 
 void _registerAdapterFn() {
   Hive.registerAdapter<AccountType>(AccountTypeAdapter());
-  Hive.registerAdapter<UserEntity>(UserEntityAdapter());
+  Hive.registerAdapter<AuthUserEntity>(AuthUserEntityAdapter());
 }
 
-Future<void> _sharedPref() async => pref = await SharedPreferences.getInstance();
+Future<void> _sharedPref() async =>
+    pref = await SharedPreferences.getInstance();
