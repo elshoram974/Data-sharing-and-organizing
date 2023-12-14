@@ -3,5 +3,6 @@ import 'dart:async';
 import '../status/status.dart';
 
 abstract class UseCase<T, P> {
-  FutureOr<({Status status, T data})> call(P param);
+  const UseCase();
+  FutureOr<Status<T>> call(P param);
 }

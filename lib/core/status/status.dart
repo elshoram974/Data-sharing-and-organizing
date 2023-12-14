@@ -1,3 +1,3 @@
-abstract class Status {
+abstract class Status<T> {
   const Status();
 }

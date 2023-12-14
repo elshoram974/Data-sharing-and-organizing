@@ -1,6 +1,6 @@
 import '../status.dart';
 
-class Success<T> extends Status {
-  final T param;
-  const Success(this.param);
+class Success<T> extends Status<T> {
+  final T data;
+  const Success(this.data);
 }
