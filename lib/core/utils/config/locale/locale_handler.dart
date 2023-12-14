@@ -1,7 +1,7 @@
 import 'dart:ui';
 
 import 'package:data_sharing_organizing/core/utils/constants/app_strings.dart';
-import 'package:data_sharing_organizing/core/utils/services/dependency.dart';
+import 'package:data_sharing_organizing/core/utils/services/init_local.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../features/splash/presentation/cubit/config_cubit.dart';
