@@ -1,4 +1,5 @@
 import 'package:data_sharing_organizing/core/shared/default_field.dart';
+import 'package:data_sharing_organizing/core/utils/extension/padding_ex.dart';
 import 'package:data_sharing_organizing/core/utils/styles.dart';
 import 'package:flutter/material.dart';
 
@@ -41,42 +42,39 @@ class AuthField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(top: 35),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(label, style: const TextStyle(fontSize: 16)),
-          const SizedBox(height: 5),
-          MyDefaultField(
-            autofillHints: autofillHints,
-            textDirection: textDirection,
-            keyboardType: keyboardType,
-            hintText: hint,
-            textInputAction: textInputAction,
-            obscureText: obscureText,
-            onSaved: onSaved,
-            onChanged: onChanged,
-            validator: validator,
-            onEditingComplete: onEditingComplete,
-            onFieldSubmitted: onFieldSubmitted,
-            filled: true,
-            fillColor: Colors.white,
-            hintStyle: AppStyle.styleRegular15.copyWith(fontSize: 18),
-            style: const TextStyle(fontSize: 18, color: Colors.black87),
-            suffixIconColor: AppStyle.styleRegular15.color,
-            suffix: suffix != null
-                ? IconButton(
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
-                    iconSize: 28,
-                    onPressed: onPressedSuffix,
-                    icon: Icon(suffix),
-                    tooltip: suffixTooltip,
-                  )
-                : null,
-          ),
-        ],
-      ),
-    );
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(label, style: const TextStyle(fontSize: 16)),
+        const SizedBox(height: 5),
+        MyDefaultField(
+          autofillHints: autofillHints,
+          textDirection: textDirection,
+          keyboardType: keyboardType,
+          hintText: hint,
+          textInputAction: textInputAction,
+          obscureText: obscureText,
+          onSaved: onSaved,
+          onChanged: onChanged,
+          validator: validator,
+          onEditingComplete: onEditingComplete,
+          onFieldSubmitted: onFieldSubmitted,
+          filled: true,
+          fillColor: Colors.white,
+          hintStyle: AppStyle.styleRegular15.copyWith(fontSize: 18),
+          style: const TextStyle(fontSize: 18, color: Colors.black87),
+          suffixIconColor: AppStyle.styleRegular15.color,
+          suffix: suffix != null
+              ? IconButton(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  iconSize: 28,
+                  onPressed: onPressedSuffix,
+                  icon: Icon(suffix),
+                  tooltip: suffixTooltip,
+                )
+              : null,
+        ),
+      ],
+    ).topPadding(35);
   }
 }

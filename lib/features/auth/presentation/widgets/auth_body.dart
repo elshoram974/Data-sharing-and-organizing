@@ -1,4 +1,5 @@
 import 'package:data_sharing_organizing/core/utils/constants/app_constants.dart';
+import 'package:data_sharing_organizing/core/utils/extension/padding_ex.dart';
 import 'package:flutter/material.dart';
 
 import 'auth_app_bar/auth_app_bar.dart';
@@ -23,35 +24,30 @@ class AuthBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(
-        horizontal: AppConst.defaultPadding,
-      ),
-      child: CustomScrollView(
-        physics: const BouncingScrollPhysics(),
-        slivers: [
-          AuthAppBar(
-            showBackButton: showBackButton,
-            showSettingsButton: showSettingsButton,
+    return CustomScrollView(
+      physics: const BouncingScrollPhysics(),
+      slivers: [
+        AuthAppBar(
+          showBackButton: showBackButton,
+          showSettingsButton: showSettingsButton,
+        ),
+        const AuthLogo(),
+        IntroAuthWidget(
+          header: introHeader,
+          body: introBody,
+        ),
+        SliverToBoxAdapter(
+          child: ListView(
+            padding: EdgeInsets.zero,
+            physics: const NeverScrollableScrollPhysics(),
+            shrinkWrap: true,
+            children: children,
           ),
-          const AuthLogo(),
-          IntroAuthWidget(
-            header: introHeader,
-            body: introBody,
-          ),
-          SliverToBoxAdapter(
-            child: ListView(
-              padding: EdgeInsets.zero,
-              physics: const NeverScrollableScrollPhysics(),
-              shrinkWrap: true,
-              children: children,
-            ),
-          ),
-          const SliverToBoxAdapter(
-            child: SizedBox(height: 2 * AppConst.defaultPadding),
-          ),
-        ],
-      ),
-    );
+        ),
+        const SliverToBoxAdapter(
+          child: SizedBox(height: 2 * AppConst.defaultPadding),
+        ),
+      ],
+    ).horizontalPadding(AppConst.defaultPadding);
   }
 }
