@@ -5,7 +5,7 @@ import 'package:data_sharing_organizing/core/usecase/usecase_no_parameter.dart';
 
 import '../repositories/auth_repositories.dart';
 
-class LogOutUseCase extends UseCase<int> {
+final class LogOutUseCase extends UseCase<int> {
   final AuthRepositories authRepositories;
 
   LogOutUseCase(this.authRepositories);

@@ -3,7 +3,7 @@ import 'package:data_sharing_organizing/core/usecase/usecase_no_parameter.dart';
 
 import '../repositories/auth_repositories.dart';
 
-class IsLoggedInUseCase extends UseCase<bool> {
+final class IsLoggedInUseCase extends UseCase<bool> {
   final AuthRepositories authRepositories;
 
   IsLoggedInUseCase(this.authRepositories);
