@@ -1,6 +1,6 @@
 import '../status.dart';
 
-class Failure extends Status {
+class Failure<T> extends Status<T> {
   final String error;
   const Failure(this.error);
 }
