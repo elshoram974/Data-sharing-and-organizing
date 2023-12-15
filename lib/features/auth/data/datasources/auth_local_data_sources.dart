@@ -6,7 +6,8 @@ import '../../domain/entities/auth_user_entity.dart';
 abstract class AuthLocalDataSource {
   const AuthLocalDataSource();
   Future<int> saveUser(AuthUserEntity user);
-  AuthUserEntity? getSavedUser();
+  AuthUserEntity? getCurrentUser();
+  Future<int> logOut();
   bool isLoggedIn();
 }
 
@@ -15,19 +16,26 @@ class AuthLocalDataSourceImp extends AuthLocalDataSource {
 
   @override
   Future<int> saveUser(AuthUserEntity user) {
-    final Box<AuthUserEntity> userBox = Hive.box<AuthUserEntity>(AppStrings.userBox);
+    final Box<AuthUserEntity> userBox =
+        Hive.box<AuthUserEntity>(AppStrings.userBox);
 
     return userBox.add(user);
   }
 
   @override
-  AuthUserEntity? getSavedUser() {
+  AuthUserEntity? getCurrentUser() {
     final Box<AuthUserEntity> userBox = Hive.box<AuthUserEntity>(AppStrings.userBox);
     List<AuthUserEntity> users = userBox.values.toList();
     if (users.isEmpty) return null;
-    return users.first;
+    return users.last;
   }
 
   @override
-  bool isLoggedIn() => getSavedUser() != null;
+  Future<int> logOut() {
+    final Box<AuthUserEntity> userBox = Hive.box<AuthUserEntity>(AppStrings.userBox);
+    return userBox.clear();
+  }
+
+  @override
+  bool isLoggedIn() => getCurrentUser() != null;
 }
