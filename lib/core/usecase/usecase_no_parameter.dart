@@ -2,8 +2,8 @@ import 'dart:async';
 
 import '../status/status.dart';
 
-abstract class UseCase {
+abstract class UseCase<T> {
   const UseCase();
 
-  FutureOr<Status> call();
+  FutureOr<Status<T>> call();
 }
