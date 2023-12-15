@@ -8,7 +8,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../domain/entities/login_entity.dart';
-import '../../domain/usecases/is_logged_in_use_case.dart';
 import '../../domain/usecases/log_out_use_case.dart';
 import '../../domain/usecases/login_use_case.dart';
 import '../../domain/usecases/recover_account_use_case.dart';
@@ -23,7 +22,6 @@ class AuthCubit extends Cubit<AuthState> {
   final RequestToRecoverAccountUseCase recoverAccountUseCase;
   final VerifyCodeUseCase verifyCodeUseCase;
   final LogOutUseCase logOutUseCase;
-  final IsLoggedInUseCase isLoggedInUseCase;
 
   AuthCubit({
     required this.loginUseCase,
@@ -31,7 +29,6 @@ class AuthCubit extends Cubit<AuthState> {
     required this.recoverAccountUseCase,
     required this.verifyCodeUseCase,
     required this.logOutUseCase,
-    required this.isLoggedInUseCase,
   }) : super(const AuthInitial());
 
   void login() async {
@@ -66,12 +63,12 @@ class AuthCubit extends Cubit<AuthState> {
       emit(AuthSuccess<AuthUserEntity>(data));
 
       debugPrint('user: ${data.email}');
-      //  TODO: Implement login success
+      //  TODO: Implement signUp success
     } else if (signUpState is Failure<AuthUserEntity>) {
       final String error = signUpState.error;
       emit(AuthFailure(error));
       debugPrint('error: $error');
-      //  TODO: Implement login failure
+      //  TODO: Implement signUp failure
     }
   }
 
@@ -84,12 +81,12 @@ class AuthCubit extends Cubit<AuthState> {
       emit(AuthSuccess<AuthUserEntity>(data));
 
       debugPrint('user: ${data.email}');
-      //  TODO: Implement login success
+      //  TODO: Implement recoverAccount success
     } else if (requestStatus is Failure<AuthUserEntity>) {
       final String error = requestStatus.error;
       emit(AuthFailure(error));
       debugPrint('error: $error');
-      //  TODO: Implement login failure
+      //  TODO: Implement recoverAccount failure
     }
   }
 
@@ -101,12 +98,12 @@ class AuthCubit extends Cubit<AuthState> {
       emit(AuthSuccess<AuthUserEntity>(data));
 
       debugPrint('user: ${data.email}');
-      //  TODO: Implement login success
+      //  TODO: Implement verifyCode success
     } else if (verifyStatus is Failure<AuthUserEntity>) {
       final String error = verifyStatus.error;
       emit(AuthFailure(error));
       debugPrint('error: $error');
-      //  TODO: Implement login failure
+      //  TODO: Implement verifyCode failure
     }
   }
 
@@ -118,20 +115,12 @@ class AuthCubit extends Cubit<AuthState> {
       emit(AuthSuccess<int>(data));
 
       debugPrint('user: $data');
-      //  TODO: Implement login success
+      //  TODO: Implement logOut success
     } else if (logOutStatus is Failure<int>) {
       final String error = logOutStatus.error;
       emit(AuthFailure(error));
       debugPrint('error: $error');
-      //  TODO: Implement login failure
+      //  TODO: Implement logOut failure
     }
-  }
-
-  bool get isLoggedIn {
-    final Status<bool> isLoggedInStatus = isLoggedInUseCase();
-    if (isLoggedInStatus is Success<bool>) {
-      return isLoggedInStatus.data;
-    }
-    return false;
   }
 }

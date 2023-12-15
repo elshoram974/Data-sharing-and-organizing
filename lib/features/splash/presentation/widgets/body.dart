@@ -1,6 +1,8 @@
 import 'package:data_sharing_organizing/core/utils/config/locale/generated/l10n.dart';
 import 'package:data_sharing_organizing/core/utils/config/routes/routes.dart';
+import 'package:data_sharing_organizing/features/splash/presentation/cubit/config_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 import 'animated_logo.dart';
@@ -17,10 +19,12 @@ class _SplashBodyState extends State<SplashBody>
   late final AnimationController _controller;
   late final Animation<double> _animation;
 
+  late final ConfigCubit cubit;
+
   @override
   void initState() {
     super.initState();
-
+    cubit = BlocProvider.of<ConfigCubit>(context);
     startScaleAnimation();
     navigateHomeScreen();
   }
@@ -69,7 +73,11 @@ class _SplashBodyState extends State<SplashBody>
     return Future.delayed(
       const Duration(seconds: 3),
       () {
-        context.go(AppRoute.loginScreen);
+        if (cubit.isLoggedIn) {
+          context.go(AppRoute.homeScreen);
+        } else {
+          context.go(AppRoute.loginScreen);
+        }
       },
     );
   }

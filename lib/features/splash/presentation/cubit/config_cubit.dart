@@ -1,3 +1,5 @@
+import 'package:data_sharing_organizing/core/status/status.dart';
+import 'package:data_sharing_organizing/core/status/success/success.dart';
 import 'package:data_sharing_organizing/core/utils/config/locale/locale_handler.dart';
 import 'package:data_sharing_organizing/core/utils/config/themes/app_theme.dart';
 import 'package:data_sharing_organizing/core/utils/constants/app_strings.dart';
@@ -6,10 +8,14 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../auth/domain/usecases/is_logged_in_use_case.dart';
+
 part 'config_state.dart';
 
 class ConfigCubit extends Cubit<ConfigState> {
-  ConfigCubit() : super(const ConfigInitial());
+  final IsLoggedInUseCase isLoggedInUseCase;
+
+  ConfigCubit(this.isLoggedInUseCase) : super(const ConfigInitial());
 
   ThemeMode themeMode =
       ThemeMode.values[pref.getInt(AppStrings.themeMode) ?? 0];
@@ -33,4 +39,12 @@ class ConfigCubit extends Cubit<ConfigState> {
   bool get appIsDark =>
       themeMode == ThemeMode.dark ||
       (themeMode == ThemeMode.system && AppTheme.isDarkMode());
+
+  bool get isLoggedIn {
+    final Status<bool> isLoggedInStatus = isLoggedInUseCase();
+    if (isLoggedInStatus is Success<bool>) {
+      return isLoggedInStatus.data;
+    }
+    return false;
+  }
 }
