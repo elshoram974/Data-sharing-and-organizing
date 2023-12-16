@@ -391,6 +391,96 @@ class S {
       args: [],
     );
   }
+
+  /// `The password provided is too weak.`
+  String get weakPassword {
+    return Intl.message(
+      'The password provided is too weak.',
+      name: 'weakPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `The account already exists for that email.`
+  String get emailAlreadyInUse {
+    return Intl.message(
+      'The account already exists for that email.',
+      name: 'emailAlreadyInUse',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No user found for that email.`
+  String get userNotFound {
+    return Intl.message(
+      'No user found for that email.',
+      name: 'userNotFound',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Wrong password provided for that user.`
+  String get wrongPassword {
+    return Intl.message(
+      'Wrong password provided for that user.',
+      name: 'wrongPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `fill this field`
+  String get fillField {
+    return Intl.message(
+      'fill this field',
+      name: 'fillField',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter valid E-mail`
+  String get enterValidEmail {
+    return Intl.message(
+      'Enter valid E-mail',
+      name: 'enterValidEmail',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Can't be less than {min}`
+  String cantBeLessThan(Object min) {
+    return Intl.message(
+      'Can\'t be less than $min',
+      name: 'cantBeLessThan',
+      desc: '',
+      args: [min],
+    );
+  }
+
+  /// `Can't be more than {max}`
+  String cantBeMoreThan(Object max) {
+    return Intl.message(
+      'Can\'t be more than $max',
+      name: 'cantBeMoreThan',
+      desc: '',
+      args: [max],
+    );
+  }
+
+  /// `Not same password`
+  String get notSamePass {
+    return Intl.message(
+      'Not same password',
+      name: 'notSamePass',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

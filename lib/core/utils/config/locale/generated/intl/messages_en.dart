@@ -20,11 +20,17 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'en';
 
+  static String m0(min) => "Can\'t be less than ${min}";
+
+  static String m1(max) => "Can\'t be more than ${max}";
+
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "back": MessageLookupByLibrary.simpleMessage("Back"),
         "businessAccount":
             MessageLookupByLibrary.simpleMessage("Business account"),
+        "cantBeLessThan": m0,
+        "cantBeMoreThan": m1,
         "codeVerification":
             MessageLookupByLibrary.simpleMessage("Code verification"),
         "confirmPassword":
@@ -35,11 +41,16 @@ class MessageLookup extends MessageLookupByLibrary {
         "doNotHaveAnAccount":
             MessageLookupByLibrary.simpleMessage("Don\'t have an account ? "),
         "emailAddress": MessageLookupByLibrary.simpleMessage("Email address"),
+        "emailAlreadyInUse": MessageLookupByLibrary.simpleMessage(
+            "The account already exists for that email."),
         "enterDigitCodeThatHasBeenSentToYourEmail":
             MessageLookupByLibrary.simpleMessage(
                 "Enter the 6-digit code that has been sent to your email"),
+        "enterValidEmail":
+            MessageLookupByLibrary.simpleMessage("Enter valid E-mail"),
         "enterYourCredentialsToContinue": MessageLookupByLibrary.simpleMessage(
             "Enter your credentials to continue."),
+        "fillField": MessageLookupByLibrary.simpleMessage("fill this field"),
         "forgetPassword":
             MessageLookupByLibrary.simpleMessage("Forget password ? "),
         "goBack": MessageLookupByLibrary.simpleMessage("Go back"),
@@ -51,6 +62,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "noCodeReceived":
             MessageLookupByLibrary.simpleMessage("No code received? "),
         "noNeed": MessageLookupByLibrary.simpleMessage("No need ? "),
+        "notSamePass":
+            MessageLookupByLibrary.simpleMessage("Not same password"),
         "oR": MessageLookupByLibrary.simpleMessage("OR"),
         "password": MessageLookupByLibrary.simpleMessage("Password"),
         "personalAccount":
@@ -66,7 +79,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "showPassword": MessageLookupByLibrary.simpleMessage("Show password"),
         "signUp": MessageLookupByLibrary.simpleMessage("Sign up"),
         "system": MessageLookupByLibrary.simpleMessage("System"),
+        "userNotFound": MessageLookupByLibrary.simpleMessage(
+            "No user found for that email."),
         "verify": MessageLookupByLibrary.simpleMessage("Verify"),
-        "welcomeBack": MessageLookupByLibrary.simpleMessage("Welcome back!")
+        "weakPassword": MessageLookupByLibrary.simpleMessage(
+            "The password provided is too weak."),
+        "welcomeBack": MessageLookupByLibrary.simpleMessage("Welcome back!"),
+        "wrongPassword": MessageLookupByLibrary.simpleMessage(
+            "Wrong password provided for that user.")
       };
 }

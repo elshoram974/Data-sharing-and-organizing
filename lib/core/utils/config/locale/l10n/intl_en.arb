@@ -33,5 +33,14 @@
     "confirmPassword": "Confirm Password",
     "businessAccount": "Business account",
     "oR": "OR",
-    "personalAccount": "Personal account"
+    "personalAccount": "Personal account",
+    "weakPassword": "The password provided is too weak.",
+    "emailAlreadyInUse": "The account already exists for that email.",
+    "userNotFound": "No user found for that email.",
+    "wrongPassword": "Wrong password provided for that user.",
+    "fillField": "fill this field",
+    "enterValidEmail": "Enter valid E-mail",
+    "cantBeLessThan": "Can't be less than {min}",
+    "cantBeMoreThan": "Can't be more than {max}",
+    "notSamePass": "Not same password"
 }

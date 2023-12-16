@@ -33,5 +33,14 @@
     "confirmPassword": "تأكيد كلمة المرور",
     "businessAccount": "حساب الشركة",
     "oR": "أو",
-    "personalAccount": "حساب خاص"
+    "personalAccount": "حساب خاص",
+    "weakPassword": "كلمة المرور المقدمة ضعيفة جدًا.",
+    "emailAlreadyInUse": "الحساب موجود بالفعل لهذا البريد الإلكتروني.",
+    "userNotFound": "لا يوجد مستخدم لهذا البريد الإلكتروني.",
+    "wrongPassword": "تم تقديم كلمة مرور خاطئة لهذا المستخدم.",
+    "fillField": "املأ هذا الحقل",
+    "enterValidEmail": "أدخل بريد إلكتروني صالح",
+    "cantBeLessThan": "لا يمكن أن يكون أقل من {min}",
+    "cantBeMoreThan": "لا يمكن أن يكون أكثر من {max}",
+    "notSamePass": "ليست نفس كلمة المرور"
 }

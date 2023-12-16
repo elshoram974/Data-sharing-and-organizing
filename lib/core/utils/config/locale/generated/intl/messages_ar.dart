@@ -20,10 +20,16 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'ar';
 
+  static String m0(min) => "لا يمكن أن يكون أقل من ${min}";
+
+  static String m1(max) => "لا يمكن أن يكون أكثر من ${max}";
+
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "back": MessageLookupByLibrary.simpleMessage("رجوع"),
         "businessAccount": MessageLookupByLibrary.simpleMessage("حساب الشركة"),
+        "cantBeLessThan": m0,
+        "cantBeMoreThan": m1,
         "codeVerification":
             MessageLookupByLibrary.simpleMessage("تحقق من الرمز"),
         "confirmPassword":
@@ -35,11 +41,16 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("ليس لديك حساب ؟ "),
         "emailAddress":
             MessageLookupByLibrary.simpleMessage("عنوان البريد الإلكتروني"),
+        "emailAlreadyInUse": MessageLookupByLibrary.simpleMessage(
+            "الحساب موجود بالفعل لهذا البريد الإلكتروني."),
         "enterDigitCodeThatHasBeenSentToYourEmail":
             MessageLookupByLibrary.simpleMessage(
                 "أدخل الرمز المكون من 6 أرقام الذي تم إرساله إلى بريدك الإلكتروني"),
+        "enterValidEmail":
+            MessageLookupByLibrary.simpleMessage("أدخل بريد إلكتروني صالح"),
         "enterYourCredentialsToContinue": MessageLookupByLibrary.simpleMessage(
             "أدخل بيانات اعتمادك للمتابعة."),
+        "fillField": MessageLookupByLibrary.simpleMessage("املأ هذا الحقل"),
         "forgetPassword":
             MessageLookupByLibrary.simpleMessage("هل نسيت كلمة المرور ؟ "),
         "goBack": MessageLookupByLibrary.simpleMessage("العودة"),
@@ -52,6 +63,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "noCodeReceived":
             MessageLookupByLibrary.simpleMessage("لم يتم استلام رمز؟ "),
         "noNeed": MessageLookupByLibrary.simpleMessage("لا تحتاج للمساعدة؟ "),
+        "notSamePass":
+            MessageLookupByLibrary.simpleMessage("ليست نفس كلمة المرور"),
         "oR": MessageLookupByLibrary.simpleMessage("أو"),
         "password": MessageLookupByLibrary.simpleMessage("كلمة المرور"),
         "personalAccount": MessageLookupByLibrary.simpleMessage("حساب خاص"),
@@ -67,7 +80,13 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("إظهار كلمة المرور"),
         "signUp": MessageLookupByLibrary.simpleMessage("التسجيل"),
         "system": MessageLookupByLibrary.simpleMessage("النظام"),
+        "userNotFound": MessageLookupByLibrary.simpleMessage(
+            "لا يوجد مستخدم لهذا البريد الإلكتروني."),
         "verify": MessageLookupByLibrary.simpleMessage("التحقق"),
-        "welcomeBack": MessageLookupByLibrary.simpleMessage("مرحبًا بعودتك!")
+        "weakPassword": MessageLookupByLibrary.simpleMessage(
+            "كلمة المرور المقدمة ضعيفة جدًا."),
+        "welcomeBack": MessageLookupByLibrary.simpleMessage("مرحبًا بعودتك!"),
+        "wrongPassword": MessageLookupByLibrary.simpleMessage(
+            "تم تقديم كلمة مرور خاطئة لهذا المستخدم.")
       };
 }
