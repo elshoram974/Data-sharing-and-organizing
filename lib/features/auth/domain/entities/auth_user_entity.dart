@@ -21,6 +21,21 @@ class AuthUserEntity extends Equatable {
     required this.password,
     required this.accountType,
   });
+
+  AuthUserEntity copyWith({
+    String? name,
+    String? email,
+    String? password,
+    AccountType? accountType,
+  }) {
+    return AuthUserEntity(
+      name: name ?? this.name,
+      email: email ?? this.email,
+      password: password ?? this.password,
+      accountType: accountType ?? this.accountType,
+    );
+  }
+
   @override
   List<Object?> get props => [name, email, password, accountType];
 }

@@ -9,6 +9,24 @@ final class LoginUserEntity extends AuthUserEntity {
     this.keepLogin = true,
   }) : super(name: '', accountType: AccountType.personal);
 
+  factory LoginUserEntity.none() =>
+      const LoginUserEntity(email: '', password: '');
+
+  @override
+  LoginUserEntity copyWith({
+    String? name,
+    String? email,
+    String? password,
+    AccountType? accountType,
+    bool? keepLogin,
+  }) {
+    return LoginUserEntity(
+      email: email ?? this.email,
+      password: password ?? this.password,
+      keepLogin: keepLogin ?? this.keepLogin,
+    );
+  }
+
   @override
   List<Object?> get props => [email, password, keepLogin];
 }
