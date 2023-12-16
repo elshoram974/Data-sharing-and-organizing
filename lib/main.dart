@@ -10,15 +10,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'features/auth/presentation/cubit/auth_cubit.dart';
 
-
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Future.wait([
     S.load(AppLocale().deviceLocale),
     localInstance(),
-    initDependencies(),
   ]);
   Bloc.observer = MyBlocObserver();
+  initDependencies();
 
   runApp(const MyApp());
 }

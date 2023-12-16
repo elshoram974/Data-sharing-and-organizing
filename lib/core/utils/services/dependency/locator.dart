@@ -17,15 +17,15 @@ Future<void> initDependencies() async {
 
   // Dependency
   sl.registerSingleton<APIServices>(APIServices(sl.get<Dio>()));
-  // dataSourceDependency here if fall in problem
+  
+  dataSourceDependency();
+
   sl.registerSingleton<AuthRepositoriesImp>(
     AuthRepositoriesImp(
       localDataSource: sl.get<AuthLocalDataSourceImp>(),
       remoteDataSource: sl.get<AuthRemoteDataSourceImp>(),
     ),
   );
-
-  dataSourceDependency();
 
   useCasesDependency();
 
