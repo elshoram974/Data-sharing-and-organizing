@@ -18,10 +18,10 @@ class AuthRepositoriesImp extends AuthRepositories {
   });
 
   @override
-  Future<Status<AuthUserEntity>> login(LoginUserEntity user) async{
-    if(user.LoginUserEntity) await localDataSource.saveUser(user) ;
+  Future<Status<AuthUserEntity>> login(LoginUserEntity user) async {
+    if (user.keepLogin) await localDataSource.saveUser(user);
     // TODO: implement login
-    throw UnimplementedError();
+    return Success(user);
   }
 
   @override
