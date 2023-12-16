@@ -3,6 +3,7 @@ import 'package:data_sharing_organizing/core/status/success/success.dart';
 
 import 'package:data_sharing_organizing/features/auth/domain/entities/auth_user_entity.dart';
 
+import '../../domain/entities/login_entity.dart';
 import '../../domain/repositories/auth_repositories.dart';
 import '../datasources/auth_local_data_sources.dart';
 import '../datasources/auth_remote_data_sources.dart';
@@ -17,7 +18,8 @@ class AuthRepositoriesImp extends AuthRepositories {
   });
 
   @override
-  Future<Status<AuthUserEntity>> login(AuthUserEntity user) {
+  Future<Status<AuthUserEntity>> login(LoginUserEntity user) async{
+    if(user.LoginUserEntity) await localDataSource.saveUser(user) ;
     // TODO: implement login
     throw UnimplementedError();
   }
