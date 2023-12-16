@@ -11,6 +11,14 @@ class AuthInitial extends AuthState {
   const AuthInitial();
 }
 
+class ChangeRememberMeState extends AuthState {
+  final bool rememberMe;
+  const ChangeRememberMeState(this.rememberMe);
+
+  @override
+  List<bool> get props => [rememberMe];
+}
+
 class AuthLoading extends AuthState {
   const AuthLoading();
 }

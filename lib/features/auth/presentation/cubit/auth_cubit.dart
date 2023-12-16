@@ -31,9 +31,21 @@ class AuthCubit extends Cubit<AuthState> {
     required this.logOutUseCase,
   }) : super(const AuthInitial());
 
+  GlobalKey<FormState> loginKey = GlobalKey<FormState>();
+
+  late LoginUserEntity loginUser = LoginUserEntity.none();
+
+  // * login----------------------------
+  void changeRemember() {
+    loginUser = loginUser.copyWith(keepLogin: !loginUser.keepLogin);
+    emit(ChangeRememberMeState(loginUser.keepLogin));
+  }
+
   void login() async {
+    if (!loginKey.currentState!.validate()) return;
+    loginKey.currentState!.save();
     emit(const AuthLoading());
-    const LoginUserEntity user = LoginUserEntity(email: '', password: '');
+    final LoginUserEntity user = loginUser;
     final Status<AuthUserEntity> loginState = await loginUseCase(user);
     if (loginState is Success<AuthUserEntity>) {
       final AuthUserEntity data = loginState.data;
@@ -48,7 +60,9 @@ class AuthCubit extends Cubit<AuthState> {
       //  TODO: Implement login failure
     }
   }
+  //  end login----------------------------
 
+  // * sign up----------------------------
   void signUp() async {
     emit(const AuthLoading());
     const AuthUserEntity user = AuthUserEntity(
@@ -71,6 +85,9 @@ class AuthCubit extends Cubit<AuthState> {
       //  TODO: Implement signUp failure
     }
   }
+  // end sign up----------------------------
+
+  // * recover account----------------------------
 
   void recoverAccount() async {
     emit(const AuthLoading());
@@ -89,7 +106,9 @@ class AuthCubit extends Cubit<AuthState> {
       //  TODO: Implement recoverAccount failure
     }
   }
+  // end recover account----------------------------
 
+  // * verify Code----------------------------
   void verifyCode() async {
     emit(const AuthLoading());
     final Status<AuthUserEntity> verifyStatus = await verifyCodeUseCase(123456);
@@ -106,6 +125,7 @@ class AuthCubit extends Cubit<AuthState> {
       //  TODO: Implement verifyCode failure
     }
   }
+  // end verify Code----------------------------
 
   void logOut() async {
     emit(const AuthLoading());

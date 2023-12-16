@@ -1,5 +1,6 @@
 import 'package:data_sharing_organizing/core/utils/config/locale/generated/l10n.dart';
 import 'package:data_sharing_organizing/core/utils/config/routes/routes.dart';
+import 'package:data_sharing_organizing/core/utils/services/dependency/provider_dependency.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -21,7 +22,7 @@ class LoginButtons extends StatelessWidget {
         const RememberMeWidget(),
         AuthFilledButton(
           text: S.of(context).login,
-          onPressed: () {},
+          onPressed: ProviderDependency.auth.login,
         ),
         LoginOutlinedButton(
           activeText: S.of(context).signUp,
