@@ -24,30 +24,32 @@ class AuthBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CustomScrollView(
-      physics: const BouncingScrollPhysics(),
-      slivers: [
-        AuthAppBar(
-          showBackButton: showBackButton,
-          showSettingsButton: showSettingsButton,
-        ),
-        const AuthLogo(),
-        IntroAuthWidget(
-          header: introHeader,
-          body: introBody,
-        ),
-        SliverToBoxAdapter(
-          child: ListView(
-            padding: EdgeInsets.zero,
-            physics: const NeverScrollableScrollPhysics(),
-            shrinkWrap: true,
-            children: children,
+    return SafeArea(
+      child: CustomScrollView(
+        physics: const BouncingScrollPhysics(),
+        slivers: [
+          AuthAppBar(
+            showBackButton: showBackButton,
+            showSettingsButton: showSettingsButton,
           ),
-        ),
-        const SliverToBoxAdapter(
-          child: SizedBox(height: 2 * AppConst.defaultPadding),
-        ),
-      ],
-    ).horizontalPadding(AppConst.defaultPadding);
+          const AuthLogo(),
+          IntroAuthWidget(
+            header: introHeader,
+            body: introBody,
+          ),
+          SliverToBoxAdapter(
+            child: ListView(
+              padding: EdgeInsets.zero,
+              physics: const NeverScrollableScrollPhysics(),
+              shrinkWrap: true,
+              children: children,
+            ),
+          ),
+          const SliverToBoxAdapter(
+            child: SizedBox(height: 2 * AppConst.defaultPadding),
+          ),
+        ],
+      ).horizontalPadding(AppConst.defaultPadding),
+    );
   }
 }
