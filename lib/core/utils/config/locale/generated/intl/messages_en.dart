@@ -35,6 +35,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Code verification"),
         "confirmPassword":
             MessageLookupByLibrary.simpleMessage("Confirm Password"),
+        "createNewPassword":
+            MessageLookupByLibrary.simpleMessage("Create new password"),
         "createYourOwenEmail":
             MessageLookupByLibrary.simpleMessage("Create your owen email"),
         "darkMode": MessageLookupByLibrary.simpleMessage("Dark mode"),
@@ -59,6 +61,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "language": MessageLookupByLibrary.simpleMessage("Language"),
         "login": MessageLookupByLibrary.simpleMessage("Login"),
         "name": MessageLookupByLibrary.simpleMessage("Name"),
+        "newPassword": MessageLookupByLibrary.simpleMessage("New password"),
         "noCodeReceived":
             MessageLookupByLibrary.simpleMessage("No code received? "),
         "noNeed": MessageLookupByLibrary.simpleMessage("No need ? "),
@@ -73,6 +76,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Recover your account"),
         "rememberMe": MessageLookupByLibrary.simpleMessage("Remember me"),
         "resend": MessageLookupByLibrary.simpleMessage("Resend"),
+        "save": MessageLookupByLibrary.simpleMessage("Save"),
         "sendRequest": MessageLookupByLibrary.simpleMessage("Send request"),
         "settings": MessageLookupByLibrary.simpleMessage("Settings"),
         "sharikna": MessageLookupByLibrary.simpleMessage("Sharikna"),
@@ -86,6 +90,9 @@ class MessageLookup extends MessageLookupByLibrary {
             "The password provided is too weak."),
         "welcomeBack": MessageLookupByLibrary.simpleMessage("Welcome back!"),
         "wrongPassword": MessageLookupByLibrary.simpleMessage(
-            "Wrong password provided for that user.")
+            "Wrong password provided for that user."),
+        "yourNewPasswordMustBeDifferentFromPreviously":
+            MessageLookupByLibrary.simpleMessage(
+                "Your new password must be different from previously used password")
       };
 }

@@ -42,5 +42,9 @@
     "enterValidEmail": "Enter valid E-mail",
     "cantBeLessThan": "Can't be less than {min}",
     "cantBeMoreThan": "Can't be more than {max}",
-    "notSamePass": "Not same password"
+    "notSamePass": "Not same password",
+    "newPassword": "New password",
+    "save": "Save",
+    "createNewPassword": "Create new password",
+    "yourNewPasswordMustBeDifferentFromPreviously": "Your new password must be different from previously used password"
 }

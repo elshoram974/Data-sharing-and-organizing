@@ -34,6 +34,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("تحقق من الرمز"),
         "confirmPassword":
             MessageLookupByLibrary.simpleMessage("تأكيد كلمة المرور"),
+        "createNewPassword":
+            MessageLookupByLibrary.simpleMessage("إنشاء كلمة مرور جديدة"),
         "createYourOwenEmail":
             MessageLookupByLibrary.simpleMessage("أنشئ بريدك الإلكتروني الخاص"),
         "darkMode": MessageLookupByLibrary.simpleMessage("الوضع المظلم"),
@@ -60,6 +62,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "language": MessageLookupByLibrary.simpleMessage("اللغة"),
         "login": MessageLookupByLibrary.simpleMessage("تسجيل الدخول"),
         "name": MessageLookupByLibrary.simpleMessage("الاسم"),
+        "newPassword": MessageLookupByLibrary.simpleMessage("كلمة مرور جديدة"),
         "noCodeReceived":
             MessageLookupByLibrary.simpleMessage("لم يتم استلام رمز؟ "),
         "noNeed": MessageLookupByLibrary.simpleMessage("لا تحتاج للمساعدة؟ "),
@@ -73,6 +76,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("استعادة حسابك"),
         "rememberMe": MessageLookupByLibrary.simpleMessage("تذكرني"),
         "resend": MessageLookupByLibrary.simpleMessage("إعادة الإرسال"),
+        "save": MessageLookupByLibrary.simpleMessage("حفظ"),
         "sendRequest": MessageLookupByLibrary.simpleMessage("إرسال الطلب"),
         "settings": MessageLookupByLibrary.simpleMessage("الإعدادات"),
         "sharikna": MessageLookupByLibrary.simpleMessage("شاركنا"),
@@ -87,6 +91,9 @@ class MessageLookup extends MessageLookupByLibrary {
             "كلمة المرور المقدمة ضعيفة جدًا."),
         "welcomeBack": MessageLookupByLibrary.simpleMessage("مرحبًا بعودتك!"),
         "wrongPassword": MessageLookupByLibrary.simpleMessage(
-            "تم تقديم كلمة مرور خاطئة لهذا المستخدم.")
+            "تم تقديم كلمة مرور خاطئة لهذا المستخدم."),
+        "yourNewPasswordMustBeDifferentFromPreviously":
+            MessageLookupByLibrary.simpleMessage(
+                "يجب أن تكون كلمة المرور الجديدة مختلفة عن كلمة المرور المستخدمة سابقًا")
       };
 }
