@@ -2,6 +2,16 @@ import '../config/locale/generated/l10n.dart';
 import '../enums/fields_type_enum.dart';
 
 abstract final class AppValidator {
+  const AppValidator();
+  
+  static String? samePassword(String? current, String previous) {
+    if (current == null || current.trim() == "") return S.current.fillField;
+
+    if (previous != current) return S.current.notSamePass;
+
+    return null;
+  }
+
   static String? auth(
     String? value,
     int min,
