@@ -2,7 +2,7 @@ import 'package:data_sharing_organizing/core/utils/services/dependency/provider_
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../cubit/auth_cubit.dart';
+import '../cubit/login_cubit/login_cubit.dart';
 import '../widgets/login/login_body.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -10,7 +10,7 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ProviderDependency.auth = BlocProvider.of<AuthCubit>(context);
+    ProviderDependency.login = BlocProvider.of<LoginCubit>(context);
     return const Scaffold(body: LoginBody());
   }
 }

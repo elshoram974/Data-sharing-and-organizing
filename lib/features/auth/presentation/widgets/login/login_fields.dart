@@ -4,7 +4,7 @@ import 'package:data_sharing_organizing/core/utils/functions/app_validate.dart';
 import 'package:data_sharing_organizing/core/utils/services/dependency/provider_dependency.dart';
 import 'package:flutter/material.dart';
 
-import '../../cubit/auth_cubit.dart';
+import '../../cubit/login_cubit/login_cubit.dart';
 import '../auth_field.dart';
 import '../auth_password_field.dart';
 
@@ -13,7 +13,7 @@ class LoginFields extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    AuthCubit c = ProviderDependency.auth;
+    LoginCubit c = ProviderDependency.login;
     return AutofillGroup(
       child: Form(
         key: c.loginKey,
@@ -24,14 +24,14 @@ class LoginFields extends StatelessWidget {
               hint: S.of(context).emailAddress,
               autofillHints: const [AutofillHints.email],
               keyboardType: TextInputType.emailAddress,
-              onSaved: (val) => c.loginUser = c.loginUser.copyWith(email: val!.trim()),
+              onSaved: (val) => c.email = val!.trim(),
               validator: (val) => AppValidator.auth(val, 0, 200, FieldType.loginEmail),
             ),
             AuthPasswordField(
               label: S.of(context).password,
               hint: S.of(context).password,
               newPassword: false,
-              onSaved: (val) => c.loginUser = c.loginUser.copyWith(password: val!),
+              onSaved: (val) => c.password = val!,
               validator: (val) => AppValidator.auth(val, 0, 200, FieldType.loginPass),
             ),
           ],

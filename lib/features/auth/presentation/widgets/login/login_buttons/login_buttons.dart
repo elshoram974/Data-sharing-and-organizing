@@ -22,7 +22,7 @@ class LoginButtons extends StatelessWidget {
         const RememberMeWidget(),
         AuthFilledButton(
           text: S.of(context).login,
-          onPressed: ProviderDependency.auth.login,
+          onPressed: ProviderDependency.login.login,
         ),
         LoginOutlinedButton(
           activeText: S.of(context).signUp,

@@ -1,7 +1,7 @@
-import 'package:data_sharing_organizing/features/auth/presentation/cubit/auth_cubit.dart';
+import '../../../../features/auth/presentation/cubit/login_cubit/login_cubit.dart';
 
 abstract final class ProviderDependency {
   const ProviderDependency();
 
-  static late AuthCubit auth;
+  static late LoginCubit login;
 }

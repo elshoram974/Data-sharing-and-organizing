@@ -8,7 +8,7 @@ import 'package:data_sharing_organizing/features/splash/presentation/cubit/confi
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'features/auth/presentation/cubit/auth_cubit.dart';
+import 'features/auth/presentation/cubit/login_cubit/login_cubit.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (context) => sl.get<ConfigCubit>()),
-        BlocProvider(create: (context) => sl.get<AuthCubit>()),
+        BlocProvider(create: (context) => sl.get<LoginCubit>()),
       ],
       child: const ClarityApp(),
     );
