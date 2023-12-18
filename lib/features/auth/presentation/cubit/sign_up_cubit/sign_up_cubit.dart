@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:data_sharing_organizing/core/status/errors/failure.dart';
 import 'package:data_sharing_organizing/core/status/status.dart';
 import 'package:data_sharing_organizing/core/status/success/success.dart';
@@ -31,24 +29,28 @@ class SignUpCubit extends Cubit<SignUpState> {
 
   @override
   Future<void> close() {
-    log("closed");
     focusNode.dispose();
     return super.close();
+  }
+
+  void chooseAccountType(AccountType type) {
+    accountType = type;
+    emit(ChooseAccountTypeState(accountType!));
   }
 
   // * sign up----------------------------
   void signUp() async {
     if (!formKey.currentState!.validate()) return;
-    if (accountType != null) return;
+    if (accountType == null) return;
     formKey.currentState!.save();
     emit(const SignUpLoadingState());
     final AuthUserEntity user = AuthUserEntity(
       name: name,
       email: email,
       password: password,
-      accountType: accountType ?? AccountType.personal,
+      accountType: accountType!,
     );
-    debugPrint('user: ');
+    debugPrint('user: ${user.email} $user');
 
     final Status<AuthUserEntity> signUpState = await signUpUseCase(user);
     if (signUpState is Success<AuthUserEntity>) {

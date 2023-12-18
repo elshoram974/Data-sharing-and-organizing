@@ -11,6 +11,14 @@ final class SignUpInitial extends SignUpState {
   const SignUpInitial();
 }
 
+final class ChooseAccountTypeState extends SignUpState {
+  final AccountType accountType;
+  const ChooseAccountTypeState(this.accountType);
+
+  @override
+  List<AccountType> get props => [accountType];
+}
+
 final class SignUpLoadingState extends SignUpState {
   const SignUpLoadingState();
 }
