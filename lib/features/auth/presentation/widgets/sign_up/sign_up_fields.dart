@@ -28,12 +28,12 @@ class SignUpFields extends StatelessWidget {
           AuthPasswordField(
             label: S.of(context).password,
             hint: S.of(context).password,
-            newPassword: false,
+            newPassword: true,
           ),
           AuthPasswordField(
             label: S.of(context).confirmPassword,
             hint: S.of(context).password,
-            newPassword: false,
+            newPassword: true,
           ),
         ],
       ),

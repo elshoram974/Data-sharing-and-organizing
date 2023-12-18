@@ -13,7 +13,7 @@ class SettingsButtonAction extends StatelessWidget {
     return Visibility(
       visible: showSettingsButton,
       child: IconButton(
-        onPressed: () => context.push(AppRoute.authSettingsScreen),
+        onPressed: () => context.push(AppRoute.authSettings),
         tooltip: S.of(context).settings,
         icon: const Icon(Icons.settings_outlined),
       ),

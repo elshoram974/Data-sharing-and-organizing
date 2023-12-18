@@ -18,7 +18,10 @@ class RecoverButtons extends StatelessWidget {
         const SizedBox(height: 53),
         AuthFilledButton(
           text: S.of(context).sendRequest,
-          onPressed: () => context.push(AppRoute.codeVerificationScreen),
+          onPressed: () => context.push(
+            AppRoute.codeVerification,
+            extra: AppRoute.forgotPassword,
+          ),
         ),
         const SizedBox(height: 8),
         AuthRichButton(

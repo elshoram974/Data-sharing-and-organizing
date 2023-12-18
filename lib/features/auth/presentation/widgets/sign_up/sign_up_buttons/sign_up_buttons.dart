@@ -19,7 +19,10 @@ class SignUpButtons extends StatelessWidget {
           text: S.of(context).signUp,
           onPressed: () {
             // Register Fn
-            context.push(AppRoute.codeVerificationScreen);
+            context.push(
+              AppRoute.codeVerification,
+              extra: AppRoute.homeScreen,
+            );
           },
         ),
       ],

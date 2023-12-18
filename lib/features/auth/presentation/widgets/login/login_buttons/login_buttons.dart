@@ -27,7 +27,7 @@ class LoginButtons extends StatelessWidget {
         LoginOutlinedButton(
           activeText: S.of(context).signUp,
           text: S.of(context).doNotHaveAnAccount,
-          onPressed: () => context.push(AppRoute.signUpScreen),
+          onPressed: () => context.push(AppRoute.signUp),
         ),
       ],
     );

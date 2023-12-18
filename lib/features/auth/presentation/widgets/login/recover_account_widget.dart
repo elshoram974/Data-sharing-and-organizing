@@ -15,7 +15,7 @@ class RecoverAccountButton extends StatelessWidget {
       align: TextAlign.end,
       prefixText: S.of(context).forgetPassword,
       buttonText: S.of(context).recover,
-      onTap: () => context.push(AppRoute.recoverScreen),
+      onTap: () => context.push(AppRoute.recover),
     );
   }
 }
