@@ -47,6 +47,12 @@ class AuthRepositoriesImp extends AuthRepositories {
 
   @override
   Future<Status<int>> logOut() async => Success(await localDataSource.logOut());
+  
+  @override
+  Future<Status<AuthUserEntity>> newPassword(String newPassword) {
+    // TODO: implement newPassword
+    throw UnimplementedError();
+  }
 
   // @override
   // Future<
