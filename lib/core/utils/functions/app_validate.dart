@@ -12,7 +12,7 @@ abstract final class AppValidator {
     if (value == null || value.trim() == "") return S.current.fillField;
 
     switch (field) {
-      case FieldType.loginEmail || FieldType.signUpEmail:
+      case FieldType.email:
         if (!isEmail(value)) return S.current.enterValidEmail;
 
       default:
@@ -29,6 +29,7 @@ abstract final class AppValidator {
 }
 
 bool isEmail(email) {
-  const String emailRegExp = r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+";
+  const String emailRegExp =
+      r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+";
   return RegExp(emailRegExp).hasMatch(email);
 }

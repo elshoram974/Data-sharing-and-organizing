@@ -19,7 +19,7 @@ class LoginCubit extends Cubit<LoginState> {
 
   LoginCubit(this.loginUseCase) : super(const LoginInitialState());
 
-  GlobalKey<FormState> loginKey = GlobalKey<FormState>();
+  GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   String email = '';
   String password = '';
@@ -34,8 +34,8 @@ class LoginCubit extends Cubit<LoginState> {
 
   // * login----------------------------
   void login() async {
-    if (!loginKey.currentState!.validate()) return;
-    loginKey.currentState!.save();
+    if (!formKey.currentState!.validate()) return;
+    formKey.currentState!.save();
     emit(const LoginLoadingState());
     final LoginUserEntity user = LoginUserEntity(
       email: email,

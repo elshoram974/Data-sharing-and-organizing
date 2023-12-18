@@ -1,8 +1,6 @@
 enum FieldType {
-  loginEmail,
-  loginPass,
-  signUpName,
-  signUpEmail,
-  signUpPass,
-  signUpRePass,
+  name,
+  email,
+  password,
+  rePassword,
 }

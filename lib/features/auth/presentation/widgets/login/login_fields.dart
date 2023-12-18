@@ -16,7 +16,7 @@ class LoginFields extends StatelessWidget {
     LoginCubit c = ProviderDependency.login;
     return AutofillGroup(
       child: Form(
-        key: c.loginKey,
+        key: c.formKey,
         child: Column(
           children: [
             AuthField(
@@ -25,14 +25,14 @@ class LoginFields extends StatelessWidget {
               autofillHints: const [AutofillHints.email],
               keyboardType: TextInputType.emailAddress,
               onSaved: (val) => c.email = val!.trim(),
-              validator: (val) => AppValidator.auth(val, 0, 200, FieldType.loginEmail),
+              validator: (val) => AppValidator.auth(val?.trim(), 0, 200, FieldType.email),
             ),
             AuthPasswordField(
               label: S.of(context).password,
               hint: S.of(context).password,
               newPassword: false,
               onSaved: (val) => c.password = val!,
-              validator: (val) => AppValidator.auth(val, 0, 200, FieldType.loginPass),
+              validator: (val) => AppValidator.auth(val, 0, 200, FieldType.password),
             ),
           ],
         ),
