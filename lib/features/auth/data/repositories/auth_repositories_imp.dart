@@ -31,9 +31,9 @@ class AuthRepositoriesImp extends AuthRepositories {
   }
 
   @override
-  Future<Status<AuthUserEntity>> signUp(AuthUserEntity user) {
+  Future<Status<AuthUserEntity>> signUp(AuthUserEntity user) async{
     // TODO: implement signUp
-    throw UnimplementedError();
+    return Success<AuthUserEntity>(user);
   }
 
   @override
