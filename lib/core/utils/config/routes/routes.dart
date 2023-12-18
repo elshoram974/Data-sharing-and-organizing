@@ -8,14 +8,15 @@ abstract class AppRoute {
   static const String splashScreen = '/';
 
   // * authorization screens *//
-  static const String loginScreen = AuthRoutes.loginScreen;
-  static const String authSettingsScreen = AuthRoutes.authSettingsScreen;
-  static const String recoverScreen = AuthRoutes.recoverScreen;
-  static const String codeVerificationScreen = AuthRoutes.codeVerificationScreen;
-  static const String signUpScreen = AuthRoutes.signUpScreen;
+  static const String login = AuthRoutes.login;
+  static const String authSettings = AuthRoutes.authSettings;
+  static const String recover = AuthRoutes.recover;
+  static const String forgotPassword = AuthRoutes.forgotPassword;
+  static const String codeVerification = AuthRoutes.codeVerification;
+  static const String signUp = AuthRoutes.signUp;
   // * ------ End authorization screens ------ *//
 
-  static const String homeScreen = '/homeScreen';
+  static const String homeScreen = '/home';
 
   static final GoRouter router = GoRouter(
     routes: <RouteBase>[
