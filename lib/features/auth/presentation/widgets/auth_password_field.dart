@@ -15,11 +15,13 @@ class AuthPasswordField extends StatefulWidget {
     this.onChanged,
     this.validator,
     this.textInputAction = TextInputAction.done,
+    this.focusNode,
   });
 
   final String label;
   final String? hint;
   final bool newPassword;
+  final FocusNode? focusNode;
   final TextInputAction textInputAction;
   final void Function(String?)? onSaved;
   final void Function()? onEditingComplete;
@@ -38,6 +40,7 @@ class _AuthPasswordFieldState extends State<AuthPasswordField> {
     return AuthField(
       label: widget.label,
       hint: widget.hint,
+      focusNode: widget.focusNode,
       autofillHints: [
         widget.newPassword ? AutofillHints.newPassword : AutofillHints.password,
       ],

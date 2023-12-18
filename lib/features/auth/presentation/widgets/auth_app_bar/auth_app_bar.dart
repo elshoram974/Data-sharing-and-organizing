@@ -17,7 +17,7 @@ class AuthAppBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return SliverAppBar(
       automaticallyImplyLeading: false,
-      floating: true,
+      floating: false,
       leadingWidth: 100,
       scrolledUnderElevation: 0,
       leading: BackButtonLeading(showBackButton: showBackButton),

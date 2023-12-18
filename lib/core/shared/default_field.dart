@@ -10,6 +10,7 @@ class MyDefaultField extends StatelessWidget {
   final String? initialValue;
   final bool isDouble;
   final TextAlign textAlign;
+  final FocusNode? focusNode;
   final TextEditingController? controller;
   final void Function(String)? onChanged;
   final void Function(String?)? onSaved;
@@ -76,12 +77,14 @@ class MyDefaultField extends StatelessWidget {
     this.autofocus = false,
     this.style,
     this.hintStyle,
+    this.focusNode,
   });
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       obscureText: obscureText,
+      focusNode: focusNode,
       decoration: InputDecoration(
         filled: filled,
         fillColor: fillColor,

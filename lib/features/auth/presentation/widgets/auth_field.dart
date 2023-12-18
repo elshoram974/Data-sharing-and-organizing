@@ -21,6 +21,8 @@ class AuthField extends StatelessWidget {
     this.suffixTooltip,
     this.textInputAction = TextInputAction.next,
     this.textDirection = TextDirection.ltr,
+    this.autofocus = false,
+    this.focusNode,
   });
 
   final String label;
@@ -29,6 +31,8 @@ class AuthField extends StatelessWidget {
   final Iterable<String>? autofillHints;
   final TextInputType? keyboardType;
   final bool obscureText;
+  final bool autofocus;
+  final FocusNode? focusNode;
   final IconData? suffix;
   final TextInputAction textInputAction;
   final TextDirection? textDirection;
@@ -49,6 +53,8 @@ class AuthField extends StatelessWidget {
         const SizedBox(height: 5),
         MyDefaultField(
           autofillHints: autofillHints,
+          autofocus: autofocus,
+          focusNode: focusNode,
           textDirection: textDirection,
           keyboardType: keyboardType,
           hintText: hint,
