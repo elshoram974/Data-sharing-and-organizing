@@ -1,9 +1,12 @@
 import 'package:data_sharing_organizing/core/status/errors/failure.dart';
 import 'package:data_sharing_organizing/core/status/status.dart';
 import 'package:data_sharing_organizing/core/status/success/success.dart';
+import 'package:data_sharing_organizing/core/utils/config/routes/routes.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../domain/entities/auth_user_entity.dart';
 import '../../../domain/entities/login_entity.dart';
@@ -43,6 +46,8 @@ class LoginCubit extends Cubit<LoginState> {
     if (loginState is Success<AuthUserEntity>) {
       final AuthUserEntity data = loginState.data;
       emit(LoginSuccessState(data));
+      TextInput.finishAutofillContext();
+      AppRoute.key.currentContext?.pushReplacement(AppRoute.home, extra: data);
 
       debugPrint('user: ${data.email}');
       //  TODO: Implement login success

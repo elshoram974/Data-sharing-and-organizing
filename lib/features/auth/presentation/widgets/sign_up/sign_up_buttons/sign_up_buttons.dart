@@ -21,7 +21,7 @@ class SignUpButtons extends StatelessWidget {
             // Register Fn
             context.push(
               AppRoute.codeVerification,
-              extra: AppRoute.homeScreen,
+              extra: AppRoute.home,
             );
           },
         ),

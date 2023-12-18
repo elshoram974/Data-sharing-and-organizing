@@ -74,7 +74,7 @@ class _SplashBodyState extends State<SplashBody>
       const Duration(seconds: 3),
       () {
         if (cubit.isLoggedIn) {
-          context.go(AppRoute.homeScreen);
+          context.go(AppRoute.home);
         } else {
           context.go(AppRoute.login);
         }

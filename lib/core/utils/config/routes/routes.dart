@@ -5,6 +5,8 @@ import '../../../../features/splash/presentation/screen/splash_screen.dart';
 import 'routes/authentication_routes.dart';
 
 abstract class AppRoute {
+  static GlobalKey<NavigatorState> key = GlobalKey<NavigatorState>();
+
   static const String splashScreen = '/';
 
   // * authorization screens *//
@@ -16,9 +18,10 @@ abstract class AppRoute {
   static const String signUp = AuthRoutes.signUp;
   // * ------ End authorization screens ------ *//
 
-  static const String homeScreen = '/home';
+  static const String home = '/home';
 
   static final GoRouter router = GoRouter(
+    navigatorKey: key,
     routes: <RouteBase>[
       GoRoute(
         path: splashScreen,
