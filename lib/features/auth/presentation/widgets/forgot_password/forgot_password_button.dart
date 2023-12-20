@@ -18,7 +18,7 @@ class ForgotPasswordButton extends StatelessWidget {
         TextInput.finishAutofillContext();
 
         // save new password Fn
-        context.push(AppRoute.home);
+        context.go(AppRoute.home);
       },
     ).topPadding(70);
   }
