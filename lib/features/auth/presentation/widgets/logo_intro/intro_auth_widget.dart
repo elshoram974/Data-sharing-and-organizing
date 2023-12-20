@@ -6,9 +6,11 @@ class IntroAuthWidget extends StatelessWidget {
     super.key,
     required this.header,
     required this.body,
+    required this.crossAxisAlignment,
   });
   final String header;
   final String body;
+  final CrossAxisAlignment crossAxisAlignment;
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +20,7 @@ class IntroAuthWidget extends StatelessWidget {
         bottom: 3,
       ),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: crossAxisAlignment,
         children: [
           Text(header, style: AppStyle.styleBoldInika24),
           Text(body, style: AppStyle.styleRegular15),

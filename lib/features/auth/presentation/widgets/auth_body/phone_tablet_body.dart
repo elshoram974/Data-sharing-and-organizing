@@ -20,7 +20,10 @@ class AuthPhoneAndTabletBody extends StatelessWidget {
     return SliverToBoxAdapter(
       child: AddWidgetInBody(
         children: [
-          AuthLogoWithIntro(introHeader: introHeader, introBody: introBody),
+          AuthLogoWithIntro(
+            introHeader: introHeader,
+            introBody: introBody,
+          ),
           ...children,
         ],
       ),

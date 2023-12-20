@@ -1,4 +1,3 @@
-import 'package:data_sharing_organizing/core/utils/constants/app_constants.dart';
 import 'package:flutter/material.dart';
 
 import '../logo_intro/auth_logo_with_intro.dart';
@@ -18,17 +17,22 @@ class AuthDesktopBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    const int flex = 20;
     return SliverToBoxAdapter(
       child: Row(
         children: [
-          Expanded(child: AddWidgetInBody(children: children)),
-          const SizedBox(width: AppConst.defaultPadding),
+          const Spacer(),
+          Expanded(flex: flex, child: AddWidgetInBody(children: children)),
+          const Spacer(),
           Expanded(
+            flex: flex,
             child: AuthLogoWithIntro(
               introHeader: introHeader,
               introBody: introBody,
+              center: true,
             ),
           ),
+          const Spacer(),
         ],
       ),
     );
