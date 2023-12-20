@@ -33,6 +33,7 @@ class LoginFields extends StatelessWidget {
               newPassword: false,
               onSaved: (val) => c.password = val!,
               validator: (val) => AppValidator.auth(val, 0, 200, FieldType.password),
+              onFieldSubmitted: (val) => c.login(),
             ),
           ],
         ),
