@@ -12,19 +12,17 @@ class IntroAuthWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SliverPadding(
+    return Padding(
       padding: const EdgeInsets.only(
         top: 70,
         bottom: 3,
       ),
-      sliver: SliverToBoxAdapter(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(header, style: AppStyle.styleBoldInika24),
-            Text(body, style: AppStyle.styleRegular15),
-          ],
-        ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(header, style: AppStyle.styleBoldInika24),
+          Text(body, style: AppStyle.styleRegular15),
+        ],
       ),
     );
   }

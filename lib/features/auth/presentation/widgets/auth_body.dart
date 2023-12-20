@@ -3,8 +3,7 @@ import 'package:data_sharing_organizing/core/utils/extension/padding_ex.dart';
 import 'package:flutter/material.dart';
 
 import 'auth_app_bar/auth_app_bar.dart';
-import 'auth_logo.dart';
-import 'intro_auth_widget.dart';
+import 'auth_body/auth_response_body.dart';
 
 class AuthBody extends StatelessWidget {
   const AuthBody({
@@ -32,22 +31,11 @@ class AuthBody extends StatelessWidget {
             showBackButton: showBackButton,
             showSettingsButton: showSettingsButton,
           ),
-          const AuthLogo(),
-          IntroAuthWidget(
-            header: introHeader,
-            body: introBody,
-          ),
-          SliverToBoxAdapter(
-            child: ListView(
-              padding: EdgeInsets.zero,
-              physics: const NeverScrollableScrollPhysics(),
-              shrinkWrap: true,
-              children: children,
-            ),
-          ),
-          const SliverToBoxAdapter(
-            child: SizedBox(height: 2 * AppConst.defaultPadding),
-          ),
+          AuthResponseBody(
+            introHeader: introHeader,
+            introBody: introBody,
+            children: children,
+          )
         ],
       ).horizontalPadding(AppConst.defaultPadding),
     );

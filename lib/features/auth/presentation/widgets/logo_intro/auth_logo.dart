@@ -7,10 +7,12 @@ class AuthLogo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SliverToBoxAdapter(
-      child: SizedBox(
-        height: 60,
-        width: 100,
+    return FittedBox(
+      fit: BoxFit.scaleDown,
+      child: Container(
+        height: MediaQuery.sizeOf(context).shortestSide * 0.2,
+        width: MediaQuery.sizeOf(context).shortestSide * 0.3,
+        constraints: const BoxConstraints(maxWidth: 400, maxHeight: 300),
         child: Column(
           children: [
             const Expanded(child: FittedBox(child: LogoWidget())),

@@ -30,5 +30,5 @@ class LogoWidget extends StatelessWidget {
     );
   }
 
-  double padding() => size == null ? 7 : size! * 0.04286;
+  double padding() => size == null ? 10 : size! * 0.04286;
 }
