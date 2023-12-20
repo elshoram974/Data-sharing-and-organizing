@@ -1,8 +1,6 @@
 import '../../../../features/auth/domain/usecases/is_logged_in_use_case.dart';
 import '../../../../features/auth/domain/usecases/login_use_case.dart';
-import '../../../../features/auth/domain/usecases/sign_up_use_case.dart';
 import '../../../../features/auth/presentation/cubit/login_cubit/login_cubit.dart';
-import '../../../../features/auth/presentation/cubit/sign_up_cubit/sign_up_cubit.dart';
 import '../../../../features/splash/presentation/cubit/config_cubit.dart';
 import 'locator.dart';
 
@@ -11,5 +9,4 @@ void cubitDependency() {
 
   // * Authentication cubits
   sl.registerLazySingleton(() => LoginCubit(sl.get<LoginUseCase>()));
-  sl.registerFactory(() => SignUpCubit(sl.get<SignUpUseCase>()));
 }
