@@ -57,6 +57,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("أدخل بريد إلكتروني صالح"),
         "enterYourCredentialsToContinue": MessageLookupByLibrary.simpleMessage(
             "أدخل بيانات اعتمادك للمتابعة."),
+        "error": MessageLookupByLibrary.simpleMessage("خطأ"),
         "fillField": MessageLookupByLibrary.simpleMessage("املأ هذا الحقل"),
         "forgetPassword":
             MessageLookupByLibrary.simpleMessage("هل نسيت كلمة المرور ؟ "),

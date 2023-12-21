@@ -51,5 +51,6 @@
     "cancel": "إلغاء",
     "warning": "تحذير",
     "gotIt": "مفهوم",
-    "YouHaveChooseTypeOfAccountPersonalOrBusiness": "عليك تحديد ان كان الحساب خاص أو لشركة"
+    "YouHaveChooseTypeOfAccountPersonalOrBusiness": "عليك تحديد ان كان الحساب خاص أو لشركة",
+    "error": "خطأ"
 }

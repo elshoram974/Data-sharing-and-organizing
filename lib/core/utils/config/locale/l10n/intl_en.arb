@@ -51,5 +51,6 @@
     "cancel": "Cancel",
     "warning": "Warning",
     "gotIt": "Got it",
-    "YouHaveChooseTypeOfAccountPersonalOrBusiness": "You have to choose the type of your account if it personal or business account."
+    "YouHaveChooseTypeOfAccountPersonalOrBusiness": "You have to choose the type of your account if it personal or business account.",
+    "error": "Error"
 }

@@ -57,6 +57,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Enter valid E-mail"),
         "enterYourCredentialsToContinue": MessageLookupByLibrary.simpleMessage(
             "Enter your credentials to continue."),
+        "error": MessageLookupByLibrary.simpleMessage("Error"),
         "fillField": MessageLookupByLibrary.simpleMessage("fill this field"),
         "forgetPassword":
             MessageLookupByLibrary.simpleMessage("Forget password ? "),

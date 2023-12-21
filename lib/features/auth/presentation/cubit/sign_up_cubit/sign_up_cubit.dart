@@ -1,8 +1,10 @@
 import 'package:data_sharing_organizing/core/status/errors/failure.dart';
 import 'package:data_sharing_organizing/core/status/status.dart';
 import 'package:data_sharing_organizing/core/status/success/success.dart';
+import 'package:data_sharing_organizing/core/utils/config/locale/generated/l10n.dart';
 import 'package:data_sharing_organizing/core/utils/config/routes/routes.dart';
 import 'package:data_sharing_organizing/core/utils/enums/account_type/account_type_enum.dart';
+import 'package:data_sharing_organizing/core/utils/functions/show_my_dialog.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -29,6 +31,8 @@ class SignUpCubit extends Cubit<SignUpState> {
   String password = '';
   AccountType? accountType;
 
+  final BuildContext? _context = AppRoute.key.currentContext;
+
   @override
   Future<void> close() {
     focusNode.dispose();
@@ -43,7 +47,7 @@ class SignUpCubit extends Cubit<SignUpState> {
   // * sign up----------------------------
   void signUp() async {
     if (!formKey.currentState!.validate()) return;
-    if (accountType == null) return;
+    if (accountType == null) return _chooseAccountTypeDialog();
     formKey.currentState!.save();
     emit(const SignUpLoadingState());
     final AuthUserEntity user = AuthUserEntity(
@@ -54,24 +58,38 @@ class SignUpCubit extends Cubit<SignUpState> {
     );
     debugPrint('user: ${user.email} $user');
 
-    final Status<AuthUserEntity> signUpState = await signUpUseCase(user);
-    if (signUpState is Success<AuthUserEntity>) {
-      final AuthUserEntity data = signUpState.data;
-      emit(SignUpSuccessState(data));
-
-      AppRoute.key.currentContext?.push(
-        AppRoute.codeVerification,
-        extra: AppRoute.home,
-      );
-
-      debugPrint('user: ${data.email}');
-      TextInput.finishAutofillContext();
-    } else if (signUpState is Failure<AuthUserEntity>) {
-      final String error = signUpState.error;
-      emit(SignUpFailureState(error));
-      debugPrint('error: $error');
-      //  TODO: Implement signUp failure
+    final Status<AuthUserEntity> signUpStatus = await signUpUseCase(user);
+    if (signUpStatus is Success<AuthUserEntity>) {
+      _successLogin(signUpStatus.data);
+    } else if (signUpStatus is Failure<AuthUserEntity>) {
+      _failureStatus(signUpStatus.error);
     }
   }
+
+  void _successLogin(AuthUserEntity data) {
+    emit(SignUpSuccessState(data));
+
+    _context?.push(
+      AppRoute.codeVerification,
+      extra: AppRoute.home,
+    );
+
+    debugPrint('user: ${data.email}');
+    TextInput.finishAutofillContext();
+  }
+
+  void _failureStatus(String error) async {
+    emit(SignUpFailureState(error));
+
+    await ShowMyDialog.error(_context!, body: error);
+  }
+
   // end sign up----------------------------
+
+  void _chooseAccountTypeDialog() async {
+    await ShowMyDialog.warning(
+      _context!,
+      body: S.of(_context).YouHaveChooseTypeOfAccountPersonalOrBusiness,
+    );
+  }
 }

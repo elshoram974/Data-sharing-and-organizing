@@ -21,4 +21,20 @@ abstract final class ShowMyDialog {
       },
     );
   }
+
+  static Future<T?> error<T>(
+    BuildContext context, {
+    required String body,
+  }) {
+    return showDialog<T>(
+      context: context,
+      builder: (context) {
+        return CustomDialog(
+          title: S.of(context).error,
+          body: body,
+          textCancel: S.of(context).gotIt,
+        );
+      },
+    );
+  }
 }
