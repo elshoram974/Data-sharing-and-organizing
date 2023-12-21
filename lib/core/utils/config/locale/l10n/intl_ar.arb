@@ -46,5 +46,10 @@
     "newPassword": "كلمة مرور جديدة",
     "save": "حفظ",
     "createNewPassword": "إنشاء كلمة مرور جديدة",
-    "yourNewPasswordMustBeDifferentFromPreviously": "يجب أن تكون كلمة المرور الجديدة مختلفة عن كلمة المرور المستخدمة سابقًا"
+    "yourNewPasswordMustBeDifferentFromPreviously": "يجب أن تكون كلمة المرور الجديدة مختلفة عن كلمة المرور المستخدمة سابقًا",
+    "confirm": "تأكيد",
+    "cancel": "إلغاء",
+    "warning": "تحذير",
+    "gotIt": "مفهوم",
+    "YouHaveChooseTypeOfAccountPersonalOrBusiness": "عليك تحديد ان كان الحساب خاص أو لشركة"
 }

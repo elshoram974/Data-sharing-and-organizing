@@ -26,12 +26,17 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "YouHaveChooseTypeOfAccountPersonalOrBusiness":
+            MessageLookupByLibrary.simpleMessage(
+                "عليك تحديد ان كان الحساب خاص أو لشركة"),
         "back": MessageLookupByLibrary.simpleMessage("رجوع"),
         "businessAccount": MessageLookupByLibrary.simpleMessage("حساب الشركة"),
+        "cancel": MessageLookupByLibrary.simpleMessage("إلغاء"),
         "cantBeLessThan": m0,
         "cantBeMoreThan": m1,
         "codeVerification":
             MessageLookupByLibrary.simpleMessage("تحقق من الرمز"),
+        "confirm": MessageLookupByLibrary.simpleMessage("تأكيد"),
         "confirmPassword":
             MessageLookupByLibrary.simpleMessage("تأكيد كلمة المرور"),
         "createNewPassword":
@@ -57,6 +62,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("هل نسيت كلمة المرور ؟ "),
         "goBack": MessageLookupByLibrary.simpleMessage("العودة"),
         "goTo": MessageLookupByLibrary.simpleMessage("اذهب الي"),
+        "gotIt": MessageLookupByLibrary.simpleMessage("مفهوم"),
         "hidePassword":
             MessageLookupByLibrary.simpleMessage("إخفاء كلمة المرور"),
         "language": MessageLookupByLibrary.simpleMessage("اللغة"),
@@ -87,6 +93,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "userNotFound": MessageLookupByLibrary.simpleMessage(
             "لا يوجد مستخدم لهذا البريد الإلكتروني."),
         "verify": MessageLookupByLibrary.simpleMessage("التحقق"),
+        "warning": MessageLookupByLibrary.simpleMessage("تحذير"),
         "weakPassword": MessageLookupByLibrary.simpleMessage(
             "كلمة المرور المقدمة ضعيفة جدًا."),
         "welcomeBack": MessageLookupByLibrary.simpleMessage("مرحبًا بعودتك!"),

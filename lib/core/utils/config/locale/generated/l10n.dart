@@ -521,6 +521,56 @@ class S {
       args: [],
     );
   }
+
+  /// `Confirm`
+  String get confirm {
+    return Intl.message(
+      'Confirm',
+      name: 'confirm',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cancel`
+  String get cancel {
+    return Intl.message(
+      'Cancel',
+      name: 'cancel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Warning`
+  String get warning {
+    return Intl.message(
+      'Warning',
+      name: 'warning',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Got it`
+  String get gotIt {
+    return Intl.message(
+      'Got it',
+      name: 'gotIt',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You have to choose the type of your account if it personal or business account.`
+  String get YouHaveChooseTypeOfAccountPersonalOrBusiness {
+    return Intl.message(
+      'You have to choose the type of your account if it personal or business account.',
+      name: 'YouHaveChooseTypeOfAccountPersonalOrBusiness',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

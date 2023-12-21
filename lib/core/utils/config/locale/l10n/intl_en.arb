@@ -46,5 +46,10 @@
     "newPassword": "New password",
     "save": "Save",
     "createNewPassword": "Create new password",
-    "yourNewPasswordMustBeDifferentFromPreviously": "Your new password must be different from previously used password"
+    "yourNewPasswordMustBeDifferentFromPreviously": "Your new password must be different from previously used password",
+    "confirm": "Confirm",
+    "cancel": "Cancel",
+    "warning": "Warning",
+    "gotIt": "Got it",
+    "YouHaveChooseTypeOfAccountPersonalOrBusiness": "You have to choose the type of your account if it personal or business account."
 }

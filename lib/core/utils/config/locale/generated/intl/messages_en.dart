@@ -26,13 +26,18 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "YouHaveChooseTypeOfAccountPersonalOrBusiness":
+            MessageLookupByLibrary.simpleMessage(
+                "You have to choose the type of your account if it personal or business account."),
         "back": MessageLookupByLibrary.simpleMessage("Back"),
         "businessAccount":
             MessageLookupByLibrary.simpleMessage("Business account"),
+        "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
         "cantBeLessThan": m0,
         "cantBeMoreThan": m1,
         "codeVerification":
             MessageLookupByLibrary.simpleMessage("Code verification"),
+        "confirm": MessageLookupByLibrary.simpleMessage("Confirm"),
         "confirmPassword":
             MessageLookupByLibrary.simpleMessage("Confirm Password"),
         "createNewPassword":
@@ -57,6 +62,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Forget password ? "),
         "goBack": MessageLookupByLibrary.simpleMessage("Go back"),
         "goTo": MessageLookupByLibrary.simpleMessage("Go to"),
+        "gotIt": MessageLookupByLibrary.simpleMessage("Got it"),
         "hidePassword": MessageLookupByLibrary.simpleMessage("Hide password"),
         "language": MessageLookupByLibrary.simpleMessage("Language"),
         "login": MessageLookupByLibrary.simpleMessage("Login"),
@@ -86,6 +92,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "userNotFound": MessageLookupByLibrary.simpleMessage(
             "No user found for that email."),
         "verify": MessageLookupByLibrary.simpleMessage("Verify"),
+        "warning": MessageLookupByLibrary.simpleMessage("Warning"),
         "weakPassword": MessageLookupByLibrary.simpleMessage(
             "The password provided is too weak."),
         "welcomeBack": MessageLookupByLibrary.simpleMessage("Welcome back!"),
