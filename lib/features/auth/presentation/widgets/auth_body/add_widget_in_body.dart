@@ -10,7 +10,7 @@ class AddWidgetInBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return Align(
       child: ConstrainedBox(
-        constraints: const BoxConstraints(maxWidth: 600),
+        constraints: const BoxConstraints(maxWidth: AppConst.constraint),
         child: ListView(
           padding: EdgeInsets.zero,
           physics: const NeverScrollableScrollPhysics(),
