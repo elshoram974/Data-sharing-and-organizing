@@ -15,7 +15,7 @@ class VerifyCodeCubit extends Cubit<VerifyCodeState> {
 
   VerifyCodeCubit(this.verifyCodeUseCase) : super(const VerifyCodeInitial());
 
-    // * verify Code----------------------------
+  // * verify Code----------------------------
   void verifyCode() async {
     emit(const VerifyCodeLoadingState());
     final Status<AuthUserEntity> verifyStatus = await verifyCodeUseCase(123456);
@@ -33,5 +33,4 @@ class VerifyCodeCubit extends Cubit<VerifyCodeState> {
     }
   }
   // end verify Code----------------------------
-
 }

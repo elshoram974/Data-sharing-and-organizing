@@ -27,7 +27,8 @@ class SignUpFields extends StatelessWidget {
               autofillHints: const [AutofillHints.name],
               keyboardType: TextInputType.name,
               onSaved: (val) => c.name = val!.trim(),
-              validator: (val) => AppValidator.auth(val?.trim(), 3, 200, FieldType.name),
+              validator: (val) =>
+                  AppValidator.auth(val?.trim(), 3, 200, FieldType.name),
             ),
             AuthField(
               label: S.of(context).emailAddress,
@@ -35,7 +36,8 @@ class SignUpFields extends StatelessWidget {
               autofillHints: const [AutofillHints.email],
               keyboardType: TextInputType.emailAddress,
               onSaved: (val) => c.email = val!.trim(),
-              validator: (val) => AppValidator.auth(val?.trim(), 0, 200, FieldType.email),
+              validator: (val) =>
+                  AppValidator.auth(val?.trim(), 0, 200, FieldType.email),
             ),
             AuthPasswordField(
               label: S.of(context).password,
@@ -44,7 +46,8 @@ class SignUpFields extends StatelessWidget {
               onChanged: (val) => c.password = val,
               textInputAction: TextInputAction.next,
               onFieldSubmitted: (_) => c.focusNode.requestFocus(),
-              validator: (val) => AppValidator.auth(val, 8, 200, FieldType.password),
+              validator: (val) =>
+                  AppValidator.auth(val, 8, 200, FieldType.password),
             ),
             AuthPasswordField(
               label: S.of(context).confirmPassword,

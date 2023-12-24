@@ -4,11 +4,11 @@ import 'package:data_sharing_organizing/features/auth/domain/entities/auth_user_
 
 import '../repositories/auth_repositories.dart';
 
-final class VerifyCodeUseCase extends UseCase<AuthUserEntity,int> {
+final class VerifyCodeUseCase extends UseCase<AuthUserEntity, int> {
   final AuthRepositories authRepositories;
 
   VerifyCodeUseCase(this.authRepositories);
-  
+
   @override
   Future<Status<AuthUserEntity>> call(int param) {
     return authRepositories.verifyCode(param);

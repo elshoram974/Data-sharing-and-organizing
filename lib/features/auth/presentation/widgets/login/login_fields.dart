@@ -25,14 +25,16 @@ class LoginFields extends StatelessWidget {
               autofillHints: const [AutofillHints.email],
               keyboardType: TextInputType.emailAddress,
               onSaved: (val) => c.email = val!.trim(),
-              validator: (val) => AppValidator.auth(val?.trim(), 0, 200, FieldType.email),
+              validator: (val) =>
+                  AppValidator.auth(val?.trim(), 0, 200, FieldType.email),
             ),
             AuthPasswordField(
               label: S.of(context).password,
               hint: S.of(context).password,
               newPassword: false,
               onSaved: (val) => c.password = val!,
-              validator: (val) => AppValidator.auth(val, 0, 200, FieldType.password),
+              validator: (val) =>
+                  AppValidator.auth(val, 0, 200, FieldType.password),
               onFieldSubmitted: (val) => c.login(),
             ),
           ],

@@ -20,7 +20,7 @@ class AuthUserEntityAdapter extends TypeAdapter<AuthUserEntity> {
       name: fields[0] as String,
       email: fields[1] as String,
       password: fields[2] as String,
-      accountType: fields[3] as AccountType,
+      userRole: fields[3] as UserRole,
     );
   }
 
@@ -35,7 +35,7 @@ class AuthUserEntityAdapter extends TypeAdapter<AuthUserEntity> {
       ..writeByte(2)
       ..write(obj.password)
       ..writeByte(3)
-      ..write(obj.accountType);
+      ..write(obj.userRole);
   }
 
   @override

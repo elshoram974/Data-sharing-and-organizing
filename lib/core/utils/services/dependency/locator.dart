@@ -17,7 +17,7 @@ Future<void> initDependencies() async {
 
   // Dependency
   sl.registerSingleton<APIServices>(APIServices(sl.get<Dio>()));
-  
+
   dataSourceDependency();
 
   sl.registerSingleton<AuthRepositoriesImp>(

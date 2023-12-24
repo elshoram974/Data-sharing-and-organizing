@@ -3,7 +3,7 @@ import '../enums/fields_type_enum.dart';
 
 abstract final class AppValidator {
   const AppValidator();
-  
+
   static String? samePassword(String? current, String previous) {
     if (current == null || current.trim() == "") return S.current.fillField;
 

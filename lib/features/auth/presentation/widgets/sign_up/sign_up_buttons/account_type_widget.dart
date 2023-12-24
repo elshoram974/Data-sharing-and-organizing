@@ -1,4 +1,4 @@
-import 'package:data_sharing_organizing/core/utils/enums/account_type/account_type_enum.dart';
+import 'package:data_sharing_organizing/core/utils/enums/user_role/user_role_enum.dart';
 import 'package:flutter/material.dart';
 
 class AccountTypeWidget extends StatelessWidget {
@@ -10,13 +10,13 @@ class AccountTypeWidget extends StatelessWidget {
     this.onChanged,
   });
   final String title;
-  final AccountType? group;
-  final AccountType value;
-  final void Function(AccountType?)? onChanged;
+  final UserRole? group;
+  final UserRole value;
+  final void Function(UserRole?)? onChanged;
 
   @override
   Widget build(BuildContext context) {
-    return RadioListTile<AccountType>(
+    return RadioListTile<UserRole>(
       groupValue: group,
       title: Text(title, style: const TextStyle(fontSize: 16)),
       dense: true,

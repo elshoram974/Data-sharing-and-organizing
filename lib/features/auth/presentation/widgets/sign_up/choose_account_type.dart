@@ -1,6 +1,6 @@
 import 'package:data_sharing_organizing/core/utils/config/locale/generated/l10n.dart';
 import 'package:data_sharing_organizing/core/utils/constants/app_constants.dart';
-import 'package:data_sharing_organizing/core/utils/enums/account_type/account_type_enum.dart';
+import 'package:data_sharing_organizing/core/utils/enums/user_role/user_role_enum.dart';
 import 'package:data_sharing_organizing/core/utils/services/dependency/provider_dependency.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -27,8 +27,8 @@ class ChooseAccountType extends StatelessWidget {
             children: [
               AccountTypeWidget(
                 title: S.of(context).personalAccount,
-                group: controller.accountType,
-                value: AccountType.personal,
+                group: controller.userRole,
+                value: UserRole.personalUser,
                 onChanged: (type) => controller.chooseAccountType(type!),
               ),
               Text(
@@ -37,8 +37,8 @@ class ChooseAccountType extends StatelessWidget {
               ),
               AccountTypeWidget(
                 title: S.of(context).businessAccount,
-                group: controller.accountType,
-                value: AccountType.business,
+                group: controller.userRole,
+                value: UserRole.businessAdmin,
                 onChanged: (type) => controller.chooseAccountType(type!),
               ),
             ],

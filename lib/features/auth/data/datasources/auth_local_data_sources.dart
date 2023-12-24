@@ -24,7 +24,8 @@ class AuthLocalDataSourceImp extends AuthLocalDataSource {
 
   @override
   AuthUserEntity? getCurrentUser() {
-    final Box<AuthUserEntity> userBox = Hive.box<AuthUserEntity>(AppStrings.userBox);
+    final Box<AuthUserEntity> userBox =
+        Hive.box<AuthUserEntity>(AppStrings.userBox);
     List<AuthUserEntity> users = userBox.values.toList();
     if (users.isEmpty) return null;
     return users.last;
@@ -32,7 +33,8 @@ class AuthLocalDataSourceImp extends AuthLocalDataSource {
 
   @override
   Future<int> logOut() {
-    final Box<AuthUserEntity> userBox = Hive.box<AuthUserEntity>(AppStrings.userBox);
+    final Box<AuthUserEntity> userBox =
+        Hive.box<AuthUserEntity>(AppStrings.userBox);
     return userBox.clear();
   }
 

@@ -4,11 +4,11 @@ import 'package:data_sharing_organizing/features/auth/domain/entities/auth_user_
 
 import '../repositories/auth_repositories.dart';
 
-final class NewPasswordUseCase extends UseCase<AuthUserEntity,String> {
+final class NewPasswordUseCase extends UseCase<AuthUserEntity, String> {
   final AuthRepositories authRepositories;
 
   NewPasswordUseCase(this.authRepositories);
-  
+
   @override
   Future<Status<AuthUserEntity>> call(String param) {
     return authRepositories.newPassword(param);

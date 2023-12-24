@@ -4,11 +4,11 @@ import 'package:data_sharing_organizing/features/auth/domain/entities/auth_user_
 
 import '../repositories/auth_repositories.dart';
 
-final class SignUpUseCase extends UseCase<AuthUserEntity,AuthUserEntity> {
+final class SignUpUseCase extends UseCase<AuthUserEntity, AuthUserEntity> {
   final AuthRepositories authRepositories;
 
   SignUpUseCase(this.authRepositories);
-  
+
   @override
   Future<Status<AuthUserEntity>> call(AuthUserEntity param) {
     return authRepositories.signUp(param);

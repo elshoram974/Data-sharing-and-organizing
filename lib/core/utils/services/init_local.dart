@@ -1,5 +1,5 @@
 import 'package:data_sharing_organizing/core/utils/constants/app_strings.dart';
-import 'package:data_sharing_organizing/core/utils/enums/account_type/account_type_enum.dart';
+import 'package:data_sharing_organizing/core/utils/enums/user_role/user_role_enum.dart';
 import 'package:data_sharing_organizing/features/auth/domain/entities/auth_user_entity.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -16,7 +16,7 @@ Future<void> localInstance() async {
 }
 
 void _registerAdapterFn() {
-  Hive.registerAdapter<AccountType>(AccountTypeAdapter());
+  Hive.registerAdapter<UserRole>(UserRoleAdapter());
   Hive.registerAdapter<AuthUserEntity>(AuthUserEntityAdapter());
 }
 

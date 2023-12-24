@@ -8,14 +8,14 @@ import 'code_verification_buttons.dart';
 class CodeVerificationBody extends StatelessWidget {
   final String nextRoute;
 
-  const CodeVerificationBody(this.nextRoute,{super.key});
+  const CodeVerificationBody(this.nextRoute, {super.key});
 
   @override
   Widget build(BuildContext context) {
     return AuthBody(
       introHeader: S.of(context).codeVerification,
       introBody: S.of(context).enterDigitCodeThatHasBeenSentToYourEmail,
-      children:  [
+      children: [
         const CodeFields(),
         CodeVerificationButtons(nextRoute),
       ],

@@ -1,35 +1,40 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'account_type_enum.dart';
+part of 'user_role_enum.dart';
 
 // **************************************************************************
 // TypeAdapterGenerator
 // **************************************************************************
 
-class AccountTypeAdapter extends TypeAdapter<AccountType> {
+class UserRoleAdapter extends TypeAdapter<UserRole> {
   @override
   final int typeId = 1;
 
   @override
-  AccountType read(BinaryReader reader) {
+  UserRole read(BinaryReader reader) {
     switch (reader.readByte()) {
       case 0:
-        return AccountType.personal;
+        return UserRole.personalUser;
       case 1:
-        return AccountType.business;
+        return UserRole.businessUser;
+      case 2:
+        return UserRole.businessAdmin;
       default:
-        return AccountType.personal;
+        return UserRole.personalUser;
     }
   }
 
   @override
-  void write(BinaryWriter writer, AccountType obj) {
+  void write(BinaryWriter writer, UserRole obj) {
     switch (obj) {
-      case AccountType.personal:
+      case UserRole.personalUser:
         writer.writeByte(0);
         break;
-      case AccountType.business:
+      case UserRole.businessUser:
         writer.writeByte(1);
+        break;
+      case UserRole.businessAdmin:
+        writer.writeByte(2);
         break;
     }
   }
@@ -40,7 +45,7 @@ class AccountTypeAdapter extends TypeAdapter<AccountType> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is AccountTypeAdapter &&
+      other is UserRoleAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }

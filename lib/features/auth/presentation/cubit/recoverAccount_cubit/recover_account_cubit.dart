@@ -20,7 +20,8 @@ class RecoverAccountCubit extends Cubit<RecoverAccountState> {
 
   void recoverAccount() async {
     emit(const RecoverAccountLoadingState());
-    final Status<AuthUserEntity> requestStatus = await recoverAccountUseCase('email');
+    final Status<AuthUserEntity> requestStatus =
+        await recoverAccountUseCase('email');
     if (requestStatus is Success<AuthUserEntity>) {
       final AuthUserEntity data = requestStatus.data;
       emit(RecoverAccountSuccessState(data));

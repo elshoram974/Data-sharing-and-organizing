@@ -4,7 +4,8 @@ import 'package:data_sharing_organizing/features/auth/domain/entities/auth_user_
 
 import '../repositories/auth_repositories.dart';
 
-final class RequestToRecoverAccountUseCase extends UseCase<AuthUserEntity, String> {
+final class RequestToRecoverAccountUseCase
+    extends UseCase<AuthUserEntity, String> {
   final AuthRepositories authRepositories;
 
   RequestToRecoverAccountUseCase(this.authRepositories);

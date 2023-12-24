@@ -12,11 +12,11 @@ final class SignUpInitial extends SignUpState {
 }
 
 final class ChooseAccountTypeState extends SignUpState {
-  final AccountType accountType;
-  const ChooseAccountTypeState(this.accountType);
+  final UserRole userRole;
+  const ChooseAccountTypeState(this.userRole);
 
   @override
-  List<AccountType> get props => [accountType];
+  List<UserRole> get props => [userRole];
 }
 
 final class SignUpLoadingState extends SignUpState {

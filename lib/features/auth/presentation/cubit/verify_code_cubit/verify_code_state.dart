@@ -7,7 +7,6 @@ sealed class VerifyCodeState extends Equatable {
   List<Object> get props => [];
 }
 
-
 final class VerifyCodeInitial extends VerifyCodeState {
   const VerifyCodeInitial();
 }
@@ -29,4 +28,3 @@ final class VerifyCodeFailureState extends VerifyCodeState {
   @override
   List<String> get props => [error];
 }
-

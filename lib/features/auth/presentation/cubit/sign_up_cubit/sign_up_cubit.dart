@@ -3,7 +3,7 @@ import 'package:data_sharing_organizing/core/status/status.dart';
 import 'package:data_sharing_organizing/core/status/success/success.dart';
 import 'package:data_sharing_organizing/core/utils/config/locale/generated/l10n.dart';
 import 'package:data_sharing_organizing/core/utils/config/routes/routes.dart';
-import 'package:data_sharing_organizing/core/utils/enums/account_type/account_type_enum.dart';
+import 'package:data_sharing_organizing/core/utils/enums/user_role/user_role_enum.dart';
 import 'package:data_sharing_organizing/core/utils/functions/show_my_dialog.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
@@ -29,7 +29,7 @@ class SignUpCubit extends Cubit<SignUpState> {
   String name = '';
   String email = '';
   String password = '';
-  AccountType? accountType;
+  UserRole? userRole;
 
   final BuildContext? _context = AppRoute.key.currentContext;
 
@@ -39,22 +39,22 @@ class SignUpCubit extends Cubit<SignUpState> {
     return super.close();
   }
 
-  void chooseAccountType(AccountType type) {
-    accountType = type;
-    emit(ChooseAccountTypeState(accountType!));
+  void chooseAccountType(UserRole type) {
+    userRole = type;
+    emit(ChooseAccountTypeState(userRole!));
   }
 
   // * sign up----------------------------
   void signUp() async {
     if (!formKey.currentState!.validate()) return;
-    if (accountType == null) return _chooseAccountTypeDialog();
+    if (userRole == null) return _chooseAccountTypeDialog();
     formKey.currentState!.save();
     emit(const SignUpLoadingState());
     final AuthUserEntity user = AuthUserEntity(
       name: name,
       email: email,
       password: password,
-      accountType: accountType!,
+      userRole: userRole!,
     );
     debugPrint('user: ${user.email} $user');
 

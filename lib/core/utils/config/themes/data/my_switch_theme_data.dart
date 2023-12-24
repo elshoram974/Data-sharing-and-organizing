@@ -9,8 +9,8 @@ abstract final class MySwitchThemeData {
       trackOutlineWidth: const MaterialStatePropertyAll(0),
       trackColor: MaterialStateProperty.resolveWith<Color?>(
           (states) => ThemeFunctions.color(states, null, AppColor.secondary)),
-      thumbColor: MaterialStateProperty.resolveWith<Color?>(
-          (states) => ThemeFunctions.color(states, AppColor.active, Colors.white)),
+      thumbColor: MaterialStateProperty.resolveWith<Color?>((states) =>
+          ThemeFunctions.color(states, AppColor.active, Colors.white)),
       thumbIcon: const MaterialStatePropertyAll(
         Icon(
           Icons.circle_outlined,
