@@ -1,7 +1,12 @@
+import 'dart:developer';
+
+import 'package:data_sharing_organizing/core/status/errors/failure.dart';
+import 'package:data_sharing_organizing/core/status/errors/server_failure.dart';
 import 'package:data_sharing_organizing/core/status/status.dart';
 import 'package:data_sharing_organizing/core/status/success/success.dart';
 
 import 'package:data_sharing_organizing/features/auth/domain/entities/auth_user_entity.dart';
+import 'package:dio/dio.dart';
 
 import '../../domain/entities/login_entity.dart';
 import '../../domain/repositories/auth_repositories.dart';
@@ -19,9 +24,18 @@ class AuthRepositoriesImp extends AuthRepositories {
 
   @override
   Future<Status<AuthUserEntity>> login(LoginUserEntity user) async {
-    if (user.keepLogin) await localDataSource.saveUser(user);
-    // TODO: implement login
-    return Success(user);
+    try {
+      AuthUserEntity authUserEntity = await remoteDataSource.login(user);
+      if (user.keepLogin) await localDataSource.saveUser(user);
+
+      return Success(authUserEntity);
+    } catch (e) {
+      log(e.toString());
+      if (e is DioException) {
+        return ServerFailure.fromDioException(e);
+      }
+      return Failure(e.toString());
+    }
   }
 
   @override
