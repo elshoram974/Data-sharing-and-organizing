@@ -8,4 +8,12 @@ class APIServices {
     final Response response = await dio.get(link);
     return response.data;
   }
+
+  Future<Map<String, dynamic>> post(
+    final String link,
+    Map<String, dynamic> body,
+  ) async {
+    final Response response = await dio.post(link, data: body);
+    return response.data;
+  }
 }
