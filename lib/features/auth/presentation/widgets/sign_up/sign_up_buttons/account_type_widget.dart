@@ -1,8 +1,8 @@
 import 'package:data_sharing_organizing/core/utils/enums/user_role/user_role_enum.dart';
 import 'package:flutter/material.dart';
 
-class AccountTypeWidget extends StatelessWidget {
-  const AccountTypeWidget({
+class UserRoleWidget extends StatelessWidget {
+  const UserRoleWidget({
     super.key,
     required this.title,
     required this.group,

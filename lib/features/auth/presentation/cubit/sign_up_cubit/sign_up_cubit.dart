@@ -39,15 +39,15 @@ class SignUpCubit extends Cubit<SignUpState> {
     return super.close();
   }
 
-  void chooseAccountType(UserRole type) {
-    userRole = type;
-    emit(ChooseAccountTypeState(userRole!));
+  void chooseUserRole(UserRole role) {
+    userRole = role;
+    emit(ChooseUserRoleState(userRole!));
   }
 
   // * sign up----------------------------
   void signUp() async {
     if (!formKey.currentState!.validate()) return;
-    if (userRole == null) return _chooseAccountTypeDialog();
+    if (userRole == null) return _chooseUserRoleDialog();
     formKey.currentState!.save();
     emit(const SignUpLoadingState());
     final AuthUserEntity user = AuthUserEntity(
@@ -86,7 +86,7 @@ class SignUpCubit extends Cubit<SignUpState> {
 
   // end sign up----------------------------
 
-  void _chooseAccountTypeDialog() async {
+  void _chooseUserRoleDialog() async {
     await ShowMyDialog.warning(
       _context!,
       body: S.of(_context).YouHaveChooseTypeOfAccountPersonalOrBusiness,

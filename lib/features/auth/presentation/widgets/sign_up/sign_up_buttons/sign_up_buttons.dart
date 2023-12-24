@@ -13,7 +13,7 @@ class SignUpButtons extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        const ChooseAccountType(),
+        const ChooseUserRole(),
         AuthFilledButton(
           text: S.of(context).signUp,
           onPressed: ProviderDependency.signUp.signUp,

@@ -8,8 +8,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../cubit/sign_up_cubit/sign_up_cubit.dart';
 import 'sign_up_buttons/account_type_widget.dart';
 
-class ChooseAccountType extends StatelessWidget {
-  const ChooseAccountType({super.key});
+class ChooseUserRole extends StatelessWidget {
+  const ChooseUserRole({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -20,26 +20,26 @@ class ChooseAccountType extends StatelessWidget {
         bottom: AppConst.defaultPadding,
       ),
       child: BlocBuilder<SignUpCubit, SignUpState>(
-        buildWhen: (p, c) => c is ChooseAccountTypeState,
+        buildWhen: (p, c) => c is ChooseUserRoleState,
         builder: (context, state) {
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              AccountTypeWidget(
+              UserRoleWidget(
                 title: S.of(context).personalAccount,
                 group: controller.userRole,
                 value: UserRole.personalUser,
-                onChanged: (type) => controller.chooseAccountType(type!),
+                onChanged: (type) => controller.chooseUserRole(type!),
               ),
               Text(
                 S.of(context).oR,
                 style: const TextStyle(fontSize: 16),
               ),
-              AccountTypeWidget(
+              UserRoleWidget(
                 title: S.of(context).businessAccount,
                 group: controller.userRole,
                 value: UserRole.businessAdmin,
-                onChanged: (type) => controller.chooseAccountType(type!),
+                onChanged: (type) => controller.chooseUserRole(type!),
               ),
             ],
           );

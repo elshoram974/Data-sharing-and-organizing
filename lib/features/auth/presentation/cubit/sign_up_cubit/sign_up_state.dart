@@ -11,9 +11,9 @@ final class SignUpInitial extends SignUpState {
   const SignUpInitial();
 }
 
-final class ChooseAccountTypeState extends SignUpState {
+final class ChooseUserRoleState extends SignUpState {
   final UserRole userRole;
-  const ChooseAccountTypeState(this.userRole);
+  const ChooseUserRoleState(this.userRole);
 
   @override
   List<UserRole> get props => [userRole];
