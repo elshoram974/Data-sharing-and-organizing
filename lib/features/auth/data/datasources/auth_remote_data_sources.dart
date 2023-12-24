@@ -1,4 +1,6 @@
+import 'package:data_sharing_organizing/core/utils/constants/app_links.dart';
 import 'package:data_sharing_organizing/core/utils/services/api_services.dart';
+import 'package:data_sharing_organizing/features/auth/data/models/app_user/app_user.dart';
 
 import '../../domain/entities/auth_user_entity.dart';
 
@@ -16,9 +18,12 @@ class AuthRemoteDataSourceImp extends AuthRemoteDataSource {
   AuthRemoteDataSourceImp(this.service);
 
   @override
-  Future<AuthUserEntity> login(AuthUserEntity user) {
-    // TODO: implement login
-    throw UnimplementedError();
+  Future<AuthUserEntity> login(AuthUserEntity user) async {
+    Map<String, dynamic> response = await service.post(
+      AppLinks.login,
+      {'email': user.email, 'password': user.password},
+    );
+    return AppUser.fromMap(response).user!;
   }
 
   @override
