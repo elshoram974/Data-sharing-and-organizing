@@ -581,6 +581,46 @@ class S {
       args: [],
     );
   }
+
+  /// `You have to confirm your account`
+  String get youHaveToConfirmYourAccount {
+    return Intl.message(
+      'You have to confirm your account',
+      name: 'youHaveToConfirmYourAccount',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Error in password`
+  String get errorInPassword {
+    return Intl.message(
+      'Error in password',
+      name: 'errorInPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `The email you entered does not exist`
+  String get emailYouEnteredDoesNotExist {
+    return Intl.message(
+      'The email you entered does not exist',
+      name: 'emailYouEnteredDoesNotExist',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No internet connection`
+  String get noInternetConnection {
+    return Intl.message(
+      'No internet connection',
+      name: 'noInternetConnection',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

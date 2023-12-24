@@ -52,5 +52,9 @@
     "warning": "Warning",
     "gotIt": "Got it",
     "YouHaveChooseTypeOfAccountPersonalOrBusiness": "You have to choose the type of your account if it personal or business account.",
-    "error": "Error"
+    "error": "Error",
+    "youHaveToConfirmYourAccount": "You have to confirm your account",
+    "errorInPassword": "Error in password",
+    "emailYouEnteredDoesNotExist": "The email you entered does not exist",
+    "noInternetConnection": "No internet connection"
 }

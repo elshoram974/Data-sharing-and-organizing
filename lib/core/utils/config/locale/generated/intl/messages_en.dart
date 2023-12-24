@@ -50,6 +50,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "emailAddress": MessageLookupByLibrary.simpleMessage("Email address"),
         "emailAlreadyInUse": MessageLookupByLibrary.simpleMessage(
             "The account already exists for that email."),
+        "emailYouEnteredDoesNotExist": MessageLookupByLibrary.simpleMessage(
+            "The email you entered does not exist"),
         "enterDigitCodeThatHasBeenSentToYourEmail":
             MessageLookupByLibrary.simpleMessage(
                 "Enter the 6-digit code that has been sent to your email"),
@@ -58,6 +60,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "enterYourCredentialsToContinue": MessageLookupByLibrary.simpleMessage(
             "Enter your credentials to continue."),
         "error": MessageLookupByLibrary.simpleMessage("Error"),
+        "errorInPassword":
+            MessageLookupByLibrary.simpleMessage("Error in password"),
         "fillField": MessageLookupByLibrary.simpleMessage("fill this field"),
         "forgetPassword":
             MessageLookupByLibrary.simpleMessage("Forget password ? "),
@@ -71,6 +75,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "newPassword": MessageLookupByLibrary.simpleMessage("New password"),
         "noCodeReceived":
             MessageLookupByLibrary.simpleMessage("No code received? "),
+        "noInternetConnection":
+            MessageLookupByLibrary.simpleMessage("No internet connection"),
         "noNeed": MessageLookupByLibrary.simpleMessage("No need ? "),
         "notSamePass":
             MessageLookupByLibrary.simpleMessage("Not same password"),
@@ -99,6 +105,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "welcomeBack": MessageLookupByLibrary.simpleMessage("Welcome back!"),
         "wrongPassword": MessageLookupByLibrary.simpleMessage(
             "Wrong password provided for that user."),
+        "youHaveToConfirmYourAccount": MessageLookupByLibrary.simpleMessage(
+            "You have to confirm your account"),
         "yourNewPasswordMustBeDifferentFromPreviously":
             MessageLookupByLibrary.simpleMessage(
                 "Your new password must be different from previously used password")
