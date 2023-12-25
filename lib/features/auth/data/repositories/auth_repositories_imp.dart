@@ -1,10 +1,6 @@
-import 'dart:developer';
-
-import 'package:data_sharing_organizing/core/status/errors/failure.dart';
-import 'package:data_sharing_organizing/core/status/errors/server_failure.dart';
 import 'package:data_sharing_organizing/core/status/status.dart';
 import 'package:data_sharing_organizing/core/status/success/success.dart';
-import 'package:data_sharing_organizing/core/utils/exceptions/http_exception.dart';
+import 'package:data_sharing_organizing/core/utils/functions/excute_and_handle_remote_errors.dart';
 
 import 'package:data_sharing_organizing/features/auth/domain/entities/auth_user_entity.dart';
 
@@ -24,19 +20,14 @@ class AuthRepositoriesImp extends AuthRepositories {
 
   @override
   Future<Status<AuthUserEntity>> login(LoginUserEntity user) async {
-    try {
-      AuthUserEntity authUserEntity = await remoteDataSource.login(user);
-      if (user.keepLogin) await localDataSource.saveUser(user);
+    return executeAndHandleErrors<AuthUserEntity>(
+      () async {
+        AuthUserEntity authUserEntity = await remoteDataSource.login(user);
+        if (user.keepLogin) await localDataSource.saveUser(user);
 
-      return Success(authUserEntity);
-    } catch (e) {
-      log(e.toString());
-      if (e is MyHttpException) {
-        print(e.toString());
-        return ServerFailure.fromHttpException(e);
-      }
-      return Failure(e.toString());
-    }
+        return authUserEntity;
+      },
+    );
   }
 
   @override
