@@ -1,11 +1,10 @@
 import 'dart:async';
 import 'dart:convert';
-import 'dart:io';
 
-import 'package:data_sharing_organizing/core/utils/enums/http_exception_type_enum.dart';
 import 'package:http/http.dart' as http;
 
 import '../exceptions/http_exception.dart';
+import '../functions/handle_request_errors.dart';
 
 class APIServices {
   const APIServices();
@@ -26,33 +25,19 @@ class APIServices {
     final String link,
     Map<String, dynamic> body,
   ) async {
-    http.Response response = await _handleRequestErrors<http.Response>(
+    http.Response response = await handleRequestErrors<http.Response>(
       () => http.post(Uri.parse(link), body: body),
     );
 
+    final Map<String, dynamic> res = jsonDecode(response.body);
+
     if (response.statusCode != 200) {
-      throw MyHttpException(
-        type: HttpExceptionType.badResponse,
+      throw MyHttpException.badResponse(
+        statusCode: response.statusCode,
         response: response,
       );
     }
 
-    return jsonDecode(response.body);
-  }
-
-  Future<T> _handleRequestErrors<T>(
-    Future<T> Function() function,
-  ) async {
-    try {
-      return await function();
-    } catch (e) {
-      if (e is TimeoutException) {
-        throw MyHttpException(type: HttpExceptionType.connectionTimeout);
-      } else if (e is SocketException) {
-        throw MyHttpException(type: HttpExceptionType.connectionError);
-      } else {
-        throw MyHttpException(type: HttpExceptionType.unknown);
-      }
-    }
+    return res;
   }
 }
