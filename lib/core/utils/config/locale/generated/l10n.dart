@@ -621,6 +621,36 @@ class S {
       args: [],
     );
   }
+
+  /// `Your request was not found. Try again later.`
+  String get yourRequestNotFoundTryAgainLater {
+    return Intl.message(
+      'Your request was not found. Try again later.',
+      name: 'yourRequestNotFoundTryAgainLater',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `There is a problem with the server. Try again later.`
+  String get thereIsProblemWithServerTryAgainLater {
+    return Intl.message(
+      'There is a problem with the server. Try again later.',
+      name: 'thereIsProblemWithServerTryAgainLater',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `There is a problem with the server. Try again later.`
+  String get thereIsAnErrorTryAgainLater {
+    return Intl.message(
+      'There is a problem with the server. Try again later.',
+      name: 'thereIsAnErrorTryAgainLater',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

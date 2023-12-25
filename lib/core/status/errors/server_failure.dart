@@ -40,11 +40,11 @@ class ServerFailure<T> extends Failure<T> {
     if (statusCode == 400 || statusCode == 401 || statusCode == 403) {
       return loginValid(response.data['message']);
     } else if (statusCode == 404) {
-      return ServerFailure('Your request was not found, Try later.');
+      return ServerFailure(S.current.yourRequestNotFoundTryAgainLater);
     } else if (statusCode == 500) {
-      return ServerFailure('There is a problem with server, Try later.');
+      return ServerFailure(S.current.thereIsProblemWithServerTryAgainLater);
     }
-    return ServerFailure('There is an error, Try later.');
+    return ServerFailure(S.current.thereIsAnErrorTryAgainLater);
   }
 
   static ServerFailure<T> loginValid<T>(String errorMessage) {

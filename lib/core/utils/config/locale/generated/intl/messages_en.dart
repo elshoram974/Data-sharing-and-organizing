@@ -96,6 +96,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "showPassword": MessageLookupByLibrary.simpleMessage("Show password"),
         "signUp": MessageLookupByLibrary.simpleMessage("Sign up"),
         "system": MessageLookupByLibrary.simpleMessage("System"),
+        "thereIsAnErrorTryAgainLater": MessageLookupByLibrary.simpleMessage(
+            "There is a problem with the server. Try again later."),
+        "thereIsProblemWithServerTryAgainLater":
+            MessageLookupByLibrary.simpleMessage(
+                "There is a problem with the server. Try again later."),
         "userNotFound": MessageLookupByLibrary.simpleMessage(
             "No user found for that email."),
         "verify": MessageLookupByLibrary.simpleMessage("Verify"),
@@ -109,6 +114,9 @@ class MessageLookup extends MessageLookupByLibrary {
             "You have to confirm your account"),
         "yourNewPasswordMustBeDifferentFromPreviously":
             MessageLookupByLibrary.simpleMessage(
-                "Your new password must be different from previously used password")
+                "Your new password must be different from previously used password"),
+        "yourRequestNotFoundTryAgainLater":
+            MessageLookupByLibrary.simpleMessage(
+                "Your request was not found. Try again later.")
       };
 }

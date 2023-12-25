@@ -52,5 +52,12 @@
     "warning": "تحذير",
     "gotIt": "مفهوم",
     "YouHaveChooseTypeOfAccountPersonalOrBusiness": "عليك تحديد ان كان الحساب خاص أو لشركة",
-    "error": "خطأ"
+    "error": "خطأ",
+    "youHaveToConfirmYourAccount": "يجب تأكيد حسابك",
+    "errorInPassword": "خطأ في كلمة المرور",
+    "emailYouEnteredDoesNotExist": "البريد الإلكتروني الذي أدخلته غير موجود",
+    "noInternetConnection": "لا يوجد اتصال بالإنترنت",
+    "yourRequestNotFoundTryAgainLater": "لم يتم العثور على طلبك. حاول مرة أخرى لاحقًا.",
+    "thereIsProblemWithServerTryAgainLater": "هناك مشكلة في الخادم. حاول مرة أخرى لاحقًا.",
+    "thereIsAnErrorTryAgainLater": "هناك مشكلة في الخادم. حاول مرة أخرى لاحقًا."
 }

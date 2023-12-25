@@ -50,6 +50,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("عنوان البريد الإلكتروني"),
         "emailAlreadyInUse": MessageLookupByLibrary.simpleMessage(
             "الحساب موجود بالفعل لهذا البريد الإلكتروني."),
+        "emailYouEnteredDoesNotExist": MessageLookupByLibrary.simpleMessage(
+            "البريد الإلكتروني الذي أدخلته غير موجود"),
         "enterDigitCodeThatHasBeenSentToYourEmail":
             MessageLookupByLibrary.simpleMessage(
                 "أدخل الرمز المكون من 6 أرقام الذي تم إرساله إلى بريدك الإلكتروني"),
@@ -58,6 +60,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "enterYourCredentialsToContinue": MessageLookupByLibrary.simpleMessage(
             "أدخل بيانات اعتمادك للمتابعة."),
         "error": MessageLookupByLibrary.simpleMessage("خطأ"),
+        "errorInPassword":
+            MessageLookupByLibrary.simpleMessage("خطأ في كلمة المرور"),
         "fillField": MessageLookupByLibrary.simpleMessage("املأ هذا الحقل"),
         "forgetPassword":
             MessageLookupByLibrary.simpleMessage("هل نسيت كلمة المرور ؟ "),
@@ -72,6 +76,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "newPassword": MessageLookupByLibrary.simpleMessage("كلمة مرور جديدة"),
         "noCodeReceived":
             MessageLookupByLibrary.simpleMessage("لم يتم استلام رمز؟ "),
+        "noInternetConnection":
+            MessageLookupByLibrary.simpleMessage("لا يوجد اتصال بالإنترنت"),
         "noNeed": MessageLookupByLibrary.simpleMessage("لا تحتاج للمساعدة؟ "),
         "notSamePass":
             MessageLookupByLibrary.simpleMessage("ليست نفس كلمة المرور"),
@@ -91,6 +97,11 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("إظهار كلمة المرور"),
         "signUp": MessageLookupByLibrary.simpleMessage("التسجيل"),
         "system": MessageLookupByLibrary.simpleMessage("النظام"),
+        "thereIsAnErrorTryAgainLater": MessageLookupByLibrary.simpleMessage(
+            "هناك مشكلة في الخادم. حاول مرة أخرى لاحقًا."),
+        "thereIsProblemWithServerTryAgainLater":
+            MessageLookupByLibrary.simpleMessage(
+                "هناك مشكلة في الخادم. حاول مرة أخرى لاحقًا."),
         "userNotFound": MessageLookupByLibrary.simpleMessage(
             "لا يوجد مستخدم لهذا البريد الإلكتروني."),
         "verify": MessageLookupByLibrary.simpleMessage("التحقق"),
@@ -100,8 +111,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "welcomeBack": MessageLookupByLibrary.simpleMessage("مرحبًا بعودتك!"),
         "wrongPassword": MessageLookupByLibrary.simpleMessage(
             "تم تقديم كلمة مرور خاطئة لهذا المستخدم."),
+        "youHaveToConfirmYourAccount":
+            MessageLookupByLibrary.simpleMessage("يجب تأكيد حسابك"),
         "yourNewPasswordMustBeDifferentFromPreviously":
             MessageLookupByLibrary.simpleMessage(
-                "يجب أن تكون كلمة المرور الجديدة مختلفة عن كلمة المرور المستخدمة سابقًا")
+                "يجب أن تكون كلمة المرور الجديدة مختلفة عن كلمة المرور المستخدمة سابقًا"),
+        "yourRequestNotFoundTryAgainLater":
+            MessageLookupByLibrary.simpleMessage(
+                "لم يتم العثور على طلبك. حاول مرة أخرى لاحقًا.")
       };
 }
