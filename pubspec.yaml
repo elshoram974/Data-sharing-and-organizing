@@ -48,7 +48,7 @@ dependencies:
 
   get_it: ^7.6.4
   equatable: ^2.0.5
-  dio: ^5.4.0
+  http: ^1.1.2
 
   # * State management
   flutter_bloc: ^8.1.3
