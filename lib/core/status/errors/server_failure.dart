@@ -1,35 +1,39 @@
 // ! Failure --------------------------
 
-import 'package:data_sharing_organizing/core/utils/config/locale/generated/l10n.dart';
-import 'package:dio/dio.dart';
+import 'dart:convert';
 
+import 'package:data_sharing_organizing/core/utils/config/locale/generated/l10n.dart';
+import 'package:http/http.dart';
+
+import '../../utils/enums/http_exception_type_enum.dart';
+import '../../utils/exceptions/http_exception.dart';
 import 'failure.dart';
 
 class ServerFailure<T> extends Failure<T> {
   ServerFailure(super.error);
-  factory ServerFailure.fromDioException(DioException e) {
+  factory ServerFailure.fromHttpException(MyHttpException e) {
     switch (e.type) {
-      case DioExceptionType.connectionTimeout:
+      case HttpExceptionType.connectionTimeout:
         return ServerFailure('connectionTimeout');
 
-      case DioExceptionType.badCertificate:
+      case HttpExceptionType.badCertificate:
         return ServerFailure('badCertificate');
 
-      case DioExceptionType.badResponse:
+      case HttpExceptionType.badResponse:
         return ServerFailure.fromBadResponse(e.response!);
 
-      case DioExceptionType.cancel:
+      case HttpExceptionType.cancel:
         return ServerFailure('cancel');
 
-      case DioExceptionType.connectionError:
+      case HttpExceptionType.connectionError:
         return ServerFailure(S.current.noInternetConnection);
 
-      case DioExceptionType.receiveTimeout:
+      case HttpExceptionType.receiveTimeout:
         return ServerFailure('receiveTimeout');
 
-      case DioExceptionType.sendTimeout:
+      case HttpExceptionType.sendTimeout:
         return ServerFailure('sendTimeout');
-      case DioExceptionType.unknown:
+      case HttpExceptionType.unknown:
       default:
         return ServerFailure('unknown error : ${e.message}');
     }
@@ -38,7 +42,7 @@ class ServerFailure<T> extends Failure<T> {
   factory ServerFailure.fromBadResponse(Response response) {
     int? statusCode = response.statusCode;
     if (statusCode == 400 || statusCode == 401 || statusCode == 403) {
-      return loginValid(response.data['message']);
+      return loginValid(jsonDecode(response.body)['message']);
     } else if (statusCode == 404) {
       return ServerFailure(S.current.yourRequestNotFoundTryAgainLater);
     } else if (statusCode == 500) {

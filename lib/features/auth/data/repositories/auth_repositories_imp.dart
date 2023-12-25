@@ -4,9 +4,9 @@ import 'package:data_sharing_organizing/core/status/errors/failure.dart';
 import 'package:data_sharing_organizing/core/status/errors/server_failure.dart';
 import 'package:data_sharing_organizing/core/status/status.dart';
 import 'package:data_sharing_organizing/core/status/success/success.dart';
+import 'package:data_sharing_organizing/core/utils/exceptions/http_exception.dart';
 
 import 'package:data_sharing_organizing/features/auth/domain/entities/auth_user_entity.dart';
-import 'package:dio/dio.dart';
 
 import '../../domain/entities/login_entity.dart';
 import '../../domain/repositories/auth_repositories.dart';
@@ -31,8 +31,9 @@ class AuthRepositoriesImp extends AuthRepositories {
       return Success(authUserEntity);
     } catch (e) {
       log(e.toString());
-      if (e is DioException) {
-        return ServerFailure.fromDioException(e);
+      if (e is MyHttpException) {
+        print(e.toString());
+        return ServerFailure.fromHttpException(e);
       }
       return Failure(e.toString());
     }
