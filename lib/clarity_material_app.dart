@@ -1,6 +1,7 @@
 import 'package:data_sharing_organizing/core/utils/config/locale/generated/l10n.dart';
 import 'package:data_sharing_organizing/core/utils/config/locale/locale_handler.dart';
 import 'package:data_sharing_organizing/core/utils/config/themes/app_theme.dart';
+import 'package:data_sharing_organizing/core/utils/functions/show_snake_bar.dart';
 import 'package:data_sharing_organizing/features/splash/presentation/cubit/config_cubit.dart';
 import 'package:data_sharing_organizing/core/utils/config/routes/routes.dart';
 import 'package:flutter/material.dart';
@@ -27,6 +28,7 @@ class ClarityApp extends StatelessWidget {
       theme: AppTheme.lightMode,
       darkTheme: AppTheme.darkMode,
       themeMode: c.themeMode,
+      scaffoldMessengerKey: ScaffoldKey.call,
       localeResolutionCallback: (l, _) => AppLocale.localeResolutionCallback(l, c),
     );
   }
