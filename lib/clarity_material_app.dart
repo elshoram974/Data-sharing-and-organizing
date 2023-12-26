@@ -6,6 +6,7 @@ import 'package:data_sharing_organizing/features/splash/presentation/cubit/confi
 import 'package:data_sharing_organizing/core/utils/config/routes/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
 class ClarityApp extends StatelessWidget {
@@ -28,6 +29,7 @@ class ClarityApp extends StatelessWidget {
       theme: AppTheme.lightMode,
       darkTheme: AppTheme.darkMode,
       themeMode: c.themeMode,
+      builder: EasyLoading.init(),
       scaffoldMessengerKey: ScaffoldKey.call,
       localeResolutionCallback: (l, _) => AppLocale.localeResolutionCallback(l, c),
     );

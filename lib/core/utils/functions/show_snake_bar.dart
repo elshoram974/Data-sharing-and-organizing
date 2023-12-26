@@ -5,9 +5,10 @@ abstract final class ScaffoldKey {
       GlobalKey<ScaffoldMessengerState>();
 
   static void showTesterSnakeBar(String message) {
-    call.currentState!.showSnackBar(SnackBar(
-      content: Text(message),
-      duration: Duration(hours: 1),
-    ));
+    call.currentState!.showSnackBar(
+      SnackBar(
+        content: Text(message),
+      ),
+    );
   }
 }

@@ -6,6 +6,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../domain/entities/auth_user_entity.dart';
@@ -37,6 +38,8 @@ class LoginCubit extends Cubit<LoginState> {
     if (!formKey.currentState!.validate()) return;
     formKey.currentState!.save();
     emit(const LoginLoadingState());
+    EasyLoading.show();
+
     final LoginUserEntity user = LoginUserEntity(
       email: email,
       password: password,
@@ -46,16 +49,15 @@ class LoginCubit extends Cubit<LoginState> {
     if (loginState is Success<AuthUserEntity>) {
       final AuthUserEntity data = loginState.data;
       emit(LoginSuccessState(data));
+      EasyLoading.dismiss();
+      EasyLoading.showSuccess(data.email, duration: const Duration(seconds: 2));
       TextInput.finishAutofillContext();
       AppRoute.key.currentContext?.pushReplacement(AppRoute.home, extra: data);
-
-      debugPrint('user: ${data.email}');
-      //  TODO: Implement login success
     } else if (loginState is Failure<AuthUserEntity>) {
       final String error = loginState.error;
       emit(LoginFailureState(error));
-      debugPrint('error: $error');
-      //  TODO: Implement login failure
+      EasyLoading.dismiss();
+      EasyLoading.showError(error, duration: const Duration(seconds: 2));
     }
   }
   //  end login----------------------------
