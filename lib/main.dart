@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:data_sharing_organizing/core/utils/config/locale/generated/l10n.dart';
 import 'package:data_sharing_organizing/core/utils/config/locale/locale_handler.dart';
 import 'package:data_sharing_organizing/core/utils/services/bloc_observer.dart';
-import 'package:data_sharing_organizing/clarity_material_app.dart';
+import 'package:data_sharing_organizing/data_sharing_material_app.dart';
 import 'package:data_sharing_organizing/core/utils/services/dependency/locator.dart';
 import 'package:data_sharing_organizing/core/utils/services/init_local.dart';
 import 'package:data_sharing_organizing/features/splash/presentation/cubit/config_cubit.dart';
@@ -46,7 +46,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => sl.get<ConfigCubit>()),
         BlocProvider(create: (context) => sl.get<LoginCubit>()),
       ],
-      child: const ClarityApp(),
+      child: const DataSharingApp(),
     );
   }
 }

@@ -9,8 +9,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
-class ClarityApp extends StatelessWidget {
-  const ClarityApp({super.key});
+class DataSharingApp extends StatelessWidget {
+  const DataSharingApp({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +31,8 @@ class ClarityApp extends StatelessWidget {
       themeMode: c.themeMode,
       builder: EasyLoading.init(),
       scaffoldMessengerKey: ScaffoldKey.call,
-      localeResolutionCallback: (l, _) => AppLocale.localeResolutionCallback(l, c),
+      localeResolutionCallback: (l, _) =>
+          AppLocale.localeResolutionCallback(l, c),
     );
   }
 }
