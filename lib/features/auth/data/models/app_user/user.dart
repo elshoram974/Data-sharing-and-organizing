@@ -36,69 +36,19 @@ class User extends AuthUserEntity {
         );
 
   factory User.fromMap(Map<String, dynamic> data) {
-    UserRole role = getUserRoleFromString(data['user_role'] as String?);
-    UserProvider provider =
-        getUserProviderFromString(data['user_provider'] as String?);
     return User(
       userId: data['user_id'] as int,
       userEmail: data['user_email'] as String,
       userFirstName: data['user_first_name'] as String,
       userLastName: data['user_last_name'] as String,
       userPassword: data['user_password'] as String,
-      userProvider: provider,
+      userProvider: UserProvider.fromString(data['user_provider'] as String?),
       userIsVerified: data['user_is_verified'] == 1 ? true : false,
       accountLastlogin: DateTime.tryParse(data['account_lastlogin'] as String),
-      accountCreatedDatetime:
-          DateTime.tryParse(data['account_created_datetime'] as String),
+      accountCreatedDatetime: DateTime.tryParse(data['account_created_datetime'] as String),
       userImage: data['user_image'] as dynamic,
-      userRole: role,
+      userRole: UserRole.fromString(data['user_role'] as String?),
     );
-  }
-
-  static UserRole getUserRoleFromString(String? stringRole) {
-    switch (stringRole) {
-      case 'personal_user':
-        return UserRole.personalUser;
-      case 'business_user':
-        return UserRole.businessUser;
-      case 'business_admin':
-        return UserRole.businessAdmin;
-    }
-    return UserRole.personalUser;
-  }
-
-  static UserProvider getUserProviderFromString(String? stringProvider) {
-    switch (stringProvider) {
-      case 'facebook':
-        return UserProvider.facebook;
-      case 'google':
-        return UserProvider.google;
-      case 'email_password':
-        return UserProvider.emailPassword;
-    }
-    return UserProvider.emailPassword;
-  }
-
-  String covertUserRoleToString(UserRole userRole) {
-    switch (userRole) {
-      case UserRole.personalUser:
-        return 'personal_user';
-      case UserRole.businessUser:
-        return 'business_user';
-      case UserRole.businessAdmin:
-        return 'business_admin';
-    }
-  }
-
-  String covertUserProviderToString(UserProvider userProvider) {
-    switch (userProvider) {
-      case UserProvider.facebook:
-        return 'facebook';
-      case UserProvider.google:
-        return 'google';
-      case UserProvider.emailPassword:
-        return 'email_password';
-    }
   }
 
   Map<String, dynamic> toMap() => {
@@ -107,12 +57,12 @@ class User extends AuthUserEntity {
         'user_first_name': userFirstName,
         'user_last_name': userLastName,
         'user_password': userPassword,
-        'user_provider': covertUserProviderToString(userProvider),
+        'user_provider': userProvider.inString,
         'user_is_verified': userIsVerified,
         'account_lastlogin': accountLastlogin?.toIso8601String(),
         'account_created_datetime': accountCreatedDatetime?.toIso8601String(),
         'user_image': userImage,
-        'user_role': covertUserRoleToString(userRole),
+        'user_role': userRole.inString,
       };
 
   /// `dart:convert`
