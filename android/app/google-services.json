@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "466899267669",
+    "project_id": "data-shring-and-organizing",
+    "storage_bucket": "data-shring-and-organizing.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:466899267669:android:43eaab69327da0b151a4dc",
+        "android_client_info": {
+          "package_name": "com.mrecode.datasharingorganizing.data_sharing_organizing"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBk8TFmOymXkSZebyPY6OQhfENPhjF74HQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
