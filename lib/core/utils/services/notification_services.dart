@@ -18,6 +18,6 @@ final class NotificationApi {
       sound: true,
     );
 
-    log('Token:$tokenId');
+    log('FirebaseMessagingToken:$tokenId');
   }
 }
