@@ -15,7 +15,10 @@ Future<T> handleRequestErrors<T>(
     } else if (e is SocketException) {
       throw MyHttpException(type: HttpExceptionType.connectionError);
     } else {
-      throw MyHttpException(type: HttpExceptionType.unknown);
+      throw MyHttpException(
+        type: HttpExceptionType.unknown,
+        message: e.toString(),
+      );
     }
   }
 }

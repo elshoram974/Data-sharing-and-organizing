@@ -73,8 +73,8 @@ class AuthRepositoriesImp extends AuthRepositories {
   //     books = await remoteDataSource.fetchFeaturedBooks(pageNumber);
   //     return (status: Success(), data: books);
   //   } catch (e) {
-  //     if (e is DioException) {
-  //       return (status: ServerFailure.fromDioException(e), data: books);
+  //     if (e is HttpException) {
+  //       return (status: ServerFailure.fromHttpException(e), data: books);
   //     }
   //     return (status: Failure(e.toString()), data: books);
   //   }
@@ -92,8 +92,8 @@ class AuthRepositoriesImp extends AuthRepositories {
   //     books = await remoteDataSource.fetchSuggestionBooks(pageNumber);
   //     return (status: Success(), data: books);
   //   } catch (e) {
-  //     if (e is DioException) {
-  //       return (status: ServerFailure.fromDioException(e), data: books);
+  //     if (e is HttpException) {
+  //       return (status: ServerFailure.fromHttpException(e), data: books);
   //     }
   //     return (status: Failure(e.toString()), data: books);
   //   }

@@ -110,7 +110,7 @@ class MyHttpException implements Exception {
 
   @override
   String toString() {
-    String msg = 'DioException [${type.toPrettyDescription()}]: $message';
+    String msg = 'HttpException [${type.toPrettyDescription()}]: $message';
     if (error != null) {
       msg += '\nError: $error';
     }
