@@ -1,3 +1,5 @@
+import 'package:flutter/foundation.dart';
+
 abstract final class AppConst {
   const AppConst();
 
@@ -8,4 +10,7 @@ abstract final class AppConst {
 
   static const int maxPhone = 500;
   static const int maxTablet = 900;
+
+
+  static const bool isWeb = kIsWeb;
 }
