@@ -21,6 +21,7 @@ class AuthLogoWithIntro extends StatelessWidget {
         center ? CrossAxisAlignment.center : CrossAxisAlignment.stretch;
     return Column(
       crossAxisAlignment: alimentAxis,
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
         const AuthLogo(),
         IntroAuthWidget(
