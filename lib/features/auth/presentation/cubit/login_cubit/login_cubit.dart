@@ -38,7 +38,7 @@ class LoginCubit extends Cubit<LoginState> {
     if (!formKey.currentState!.validate()) return;
     formKey.currentState!.save();
     emit(const LoginLoadingState());
-    EasyLoading.show();
+    EasyLoading.show(dismissOnTap: false);
 
     final LoginUserEntity user = LoginUserEntity(
       email: email,
