@@ -63,5 +63,7 @@
     "thisAccountExistWithAnotherProvider": "هذا الحساب موجود ولكن مع مزود خدمة آخر.",
     "pressAgainToExit": "اضغط مرة أخرى للخروج",
     "ifYouReturnNowYouWillLoseAllData": "إذا قمت بالعودة الآن، ستفقد كل البيانات!",
-    "stayHere": "ابق هنا"
+    "stayHere": "ابق هنا",
+    "uHaveToVerifyAccountFirst": "يجب التحقق من حسابك أولاً",
+    "verifyIt": "تحقق منه"
 }

@@ -74,10 +74,7 @@ class SignUpCubit extends Cubit<SignUpState> {
   void _successLogin(AuthUserEntity data) {
     emit(SignUpSuccessState(data));
 
-    _context?.push(
-      AppRoute.codeVerification,
-      extra: AppRoute.home,
-    );
+    ShowMyDialog.verifyDialog();
 
     debugPrint('user: ${data.email}');
     TextInput.finishAutofillContext();

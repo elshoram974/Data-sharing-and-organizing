@@ -63,5 +63,7 @@
     "thisAccountExistWithAnotherProvider": "this account is exist but with another provider.",
     "pressAgainToExit": "Press again to exit",
     "ifYouReturnNowYouWillLoseAllData": "If you return now, you will lose all data!",
-    "stayHere": "Stay here"
+    "stayHere": "Stay here",
+    "uHaveToVerifyAccountFirst": "You have to verify your account first",
+    "verifyIt": "Verify it"
 }

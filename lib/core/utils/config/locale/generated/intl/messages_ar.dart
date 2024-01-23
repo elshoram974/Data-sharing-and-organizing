@@ -111,9 +111,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "thisAccountExistWithAnotherProvider":
             MessageLookupByLibrary.simpleMessage(
                 "هذا الحساب موجود ولكن مع مزود خدمة آخر."),
+        "uHaveToVerifyAccountFirst":
+            MessageLookupByLibrary.simpleMessage("يجب التحقق من حسابك أولاً"),
         "userNotFound": MessageLookupByLibrary.simpleMessage(
             "لا يوجد مستخدم لهذا البريد الإلكتروني."),
         "verify": MessageLookupByLibrary.simpleMessage("التحقق"),
+        "verifyIt": MessageLookupByLibrary.simpleMessage("تحقق منه"),
         "warning": MessageLookupByLibrary.simpleMessage("تحذير"),
         "weakPassword": MessageLookupByLibrary.simpleMessage(
             "كلمة المرور المقدمة ضعيفة جدًا."),

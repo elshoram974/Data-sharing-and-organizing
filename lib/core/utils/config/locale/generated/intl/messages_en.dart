@@ -110,9 +110,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "thisAccountExistWithAnotherProvider":
             MessageLookupByLibrary.simpleMessage(
                 "this account is exist but with another provider."),
+        "uHaveToVerifyAccountFirst": MessageLookupByLibrary.simpleMessage(
+            "You have to verify your account first"),
         "userNotFound": MessageLookupByLibrary.simpleMessage(
             "No user found for that email."),
         "verify": MessageLookupByLibrary.simpleMessage("Verify"),
+        "verifyIt": MessageLookupByLibrary.simpleMessage("Verify it"),
         "warning": MessageLookupByLibrary.simpleMessage("Warning"),
         "weakPassword": MessageLookupByLibrary.simpleMessage(
             "The password provided is too weak."),

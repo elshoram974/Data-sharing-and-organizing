@@ -691,6 +691,26 @@ class S {
       args: [],
     );
   }
+
+  /// `You have to verify your account first`
+  String get uHaveToVerifyAccountFirst {
+    return Intl.message(
+      'You have to verify your account first',
+      name: 'uHaveToVerifyAccountFirst',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Verify it`
+  String get verifyIt {
+    return Intl.message(
+      'Verify it',
+      name: 'verifyIt',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
