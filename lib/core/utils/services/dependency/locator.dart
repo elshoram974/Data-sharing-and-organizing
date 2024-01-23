@@ -11,7 +11,7 @@ import 'usecases_dependency.dart';
 
 final GetIt sl = GetIt.instance;
 
-Future<void> initDependencies() async {
+void initDependencies() {
 
   // Dependency
   sl.registerSingleton<APIServices>(const APIServices());

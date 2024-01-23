@@ -26,13 +26,9 @@ void main() async {
     Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform)
   ]);
 
+  initDependencies();
+
   initAppConfiguration();
-
-  await initDependencies();
-
-  await Future.wait([
-    sl.get<NotificationApi>().init(),
-  ]);
 
   runApp(const MyApp());
 }
@@ -60,11 +56,14 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-late DateTime timeBackPressed ;
+
+late DateTime timeBackPressed;
 
 void initAppConfiguration() {
   if (kDebugMode) HttpOverrides.global = MyHttpOverrides();
-   timeBackPressed = DateTime.now();
+  timeBackPressed = DateTime.now();
+
+  sl.get<NotificationApi>().init();
 
   Bloc.observer = MyBlocObserver();
 
