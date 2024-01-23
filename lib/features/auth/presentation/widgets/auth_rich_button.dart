@@ -41,7 +41,7 @@ class AuthRichButton extends StatelessWidget {
               text: prefixText,
             ),
             TextSpan(
-              style: const TextStyle(color: AppColor.active),
+              style: TextStyle(color: onTap == null ? null : AppColor.active),
               text: buttonText,
               recognizer: TapGestureRecognizer()..onTap = onTap,
             ),
