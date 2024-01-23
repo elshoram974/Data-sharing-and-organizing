@@ -17,10 +17,11 @@ class RecoverButtons extends StatelessWidget {
       children: [
         const SizedBox(height: 53),
         AuthFilledButton(
+          // todo: don't forget put user id
           text: S.of(context).sendRequest,
           onPressed: () => context.push(
             AppRoute.codeVerification,
-            extra: AppRoute.forgotPassword,
+            extra: {'userId': 0, 'nextRoute': AppRoute.forgotPassword},
           ),
         ),
         const SizedBox(height: 8),

@@ -67,14 +67,19 @@ abstract final class AuthRoutes {
           ),
         ),
         GoRoute(
-          path: _codeVerification,
-          pageBuilder: (context, state) => MyCustomTransition.slideTransition(
-            offset: const Offset(-1, 0),
-            context: context,
-            state: state,
-            child: CodeVerificationScreen(state.extra as String),
-          ),
-        ),
+            path: _codeVerification,
+            pageBuilder: (context, state) {
+              Map<String, dynamic> data = state.extra as Map<String, dynamic>;
+              return MyCustomTransition.slideTransition(
+                offset: const Offset(-1, 0),
+                context: context,
+                state: state,
+                child: CodeVerificationScreen(
+                  userId: data['userId'],
+                  nextRoute: data['nextRoute'],
+                ),
+              );
+            }),
         GoRoute(
           path: _signUp,
           pageBuilder: (context, state) => MyCustomTransition.slideTransition(

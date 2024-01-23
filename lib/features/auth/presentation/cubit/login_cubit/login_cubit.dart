@@ -70,7 +70,7 @@ class LoginCubit extends Cubit<LoginState> {
       EasyLoading.showSuccess(data.name, duration: const Duration(seconds: 2));
       AppRoute.key.currentContext?.pushReplacement(AppRoute.home, extra: data);
     } else {
-      await ShowMyDialog.verifyDialog();
+      await ShowMyDialog.verifyDialog(data.userId);
     }
   }
   //  end login----------------------------

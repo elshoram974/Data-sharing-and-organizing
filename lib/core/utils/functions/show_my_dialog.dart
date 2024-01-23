@@ -62,7 +62,7 @@ abstract final class ShowMyDialog {
     );
   }
 
-  static Future<T?> verifyDialog<T>() {
+  static Future<T?> verifyDialog<T>(int userId) {
     return showDialog<T>(
       context: AppRoute.key.currentContext!,
       builder: (context) {
@@ -73,8 +73,10 @@ abstract final class ShowMyDialog {
           textConfirm: S.of(context).verifyIt,
           onPressConfirm: () {
             AppRoute.key.currentContext?.pop();
-            AppRoute.key.currentContext
-                ?.push(AppRoute.codeVerification, extra: AppRoute.home);
+            AppRoute.key.currentContext?.push(
+              AppRoute.codeVerification,
+              extra: {'userId': userId, 'nextRoute': AppRoute.home},
+            );
           },
         );
       },

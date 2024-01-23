@@ -12,6 +12,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../data/models/app_user/user.dart';
 import '../../../domain/entities/auth_user_entity.dart';
 import '../../../domain/usecases/sign_up_use_case.dart';
 
@@ -61,20 +62,20 @@ class SignUpCubit extends Cubit<SignUpState> {
 
     EasyLoading.show(dismissOnTap: false);
 
-    final Status<AuthUserEntity> signUpStatus = await signUpUseCase(user);
+    final Status<User> signUpStatus = await signUpUseCase(user);
 
     await EasyLoading.dismiss();
-    if (signUpStatus is Success<AuthUserEntity>) {
+    if (signUpStatus is Success<User>) {
       _successLogin(signUpStatus.data);
-    } else if (signUpStatus is Failure<AuthUserEntity>) {
+    } else if (signUpStatus is Failure<User>) {
       _failureStatus(signUpStatus.error);
     }
   }
 
-  void _successLogin(AuthUserEntity data) {
+  void _successLogin(User data) {
     emit(SignUpSuccessState(data));
 
-    ShowMyDialog.verifyDialog();
+    ShowMyDialog.verifyDialog(data.userId);
 
     debugPrint('user: ${data.email}');
     TextInput.finishAutofillContext();
