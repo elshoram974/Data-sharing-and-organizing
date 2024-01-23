@@ -17,6 +17,7 @@ abstract final class ShowMyDialog {
       builder: (context) {
         return CustomDialog(
           title: S.of(context).warning,
+          crossAxisAlignment: CrossAxisAlignment.center,
           body: body,
           textCancel: S.of(context).gotIt,
         );
@@ -33,6 +34,7 @@ abstract final class ShowMyDialog {
       builder: (context) {
         return CustomDialog(
           title: S.of(context).error,
+          crossAxisAlignment: CrossAxisAlignment.center,
           body: body,
           textCancel: S.of(context).gotIt,
         );
@@ -47,6 +49,7 @@ abstract final class ShowMyDialog {
         return CustomDialog(
           title: S.of(context).goBack,
           body: body ?? S.of(context).ifYouReturnNowYouWillLoseAllData,
+          crossAxisAlignment: CrossAxisAlignment.center,
           textCancel: S.of(context).goBack,
           onPressCancel: () {
             context.pop();
@@ -65,8 +68,9 @@ abstract final class ShowMyDialog {
       builder: (context) {
         return CustomDialog(
           title: S.of(context).warning,
-          body: 'u have to verify your account',
-          textConfirm: 'verify it',
+          body: S.of(context).uHaveToVerifyAccountFirst,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          textConfirm: S.of(context).verifyIt,
           onPressConfirm: () {
             AppRoute.key.currentContext?.pop();
             AppRoute.key.currentContext

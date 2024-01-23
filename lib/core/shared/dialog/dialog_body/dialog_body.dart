@@ -39,7 +39,7 @@ class DialogBody extends StatelessWidget {
           Visibility(
             visible: customBody == null,
             replacement: customBody ?? const SizedBox.shrink(),
-            child: Text(body),
+            child: Text(body, style: Theme.of(context).textTheme.bodyMedium),
           ).verticalPadding(2 * AppConst.defaultPadding),
           DialogButtons(
             onPressConfirm: onPressConfirm,
