@@ -38,8 +38,14 @@ class AuthRepositoriesImp extends AuthRepositories {
 
   @override
   Future<Status<AuthUserEntity>> signUp(AuthUserEntity user) async {
-    // TODO: implement signUp
-    return Success<AuthUserEntity>(user);
+    return executeAndHandleErrors<AuthUserEntity>(
+      () async {
+        AuthUserEntity authUserEntity = await remoteDataSource.signUp(user);
+        await localDataSource.saveUser(user);
+
+        return authUserEntity;
+      },
+    );
   }
 
   @override
