@@ -22,7 +22,7 @@ class CodeVerificationBody extends StatelessWidget {
       introBody: S.of(context).enterDigitCodeThatHasBeenSentToYourEmail,
       onWillPop: ProviderDependency.verificationCode.onWillPop,
       children: [
-        const CodeFields(),
+        CodeFields(nextRoute: nextRoute),
         CodeVerificationButtons(nextRoute),
       ],
     );

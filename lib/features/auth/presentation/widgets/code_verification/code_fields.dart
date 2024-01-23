@@ -1,19 +1,27 @@
 import 'package:data_sharing_organizing/core/utils/constants/app_constants.dart';
+import 'package:data_sharing_organizing/core/utils/services/dependency/provider_dependency.dart';
 import 'package:data_sharing_organizing/core/utils/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:pinput/pinput.dart';
 
+import '../../cubit/verify_code_cubit/verify_code_cubit.dart';
+
 class CodeFields extends StatelessWidget {
-  const CodeFields({super.key});
+  const CodeFields({super.key, required this.nextRoute});
+  final String nextRoute;
 
   @override
   Widget build(BuildContext context) {
+    final VerifyCodeCubit cubit = ProviderDependency.verificationCode;
     return Padding(
       padding: const EdgeInsets.only(top: 57),
       child: Directionality(
         textDirection: TextDirection.ltr,
         child: Pinput(
+          onChanged: (value) => cubit.code = int.tryParse(value) ?? 0,
+          onSubmitted: (val) => cubit.verifyCode(nextRoute),
+          onCompleted: (val) => cubit.verifyCode(nextRoute),
           length: 6,
           autofocus: true,
           inputFormatters: [FilteringTextInputFormatter.digitsOnly],

@@ -10,16 +10,20 @@ import '../widgets/code_verification/code_verification_body.dart';
 class CodeVerificationScreen extends StatelessWidget {
   final String nextRoute;
   final int userId;
-  const CodeVerificationScreen({required this.userId, required this.nextRoute, super.key,});
+  const CodeVerificationScreen({
+    required this.userId,
+    required this.nextRoute,
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => VerifyCodeCubit(
-    userId:userId ,
-    sendCodeUseCase: sl.get<RequestToSendCodeUseCase>() ,
-    verifyCodeUseCase: sl.get<VerifyCodeUseCase>(),
-  ),
+        userId: userId,
+        sendCodeUseCase: sl.get<RequestToSendCodeUseCase>(),
+        verifyCodeUseCase: sl.get<VerifyCodeUseCase>(),
+      ),
       child: Scaffold(body: CodeVerificationBody(nextRoute)),
     );
   }
