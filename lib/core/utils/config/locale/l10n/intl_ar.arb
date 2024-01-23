@@ -60,5 +60,8 @@
     "yourRequestNotFoundTryAgainLater": "لم يتم العثور على طلبك. حاول مرة أخرى لاحقًا.",
     "thereIsProblemWithServerTryAgainLater": "هناك مشكلة في الخادم. حاول مرة أخرى لاحقًا.",
     "thereIsAnErrorTryAgainLater": "هناك مشكلة في الخادم. حاول مرة أخرى لاحقًا.",
-    "thisAccountExistWithAnotherProvider": "هذا الحساب موجود ولكن مع مزود خدمة آخر."
+    "thisAccountExistWithAnotherProvider": "هذا الحساب موجود ولكن مع مزود خدمة آخر.",
+    "pressAgainToExit": "اضغط مرة أخرى للخروج",
+    "ifYouReturnNowYouWillLoseAllData": "إذا قمت بالعودة الآن، ستفقد كل البيانات!",
+    "stayHere": "ابق هنا"
 }

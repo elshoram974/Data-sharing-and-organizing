@@ -70,6 +70,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "gotIt": MessageLookupByLibrary.simpleMessage("مفهوم"),
         "hidePassword":
             MessageLookupByLibrary.simpleMessage("إخفاء كلمة المرور"),
+        "ifYouReturnNowYouWillLoseAllData":
+            MessageLookupByLibrary.simpleMessage(
+                "إذا قمت بالعودة الآن، ستفقد كل البيانات!"),
         "language": MessageLookupByLibrary.simpleMessage("اللغة"),
         "login": MessageLookupByLibrary.simpleMessage("تسجيل الدخول"),
         "name": MessageLookupByLibrary.simpleMessage("الاسم"),
@@ -84,6 +87,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "oR": MessageLookupByLibrary.simpleMessage("أو"),
         "password": MessageLookupByLibrary.simpleMessage("كلمة المرور"),
         "personalAccount": MessageLookupByLibrary.simpleMessage("حساب خاص"),
+        "pressAgainToExit":
+            MessageLookupByLibrary.simpleMessage("اضغط مرة أخرى للخروج"),
         "recover": MessageLookupByLibrary.simpleMessage("استعادة"),
         "recoverYourAccount":
             MessageLookupByLibrary.simpleMessage("استعادة حسابك"),
@@ -96,6 +101,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "showPassword":
             MessageLookupByLibrary.simpleMessage("إظهار كلمة المرور"),
         "signUp": MessageLookupByLibrary.simpleMessage("التسجيل"),
+        "stayHere": MessageLookupByLibrary.simpleMessage("ابق هنا"),
         "system": MessageLookupByLibrary.simpleMessage("النظام"),
         "thereIsAnErrorTryAgainLater": MessageLookupByLibrary.simpleMessage(
             "هناك مشكلة في الخادم. حاول مرة أخرى لاحقًا."),

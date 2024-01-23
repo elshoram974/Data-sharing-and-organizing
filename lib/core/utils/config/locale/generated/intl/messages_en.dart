@@ -69,6 +69,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "goTo": MessageLookupByLibrary.simpleMessage("Go to"),
         "gotIt": MessageLookupByLibrary.simpleMessage("Got it"),
         "hidePassword": MessageLookupByLibrary.simpleMessage("Hide password"),
+        "ifYouReturnNowYouWillLoseAllData":
+            MessageLookupByLibrary.simpleMessage(
+                "If you return now, you will lose all data!"),
         "language": MessageLookupByLibrary.simpleMessage("Language"),
         "login": MessageLookupByLibrary.simpleMessage("Login"),
         "name": MessageLookupByLibrary.simpleMessage("Name"),
@@ -84,6 +87,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "password": MessageLookupByLibrary.simpleMessage("Password"),
         "personalAccount":
             MessageLookupByLibrary.simpleMessage("Personal account"),
+        "pressAgainToExit":
+            MessageLookupByLibrary.simpleMessage("Press again to exit"),
         "recover": MessageLookupByLibrary.simpleMessage("Recover"),
         "recoverYourAccount":
             MessageLookupByLibrary.simpleMessage("Recover your account"),
@@ -95,6 +100,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "sharikna": MessageLookupByLibrary.simpleMessage("Sharikna"),
         "showPassword": MessageLookupByLibrary.simpleMessage("Show password"),
         "signUp": MessageLookupByLibrary.simpleMessage("Sign up"),
+        "stayHere": MessageLookupByLibrary.simpleMessage("Stay here"),
         "system": MessageLookupByLibrary.simpleMessage("System"),
         "thereIsAnErrorTryAgainLater": MessageLookupByLibrary.simpleMessage(
             "There is a problem with the server. Try again later."),

@@ -661,6 +661,36 @@ class S {
       args: [],
     );
   }
+
+  /// `Press again to exit`
+  String get pressAgainToExit {
+    return Intl.message(
+      'Press again to exit',
+      name: 'pressAgainToExit',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `If you return now, you will lose all data!`
+  String get ifYouReturnNowYouWillLoseAllData {
+    return Intl.message(
+      'If you return now, you will lose all data!',
+      name: 'ifYouReturnNowYouWillLoseAllData',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Stay here`
+  String get stayHere {
+    return Intl.message(
+      'Stay here',
+      name: 'stayHere',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
