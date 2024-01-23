@@ -8,9 +8,12 @@ class AuthAppBar extends StatelessWidget {
     super.key,
     required this.showBackButton,
     required this.showSettingsButton,
+    this.onWillPop,
   });
 
   final bool showBackButton;
+  final void Function()? onWillPop;
+
   final bool showSettingsButton;
 
   @override
@@ -20,7 +23,10 @@ class AuthAppBar extends StatelessWidget {
       floating: false,
       leadingWidth: 100,
       scrolledUnderElevation: 0,
-      leading: BackButtonLeading(showBackButton: showBackButton),
+      leading: BackButtonLeading(
+        showBackButton: showBackButton,
+        onWillPop: onWillPop,
+      ),
       actions: [
         SettingsButtonAction(showSettingsButton: showSettingsButton),
       ],

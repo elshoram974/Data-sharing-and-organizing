@@ -14,13 +14,20 @@ class SignUpBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     ProviderDependency.signUp = BlocProvider.of<SignUpCubit>(context);
-    return AuthBody(
-      introHeader: S.of(context).signUp,
-      introBody: S.of(context).createYourOwenEmail,
-      children: const [
-        SignUpFields(),
-        SignUpButtons(),
-      ],
+    return PopScope(
+      canPop: false,
+      onPopInvoked: (didPop) {
+        if (!didPop) ProviderDependency.signUp.onWillPop();
+      },
+      child: AuthBody(
+        introHeader: S.of(context).signUp,
+        introBody: S.of(context).createYourOwenEmail,
+        onWillPop: ProviderDependency.signUp.onWillPop,
+        children: const [
+          SignUpFields(),
+          SignUpButtons(),
+        ],
+      ),
     );
   }
 }

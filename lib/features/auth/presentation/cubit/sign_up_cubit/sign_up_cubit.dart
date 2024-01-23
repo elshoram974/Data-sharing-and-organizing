@@ -92,4 +92,16 @@ class SignUpCubit extends Cubit<SignUpState> {
       body: S.of(_context).YouHaveChooseTypeOfAccountPersonalOrBusiness,
     );
   }
+
+  void onWillPop() {
+    formKey.currentState!.save();
+    if (name.isNotEmpty ||
+        email.isNotEmpty ||
+        password.isNotEmpty ||
+        userRole != null) {
+      ShowMyDialog.back(_context!);
+    } else {
+      _context?.pop();
+    }
+  }
 }

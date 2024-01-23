@@ -12,13 +12,14 @@ class AuthBody extends StatelessWidget {
     required this.introBody,
     this.children = const <Widget>[],
     this.showSettingsButton = true,
-    this.showBackButton = true,
+    this.showBackButton = true, this.onWillPop,
   });
 
   final String introHeader;
   final String introBody;
   final bool showSettingsButton;
   final bool showBackButton;
+  final void Function()? onWillPop;
   final List<Widget> children;
 
   @override
@@ -29,6 +30,7 @@ class AuthBody extends StatelessWidget {
         slivers: [
           AuthAppBar(
             showBackButton: showBackButton,
+            onWillPop: onWillPop,
             showSettingsButton: showSettingsButton,
           ),
           AuthResponseBody(

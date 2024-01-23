@@ -5,16 +5,17 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 class BackButtonLeading extends StatelessWidget {
-  const BackButtonLeading({super.key, required this.showBackButton});
+  const BackButtonLeading({super.key, required this.showBackButton, this.onWillPop});
 
   final bool showBackButton;
+  final void Function()? onWillPop;
 
   @override
   Widget build(BuildContext context) {
     return Visibility(
       visible: showBackButton,
       child: InkWell(
-        onTap: context.pop,
+        onTap: onWillPop ?? context.pop,
         borderRadius: BorderRadius.circular(AppConst.borderRadius),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
