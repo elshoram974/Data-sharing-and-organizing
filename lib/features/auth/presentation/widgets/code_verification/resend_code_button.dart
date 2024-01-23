@@ -1,5 +1,6 @@
 import 'package:data_sharing_organizing/core/utils/config/locale/generated/l10n.dart';
 import 'package:data_sharing_organizing/core/utils/constants/app_assets.dart';
+import 'package:data_sharing_organizing/core/utils/services/dependency/provider_dependency.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -10,6 +11,7 @@ class ResendCodeButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final cubit =ProviderDependency.verificationCode;
     return AuthRichButton(
       prefix: SvgPicture.asset(
         AppAssets.pathArrow,
@@ -18,6 +20,7 @@ class ResendCodeButton extends StatelessWidget {
       ),
       prefixText: S.of(context).noCodeReceived,
       buttonText: S.of(context).resend,
+      onTap: cubit.resendCode,
     );
   }
 }

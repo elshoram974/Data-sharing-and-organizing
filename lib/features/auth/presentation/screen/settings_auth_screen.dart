@@ -4,10 +4,11 @@ import 'package:flutter/material.dart';
 import '../widgets/auth_body.dart';
 import '../widgets/settings/dark_mode_list_tile.dart';
 import '../widgets/settings/locale_tile/language_list_tile.dart';
-import '../widgets/settings/return_to_login.dart';
+import '../widgets/settings/return_to_previous_route.dart';
 
 class AuthSettingsScreen extends StatelessWidget {
-  const AuthSettingsScreen({super.key});
+  final String previousRouteName;
+  const AuthSettingsScreen({super.key, required this.previousRouteName});
 
   @override
   Widget build(BuildContext context) {
@@ -17,6 +18,7 @@ class AuthSettingsScreen extends StatelessWidget {
 
     return Scaffold(
       body: AuthBody(
+        currentRouteName: S.of(context).settings,
         introHeader: S.of(context).settings,
         showSettingsButton: false,
         introBody: '',
@@ -26,7 +28,7 @@ class AuthSettingsScreen extends StatelessWidget {
           SizedBox(height: h * 0.05),
           DarkModeListTile(color: color, style: style),
           SizedBox(height: h * 0.06),
-          const ReturnToLogin(),
+          ReturnToPreviousRoute(previousRouteName: previousRouteName),
         ],
       ),
     );

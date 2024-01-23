@@ -11,6 +11,7 @@ class ForgotPasswordBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AuthBody(
+      currentRouteName: S.of(context).createNewPassword,
       introHeader: S.of(context).createNewPassword,
       introBody: S.of(context).yourNewPasswordMustBeDifferentFromPreviously,
       showBackButton: false,

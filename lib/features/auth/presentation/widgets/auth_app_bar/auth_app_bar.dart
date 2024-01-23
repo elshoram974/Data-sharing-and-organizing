@@ -9,8 +9,10 @@ class AuthAppBar extends StatelessWidget {
     required this.showBackButton,
     required this.showSettingsButton,
     this.onWillPop,
+    required this.currentRouteName,
   });
 
+  final String currentRouteName;
   final bool showBackButton;
   final void Function()? onWillPop;
 
@@ -28,7 +30,10 @@ class AuthAppBar extends StatelessWidget {
         onWillPop: onWillPop,
       ),
       actions: [
-        SettingsButtonAction(showSettingsButton: showSettingsButton),
+        SettingsButtonAction(
+          showSettingsButton: showSettingsButton,
+          previousRouteName: currentRouteName,
+        ),
       ],
     );
   }

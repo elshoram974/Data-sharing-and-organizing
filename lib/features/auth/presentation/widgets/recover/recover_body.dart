@@ -11,6 +11,7 @@ class RecoverBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AuthBody(
+      currentRouteName: S.of(context).recoverYourAccount,
       introHeader: S.of(context).recoverYourAccount,
       introBody: S.of(context).enterYourCredentialsToContinue,
       children: const [
