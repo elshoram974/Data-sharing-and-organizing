@@ -51,19 +51,26 @@ class LoginCubit extends Cubit<LoginState> {
     await EasyLoading.dismiss();
     if (loginState is Success<User>) {
       final User data = loginState.data;
-      emit(LoginSuccessState(data));
-      EasyLoading.showSuccess(data.email, duration: const Duration(seconds: 2));
-      TextInput.finishAutofillContext();
-      if (data.userIsVerified) {
-        AppRoute.key.currentContext
-            ?.pushReplacement(AppRoute.home, extra: data);
-      } else {
-        await ShowMyDialog.verifyDialog();
-      }
+      await _inSuccess(data);
     } else if (loginState is Failure<User>) {
       final String error = loginState.error;
-      emit(LoginFailureState(error));
-      EasyLoading.showError(error, duration: const Duration(seconds: 5));
+      _inFailure(error);
+    }
+  }
+
+  void _inFailure(String error) {
+    emit(LoginFailureState(error));
+    EasyLoading.showError(error, duration: const Duration(seconds: 5));
+  }
+
+  Future<void> _inSuccess(User data) async {
+    emit(LoginSuccessState(data));
+    EasyLoading.showSuccess(data.email, duration: const Duration(seconds: 2));
+    TextInput.finishAutofillContext();
+    if (data.userIsVerified) {
+      AppRoute.key.currentContext?.pushReplacement(AppRoute.home, extra: data);
+    } else {
+      await ShowMyDialog.verifyDialog();
     }
   }
   //  end login----------------------------
