@@ -12,7 +12,8 @@ class AuthBody extends StatelessWidget {
     required this.introBody,
     this.children = const <Widget>[],
     this.showSettingsButton = true,
-    this.showBackButton = true, this.onWillPop,
+    this.showBackButton = true,
+    this.onWillPop,
   });
 
   final String introHeader;
@@ -25,21 +26,25 @@ class AuthBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: CustomScrollView(
-        physics: const BouncingScrollPhysics(),
-        slivers: [
-          AuthAppBar(
-            showBackButton: showBackButton,
-            onWillPop: onWillPop,
-            showSettingsButton: showSettingsButton,
-          ),
-          AuthResponseBody(
-            introHeader: introHeader,
-            introBody: introBody,
-            children: children,
-          )
-        ],
-      ).horizontalPadding(AppConst.defaultPadding),
+      child: PopScope(
+        canPop: onWillPop == null,
+        onPopInvoked: (_) => {if (!_ && onWillPop != null) onWillPop!()},
+        child: CustomScrollView(
+          physics: const BouncingScrollPhysics(),
+          slivers: [
+            AuthAppBar(
+              showBackButton: showBackButton,
+              onWillPop: onWillPop,
+              showSettingsButton: showSettingsButton,
+            ),
+            AuthResponseBody(
+              introHeader: introHeader,
+              introBody: introBody,
+              children: children,
+            )
+          ],
+        ).horizontalPadding(AppConst.defaultPadding),
+      ),
     );
   }
 }
