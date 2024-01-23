@@ -60,9 +60,11 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+late DateTime timeBackPressed ;
 
 void initAppConfiguration() {
   if (kDebugMode) HttpOverrides.global = MyHttpOverrides();
+   timeBackPressed = DateTime.now();
 
   Bloc.observer = MyBlocObserver();
 
