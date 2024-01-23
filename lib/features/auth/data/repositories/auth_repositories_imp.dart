@@ -60,10 +60,13 @@ class AuthRepositoriesImp extends AuthRepositories {
   }
 
   @override
-  Future<Status<User>> verifyCode(int code) {
-    // TODO: implement verifyCode
-    // await localDataSource.saveUser(user);
-    throw UnimplementedError();
+  Future<Status<User>> verifyCode(({int id , int code}) param) {
+    return executeAndHandleErrors<User>(
+      () async {
+        User user = await remoteDataSource.verifyCode(param.id,param.code);
+        return user;
+      },
+    );
   }
 
   @override

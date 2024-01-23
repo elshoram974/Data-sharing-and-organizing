@@ -11,7 +11,7 @@ abstract class AuthRemoteDataSource {
   Future<User> signUp(AuthUserEntity user);
   Future<User> requestToRecoverAccount(String email);
   Future<User> requestToSendCode(int id);
-  Future<User> verifyCode(int code);
+  Future<User> verifyCode(int id, int code);
 }
 
 class AuthRemoteDataSourceImp extends AuthRemoteDataSource {
@@ -52,14 +52,17 @@ class AuthRemoteDataSourceImp extends AuthRemoteDataSource {
   Future<User> requestToSendCode(int id) async {
     Map<String, dynamic> response = await service.post(
       AppLinks.requestToSendCode,
-      {'user_id': id},
+      {'user_id': '$id'},
     );
     return AppUser.fromMap(response).user!;
   }
 
   @override
-  Future<User> verifyCode(int code) {
-    // TODO: implement verifyCode
-    throw UnimplementedError();
+  Future<User> verifyCode(int id, int code) async {
+    Map<String, dynamic> response = await service.post(
+      AppLinks.requestToSendCode,
+      {'user_id': '$id', 'code': '$code'},
+    );
+    return AppUser.fromMap(response).user!;
   }
 }
