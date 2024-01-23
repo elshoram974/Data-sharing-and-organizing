@@ -8,6 +8,7 @@ import '../../domain/entities/login_entity.dart';
 import '../../domain/repositories/auth_repositories.dart';
 import '../datasources/auth_local_data_sources.dart';
 import '../datasources/auth_remote_data_sources.dart';
+import '../models/app_user/user.dart';
 
 class AuthRepositoriesImp extends AuthRepositories {
   final AuthLocalDataSource localDataSource;
@@ -19,38 +20,40 @@ class AuthRepositoriesImp extends AuthRepositories {
   });
 
   @override
-  Future<Status<AuthUserEntity>> login(LoginUserEntity user) async {
-    return executeAndHandleErrors<AuthUserEntity>(
+  Future<Status<User>> login(LoginUserEntity user) async {
+    return executeAndHandleErrors<User>(
       () async {
-        AuthUserEntity authUserEntity = await remoteDataSource.login(user);
-        if (user.keepLogin) await localDataSource.saveUser(user);
+        User authUser = await remoteDataSource.login(user);
+        if (user.keepLogin && authUser.userIsVerified) {
+          await localDataSource.saveUser(user);
+        }
 
-        return authUserEntity;
+        return authUser;
       },
     );
   }
 
   @override
-  Future<Status<AuthUserEntity>> requestToRecoverAccount(String email) {
+  Future<Status<User>> requestToRecoverAccount(String email) {
     // TODO: implement requestToRecoverAccount
     throw UnimplementedError();
   }
 
   @override
-  Future<Status<AuthUserEntity>> signUp(AuthUserEntity user) async {
-    return executeAndHandleErrors<AuthUserEntity>(
+  Future<Status<User>> signUp(AuthUserEntity user) async {
+    return executeAndHandleErrors<User>(
       () async {
-        AuthUserEntity authUserEntity = await remoteDataSource.signUp(user);
-        await localDataSource.saveUser(user);
+        User authUser = await remoteDataSource.signUp(user);
 
-        return authUserEntity;
+        return authUser;
       },
     );
   }
 
   @override
-  Future<Status<AuthUserEntity>> verifyCode(int code) {
+  Future<Status<User>> verifyCode(int code) {
     // TODO: implement verifyCode
+    // await localDataSource.saveUser(user);
     throw UnimplementedError();
   }
 
@@ -61,7 +64,7 @@ class AuthRepositoriesImp extends AuthRepositories {
   Future<Status<int>> logOut() async => Success(await localDataSource.logOut());
 
   @override
-  Future<Status<AuthUserEntity>> newPassword(String newPassword) {
+  Future<Status<User>> newPassword(String newPassword) {
     // TODO: implement newPassword
     throw UnimplementedError();
   }

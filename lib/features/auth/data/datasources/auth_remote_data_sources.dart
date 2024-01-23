@@ -3,13 +3,14 @@ import 'package:data_sharing_organizing/core/utils/services/api_services.dart';
 import 'package:data_sharing_organizing/features/auth/data/models/app_user/app_user.dart';
 
 import '../../domain/entities/auth_user_entity.dart';
+import '../models/app_user/user.dart';
 
 abstract class AuthRemoteDataSource {
   const AuthRemoteDataSource();
-  Future<AuthUserEntity> login(AuthUserEntity user);
-  Future<AuthUserEntity> signUp(AuthUserEntity user);
-  Future<AuthUserEntity> requestToRecoverAccount(String email);
-  Future<AuthUserEntity> verifyCode(int code);
+  Future<User> login(AuthUserEntity user);
+  Future<User> signUp(AuthUserEntity user);
+  Future<User> requestToRecoverAccount(String email);
+  Future<User> verifyCode(int code);
 }
 
 class AuthRemoteDataSourceImp extends AuthRemoteDataSource {
@@ -18,7 +19,7 @@ class AuthRemoteDataSourceImp extends AuthRemoteDataSource {
   AuthRemoteDataSourceImp(this.service);
 
   @override
-  Future<AuthUserEntity> login(AuthUserEntity user) async {
+  Future<User> login(AuthUserEntity user) async {
     Map<String, dynamic> response = await service.post(
       AppLinks.login,
       {'email': user.email, 'password': user.password},
@@ -27,13 +28,13 @@ class AuthRemoteDataSourceImp extends AuthRemoteDataSource {
   }
 
   @override
-  Future<AuthUserEntity> requestToRecoverAccount(String email) {
+  Future<User> requestToRecoverAccount(String email) {
     // TODO: implement requestToRecoverAccount
     throw UnimplementedError();
   }
 
   @override
-  Future<AuthUserEntity> signUp(AuthUserEntity user) async {
+  Future<User> signUp(AuthUserEntity user) async {
     Map<String, dynamic> response = await service.post(
       AppLinks.signUp,
       {
@@ -47,7 +48,7 @@ class AuthRemoteDataSourceImp extends AuthRemoteDataSource {
   }
 
   @override
-  Future<AuthUserEntity> verifyCode(int code) {
+  Future<User> verifyCode(int code) {
     // TODO: implement verifyCode
     throw UnimplementedError();
   }

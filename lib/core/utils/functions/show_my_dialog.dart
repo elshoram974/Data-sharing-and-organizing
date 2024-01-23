@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../shared/dialog/custom_dialog.dart';
 import '../config/locale/generated/l10n.dart';
+import '../config/routes/routes.dart';
 
 abstract final class ShowMyDialog {
   const ShowMyDialog();
@@ -53,6 +54,24 @@ abstract final class ShowMyDialog {
           },
           textConfirm: S.of(context).stayHere,
           onPressConfirm: context.pop,
+        );
+      },
+    );
+  }
+
+  static Future<T?> verifyDialog<T>() {
+    return showDialog<T>(
+      context: AppRoute.key.currentContext!,
+      builder: (context) {
+        return CustomDialog(
+          title: S.of(context).warning,
+          body: 'u have to verify your account',
+          textConfirm: 'verify it',
+          onPressConfirm: () {
+            AppRoute.key.currentContext?.pop();
+            AppRoute.key.currentContext
+                ?.push(AppRoute.codeVerification, extra: AppRoute.home);
+          },
         );
       },
     );
