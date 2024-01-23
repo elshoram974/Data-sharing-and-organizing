@@ -33,9 +33,17 @@ class AuthRemoteDataSourceImp extends AuthRemoteDataSource {
   }
 
   @override
-  Future<AuthUserEntity> signUp(AuthUserEntity user) {
-    // TODO: implement signUp
-    throw UnimplementedError();
+  Future<AuthUserEntity> signUp(AuthUserEntity user) async {
+    Map<String, dynamic> response = await service.post(
+      AppLinks.signUp,
+      {
+        'name': user.name,
+        'email': user.email,
+        'password': user.password,
+        'userRole': user.userRole.inString,
+      },
+    );
+    return AppUser.fromMap(response).user!;
   }
 
   @override
