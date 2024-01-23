@@ -65,9 +65,9 @@ class LoginCubit extends Cubit<LoginState> {
 
   Future<void> _inSuccess(User data) async {
     emit(LoginSuccessState(data));
-    EasyLoading.showSuccess(data.email, duration: const Duration(seconds: 2));
     TextInput.finishAutofillContext();
     if (data.userIsVerified) {
+      EasyLoading.showSuccess(data.name, duration: const Duration(seconds: 2));
       AppRoute.key.currentContext?.pushReplacement(AppRoute.home, extra: data);
     } else {
       await ShowMyDialog.verifyDialog();
