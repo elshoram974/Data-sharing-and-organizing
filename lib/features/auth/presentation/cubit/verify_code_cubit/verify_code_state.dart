@@ -14,6 +14,13 @@ final class VerifyCodeInitial extends VerifyCodeState {
 final class VerifyCodeLoadingState extends VerifyCodeState {
   const VerifyCodeLoadingState();
 }
+final class VerifyCodeLoadingResendCodeState extends VerifyCodeState {
+  final Duration duration;
+  const VerifyCodeLoadingResendCodeState(this.duration);
+
+  @override
+  List<Duration> get props => [duration];
+}
 
 final class VerifyCodeSuccessState extends VerifyCodeState {
   final AuthUserEntity user;

@@ -10,6 +10,7 @@ abstract class AuthRemoteDataSource {
   Future<User> login(AuthUserEntity user);
   Future<User> signUp(AuthUserEntity user);
   Future<User> requestToRecoverAccount(String email);
+  Future<User> requestToSendCode(int id);
   Future<User> verifyCode(int code);
 }
 
@@ -43,6 +44,15 @@ class AuthRemoteDataSourceImp extends AuthRemoteDataSource {
         'password': user.password,
         'userRole': user.userRole.inString,
       },
+    );
+    return AppUser.fromMap(response).user!;
+  }
+
+  @override
+  Future<User> requestToSendCode(int id) async {
+    Map<String, dynamic> response = await service.post(
+      AppLinks.requestToSendCode,
+      {'user_id': id},
     );
     return AppUser.fromMap(response).user!;
   }

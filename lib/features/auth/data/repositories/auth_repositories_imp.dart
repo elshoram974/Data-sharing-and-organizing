@@ -44,7 +44,16 @@ class AuthRepositoriesImp extends AuthRepositories {
     return executeAndHandleErrors<User>(
       () async {
         User authUser = await remoteDataSource.signUp(user);
+        return authUser;
+      },
+    );
+  }
 
+  @override
+  Future<Status<User>> requestToSendCode(int id) async {
+    return executeAndHandleErrors<User>(
+      () async {
+        User authUser = await remoteDataSource.requestToSendCode(id);
         return authUser;
       },
     );
