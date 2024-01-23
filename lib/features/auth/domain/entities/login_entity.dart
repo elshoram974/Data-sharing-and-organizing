@@ -7,13 +7,14 @@ final class LoginUserEntity extends AuthUserEntity {
     required super.email,
     required super.password,
     this.keepLogin = true,
-  }) : super(name: '', userRole: UserRole.personalUser);
+  }) : super(id:0, name: '', userRole: UserRole.personalUser);
 
   factory LoginUserEntity.none() =>
       const LoginUserEntity(email: '', password: '');
 
   @override
   LoginUserEntity copyWith({
+    int? id,
     String? name,
     String? email,
     String? password,

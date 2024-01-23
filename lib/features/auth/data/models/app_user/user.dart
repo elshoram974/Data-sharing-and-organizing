@@ -30,6 +30,7 @@ class User extends AuthUserEntity {
     this.userImage,
     required super.userRole,
   }) : super(
+          id: userId,
           name: "$userFirstName $userLastName",
           email: userEmail,
           password: userPassword,
@@ -45,7 +46,8 @@ class User extends AuthUserEntity {
       userProvider: UserProvider.fromString(data['user_provider'] as String?),
       userIsVerified: data['user_is_verified'] == 1 ? true : false,
       accountLastlogin: DateTime.tryParse(data['user_lastlogin'] as String),
-      accountCreatedDatetime: DateTime.tryParse(data['user_createdat'] as String),
+      accountCreatedDatetime:
+          DateTime.tryParse(data['user_createdat'] as String),
       userImage: data['user_image'] as dynamic,
       userRole: UserRole.fromString(data['user_role'] as String?),
     );

@@ -53,6 +53,7 @@ class SignUpCubit extends Cubit<SignUpState> {
     formKey.currentState!.save();
     emit(const SignUpLoadingState());
     final AuthUserEntity user = AuthUserEntity(
+      id: 0,
       name: name,
       email: email,
       password: password,

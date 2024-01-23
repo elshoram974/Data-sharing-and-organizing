@@ -7,15 +7,18 @@ part 'auth_user_entity.g.dart';
 @HiveType(typeId: 2)
 class AuthUserEntity extends Equatable {
   @HiveField(0)
-  final String name;
+  final int id;
   @HiveField(1)
-  final String email;
+  final String name;
   @HiveField(2)
-  final String password;
+  final String email;
   @HiveField(3)
+  final String password;
+  @HiveField(4)
   final UserRole userRole;
 
   const AuthUserEntity({
+    required this.id,
     required this.name,
     required this.email,
     required this.password,
@@ -23,12 +26,14 @@ class AuthUserEntity extends Equatable {
   });
 
   AuthUserEntity copyWith({
+    int? id,
     String? name,
     String? email,
     String? password,
     UserRole? userRole,
   }) {
     return AuthUserEntity(
+      id: id ?? this.id,
       name: name ?? this.name,
       email: email ?? this.email,
       password: password ?? this.password,
