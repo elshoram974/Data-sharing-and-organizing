@@ -103,7 +103,10 @@ class SignUpCubit extends Cubit<SignUpState> {
         email.isNotEmpty ||
         password.isNotEmpty ||
         userRole != null) {
-      ShowMyDialog.back(_context!);
+      ShowMyDialog.back(
+        _context!,
+        body: S.of(_context).ifYouReturnNowYouWillLoseAllData,
+      );
     } else {
       _context?.pop();
     }

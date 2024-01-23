@@ -48,7 +48,7 @@ abstract final class ShowMyDialog {
       builder: (context) {
         return CustomDialog(
           title: S.of(context).goBack,
-          body: body ?? S.of(context).ifYouReturnNowYouWillLoseAllData,
+          body: body ?? S.of(context).areYouSureYouWantToReturnBack,
           crossAxisAlignment: CrossAxisAlignment.center,
           textCancel: S.of(context).goBack,
           onPressCancel: () {

@@ -711,6 +711,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Are you sure you want to return back`
+  String get areYouSureYouWantToReturnBack {
+    return Intl.message(
+      'Are you sure you want to return back',
+      name: 'areYouSureYouWantToReturnBack',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

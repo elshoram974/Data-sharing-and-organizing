@@ -65,5 +65,6 @@
     "ifYouReturnNowYouWillLoseAllData": "إذا قمت بالعودة الآن، ستفقد كل البيانات!",
     "stayHere": "ابق هنا",
     "uHaveToVerifyAccountFirst": "يجب التحقق من حسابك أولاً",
-    "verifyIt": "تحقق منه"
+    "verifyIt": "تحقق منه",
+    "areYouSureYouWantToReturnBack": "هل أنت متأكد أنك تريد العودة؟"
 }

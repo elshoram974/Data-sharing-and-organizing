@@ -29,6 +29,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "YouHaveChooseTypeOfAccountPersonalOrBusiness":
             MessageLookupByLibrary.simpleMessage(
                 "You have to choose the type of your account if it personal or business account."),
+        "areYouSureYouWantToReturnBack": MessageLookupByLibrary.simpleMessage(
+            "Are you sure you want to return back"),
         "back": MessageLookupByLibrary.simpleMessage("Back"),
         "businessAccount":
             MessageLookupByLibrary.simpleMessage("Business account"),

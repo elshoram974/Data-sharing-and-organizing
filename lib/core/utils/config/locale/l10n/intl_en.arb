@@ -65,5 +65,6 @@
     "ifYouReturnNowYouWillLoseAllData": "If you return now, you will lose all data!",
     "stayHere": "Stay here",
     "uHaveToVerifyAccountFirst": "You have to verify your account first",
-    "verifyIt": "Verify it"
+    "verifyIt": "Verify it",
+    "areYouSureYouWantToReturnBack": "Are you sure you want to return back"
 }

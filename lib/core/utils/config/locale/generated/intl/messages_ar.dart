@@ -29,6 +29,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "YouHaveChooseTypeOfAccountPersonalOrBusiness":
             MessageLookupByLibrary.simpleMessage(
                 "عليك تحديد ان كان الحساب خاص أو لشركة"),
+        "areYouSureYouWantToReturnBack": MessageLookupByLibrary.simpleMessage(
+            "هل أنت متأكد أنك تريد العودة؟"),
         "back": MessageLookupByLibrary.simpleMessage("رجوع"),
         "businessAccount": MessageLookupByLibrary.simpleMessage("حساب الشركة"),
         "cancel": MessageLookupByLibrary.simpleMessage("إلغاء"),
