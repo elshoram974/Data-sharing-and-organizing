@@ -59,6 +59,8 @@ class ServerFailure<T> extends Failure<T> {
         return ServerFailure(S.current.errorInPassword);
       case 'The email you entered does not exist':
         return ServerFailure(S.current.emailYouEnteredDoesNotExist);
+      case 'User created by another provider':
+        return ServerFailure(S.current.thisAccountExistWithAnotherProvider);
       default:
         return ServerFailure(errorMessage);
     }

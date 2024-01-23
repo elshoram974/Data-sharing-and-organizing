@@ -59,5 +59,6 @@
     "noInternetConnection": "لا يوجد اتصال بالإنترنت",
     "yourRequestNotFoundTryAgainLater": "لم يتم العثور على طلبك. حاول مرة أخرى لاحقًا.",
     "thereIsProblemWithServerTryAgainLater": "هناك مشكلة في الخادم. حاول مرة أخرى لاحقًا.",
-    "thereIsAnErrorTryAgainLater": "هناك مشكلة في الخادم. حاول مرة أخرى لاحقًا."
+    "thereIsAnErrorTryAgainLater": "هناك مشكلة في الخادم. حاول مرة أخرى لاحقًا.",
+    "thisAccountExistWithAnotherProvider": "هذا الحساب موجود ولكن مع مزود خدمة آخر."
 }

@@ -102,6 +102,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "thereIsProblemWithServerTryAgainLater":
             MessageLookupByLibrary.simpleMessage(
                 "هناك مشكلة في الخادم. حاول مرة أخرى لاحقًا."),
+        "thisAccountExistWithAnotherProvider":
+            MessageLookupByLibrary.simpleMessage(
+                "هذا الحساب موجود ولكن مع مزود خدمة آخر."),
         "userNotFound": MessageLookupByLibrary.simpleMessage(
             "لا يوجد مستخدم لهذا البريد الإلكتروني."),
         "verify": MessageLookupByLibrary.simpleMessage("التحقق"),

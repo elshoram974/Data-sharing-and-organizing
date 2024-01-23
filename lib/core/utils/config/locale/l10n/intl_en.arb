@@ -59,5 +59,6 @@
     "noInternetConnection": "No internet connection",
     "yourRequestNotFoundTryAgainLater": "Your request was not found. Try again later.",
     "thereIsProblemWithServerTryAgainLater": "There is a problem with the server. Try again later.",
-    "thereIsAnErrorTryAgainLater": "There is a problem with the server. Try again later."
+    "thereIsAnErrorTryAgainLater": "There is a problem with the server. Try again later.",
+    "thisAccountExistWithAnotherProvider": "this account is exist but with another provider."
 }

@@ -651,6 +651,16 @@ class S {
       args: [],
     );
   }
+
+  /// `this account is exist but with another provider.`
+  String get thisAccountExistWithAnotherProvider {
+    return Intl.message(
+      'this account is exist but with another provider.',
+      name: 'thisAccountExistWithAnotherProvider',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

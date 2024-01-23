@@ -101,6 +101,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "thereIsProblemWithServerTryAgainLater":
             MessageLookupByLibrary.simpleMessage(
                 "There is a problem with the server. Try again later."),
+        "thisAccountExistWithAnotherProvider":
+            MessageLookupByLibrary.simpleMessage(
+                "this account is exist but with another provider."),
         "userNotFound": MessageLookupByLibrary.simpleMessage(
             "No user found for that email."),
         "verify": MessageLookupByLibrary.simpleMessage("Verify"),

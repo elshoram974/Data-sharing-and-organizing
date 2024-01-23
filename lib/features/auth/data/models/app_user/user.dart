@@ -44,8 +44,8 @@ class User extends AuthUserEntity {
       userPassword: data['user_password'] as String,
       userProvider: UserProvider.fromString(data['user_provider'] as String?),
       userIsVerified: data['user_is_verified'] == 1 ? true : false,
-      accountLastlogin: DateTime.tryParse(data['account_lastlogin'] as String),
-      accountCreatedDatetime: DateTime.tryParse(data['account_created_datetime'] as String),
+      accountLastlogin: DateTime.tryParse(data['user_lastlogin'] as String),
+      accountCreatedDatetime: DateTime.tryParse(data['user_createdat'] as String),
       userImage: data['user_image'] as dynamic,
       userRole: UserRole.fromString(data['user_role'] as String?),
     );
@@ -59,8 +59,8 @@ class User extends AuthUserEntity {
         'user_password': userPassword,
         'user_provider': userProvider.inString,
         'user_is_verified': userIsVerified,
-        'account_lastlogin': accountLastlogin?.toIso8601String(),
-        'account_created_datetime': accountCreatedDatetime?.toIso8601String(),
+        'user_lastlogin': accountLastlogin?.toIso8601String(),
+        'user_createdat': accountCreatedDatetime?.toIso8601String(),
         'user_image': userImage,
         'user_role': userRole.inString,
       };

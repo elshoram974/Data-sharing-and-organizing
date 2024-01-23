@@ -57,7 +57,7 @@ class LoginCubit extends Cubit<LoginState> {
       final String error = loginState.error;
       emit(LoginFailureState(error));
       EasyLoading.dismiss();
-      EasyLoading.showError(error, duration: const Duration(seconds: 2));
+      EasyLoading.showError(error, duration: const Duration(seconds: 5));
     }
   }
   //  end login----------------------------
