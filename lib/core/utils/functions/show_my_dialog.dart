@@ -42,7 +42,11 @@ abstract final class ShowMyDialog {
     );
   }
 
-  static Future<bool?> back(BuildContext context, {String? body}) {
+  static Future<bool?> back(
+    BuildContext context, {
+    String? body,
+    void Function()? onGoBack,
+  }) {
     return showDialog<bool>(
       context: context,
       builder: (context) {
@@ -52,6 +56,7 @@ abstract final class ShowMyDialog {
           crossAxisAlignment: CrossAxisAlignment.center,
           textCancel: S.of(context).goBack,
           onPressCancel: () {
+            if (onGoBack != null) onGoBack();
             context.pop();
             context.pop();
           },

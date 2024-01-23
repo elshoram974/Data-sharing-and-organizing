@@ -15,11 +15,11 @@ final class VerifyCodeLoadingState extends VerifyCodeState {
   const VerifyCodeLoadingState();
 }
 final class VerifyCodeLoadingResendCodeState extends VerifyCodeState {
-  final Duration duration;
+  final int duration;
   const VerifyCodeLoadingResendCodeState(this.duration);
 
   @override
-  List<Duration> get props => [duration];
+  List<int> get props => [duration];
 }
 
 final class VerifyCodeSuccessState extends VerifyCodeState {
