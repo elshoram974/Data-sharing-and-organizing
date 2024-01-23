@@ -23,6 +23,7 @@ class AuthField extends StatelessWidget {
     this.textDirection = TextDirection.ltr,
     this.autofocus = false,
     this.focusNode,
+    this.textCapitalization = TextCapitalization.none,
   });
 
   final String label;
@@ -36,6 +37,7 @@ class AuthField extends StatelessWidget {
   final IconData? suffix;
   final TextInputAction textInputAction;
   final TextDirection? textDirection;
+  final TextCapitalization textCapitalization;
 
   final void Function(String?)? onSaved;
   final void Function()? onEditingComplete;
@@ -55,6 +57,7 @@ class AuthField extends StatelessWidget {
           autofillHints: autofillHints,
           autofocus: autofocus,
           focusNode: focusNode,
+          textCapitalization: textCapitalization,
           textDirection: textDirection,
           keyboardType: keyboardType,
           hintText: hint,

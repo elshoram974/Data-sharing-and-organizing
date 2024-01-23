@@ -26,6 +26,7 @@ class SignUpFields extends StatelessWidget {
               textDirection: null,
               autofillHints: const [AutofillHints.name],
               keyboardType: TextInputType.name,
+              textCapitalization: TextCapitalization.words,
               onSaved: (val) => c.name = val!.trim(),
               validator: (val) =>
                   AppValidator.auth(val?.trim(), 3, 200, FieldType.name),
