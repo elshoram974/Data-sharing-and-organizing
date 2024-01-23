@@ -13,7 +13,7 @@ final class AppLocale {
   final Locale deviceLocale = dispatcher.locale;
   final List<Locale> systemLocales = dispatcher.locales;
   static Locale? localeResolutionCallback(Locale? locale, ConfigCubit cubit) {
-    if (locale == null || pref.containsKey(AppStrings.locale)) return null;
+    if (locale == null || config.containsKey(AppStrings.locale)) return null;
     final Locale deviceLocale = AppLocale().deviceLocale;
     final bool isSupported = S.delegate.isSupported(deviceLocale);
     if (isSupported) {

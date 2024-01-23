@@ -18,21 +18,21 @@ class ConfigCubit extends Cubit<ConfigState> {
   ConfigCubit(this.isLoggedInUseCase) : super(const ConfigInitial());
 
   ThemeMode themeMode =
-      ThemeMode.values[pref.getInt(AppStrings.themeMode) ?? 0];
+      ThemeMode.values[int.parse(config.get(AppStrings.themeMode) ?? '0')];
 
-  Locale appLocale = pref.containsKey(AppStrings.locale)
-      ? Locale(pref.getString(AppStrings.locale)!)
+  Locale appLocale = config.containsKey(AppStrings.locale)
+      ? Locale(config.get(AppStrings.locale)!)
       : AppLocale().deviceLocale;
 
-  void changeMode(ThemeMode mode) {
+  void changeMode(ThemeMode mode) async {
     themeMode = mode;
-    pref.setInt(AppStrings.themeMode, mode.index);
+    await config.put(AppStrings.themeMode, '${mode.index}');
     emit(ChangeThemeMode(mode));
   }
 
-  void changeLocale(String lang) {
+  void changeLocale(String lang) async {
     appLocale = Locale(lang);
-    pref.setString(AppStrings.locale, lang);
+    await config.put(AppStrings.locale, lang);
     emit(ChangeLanguage(lang));
   }
 
