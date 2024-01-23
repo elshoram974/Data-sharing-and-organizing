@@ -9,6 +9,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../domain/entities/auth_user_entity.dart';
@@ -58,7 +59,11 @@ class SignUpCubit extends Cubit<SignUpState> {
     );
     debugPrint('user: ${user.email} $user');
 
+    EasyLoading.show(dismissOnTap: false);
+
     final Status<AuthUserEntity> signUpStatus = await signUpUseCase(user);
+
+    await EasyLoading.dismiss();
     if (signUpStatus is Success<AuthUserEntity>) {
       _successLogin(signUpStatus.data);
     } else if (signUpStatus is Failure<AuthUserEntity>) {
@@ -80,8 +85,9 @@ class SignUpCubit extends Cubit<SignUpState> {
 
   void _failureStatus(String error) async {
     emit(SignUpFailureState(error));
+    EasyLoading.showError(error, duration: const Duration(seconds: 5));
 
-    await ShowMyDialog.error(_context!, body: error);
+    // await ShowMyDialog.error(_context!, body: error);
   }
 
   // end sign up----------------------------

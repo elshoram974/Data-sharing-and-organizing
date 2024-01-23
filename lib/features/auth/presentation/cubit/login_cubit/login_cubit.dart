@@ -46,17 +46,16 @@ class LoginCubit extends Cubit<LoginState> {
       keepLogin: rememberMe,
     );
     final Status<AuthUserEntity> loginState = await loginUseCase(user);
+    await EasyLoading.dismiss();
     if (loginState is Success<AuthUserEntity>) {
       final AuthUserEntity data = loginState.data;
       emit(LoginSuccessState(data));
-      EasyLoading.dismiss();
       EasyLoading.showSuccess(data.email, duration: const Duration(seconds: 2));
       TextInput.finishAutofillContext();
       AppRoute.key.currentContext?.pushReplacement(AppRoute.home, extra: data);
     } else if (loginState is Failure<AuthUserEntity>) {
       final String error = loginState.error;
       emit(LoginFailureState(error));
-      EasyLoading.dismiss();
       EasyLoading.showError(error, duration: const Duration(seconds: 5));
     }
   }
