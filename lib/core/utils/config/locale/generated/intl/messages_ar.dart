@@ -93,6 +93,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "personalAccount": MessageLookupByLibrary.simpleMessage("حساب خاص"),
         "pressAgainToExit":
             MessageLookupByLibrary.simpleMessage("اضغط مرة أخرى للخروج"),
+        "processHasBeenCancelled":
+            MessageLookupByLibrary.simpleMessage("تم إلغاء العملية"),
         "recover": MessageLookupByLibrary.simpleMessage("استعادة"),
         "recoverYourAccount":
             MessageLookupByLibrary.simpleMessage("استعادة حسابك"),

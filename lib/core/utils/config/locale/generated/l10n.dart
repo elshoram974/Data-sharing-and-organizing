@@ -731,6 +731,16 @@ class S {
       args: [],
     );
   }
+
+  /// `The process has been cancelled`
+  String get processHasBeenCancelled {
+    return Intl.message(
+      'The process has been cancelled',
+      name: 'processHasBeenCancelled',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

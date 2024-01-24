@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "466899267669-bf4jn99l392mdcgaqutdunubfjgaplhn.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mrecode.sharikna",
+            "certificate_hash": "94decc5cd2d5be3a9ccacd90157381e4ab8d4777"
+          }
+        },
+        {
           "client_id": "466899267669-dcsgo1jh9kirr909oubohjh4lm6lfo4b.apps.googleusercontent.com",
           "client_type": 3
         }

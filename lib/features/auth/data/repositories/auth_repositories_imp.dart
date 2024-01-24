@@ -35,11 +35,11 @@ class AuthRepositoriesImp extends AuthRepositories {
   }
 
   @override
-  Future<Status<User>> socialLogin(({UserProvider provider, AuthUserEntity user}) param) async {
+  Future<Status<User>> socialLogin(UserProvider provider) async {
     return executeAndHandleErrors<User>(
       () async {
-        User authUser = await remoteDataSource.loginWithProvider(param);
-        await localDataSource.saveUser(param.user);
+        User authUser = await remoteDataSource.socialLogin(provider);
+        await localDataSource.saveUser(authUser);
 
         return authUser;
       },

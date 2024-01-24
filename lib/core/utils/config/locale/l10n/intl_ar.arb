@@ -67,5 +67,6 @@
     "uHaveToVerifyAccountFirst": "يجب التحقق من حسابك أولاً",
     "verifyIt": "تحقق منه",
     "areYouSureYouWantToReturnBack": "هل أنت متأكد أنك تريد العودة؟",
-    "orConnectUsing": "أو قم بتسجيل الدخول باستخدام"
+    "orConnectUsing": "أو قم بتسجيل الدخول باستخدام",
+    "processHasBeenCancelled": "تم إلغاء العملية"
 }

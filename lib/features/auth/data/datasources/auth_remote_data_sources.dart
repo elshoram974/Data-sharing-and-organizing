@@ -1,6 +1,9 @@
+import 'package:data_sharing_organizing/core/utils/config/locale/generated/l10n.dart';
 import 'package:data_sharing_organizing/core/utils/constants/app_links.dart';
 import 'package:data_sharing_organizing/core/utils/enums/user_provider_enum.dart';
 import 'package:data_sharing_organizing/core/utils/services/api_services.dart';
+import 'package:data_sharing_organizing/core/utils/services/dependency/locator.dart';
+import 'package:data_sharing_organizing/core/utils/services/social_services.dart';
 import 'package:data_sharing_organizing/features/auth/data/models/app_user/app_user.dart';
 
 import '../../domain/entities/auth_user_entity.dart';
@@ -9,7 +12,7 @@ import '../models/app_user/user.dart';
 abstract class AuthRemoteDataSource {
   const AuthRemoteDataSource();
   Future<User> login(AuthUserEntity user);
-  Future<User> loginWithProvider(({UserProvider provider, AuthUserEntity user}) param);
+  Future<User> socialLogin(UserProvider provider);
   Future<User> signUp(AuthUserEntity user);
   Future<User> requestToRecoverAccount(String email);
   Future<User> requestToSendCode(int id);
@@ -31,14 +34,20 @@ class AuthRemoteDataSourceImp extends AuthRemoteDataSource {
   }
 
   @override
-  Future<User> loginWithProvider(({UserProvider provider, AuthUserEntity user}) param) async {
+  Future<User> socialLogin(UserProvider provider) async {
+    late final AuthUserEntity? user;
+    if (provider == UserProvider.facebook) {
+      user = await sl.get<SocialServices>().signInWithFacebook();
+    } else {
+      user = await sl.get<SocialServices>().signInWithGoogle();
+    }
+    if (user == null) throw S.current.processHasBeenCancelled;
     Map<String, dynamic> response = await service.post(
       'login provider',
-      {'email': param.user.email,'provider': param.provider.inString},
+      {'email': user.email, 'provider': provider.inString},
     );
     return AppUser.fromMap(response).user!;
   }
-
 
   @override
   Future<User> requestToRecoverAccount(String email) {

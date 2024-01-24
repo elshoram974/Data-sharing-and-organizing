@@ -67,5 +67,6 @@
     "uHaveToVerifyAccountFirst": "You have to verify your account first",
     "verifyIt": "Verify it",
     "areYouSureYouWantToReturnBack": "Are you sure you want to return back",
-    "orConnectUsing": "Or connect using"
+    "orConnectUsing": "Or connect using",
+    "processHasBeenCancelled": "The process has been cancelled"
 }

@@ -1,17 +1,17 @@
 import 'package:data_sharing_organizing/core/status/status.dart';
 import 'package:data_sharing_organizing/core/usecase/usecase_with_parameter.dart';
+import 'package:data_sharing_organizing/core/utils/enums/user_provider_enum.dart';
 
 import '../../data/models/app_user/user.dart';
-import '../entities/login_entity.dart';
 import '../repositories/auth_repositories.dart';
 
-final class LoginUseCase extends UseCase<User, LoginUserEntity> {
+final class SocialLoginUseCase extends UseCase<User, UserProvider> {
   final AuthRepositories authRepositories;
 
-  LoginUseCase(this.authRepositories);
+  SocialLoginUseCase(this.authRepositories);
 
   @override
-  Future<Status<User>> call(LoginUserEntity param) {
-    return authRepositories.login(param);
+  Future<Status<User>> call(UserProvider param) {
+    return authRepositories.socialLogin(param);
   }
 }

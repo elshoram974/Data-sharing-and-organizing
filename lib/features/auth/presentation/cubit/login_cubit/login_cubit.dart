@@ -15,13 +15,18 @@ import '../../../data/models/app_user/user.dart';
 import '../../../domain/entities/auth_user_entity.dart';
 import '../../../domain/entities/login_entity.dart';
 import '../../../domain/usecases/login_use_case.dart';
+import '../../../domain/usecases/social_login_use_case.dart';
 
 part 'login_state.dart';
 
 class LoginCubit extends Cubit<LoginState> {
   final LoginUseCase loginUseCase;
+  final SocialLoginUseCase socialLoginUseCase;
 
-  LoginCubit(this.loginUseCase) : super(const LoginInitialState());
+  LoginCubit({
+    required this.socialLoginUseCase,
+    required this.loginUseCase,
+  }) : super(const LoginInitialState());
 
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
@@ -48,7 +53,7 @@ class LoginCubit extends Cubit<LoginState> {
       password: password,
       keepLogin: rememberMe,
     );
-    final Status<User> loginState = await loginUseCase((provider: UserProvider.emailPassword, user: user));
+    final Status<User> loginState = await loginUseCase(user);
     await EasyLoading.dismiss();
     if (loginState is Success<User>) {
       final User data = loginState.data;
@@ -79,13 +84,7 @@ class LoginCubit extends Cubit<LoginState> {
   void socialLogin(UserProvider provider) async {
     emit(const LoginLoadingState());
     EasyLoading.show(dismissOnTap: false);
-    final LoginUserEntity user = LoginUserEntity(
-      email: email,
-      password: password,
-      keepLogin: rememberMe,
-    );
-
-    final Status<User> loginState = await loginUseCase((provider: provider, user: user));
+    final Status<User> loginState = await socialLoginUseCase(provider);
     await EasyLoading.dismiss();
     if (loginState is Success<User>) {
       final User data = loginState.data;

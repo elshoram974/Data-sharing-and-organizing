@@ -1,5 +1,6 @@
 import 'package:data_sharing_organizing/core/utils/enums/user_role/user_role_enum.dart';
 import 'package:equatable/equatable.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:hive/hive.dart';
 
 part 'auth_user_entity.g.dart';
@@ -38,6 +39,16 @@ class AuthUserEntity extends Equatable {
       email: email ?? this.email,
       password: password ?? this.password,
       userRole: userRole ?? this.userRole,
+    );
+  }
+
+  factory AuthUserEntity.fromFirebaseAuth(User user) {
+    return AuthUserEntity(
+      id: 0,
+      name: user.displayName ?? '',
+      email: user.email ?? '',
+      password: '',
+      userRole: UserRole.personalUser,
     );
   }
 
