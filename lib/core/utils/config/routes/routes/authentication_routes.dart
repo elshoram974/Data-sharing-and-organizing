@@ -63,7 +63,7 @@ abstract final class AuthRoutes {
             offset: const Offset(-1, 0),
             context: context,
             state: state,
-            child: const ForgotPasswordScreen(),
+            child: ForgotPasswordScreen(userId: state.extra as int),
           ),
         ),
         GoRoute(

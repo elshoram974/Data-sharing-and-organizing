@@ -12,7 +12,6 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../data/models/app_user/user.dart';
-import '../../../domain/entities/auth_user_entity.dart';
 import '../../../domain/usecases/verify_code_use_case.dart';
 
 part 'verify_code_state.dart';
@@ -57,7 +56,7 @@ class VerifyCodeCubit extends Cubit<VerifyCodeState> {
     if (nextRoute == AppRoute.home) {
       AppRoute.key.currentContext!.go(nextRoute);
     } else {
-      AppRoute.key.currentContext!.pushReplacement(nextRoute);
+      AppRoute.key.currentContext!.pushReplacement(nextRoute, extra: user.id);
     }
   }
 
