@@ -87,6 +87,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "notSamePass":
             MessageLookupByLibrary.simpleMessage("ليست نفس كلمة المرور"),
         "oR": MessageLookupByLibrary.simpleMessage("أو"),
+        "orConnectUsing": MessageLookupByLibrary.simpleMessage(
+            "أو قم بتسجيل الدخول باستخدام"),
         "password": MessageLookupByLibrary.simpleMessage("كلمة المرور"),
         "personalAccount": MessageLookupByLibrary.simpleMessage("حساب خاص"),
         "pressAgainToExit":

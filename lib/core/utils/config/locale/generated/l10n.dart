@@ -721,6 +721,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Or connect using`
+  String get orConnectUsing {
+    return Intl.message(
+      'Or connect using',
+      name: 'orConnectUsing',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

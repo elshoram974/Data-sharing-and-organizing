@@ -66,5 +66,6 @@
     "stayHere": "ابق هنا",
     "uHaveToVerifyAccountFirst": "يجب التحقق من حسابك أولاً",
     "verifyIt": "تحقق منه",
-    "areYouSureYouWantToReturnBack": "هل أنت متأكد أنك تريد العودة؟"
+    "areYouSureYouWantToReturnBack": "هل أنت متأكد أنك تريد العودة؟",
+    "orConnectUsing": "أو قم بتسجيل الدخول باستخدام"
 }

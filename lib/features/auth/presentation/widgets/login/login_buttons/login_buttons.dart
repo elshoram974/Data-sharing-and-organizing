@@ -7,6 +7,7 @@ import '../recover_account_widget.dart';
 import '../remember_me_widget.dart';
 import 'login_button.dart';
 import 'login_outlined_button.dart';
+import 'social_auth_widgets/social_authentication.dart';
 
 class LoginButtons extends StatelessWidget {
   const LoginButtons({super.key});
@@ -20,6 +21,7 @@ class LoginButtons extends StatelessWidget {
         const SizedBox(height: 25),
         const RememberMeWidget(),
         const LoginButton(),
+        const SocialAuthentication(),
         LoginOutlinedButton(
           activeText: S.of(context).signUp,
           text: S.of(context).doNotHaveAnAccount,

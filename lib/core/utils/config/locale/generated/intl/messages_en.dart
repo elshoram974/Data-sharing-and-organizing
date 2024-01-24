@@ -86,6 +86,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "notSamePass":
             MessageLookupByLibrary.simpleMessage("Not same password"),
         "oR": MessageLookupByLibrary.simpleMessage("OR"),
+        "orConnectUsing":
+            MessageLookupByLibrary.simpleMessage("Or connect using"),
         "password": MessageLookupByLibrary.simpleMessage("Password"),
         "personalAccount":
             MessageLookupByLibrary.simpleMessage("Personal account"),
