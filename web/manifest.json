@@ -1,11 +1,11 @@
 {
-    "name": "data_sharing_organizing",
-    "short_name": "data_sharing_organizing",
+    "name": "Sharikna",
+    "short_name": "Sharikna",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
     "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
+    "description": "A site that share data and organize it by ease way that help in retrieve data.",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [
