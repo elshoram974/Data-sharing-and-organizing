@@ -2,6 +2,7 @@ import 'package:data_sharing_organizing/core/status/errors/failure.dart';
 import 'package:data_sharing_organizing/core/status/status.dart';
 import 'package:data_sharing_organizing/core/status/success/success.dart';
 import 'package:data_sharing_organizing/core/utils/config/routes/routes.dart';
+import 'package:data_sharing_organizing/core/utils/enums/user_provider_enum.dart';
 import 'package:data_sharing_organizing/core/utils/functions/show_my_dialog.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
@@ -47,7 +48,7 @@ class LoginCubit extends Cubit<LoginState> {
       password: password,
       keepLogin: rememberMe,
     );
-    final Status<User> loginState = await loginUseCase(user);
+    final Status<User> loginState = await loginUseCase((provider: UserProvider.emailPassword, user: user));
     await EasyLoading.dismiss();
     if (loginState is Success<User>) {
       final User data = loginState.data;
@@ -74,4 +75,24 @@ class LoginCubit extends Cubit<LoginState> {
     }
   }
   //  end login----------------------------
+
+  void socialLogin(UserProvider provider) async {
+    emit(const LoginLoadingState());
+    EasyLoading.show(dismissOnTap: false);
+    final LoginUserEntity user = LoginUserEntity(
+      email: email,
+      password: password,
+      keepLogin: rememberMe,
+    );
+
+    final Status<User> loginState = await loginUseCase((provider: provider, user: user));
+    await EasyLoading.dismiss();
+    if (loginState is Success<User>) {
+      final User data = loginState.data;
+      await _inSuccess(data);
+    } else if (loginState is Failure<User>) {
+      final String error = loginState.error;
+      _inFailure(error);
+    }
+  }
 }
