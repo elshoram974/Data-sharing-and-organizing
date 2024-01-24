@@ -61,7 +61,7 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyBk8TFmOymXkSZebyPY6OQhfENPhjF74HQ',
-    appId: '1:466899267669:android:43eaab69327da0b151a4dc',
+    appId: '1:466899267669:android:48f8db7163b5b3f851a4dc',
     messagingSenderId: '466899267669',
     projectId: 'data-shring-and-organizing',
     storageBucket: 'data-shring-and-organizing.appspot.com',

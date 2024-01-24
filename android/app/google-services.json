@@ -7,12 +7,17 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:466899267669:android:43eaab69327da0b151a4dc",
+        "mobilesdk_app_id": "1:466899267669:android:48f8db7163b5b3f851a4dc",
         "android_client_info": {
-          "package_name": "com.mrecode.datasharingorganizing.data_sharing_organizing"
+          "package_name": "com.mrecode.sharikna"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "466899267669-dcsgo1jh9kirr909oubohjh4lm6lfo4b.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyBk8TFmOymXkSZebyPY6OQhfENPhjF74HQ"
@@ -20,7 +25,12 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "466899267669-dcsgo1jh9kirr909oubohjh4lm6lfo4b.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }
