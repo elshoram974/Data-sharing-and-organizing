@@ -1,4 +1,5 @@
 import 'package:data_sharing_organizing/core/utils/constants/app_links.dart';
+import 'package:data_sharing_organizing/core/utils/enums/user_provider_enum.dart';
 import 'package:data_sharing_organizing/core/utils/services/api_services.dart';
 import 'package:data_sharing_organizing/features/auth/data/models/app_user/app_user.dart';
 
@@ -8,6 +9,7 @@ import '../models/app_user/user.dart';
 abstract class AuthRemoteDataSource {
   const AuthRemoteDataSource();
   Future<User> login(AuthUserEntity user);
+  Future<User> loginWithProvider(({UserProvider provider, AuthUserEntity user}) param);
   Future<User> signUp(AuthUserEntity user);
   Future<User> requestToRecoverAccount(String email);
   Future<User> requestToSendCode(int id);
@@ -27,6 +29,16 @@ class AuthRemoteDataSourceImp extends AuthRemoteDataSource {
     );
     return AppUser.fromMap(response).user!;
   }
+
+  @override
+  Future<User> loginWithProvider(({UserProvider provider, AuthUserEntity user}) param) async {
+    Map<String, dynamic> response = await service.post(
+      'login provider',
+      {'email': param.user.email,'provider': param.provider.inString},
+    );
+    return AppUser.fromMap(response).user!;
+  }
+
 
   @override
   Future<User> requestToRecoverAccount(String email) {
