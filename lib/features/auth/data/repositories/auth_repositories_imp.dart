@@ -1,5 +1,6 @@
 import 'package:data_sharing_organizing/core/status/status.dart';
 import 'package:data_sharing_organizing/core/status/success/success.dart';
+import 'package:data_sharing_organizing/core/utils/enums/user_provider_enum.dart';
 import 'package:data_sharing_organizing/core/utils/functions/excute_and_handle_remote_errors.dart';
 
 import 'package:data_sharing_organizing/features/auth/domain/entities/auth_user_entity.dart';
@@ -34,6 +35,18 @@ class AuthRepositoriesImp extends AuthRepositories {
   }
 
   @override
+  Future<Status<User>> socialLogin(({UserProvider provider, AuthUserEntity user}) param) async {
+    return executeAndHandleErrors<User>(
+      () async {
+        User authUser = await remoteDataSource.loginWithProvider(param);
+        await localDataSource.saveUser(param.user);
+
+        return authUser;
+      },
+    );
+  }
+
+  @override
   Future<Status<User>> requestToRecoverAccount(String email) {
     // TODO: implement requestToRecoverAccount
     throw UnimplementedError();
@@ -60,10 +73,10 @@ class AuthRepositoriesImp extends AuthRepositories {
   }
 
   @override
-  Future<Status<User>> verifyCode(({int id , int code}) param) {
+  Future<Status<User>> verifyCode(({int id, int code}) param) {
     return executeAndHandleErrors<User>(
       () async {
-        User user = await remoteDataSource.verifyCode(param.id,param.code);
+        User user = await remoteDataSource.verifyCode(param.id, param.code);
         return user;
       },
     );
