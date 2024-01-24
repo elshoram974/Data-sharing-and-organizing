@@ -14,5 +14,5 @@ abstract class AuthRepositories {
   Future<Status<User>> requestToRecoverAccount(String email);
   Future<Status<User>> requestToSendCode(int id);
   Future<Status<User>> verifyCode(({int id , int code}) param);
-  Future<Status<User>> newPassword(String newPassword);
+  Future<Status<User>> newPassword(({int id , String newPass}) param);
 }

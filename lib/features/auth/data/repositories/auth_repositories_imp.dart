@@ -90,47 +90,8 @@ class AuthRepositoriesImp extends AuthRepositories {
   Future<Status<int>> logOut() async => Success(await localDataSource.logOut());
 
   @override
-  Future<Status<User>> newPassword(String newPassword) {
+  Future<Status<User>> newPassword(({int id , String newPass}) param) {
     // TODO: implement newPassword
     throw UnimplementedError();
   }
-
-  // @override
-  // Future<
-  //     ({
-  //       Status status,
-  //       List<HomeBooksEntity> data,
-  //     })> fetchFeaturedBooks(int pageNumber) async {
-  //   List<HomeBooksEntity> books =
-  //       localDataSource.fetchFeaturedBooks(pageNumber);
-  //   try {
-  //     if (books.isNotEmpty) return (status: Success(), data: books);
-  //     books = await remoteDataSource.fetchFeaturedBooks(pageNumber);
-  //     return (status: Success(), data: books);
-  //   } catch (e) {
-  //     if (e is HttpException) {
-  //       return (status: ServerFailure.fromHttpException(e), data: books);
-  //     }
-  //     return (status: Failure(e.toString()), data: books);
-  //   }
-  // }
-
-  // @override
-  // Future<
-  //     ({
-  //       Status status,
-  //       List<HomeBooksEntity> data,
-  //     })> fetchSuggestionBooks(int pageNumber) async {
-  //   List<HomeBooksEntity> books = localDataSource.fetchSuggestionBooks(pageNumber);
-  //   try {
-  //     if (books.isNotEmpty) return (status: Success(), data: books);
-  //     books = await remoteDataSource.fetchSuggestionBooks(pageNumber);
-  //     return (status: Success(), data: books);
-  //   } catch (e) {
-  //     if (e is HttpException) {
-  //       return (status: ServerFailure.fromHttpException(e), data: books);
-  //     }
-  //     return (status: Failure(e.toString()), data: books);
-  //   }
-  // }
 }
