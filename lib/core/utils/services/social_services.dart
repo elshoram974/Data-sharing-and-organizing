@@ -9,6 +9,17 @@ import 'package:google_sign_in/google_sign_in.dart';
 final class SocialServices {
   const SocialServices();
 
+  Future<void> authConfiguration() async {
+    if (AppConst.isWeb) {
+      await FacebookAuth.i.webAndDesktopInitialize(
+        appId: "944010007296572",
+        cookie: true,
+        xfbml: true,
+        version: "v15.0",
+      );
+    }
+  }
+
   // * google sign in
   Future<AuthUserEntity?> signInWithGoogle() async {
     late final UserCredential? user;
@@ -66,6 +77,7 @@ final class SocialServices {
     final FacebookAuthProvider facebookProvider = FacebookAuthProvider();
 
     facebookProvider.addScope('email');
+    facebookProvider.addScope('public_profile');
     facebookProvider.setCustomParameters({
       'display': 'popup',
     });

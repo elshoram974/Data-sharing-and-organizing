@@ -4,6 +4,7 @@ import 'package:data_sharing_organizing/core/utils/config/locale/generated/l10n.
 import 'package:data_sharing_organizing/core/utils/config/locale/locale_handler.dart';
 import 'package:data_sharing_organizing/core/utils/services/bloc_observer.dart';
 import 'package:data_sharing_organizing/core/utils/services/notification_services.dart';
+import 'package:data_sharing_organizing/core/utils/services/social_services.dart';
 import 'package:data_sharing_organizing/data_sharing_material_app.dart';
 import 'package:data_sharing_organizing/core/utils/services/dependency/locator.dart';
 import 'package:data_sharing_organizing/core/utils/services/init_local.dart';
@@ -28,7 +29,7 @@ void main() async {
 
   initDependencies();
 
-  initAppConfiguration();
+  await initAppConfiguration();
 
   runApp(const MyApp());
 }
@@ -59,11 +60,12 @@ class MyApp extends StatelessWidget {
 
 late DateTime timeBackPressed;
 
-void initAppConfiguration() {
+Future<void> initAppConfiguration() async {
   if (kDebugMode) HttpOverrides.global = MyHttpOverrides();
   timeBackPressed = DateTime.now();
 
   sl.get<NotificationApi>().init();
+  await sl.get<SocialServices>().authConfiguration();
 
   Bloc.observer = MyBlocObserver();
 
