@@ -14,11 +14,19 @@
       },
       "oauth_client": [
         {
-          "client_id": "466899267669-bf4jn99l392mdcgaqutdunubfjgaplhn.apps.googleusercontent.com",
+          "client_id": "466899267669-5p1bq504rjhg02h8638b7lqmp973s38o.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.mrecode.sharikna",
-            "certificate_hash": "94decc5cd2d5be3a9ccacd90157381e4ab8d4777"
+            "certificate_hash": "beb7ccb4a0d82ec27d7fa052faeeda44668d2de2"
+          }
+        },
+        {
+          "client_id": "466899267669-n1ru1910g9aup31i6j8netpbv3r1a7tj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mrecode.sharikna",
+            "certificate_hash": "82db0f69b225d247774daf37398ed3ea4457d69d"
           }
         },
         {
@@ -35,7 +43,7 @@
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "466899267669-dcsgo1jh9kirr909oubohjh4lm6lfo4b.apps.googleusercontent.com",
+              "client_id": "466899267669-64k6vh8gg4o25radjff8nqj39lovcm51.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
    <string name = "AppName" >Sharikna</string>
-   <string name="facebook_app_id">1091458938657265</string>
-   <string name="facebook_client_token">4feedd00398a26f37b48b16192888f5c</string>
-   <string name="fb_login_protocol_scheme">fb1091458938657265</string>
+   <string name="facebook_app_id">944010007296572</string>
+   <string name="facebook_client_token">7c68fe80c3d68ef2acf9dc77cafee35f</string>
+   <string name="fb_login_protocol_scheme">fb944010007296572</string>
 
 
 </resources>
