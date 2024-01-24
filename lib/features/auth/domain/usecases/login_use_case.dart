@@ -12,20 +12,13 @@ final class LoginUseCase extends UseCase<User, ({UserProvider provider, LoginUse
   LoginUseCase(this.authRepositories);
 
   @override
-  Future<Status<User>> call(
-      ({UserProvider provider, LoginUserEntity user}) param) {
+  Future<Status<User>> call(({UserProvider provider, LoginUserEntity user}) param) {
     switch (param.provider) {
       case UserProvider.emailPassword:
         return authRepositories.login(param.user);
 
-      case UserProvider.google:
-        return authRepositories.loginWithGoogle(param.user);
-
-      case UserProvider.facebook:
-        return authRepositories.loginWithFacebook(param.user);
-
       default:
-        return authRepositories.login(param.user);
+        return authRepositories.socialLogin(param);
     }
   }
 }
