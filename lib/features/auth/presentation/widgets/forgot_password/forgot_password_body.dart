@@ -19,6 +19,7 @@ class ForgotPasswordBody extends StatelessWidget {
       introHeader: S.of(context).createNewPassword,
       introBody: S.of(context).yourNewPasswordMustBeDifferentFromPreviously,
       showBackButton: false,
+      onWillPop: ProviderDependency.createNewPassword.onWillPop,
       children: const [
         ForgotPasswordFields(),
         ForgotPasswordButton(),
