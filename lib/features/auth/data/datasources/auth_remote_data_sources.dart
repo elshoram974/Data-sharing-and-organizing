@@ -50,9 +50,12 @@ class AuthRemoteDataSourceImp extends AuthRemoteDataSource {
   }
 
   @override
-  Future<User> requestToRecoverAccount(String email) {
-    // TODO: implement requestToRecoverAccount
-    throw UnimplementedError();
+  Future<User> requestToRecoverAccount(String email) async {
+    Map<String, dynamic> response = await service.post(
+      'requestToRecoverAccount',
+      {'email': email},
+    );
+    return AppUser.fromMap(response).user!;
   }
 
   @override

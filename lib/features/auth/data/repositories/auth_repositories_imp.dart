@@ -1,7 +1,7 @@
 import 'package:data_sharing_organizing/core/status/status.dart';
 import 'package:data_sharing_organizing/core/status/success/success.dart';
 import 'package:data_sharing_organizing/core/utils/enums/user_provider_enum.dart';
-import 'package:data_sharing_organizing/core/utils/functions/excute_and_handle_remote_errors.dart';
+import 'package:data_sharing_organizing/core/utils/functions/execute_and_handle_remote_errors.dart';
 
 import 'package:data_sharing_organizing/features/auth/domain/entities/auth_user_entity.dart';
 
@@ -21,7 +21,7 @@ class AuthRepositoriesImp extends AuthRepositories {
   });
 
   @override
-  Future<Status<User>> login(LoginUserEntity user) async {
+  Future<Status<User>> login(LoginUserEntity user) {
     return executeAndHandleErrors<User>(
       () async {
         User authUser = await remoteDataSource.login(user);
@@ -35,7 +35,7 @@ class AuthRepositoriesImp extends AuthRepositories {
   }
 
   @override
-  Future<Status<User>> socialLogin(UserProvider provider) async {
+  Future<Status<User>> socialLogin(UserProvider provider) {
     return executeAndHandleErrors<User>(
       () async {
         User authUser = await remoteDataSource.socialLogin(provider);
@@ -48,12 +48,13 @@ class AuthRepositoriesImp extends AuthRepositories {
 
   @override
   Future<Status<User>> requestToRecoverAccount(String email) {
-    // TODO: implement requestToRecoverAccount
-    throw UnimplementedError();
+    return executeAndHandleErrors<User>(
+      () => remoteDataSource.requestToRecoverAccount(email),
+    );
   }
 
   @override
-  Future<Status<User>> signUp(AuthUserEntity user) async {
+  Future<Status<User>> signUp(AuthUserEntity user) {
     return executeAndHandleErrors<User>(
       () async {
         User authUser = await remoteDataSource.signUp(user);
@@ -63,7 +64,7 @@ class AuthRepositoriesImp extends AuthRepositories {
   }
 
   @override
-  Future<Status<User>> requestToSendCode(int id) async {
+  Future<Status<User>> requestToSendCode(int id) {
     return executeAndHandleErrors<User>(
       () async {
         User authUser = await remoteDataSource.requestToSendCode(id);

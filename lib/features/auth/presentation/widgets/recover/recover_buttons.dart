@@ -1,8 +1,7 @@
 import 'package:data_sharing_organizing/core/utils/config/locale/generated/l10n.dart';
-import 'package:data_sharing_organizing/core/utils/config/routes/routes.dart';
+import 'package:data_sharing_organizing/core/utils/services/dependency/provider_dependency.dart';
 import 'package:data_sharing_organizing/core/utils/styles.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 
 import '../auth_filled_button.dart';
 import '../auth_rich_button.dart';
@@ -17,12 +16,8 @@ class RecoverButtons extends StatelessWidget {
       children: [
         const SizedBox(height: 53),
         AuthFilledButton(
-          // todo: don't forget put user id
           text: S.of(context).sendRequest,
-          onPressed: () => context.push(
-            AppRoute.codeVerification,
-            extra: {'userId': 0, 'nextRoute': AppRoute.forgotPassword},
-          ),
+          onPressed: ProviderDependency.recoverAccount.recoverAccount,
         ),
         const SizedBox(height: 8),
         AuthRichButton(
@@ -32,7 +27,7 @@ class RecoverButtons extends StatelessWidget {
           ),
           prefixText: S.of(context).noNeed,
           buttonText: S.of(context).goBack,
-          onTap: context.pop,
+          onTap: ProviderDependency.recoverAccount.onWillPop,
         )
       ],
     );

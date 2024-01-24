@@ -59,7 +59,6 @@ class SignUpCubit extends Cubit<SignUpState> {
       password: password,
       userRole: userRole!,
     );
-    debugPrint('user: ${user.email} $user');
 
     EasyLoading.show(dismissOnTap: false);
 
@@ -67,13 +66,13 @@ class SignUpCubit extends Cubit<SignUpState> {
 
     await EasyLoading.dismiss();
     if (signUpStatus is Success<User>) {
-      _successLogin(signUpStatus.data);
+      _successStatus(signUpStatus.data);
     } else if (signUpStatus is Failure<User>) {
       _failureStatus(signUpStatus.error);
     }
   }
 
-  void _successLogin(User data) {
+  void _successStatus(User data) {
     emit(SignUpSuccessState(data));
 
     ShowMyDialog.verifyDialog(data.userId);
@@ -82,7 +81,7 @@ class SignUpCubit extends Cubit<SignUpState> {
     TextInput.finishAutofillContext();
   }
 
-  void _failureStatus(String error) async {
+  void _failureStatus(String error) {
     emit(SignUpFailureState(error));
     EasyLoading.showError(error, duration: const Duration(seconds: 5));
 
