@@ -11,7 +11,6 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../data/models/app_user/user.dart';
-import '../../../domain/entities/auth_user_entity.dart';
 import '../../../domain/usecases/recover_account_use_case.dart';
 
 part 'recover_account_state.dart';
@@ -44,7 +43,7 @@ class RecoverAccountCubit extends Cubit<RecoverAccountState> {
     emit(RecoverAccountSuccessState(data));
     AppRoute.key.currentContext!.push(
       AppRoute.codeVerification,
-      extra: {'userId': '${data.id}', 'nextRoute': AppRoute.forgotPassword},
+      extra: {'userId': data.id, 'nextRoute': AppRoute.forgotPassword},
     );
   }
 
