@@ -85,7 +85,7 @@ class AuthRemoteDataSourceImp extends AuthRemoteDataSource {
   @override
   Future<User> verifyCode(int id, int code) async {
     Map<String, dynamic> response = await service.post(
-      AppLinks.requestToSendCode,
+      'AppLinks.verifyCode',
       {'user_id': '$id', 'code': '$code'},
     );
     return AppUser.fromMap(response).user!;
@@ -94,7 +94,7 @@ class AuthRemoteDataSourceImp extends AuthRemoteDataSource {
   @override
   Future<User> newPassword(int id, String newPass) async {
     Map<String, dynamic> response = await service.post(
-      AppLinks.requestToSendCode,
+      'AppLinks.newPassword',
       {'user_id': '$id', 'new_password': newPass},
     );
     return AppUser.fromMap(response).user!;

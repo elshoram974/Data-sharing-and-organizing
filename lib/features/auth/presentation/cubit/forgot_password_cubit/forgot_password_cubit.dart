@@ -5,8 +5,10 @@ import 'package:data_sharing_organizing/core/utils/config/routes/routes.dart';
 import 'package:data_sharing_organizing/core/utils/functions/show_my_dialog.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../data/models/app_user/user.dart';
 import '../../../domain/usecases/new_password_use_case.dart';
@@ -20,16 +22,28 @@ class CreateNewPasswordCubit extends Cubit<CreateNewPasswordState> {
   CreateNewPasswordCubit({
     required this.userId,
     required this.createNewPasswordUseCase,
-  }) : super(const CreateNewPasswordInitial());
-
+  }) : super(const CreateNewPasswordInitial()) {
+    focusNode = FocusNode();
+  }
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+
+  late final FocusNode focusNode;
   String newPassword = '';
+
+  @override
+  Future<void> close() {
+    focusNode.dispose();
+    return super.close();
+  }
 
   // * save new password----------------------------
   void saveNewPassword() async {
-    EasyLoading.show(dismissOnTap: false);
+    if (!formKey.currentState!.validate()) return;
 
     emit(const CreateNewPasswordLoadingState());
+
+    EasyLoading.show(dismissOnTap: false);
+
     final Status<User> savedStatus = await createNewPasswordUseCase((
       id: userId,
       newPass: newPassword,
@@ -42,10 +56,12 @@ class CreateNewPasswordCubit extends Cubit<CreateNewPasswordState> {
     }
   }
 
-  // end verify Code----------------------------
+  // end saved new password Code----------------------------
 
   void _savedSuccess(User user) {
     emit(CreateNewPasswordSuccessState(user));
+    TextInput.finishAutofillContext();
+    AppRoute.key.currentContext!.go(AppRoute.home);
   }
 
   void _failureState(String error) {
