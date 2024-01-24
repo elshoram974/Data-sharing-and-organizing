@@ -16,10 +16,10 @@ final class RecoverAccountLoadingState extends RecoverAccountState {
 }
 
 final class RecoverAccountSuccessState extends RecoverAccountState {
-  final AuthUserEntity user;
+  final User user;
   const RecoverAccountSuccessState(this.user);
   @override
-  List<AuthUserEntity> get props => [user];
+  List<User> get props => [user];
 }
 
 final class RecoverAccountFailureState extends RecoverAccountState {

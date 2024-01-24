@@ -23,10 +23,10 @@ final class VerifyCodeLoadingResendCodeState extends VerifyCodeState {
 }
 
 final class VerifyCodeSuccessState extends VerifyCodeState {
-  final AuthUserEntity user;
+  final User user;
   const VerifyCodeSuccessState(this.user);
   @override
-  List<AuthUserEntity> get props => [user];
+  List<User> get props => [user];
 }
 
 final class VerifyCodeFailureState extends VerifyCodeState {

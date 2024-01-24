@@ -12,7 +12,6 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../data/models/app_user/user.dart';
-import '../../../domain/entities/auth_user_entity.dart';
 import '../../../domain/entities/login_entity.dart';
 import '../../../domain/usecases/login_use_case.dart';
 import '../../../domain/usecases/social_login_use_case.dart';

@@ -24,10 +24,10 @@ final class LoginLoadingState extends LoginState {
 }
 
 final class LoginSuccessState extends LoginState {
-  final AuthUserEntity user;
+  final User user;
   const LoginSuccessState(this.user);
   @override
-  List<AuthUserEntity> get props => [user];
+  List<User> get props => [user];
 }
 
 final class LoginFailureState extends LoginState {

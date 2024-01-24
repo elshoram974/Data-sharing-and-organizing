@@ -24,10 +24,10 @@ final class SignUpLoadingState extends SignUpState {
 }
 
 final class SignUpSuccessState extends SignUpState {
-  final AuthUserEntity user;
+  final User user;
   const SignUpSuccessState(this.user);
   @override
-  List<AuthUserEntity> get props => [user];
+  List<User> get props => [user];
 }
 
 final class SignUpFailureState extends SignUpState {
