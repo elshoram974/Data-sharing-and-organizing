@@ -6,6 +6,8 @@ import '../entities/login_entity.dart';
 
 abstract class AuthRepositories {
   Future<Status<User>> login(LoginUserEntity user);
+  Future<Status<User>> loginWithGoogle(LoginUserEntity user);
+  Future<Status<User>> loginWithFacebook(LoginUserEntity user);
   Future<Status<int>> logOut();
   Status<bool> isLoggedIn();
   Future<Status<User>> signUp(AuthUserEntity user);
