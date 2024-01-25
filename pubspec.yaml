@@ -73,6 +73,9 @@ dependencies:
   flutter_facebook_auth: ^6.0.4
   firebase_auth: ^4.16.0
 
+  # * Splash screen
+  flutter_native_splash: ^2.3.9
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
