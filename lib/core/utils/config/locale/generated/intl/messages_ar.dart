@@ -109,6 +109,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "signUp": MessageLookupByLibrary.simpleMessage("التسجيل"),
         "stayHere": MessageLookupByLibrary.simpleMessage("ابق هنا"),
         "system": MessageLookupByLibrary.simpleMessage("النظام"),
+        "thePasswordIsVeryWeak": MessageLookupByLibrary.simpleMessage(
+            "كلمة المرور ضعيفة جدًا. يرجى استخدام كلمة مرور أقوى."),
         "thereIsAnErrorTryAgainLater": MessageLookupByLibrary.simpleMessage(
             "هناك مشكلة في الخادم. حاول مرة أخرى لاحقًا."),
         "thereIsProblemWithServerTryAgainLater":
@@ -117,6 +119,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "thisAccountExistWithAnotherProvider":
             MessageLookupByLibrary.simpleMessage(
                 "هذا الحساب موجود ولكن مع مزود خدمة آخر."),
+        "thisEmailAlreadyExists": MessageLookupByLibrary.simpleMessage(
+            "هذا البريد الإلكتروني مستخدم بالفعل."),
         "uHaveToVerifyAccountFirst":
             MessageLookupByLibrary.simpleMessage("يجب التحقق من حسابك أولاً"),
         "userNotFound": MessageLookupByLibrary.simpleMessage(

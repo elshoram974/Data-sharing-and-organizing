@@ -68,5 +68,7 @@
     "verifyIt": "تحقق منه",
     "areYouSureYouWantToReturnBack": "هل أنت متأكد أنك تريد العودة؟",
     "orConnectUsing": "أو قم بتسجيل الدخول باستخدام",
-    "processHasBeenCancelled": "تم إلغاء العملية"
+    "processHasBeenCancelled": "تم إلغاء العملية",
+    "thisEmailAlreadyExists": "هذا البريد الإلكتروني مستخدم بالفعل.",
+    "thePasswordIsVeryWeak": "كلمة المرور ضعيفة جدًا. يرجى استخدام كلمة مرور أقوى."
 }

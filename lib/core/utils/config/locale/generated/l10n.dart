@@ -741,6 +741,26 @@ class S {
       args: [],
     );
   }
+
+  /// `This email is already in use.`
+  String get thisEmailAlreadyExists {
+    return Intl.message(
+      'This email is already in use.',
+      name: 'thisEmailAlreadyExists',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `The password is very weak. Please use a stronger password.`
+  String get thePasswordIsVeryWeak {
+    return Intl.message(
+      'The password is very weak. Please use a stronger password.',
+      name: 'thePasswordIsVeryWeak',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

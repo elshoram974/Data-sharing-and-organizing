@@ -68,5 +68,7 @@
     "verifyIt": "Verify it",
     "areYouSureYouWantToReturnBack": "Are you sure you want to return back",
     "orConnectUsing": "Or connect using",
-    "processHasBeenCancelled": "The process has been cancelled"
+    "processHasBeenCancelled": "The process has been cancelled",
+    "thisEmailAlreadyExists": "This email is already in use.",
+    "thePasswordIsVeryWeak": "The password is very weak. Please use a stronger password."
 }

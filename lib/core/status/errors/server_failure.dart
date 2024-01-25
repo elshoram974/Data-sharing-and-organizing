@@ -61,6 +61,10 @@ class ServerFailure<T> extends Failure<T> {
         return ServerFailure(S.current.emailYouEnteredDoesNotExist);
       case 'User created by another provider':
         return ServerFailure(S.current.thisAccountExistWithAnotherProvider);
+      case 'This email already exists':
+        return ServerFailure(S.current.thisEmailAlreadyExists);
+      case 'The password is very weak':
+        return ServerFailure(S.current.thePasswordIsVeryWeak);
       default:
         return ServerFailure(errorMessage);
     }

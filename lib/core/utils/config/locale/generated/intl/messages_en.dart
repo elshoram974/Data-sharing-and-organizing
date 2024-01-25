@@ -108,6 +108,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "signUp": MessageLookupByLibrary.simpleMessage("Sign up"),
         "stayHere": MessageLookupByLibrary.simpleMessage("Stay here"),
         "system": MessageLookupByLibrary.simpleMessage("System"),
+        "thePasswordIsVeryWeak": MessageLookupByLibrary.simpleMessage(
+            "The password is very weak. Please use a stronger password."),
         "thereIsAnErrorTryAgainLater": MessageLookupByLibrary.simpleMessage(
             "There is a problem with the server. Try again later."),
         "thereIsProblemWithServerTryAgainLater":
@@ -116,6 +118,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "thisAccountExistWithAnotherProvider":
             MessageLookupByLibrary.simpleMessage(
                 "this account is exist but with another provider."),
+        "thisEmailAlreadyExists": MessageLookupByLibrary.simpleMessage(
+            "This email is already in use."),
         "uHaveToVerifyAccountFirst": MessageLookupByLibrary.simpleMessage(
             "You have to verify your account first"),
         "userNotFound": MessageLookupByLibrary.simpleMessage(
