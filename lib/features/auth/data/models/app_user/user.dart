@@ -44,7 +44,7 @@ class User extends AuthUserEntity {
       userLastName: data['user_last_name'] as String,
       userPassword: data['user_password'] as String,
       userProvider: UserProvider.fromString(data['user_provider'] as String?),
-      userIsVerified: data['user_is_verified'] == 1 ? true : false,
+      userIsVerified: data['user_is_verified'] as bool,
       accountLastlogin: DateTime.tryParse(data['user_lastlogin'] as String),
       accountCreatedDatetime:
           DateTime.tryParse(data['user_createdat'] as String),
