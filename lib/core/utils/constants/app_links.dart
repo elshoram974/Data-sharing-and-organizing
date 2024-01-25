@@ -8,6 +8,7 @@ abstract final class AppLinks {
   // * authorization links
   static const String _auth = '$_baseLink/auth/users';
   static const String login = '$_auth/login_user.php';
+  static const String loginByProvider = '$_auth/login_provider.php';
   static const String signUp = '$_auth/sign_up_user.php';
   static const String requestToSendCode = '$_auth/request_to_send_code.php';
   static const String verifyCode = '$_auth/verify_code.php';
