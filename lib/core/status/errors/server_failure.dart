@@ -41,14 +41,12 @@ class ServerFailure<T> extends Failure<T> {
 
   factory ServerFailure.fromBadResponse(Response response) {
     int? statusCode = response.statusCode;
-    if (statusCode == 400 || statusCode == 401 || statusCode == 403) {
-      return loginValid(jsonDecode(response.body)['message']);
-    } else if (statusCode == 404) {
+    if (statusCode == 404) {
       return ServerFailure(S.current.yourRequestNotFoundTryAgainLater);
     } else if (statusCode == 500) {
       return ServerFailure(S.current.thereIsProblemWithServerTryAgainLater);
     }
-    return ServerFailure(S.current.thereIsAnErrorTryAgainLater);
+    return loginValid(jsonDecode(response.body)['message']);
   }
 
   static ServerFailure<T> loginValid<T>(String errorMessage) {
