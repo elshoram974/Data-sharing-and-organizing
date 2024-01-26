@@ -10,6 +10,7 @@ abstract final class AppLinks {
   static const String login = '$_auth/login_user.php';
   static const String loginByProvider = '$_auth/login_provider.php';
   static const String signUp = '$_auth/sign_up_user.php';
-  static const String requestToSendCode = '$_auth/request_to_send_code.php';
-  static const String verifyCode = '$_auth/verify_code.php';
+  static const String sendVerifyCode = '$_auth/send_verify_code.php';
+  static const String checkVerifyCode = '$_auth/check_verify_code.php';
+  static const String newPassword = '$_auth/new_password.php';
 }
