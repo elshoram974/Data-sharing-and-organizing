@@ -4,6 +4,7 @@ import 'package:data_sharing_organizing/core/status/errors/failure.dart';
 import 'package:data_sharing_organizing/core/status/status.dart';
 import 'package:data_sharing_organizing/core/status/success/success.dart';
 import 'package:data_sharing_organizing/core/utils/config/routes/routes.dart';
+import 'package:data_sharing_organizing/core/utils/enums/verification_type_enum.dart';
 import 'package:data_sharing_organizing/core/utils/functions/show_my_dialog.dart';
 import 'package:data_sharing_organizing/features/auth/domain/usecases/request_to_send_code_use_case.dart';
 import 'package:equatable/equatable.dart';
@@ -17,28 +18,36 @@ import '../../../domain/usecases/verify_code_use_case.dart';
 part 'verify_code_state.dart';
 
 class VerifyCodeCubit extends Cubit<VerifyCodeState> {
-  final int userId;
+  final User user;
+  final String nextRoute;
   final VerifyCodeUseCase verifyCodeUseCase;
   final RequestToSendCodeUseCase sendCodeUseCase;
 
   VerifyCodeCubit({
-    required this.userId,
+    required this.user,
+    required this.nextRoute,
     required this.verifyCodeUseCase,
     required this.sendCodeUseCase,
   }) : super(const VerifyCodeInitial()) {
     _start();
   }
 
+  VerificationType verificationFromNextRoute() {
+    if (nextRoute == AppRoute.home) return VerificationType.createEmail;
+    return VerificationType.forgotPassword;
+  }
+
   // * verify Code----------------------------
-  int code = 0;
-  void verifyCode(String nextRoute) async {
-    if (code.toString().length < 6) return;
+  String code = '';
+  void verifyCode() async {
+    if (code.length < 6) return;
     EasyLoading.show(dismissOnTap: false);
 
     emit(const VerifyCodeLoadingState());
     final Status<User> verifyStatus = await verifyCodeUseCase((
-      id: userId,
+      id: user.userId,
       code: code,
+      verification: verificationFromNextRoute(),
     ));
     await EasyLoading.dismiss();
     if (verifyStatus is Success<User>) {
@@ -71,7 +80,10 @@ class VerifyCodeCubit extends Cubit<VerifyCodeState> {
   void resendCode() async {
     emit(const VerifyCodeLoadingState());
     EasyLoading.show(dismissOnTap: false);
-    final Status<User> status = await sendCodeUseCase.call(userId);
+    final Status<User> status = await sendCodeUseCase.call((
+      email: user.email,
+      verification: verificationFromNextRoute(),
+    ));
     await EasyLoading.dismiss();
     if (status is Success<User>) {
       _start();

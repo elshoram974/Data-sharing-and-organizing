@@ -8,8 +8,7 @@ import 'package:pinput/pinput.dart';
 import '../../cubit/verify_code_cubit/verify_code_cubit.dart';
 
 class CodeFields extends StatelessWidget {
-  const CodeFields({super.key, required this.nextRoute});
-  final String nextRoute;
+  const CodeFields({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -19,9 +18,9 @@ class CodeFields extends StatelessWidget {
       child: Directionality(
         textDirection: TextDirection.ltr,
         child: Pinput(
-          onChanged: (value) => cubit.code = int.tryParse(value) ?? 0,
-          onSubmitted: (val) => cubit.verifyCode(nextRoute),
-          onCompleted: (val) => cubit.verifyCode(nextRoute),
+          onChanged: (value) => cubit.code = value,
+          onSubmitted: (val) => cubit.verifyCode(),
+          onCompleted: (val) => cubit.verifyCode(),
           length: 6,
           autofocus: true,
           inputFormatters: [FilteringTextInputFormatter.digitsOnly],

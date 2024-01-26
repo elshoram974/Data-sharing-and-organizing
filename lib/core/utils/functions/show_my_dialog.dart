@@ -1,3 +1,4 @@
+import 'package:data_sharing_organizing/features/auth/data/models/app_user/user.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -67,7 +68,7 @@ abstract final class ShowMyDialog {
     );
   }
 
-  static Future<T?> verifyDialog<T>(int userId) {
+  static Future<T?> verifyDialog<T>(User user) {
     return showDialog<T>(
       context: AppRoute.key.currentContext!,
       builder: (context) {
@@ -80,7 +81,7 @@ abstract final class ShowMyDialog {
             AppRoute.key.currentContext?.pop();
             AppRoute.key.currentContext?.push(
               AppRoute.codeVerification,
-              extra: {'userId': userId, 'nextRoute': AppRoute.home},
+              extra: {'userId': user, 'nextRoute': AppRoute.home},
             );
           },
         );

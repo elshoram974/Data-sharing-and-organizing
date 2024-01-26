@@ -75,7 +75,7 @@ class SignUpCubit extends Cubit<SignUpState> {
   void _successStatus(User data) {
     emit(SignUpSuccessState(data));
 
-    ShowMyDialog.verifyDialog(data.userId);
+    ShowMyDialog.verifyDialog(data);
 
     debugPrint('user: ${data.email}');
     TextInput.finishAutofillContext();

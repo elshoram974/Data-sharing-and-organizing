@@ -6,9 +6,7 @@ import '../auth_filled_button.dart';
 import 'resend_code_button/resend_code_button.dart';
 
 class CodeVerificationButtons extends StatelessWidget {
-  final String nextRoute;
-
-  const CodeVerificationButtons(this.nextRoute, {super.key});
+  const CodeVerificationButtons({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +16,7 @@ class CodeVerificationButtons extends StatelessWidget {
         const SizedBox(height: 53),
         AuthFilledButton(
           text: S.of(context).verify,
-          onPressed: () => ProviderDependency.verificationCode.verifyCode(nextRoute),
+          onPressed: ProviderDependency.verificationCode.verifyCode,
         ),
         const SizedBox(height: 8),
         const ResendCodeButton(),

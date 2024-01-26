@@ -1,4 +1,5 @@
 import 'package:data_sharing_organizing/core/utils/services/dependency/locator.dart';
+import 'package:data_sharing_organizing/features/auth/data/models/app_user/user.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -9,9 +10,9 @@ import '../widgets/code_verification/code_verification_body.dart';
 
 class CodeVerificationScreen extends StatelessWidget {
   final String nextRoute;
-  final int userId;
+  final User user;
   const CodeVerificationScreen({
-    required this.userId,
+    required this.user,
     required this.nextRoute,
     super.key,
   });
@@ -20,11 +21,12 @@ class CodeVerificationScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => VerifyCodeCubit(
-        userId: userId,
+        user: user,
+        nextRoute: nextRoute,
         sendCodeUseCase: sl.get<RequestToSendCodeUseCase>(),
         verifyCodeUseCase: sl.get<VerifyCodeUseCase>(),
       ),
-      child: Scaffold(body: CodeVerificationBody(nextRoute)),
+      child: const Scaffold(body: CodeVerificationBody()),
     );
   }
 }

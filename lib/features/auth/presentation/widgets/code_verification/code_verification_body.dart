@@ -9,9 +9,7 @@ import 'code_fields.dart';
 import 'code_verification_buttons.dart';
 
 class CodeVerificationBody extends StatelessWidget {
-  final String nextRoute;
-
-  const CodeVerificationBody(this.nextRoute, {super.key});
+  const CodeVerificationBody({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -21,9 +19,9 @@ class CodeVerificationBody extends StatelessWidget {
       introHeader: S.of(context).codeVerification,
       introBody: S.of(context).enterDigitCodeThatHasBeenSentToYourEmail,
       onWillPop: ProviderDependency.verificationCode.onWillPop,
-      children: [
-        CodeFields(nextRoute: nextRoute),
-        CodeVerificationButtons(nextRoute),
+      children: const [
+        CodeFields(),
+        CodeVerificationButtons(),
       ],
     );
   }

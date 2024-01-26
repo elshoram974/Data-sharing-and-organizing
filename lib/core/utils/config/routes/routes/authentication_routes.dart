@@ -45,7 +45,7 @@ abstract final class AuthRoutes {
             offset: const Offset(-1, 0),
             context: context,
             state: state,
-            child: AuthSettingsScreen(previousRouteName: state.extra as String ),
+            child: AuthSettingsScreen(previousRouteName: state.extra as String),
           ),
         ),
         GoRoute(
@@ -75,7 +75,7 @@ abstract final class AuthRoutes {
                 context: context,
                 state: state,
                 child: CodeVerificationScreen(
-                  userId: data['userId'],
+                  user: data['user'],
                   nextRoute: data['nextRoute'],
                 ),
               );
