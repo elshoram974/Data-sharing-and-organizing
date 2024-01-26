@@ -1,6 +1,7 @@
 import 'package:data_sharing_organizing/core/utils/config/locale/generated/l10n.dart';
 import 'package:data_sharing_organizing/core/utils/constants/app_links.dart';
 import 'package:data_sharing_organizing/core/utils/enums/user_provider_enum.dart';
+import 'package:data_sharing_organizing/core/utils/enums/verification_type_enum.dart';
 import 'package:data_sharing_organizing/core/utils/services/api_services.dart';
 import 'package:data_sharing_organizing/core/utils/services/dependency/locator.dart';
 import 'package:data_sharing_organizing/core/utils/services/social_services.dart';
@@ -14,9 +15,8 @@ abstract class AuthRemoteDataSource {
   Future<User> login(AuthUserEntity user);
   Future<User> socialLogin(UserProvider provider);
   Future<User> signUp(AuthUserEntity user);
-  Future<User> requestToRecoverAccount(String email);
-  Future<User> requestToSendCode(int id);
-  Future<User> verifyCode(int id, int code);
+  Future<User> requestToSendCode(String email, VerificationType verification);
+  Future<User> verifyCode(int id, String code, VerificationType verification);
   Future<User> newPassword(int id, String newPass);
 }
 
@@ -51,15 +51,6 @@ class AuthRemoteDataSourceImp extends AuthRemoteDataSource {
   }
 
   @override
-  Future<User> requestToRecoverAccount(String email) async {
-    Map<String, dynamic> response = await service.post(
-      'requestToRecoverAccount',
-      {'email': email},
-    );
-    return AppUser.fromMap(response).user!;
-  }
-
-  @override
   Future<User> signUp(AuthUserEntity user) async {
     Map<String, dynamic> response = await service.post(
       AppLinks.signUp,
@@ -74,19 +65,28 @@ class AuthRemoteDataSourceImp extends AuthRemoteDataSource {
   }
 
   @override
-  Future<User> requestToSendCode(int id) async {
+  Future<User> requestToSendCode(
+      String email, VerificationType verification) async {
     Map<String, dynamic> response = await service.post(
-      AppLinks.requestToSendCode,
-      {'user_id': '$id'},
+      AppLinks.sendVerifyCode,
+      {'email': email, 'verificationType': verification.inString},
     );
     return AppUser.fromMap(response).user!;
   }
 
   @override
-  Future<User> verifyCode(int id, int code) async {
+  Future<User> verifyCode(
+    int id,
+    String code,
+    VerificationType verification,
+  ) async {
     Map<String, dynamic> response = await service.post(
-      'AppLinks.verifyCode',
-      {'user_id': '$id', 'code': '$code'},
+      AppLinks.checkVerifyCode,
+      {
+        'userId': '$id',
+        'code': code,
+        'verificationType': verification.inString,
+      },
     );
     return AppUser.fromMap(response).user!;
   }
@@ -94,8 +94,8 @@ class AuthRemoteDataSourceImp extends AuthRemoteDataSource {
   @override
   Future<User> newPassword(int id, String newPass) async {
     Map<String, dynamic> response = await service.post(
-      'AppLinks.newPassword',
-      {'user_id': '$id', 'new_password': newPass},
+      AppLinks.newPassword,
+      {'userId': '$id', 'newPassword': newPass},
     );
     return AppUser.fromMap(response).user!;
   }
