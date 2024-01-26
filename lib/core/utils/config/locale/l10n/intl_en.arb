@@ -69,5 +69,9 @@
     "orConnectUsing": "Or connect using",
     "processHasBeenCancelled": "The process has been cancelled",
     "thisEmailAlreadyExists": "This email is already in use.",
-    "thePasswordIsVeryWeak": "The password is very weak. Please use a stronger password."
+    "thePasswordIsVeryWeak": "The password is very weak. Please use a stronger password.",
+    "youCanNotUseSamePreviousPassword": "You can't use the same previous password.",
+    "invalidVerificationCode": "Invalid verification code",
+    "theVerificationCodeHasExpiredWeSentAnotherCode": "The verification code has expired. We have sent another code.",
+    "invalidVerificationType": "Invalid verification type."
 }

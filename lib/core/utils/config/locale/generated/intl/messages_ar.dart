@@ -75,6 +75,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "ifYouReturnNowYouWillLoseAllData":
             MessageLookupByLibrary.simpleMessage(
                 "إذا قمت بالعودة الآن، ستفقد كل البيانات!"),
+        "invalidVerificationCode":
+            MessageLookupByLibrary.simpleMessage("رمز التحقيق غير صالح"),
+        "invalidVerificationType":
+            MessageLookupByLibrary.simpleMessage("نوع التحقق غير صالح"),
         "language": MessageLookupByLibrary.simpleMessage("اللغة"),
         "login": MessageLookupByLibrary.simpleMessage("تسجيل الدخول"),
         "name": MessageLookupByLibrary.simpleMessage("الاسم"),
@@ -111,6 +115,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "system": MessageLookupByLibrary.simpleMessage("النظام"),
         "thePasswordIsVeryWeak": MessageLookupByLibrary.simpleMessage(
             "كلمة المرور ضعيفة جدًا. يرجى استخدام كلمة مرور أقوى."),
+        "theVerificationCodeHasExpiredWeSentAnotherCode":
+            MessageLookupByLibrary.simpleMessage(
+                "انتهت صلاحية رمز التحقق. لقد قمنا بإرسال رمز آخر."),
         "thereIsProblemWithServerTryAgainLater":
             MessageLookupByLibrary.simpleMessage(
                 "هناك مشكلة في الخادم. حاول مرة أخرى لاحقًا."),
@@ -131,6 +138,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "welcomeBack": MessageLookupByLibrary.simpleMessage("مرحبًا بعودتك!"),
         "wrongPassword": MessageLookupByLibrary.simpleMessage(
             "تم تقديم كلمة مرور خاطئة لهذا المستخدم."),
+        "youCanNotUseSamePreviousPassword":
+            MessageLookupByLibrary.simpleMessage(
+                "لا يمكنك استخدام نفس كلمة المرور السابقة."),
         "youHaveToConfirmYourAccount":
             MessageLookupByLibrary.simpleMessage("يجب تأكيد حسابك"),
         "yourNewPasswordMustBeDifferentFromPreviously":

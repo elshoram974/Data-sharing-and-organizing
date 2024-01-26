@@ -69,5 +69,9 @@
     "orConnectUsing": "أو قم بتسجيل الدخول باستخدام",
     "processHasBeenCancelled": "تم إلغاء العملية",
     "thisEmailAlreadyExists": "هذا البريد الإلكتروني مستخدم بالفعل.",
-    "thePasswordIsVeryWeak": "كلمة المرور ضعيفة جدًا. يرجى استخدام كلمة مرور أقوى."
+    "thePasswordIsVeryWeak": "كلمة المرور ضعيفة جدًا. يرجى استخدام كلمة مرور أقوى.",
+    "youCanNotUseSamePreviousPassword": "لا يمكنك استخدام نفس كلمة المرور السابقة.",
+    "invalidVerificationCode": "رمز التحقيق غير صالح",
+    "theVerificationCodeHasExpiredWeSentAnotherCode": "انتهت صلاحية رمز التحقق. لقد قمنا بإرسال رمز آخر.",
+    "invalidVerificationType": "نوع التحقق غير صالح"
 }

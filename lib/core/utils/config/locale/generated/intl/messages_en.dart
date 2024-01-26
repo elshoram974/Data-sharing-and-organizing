@@ -74,6 +74,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "ifYouReturnNowYouWillLoseAllData":
             MessageLookupByLibrary.simpleMessage(
                 "If you return now, you will lose all data!"),
+        "invalidVerificationCode":
+            MessageLookupByLibrary.simpleMessage("Invalid verification code"),
+        "invalidVerificationType":
+            MessageLookupByLibrary.simpleMessage("Invalid verification type."),
         "language": MessageLookupByLibrary.simpleMessage("Language"),
         "login": MessageLookupByLibrary.simpleMessage("Login"),
         "name": MessageLookupByLibrary.simpleMessage("Name"),
@@ -110,6 +114,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "system": MessageLookupByLibrary.simpleMessage("System"),
         "thePasswordIsVeryWeak": MessageLookupByLibrary.simpleMessage(
             "The password is very weak. Please use a stronger password."),
+        "theVerificationCodeHasExpiredWeSentAnotherCode":
+            MessageLookupByLibrary.simpleMessage(
+                "The verification code has expired. We have sent another code."),
         "thereIsProblemWithServerTryAgainLater":
             MessageLookupByLibrary.simpleMessage(
                 "There is a problem with the server. Try again later."),
@@ -130,6 +137,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "welcomeBack": MessageLookupByLibrary.simpleMessage("Welcome back!"),
         "wrongPassword": MessageLookupByLibrary.simpleMessage(
             "Wrong password provided for that user."),
+        "youCanNotUseSamePreviousPassword":
+            MessageLookupByLibrary.simpleMessage(
+                "You can\'t use the same previous password."),
         "youHaveToConfirmYourAccount": MessageLookupByLibrary.simpleMessage(
             "You have to confirm your account"),
         "yourNewPasswordMustBeDifferentFromPreviously":

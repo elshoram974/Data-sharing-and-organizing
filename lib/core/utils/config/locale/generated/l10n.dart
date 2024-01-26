@@ -751,6 +751,46 @@ class S {
       args: [],
     );
   }
+
+  /// `You can't use the same previous password.`
+  String get youCanNotUseSamePreviousPassword {
+    return Intl.message(
+      'You can\'t use the same previous password.',
+      name: 'youCanNotUseSamePreviousPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Invalid verification code`
+  String get invalidVerificationCode {
+    return Intl.message(
+      'Invalid verification code',
+      name: 'invalidVerificationCode',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `The verification code has expired. We have sent another code.`
+  String get theVerificationCodeHasExpiredWeSentAnotherCode {
+    return Intl.message(
+      'The verification code has expired. We have sent another code.',
+      name: 'theVerificationCodeHasExpiredWeSentAnotherCode',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Invalid verification type.`
+  String get invalidVerificationType {
+    return Intl.message(
+      'Invalid verification type.',
+      name: 'invalidVerificationType',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

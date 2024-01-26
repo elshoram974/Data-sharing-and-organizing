@@ -55,7 +55,7 @@ class ServerFailure<T> extends Failure<T> {
         return ServerFailure(S.current.youHaveToConfirmYourAccount);
       case 'Error in password':
         return ServerFailure(S.current.errorInPassword);
-      case 'The email you entered does not exist':
+      case 'The email you entered does not exist' || 'The userId you entered does not exist':
         return ServerFailure(S.current.emailYouEnteredDoesNotExist);
       case 'User created by another provider':
         return ServerFailure(S.current.thisAccountExistWithAnotherProvider);
@@ -63,6 +63,14 @@ class ServerFailure<T> extends Failure<T> {
         return ServerFailure(S.current.thisEmailAlreadyExists);
       case 'The password is very weak':
         return ServerFailure(S.current.thePasswordIsVeryWeak);
+      case 'You can\'t use the same previous password':
+        return ServerFailure(S.current.youCanNotUseSamePreviousPassword);
+      case 'Invalid verification code':
+        return ServerFailure(S.current.invalidVerificationCode);
+      case 'The verification code has expired. we sent another code':
+        return ServerFailure(S.current.theVerificationCodeHasExpiredWeSentAnotherCode);
+      case 'Invalid verification type.':
+        return ServerFailure(S.current.invalidVerificationType);
       default:
         return ServerFailure(errorMessage);
     }
