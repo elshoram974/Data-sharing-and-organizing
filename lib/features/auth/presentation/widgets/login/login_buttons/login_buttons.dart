@@ -21,12 +21,12 @@ class LoginButtons extends StatelessWidget {
         const SizedBox(height: 25),
         const RememberMeWidget(),
         const LoginButton(),
-        const SocialAuthentication(),
         LoginOutlinedButton(
           activeText: S.of(context).signUp,
           text: S.of(context).doNotHaveAnAccount,
           onPressed: () => context.push(AppRoute.signUp),
         ),
+        const SocialAuthentication(),
       ],
     );
   }
