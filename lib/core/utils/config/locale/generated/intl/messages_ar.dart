@@ -128,6 +128,11 @@ class MessageLookup extends MessageLookupByLibrary {
             "هذا البريد الإلكتروني مستخدم بالفعل."),
         "uHaveToVerifyAccountFirst":
             MessageLookupByLibrary.simpleMessage("يجب التحقق من حسابك أولاً"),
+        "userNotEmailPasswordToNewPass": MessageLookupByLibrary.simpleMessage(
+            "المستخدم ليس عبارة عن حساب بالبريد الإلكتروني وكلمة مرور لتغيير كلمة المرور"),
+        "userNotEmailPasswordToSendVerificationCode":
+            MessageLookupByLibrary.simpleMessage(
+                "هذا المستخدم ليس مزودًا ببريد إلكتروني وكلمة مرور لإرسال رمز التحقق."),
         "userNotFound": MessageLookupByLibrary.simpleMessage(
             "لا يوجد مستخدم لهذا البريد الإلكتروني."),
         "verify": MessageLookupByLibrary.simpleMessage("التحقق"),

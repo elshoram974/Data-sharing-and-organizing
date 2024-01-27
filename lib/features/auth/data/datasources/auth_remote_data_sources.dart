@@ -45,7 +45,12 @@ class AuthRemoteDataSourceImp extends AuthRemoteDataSource {
     if (user == null) throw S.current.processHasBeenCancelled;
     Map<String, dynamic> response = await service.post(
       AppLinks.loginByProvider,
-      {'name': user.name, 'email': user.email, 'provider': provider.inString},
+      {
+        'name': user.name,
+        'email': user.email,
+        'password': user.password,
+        'provider': provider.inString,
+      },
     );
     return AppUser.fromMap(response).user!;
   }

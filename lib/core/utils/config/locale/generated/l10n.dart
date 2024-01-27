@@ -791,6 +791,26 @@ class S {
       args: [],
     );
   }
+
+  /// `User is not email_password to make new pass`
+  String get userNotEmailPasswordToNewPass {
+    return Intl.message(
+      'User is not email_password to make new pass',
+      name: 'userNotEmailPasswordToNewPass',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `This user is not email and password provider to send verification code.`
+  String get userNotEmailPasswordToSendVerificationCode {
+    return Intl.message(
+      'This user is not email and password provider to send verification code.',
+      name: 'userNotEmailPasswordToSendVerificationCode',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

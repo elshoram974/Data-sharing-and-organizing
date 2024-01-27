@@ -73,5 +73,7 @@
     "youCanNotUseSamePreviousPassword": "You can't use the same previous password.",
     "invalidVerificationCode": "Invalid verification code",
     "theVerificationCodeHasExpiredWeSentAnotherCode": "The verification code has expired. We have sent another code.",
-    "invalidVerificationType": "Invalid verification type."
+    "invalidVerificationType": "Invalid verification type.",
+    "userNotEmailPasswordToNewPass": "User is not email_password to make new pass",
+    "userNotEmailPasswordToSendVerificationCode": "This user is not email and password provider to send verification code."
 }

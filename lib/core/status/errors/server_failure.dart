@@ -71,6 +71,10 @@ class ServerFailure<T> extends Failure<T> {
         return ServerFailure(S.current.theVerificationCodeHasExpiredWeSentAnotherCode);
       case 'Invalid verification type.':
         return ServerFailure(S.current.invalidVerificationType);
+      case 'User is not email_password to make new pass':
+        return ServerFailure(S.current.userNotEmailPasswordToNewPass);
+      case 'User is not email_password to send verification code.':
+        return ServerFailure(S.current.userNotEmailPasswordToSendVerificationCode);
       default:
         return ServerFailure(errorMessage);
     }

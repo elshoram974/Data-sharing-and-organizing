@@ -127,6 +127,11 @@ class MessageLookup extends MessageLookupByLibrary {
             "This email is already in use."),
         "uHaveToVerifyAccountFirst": MessageLookupByLibrary.simpleMessage(
             "You have to verify your account first"),
+        "userNotEmailPasswordToNewPass": MessageLookupByLibrary.simpleMessage(
+            "User is not email_password to make new pass"),
+        "userNotEmailPasswordToSendVerificationCode":
+            MessageLookupByLibrary.simpleMessage(
+                "This user is not email and password provider to send verification code."),
         "userNotFound": MessageLookupByLibrary.simpleMessage(
             "No user found for that email."),
         "verify": MessageLookupByLibrary.simpleMessage("Verify"),

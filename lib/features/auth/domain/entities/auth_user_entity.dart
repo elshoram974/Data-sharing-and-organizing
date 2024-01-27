@@ -47,7 +47,7 @@ class AuthUserEntity extends Equatable {
       id: 0,
       name: user.displayName ?? '',
       email: user.email ?? '',
-      password: '',
+      password: user.uid,
       userRole: UserRole.personalUser,
     );
   }
