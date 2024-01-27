@@ -1,3 +1,4 @@
+import 'package:data_sharing_organizing/core/utils/constants/app_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -15,8 +16,13 @@ class ProvidersButtons extends StatelessWidget {
           const Expanded(child: SizedBox()),
           InkWell(
             onTap: e.onTap,
-            child: SizedBox.square(
-              dimension: 56,
+            child: Container(
+              width: 56,
+              height: 56,
+              padding: EdgeInsets.all(e.padding),
+              decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(AppConst.borderRadius)),
               child: SvgPicture.asset(
                 e.assetName,
                 fit: BoxFit.cover,
