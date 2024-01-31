@@ -12,7 +12,7 @@ import '../my_custom_transition.dart';
 abstract final class AuthRoutes {
   const AuthRoutes();
 
-  static const String login = '/loginScreen';
+  static const String login = '/login';
 
   static const String _authSettings = 'authSettings';
   static const String authSettings = '$login/$_authSettings';
