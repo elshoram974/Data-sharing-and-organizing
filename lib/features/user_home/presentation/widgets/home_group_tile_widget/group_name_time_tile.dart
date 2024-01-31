@@ -1,0 +1,33 @@
+import 'package:data_sharing_organizing/core/utils/constants/app_color.dart';
+import 'package:data_sharing_organizing/core/utils/styles.dart';
+import 'package:flutter/material.dart';
+
+import '../../../domain/entities/group_home_entity.dart';
+
+class GroupNameAndTimeTile extends StatelessWidget {
+  const GroupNameAndTimeTile({super.key, required this.groupHomeEntity});
+
+  final GroupHomeEntity groupHomeEntity;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Expanded(
+          child: Text(
+            groupHomeEntity.groupName,
+            style: AppStyle.styleBoldInika24.copyWith(fontSize: 16),
+          ),
+        ),
+        Text(
+          '${groupHomeEntity.lastMessageTime.hour}',
+          style: TextStyle(
+            color: groupHomeEntity.isUnread ? AppColor.active : AppColor.gray,
+            fontSize: 10,
+          ),
+        ),
+      ],
+    );
+  }
+}
