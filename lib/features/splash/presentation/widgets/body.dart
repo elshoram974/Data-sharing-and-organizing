@@ -1,9 +1,9 @@
 import 'package:data_sharing_organizing/core/utils/config/locale/generated/l10n.dart';
 import 'package:data_sharing_organizing/core/utils/config/routes/routes.dart';
 import 'package:data_sharing_organizing/core/utils/enums/user_role/user_role_enum.dart';
+import 'package:data_sharing_organizing/core/utils/services/dependency/provider_dependency.dart';
 import 'package:data_sharing_organizing/features/splash/presentation/cubit/config_cubit.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 import 'animated_logo.dart';
@@ -20,12 +20,11 @@ class _SplashBodyState extends State<SplashBody>
   late final AnimationController _controller;
   late final Animation<double> _animation;
 
-  late final ConfigCubit cubit;
+  final ConfigCubit cubit = ProviderDependency.config;
 
   @override
   void initState() {
     super.initState();
-    cubit = BlocProvider.of<ConfigCubit>(context);
     startScaleAnimation();
     navigateHomeScreen();
   }

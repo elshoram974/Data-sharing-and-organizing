@@ -42,6 +42,7 @@ class ConfigCubit extends Cubit<ConfigState> {
       (themeMode == ThemeMode.system && AppTheme.isDarkMode());
 
   bool get isLoggedIn => currentUser != null;
+  bool get isArabic => appLocale.languageCode == 'ar';
 
   AuthUserEntity? get currentUser {
     Status<AuthUserEntity?> status = getCurrentUserUseCase();

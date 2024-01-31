@@ -1,8 +1,8 @@
 import 'package:data_sharing_organizing/core/utils/config/locale/class.dart';
 import 'package:data_sharing_organizing/core/utils/config/locale/generated/l10n.dart';
 import 'package:data_sharing_organizing/core/utils/constants/app_constants.dart';
+import 'package:data_sharing_organizing/core/utils/services/dependency/provider_dependency.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../../splash/presentation/cubit/config_cubit.dart';
@@ -12,7 +12,7 @@ class LanguagesDialogList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ConfigCubit cubit = BlocProvider.of<ConfigCubit>(context);
+    final ConfigCubit cubit = ProviderDependency.config;
 
     return SingleChildScrollView(
       child: Column(
