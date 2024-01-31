@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../../../features/splash/presentation/screen/splash_screen.dart';
 import 'routes/authentication_routes.dart';
+import 'routes/user_home_routes.dart';
 
 abstract class AppRoute {
   static GlobalKey<NavigatorState> key = GlobalKey<NavigatorState>();
@@ -18,7 +19,9 @@ abstract class AppRoute {
   static const String signUp = AuthRoutes.signUp;
   // * ------ End authorization screens ------ *//
 
-  static const String home = '/home';
+  // * user screens *//
+  static const String userHome = UserHomeRoutes.userHome;
+  // * ------ End user screens ------ *//
 
   static final GoRouter router = GoRouter(
     navigatorKey: key,
@@ -30,6 +33,7 @@ abstract class AppRoute {
         },
       ),
       AuthRoutes.call(),
+      UserHomeRoutes.call(),
     ],
   );
 }

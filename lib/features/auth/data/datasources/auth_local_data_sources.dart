@@ -8,7 +8,6 @@ abstract class AuthLocalDataSource {
   Future<int> saveUser(AuthUserEntity user);
   AuthUserEntity? getCurrentUser();
   Future<int> logOut();
-  bool isLoggedIn();
 }
 
 class AuthLocalDataSourceImp extends AuthLocalDataSource {
@@ -37,7 +36,4 @@ class AuthLocalDataSourceImp extends AuthLocalDataSource {
         Hive.box<AuthUserEntity>(AppStrings.userBox);
     return userBox.clear();
   }
-
-  @override
-  bool isLoggedIn() => getCurrentUser() != null;
 }

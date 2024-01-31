@@ -4,6 +4,7 @@ import 'package:data_sharing_organizing/core/status/errors/failure.dart';
 import 'package:data_sharing_organizing/core/status/status.dart';
 import 'package:data_sharing_organizing/core/status/success/success.dart';
 import 'package:data_sharing_organizing/core/utils/config/routes/routes.dart';
+import 'package:data_sharing_organizing/core/utils/enums/user_role/user_role_enum.dart';
 import 'package:data_sharing_organizing/core/utils/enums/verification_type_enum.dart';
 import 'package:data_sharing_organizing/core/utils/functions/show_my_dialog.dart';
 import 'package:data_sharing_organizing/features/auth/domain/usecases/request_to_send_code_use_case.dart';
@@ -33,7 +34,7 @@ class VerifyCodeCubit extends Cubit<VerifyCodeState> {
   }
 
   VerificationType verificationFromNextRoute() {
-    if (nextRoute == AppRoute.home) return VerificationType.createEmail;
+    if (nextRoute == AppRoute.userHome) return VerificationType.createEmail;
     return VerificationType.forgotPassword;
   }
 
@@ -62,8 +63,12 @@ class VerifyCodeCubit extends Cubit<VerifyCodeState> {
   void _verifySuccess(User user, String nextRoute) {
     _timer.cancel();
     emit(VerifyCodeSuccessState(user));
-    if (nextRoute == AppRoute.home) {
-      AppRoute.key.currentContext!.go(nextRoute);
+    if (nextRoute == AppRoute.userHome) {
+      if (user.userRole == UserRole.businessAdmin) {
+        // TODO: to admin home
+      } else {
+        AppRoute.key.currentContext!.go(AppRoute.userHome, extra: user);
+      }
     } else {
       AppRoute.key.currentContext!.pushReplacement(nextRoute, extra: user.id);
     }

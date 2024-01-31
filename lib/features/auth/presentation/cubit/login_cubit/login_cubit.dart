@@ -3,6 +3,7 @@ import 'package:data_sharing_organizing/core/status/status.dart';
 import 'package:data_sharing_organizing/core/status/success/success.dart';
 import 'package:data_sharing_organizing/core/utils/config/routes/routes.dart';
 import 'package:data_sharing_organizing/core/utils/enums/user_provider_enum.dart';
+import 'package:data_sharing_organizing/core/utils/enums/user_role/user_role_enum.dart';
 import 'package:data_sharing_organizing/core/utils/functions/show_my_dialog.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
@@ -73,7 +74,12 @@ class LoginCubit extends Cubit<LoginState> {
     TextInput.finishAutofillContext();
     if (data.userIsVerified) {
       EasyLoading.showSuccess(data.name, duration: const Duration(seconds: 2));
-      AppRoute.key.currentContext?.pushReplacement(AppRoute.home, extra: data);
+      if (data.userRole == UserRole.businessAdmin) {
+        // TODO: to admin home
+      } else {
+        AppRoute.key.currentContext
+            ?.pushReplacement(AppRoute.userHome, extra: data);
+      }
     } else {
       await ShowMyDialog.verifyDialog(data);
     }

@@ -8,14 +8,15 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../auth/domain/usecases/is_logged_in_use_case.dart';
+import '../../../auth/domain/entities/auth_user_entity.dart';
+import '../../../auth/domain/usecases/get_current_user_use_case.dart';
 
 part 'config_state.dart';
 
 class ConfigCubit extends Cubit<ConfigState> {
-  final IsLoggedInUseCase isLoggedInUseCase;
+  final GetCurrentUserUseCase getCurrentUserUseCase;
 
-  ConfigCubit(this.isLoggedInUseCase) : super(const ConfigInitial());
+  ConfigCubit(this.getCurrentUserUseCase) : super(const ConfigInitial());
 
   ThemeMode themeMode =
       ThemeMode.values[int.parse(config.get(AppStrings.themeMode) ?? '0')];
@@ -40,11 +41,11 @@ class ConfigCubit extends Cubit<ConfigState> {
       themeMode == ThemeMode.dark ||
       (themeMode == ThemeMode.system && AppTheme.isDarkMode());
 
-  bool get isLoggedIn {
-    final Status<bool> isLoggedInStatus = isLoggedInUseCase();
-    if (isLoggedInStatus is Success<bool>) {
-      return isLoggedInStatus.data;
-    }
-    return false;
+  bool get isLoggedIn => currentUser != null;
+
+  AuthUserEntity? get currentUser {
+    Status<AuthUserEntity?> status = getCurrentUserUseCase();
+    if (status is Success<AuthUserEntity?>) return status.data;
+    return null;
   }
 }

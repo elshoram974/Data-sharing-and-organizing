@@ -81,7 +81,7 @@ abstract final class ShowMyDialog {
             AppRoute.key.currentContext?.pop();
             AppRoute.key.currentContext?.push(
               AppRoute.codeVerification,
-              extra: {'user': user, 'nextRoute': AppRoute.home},
+              extra: {'user': user, 'nextRoute': AppRoute.userHome},
             );
           },
         );

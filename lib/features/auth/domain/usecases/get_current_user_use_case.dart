@@ -1,15 +1,16 @@
 import 'package:data_sharing_organizing/core/status/status.dart';
 import 'package:data_sharing_organizing/core/usecase/usecase_no_parameter.dart';
 
+import '../entities/auth_user_entity.dart';
 import '../repositories/auth_repositories.dart';
 
-final class IsLoggedInUseCase extends UseCase<bool> {
+final class GetCurrentUserUseCase extends UseCase<AuthUserEntity?> {
   final AuthRepositories authRepositories;
 
-  IsLoggedInUseCase(this.authRepositories);
+  GetCurrentUserUseCase(this.authRepositories);
 
   @override
-  Status<bool> call() {
-    return authRepositories.isLoggedIn();
+  Status<AuthUserEntity?> call() {
+    return authRepositories.currentUser();
   }
 }

@@ -1,5 +1,5 @@
 import '../../../../features/auth/data/repositories/auth_repositories_imp.dart';
-import '../../../../features/auth/domain/usecases/is_logged_in_use_case.dart';
+import '../../../../features/auth/domain/usecases/get_current_user_use_case.dart';
 import '../../../../features/auth/domain/usecases/log_out_use_case.dart';
 import '../../../../features/auth/domain/usecases/login_use_case.dart';
 import '../../../../features/auth/domain/usecases/new_password_use_case.dart';
@@ -10,8 +10,8 @@ import '../../../../features/auth/domain/usecases/verify_code_use_case.dart';
 import 'locator.dart';
 
 void useCasesDependency() {
-  sl.registerSingleton<IsLoggedInUseCase>(
-    IsLoggedInUseCase(sl.get<AuthRepositoriesImp>()),
+  sl.registerSingleton<GetCurrentUserUseCase>(
+    GetCurrentUserUseCase(sl.get<AuthRepositoriesImp>()),
   );
   sl.registerLazySingleton<LoginUseCase>(
     () => LoginUseCase(sl.get<AuthRepositoriesImp>()),

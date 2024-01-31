@@ -92,7 +92,7 @@ class AuthRepositoriesImp extends AuthRepositories {
   }
 
   @override
-  Status<bool> isLoggedIn() => Success(localDataSource.isLoggedIn());
+  Status<AuthUserEntity?> currentUser() => Success(localDataSource.getCurrentUser());
 
   @override
   Future<Status<int>> logOut() async => Success(await localDataSource.logOut());

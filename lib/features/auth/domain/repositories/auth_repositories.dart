@@ -9,8 +9,8 @@ import '../entities/login_entity.dart';
 abstract class AuthRepositories {
   Future<Status<User>> login(LoginUserEntity user);
   Future<Status<User>> socialLogin(UserProvider provider);
+  Status<AuthUserEntity?> currentUser();
   Future<Status<int>> logOut();
-  Status<bool> isLoggedIn();
   Future<Status<User>> signUp(AuthUserEntity user);
   Future<Status<User>> requestToSendCode(({String email, VerificationType verification}) param);
   Future<Status<User>> verifyCode(({int id , String code, VerificationType verification}) param);
