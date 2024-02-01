@@ -4,6 +4,7 @@ import 'package:data_sharing_organizing/core/status/success/success.dart';
 import 'package:data_sharing_organizing/core/utils/config/routes/routes.dart';
 import 'package:data_sharing_organizing/core/utils/enums/user_provider_enum.dart';
 import 'package:data_sharing_organizing/core/utils/enums/user_role/user_role_enum.dart';
+import 'package:data_sharing_organizing/core/utils/enums/user_status_enum.dart';
 import 'package:data_sharing_organizing/core/utils/functions/show_my_dialog.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
@@ -72,7 +73,7 @@ class LoginCubit extends Cubit<LoginState> {
   Future<void> _inSuccess(User data) async {
     emit(LoginSuccessState(data));
     TextInput.finishAutofillContext();
-    if (data.userIsVerified) {
+    if (data.userStatus == UserStatus.active) {
       EasyLoading.showSuccess(data.name, duration: const Duration(seconds: 2));
       if (data.userRole == UserRole.businessAdmin) {
         // TODO: to admin home
@@ -81,7 +82,14 @@ class LoginCubit extends Cubit<LoginState> {
             ?.pushReplacement(AppRoute.userHome, extra: data);
       }
     } else {
-      await ShowMyDialog.verifyDialog(data);
+      if (data.userStatus == UserStatus.pending && data.userStatusMessage == 'want to verify the account') {
+        await ShowMyDialog.verifyDialog(data);
+      } else {
+        await ShowMyDialog.error(
+          AppRoute.key.currentContext!,
+          body: 'Account status: ${data.userStatus}, ${data.userStatusMessage}',
+        );
+      }
     }
   }
   //  end login----------------------------

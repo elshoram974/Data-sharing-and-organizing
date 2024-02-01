@@ -1,6 +1,7 @@
 import 'package:data_sharing_organizing/core/status/status.dart';
 import 'package:data_sharing_organizing/core/status/success/success.dart';
 import 'package:data_sharing_organizing/core/utils/enums/user_provider_enum.dart';
+import 'package:data_sharing_organizing/core/utils/enums/user_status_enum.dart';
 import 'package:data_sharing_organizing/core/utils/enums/verification_type_enum.dart';
 import 'package:data_sharing_organizing/core/utils/functions/execute_and_handle_remote_errors.dart';
 
@@ -26,7 +27,7 @@ class AuthRepositoriesImp extends AuthRepositories {
     return executeAndHandleErrors<User>(
       () async {
         User authUser = await remoteDataSource.login(user);
-        if (user.keepLogin && authUser.userIsVerified) {
+        if (user.keepLogin && authUser.userStatus == UserStatus.active) {
           await localDataSource.saveUser(user);
         }
 
@@ -92,7 +93,8 @@ class AuthRepositoriesImp extends AuthRepositories {
   }
 
   @override
-  Status<AuthUserEntity?> currentUser() => Success(localDataSource.getCurrentUser());
+  Status<AuthUserEntity?> currentUser() =>
+      Success(localDataSource.getCurrentUser());
 
   @override
   Future<Status<int>> logOut() async => Success(await localDataSource.logOut());
