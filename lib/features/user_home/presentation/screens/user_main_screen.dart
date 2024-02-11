@@ -20,7 +20,13 @@ class UserMainScreens extends StatelessWidget {
         return Scaffold(
           appBar: const MainUserAppBar(),
           bottomNavigationBar: BottomNavBar(navIndex: navIndex),
-          body: MainScreens.items[navIndex].screen,
+          body: PageView(
+            controller: ProviderDependency.userMain.navController,
+            onPageChanged: ProviderDependency.userMain.onNavChange,
+            children: [
+              for (MainScreens e in MainScreens.items) e.screen,
+            ],
+          ),
         );
       },
     );
