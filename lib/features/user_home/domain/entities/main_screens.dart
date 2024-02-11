@@ -21,7 +21,7 @@ final class MainScreens {
     MainScreens(
       name: S.current.home,
       icon: Icons.home_outlined,
-      activeIcon: Icons.home_filled,
+      activeIcon: Icons.home,
       screen: const UserHomeScreen(),
     ),
     MainScreens(

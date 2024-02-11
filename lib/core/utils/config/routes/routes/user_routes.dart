@@ -2,7 +2,7 @@ import 'package:data_sharing_organizing/features/auth/domain/entities/auth_user_
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../../../../features/user_home/presentation/screens/user_main_screen.dart';
+import '../../../../../features/user_home/presentation/screens/main_screen/user_main_screen.dart';
 import '../my_custom_transition.dart';
 
 abstract final class UserRoutes {

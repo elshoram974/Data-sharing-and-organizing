@@ -2,8 +2,7 @@ import 'package:data_sharing_organizing/core/utils/constants/app_color.dart';
 import 'package:data_sharing_organizing/core/utils/services/dependency/provider_dependency.dart';
 import 'package:flutter/material.dart';
 
-import '../../../domain/entities/main_screens.dart';
-
+import '../../../../domain/entities/main_screens.dart';
 
 class BottomNavBar extends StatelessWidget {
   const BottomNavBar({super.key, required this.navIndex});
