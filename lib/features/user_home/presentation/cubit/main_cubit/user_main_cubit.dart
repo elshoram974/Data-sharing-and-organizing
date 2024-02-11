@@ -13,12 +13,11 @@ class UserMainCubit extends Cubit<UserMainState> {
   PageController navController = PageController();
   int navIndex = 0;
 
-  void onNavChange(int val) {
+  void onNavChange(int val, bool inPageChange) {
     navIndex = val;
-    navController.jumpToPage(navIndex);
+    if (!inPageChange) navController.jumpToPage(navIndex);
     emit(UserMainChangeNavBar(navIndex));
   }
-
 
   @override
   Future<void> close() {

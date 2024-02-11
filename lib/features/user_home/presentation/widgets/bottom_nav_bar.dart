@@ -13,7 +13,7 @@ class BottomNavBar extends StatelessWidget {
       currentIndex: navIndex,
       showUnselectedLabels: false,
       landscapeLayout: BottomNavigationBarLandscapeLayout.linear,
-      onTap: ProviderDependency.userMain.onNavChange,
+      onTap: (_) => ProviderDependency.userMain.onNavChange(_, false),
       items: [
         for (MainScreens e in MainScreens.items)
           BottomNavigationBarItem(
