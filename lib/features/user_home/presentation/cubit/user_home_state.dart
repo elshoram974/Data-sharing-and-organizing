@@ -7,4 +7,13 @@ abstract class UserHomeState extends Equatable {
   List<Object> get props => [];
 }
 
-class UserHomeInitial extends UserHomeState {}
+class UserHomeInitial extends UserHomeState {
+  const UserHomeInitial();
+}
+
+class UserHomeChangeNavBar extends UserHomeState {
+  final int navIndex;
+  const UserHomeChangeNavBar(this.navIndex);
+  @override
+  List<int> get props => [navIndex];
+}

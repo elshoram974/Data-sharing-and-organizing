@@ -4,6 +4,7 @@ import '../../../../features/auth/presentation/cubit/recoverAccount_cubit/recove
 import '../../../../features/auth/presentation/cubit/sign_up_cubit/sign_up_cubit.dart';
 import '../../../../features/auth/presentation/cubit/verify_code_cubit/verify_code_cubit.dart';
 import '../../../../features/splash/presentation/cubit/config_cubit.dart';
+import '../../../../features/user_home/presentation/cubit/user_home_cubit.dart';
 
 abstract final class ProviderDependency {
   const ProviderDependency();
@@ -17,4 +18,7 @@ abstract final class ProviderDependency {
   static late VerifyCodeCubit verificationCode;
   static late RecoverAccountCubit recoverAccount;
   static late CreateNewPasswordCubit createNewPassword;
+
+  // * User Home Cubits
+  static late UserHomeCubit userHome;
 }
