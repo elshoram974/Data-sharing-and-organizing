@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../domain/entities/main_screens.dart';
 import '../cubit/main_cubit/user_main_cubit.dart';
 import '../widgets/bottom_nav_bar.dart';
+import '../widgets/main_user_app_bar.dart';
 
 class UserMainScreens extends StatelessWidget {
   const UserMainScreens({super.key});
@@ -17,6 +18,7 @@ class UserMainScreens extends StatelessWidget {
       builder: (context, state) {
         final int navIndex = ProviderDependency.userMain.navIndex;
         return Scaffold(
+          appBar: const MainUserAppBar(),
           bottomNavigationBar: BottomNavBar(navIndex: navIndex),
           body: MainScreens.items[navIndex].screen,
         );

@@ -1,9 +1,8 @@
-import 'package:data_sharing_organizing/core/utils/constants/app_constants.dart';
 import 'package:flutter/material.dart';
 
 import '../../domain/entities/group_home_entity.dart';
 import '../widgets/home_group_tile_widget/home_group_tile.dart';
-import '../widgets/home_user_app_bar.dart';
+import '../widgets/main_body.dart';
 
 class UserHomeScreen extends StatelessWidget {
   const UserHomeScreen({super.key});
@@ -11,16 +10,7 @@ class UserHomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const HomeUserAppBar(),
-      body: ListView(
-        padding: const EdgeInsets.only(
-          top: 25,
-          left: AppConst.defaultPadding,
-          right: AppConst.defaultPadding,
-          bottom: 56,
-        ),
-        children: groupsItems,
-      ),
+      body: MainBodyWidget(children: groupsItems),
     );
   }
 }

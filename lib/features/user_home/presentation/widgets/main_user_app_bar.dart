@@ -2,8 +2,8 @@ import 'package:data_sharing_organizing/core/shared/app_logo_Name_home.dart';
 import 'package:data_sharing_organizing/core/utils/constants/app_constants.dart';
 import 'package:flutter/material.dart';
 
-class HomeUserAppBar extends StatelessWidget implements PreferredSizeWidget {
-  const HomeUserAppBar({super.key});
+class MainUserAppBar extends StatelessWidget implements PreferredSizeWidget {
+  const MainUserAppBar({super.key});
 
   @override
   Widget build(BuildContext context) {
