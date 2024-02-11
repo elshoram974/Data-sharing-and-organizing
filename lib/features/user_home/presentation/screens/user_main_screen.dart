@@ -20,9 +20,11 @@ class UserMainScreens extends StatelessWidget {
         return Scaffold(
           appBar: const MainUserAppBar(),
           bottomNavigationBar: BottomNavBar(navIndex: navIndex),
+          floatingActionButton: getHomeNav(navIndex),
           body: PageView(
             controller: ProviderDependency.userMain.navController,
-            onPageChanged: ProviderDependency.userMain.onNavChange,
+            onPageChanged: (_) =>
+                ProviderDependency.userMain.onNavChange(_, true),
             children: [
               for (MainScreens e in MainScreens.items) e.screen,
             ],
@@ -31,4 +33,15 @@ class UserMainScreens extends StatelessWidget {
       },
     );
   }
+}
+
+FloatingActionButton? getHomeNav(int navIndex) {
+  switch (navIndex) {
+    case 0:
+      return FloatingActionButton(
+        child: const Icon(Icons.add),
+        onPressed: () {},
+      );
+  }
+  return null;
 }

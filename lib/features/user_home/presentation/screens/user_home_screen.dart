@@ -9,9 +9,7 @@ class UserHomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: MainBodyWidget(children: groupsItems),
-    );
+    return MainBodyWidget(children: groupsItems);
   }
 }
 

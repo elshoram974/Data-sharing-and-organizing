@@ -8,12 +8,10 @@ class UserMenuScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: MainBodyWidget(
-        children: [
-          Text(S.of(context).menu),
-        ],
-      ),
+    return MainBodyWidget(
+      children: [
+        Text(S.of(context).menu),
+      ],
     );
   }
 }
