@@ -1,3 +1,4 @@
+import 'package:data_sharing_organizing/core/utils/constants/app_color.dart';
 import 'package:data_sharing_organizing/core/utils/services/dependency/provider_dependency.dart';
 import 'package:flutter/material.dart';
 
@@ -13,6 +14,7 @@ class BottomNavBar extends StatelessWidget {
       currentIndex: navIndex,
       showUnselectedLabels: false,
       landscapeLayout: BottomNavigationBarLandscapeLayout.linear,
+      selectedItemColor: AppColor.active,
       onTap: (_) => ProviderDependency.userMain.onNavChange(_, false),
       items: [
         for (MainScreens e in MainScreens.items)

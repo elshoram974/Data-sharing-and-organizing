@@ -1,3 +1,4 @@
+import 'package:data_sharing_organizing/core/utils/constants/app_color.dart';
 import 'package:data_sharing_organizing/core/utils/services/dependency/provider_dependency.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -39,6 +40,8 @@ FloatingActionButton? getHomeNav(int navIndex) {
   switch (navIndex) {
     case 0:
       return FloatingActionButton(
+        backgroundColor: AppColor.active,
+        foregroundColor: Colors.white,
         child: const Icon(Icons.add),
         onPressed: () {},
       );
