@@ -18,28 +18,30 @@ class BottomNavBar extends StatelessWidget {
           showUnselectedLabels: false,
           landscapeLayout: BottomNavigationBarLandscapeLayout.linear,
           onTap: ProviderDependency.userHome.onNavChange,
-          items: [
-            BottomNavigationBarItem(
-              activeIcon: const Icon(Icons.home_filled),
-              icon: const Icon(Icons.home_outlined),
-              tooltip: S.of(context).home,
-              label: S.of(context).home,
-            ),
-            BottomNavigationBarItem(
-              activeIcon: const Icon(Icons.notifications),
-              icon: const Icon(Icons.notifications_outlined),
-              tooltip: S.of(context).notification,
-              label: S.of(context).notification,
-            ),
-            BottomNavigationBarItem(
-              activeIcon: const Icon(Icons.menu),
-              icon: const Icon(Icons.menu_outlined),
-              tooltip: S.of(context).menu,
-              label: S.of(context).menu,
-            ),
-          ],
+          items: navItems,
         );
       },
     );
   }
 }
+
+final List<BottomNavigationBarItem> navItems = [
+  BottomNavigationBarItem(
+    activeIcon: const Icon(Icons.home_filled),
+    icon: const Icon(Icons.home_outlined),
+    tooltip: S.current.home,
+    label: S.current.home,
+  ),
+  BottomNavigationBarItem(
+    activeIcon: const Icon(Icons.notifications),
+    icon: const Icon(Icons.notifications_outlined),
+    tooltip: S.current.notification,
+    label: S.current.notification,
+  ),
+  BottomNavigationBarItem(
+    activeIcon: const Icon(Icons.menu),
+    icon: const Icon(Icons.menu_outlined),
+    tooltip: S.current.menu,
+    label: S.current.menu,
+  ),
+];
