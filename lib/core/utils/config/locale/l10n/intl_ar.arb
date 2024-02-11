@@ -77,5 +77,8 @@
     "userNotEmailPasswordToNewPass": "المستخدم ليس عبارة عن حساب بالبريد الإلكتروني وكلمة مرور لتغيير كلمة المرور",
     "userNotEmailPasswordToSendVerificationCode": "هذا المستخدم ليس مزودًا ببريد إلكتروني وكلمة مرور لإرسال رمز التحقق.",
     "today": "اليوم",
-    "yesterday": "أمس"
+    "yesterday": "أمس",
+    "home": "الصفحة الرئيسية",
+    "notification": "الإشعارات",
+    "menu": "القائمة"
 }

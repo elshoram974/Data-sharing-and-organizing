@@ -3,6 +3,7 @@ import 'package:data_sharing_organizing/features/auth/domain/entities/auth_user_
 import 'package:flutter/material.dart';
 
 import '../../domain/entities/group_home_entity.dart';
+import '../widgets/bottom_nav_bar.dart';
 import '../widgets/home_group_tile_widget/home_group_tile.dart';
 import '../widgets/home_user_app_bar.dart';
 
@@ -14,6 +15,7 @@ class UserHomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const HomeUserAppBar(),
+      bottomNavigationBar: const BottomNavBar(),
       body: ListView(
         padding: const EdgeInsets.only(
           top: 25,

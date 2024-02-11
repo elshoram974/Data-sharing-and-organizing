@@ -71,6 +71,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "goTo": MessageLookupByLibrary.simpleMessage("Go to"),
         "gotIt": MessageLookupByLibrary.simpleMessage("Got it"),
         "hidePassword": MessageLookupByLibrary.simpleMessage("Hide password"),
+        "home": MessageLookupByLibrary.simpleMessage("Home"),
         "ifYouReturnNowYouWillLoseAllData":
             MessageLookupByLibrary.simpleMessage(
                 "If you return now, you will lose all data!"),
@@ -80,6 +81,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Invalid verification type."),
         "language": MessageLookupByLibrary.simpleMessage("Language"),
         "login": MessageLookupByLibrary.simpleMessage("Login"),
+        "menu": MessageLookupByLibrary.simpleMessage("Menu"),
         "name": MessageLookupByLibrary.simpleMessage("Name"),
         "newPassword": MessageLookupByLibrary.simpleMessage("New password"),
         "noCodeReceived":
@@ -89,6 +91,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "noNeed": MessageLookupByLibrary.simpleMessage("No need ? "),
         "notSamePass":
             MessageLookupByLibrary.simpleMessage("Not same password"),
+        "notification": MessageLookupByLibrary.simpleMessage("Notification"),
         "oR": MessageLookupByLibrary.simpleMessage("OR"),
         "orConnectUsing":
             MessageLookupByLibrary.simpleMessage("Or connect using"),

@@ -77,5 +77,8 @@
     "userNotEmailPasswordToNewPass": "User is not email_password to make new pass",
     "userNotEmailPasswordToSendVerificationCode": "This user is not email and password provider to send verification code.",
     "today": "Today",
-    "yesterday": "Yesterday"
+    "yesterday": "Yesterday",
+    "home": "Home",
+    "notification": "Notification",
+    "menu": "Menu"
 }

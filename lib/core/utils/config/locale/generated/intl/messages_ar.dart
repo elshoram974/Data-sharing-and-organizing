@@ -72,6 +72,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "gotIt": MessageLookupByLibrary.simpleMessage("مفهوم"),
         "hidePassword":
             MessageLookupByLibrary.simpleMessage("إخفاء كلمة المرور"),
+        "home": MessageLookupByLibrary.simpleMessage("الصفحة الرئيسية"),
         "ifYouReturnNowYouWillLoseAllData":
             MessageLookupByLibrary.simpleMessage(
                 "إذا قمت بالعودة الآن، ستفقد كل البيانات!"),
@@ -81,6 +82,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("نوع التحقق غير صالح"),
         "language": MessageLookupByLibrary.simpleMessage("اللغة"),
         "login": MessageLookupByLibrary.simpleMessage("تسجيل الدخول"),
+        "menu": MessageLookupByLibrary.simpleMessage("القائمة"),
         "name": MessageLookupByLibrary.simpleMessage("الاسم"),
         "newPassword": MessageLookupByLibrary.simpleMessage("كلمة مرور جديدة"),
         "noCodeReceived":
@@ -90,6 +92,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "noNeed": MessageLookupByLibrary.simpleMessage("لا تحتاج للمساعدة؟ "),
         "notSamePass":
             MessageLookupByLibrary.simpleMessage("ليست نفس كلمة المرور"),
+        "notification": MessageLookupByLibrary.simpleMessage("الإشعارات"),
         "oR": MessageLookupByLibrary.simpleMessage("أو"),
         "orConnectUsing": MessageLookupByLibrary.simpleMessage(
             "أو قم بتسجيل الدخول باستخدام"),
