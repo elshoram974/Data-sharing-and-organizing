@@ -1,4 +1,5 @@
 import 'package:data_sharing_organizing/core/utils/constants/app_color.dart';
+import 'package:data_sharing_organizing/core/utils/functions/convert_date_to_string.dart';
 import 'package:data_sharing_organizing/core/utils/styles.dart';
 import 'package:flutter/material.dart';
 
@@ -21,7 +22,7 @@ class GroupNameAndTimeTile extends StatelessWidget {
           ),
         ),
         Text(
-          '${groupHomeEntity.lastMessageTime.hour}',
+          DateToString.call(groupHomeEntity.lastMessageTime, false),
           style: TextStyle(
             color: groupHomeEntity.isUnread ? AppColor.active : AppColor.gray,
             fontSize: 10,

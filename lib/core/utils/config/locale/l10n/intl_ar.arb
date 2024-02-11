@@ -75,5 +75,7 @@
     "theVerificationCodeHasExpiredWeSentAnotherCode": "انتهت صلاحية رمز التحقق. لقد قمنا بإرسال رمز آخر.",
     "invalidVerificationType": "نوع التحقق غير صالح",
     "userNotEmailPasswordToNewPass": "المستخدم ليس عبارة عن حساب بالبريد الإلكتروني وكلمة مرور لتغيير كلمة المرور",
-    "userNotEmailPasswordToSendVerificationCode": "هذا المستخدم ليس مزودًا ببريد إلكتروني وكلمة مرور لإرسال رمز التحقق."
+    "userNotEmailPasswordToSendVerificationCode": "هذا المستخدم ليس مزودًا ببريد إلكتروني وكلمة مرور لإرسال رمز التحقق.",
+    "today": "اليوم",
+    "yesterday": "أمس"
 }

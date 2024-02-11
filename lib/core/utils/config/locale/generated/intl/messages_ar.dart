@@ -126,6 +126,7 @@ class MessageLookup extends MessageLookupByLibrary {
                 "هذا الحساب موجود ولكن مع مزود خدمة آخر."),
         "thisEmailAlreadyExists": MessageLookupByLibrary.simpleMessage(
             "هذا البريد الإلكتروني مستخدم بالفعل."),
+        "today": MessageLookupByLibrary.simpleMessage("اليوم"),
         "uHaveToVerifyAccountFirst":
             MessageLookupByLibrary.simpleMessage("يجب التحقق من حسابك أولاً"),
         "userNotEmailPasswordToNewPass": MessageLookupByLibrary.simpleMessage(
@@ -143,6 +144,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "welcomeBack": MessageLookupByLibrary.simpleMessage("مرحبًا بعودتك!"),
         "wrongPassword": MessageLookupByLibrary.simpleMessage(
             "تم تقديم كلمة مرور خاطئة لهذا المستخدم."),
+        "yesterday": MessageLookupByLibrary.simpleMessage("أمس"),
         "youCanNotUseSamePreviousPassword":
             MessageLookupByLibrary.simpleMessage(
                 "لا يمكنك استخدام نفس كلمة المرور السابقة."),

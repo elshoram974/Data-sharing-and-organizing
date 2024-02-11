@@ -125,6 +125,7 @@ class MessageLookup extends MessageLookupByLibrary {
                 "this account is exist but with another provider."),
         "thisEmailAlreadyExists": MessageLookupByLibrary.simpleMessage(
             "This email is already in use."),
+        "today": MessageLookupByLibrary.simpleMessage("Today"),
         "uHaveToVerifyAccountFirst": MessageLookupByLibrary.simpleMessage(
             "You have to verify your account first"),
         "userNotEmailPasswordToNewPass": MessageLookupByLibrary.simpleMessage(
@@ -142,6 +143,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "welcomeBack": MessageLookupByLibrary.simpleMessage("Welcome back!"),
         "wrongPassword": MessageLookupByLibrary.simpleMessage(
             "Wrong password provided for that user."),
+        "yesterday": MessageLookupByLibrary.simpleMessage("Yesterday"),
         "youCanNotUseSamePreviousPassword":
             MessageLookupByLibrary.simpleMessage(
                 "You can\'t use the same previous password."),
