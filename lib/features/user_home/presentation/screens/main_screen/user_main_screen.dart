@@ -1,10 +1,12 @@
 import 'package:data_sharing_organizing/core/shared/responsive/in_many_device.dart';
 import 'package:data_sharing_organizing/core/utils/constants/app_color.dart';
+import 'package:data_sharing_organizing/core/utils/services/dependency/locator.dart';
 import 'package:data_sharing_organizing/core/utils/services/dependency/provider_dependency.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../auth/domain/entities/auth_user_entity.dart';
+import '../../../../auth/domain/usecases/log_out_use_case.dart';
 import '../../cubit/main_cubit/user_main_cubit.dart';
 import 'desktop_main_screen.dart';
 import 'phone_main_screen.dart';
@@ -17,7 +19,10 @@ class UserMainScreens extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => UserMainCubit(user),
+      create: (context) => UserMainCubit(
+        user: user,
+        logOutUseCase: sl.get<LogOutUseCase>(),
+      ),
       child: const _UserMainScreens(),
     );
   }
