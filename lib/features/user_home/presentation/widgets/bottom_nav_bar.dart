@@ -1,47 +1,28 @@
-import 'package:data_sharing_organizing/core/utils/config/locale/generated/l10n.dart';
 import 'package:data_sharing_organizing/core/utils/services/dependency/provider_dependency.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../cubit/user_home_cubit.dart';
+import '../../domain/entities/main_screens.dart';
 
 class BottomNavBar extends StatelessWidget {
-  const BottomNavBar({super.key});
+  const BottomNavBar({super.key, required this.navIndex});
+  final int navIndex;
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<UserHomeCubit, UserHomeState>(
-      buildWhen: (p, c) => c is UserHomeChangeNavBar,
-      builder: (context, state) {
-        return BottomNavigationBar(
-          currentIndex: ProviderDependency.userHome.navIndex,
-          showUnselectedLabels: false,
-          landscapeLayout: BottomNavigationBarLandscapeLayout.linear,
-          onTap: ProviderDependency.userHome.onNavChange,
-          items: navItems,
-        );
-      },
+    return BottomNavigationBar(
+      currentIndex: navIndex,
+      showUnselectedLabels: false,
+      landscapeLayout: BottomNavigationBarLandscapeLayout.linear,
+      onTap: ProviderDependency.userMain.onNavChange,
+      items: [
+        for (MainScreens e in MainScreens.items)
+          BottomNavigationBarItem(
+            activeIcon: Icon(e.activeIcon),
+            icon: Icon(e.icon),
+            tooltip: e.name,
+            label: e.name,
+          ),
+      ],
     );
   }
 }
-
-final List<BottomNavigationBarItem> navItems = [
-  BottomNavigationBarItem(
-    activeIcon: const Icon(Icons.home_filled),
-    icon: const Icon(Icons.home_outlined),
-    tooltip: S.current.home,
-    label: S.current.home,
-  ),
-  BottomNavigationBarItem(
-    activeIcon: const Icon(Icons.notifications),
-    icon: const Icon(Icons.notifications_outlined),
-    tooltip: S.current.notification,
-    label: S.current.notification,
-  ),
-  BottomNavigationBarItem(
-    activeIcon: const Icon(Icons.menu),
-    icon: const Icon(Icons.menu_outlined),
-    tooltip: S.current.menu,
-    label: S.current.menu,
-  ),
-];
