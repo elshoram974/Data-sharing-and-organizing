@@ -3,7 +3,7 @@ import 'package:data_sharing_organizing/core/utils/functions/convert_date_to_str
 import 'package:data_sharing_organizing/core/utils/styles.dart';
 import 'package:flutter/material.dart';
 
-import '../../../domain/entities/group_home_entity.dart';
+import '../../../../domain/entities/group_home_entity.dart';
 
 class GroupNameAndTimeTile extends StatelessWidget {
   const GroupNameAndTimeTile({super.key, required this.groupHomeEntity});

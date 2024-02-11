@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../domain/entities/group_home_entity.dart';
+import '../../../../domain/entities/group_home_entity.dart';
 import 'group_name_time_tile.dart';
 import 'home_group_subtitle.dart';
 

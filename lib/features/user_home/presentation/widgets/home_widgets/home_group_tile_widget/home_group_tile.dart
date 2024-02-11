@@ -3,7 +3,7 @@ import 'package:data_sharing_organizing/core/utils/constants/app_constants.dart'
 import 'package:data_sharing_organizing/core/utils/extension/padding_ex.dart';
 import 'package:flutter/material.dart';
 
-import '../../../domain/entities/group_home_entity.dart';
+import '../../../../domain/entities/group_home_entity.dart';
 import 'home_group_body.dart';
 import 'home_group_image.dart';
 

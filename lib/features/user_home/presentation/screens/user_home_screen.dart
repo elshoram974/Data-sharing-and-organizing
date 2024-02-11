@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 import '../../domain/entities/group_home_entity.dart';
-import '../widgets/home_group_tile_widget/home_group_tile.dart';
-import '../widgets/main_body.dart';
+import '../widgets/home_widgets/home_group_tile_widget/home_group_tile.dart';
+import '../widgets/main_screen_widgets/main_body.dart';
 
 class UserHomeScreen extends StatelessWidget {
   const UserHomeScreen({super.key});

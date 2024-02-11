@@ -3,17 +3,32 @@ import 'package:data_sharing_organizing/core/utils/services/dependency/provider_
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../domain/entities/main_screens.dart';
+import '../../../auth/domain/entities/auth_user_entity.dart';
 import '../cubit/main_cubit/user_main_cubit.dart';
-import '../widgets/bottom_nav_bar.dart';
-import '../widgets/main_user_app_bar.dart';
+import '../widgets/main_screen_widgets/bottom_nav_bar.dart';
+import '../widgets/main_screen_widgets/main_screen_body.dart';
+import '../widgets/main_screen_widgets/main_user_app_bar.dart';
 
 class UserMainScreens extends StatelessWidget {
-  const UserMainScreens({super.key});
+  const UserMainScreens(this.user, {super.key});
+  final AuthUserEntity user;
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (context) => UserMainCubit(user),
+      child: const _UserMainScreens(),
+    );
+  }
+}
+
+class _UserMainScreens extends StatelessWidget {
+  const _UserMainScreens();
 
   @override
   Widget build(BuildContext context) {
     ProviderDependency.userMain = BlocProvider.of<UserMainCubit>(context);
+
     return BlocBuilder<UserMainCubit, UserMainState>(
       buildWhen: (p, c) => c is UserMainChangeNavBar,
       builder: (context, state) {
@@ -22,14 +37,7 @@ class UserMainScreens extends StatelessWidget {
           appBar: const MainUserAppBar(),
           bottomNavigationBar: BottomNavBar(navIndex: navIndex),
           floatingActionButton: getHomeNav(navIndex),
-          body: PageView(
-            controller: ProviderDependency.userMain.navController,
-            onPageChanged: (_) =>
-                ProviderDependency.userMain.onNavChange(_, true),
-            children: [
-              for (MainScreens e in MainScreens.items) e.screen,
-            ],
-          ),
+          body: const MainScreenBody(),
         );
       },
     );
