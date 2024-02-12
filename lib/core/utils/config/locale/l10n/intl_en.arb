@@ -84,5 +84,8 @@
     "profile": "Profile",
     "privacyAndSecurity": "Privacy & Security",
     "support": "Support",
-    "logout": "Log out"
+    "logout": "Log out",
+    "statusBar": "Status bar",
+    "onLockScreen": "On lock screen",
+    "popUps": "Pop ups"
 }

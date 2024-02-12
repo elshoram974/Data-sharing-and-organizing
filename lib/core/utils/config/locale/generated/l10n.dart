@@ -901,6 +901,36 @@ class S {
       args: [],
     );
   }
+
+  /// `Status bar`
+  String get statusBar {
+    return Intl.message(
+      'Status bar',
+      name: 'statusBar',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `On lock screen`
+  String get onLockScreen {
+    return Intl.message(
+      'On lock screen',
+      name: 'onLockScreen',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Pop ups`
+  String get popUps {
+    return Intl.message(
+      'Pop ups',
+      name: 'popUps',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

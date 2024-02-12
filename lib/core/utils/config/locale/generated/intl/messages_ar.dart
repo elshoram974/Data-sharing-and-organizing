@@ -95,10 +95,12 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("ليست نفس كلمة المرور"),
         "notification": MessageLookupByLibrary.simpleMessage("الإشعارات"),
         "oR": MessageLookupByLibrary.simpleMessage("أو"),
+        "onLockScreen": MessageLookupByLibrary.simpleMessage("على شاشة القفل"),
         "orConnectUsing": MessageLookupByLibrary.simpleMessage(
             "أو قم بتسجيل الدخول باستخدام"),
         "password": MessageLookupByLibrary.simpleMessage("كلمة المرور"),
         "personalAccount": MessageLookupByLibrary.simpleMessage("حساب خاص"),
+        "popUps": MessageLookupByLibrary.simpleMessage("النوافذ المنبثقة"),
         "pressAgainToExit":
             MessageLookupByLibrary.simpleMessage("اضغط مرة أخرى للخروج"),
         "privacyAndSecurity":
@@ -118,6 +120,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "showPassword":
             MessageLookupByLibrary.simpleMessage("إظهار كلمة المرور"),
         "signUp": MessageLookupByLibrary.simpleMessage("التسجيل"),
+        "statusBar": MessageLookupByLibrary.simpleMessage("شريط الحالة"),
         "stayHere": MessageLookupByLibrary.simpleMessage("ابق هنا"),
         "support": MessageLookupByLibrary.simpleMessage("الدعم"),
         "system": MessageLookupByLibrary.simpleMessage("النظام"),

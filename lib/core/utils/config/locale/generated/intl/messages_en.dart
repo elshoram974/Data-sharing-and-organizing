@@ -94,11 +94,13 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Not same password"),
         "notification": MessageLookupByLibrary.simpleMessage("Notification"),
         "oR": MessageLookupByLibrary.simpleMessage("OR"),
+        "onLockScreen": MessageLookupByLibrary.simpleMessage("On lock screen"),
         "orConnectUsing":
             MessageLookupByLibrary.simpleMessage("Or connect using"),
         "password": MessageLookupByLibrary.simpleMessage("Password"),
         "personalAccount":
             MessageLookupByLibrary.simpleMessage("Personal account"),
+        "popUps": MessageLookupByLibrary.simpleMessage("Pop ups"),
         "pressAgainToExit":
             MessageLookupByLibrary.simpleMessage("Press again to exit"),
         "privacyAndSecurity":
@@ -117,6 +119,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "sharikna": MessageLookupByLibrary.simpleMessage("Sharikna"),
         "showPassword": MessageLookupByLibrary.simpleMessage("Show password"),
         "signUp": MessageLookupByLibrary.simpleMessage("Sign up"),
+        "statusBar": MessageLookupByLibrary.simpleMessage("Status bar"),
         "stayHere": MessageLookupByLibrary.simpleMessage("Stay here"),
         "support": MessageLookupByLibrary.simpleMessage("Support"),
         "system": MessageLookupByLibrary.simpleMessage("System"),

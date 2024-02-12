@@ -84,5 +84,8 @@
     "profile": "الملف الشخصي",
     "privacyAndSecurity": "الخصوصية والأمان",
     "support": "الدعم",
-    "logout": "تسجيل الخروج"
+    "logout": "تسجيل الخروج",
+    "statusBar": "شريط الحالة",
+    "onLockScreen": "على شاشة القفل",
+    "popUps": "النوافذ المنبثقة"
 }
