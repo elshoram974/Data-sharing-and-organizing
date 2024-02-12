@@ -1,7 +1,9 @@
 import 'package:data_sharing_organizing/core/utils/config/locale/generated/l10n.dart';
 import 'package:data_sharing_organizing/core/utils/services/dependency/provider_dependency.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
+import '../../../../core/utils/config/routes/routes.dart';
 import '../widgets/main_screen_widgets/main_body.dart';
 import '../widgets/menu_widgets/menu_item_tile_widget.dart';
 
@@ -12,7 +14,30 @@ class UserMenuScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return MainBodyWidget(
       children: [
-        Text(S.of(context).menu),
+        MenuItemTile(
+          icon: Icons.person,
+          title: S.of(context).profile,
+        ),
+        MenuItemTile(
+          icon: Icons.notifications,
+          title: S.of(context).notification,
+        ),
+        MenuItemTile(
+          icon: Icons.security,
+          title: S.of(context).privacyAndSecurity,
+        ),
+        MenuItemTile(
+          icon: Icons.headset_mic,
+          title: S.of(context).support,
+        ),
+        MenuItemTile(
+          icon: Icons.settings_outlined,
+          title: S.of(context).settings,
+          onTap: () => context.push(
+            AppRoute.authSettings,
+            extra: (BuildContext _)=>S.of(_).menu,
+          ),
+        ),
         MenuItemTile(
           onTap: ProviderDependency.userMain.logOut,
           icon: Icons.logout,

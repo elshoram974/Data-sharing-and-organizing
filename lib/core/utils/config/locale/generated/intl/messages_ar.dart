@@ -101,8 +101,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "personalAccount": MessageLookupByLibrary.simpleMessage("حساب خاص"),
         "pressAgainToExit":
             MessageLookupByLibrary.simpleMessage("اضغط مرة أخرى للخروج"),
+        "privacyAndSecurity":
+            MessageLookupByLibrary.simpleMessage("الخصوصية والأمان"),
         "processHasBeenCancelled":
             MessageLookupByLibrary.simpleMessage("تم إلغاء العملية"),
+        "profile": MessageLookupByLibrary.simpleMessage("الملف الشخصي"),
         "recover": MessageLookupByLibrary.simpleMessage("استعادة"),
         "recoverYourAccount":
             MessageLookupByLibrary.simpleMessage("استعادة حسابك"),
@@ -116,6 +119,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("إظهار كلمة المرور"),
         "signUp": MessageLookupByLibrary.simpleMessage("التسجيل"),
         "stayHere": MessageLookupByLibrary.simpleMessage("ابق هنا"),
+        "support": MessageLookupByLibrary.simpleMessage("الدعم"),
         "system": MessageLookupByLibrary.simpleMessage("النظام"),
         "thePasswordIsVeryWeak": MessageLookupByLibrary.simpleMessage(
             "كلمة المرور ضعيفة جدًا. يرجى استخدام كلمة مرور أقوى."),

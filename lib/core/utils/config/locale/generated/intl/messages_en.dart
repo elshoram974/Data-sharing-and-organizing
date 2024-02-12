@@ -101,8 +101,11 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Personal account"),
         "pressAgainToExit":
             MessageLookupByLibrary.simpleMessage("Press again to exit"),
+        "privacyAndSecurity":
+            MessageLookupByLibrary.simpleMessage("Privacy & Security"),
         "processHasBeenCancelled": MessageLookupByLibrary.simpleMessage(
             "The process has been cancelled"),
+        "profile": MessageLookupByLibrary.simpleMessage("Profile"),
         "recover": MessageLookupByLibrary.simpleMessage("Recover"),
         "recoverYourAccount":
             MessageLookupByLibrary.simpleMessage("Recover your account"),
@@ -115,6 +118,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "showPassword": MessageLookupByLibrary.simpleMessage("Show password"),
         "signUp": MessageLookupByLibrary.simpleMessage("Sign up"),
         "stayHere": MessageLookupByLibrary.simpleMessage("Stay here"),
+        "support": MessageLookupByLibrary.simpleMessage("Support"),
         "system": MessageLookupByLibrary.simpleMessage("System"),
         "thePasswordIsVeryWeak": MessageLookupByLibrary.simpleMessage(
             "The password is very weak. Please use a stronger password."),

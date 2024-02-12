@@ -81,5 +81,8 @@
     "home": "Home",
     "notification": "Notification",
     "menu": "Menu",
+    "profile": "Profile",
+    "privacyAndSecurity": "Privacy & Security",
+    "support": "Support",
     "logout": "Log out"
 }

@@ -81,5 +81,8 @@
     "home": "الصفحة الرئيسية",
     "notification": "الإشعارات",
     "menu": "القائمة",
+    "profile": "الملف الشخصي",
+    "privacyAndSecurity": "الخصوصية والأمان",
+    "support": "الدعم",
     "logout": "تسجيل الخروج"
 }
