@@ -7,8 +7,8 @@ import '../widgets/settings/locale_tile/language_list_tile.dart';
 import '../widgets/settings/return_to_previous_route.dart';
 
 class AuthSettingsScreen extends StatelessWidget {
-  final String previousRouteName;
-  const AuthSettingsScreen({super.key, required this.previousRouteName});
+  final String Function(BuildContext) previousRouteNameFunction;
+  const AuthSettingsScreen({super.key, required this.previousRouteNameFunction});
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +18,7 @@ class AuthSettingsScreen extends StatelessWidget {
 
     return Scaffold(
       body: AuthBody(
-        currentRouteName: S.of(context).settings,
+        previousRouteNameFunction:(_)=> S.of(_).settings,
         introHeader: S.of(context).settings,
         showSettingsButton: false,
         introBody: '',
@@ -28,7 +28,7 @@ class AuthSettingsScreen extends StatelessWidget {
           SizedBox(height: h * 0.05),
           DarkModeListTile(color: color, style: style),
           SizedBox(height: h * 0.06),
-          ReturnToPreviousRoute(previousRouteName: previousRouteName),
+          ReturnToPreviousRoute(previousRouteNameFunction: previousRouteNameFunction),
         ],
       ),
     );

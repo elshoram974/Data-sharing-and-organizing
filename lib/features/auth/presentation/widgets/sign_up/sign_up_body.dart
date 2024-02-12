@@ -15,7 +15,7 @@ class SignUpBody extends StatelessWidget {
   Widget build(BuildContext context) {
     ProviderDependency.signUp = BlocProvider.of<SignUpCubit>(context);
     return AuthBody(
-      currentRouteName: S.of(context).signUp,
+      previousRouteNameFunction:(_)=> S.of(_).signUp,
       introHeader: S.of(context).signUp,
       introBody: S.of(context).createYourOwenEmail,
       onWillPop: ProviderDependency.signUp.onWillPop,

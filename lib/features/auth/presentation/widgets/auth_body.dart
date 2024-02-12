@@ -14,10 +14,10 @@ class AuthBody extends StatelessWidget {
     this.showSettingsButton = true,
     this.showBackButton = true,
     this.onWillPop,
-    required this.currentRouteName,
+    required this.previousRouteNameFunction,
   });
 
-  final String currentRouteName;
+  final String Function(BuildContext) previousRouteNameFunction;
   final String introHeader;
   final String introBody;
   final bool showSettingsButton;
@@ -36,7 +36,7 @@ class AuthBody extends StatelessWidget {
           slivers: [
             AuthAppBar(
               showBackButton: showBackButton,
-              currentRouteName: currentRouteName,
+              previousRouteNameFunction: previousRouteNameFunction,
               onWillPop: onWillPop,
               showSettingsButton: showSettingsButton,
             ),

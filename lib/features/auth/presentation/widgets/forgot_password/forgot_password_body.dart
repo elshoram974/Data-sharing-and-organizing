@@ -15,7 +15,7 @@ class ForgotPasswordBody extends StatelessWidget {
   Widget build(BuildContext context) {
     ProviderDependency.createNewPassword = BlocProvider.of<CreateNewPasswordCubit>(context);
     return AuthBody(
-      currentRouteName: S.of(context).createNewPassword,
+      previousRouteNameFunction:(_)=> S.of(_).createNewPassword,
       introHeader: S.of(context).createNewPassword,
       introBody: S.of(context).yourNewPasswordMustBeDifferentFromPreviously,
       showBackButton: false,

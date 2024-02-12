@@ -7,11 +7,11 @@ class SettingsButtonAction extends StatelessWidget {
   const SettingsButtonAction({
     super.key,
     required this.showSettingsButton,
-    required this.previousRouteName,
+    required this.previousRouteNameFunction,
   });
 
   final bool showSettingsButton;
-  final String previousRouteName;
+  final String Function(BuildContext) previousRouteNameFunction;
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +20,7 @@ class SettingsButtonAction extends StatelessWidget {
       child: IconButton(
         onPressed: () => context.push(
           AppRoute.authSettings,
-          extra: previousRouteName,
+          extra: previousRouteNameFunction,
         ),
         tooltip: S.of(context).settings,
         icon: const Icon(Icons.settings_outlined),

@@ -16,7 +16,7 @@ class RecoverBody extends StatelessWidget {
     ProviderDependency.recoverAccount = BlocProvider.of<RecoverAccountCubit>(context);
 
     return AuthBody(
-      currentRouteName: S.of(context).recoverYourAccount,
+      previousRouteNameFunction:(_)=> S.of(_).recoverYourAccount,
       introHeader: S.of(context).recoverYourAccount,
       introBody: S.of(context).enterYourCredentialsToContinue,
       onWillPop: ProviderDependency.recoverAccount.onWillPop,

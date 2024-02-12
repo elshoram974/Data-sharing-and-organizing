@@ -6,8 +6,8 @@ import 'package:go_router/go_router.dart';
 import '../auth_filled_button.dart';
 
 class ReturnToPreviousRoute extends StatelessWidget {
-  final String previousRouteName;
-  const ReturnToPreviousRoute({super.key, required this.previousRouteName});
+  final String Function(BuildContext) previousRouteNameFunction;
+  const ReturnToPreviousRoute({super.key, required this.previousRouteNameFunction});
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +21,7 @@ class ReturnToPreviousRoute extends StatelessWidget {
         ),
         const Icon(Icons.arrow_downward, size: 42, weight: 700),
         AuthFilledButton(
-          text: previousRouteName,
+          text: previousRouteNameFunction(context),
           onPressed: context.pop,
         ),
       ],

@@ -15,7 +15,7 @@ class CodeVerificationBody extends StatelessWidget {
   Widget build(BuildContext context) {
     ProviderDependency.verificationCode = BlocProvider.of<VerifyCodeCubit>(context);
     return AuthBody(
-      currentRouteName: S.of(context).codeVerification,
+      previousRouteNameFunction:(_)=> S.of(_).codeVerification,
       introHeader: S.of(context).codeVerification,
       introBody: S.of(context).enterDigitCodeThatHasBeenSentToYourEmail,
       onWillPop: ProviderDependency.verificationCode.onWillPop,

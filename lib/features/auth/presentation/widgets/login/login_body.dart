@@ -12,7 +12,7 @@ class LoginBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AuthBody(
-      currentRouteName: S.of(context).login,
+      previousRouteNameFunction:(_)=> S.of(_).login,
       showBackButton: false,
       onWillPop: () => closeApp(context),
       introHeader: S.of(context).welcomeBack,
