@@ -31,11 +31,11 @@ class UserMenuScreen extends StatelessWidget {
           title: S.of(context).support,
         ),
         MenuItemTile(
-          icon: Icons.settings_outlined,
+          icon: Icons.settings,
           title: S.of(context).settings,
           onTap: () => context.push(
             AppRoute.authSettings,
-            extra: (BuildContext _)=>S.of(_).menu,
+            extra: (BuildContext _) => S.of(_).menu,
           ),
         ),
         MenuItemTile(
