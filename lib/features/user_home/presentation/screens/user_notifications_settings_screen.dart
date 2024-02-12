@@ -1,3 +1,4 @@
+import 'package:data_sharing_organizing/core/shared/back_button_leading.dart';
 import 'package:flutter/material.dart';
 
 class UserNotificationsSettingsScreen extends StatelessWidget {
@@ -5,6 +6,11 @@ class UserNotificationsSettingsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(
+      appBar: AppBar(
+        leadingWidth: 100,
+        leading: const BackButtonLeading(showBackButton: true),
+      ),
+    );
   }
 }
