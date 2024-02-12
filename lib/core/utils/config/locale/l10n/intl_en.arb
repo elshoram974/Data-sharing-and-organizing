@@ -80,5 +80,6 @@
     "yesterday": "Yesterday",
     "home": "Home",
     "notification": "Notification",
-    "menu": "Menu"
+    "menu": "Menu",
+    "logout": "Log out"
 }

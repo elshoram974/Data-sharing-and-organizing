@@ -1,6 +1,10 @@
+import 'package:data_sharing_organizing/core/status/status.dart';
+import 'package:data_sharing_organizing/core/status/success/success.dart';
+import 'package:data_sharing_organizing/core/utils/config/routes/routes.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../../auth/domain/entities/auth_user_entity.dart';
 import '../../../../auth/domain/usecases/log_out_use_case.dart';
@@ -24,7 +28,13 @@ class UserMainCubit extends Cubit<UserMainState> {
     emit(UserMainChangeNavBar(navIndex));
   }
 
-  void logOut() => logOutUseCase();
+  void logOut() async {
+    final Status<int> status = await logOutUseCase();
+    if (status is Success<int>) {
+      final BuildContext context = AppRoute.key.currentContext!;
+      if (context.mounted) context.go(AppRoute.splashScreen);
+    }
+  }
 
   @override
   Future<void> close() {
