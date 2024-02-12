@@ -19,7 +19,8 @@ class UserMainCubit extends Cubit<UserMainState> {
   final AuthUserEntity user;
   final LogOutUseCase logOutUseCase;
 
-  PageController navController = PageController();
+  final GlobalKey pageKey = GlobalKey();
+  final PageController navController = PageController();
   int navIndex = 0;
 
   void onNavChange(int val, bool inPageChange) {

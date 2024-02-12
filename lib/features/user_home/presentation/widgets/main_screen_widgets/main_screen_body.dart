@@ -9,6 +9,7 @@ class MainScreenBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return PageView(
+      key: ProviderDependency.userMain.pageKey,
       controller: ProviderDependency.userMain.navController,
       onPageChanged: (_) => ProviderDependency.userMain.onNavChange(_, true),
       children: [
