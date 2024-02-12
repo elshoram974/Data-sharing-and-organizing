@@ -21,6 +21,7 @@ class UserMenuScreen extends StatelessWidget {
         MenuItemTile(
           icon: Icons.notifications,
           title: S.of(context).notification,
+          onTap: () => context.push(AppRoute.userNotificationsSettings),
         ),
         MenuItemTile(
           icon: Icons.security,
