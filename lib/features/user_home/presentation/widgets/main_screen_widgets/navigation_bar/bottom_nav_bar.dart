@@ -17,7 +17,7 @@ class BottomNavBar extends StatelessWidget {
       selectedItemColor: AppColor.active,
       onTap: (_) => ProviderDependency.userMain.onNavChange(_, false),
       items: [
-        for (MainScreens e in MainScreens.items)
+        for (MainScreens e in MainScreens.getItems(context))
           BottomNavigationBarItem(
             activeIcon: Icon(e.activeIcon),
             icon: Icon(e.icon),

@@ -31,7 +31,7 @@ class NavigationRailBar extends StatelessWidget {
       ),
       onDestinationSelected: (_) => ProviderDependency.userMain.onNavChange(_, false),
       destinations: [
-        for (MainScreens e in MainScreens.items)
+        for (MainScreens e in MainScreens.getItems(context))
           NavigationRailDestination(
             icon: Icon(e.icon),
             selectedIcon: Icon(e.activeIcon),

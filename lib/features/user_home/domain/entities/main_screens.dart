@@ -17,21 +17,21 @@ final class MainScreens {
   final IconData icon;
   final Widget screen;
 
-  static List<MainScreens> items = [
+  static List<MainScreens> getItems (BuildContext context)=> [
     MainScreens(
-      name: S.current.home,
+      name: S.of(context).home,
       icon: Icons.home_outlined,
       activeIcon: Icons.home,
       screen: const UserHomeScreen(),
     ),
     MainScreens(
-      name: S.current.notification,
+      name: S.of(context).notification,
       icon: Icons.notifications_outlined,
       activeIcon: Icons.notifications,
       screen: const UserNotificationScreen(),
     ),
     MainScreens(
-      name: S.current.menu,
+      name: S.of(context).menu,
       icon: Icons.menu_outlined,
       activeIcon: Icons.menu,
       screen: const UserMenuScreen(),

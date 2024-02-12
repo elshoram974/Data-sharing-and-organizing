@@ -12,7 +12,7 @@ class MainScreenBody extends StatelessWidget {
       controller: ProviderDependency.userMain.navController,
       onPageChanged: (_) => ProviderDependency.userMain.onNavChange(_, true),
       children: [
-        for (MainScreens e in MainScreens.items) e.screen,
+        for (MainScreens e in MainScreens.getItems(context)) e.screen,
       ],
     );
   }
