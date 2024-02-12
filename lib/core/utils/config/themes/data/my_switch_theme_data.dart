@@ -7,10 +7,8 @@ abstract final class MySwitchThemeData {
   static SwitchThemeData light() {
     return SwitchThemeData(
       trackOutlineWidth: const MaterialStatePropertyAll(0),
-      trackColor: MaterialStateProperty.resolveWith<Color?>(
-          (states) => ThemeFunctions.color(states, null, AppColor.secondary)),
-      thumbColor: MaterialStateProperty.resolveWith<Color?>((states) =>
-          ThemeFunctions.color(states, AppColor.active, Colors.white)),
+      trackColor: MaterialStateProperty.resolveWith<Color?>((states) => ThemeFunctions.color(states, AppColor.active, AppColor.secondary)),
+      thumbColor: MaterialStateProperty.all(Colors.white),
       thumbIcon: const MaterialStatePropertyAll(
         Icon(
           Icons.circle_outlined,
@@ -25,10 +23,8 @@ abstract final class MySwitchThemeData {
   static SwitchThemeData dark() {
     return SwitchThemeData(
       trackOutlineWidth: const MaterialStatePropertyAll(0),
-      trackColor: MaterialStateProperty.resolveWith<Color?>(
-          (states) => ThemeFunctions.color(states, AppColor.active, null)),
-      thumbColor: MaterialStateProperty.resolveWith<Color?>(
-          (states) => ThemeFunctions.color(states, Colors.white, null)),
+      trackColor: MaterialStateProperty.resolveWith<Color?>((states) => ThemeFunctions.color(states, AppColor.active, null)),
+      thumbColor: MaterialStateProperty.all(Colors.white),
       thumbIcon: const MaterialStatePropertyAll(
         Icon(
           Icons.circle_outlined,
