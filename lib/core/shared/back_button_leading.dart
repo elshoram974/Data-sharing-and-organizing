@@ -5,7 +5,11 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 class BackButtonLeading extends StatelessWidget {
-  const BackButtonLeading({super.key, required this.showBackButton, this.onWillPop});
+  const BackButtonLeading({
+    super.key,
+    required this.showBackButton,
+    this.onWillPop,
+  });
 
   final bool showBackButton;
   final void Function()? onWillPop;
@@ -21,11 +25,12 @@ class BackButtonLeading extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             const Icon(Icons.arrow_back_outlined),
-            Text(S.of(context).back, style: AppStyle.styleBold20),
+            Text(
+              S.of(context).back,
+              style: AppStyle.styleBoldInika24.copyWith(fontSize: 20),
+            ),
           ],
         ),
-
-        // icon: const Icon(Icons.settings_outlined),
       ),
     );
   }

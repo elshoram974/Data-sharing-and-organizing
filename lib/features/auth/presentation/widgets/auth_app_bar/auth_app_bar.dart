@@ -1,6 +1,6 @@
+import 'package:data_sharing_organizing/core/shared/back_button_leading.dart';
 import 'package:flutter/material.dart';
 
-import 'back_button_leading.dart';
 import 'settings_button_action.dart';
 
 class AuthAppBar extends StatelessWidget {
