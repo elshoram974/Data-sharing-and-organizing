@@ -7,11 +7,11 @@ final class GroupHomeEntity {
   final DateTime lastMessageTime;
 
   GroupHomeEntity({
-    required this.imageLink,
+    this.imageLink,
     required this.groupName,
-    required this.lastMessage,
-    required this.unReadCounter,
-    required this.isUnread,
+    this.lastMessage,
+    this.unReadCounter,
+    this.isUnread = false,
     required this.lastMessageTime,
   });
 }

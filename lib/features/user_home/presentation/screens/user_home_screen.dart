@@ -16,8 +16,7 @@ class UserHomeScreen extends StatelessWidget {
 final List<HomeGroupTile> groupsItems = [
   HomeGroupTile(
     groupHomeEntity: GroupHomeEntity(
-      imageLink:
-          'https://icon2.cleanpng.com/20180320/hww/kisspng-computer-icons-directory-computer-file-png-transparent-no-5ab134adbd3e51.0821639815215627977751.jpg',
+      imageLink: 'https://images.justwatch.com/poster/248497985/s592/one-piece',
       groupName: 'First year in THIET',
       lastMessage:
           'Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message ',
