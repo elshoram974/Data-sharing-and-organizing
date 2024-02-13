@@ -2,8 +2,9 @@ import 'package:data_sharing_organizing/core/utils/constants/app_constants.dart'
 import 'package:data_sharing_organizing/core/utils/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:intl/intl.dart' as intl;
 
-class MyDefaultField extends StatelessWidget {
+class MyDefaultField extends StatefulWidget {
   final GlobalKey<FormFieldState>? fieldKey;
   final String? labelText;
   final String? hintText;
@@ -81,14 +82,20 @@ class MyDefaultField extends StatelessWidget {
   });
 
   @override
+  State<MyDefaultField> createState() => _MyDefaultFieldState();
+}
+
+class _MyDefaultFieldState extends State<MyDefaultField> {
+  late TextDirection? textDirection = widget.textDirection;
+  @override
   Widget build(BuildContext context) {
     return TextFormField(
-      obscureText: obscureText,
-      focusNode: focusNode,
+      obscureText: widget.obscureText,
+      focusNode: widget.focusNode,
       decoration: InputDecoration(
-        filled: filled,
-        fillColor: fillColor,
-        suffixIconColor: suffixIconColor,
+        filled: widget.filled,
+        fillColor: widget.fillColor,
+        suffixIconColor: widget.suffixIconColor,
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(AppConst.borderRadius),
         ),
@@ -96,42 +103,52 @@ class MyDefaultField extends StatelessWidget {
           borderSide: BorderSide(color: AppStyle.styleRegular15.color!),
           borderRadius: BorderRadius.circular(AppConst.borderRadius),
         ),
-        alignLabelWithHint: alignLabelWithHint,
-        labelText: labelText,
-        hintStyle: hintStyle,
-        suffixIcon: suffix,
-        prefixIcon: prefix,
-        hintText: hintText,
+        alignLabelWithHint: widget.alignLabelWithHint,
+        labelText: widget.labelText,
+        hintStyle: widget.hintStyle,
+        suffixIcon: widget.suffix,
+        prefixIcon: widget.prefix,
+        hintText: widget.hintText,
         contentPadding: EdgeInsets.symmetric(
-          horizontal: horizontalPadding ?? 22,
-          vertical: verticalPadding,
+          horizontal: widget.horizontalPadding ?? 22,
+          vertical: widget.verticalPadding,
         ),
       ),
-      readOnly: readOnly,
+      readOnly: widget.readOnly,
       textDirection: textDirection,
-      autofillHints: autofillHints,
-      maxLines: maxLines,
-      minLines: minLines,
-      maxLength: maxLength,
-      initialValue: initialValue,
-      controller: controller,
+      autofillHints: widget.autofillHints,
+      maxLines: widget.maxLines,
+      minLines: widget.minLines,
+      maxLength: widget.maxLength,
+      initialValue: widget.initialValue,
+      controller: widget.controller,
       autovalidateMode: AutovalidateMode.onUserInteraction,
-      keyboardType: keyboardType ??
-          (isDouble ? TextInputType.number : TextInputType.text),
-      inputFormatters: inputFormatters,
-      key: fieldKey,
-      onChanged: onChanged,
-      textCapitalization: textCapitalization,
-      textAlignVertical: textAlignVertical,
-      onSaved: onSaved,
-      validator: validator,
-      textAlign: textAlign,
-      textInputAction: textInputAction,
-      onFieldSubmitted: onFieldSubmitted,
-      onEditingComplete: onEditingComplete,
+      keyboardType: widget.keyboardType ??
+          (widget.isDouble ? TextInputType.number : TextInputType.text),
+      inputFormatters: widget.inputFormatters,
+      key: widget.fieldKey,
+      onChanged: (val) {
+        if (widget.textDirection == null) {
+          if (intl.Bidi.detectRtlDirectionality(val)) {
+            textDirection = TextDirection.rtl;
+          } else {
+            textDirection = TextDirection.ltr;
+          }
+          setState(() {});
+        }
+        if (widget.onChanged != null) widget.onChanged!(val);
+      },
+      textCapitalization: widget.textCapitalization,
+      textAlignVertical: widget.textAlignVertical,
+      onSaved: widget.onSaved,
+      validator: widget.validator,
+      textAlign: widget.textAlign,
+      textInputAction: widget.textInputAction,
+      onFieldSubmitted: widget.onFieldSubmitted,
+      onEditingComplete: widget.onEditingComplete,
       enableSuggestions: true,
-      autofocus: autofocus,
-      style: style,
+      autofocus: widget.autofocus,
+      style: widget.style,
     );
   }
 }

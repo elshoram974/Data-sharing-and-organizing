@@ -41,9 +41,7 @@ class _AuthPasswordFieldState extends State<AuthPasswordField> {
       label: widget.label,
       hint: widget.hint,
       focusNode: widget.focusNode,
-      autofillHints: [
-        widget.newPassword ? AutofillHints.newPassword : AutofillHints.password,
-      ],
+      autofillHints: widget.newPassword ? [AutofillHints.newPassword,AutofillHints.password] : [AutofillHints.password],
       keyboardType: TextInputType.visiblePassword,
       textInputAction: widget.textInputAction,
       onChanged: widget.onChanged,
