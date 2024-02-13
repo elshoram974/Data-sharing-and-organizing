@@ -13,6 +13,7 @@ class UserMenuScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MainBodyWidget(
+      makeHorizontalPadding: false,
       children: [
         MenuItemTile(
           icon: Icons.person,

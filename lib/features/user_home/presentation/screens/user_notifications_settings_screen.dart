@@ -65,6 +65,7 @@ class _NotificationItemWidgetState extends State<NotificationItemWidget> {
       contentPadding: const EdgeInsets.symmetric(
         horizontal: AppConst.defaultPadding,
       ),
+      shape: const RoundedRectangleBorder(side: BorderSide.none),
       title: Text(
         widget.title,
         style: AppStyle.styleBoldInika24.copyWith(fontSize: 20),

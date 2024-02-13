@@ -1,5 +1,6 @@
 import 'package:data_sharing_organizing/core/utils/constants/app_color.dart';
 import 'package:data_sharing_organizing/core/utils/constants/app_constants.dart';
+import 'package:data_sharing_organizing/core/utils/extension/padding_ex.dart';
 import 'package:data_sharing_organizing/core/utils/styles.dart';
 import 'package:flutter/material.dart';
 
@@ -17,7 +18,8 @@ class MenuItemTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      contentPadding:const EdgeInsets.symmetric(vertical: AppConst.defaultPadding),
+      contentPadding: const EdgeInsets.symmetric(horizontal: AppConst.defaultPadding),
+      shape: const RoundedRectangleBorder(side: BorderSide.none),
       onTap: onTap,
       title: Row(
         children: [
@@ -35,6 +37,6 @@ class MenuItemTile extends StatelessWidget {
           const Icon(Icons.arrow_forward_ios)
         ],
       ),
-    );
+    ).verticalPadding(AppConst.defaultPadding);
   }
 }

@@ -26,7 +26,7 @@ abstract final class UserRoutes {
         GoRoute(
           path: _notificationsSettings,
           pageBuilder: (context, state) => MyCustomTransition.slideTransition(
-            offset: const Offset(0, -1),
+            offset: const Offset(-1, 0),
             context: context,
             state: state,
             child: const UserNotificationsSettingsScreen(),
