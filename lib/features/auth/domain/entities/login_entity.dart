@@ -1,4 +1,4 @@
-import 'package:data_sharing_organizing/core/utils/enums/user_role/user_role_enum.dart';
+import 'package:data_sharing_organizing/core/utils/enums/user_role/user_type_enum.dart';
 import 'package:data_sharing_organizing/features/auth/domain/entities/auth_user_entity.dart';
 
 final class LoginUserEntity extends AuthUserEntity {
@@ -7,7 +7,7 @@ final class LoginUserEntity extends AuthUserEntity {
     required super.email,
     required super.password,
     this.keepLogin = true,
-  }) : super(id:0, name: '', userRole: UserRole.personalUser);
+  }) : super(id:0, name: '', userType: UserType.personal);
 
   factory LoginUserEntity.none() =>
       const LoginUserEntity(email: '', password: '');
@@ -18,7 +18,7 @@ final class LoginUserEntity extends AuthUserEntity {
     String? name,
     String? email,
     String? password,
-    UserRole? userRole,
+    UserType? userType,
     bool? keepLogin,
   }) {
     return LoginUserEntity(

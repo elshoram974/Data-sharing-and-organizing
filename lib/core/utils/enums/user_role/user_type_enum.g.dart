@@ -1,40 +1,35 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'user_role_enum.dart';
+part of 'user_type_enum.dart';
 
 // **************************************************************************
 // TypeAdapterGenerator
 // **************************************************************************
 
-class UserRoleAdapter extends TypeAdapter<UserRole> {
+class UserTypeAdapter extends TypeAdapter<UserType> {
   @override
   final int typeId = 1;
 
   @override
-  UserRole read(BinaryReader reader) {
+  UserType read(BinaryReader reader) {
     switch (reader.readByte()) {
       case 0:
-        return UserRole.personalUser;
+        return UserType.personal;
       case 1:
-        return UserRole.businessUser;
-      case 2:
-        return UserRole.businessAdmin;
+        return UserType.business;
       default:
-        return UserRole.personalUser;
+        return UserType.personal;
     }
   }
 
   @override
-  void write(BinaryWriter writer, UserRole obj) {
+  void write(BinaryWriter writer, UserType obj) {
     switch (obj) {
-      case UserRole.personalUser:
+      case UserType.personal:
         writer.writeByte(0);
         break;
-      case UserRole.businessUser:
+      case UserType.business:
         writer.writeByte(1);
-        break;
-      case UserRole.businessAdmin:
-        writer.writeByte(2);
         break;
     }
   }
@@ -45,7 +40,7 @@ class UserRoleAdapter extends TypeAdapter<UserRole> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is UserRoleAdapter &&
+      other is UserTypeAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }

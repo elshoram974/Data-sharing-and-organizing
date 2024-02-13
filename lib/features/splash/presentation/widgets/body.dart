@@ -1,6 +1,6 @@
 import 'package:data_sharing_organizing/core/utils/config/locale/generated/l10n.dart';
 import 'package:data_sharing_organizing/core/utils/config/routes/routes.dart';
-import 'package:data_sharing_organizing/core/utils/enums/user_role/user_role_enum.dart';
+import 'package:data_sharing_organizing/core/utils/enums/user_role/user_type_enum.dart';
 import 'package:data_sharing_organizing/core/utils/services/dependency/provider_dependency.dart';
 import 'package:data_sharing_organizing/features/splash/presentation/cubit/config_cubit.dart';
 import 'package:flutter/material.dart';
@@ -74,7 +74,7 @@ class _SplashBodyState extends State<SplashBody>
       const Duration(seconds: 3),
       () {
         if (cubit.isLoggedIn) {
-          if (cubit.currentUser!.userRole == UserRole.businessAdmin) {
+          if (cubit.currentUser!.userType == UserType.business) {
             // TODO: to admin home
           } else {
             context.go(AppRoute.userHome, extra: cubit.currentUser!);

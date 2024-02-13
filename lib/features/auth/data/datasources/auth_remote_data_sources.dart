@@ -63,7 +63,7 @@ class AuthRemoteDataSourceImp extends AuthRemoteDataSource {
         'name': user.name,
         'email': user.email,
         'password': user.password,
-        'userRole': user.userRole.inString,
+        'userType': user.userType.inString,
       },
     );
     return AppUser.fromMap(response).user!;

@@ -2,7 +2,7 @@ import 'package:data_sharing_organizing/core/status/errors/failure.dart';
 import 'package:data_sharing_organizing/core/status/status.dart';
 import 'package:data_sharing_organizing/core/status/success/success.dart';
 import 'package:data_sharing_organizing/core/utils/config/routes/routes.dart';
-import 'package:data_sharing_organizing/core/utils/enums/user_role/user_role_enum.dart';
+import 'package:data_sharing_organizing/core/utils/enums/user_role/user_type_enum.dart';
 import 'package:data_sharing_organizing/core/utils/functions/show_my_dialog.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
@@ -62,7 +62,7 @@ class CreateNewPasswordCubit extends Cubit<CreateNewPasswordState> {
   void _savedSuccess(User user) {
     emit(CreateNewPasswordSuccessState(user));
     TextInput.finishAutofillContext();
-    if (user.userRole == UserRole.businessAdmin) {
+    if (user.userType == UserType.business) {
       // TODO: to admin home
     } else {
       AppRoute.key.currentContext!.go(AppRoute.userHome, extra: user);

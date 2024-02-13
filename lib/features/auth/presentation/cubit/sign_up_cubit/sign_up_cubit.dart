@@ -3,7 +3,7 @@ import 'package:data_sharing_organizing/core/status/status.dart';
 import 'package:data_sharing_organizing/core/status/success/success.dart';
 import 'package:data_sharing_organizing/core/utils/config/locale/generated/l10n.dart';
 import 'package:data_sharing_organizing/core/utils/config/routes/routes.dart';
-import 'package:data_sharing_organizing/core/utils/enums/user_role/user_role_enum.dart';
+import 'package:data_sharing_organizing/core/utils/enums/user_role/user_type_enum.dart';
 import 'package:data_sharing_organizing/core/utils/functions/show_my_dialog.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
@@ -31,7 +31,7 @@ class SignUpCubit extends Cubit<SignUpState> {
   String name = '';
   String email = '';
   String password = '';
-  UserRole? userRole;
+  UserType? userType;
 
   final BuildContext? _context = AppRoute.key.currentContext;
 
@@ -41,15 +41,15 @@ class SignUpCubit extends Cubit<SignUpState> {
     return super.close();
   }
 
-  void chooseUserRole(UserRole role) {
-    userRole = role;
-    emit(ChooseUserRoleState(userRole!));
+  void chooseUserRole(UserType role) {
+    userType = role;
+    emit(ChooseUserRoleState(userType!));
   }
 
   // * sign up----------------------------
   void signUp() async {
     if (!formKey.currentState!.validate()) return;
-    if (userRole == null) return _chooseUserRoleDialog();
+    if (userType == null) return _chooseUserRoleDialog();
     formKey.currentState!.save();
     emit(const SignUpLoadingState());
     final AuthUserEntity user = AuthUserEntity(
@@ -57,7 +57,7 @@ class SignUpCubit extends Cubit<SignUpState> {
       name: name,
       email: email,
       password: password,
-      userRole: userRole!,
+      userType: userType!,
     );
 
     EasyLoading.show(dismissOnTap: false);
@@ -102,7 +102,7 @@ class SignUpCubit extends Cubit<SignUpState> {
     if (name.isNotEmpty ||
         email.isNotEmpty ||
         password.isNotEmpty ||
-        userRole != null) {
+        userType != null) {
       ShowMyDialog.back(
         _context!,
         body: S.of(_context).ifYouReturnNowYouWillLoseAllData,

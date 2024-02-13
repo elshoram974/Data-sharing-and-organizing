@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:data_sharing_organizing/core/utils/enums/user_provider_enum.dart';
-import 'package:data_sharing_organizing/core/utils/enums/user_role/user_role_enum.dart';
+import 'package:data_sharing_organizing/core/utils/enums/user_role/user_type_enum.dart';
 import 'package:data_sharing_organizing/core/utils/enums/user_status_enum.dart';
 
 import '../../../domain/entities/auth_user_entity.dart';
@@ -29,7 +29,7 @@ class User extends AuthUserEntity {
     this.accountLastlogin,
     this.accountCreatedDatetime,
     this.userImage,
-    required super.userRole,
+    required super.userType,
     required this.userStatus,
     this.userStatusMessage,
   }) : super(
@@ -50,7 +50,7 @@ class User extends AuthUserEntity {
       accountLastlogin: DateTime.tryParse(data['user_lastlogin'] as String),
       accountCreatedDatetime: DateTime.tryParse(data['user_createdat'] as String),
       userImage: data['user_image'] as dynamic,
-      userRole: UserRole.fromString(data['user_role'] as String?),
+      userType: UserType.fromString(data['user_type'] as String?),
       userStatus: UserStatus.fromString(data['user_status'] as String),
       userStatusMessage: data['user_status_message'] as String?,
     );
@@ -66,7 +66,7 @@ class User extends AuthUserEntity {
         'user_lastlogin': accountLastlogin?.toIso8601String(),
         'user_createdat': accountCreatedDatetime?.toIso8601String(),
         'user_image': userImage,
-        'user_role': userRole.inString,
+        'user_type': userType.inString,
         'user_status': userStatus.inString,
         'user_status_message': userStatusMessage,
       };
@@ -95,7 +95,7 @@ class User extends AuthUserEntity {
       accountLastlogin,
       accountCreatedDatetime,
       userImage,
-      userRole,
+      userType,
       userStatus,
       userStatusMessage,
     ];
