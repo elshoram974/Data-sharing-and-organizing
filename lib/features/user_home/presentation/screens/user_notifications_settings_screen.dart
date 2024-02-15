@@ -1,11 +1,9 @@
 import 'package:data_sharing_organizing/core/shared/back_button_leading.dart';
-import 'package:data_sharing_organizing/core/shared/switch/my_switch_list_tile.dart';
+import 'package:data_sharing_organizing/core/shared/switch/res_my_switch_list_tile.dart';
 import 'package:data_sharing_organizing/core/utils/config/locale/generated/l10n.dart';
 import 'package:data_sharing_organizing/core/utils/extension/padding_ex.dart';
 import 'package:data_sharing_organizing/core/utils/styles.dart';
 import 'package:flutter/material.dart';
-
-
 
 class UserNotificationsSettingsScreen extends StatelessWidget {
   const UserNotificationsSettingsScreen({super.key});
@@ -63,7 +61,7 @@ class _NotificationItemWidgetState extends State<NotificationItemWidget> {
   late bool value = widget.value;
   @override
   Widget build(BuildContext context) {
-    return MySwitchListTile(
+    return ResMySwitchListTile(
       title: Text(
         widget.title,
         style: AppStyle.styleBoldInika24.copyWith(fontSize: 20),
