@@ -17,12 +17,13 @@ class NotificationSubtitle extends StatelessWidget {
       children: [
         HomeGroupLastMessage(lastMessage: groupHomeEntity.lastMessage!),
         const SizedBox(width: AppConst.defaultPadding),
-        Transform.rotate(
-            angle: 3.14 / 2,
-            child: const Icon(
-              Icons.arrow_forward_ios,
-              color: AppColor.active,
-            )),
+        Icon(
+          Icons.keyboard_arrow_down,
+          size: 32,
+          color: groupHomeEntity.isUnread
+              ? AppColor.active
+              : AppColor.gray, //TODO: change the AppColor.gray value
+        ),
       ],
     );
   }

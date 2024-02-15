@@ -31,7 +31,7 @@ if (keystorePropertiesFile.exists()) {
 
 android {
     namespace "com.mrecode.datasharingorganizing.data_sharing_organizing"
-    compileSdkVersion flutter.compileSdkVersion
+    compileSdkVersion 34
     ndkVersion flutter.ndkVersion
 
     compileOptions {
