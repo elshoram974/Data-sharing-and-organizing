@@ -1,3 +1,4 @@
+import 'package:data_sharing_organizing/core/shared/switch/my_switch_list_tile.dart';
 import 'package:data_sharing_organizing/core/utils/config/locale/generated/l10n.dart';
 import 'package:data_sharing_organizing/core/utils/constants/app_constants.dart';
 import 'package:flutter/material.dart';
@@ -18,8 +19,9 @@ class DarkModeListTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ConfigCubit cubit = ProviderDependency.config;
-    return SwitchListTile(
+    return MySwitchListTile(
       contentPadding: EdgeInsets.zero,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppConst.borderRadius)),
       title: Row(
         children: [
           Icon(Icons.dark_mode_outlined, color: color),

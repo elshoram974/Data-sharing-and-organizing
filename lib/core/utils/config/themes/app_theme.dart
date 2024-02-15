@@ -7,7 +7,6 @@ import 'package:flutter/services.dart';
 import 'data/my_check_box_theme_data.dart';
 import 'data/my_list_tile_theme_data.dart';
 import 'data/my_radio_theme_data.dart';
-import 'data/my_switch_theme_data.dart';
 
 class AppTheme {
   static ThemeData lightMode = ThemeData(
@@ -15,7 +14,6 @@ class AppTheme {
     fontFamily: AppStrings.inter,
     checkboxTheme: MyCheckboxThemeData.light(),
     radioTheme: MyRadioThemeData.light(),
-    switchTheme: MySwitchThemeData.light(),
     listTileTheme: MyListTileThemeData.light(),
     colorScheme: ColorScheme.fromSeed(
       seedColor: AppColor.primary,
@@ -32,7 +30,6 @@ class AppTheme {
     useMaterial3: true,
     checkboxTheme: MyCheckboxThemeData.dark(),
     radioTheme: MyRadioThemeData.dark(),
-    switchTheme: MySwitchThemeData.dark(),
     listTileTheme: MyListTileThemeData.dark(),
     colorScheme: ColorScheme.fromSeed(
       seedColor: AppColor.primary,
