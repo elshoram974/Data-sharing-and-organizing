@@ -19,24 +19,21 @@ class AuthDesktopBody extends StatelessWidget {
   Widget build(BuildContext context) {
     const int flex = 20;
     return SliverToBoxAdapter(
-      child: SizedBox(
-        height: MediaQuery.sizeOf(context).height - 70,
-        child: Row(
-          children: [
-            const Spacer(),
-            Expanded(
-              flex: flex,
-              child: AuthLogoWithIntro(
-                introHeader: introHeader,
-                introBody: introBody,
-                center: true,
-              ),
+      child: Row(
+        children: [
+          const Spacer(),
+          Expanded(
+            flex: flex,
+            child: AuthLogoWithIntro(
+              introHeader: introHeader,
+              introBody: introBody,
+              center: true,
             ),
-            const Spacer(),
-            Expanded(flex: flex, child: AddWidgetInBody(children: children)),
-            const Spacer(),
-          ],
-        ),
+          ),
+          const Spacer(),
+          Expanded(flex: flex, child: AddWidgetInBody(children: children)),
+          const Spacer(),
+        ],
       ),
     );
   }
