@@ -17,7 +17,7 @@ class SignUpBody extends StatelessWidget {
     return AuthBody(
       previousRouteNameFunction:(_)=> S.of(_).signUp,
       introHeader: S.of(context).signUp,
-      introBody: S.of(context).createYourOwenEmail,
+      introBody: S.of(context).createYourOwnEmail,
       onWillPop: ProviderDependency.signUp.onWillPop,
       children: const [
         SignUpFields(),

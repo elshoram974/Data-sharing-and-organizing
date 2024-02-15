@@ -332,11 +332,11 @@ class S {
     );
   }
 
-  /// `Create your owen email`
-  String get createYourOwenEmail {
+  /// `Create your own email`
+  String get createYourOwnEmail {
     return Intl.message(
-      'Create your owen email',
-      name: 'createYourOwenEmail',
+      'Create your own email',
+      name: 'createYourOwnEmail',
       desc: '',
       args: [],
     );

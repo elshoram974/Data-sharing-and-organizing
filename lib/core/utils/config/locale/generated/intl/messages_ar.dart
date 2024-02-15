@@ -43,7 +43,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("تأكيد كلمة المرور"),
         "createNewPassword":
             MessageLookupByLibrary.simpleMessage("إنشاء كلمة مرور جديدة"),
-        "createYourOwenEmail":
+        "createYourOwnEmail":
             MessageLookupByLibrary.simpleMessage("أنشئ بريدك الإلكتروني الخاص"),
         "darkMode": MessageLookupByLibrary.simpleMessage("الوضع المظلم"),
         "doNotHaveAnAccount":
