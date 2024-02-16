@@ -46,6 +46,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "createYourOwnEmail":
             MessageLookupByLibrary.simpleMessage("أنشئ بريدك الإلكتروني الخاص"),
         "darkMode": MessageLookupByLibrary.simpleMessage("الوضع المظلم"),
+        "deviceMode": MessageLookupByLibrary.simpleMessage("وضع الجهاز"),
         "doNotHaveAnAccount":
             MessageLookupByLibrary.simpleMessage("ليس لديك حساب ؟ "),
         "emailAddress":
@@ -81,6 +82,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "invalidVerificationType":
             MessageLookupByLibrary.simpleMessage("نوع التحقق غير صالح"),
         "language": MessageLookupByLibrary.simpleMessage("اللغة"),
+        "lightMode": MessageLookupByLibrary.simpleMessage("الوضع الفاتح"),
         "login": MessageLookupByLibrary.simpleMessage("تسجيل الدخول"),
         "logout": MessageLookupByLibrary.simpleMessage("تسجيل الخروج"),
         "menu": MessageLookupByLibrary.simpleMessage("القائمة"),
@@ -129,6 +131,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "theVerificationCodeHasExpiredWeSentAnotherCode":
             MessageLookupByLibrary.simpleMessage(
                 "انتهت صلاحية رمز التحقق. لقد قمنا بإرسال رمز آخر."),
+        "themeMode": MessageLookupByLibrary.simpleMessage("وضع المظهر"),
         "thereIsProblemWithServerTryAgainLater":
             MessageLookupByLibrary.simpleMessage(
                 "هناك مشكلة في الخادم. حاول مرة أخرى لاحقًا."),

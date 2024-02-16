@@ -15,24 +15,27 @@ class DataSharingApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ConfigCubit c = BlocProvider.of<ConfigCubit>(context, listen: true);
-    return MaterialApp.router(
-      localizationsDelegates: const [
-        S.delegate,
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-      ],
-      supportedLocales: S.delegate.supportedLocales,
-      locale: c.appLocale,
-      title: S.current.sharikna,
-      routerConfig: AppRoute.router,
-      theme: AppTheme.lightMode,
-      darkTheme: AppTheme.darkMode,
-      themeMode: c.themeMode,
-      builder: EasyLoading.init(),
-      scaffoldMessengerKey: ScaffoldKey.call,
-      localeResolutionCallback: (l, _) =>
-          AppLocale.localeResolutionCallback(l, c),
+    return MediaQuery(
+      data: MediaQuery.of(context).copyWith(textScaler: c.textScaler),
+      child: MaterialApp.router(
+        localizationsDelegates: const [
+          S.delegate,
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+        ],
+        supportedLocales: S.delegate.supportedLocales,
+        locale: c.appLocale,
+        title: S.current.sharikna,
+        routerConfig: AppRoute.router,
+        theme: AppTheme.lightMode,
+        darkTheme: AppTheme.darkMode,
+        themeMode: c.themeMode,
+        builder: EasyLoading.init(),
+        scaffoldMessengerKey: ScaffoldKey.call,
+        localeResolutionCallback: (l, _) =>
+            AppLocale.localeResolutionCallback(l, c),
+      ),
     );
   }
 }

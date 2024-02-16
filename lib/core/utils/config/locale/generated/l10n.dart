@@ -931,6 +931,36 @@ class S {
       args: [],
     );
   }
+
+  /// `Theme mode`
+  String get themeMode {
+    return Intl.message(
+      'Theme mode',
+      name: 'themeMode',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Light mode`
+  String get lightMode {
+    return Intl.message(
+      'Light mode',
+      name: 'lightMode',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Device mode`
+  String get deviceMode {
+    return Intl.message(
+      'Device mode',
+      name: 'deviceMode',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

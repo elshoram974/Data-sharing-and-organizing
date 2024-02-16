@@ -17,6 +17,7 @@ class ConfigCubit extends Cubit<ConfigState> {
   final GetCurrentUserUseCase getCurrentUserUseCase;
 
   ConfigCubit(this.getCurrentUserUseCase) : super(const ConfigInitial());
+  TextScaler textScaler = TextScaler.noScaling;
 
   ThemeMode themeMode =
       ThemeMode.values[int.parse(config.get(AppStrings.themeMode) ?? '0')];

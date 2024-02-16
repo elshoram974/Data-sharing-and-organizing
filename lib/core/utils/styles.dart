@@ -15,6 +15,12 @@ abstract final class AppStyle {
   //   fontWeight: FontWeight.bold,
   //   fontFamily: AppStrings.montserrat,
   // );
+  static const TextStyle styleBoldInika16 = TextStyle(
+    fontSize: 16,
+    color: AppColor.gray,
+    fontWeight: FontWeight.bold,
+    fontFamily: AppStrings.inika,
+  );
   static const TextStyle styleBoldInika24 = TextStyle(
     fontSize: 24,
     fontWeight: FontWeight.bold,

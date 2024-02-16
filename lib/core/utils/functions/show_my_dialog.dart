@@ -2,12 +2,25 @@ import 'package:data_sharing_organizing/features/auth/data/models/app_user/user.
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../features/auth/presentation/widgets/settings/locale_tile/languages_dialog_list.dart';
 import '../../shared/dialog/custom_dialog.dart';
 import '../config/locale/generated/l10n.dart';
 import '../config/routes/routes.dart';
 
 abstract final class ShowMyDialog {
   const ShowMyDialog();
+
+  static void showLangDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return const Dialog(
+          clipBehavior: Clip.hardEdge,
+          child: LanguagesDialogList(),
+        );
+      },
+    );
+  }
 
   static Future<T?> warning<T>(
     BuildContext context, {

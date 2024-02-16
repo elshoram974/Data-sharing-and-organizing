@@ -7,7 +7,8 @@ import '../../../../../../core/utils/services/dependency/provider_dependency.dar
 import '../../../../../splash/presentation/cubit/config_cubit.dart';
 
 class LangNameWidget extends StatelessWidget {
-  const LangNameWidget({super.key});
+  const LangNameWidget({super.key, required this.makeInikaFont});
+  final bool makeInikaFont;
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +18,13 @@ class LangNameWidget extends StatelessWidget {
       buildWhen: (previous, current) => current is ChangeLanguage,
       builder: (context, state) {
         final LocaleClass locale = LocaleClass.fromCurrent(cubit.appLocale);
-        return Text(locale.languageName, style: AppStyle.styleRegular15);
+
+        return Text(
+          locale.languageName,
+          style: makeInikaFont
+              ? AppStyle.styleBoldInika16
+              : AppStyle.styleRegular15,
+        );
       },
     );
   }

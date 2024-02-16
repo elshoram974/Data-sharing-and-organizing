@@ -1,5 +1,6 @@
+import 'package:data_sharing_organizing/core/shared/dialog/choose_dialog_tile.dart';
+import 'package:data_sharing_organizing/core/shared/responsive/constrained_box.dart';
 import 'package:data_sharing_organizing/core/utils/config/locale/class.dart';
-import 'package:data_sharing_organizing/core/utils/config/locale/generated/l10n.dart';
 import 'package:data_sharing_organizing/core/utils/constants/app_constants.dart';
 import 'package:data_sharing_organizing/core/utils/services/dependency/provider_dependency.dart';
 import 'package:flutter/material.dart';
@@ -14,28 +15,25 @@ class LanguagesDialogList extends StatelessWidget {
   Widget build(BuildContext context) {
     final ConfigCubit cubit = ProviderDependency.config;
 
-    return SingleChildScrollView(
-      child: Column(
-        children: LocaleClass.locales
-            .map(
-              (e) => ListTile(
-                contentPadding: const EdgeInsets.symmetric(
-                  horizontal: AppConst.defaultPadding,
-                ),
-                leading: Radio<LocaleClass>(
+    return ResConstrainedBox(
+      maxWidthNotPhone: AppConst.dialogConstraint,
+      child: SingleChildScrollView(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: LocaleClass.locales
+              .map(
+                (e) => ChooseDialogListTile<LocaleClass>(
+                  title: e.languageName,
                   value: e,
                   groupValue:
                       cubit.appLocale.languageCode == e.locale.languageCode
                           ? e
                           : null,
-                  onChanged: (val) => selectLang(context, cubit, e),
+                  onTap: () => selectLang(context, cubit, e),
                 ),
-                title: Text(e.languageName),
-                trailing: e.isDeviceLang ? Text(S.of(context).system) : null,
-                onTap: () => selectLang(context, cubit, e),
-              ),
-            )
-            .toList(),
+              )
+              .toList(),
+        ),
       ),
     );
   }

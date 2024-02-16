@@ -87,5 +87,8 @@
     "logout": "Log out",
     "statusBar": "Status bar",
     "onLockScreen": "On lock screen",
-    "popUps": "Pop ups"
+    "popUps": "Pop ups",
+    "themeMode": "Theme mode",
+    "lightMode": "Light mode",
+    "deviceMode": "Device mode"
 }

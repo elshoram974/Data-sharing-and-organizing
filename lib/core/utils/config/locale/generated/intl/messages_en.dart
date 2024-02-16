@@ -47,6 +47,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "createYourOwnEmail":
             MessageLookupByLibrary.simpleMessage("Create your own email"),
         "darkMode": MessageLookupByLibrary.simpleMessage("Dark mode"),
+        "deviceMode": MessageLookupByLibrary.simpleMessage("Device mode"),
         "doNotHaveAnAccount":
             MessageLookupByLibrary.simpleMessage("Don\'t have an account ? "),
         "emailAddress": MessageLookupByLibrary.simpleMessage("Email address"),
@@ -80,6 +81,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "invalidVerificationType":
             MessageLookupByLibrary.simpleMessage("Invalid verification type."),
         "language": MessageLookupByLibrary.simpleMessage("Language"),
+        "lightMode": MessageLookupByLibrary.simpleMessage("Light mode"),
         "login": MessageLookupByLibrary.simpleMessage("Login"),
         "logout": MessageLookupByLibrary.simpleMessage("Log out"),
         "menu": MessageLookupByLibrary.simpleMessage("Menu"),
@@ -128,6 +130,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "theVerificationCodeHasExpiredWeSentAnotherCode":
             MessageLookupByLibrary.simpleMessage(
                 "The verification code has expired. We have sent another code."),
+        "themeMode": MessageLookupByLibrary.simpleMessage("Theme mode"),
         "thereIsProblemWithServerTryAgainLater":
             MessageLookupByLibrary.simpleMessage(
                 "There is a problem with the server. Try again later."),
