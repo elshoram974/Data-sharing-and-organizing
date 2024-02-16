@@ -35,10 +35,7 @@ class UserMenuScreen extends StatelessWidget {
         MenuItemTile(
           icon: Icons.settings,
           title: S.of(context).settings,
-          onTap: () => context.push(
-            AppRoute.authSettings,
-            extra: (BuildContext _) => S.of(_).menu,
-          ),
+          onTap: () => context.push(AppRoute.userSettings),
         ),
         MenuItemTile(
           onTap: ProviderDependency.userMain.logOut,

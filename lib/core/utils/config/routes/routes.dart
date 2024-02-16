@@ -22,6 +22,7 @@ abstract class AppRoute {
   // * user screens *//
   static const String userHome = UserRoutes.userHome;
   static const String userNotificationsSettings =  UserRoutes.notificationsSettings;
+  static const String userSettings =  UserRoutes.userSettings;
   // * ------ End user screens ------ *//
 
   static final GoRouter router = GoRouter(

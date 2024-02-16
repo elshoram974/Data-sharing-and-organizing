@@ -1,4 +1,4 @@
-import 'package:data_sharing_organizing/core/shared/back_button_leading.dart';
+import 'package:data_sharing_organizing/core/shared/empty_screen_with_title.dart';
 import 'package:data_sharing_organizing/core/shared/switch/res_my_switch_list_tile.dart';
 import 'package:data_sharing_organizing/core/utils/config/locale/generated/l10n.dart';
 import 'package:data_sharing_organizing/core/utils/extension/padding_ex.dart';
@@ -13,32 +13,22 @@ class UserNotificationsSettingsScreen extends StatelessWidget {
     bool showInStatusBar = false;
     bool showOnLockScreen = false;
     bool showPopUps = true;
-    return Scaffold(
-      appBar: AppBar(
-        leadingWidth: 100,
-        leading: const BackButtonLeading(showBackButton: true),
-      ),
-      body: ListView(
-        children: [
-          Text(
-            S.of(context).notification,
-            textAlign: TextAlign.center,
-            style: AppStyle.styleBoldInika24.copyWith(fontSize: 36),
-          ),
-          NotificationItemWidget(
-            value: showInStatusBar,
-            title: S.of(context).statusBar,
-          ),
-          NotificationItemWidget(
-            value: showOnLockScreen,
-            title: S.of(context).onLockScreen,
-          ),
-          NotificationItemWidget(
-            value: showPopUps,
-            title: S.of(context).popUps,
-          ),
-        ],
-      ),
+    return EmptyScreenWithTitle(
+      title: S.of(context).notification,
+      children: [
+        NotificationItemWidget(
+          value: showInStatusBar,
+          title: S.of(context).statusBar,
+        ),
+        NotificationItemWidget(
+          value: showOnLockScreen,
+          title: S.of(context).onLockScreen,
+        ),
+        NotificationItemWidget(
+          value: showPopUps,
+          title: S.of(context).popUps,
+        ),
+      ],
     );
   }
 }
@@ -69,6 +59,6 @@ class _NotificationItemWidgetState extends State<NotificationItemWidget> {
       value: value,
       onChanged: (value) => setState(() => this.value = value),
       dense: true,
-    ).verticalPadding(30 - 8);
+    ).verticalPadding(22); //30 - 8
   }
 }

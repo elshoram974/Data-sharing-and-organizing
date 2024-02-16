@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../../../../features/user_home/presentation/screens/main_screen/user_main_screen.dart';
 import '../../../../../features/user_home/presentation/screens/user_notifications_settings_screen.dart';
+import '../../../../../features/user_home/presentation/screens/user_settings_screen.dart';
 import '../my_custom_transition.dart';
 
 abstract final class UserRoutes {
@@ -12,7 +13,11 @@ abstract final class UserRoutes {
   static const String userHome = '/home';
 
   static const String _notificationsSettings = 'notificationsSettings';
-  static const String notificationsSettings = '$userHome/$_notificationsSettings';
+  static const String notificationsSettings =
+      '$userHome/$_notificationsSettings';
+
+  static const String _userSettings = 'userSettings';
+  static const String userSettings = '$userHome/$_userSettings';
 
   static GoRoute call() {
     return GoRoute(
@@ -31,7 +36,16 @@ abstract final class UserRoutes {
             state: state,
             child: const UserNotificationsSettingsScreen(),
           ),
-        )
+        ),
+        GoRoute(
+          path: _userSettings,
+          pageBuilder: (context, state) => MyCustomTransition.slideTransition(
+            offset: const Offset(-1, 0),
+            context: context,
+            state: state,
+            child: const UserSettingsScreen(),
+          ),
+        ),
       ],
     );
   }
