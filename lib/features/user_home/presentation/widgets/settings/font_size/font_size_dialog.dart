@@ -17,9 +17,17 @@ class FontSizeDialog extends StatelessWidget {
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text('A', style: AppStyle.styleBoldInika24.copyWith(fontSize: 10)),
+            Text(
+              'A',
+              style: AppStyle.styleBoldInika24.copyWith(fontSize: 10),
+              textScaler: TextScaler.noScaling,
+            ),
             const FontScaleSlider(),
-            Text('A', style: AppStyle.styleBoldInika24.copyWith(fontSize: 16)),
+            Text(
+              'A',
+              style: AppStyle.styleBoldInika24.copyWith(fontSize: 16),
+              textScaler: TextScaler.noScaling,
+            ),
           ],
         ),
       ),

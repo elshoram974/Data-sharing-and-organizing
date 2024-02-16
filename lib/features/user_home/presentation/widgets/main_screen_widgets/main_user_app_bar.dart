@@ -3,7 +3,8 @@ import 'package:data_sharing_organizing/core/utils/constants/app_constants.dart'
 import 'package:flutter/material.dart';
 
 class MainUserAppBar extends StatelessWidget implements PreferredSizeWidget {
-  const MainUserAppBar({super.key});
+  const MainUserAppBar({super.key, this.hight = 110});
+  final double hight;
 
   @override
   Widget build(BuildContext context) {
@@ -33,5 +34,5 @@ class MainUserAppBar extends StatelessWidget implements PreferredSizeWidget {
   }
 
   @override
-  Size get preferredSize => const Size(double.maxFinite, 110);
+  Size get preferredSize => Size(double.maxFinite, AppConst.isWeb ? hight / 2 : hight);
 }
