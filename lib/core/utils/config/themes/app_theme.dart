@@ -20,6 +20,10 @@ class AppTheme {
       brightness: Brightness.light,
     ),
     // textTheme: TextTheme(titleLarge: AppStyle.styleRegular24),
+    dialogTheme: const DialogTheme(
+      backgroundColor: Color(0xffFDC1C9),
+      alignment: Alignment.center,
+    ),
     appBarTheme: const AppBarTheme(
       backgroundColor: Colors.transparent,
       systemOverlayStyle: SystemUiOverlayStyle.dark,
@@ -36,6 +40,10 @@ class AppTheme {
       brightness: Brightness.dark,
     ),
     fontFamily: AppStrings.inter,
+    dialogTheme: const DialogTheme(
+      backgroundColor: Color(0xffFDC1C9),
+      alignment: Alignment.center,
+    ),
     appBarTheme: const AppBarTheme(
       backgroundColor: Colors.transparent,
       systemOverlayStyle: SystemUiOverlayStyle.light,
