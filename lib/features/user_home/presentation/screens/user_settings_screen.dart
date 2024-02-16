@@ -3,6 +3,7 @@ import 'package:data_sharing_organizing/core/utils/config/locale/generated/l10n.
 import 'package:data_sharing_organizing/core/utils/constants/app_strings.dart';
 import 'package:flutter/material.dart';
 
+import '../widgets/settings/font_size/theme_mode_widget.dart';
 import '../widgets/settings/theme/theme_mode_widget.dart';
 import '../widgets/settings/language_list_tile.dart';
 
@@ -17,16 +18,12 @@ class UserSettingsScreen extends StatelessWidget {
         ?.copyWith(fontFamily: AppStrings.inika);
     final Color? color = style?.color;
 
-    const SizedBox space = SizedBox(height: 52);
-
     return EmptyScreenWithTitle(
       title: S.of(context).settings,
       children: [
-        space,
         LanguageListTile(color: color, style: style),
-        space,
         ThemeModeWidget(color: color, style: style),
-        space,
+        FontSizeWidget(color: color, style: style),
       ],
     );
   }

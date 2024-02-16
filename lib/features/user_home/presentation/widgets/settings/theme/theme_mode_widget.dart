@@ -1,9 +1,8 @@
 import 'package:data_sharing_organizing/core/shared/responsive/constrained_box.dart';
 import 'package:data_sharing_organizing/core/utils/config/locale/generated/l10n.dart';
-import 'package:data_sharing_organizing/core/utils/constants/app_constants.dart';
-import 'package:data_sharing_organizing/core/utils/extension/responsive_ex.dart';
 import 'package:flutter/material.dart';
 
+import '../settings_tile_widget.dart';
 import 'theme_mode_dialog.dart';
 import 'theme_mode_name_arrow.dart';
 
@@ -20,18 +19,13 @@ class ThemeModeWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ResConstrainedBoxAlign(
-      child: ListTile(
-        contentPadding:
-            const EdgeInsets.symmetric(horizontal: AppConst.defaultPadding),
-        shape: context.isPhoneWidth
-            ? const RoundedRectangleBorder(borderRadius: BorderRadius.zero)
-            : RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(AppConst.borderRadius)),
-        leading: Icon(Icons.dark_mode_outlined, color: color),
-        iconColor: color,
-        title: Text(S.of(context).themeMode, style: style),
-        trailing: const ThemeModeNameAndArrow(),
+      child: SettingsTileWidget(
+        color: color,
+        style: style,
+        icon: Icons.dark_mode_outlined,
+        title: S.of(context).themeMode,
         onTap: () => showThemeModeDialog(context),
+        trailing: const ThemeModeNameAndArrow(),
       ),
     );
   }

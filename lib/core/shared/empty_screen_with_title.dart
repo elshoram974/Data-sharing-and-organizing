@@ -1,3 +1,4 @@
+import 'package:data_sharing_organizing/core/utils/extension/padding_ex.dart';
 import 'package:flutter/material.dart';
 
 import '../utils/styles.dart';
@@ -26,7 +27,7 @@ class EmptyScreenWithTitle extends StatelessWidget {
             title,
             textAlign: TextAlign.center,
             style: AppStyle.styleBoldInika24.copyWith(fontSize: 36),
-          ),
+          ).bottomPadding(60),
           ...children,
         ],
       ),
