@@ -90,5 +90,10 @@
     "popUps": "النوافذ المنبثقة",
     "themeMode": "وضع المظهر",
     "lightMode": "الوضع الفاتح",
-    "deviceMode": "وضع الجهاز"
+    "deviceMode": "وضع الجهاز",
+    "fontSize": "حجم الخط",
+    "small": "صغير",
+    "defaultScale": "افتراضي",
+    "large": "كبير",
+    "extraLarge": "كبير جداً"
 }

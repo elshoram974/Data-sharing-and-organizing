@@ -22,6 +22,11 @@ abstract final class UserRoutes {
   static GoRoute call() {
     return GoRoute(
       path: userHome,
+      redirect: (context, state) {
+        if (state.extra == null && state.fullPath == userHome) return '/';
+        // TODO: Meke redirect to other screens
+        return null;
+      },
       pageBuilder: (context, state) => MyCustomTransition.slideTransition(
           offset: const Offset(0, -1),
           context: context,

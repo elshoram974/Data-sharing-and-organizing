@@ -46,6 +46,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "createYourOwnEmail":
             MessageLookupByLibrary.simpleMessage("أنشئ بريدك الإلكتروني الخاص"),
         "darkMode": MessageLookupByLibrary.simpleMessage("الوضع المظلم"),
+        "defaultScale": MessageLookupByLibrary.simpleMessage("افتراضي"),
         "deviceMode": MessageLookupByLibrary.simpleMessage("وضع الجهاز"),
         "doNotHaveAnAccount":
             MessageLookupByLibrary.simpleMessage("ليس لديك حساب ؟ "),
@@ -65,7 +66,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "error": MessageLookupByLibrary.simpleMessage("خطأ"),
         "errorInPassword":
             MessageLookupByLibrary.simpleMessage("خطأ في كلمة المرور"),
+        "extraLarge": MessageLookupByLibrary.simpleMessage("كبير جداً"),
         "fillField": MessageLookupByLibrary.simpleMessage("املأ هذا الحقل"),
+        "fontSize": MessageLookupByLibrary.simpleMessage("حجم الخط"),
         "forgetPassword":
             MessageLookupByLibrary.simpleMessage("هل نسيت كلمة المرور ؟ "),
         "goBack": MessageLookupByLibrary.simpleMessage("العودة"),
@@ -82,6 +85,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "invalidVerificationType":
             MessageLookupByLibrary.simpleMessage("نوع التحقق غير صالح"),
         "language": MessageLookupByLibrary.simpleMessage("اللغة"),
+        "large": MessageLookupByLibrary.simpleMessage("كبير"),
         "lightMode": MessageLookupByLibrary.simpleMessage("الوضع الفاتح"),
         "login": MessageLookupByLibrary.simpleMessage("تسجيل الدخول"),
         "logout": MessageLookupByLibrary.simpleMessage("تسجيل الخروج"),
@@ -122,6 +126,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "showPassword":
             MessageLookupByLibrary.simpleMessage("إظهار كلمة المرور"),
         "signUp": MessageLookupByLibrary.simpleMessage("التسجيل"),
+        "small": MessageLookupByLibrary.simpleMessage("صغير"),
         "statusBar": MessageLookupByLibrary.simpleMessage("شريط الحالة"),
         "stayHere": MessageLookupByLibrary.simpleMessage("ابق هنا"),
         "support": MessageLookupByLibrary.simpleMessage("الدعم"),

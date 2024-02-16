@@ -8,12 +8,12 @@ import 'settings_tile_widget.dart';
 class LanguageListTile extends StatelessWidget {
   const LanguageListTile({super.key, required this.color, required this.style});
 
-  final Color? color;
+  final Color color;
   final TextStyle? style;
 
   @override
   Widget build(BuildContext context) {
-    return SettingsTileWidget(
+    return SettingsTileWidget<IconData>(
       color: color,
       style: style,
       icon: Icons.language,

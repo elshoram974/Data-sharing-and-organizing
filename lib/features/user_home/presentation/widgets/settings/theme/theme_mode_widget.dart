@@ -13,13 +13,13 @@ class ThemeModeWidget extends StatelessWidget {
     required this.style,
   });
 
-  final Color? color;
+  final Color color;
   final TextStyle? style;
 
   @override
   Widget build(BuildContext context) {
     return ResConstrainedBoxAlign(
-      child: SettingsTileWidget(
+      child: SettingsTileWidget<IconData>(
         color: color,
         style: style,
         icon: Icons.dark_mode_outlined,

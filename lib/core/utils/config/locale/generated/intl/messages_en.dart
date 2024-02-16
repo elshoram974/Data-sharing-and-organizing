@@ -47,6 +47,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "createYourOwnEmail":
             MessageLookupByLibrary.simpleMessage("Create your own email"),
         "darkMode": MessageLookupByLibrary.simpleMessage("Dark mode"),
+        "defaultScale": MessageLookupByLibrary.simpleMessage("Default"),
         "deviceMode": MessageLookupByLibrary.simpleMessage("Device mode"),
         "doNotHaveAnAccount":
             MessageLookupByLibrary.simpleMessage("Don\'t have an account ? "),
@@ -65,7 +66,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "error": MessageLookupByLibrary.simpleMessage("Error"),
         "errorInPassword":
             MessageLookupByLibrary.simpleMessage("Error in password"),
+        "extraLarge": MessageLookupByLibrary.simpleMessage("Extra Large"),
         "fillField": MessageLookupByLibrary.simpleMessage("fill this field"),
+        "fontSize": MessageLookupByLibrary.simpleMessage("Font size"),
         "forgetPassword":
             MessageLookupByLibrary.simpleMessage("Forget password ? "),
         "goBack": MessageLookupByLibrary.simpleMessage("Go back"),
@@ -81,6 +84,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "invalidVerificationType":
             MessageLookupByLibrary.simpleMessage("Invalid verification type."),
         "language": MessageLookupByLibrary.simpleMessage("Language"),
+        "large": MessageLookupByLibrary.simpleMessage("Large"),
         "lightMode": MessageLookupByLibrary.simpleMessage("Light mode"),
         "login": MessageLookupByLibrary.simpleMessage("Login"),
         "logout": MessageLookupByLibrary.simpleMessage("Log out"),
@@ -121,6 +125,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "sharikna": MessageLookupByLibrary.simpleMessage("Sharikna"),
         "showPassword": MessageLookupByLibrary.simpleMessage("Show password"),
         "signUp": MessageLookupByLibrary.simpleMessage("Sign up"),
+        "small": MessageLookupByLibrary.simpleMessage("Small"),
         "statusBar": MessageLookupByLibrary.simpleMessage("Status bar"),
         "stayHere": MessageLookupByLibrary.simpleMessage("Stay here"),
         "support": MessageLookupByLibrary.simpleMessage("Support"),

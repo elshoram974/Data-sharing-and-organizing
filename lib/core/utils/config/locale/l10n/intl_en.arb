@@ -90,5 +90,10 @@
     "popUps": "Pop ups",
     "themeMode": "Theme mode",
     "lightMode": "Light mode",
-    "deviceMode": "Device mode"
+    "deviceMode": "Device mode",
+    "fontSize": "Font size",
+    "small": "Small",
+    "defaultScale": "Default",
+    "large": "Large",
+    "extraLarge": "Extra Large"
 }

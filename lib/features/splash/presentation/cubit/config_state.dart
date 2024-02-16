@@ -26,3 +26,11 @@ final class ChangeLanguage extends ConfigState {
   @override
   List<String> get props => [languageCode];
 }
+
+final class ChangeFontScale extends ConfigState {
+  final double scale;
+  const ChangeFontScale(this.scale);
+
+  @override
+  List<double> get props => [scale];
+}

@@ -961,6 +961,56 @@ class S {
       args: [],
     );
   }
+
+  /// `Font size`
+  String get fontSize {
+    return Intl.message(
+      'Font size',
+      name: 'fontSize',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Small`
+  String get small {
+    return Intl.message(
+      'Small',
+      name: 'small',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Default`
+  String get defaultScale {
+    return Intl.message(
+      'Default',
+      name: 'defaultScale',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Large`
+  String get large {
+    return Intl.message(
+      'Large',
+      name: 'large',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Extra Large`
+  String get extraLarge {
+    return Intl.message(
+      'Extra Large',
+      name: 'extraLarge',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

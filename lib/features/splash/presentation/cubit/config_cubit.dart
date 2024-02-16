@@ -17,14 +17,10 @@ class ConfigCubit extends Cubit<ConfigState> {
   final GetCurrentUserUseCase getCurrentUserUseCase;
 
   ConfigCubit(this.getCurrentUserUseCase) : super(const ConfigInitial());
-  TextScaler textScaler = TextScaler.noScaling;
 
+  // * ThemeMode ----------------------------------------------
   ThemeMode themeMode =
       ThemeMode.values[int.parse(config.get(AppStrings.themeMode) ?? '0')];
-
-  Locale appLocale = config.containsKey(AppStrings.locale)
-      ? Locale(config.get(AppStrings.locale)!)
-      : AppLocale().deviceLocale;
 
   void changeMode(ThemeMode mode) async {
     themeMode = mode;
@@ -32,11 +28,34 @@ class ConfigCubit extends Cubit<ConfigState> {
     emit(ChangeThemeMode(mode));
   }
 
+  //  end mode ----------------------------------------------
+
+  // * Locale ----------------------------------------------
+  Locale appLocale = config.containsKey(AppStrings.locale)
+      ? Locale(config.get(AppStrings.locale)!)
+      : AppLocale().deviceLocale;
+
   void changeLocale(String lang) async {
     appLocale = Locale(lang);
     await config.put(AppStrings.locale, lang);
     emit(ChangeLanguage(lang));
   }
+  //  end locale ----------------------------------------------
+
+  // * font scale factor ----------------------------------------------
+  double textScaler = config.containsKey(AppStrings.fontScale)
+      ? double.parse(config.get(AppStrings.fontScale) as String)
+      : 1;
+  final List<double> scales = [0.8, 1, 1.2, 1.5];
+  void changeFontScale(double val) async {
+    await config.put(AppStrings.fontScale, "$val");
+
+    textScaler = scales.reduce(
+      (p, c) => (val - p).abs() < (val - c).abs() ? p : c,
+    );
+    emit(ChangeFontScale(textScaler));
+  }
+  //  end font scale factor ----------------------------------------------
 
   bool get appIsDark =>
       themeMode == ThemeMode.dark ||
