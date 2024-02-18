@@ -6,7 +6,7 @@ import '../../../../features/auth/presentation/cubit/verify_code_cubit/verify_co
 import '../../../../features/splash/presentation/cubit/config_cubit.dart';
 import '../../../../features/user_home/presentation/cubit/main_cubit/user_main_cubit.dart';
 
-abstract final class ProviderDependency {
+abstract class ProviderDependency {
   const ProviderDependency();
 
   // * Config Cubits
