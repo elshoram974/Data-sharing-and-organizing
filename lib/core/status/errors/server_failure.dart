@@ -35,7 +35,8 @@ class ServerFailure<T> extends Failure<T> {
         return ServerFailure('sendTimeout');
       case HttpExceptionType.unknown:
       default:
-        return ServerFailure('unknown error : ${e.message}');
+        print(e.message);
+        return ServerFailure('unknown error');
     }
   }
 
