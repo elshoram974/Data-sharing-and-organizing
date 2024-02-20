@@ -1,6 +1,7 @@
 // ! Failure --------------------------
 
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:data_sharing_organizing/core/utils/config/locale/generated/l10n.dart';
 import 'package:http/http.dart';
@@ -35,7 +36,7 @@ class ServerFailure<T> extends Failure<T> {
         return ServerFailure('sendTimeout');
       case HttpExceptionType.unknown:
       default:
-        print(e.message);
+        log(e.message ?? '');
         return ServerFailure('unknown error');
     }
   }
@@ -56,7 +57,8 @@ class ServerFailure<T> extends Failure<T> {
         return ServerFailure(S.current.youHaveToConfirmYourAccount);
       case 'Error in password':
         return ServerFailure(S.current.errorInPassword);
-      case 'The email you entered does not exist' || 'The userId you entered does not exist':
+      case 'The email you entered does not exist' ||
+            'The userId you entered does not exist':
         return ServerFailure(S.current.emailYouEnteredDoesNotExist);
       case 'User created by another provider':
         return ServerFailure(S.current.thisAccountExistWithAnotherProvider);
@@ -69,13 +71,15 @@ class ServerFailure<T> extends Failure<T> {
       case 'Invalid verification code':
         return ServerFailure(S.current.invalidVerificationCode);
       case 'The verification code has expired. we sent another code':
-        return ServerFailure(S.current.theVerificationCodeHasExpiredWeSentAnotherCode);
+        return ServerFailure(
+            S.current.theVerificationCodeHasExpiredWeSentAnotherCode);
       case 'Invalid verification type.':
         return ServerFailure(S.current.invalidVerificationType);
       case 'User is not email_password to make new pass':
         return ServerFailure(S.current.userNotEmailPasswordToNewPass);
       case 'User is not email_password to send verification code.':
-        return ServerFailure(S.current.userNotEmailPasswordToSendVerificationCode);
+        return ServerFailure(
+            S.current.userNotEmailPasswordToSendVerificationCode);
       default:
         return ServerFailure(errorMessage);
     }
