@@ -11,16 +11,19 @@ class ChooseDialogListTile<T> extends StatelessWidget {
     required this.value,
     this.groupValue,
     this.onTap,
+    this.trailing,
   });
   final String title;
   final T value;
   final T? groupValue;
+  final Widget? trailing;
   final void Function()? onTap;
 
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      contentPadding: const EdgeInsets.symmetric(horizontal: AppConst.defaultPadding),
+      contentPadding:
+          const EdgeInsets.symmetric(horizontal: AppConst.defaultPadding),
       leading: Radio<T>(
         fillColor: MaterialStateProperty.resolveWith(
           (s) => s.contains(MaterialState.selected)
@@ -33,6 +36,7 @@ class ChooseDialogListTile<T> extends StatelessWidget {
       ),
       shape: const RoundedRectangleBorder(borderRadius: BorderRadius.zero),
       title: Text(title, style: AppStyle.styleBoldInika16),
+      trailing: trailing,
       onTap: onTap,
     );
   }
