@@ -33,8 +33,16 @@ class UserMainCubit extends Cubit<UserMainState> {
     final Status<int> status = await logOutUseCase();
     if (status is Success<int>) {
       final BuildContext context = AppRoute.key.currentContext!;
-      if (context.mounted) context.go(AppRoute.splashScreen);
+      if (context.mounted) context.go(AppRoute.login);
     }
+  }
+
+  bool canGoBack() {
+    if (navIndex != 0) {
+      onNavChange(0, false);
+      return false;
+    }
+    return true;
   }
 
   @override

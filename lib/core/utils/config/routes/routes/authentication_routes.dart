@@ -1,3 +1,4 @@
+import 'package:data_sharing_organizing/core/utils/functions/on_close_app.dart';
 import 'package:data_sharing_organizing/features/auth/presentation/screen/sign_up_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -8,6 +9,7 @@ import '../../../../../features/auth/presentation/screen/login_screen.dart';
 import '../../../../../features/auth/presentation/screen/recover_screen.dart';
 import '../../../../../features/auth/presentation/screen/settings_auth_screen.dart';
 import '../my_custom_transition.dart';
+import '../routes.dart';
 
 abstract final class AuthRoutes {
   const AuthRoutes();
@@ -32,6 +34,11 @@ abstract final class AuthRoutes {
   static GoRoute call() {
     return GoRoute(
       path: login,
+      onExit: (_) => onCloseApp(
+        context: _,
+        canGoTo: [AppRoute.userHome],
+        currentRoute: login,
+      ),
       pageBuilder: (context, state) => MyCustomTransition.slideTransition(
         offset: const Offset(0, -1),
         context: context,
@@ -45,7 +52,9 @@ abstract final class AuthRoutes {
             offset: const Offset(-1, 0),
             context: context,
             state: state,
-            child: AuthSettingsScreen(previousRouteNameFunction: state.extra as String Function(BuildContext)),
+            child: AuthSettingsScreen(
+                previousRouteNameFunction:
+                    state.extra as String Function(BuildContext)),
           ),
         ),
         GoRoute(

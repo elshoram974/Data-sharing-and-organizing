@@ -1,5 +1,4 @@
 import 'package:data_sharing_organizing/core/utils/config/locale/generated/l10n.dart';
-import 'package:data_sharing_organizing/core/utils/functions/on_close_app.dart';
 import 'package:flutter/material.dart';
 
 import '../auth_body.dart';
@@ -14,7 +13,6 @@ class LoginBody extends StatelessWidget {
     return AuthBody(
       previousRouteNameFunction:(_)=> S.of(_).login,
       showBackButton: false,
-      onWillPop: () => closeApp(context),
       introHeader: S.of(context).welcomeBack,
       introBody: S.of(context).enterYourCredentialsToContinue,
       children: const [

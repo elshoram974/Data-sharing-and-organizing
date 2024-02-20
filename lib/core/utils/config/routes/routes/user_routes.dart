@@ -1,3 +1,5 @@
+import 'package:data_sharing_organizing/core/utils/config/routes/routes.dart';
+import 'package:data_sharing_organizing/core/utils/functions/on_close_app.dart';
 import 'package:data_sharing_organizing/features/auth/domain/entities/auth_user_entity.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -22,6 +24,11 @@ abstract final class UserRoutes {
   static GoRoute call() {
     return GoRoute(
       path: userHome,
+      onExit: (_) => onCloseApp(
+        context: _,
+        canGoTo: [AppRoute.login],
+        currentRoute: userHome,
+      ),
       redirect: (context, state) {
         if (state.extra == null && state.fullPath == userHome) return '/';
         // TODO: Meke redirect to other screens
