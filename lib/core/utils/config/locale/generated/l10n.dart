@@ -1011,6 +1011,46 @@ class S {
       args: [],
     );
   }
+
+  /// `Edit profile`
+  String get editProfile {
+    return Intl.message(
+      'Edit profile',
+      name: 'editProfile',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Change password`
+  String get changePassword {
+    return Intl.message(
+      'Change password',
+      name: 'changePassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Your groups`
+  String get yourGroups {
+    return Intl.message(
+      'Your groups',
+      name: 'yourGroups',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Create another account`
+  String get createAnotherAccount {
+    return Intl.message(
+      'Create another account',
+      name: 'createAnotherAccount',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

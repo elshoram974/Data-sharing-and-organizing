@@ -95,5 +95,9 @@
     "small": "صغير",
     "defaultScale": "افتراضي",
     "large": "كبير",
-    "extraLarge": "كبير جداً"
+    "extraLarge": "كبير جداً",
+    "editProfile": "تعديل الملف الشخصي",
+    "changePassword": "تغيير كلمة المرور",
+    "yourGroups": "مجموعاتك",
+    "createAnotherAccount": "إنشاء حساب آخر"
 }

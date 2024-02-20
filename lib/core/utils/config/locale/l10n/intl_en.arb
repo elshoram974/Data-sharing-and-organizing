@@ -95,5 +95,9 @@
     "small": "Small",
     "defaultScale": "Default",
     "large": "Large",
-    "extraLarge": "Extra Large"
+    "extraLarge": "Extra Large",
+    "editProfile": "Edit profile",
+    "changePassword": "Change password",
+    "yourGroups": "Your groups",
+    "createAnotherAccount": "Create another account"
 }

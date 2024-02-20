@@ -37,11 +37,15 @@ class MessageLookup extends MessageLookupByLibrary {
         "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
         "cantBeLessThan": m0,
         "cantBeMoreThan": m1,
+        "changePassword":
+            MessageLookupByLibrary.simpleMessage("Change password"),
         "codeVerification":
             MessageLookupByLibrary.simpleMessage("Code verification"),
         "confirm": MessageLookupByLibrary.simpleMessage("Confirm"),
         "confirmPassword":
             MessageLookupByLibrary.simpleMessage("Confirm Password"),
+        "createAnotherAccount":
+            MessageLookupByLibrary.simpleMessage("Create another account"),
         "createNewPassword":
             MessageLookupByLibrary.simpleMessage("Create new password"),
         "createYourOwnEmail":
@@ -51,6 +55,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "deviceMode": MessageLookupByLibrary.simpleMessage("Device mode"),
         "doNotHaveAnAccount":
             MessageLookupByLibrary.simpleMessage("Don\'t have an account ? "),
+        "editProfile": MessageLookupByLibrary.simpleMessage("Edit profile"),
         "emailAddress": MessageLookupByLibrary.simpleMessage("Email address"),
         "emailAlreadyInUse": MessageLookupByLibrary.simpleMessage(
             "The account already exists for that email."),
@@ -168,6 +173,7 @@ class MessageLookup extends MessageLookupByLibrary {
                 "You can\'t use the same previous password."),
         "youHaveToConfirmYourAccount": MessageLookupByLibrary.simpleMessage(
             "You have to confirm your account"),
+        "yourGroups": MessageLookupByLibrary.simpleMessage("Your groups"),
         "yourNewPasswordMustBeDifferentFromPreviously":
             MessageLookupByLibrary.simpleMessage(
                 "Your new password must be different from previously used password"),

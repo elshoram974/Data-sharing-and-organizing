@@ -36,11 +36,15 @@ class MessageLookup extends MessageLookupByLibrary {
         "cancel": MessageLookupByLibrary.simpleMessage("إلغاء"),
         "cantBeLessThan": m0,
         "cantBeMoreThan": m1,
+        "changePassword":
+            MessageLookupByLibrary.simpleMessage("تغيير كلمة المرور"),
         "codeVerification":
             MessageLookupByLibrary.simpleMessage("تحقق من الرمز"),
         "confirm": MessageLookupByLibrary.simpleMessage("تأكيد"),
         "confirmPassword":
             MessageLookupByLibrary.simpleMessage("تأكيد كلمة المرور"),
+        "createAnotherAccount":
+            MessageLookupByLibrary.simpleMessage("إنشاء حساب آخر"),
         "createNewPassword":
             MessageLookupByLibrary.simpleMessage("إنشاء كلمة مرور جديدة"),
         "createYourOwnEmail":
@@ -50,6 +54,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "deviceMode": MessageLookupByLibrary.simpleMessage("وضع الجهاز"),
         "doNotHaveAnAccount":
             MessageLookupByLibrary.simpleMessage("ليس لديك حساب ؟ "),
+        "editProfile":
+            MessageLookupByLibrary.simpleMessage("تعديل الملف الشخصي"),
         "emailAddress":
             MessageLookupByLibrary.simpleMessage("عنوان البريد الإلكتروني"),
         "emailAlreadyInUse": MessageLookupByLibrary.simpleMessage(
@@ -169,6 +175,7 @@ class MessageLookup extends MessageLookupByLibrary {
                 "لا يمكنك استخدام نفس كلمة المرور السابقة."),
         "youHaveToConfirmYourAccount":
             MessageLookupByLibrary.simpleMessage("يجب تأكيد حسابك"),
+        "yourGroups": MessageLookupByLibrary.simpleMessage("مجموعاتك"),
         "yourNewPasswordMustBeDifferentFromPreviously":
             MessageLookupByLibrary.simpleMessage(
                 "يجب أن تكون كلمة المرور الجديدة مختلفة عن كلمة المرور المستخدمة سابقًا"),
