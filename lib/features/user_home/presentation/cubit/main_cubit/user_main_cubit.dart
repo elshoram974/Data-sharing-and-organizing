@@ -30,6 +30,7 @@ class UserMainCubit extends Cubit<UserMainState> {
   }
 
   void logOut() async {
+    navIndex = 0;
     final Status<int> status = await logOutUseCase();
     if (status is Success<int>) {
       final BuildContext context = AppRoute.key.currentContext!;
