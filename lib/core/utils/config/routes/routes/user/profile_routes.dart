@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../../../../features/user_home/presentation/screens/user_change_pass_screen.dart';
+import '../../../../../../features/user_home/presentation/screens/user_edit_profile_screen.dart';
+import '../../../../../../features/user_home/presentation/screens/user_groups_screen.dart';
 import '../../../../../../features/user_home/presentation/screens/user_profile_screen.dart';
 import '../../my_custom_transition.dart';
 import 'user_routes.dart';
@@ -35,7 +38,7 @@ abstract final class ProfileRoutes {
             offset: const Offset(-1, 0),
             context: context,
             state: state,
-            child: Container(),
+            child: const UserEditProfileScreen(),
           ),
         ),
         GoRoute(
@@ -44,7 +47,7 @@ abstract final class ProfileRoutes {
             offset: const Offset(-1, 0),
             context: context,
             state: state,
-            child: Container(),
+            child: const UserChangePassScreen(),
           ),
         ),
         GoRoute(
@@ -53,7 +56,7 @@ abstract final class ProfileRoutes {
             offset: const Offset(-1, 0),
             context: context,
             state: state,
-            child: Container(),
+            child: const UserGroupsScreen(),
           ),
         ),
       ],
