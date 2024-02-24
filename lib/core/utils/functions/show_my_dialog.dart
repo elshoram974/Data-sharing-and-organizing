@@ -81,7 +81,10 @@ abstract final class ShowMyDialog {
     );
   }
 
-  static Future<T?> verifyDialog<T>(User user) {
+  static Future<T?> verifyDialog<T>(
+    User user, [
+    String nextRoute = AppRoute.userHome,
+  ]) {
     return showDialog<T>(
       context: AppRoute.key.currentContext!,
       builder: (context) {
@@ -94,7 +97,7 @@ abstract final class ShowMyDialog {
             AppRoute.key.currentContext?.pop();
             AppRoute.key.currentContext?.push(
               AppRoute.codeVerification,
-              extra: {'user': user, 'nextRoute': AppRoute.userHome},
+              extra: {'user': user, 'nextRoute': nextRoute},
             );
           },
         );
