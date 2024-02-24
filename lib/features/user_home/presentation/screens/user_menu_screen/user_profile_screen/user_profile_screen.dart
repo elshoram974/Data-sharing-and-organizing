@@ -12,7 +12,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../widgets/home_widgets/home_group_tile_widget/home_group_image.dart';
-import '../../../widgets/profile/profile_tile_widget.dart';
+import '../../../widgets/menu_widgets/profile/profile_tile_widget.dart';
 
 class UserProfileScreen extends StatelessWidget {
   const UserProfileScreen({super.key});

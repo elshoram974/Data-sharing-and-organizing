@@ -2,7 +2,7 @@ import 'package:data_sharing_organizing/core/shared/dialog/choose_dialog_tile.da
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../../../../splash/presentation/cubit/config_cubit.dart';
+import '../../../../../../splash/presentation/cubit/config_cubit.dart';
 
 class ThemeModeTileInDialog extends StatelessWidget {
   const ThemeModeTileInDialog({

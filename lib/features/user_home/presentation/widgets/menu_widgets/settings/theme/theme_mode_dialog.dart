@@ -4,7 +4,7 @@ import 'package:data_sharing_organizing/core/utils/constants/app_constants.dart'
 import 'package:data_sharing_organizing/core/utils/services/dependency/provider_dependency.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../../splash/presentation/cubit/config_cubit.dart';
+import '../../../../../../splash/presentation/cubit/config_cubit.dart';
 import 'theme_mode_tile_in_dialog.dart';
 
 class ThemeModesDialog extends StatelessWidget {

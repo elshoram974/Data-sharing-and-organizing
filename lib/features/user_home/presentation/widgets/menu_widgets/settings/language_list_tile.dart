@@ -2,7 +2,7 @@ import 'package:data_sharing_organizing/core/utils/config/locale/generated/l10n.
 import 'package:data_sharing_organizing/core/utils/functions/show_my_dialog.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../auth/presentation/widgets/settings/locale_tile/lang_name_and_arrow.dart';
+import '../../../../../auth/presentation/widgets/settings/locale_tile/lang_name_and_arrow.dart';
 import 'settings_tile_widget.dart';
 
 class LanguageListTile extends StatelessWidget {

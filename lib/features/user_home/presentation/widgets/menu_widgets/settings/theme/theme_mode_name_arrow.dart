@@ -3,7 +3,7 @@ import 'package:data_sharing_organizing/core/utils/services/dependency/provider_
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../../splash/presentation/cubit/config_cubit.dart';
+import '../../../../../../splash/presentation/cubit/config_cubit.dart';
 import '../name_arrow_widget.dart';
 
 class ThemeModeNameAndArrow extends StatelessWidget {

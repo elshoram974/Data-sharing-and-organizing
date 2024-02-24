@@ -3,9 +3,9 @@ import 'package:data_sharing_organizing/core/utils/config/locale/generated/l10n.
 import 'package:data_sharing_organizing/core/utils/constants/app_strings.dart';
 import 'package:flutter/material.dart';
 
-import '../../widgets/settings/font_size/font_size_widget.dart';
-import '../../widgets/settings/theme/theme_mode_widget.dart';
-import '../../widgets/settings/language_list_tile.dart';
+import '../../widgets/menu_widgets/settings/font_size/font_size_widget.dart';
+import '../../widgets/menu_widgets/settings/theme/theme_mode_widget.dart';
+import '../../widgets/menu_widgets/settings/language_list_tile.dart';
 
 class UserSettingsScreen extends StatelessWidget {
   const UserSettingsScreen({super.key});
