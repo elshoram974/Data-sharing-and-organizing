@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../../../../features/auth/domain/entities/auth_user_entity.dart';
-import '../../../../../features/user_home/presentation/screens/main_screen/user_main_screen.dart';
-import '../../../../../features/user_home/presentation/screens/user_notifications_settings_screen.dart';
-import '../../../../../features/user_home/presentation/screens/user_profile_screen.dart';
-import '../../../../../features/user_home/presentation/screens/user_settings_screen.dart';
-import '../../../functions/on_close_app.dart';
-import '../my_custom_transition.dart';
-import '../routes.dart';
+import '../../../../../../features/auth/domain/entities/auth_user_entity.dart';
+import '../../../../../../features/user_home/presentation/screens/main_screen/user_main_screen.dart';
+import '../../../../../../features/user_home/presentation/screens/user_notifications_settings_screen.dart';
+import '../../../../../../features/user_home/presentation/screens/user_settings_screen.dart';
+import '../../../../functions/on_close_app.dart';
+import '../../my_custom_transition.dart';
+import '../../routes.dart';
+import 'profile_routes.dart';
 
 abstract final class UserRoutes {
   const UserRoutes();
@@ -21,8 +21,12 @@ abstract final class UserRoutes {
   static const String _userSettings = 'userSettings';
   static const String userSettings = '$userHome/$_userSettings';
 
-  static const String _userProfile = 'userProfile';
-  static const String userProfile = '$userHome/$_userProfile';
+  // * profile screens *//
+  static const String userProfile = ProfileRoutes.userProfile;
+  static const String userEditProfile = ProfileRoutes.userEditProfile;
+  static const String userChangePassword = ProfileRoutes.userChangePassword;
+  static const String userGroups = ProfileRoutes.userGroups;
+  // * ------ End profile screens ------ *//
 
   static GoRoute call() {
     return GoRoute(
@@ -61,15 +65,7 @@ abstract final class UserRoutes {
             child: const UserSettingsScreen(),
           ),
         ),
-        GoRoute(
-          path: _userProfile,
-          pageBuilder: (context, state) => MyCustomTransition.slideTransition(
-            offset: const Offset(-1, 0),
-            context: context,
-            state: state,
-            child: const UserProfileScreen(),
-          ),
-        ),
+        ProfileRoutes.call(),
       ],
     );
   }

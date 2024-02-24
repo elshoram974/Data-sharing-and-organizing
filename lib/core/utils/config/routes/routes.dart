@@ -3,7 +3,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../../../features/splash/presentation/screen/splash_screen.dart';
 import 'routes/authentication_routes.dart';
-import 'routes/user_routes.dart';
+import 'routes/user/user_routes.dart';
 
 abstract class AppRoute {
   static GlobalKey<NavigatorState> key = GlobalKey<NavigatorState>();
@@ -24,6 +24,9 @@ abstract class AppRoute {
   static const String userNotificationsSettings =  UserRoutes.notificationsSettings;
   static const String userSettings =  UserRoutes.userSettings;
   static const String userProfile =  UserRoutes.userProfile;
+  static const String userEditProfile = UserRoutes.userEditProfile;
+  static const String userChangePassword = UserRoutes.userChangePassword;
+  static const String userGroups = UserRoutes.userGroups;
   // * ------ End user screens ------ *//
 
   static final GoRouter router = GoRouter(
