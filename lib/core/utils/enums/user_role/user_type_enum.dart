@@ -1,4 +1,7 @@
+import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
+
+import '../../config/locale/generated/l10n.dart';
 
 part 'user_type_enum.g.dart';
 
@@ -19,5 +22,14 @@ enum UserType {
     }
 
     return map[stringRole] ?? UserType.personal;
+  }
+
+  String name(BuildContext context) {
+    switch (this) {
+      case UserType.business:
+        return S.of(context).businessAccount;
+      case UserType.personal:
+        return S.of(context).personalAccount;
+    }
   }
 }
