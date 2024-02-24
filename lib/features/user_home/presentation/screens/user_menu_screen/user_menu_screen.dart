@@ -3,9 +3,9 @@ import 'package:data_sharing_organizing/core/utils/services/dependency/provider_
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../../../core/utils/config/routes/routes.dart';
-import '../widgets/main_screen_widgets/main_body.dart';
-import '../widgets/menu_widgets/menu_item_tile_widget.dart';
+import '../../../../../core/utils/config/routes/routes.dart';
+import '../../widgets/main_screen_widgets/main_body.dart';
+import '../../widgets/menu_widgets/menu_item_tile_widget.dart';
 
 class UserMenuScreen extends StatelessWidget {
   const UserMenuScreen({super.key});

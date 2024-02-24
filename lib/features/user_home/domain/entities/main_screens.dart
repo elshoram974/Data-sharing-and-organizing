@@ -2,7 +2,7 @@ import 'package:data_sharing_organizing/core/utils/config/locale/generated/l10n.
 import 'package:flutter/material.dart';
 
 import '../../presentation/screens/user_home_screen.dart';
-import '../../presentation/screens/user_menu_screen.dart';
+import '../../presentation/screens/user_menu_screen/user_menu_screen.dart';
 import '../../presentation/screens/user_notification_screen.dart';
 
 final class MainScreens {

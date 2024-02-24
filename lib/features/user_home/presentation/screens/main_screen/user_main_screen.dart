@@ -8,9 +8,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../auth/domain/entities/auth_user_entity.dart';
 import '../../../../auth/domain/usecases/log_out_use_case.dart';
 import '../../cubit/main_cubit/user_main_cubit.dart';
-import 'desktop_main_screen.dart';
-import 'phone_main_screen.dart';
-import 'tablet_main_screen.dart';
+import 'res/desktop_main_screen.dart';
+import 'res/phone_main_screen.dart';
+import 'res/tablet_main_screen.dart';
 
 class UserMainScreens extends StatelessWidget {
   const UserMainScreens(this.user, {super.key});

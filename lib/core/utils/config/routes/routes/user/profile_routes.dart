@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../../../../../features/user_home/presentation/screens/user_change_pass_screen.dart';
-import '../../../../../../features/user_home/presentation/screens/user_edit_profile_screen.dart';
-import '../../../../../../features/user_home/presentation/screens/user_groups_screen.dart';
-import '../../../../../../features/user_home/presentation/screens/user_profile_screen.dart';
+import '../../../../../../features/user_home/presentation/screens/user_menu_screen/user_profile_screen/user_change_pass_screen.dart';
+import '../../../../../../features/user_home/presentation/screens/user_menu_screen/user_profile_screen/user_edit_profile_screen.dart';
+import '../../../../../../features/user_home/presentation/screens/user_menu_screen/user_profile_screen/user_groups_screen.dart';
+import '../../../../../../features/user_home/presentation/screens/user_menu_screen/user_profile_screen/user_profile_screen.dart';
 import '../../my_custom_transition.dart';
 import 'user_routes.dart';
 
