@@ -103,6 +103,7 @@ class _MyDefaultFieldState extends State<MyDefaultField> {
           borderSide: BorderSide(color: AppStyle.styleRegular15.color!),
           borderRadius: BorderRadius.circular(AppConst.borderRadius),
         ),
+        constraints: const BoxConstraints(maxWidth: AppConst.constraint),
         alignLabelWithHint: widget.alignLabelWithHint,
         labelText: widget.labelText,
         hintStyle: widget.hintStyle,
