@@ -9,9 +9,11 @@ class EmptyScreenWithTitle extends StatelessWidget {
     super.key,
     required this.children,
     required this.title,
+    this.bottomPadding = 52,
   });
 
   final String title;
+  final double bottomPadding;
   final List<Widget> children;
 
   @override
@@ -27,7 +29,7 @@ class EmptyScreenWithTitle extends StatelessWidget {
             title,
             textAlign: TextAlign.center,
             style: AppStyle.styleBoldInika24.copyWith(fontSize: 36),
-          ).bottomPadding(60),
+          ).bottomPadding(bottomPadding),
           ...children,
         ],
       ),
