@@ -99,5 +99,7 @@
     "editProfile": "Edit profile",
     "changePassword": "Change password",
     "yourGroups": "Your groups",
-    "createAnotherAccount": "Create another account"
+    "createAnotherAccount": "Create another account",
+    "currentPassword": "Current Password",
+    "reTypeNewPassword": "Re-type new Password"
 }

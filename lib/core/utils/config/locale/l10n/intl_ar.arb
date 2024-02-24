@@ -99,5 +99,7 @@
     "editProfile": "تعديل الملف الشخصي",
     "changePassword": "تغيير كلمة المرور",
     "yourGroups": "مجموعاتك",
-    "createAnotherAccount": "إنشاء حساب آخر"
+    "createAnotherAccount": "إنشاء حساب آخر",
+    "currentPassword": "كلمة المرور الحالية",
+    "reTypeNewPassword": "أعد كتابة كلمة المرور الجديدة"
 }

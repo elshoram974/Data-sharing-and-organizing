@@ -1051,6 +1051,26 @@ class S {
       args: [],
     );
   }
+
+  /// `Current Password`
+  String get currentPassword {
+    return Intl.message(
+      'Current Password',
+      name: 'currentPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Re-type new Password`
+  String get reTypeNewPassword {
+    return Intl.message(
+      'Re-type new Password',
+      name: 'reTypeNewPassword',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

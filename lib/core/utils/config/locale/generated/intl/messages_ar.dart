@@ -49,6 +49,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("إنشاء كلمة مرور جديدة"),
         "createYourOwnEmail":
             MessageLookupByLibrary.simpleMessage("أنشئ بريدك الإلكتروني الخاص"),
+        "currentPassword":
+            MessageLookupByLibrary.simpleMessage("كلمة المرور الحالية"),
         "darkMode": MessageLookupByLibrary.simpleMessage("الوضع المظلم"),
         "defaultScale": MessageLookupByLibrary.simpleMessage("افتراضي"),
         "deviceMode": MessageLookupByLibrary.simpleMessage("وضع الجهاز"),
@@ -120,6 +122,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "processHasBeenCancelled":
             MessageLookupByLibrary.simpleMessage("تم إلغاء العملية"),
         "profile": MessageLookupByLibrary.simpleMessage("الملف الشخصي"),
+        "reTypeNewPassword": MessageLookupByLibrary.simpleMessage(
+            "أعد كتابة كلمة المرور الجديدة"),
         "recover": MessageLookupByLibrary.simpleMessage("استعادة"),
         "recoverYourAccount":
             MessageLookupByLibrary.simpleMessage("استعادة حسابك"),

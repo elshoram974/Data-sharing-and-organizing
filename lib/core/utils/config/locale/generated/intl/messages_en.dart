@@ -50,6 +50,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Create new password"),
         "createYourOwnEmail":
             MessageLookupByLibrary.simpleMessage("Create your own email"),
+        "currentPassword":
+            MessageLookupByLibrary.simpleMessage("Current Password"),
         "darkMode": MessageLookupByLibrary.simpleMessage("Dark mode"),
         "defaultScale": MessageLookupByLibrary.simpleMessage("Default"),
         "deviceMode": MessageLookupByLibrary.simpleMessage("Device mode"),
@@ -119,6 +121,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "processHasBeenCancelled": MessageLookupByLibrary.simpleMessage(
             "The process has been cancelled"),
         "profile": MessageLookupByLibrary.simpleMessage("Profile"),
+        "reTypeNewPassword":
+            MessageLookupByLibrary.simpleMessage("Re-type new Password"),
         "recover": MessageLookupByLibrary.simpleMessage("Recover"),
         "recoverYourAccount":
             MessageLookupByLibrary.simpleMessage("Recover your account"),
