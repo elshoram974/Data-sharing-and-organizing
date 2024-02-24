@@ -1,5 +1,6 @@
 import 'package:data_sharing_organizing/core/shared/empty_screen_with_title.dart';
 import 'package:data_sharing_organizing/core/utils/config/locale/generated/l10n.dart';
+import 'package:data_sharing_organizing/core/utils/config/routes/routes.dart';
 import 'package:data_sharing_organizing/core/utils/constants/app_assets.dart';
 import 'package:data_sharing_organizing/core/utils/constants/app_color.dart';
 import 'package:data_sharing_organizing/core/utils/constants/app_constants.dart';
@@ -8,6 +9,7 @@ import 'package:data_sharing_organizing/core/utils/styles.dart';
 import 'package:data_sharing_organizing/features/auth/domain/entities/auth_user_entity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:go_router/go_router.dart';
 
 import '../widgets/home_widgets/home_group_tile_widget/home_group_image.dart';
 import '../widgets/profile/profile_tile_widget.dart';
@@ -19,23 +21,26 @@ class UserProfileScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return EmptyScreenWithTitle(
       title: S.of(context).profile,
+      bottomPadding: 20,
       children: [
         const UserCard(),
         ProfileTileWidget(
           title: S.of(context).editProfile,
           onTap: () {},
+          // onTap: () => context.push(AppRoute.userEditProfile),
         ),
         ProfileTileWidget(
           title: S.of(context).changePassword,
-          onTap: () {},
+          onTap: () => context.push(AppRoute.userChangePassword),
         ),
         ProfileTileWidget(
           title: S.of(context).yourGroups,
           onTap: () {},
+          // onTap: () => context.push(AppRoute.userGroups),
         ),
         ProfileTileWidget(
           title: S.of(context).createAnotherAccount,
-          onTap: () {},
+          onTap: () => context.push(AppRoute.signUp),
         ),
         ProfileTileWidget(
           title: S.of(context).logout,
@@ -59,6 +64,7 @@ class UserCard extends StatelessWidget {
           left: AppConst.defaultPadding,
           right: AppConst.defaultPadding,
         ),
+        clipBehavior: Clip.none,
         constraints: const BoxConstraints(maxWidth: AppConst.constraint),
         decoration: BoxDecoration(
           color: AppColor.active,
@@ -83,6 +89,7 @@ class CardData extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Stack(
+      clipBehavior: Clip.none,
       children: [
         Positioned(
           top: -10,
@@ -140,7 +147,7 @@ class UserData extends StatelessWidget {
           style: AppStyle.styleBoldInika16.copyWith(color: Colors.white),
         ),
         Text(
-          user.userType.inString,
+          user.userType.name(context),
           textAlign: TextAlign.center,
           style: AppStyle.styleBoldInika16.copyWith(
             color: Colors.white,
