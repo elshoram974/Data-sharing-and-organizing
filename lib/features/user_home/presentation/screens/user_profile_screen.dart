@@ -26,8 +26,7 @@ class UserProfileScreen extends StatelessWidget {
         const UserCard(),
         ProfileTileWidget(
           title: S.of(context).editProfile,
-          onTap: () {},
-          // onTap: () => context.push(AppRoute.userEditProfile),
+          onTap: () => context.push(AppRoute.userEditProfile),
         ),
         ProfileTileWidget(
           title: S.of(context).changePassword,
@@ -35,8 +34,7 @@ class UserProfileScreen extends StatelessWidget {
         ),
         ProfileTileWidget(
           title: S.of(context).yourGroups,
-          onTap: () {},
-          // onTap: () => context.push(AppRoute.userGroups),
+          onTap: () => context.push(AppRoute.userGroups),
         ),
         ProfileTileWidget(
           title: S.of(context).createAnotherAccount,
@@ -108,7 +106,7 @@ class EditProfileIconButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return IconButton(
-      onPressed: () {},
+      onPressed: () => context.push(AppRoute.userEditProfile),
       tooltip: S.of(context).editProfile,
       icon: SizedBox.square(
         dimension: 24,
