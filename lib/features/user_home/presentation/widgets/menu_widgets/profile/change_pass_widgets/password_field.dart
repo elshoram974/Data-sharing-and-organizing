@@ -48,7 +48,7 @@ class _PasswordFieldState extends State<PasswordField> {
       textDirection: TextDirection.ltr,
       keyboardType: TextInputType.visiblePassword,
       hintText: widget.hint,
-      labelText: widget.label ?? widget.hint,
+      labelText: widget.label,
       textInputAction: widget.textInputAction,
       obscureText: obscureText,
       onSaved: widget.onSaved,
