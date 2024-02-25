@@ -13,9 +13,9 @@ class ForgotPasswordFields extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final CreateNewPasswordCubit c = ProviderDependency.createNewPassword;
-    return AutofillGroup(
-      child: Form(
-        key: c.formKey,
+    return Form(
+      key: c.formKey,
+      child: AutofillGroup(
         child: Column(
           children: [
             AuthPasswordField(
