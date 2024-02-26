@@ -133,7 +133,7 @@ class UserData extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        Align(child: HomeGroupImage(imageLink: '', radius: 55)),
+        Align(child: HomeGroupImage(imageLink: '', dimension: 110)),
         Text(
           user.name,
           textAlign: TextAlign.center,
