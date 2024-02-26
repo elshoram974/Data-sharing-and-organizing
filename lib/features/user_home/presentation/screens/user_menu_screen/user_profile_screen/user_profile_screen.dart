@@ -1,4 +1,5 @@
 import 'package:data_sharing_organizing/core/shared/empty_screen_with_title.dart';
+import 'package:data_sharing_organizing/core/shared/image/person.dart';
 import 'package:data_sharing_organizing/core/utils/config/locale/generated/l10n.dart';
 import 'package:data_sharing_organizing/core/utils/config/routes/routes.dart';
 import 'package:data_sharing_organizing/core/utils/constants/app_assets.dart';
@@ -11,7 +12,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../../widgets/home_widgets/home_group_tile_widget/home_group_image.dart';
+import '../../../widgets/circular_image_widget.dart';
 import '../../../widgets/menu_widgets/profile/profile_tile_widget.dart';
 
 class UserProfileScreen extends StatelessWidget {
@@ -133,7 +134,13 @@ class UserData extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        Align(child: HomeGroupImage(imageLink: '', dimension: 110)),
+        const Align(
+          child: CircularImageWidget(
+            imageLink: '',
+            dimension: 110,
+            errorWidget: PersonImage(),
+          ),
+        ),
         Text(
           user.name,
           textAlign: TextAlign.center,
