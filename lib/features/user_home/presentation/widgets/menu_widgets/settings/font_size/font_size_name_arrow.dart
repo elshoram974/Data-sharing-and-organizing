@@ -25,14 +25,14 @@ class FontSizeNameAndArrow extends StatelessWidget {
 
 String? getScaleName(double scale, BuildContext context) {
   switch (scale) {
-    case <= 0.8:
-      return S.of(context).small;
-    case <= 1:
-      return S.of(context).defaultScale;
-    case <= 1.2:
-      return S.of(context).large;
-    case <= 1.5:
+    case >= 1.5:
       return S.of(context).extraLarge;
+    case >= 1.2:
+      return S.of(context).large;
+    case >= 1:
+      return S.of(context).defaultScale;
+    case >= 0.8:
+      return S.of(context).small;
     default:
       return null;
   }
