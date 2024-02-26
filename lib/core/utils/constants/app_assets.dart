@@ -11,4 +11,5 @@ abstract final class AppAssets {
   static const String facebookLogo = '$_images/facebook_logo.svg';
   static const String fontSizeIcon = '$_images/font_size.svg';
   static const String editSquare = '$_images/edit_square.svg';
+  static const String person = '$_images/person.svg';
 }
