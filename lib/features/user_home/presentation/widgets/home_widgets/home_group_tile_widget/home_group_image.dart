@@ -1,4 +1,5 @@
 import 'package:data_sharing_organizing/core/shared/image/android_image.dart';
+import 'package:data_sharing_organizing/core/shared/image/person.dart';
 import 'package:data_sharing_organizing/core/shared/image/web_image.dart';
 import 'package:data_sharing_organizing/core/utils/constants/app_constants.dart';
 import 'package:flutter/material.dart';
@@ -33,7 +34,7 @@ class CustomSavedImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppConst.isWeb
-        ? WebImage(imageLink: imageLink ?? '')
-        : AndroidImage(imageLink: imageLink ?? '');
+        ? WebImage(imageLink: imageLink, errorWidget: const PersonImage())
+        : AndroidImage(imageLink: imageLink, errorWidget: const PersonImage());
   }
 }

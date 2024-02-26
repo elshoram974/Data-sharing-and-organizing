@@ -1,20 +1,20 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
-import 'person.dart';
-
 class AndroidImage extends StatelessWidget {
   const AndroidImage({
     super.key,
     required this.imageLink,
+    this.errorWidget,
   });
 
-  final String imageLink;
+  final String? imageLink;
+  final Widget? errorWidget;
 
   @override
   Widget build(BuildContext context) {
     return CachedNetworkImage(
-      imageUrl: imageLink,
+      imageUrl: imageLink ?? '',
       imageBuilder: (context, imageProvider) => Container(
         decoration: BoxDecoration(
           image: DecorationImage(
@@ -24,9 +24,7 @@ class AndroidImage extends StatelessWidget {
         ),
       ),
       placeholder: (context, url) => const CircularProgressIndicator(),
-      errorWidget: (context, url, error) => const PersonImage(),
+      errorWidget: errorWidget == null ? null : (_, url, e) => errorWidget!,
     );
   }
 }
-
-
