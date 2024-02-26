@@ -43,7 +43,7 @@ class ConfigCubit extends Cubit<ConfigState> {
   //  end locale ----------------------------------------------
 
   // * font scale factor ----------------------------------------------
-  double textScaler = config.containsKey(AppStrings.fontScale)
+  late double textScaler = config.containsKey(AppStrings.fontScale)
       ? double.parse(config.get(AppStrings.fontScale) as String)
       : 1;
   final List<double> scales = [0.8, 1, 1.2, 1.5];
