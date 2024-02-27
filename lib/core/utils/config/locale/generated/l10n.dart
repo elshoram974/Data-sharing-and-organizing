@@ -1091,6 +1091,16 @@ class S {
       args: [],
     );
   }
+
+  /// `If you log out now, you will lose all unsaved data. Are you sure you want to log out?`
+  String get ifYouLogOutNowYouWillLoseAllUnsavedData {
+    return Intl.message(
+      'If you log out now, you will lose all unsaved data. Are you sure you want to log out?',
+      name: 'ifYouLogOutNowYouWillLoseAllUnsavedData',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

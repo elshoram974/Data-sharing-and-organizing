@@ -103,5 +103,6 @@
     "currentPassword": "Current Password",
     "reTypeNewPassword": "Re-type new Password",
     "youCanMakeNewGroups": "Feel free to create new groups.",
-    "thereIsNoNotifications": "There are currently no notifications."
+    "thereIsNoNotifications": "There are currently no notifications.",
+    "ifYouLogOutNowYouWillLoseAllUnsavedData": "If you log out now, you will lose all unsaved data. Are you sure you want to log out?"
 }

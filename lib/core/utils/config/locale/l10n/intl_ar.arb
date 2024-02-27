@@ -103,5 +103,6 @@
     "currentPassword": "كلمة المرور الحالية",
     "reTypeNewPassword": "أعد كتابة كلمة المرور الجديدة",
     "youCanMakeNewGroups": "بإمكانك إنشاء مجموعات جديدة بحرية.",
-    "thereIsNoNotifications": "لا يوجد حاليًا أي إشعارات."
+    "thereIsNoNotifications": "لا يوجد حاليًا أي إشعارات.",
+    "ifYouLogOutNowYouWillLoseAllUnsavedData": "إذا قمت بتسجيل الخروج الآن، ستفقد كل البيانات غير المحفوظة. هل أنت متأكد أنك تريد تسجيل الخروج؟"
 }

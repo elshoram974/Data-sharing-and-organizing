@@ -83,6 +83,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "gotIt": MessageLookupByLibrary.simpleMessage("Got it"),
         "hidePassword": MessageLookupByLibrary.simpleMessage("Hide password"),
         "home": MessageLookupByLibrary.simpleMessage("Home"),
+        "ifYouLogOutNowYouWillLoseAllUnsavedData":
+            MessageLookupByLibrary.simpleMessage(
+                "If you log out now, you will lose all unsaved data. Are you sure you want to log out?"),
         "ifYouReturnNowYouWillLoseAllData":
             MessageLookupByLibrary.simpleMessage(
                 "If you return now, you will lose all data!"),

@@ -1,6 +1,8 @@
 import 'package:data_sharing_organizing/core/status/status.dart';
 import 'package:data_sharing_organizing/core/status/success/success.dart';
+import 'package:data_sharing_organizing/core/utils/config/locale/generated/l10n.dart';
 import 'package:data_sharing_organizing/core/utils/config/routes/routes.dart';
+import 'package:data_sharing_organizing/core/utils/functions/show_custom_dialog.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -30,12 +32,21 @@ class UserMainCubit extends Cubit<UserMainState> {
   }
 
   void logOut() async {
-    navIndex = 0;
-    final Status<int> status = await logOutUseCase();
-    if (status is Success<int>) {
-      final BuildContext context = AppRoute.key.currentContext!;
-      if (context.mounted) context.go(AppRoute.login);
-    }
+    final BuildContext context = AppRoute.key.currentContext!;
+
+    ShowCustomDialog.warning(
+      context,
+      body: S.of(context).ifYouLogOutNowYouWillLoseAllUnsavedData,
+      textConfirm: S.of(context).logout,
+      textCancel: S.of(context).cancel,
+      onPressConfirm: () async {
+        navIndex = 0;
+        final Status<int> status = await logOutUseCase();
+        if (status is Success<int>) {
+          if (context.mounted) context.go(AppRoute.login);
+        }
+      },
+    );
   }
 
   bool canGoBack() {

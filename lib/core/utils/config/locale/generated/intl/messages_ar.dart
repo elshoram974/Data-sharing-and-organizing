@@ -85,6 +85,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "hidePassword":
             MessageLookupByLibrary.simpleMessage("إخفاء كلمة المرور"),
         "home": MessageLookupByLibrary.simpleMessage("الصفحة الرئيسية"),
+        "ifYouLogOutNowYouWillLoseAllUnsavedData":
+            MessageLookupByLibrary.simpleMessage(
+                "إذا قمت بتسجيل الخروج الآن، ستفقد كل البيانات غير المحفوظة. هل أنت متأكد أنك تريد تسجيل الخروج؟"),
         "ifYouReturnNowYouWillLoseAllData":
             MessageLookupByLibrary.simpleMessage(
                 "إذا قمت بالعودة الآن، ستفقد كل البيانات!"),
