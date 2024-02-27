@@ -56,8 +56,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "deviceMode": MessageLookupByLibrary.simpleMessage("وضع الجهاز"),
         "doNotHaveAnAccount":
             MessageLookupByLibrary.simpleMessage("ليس لديك حساب ؟ "),
+        "edit": MessageLookupByLibrary.simpleMessage("تعديل"),
         "editProfile":
             MessageLookupByLibrary.simpleMessage("تعديل الملف الشخصي"),
+        "email": MessageLookupByLibrary.simpleMessage("البريد الالكتروني"),
         "emailAddress":
             MessageLookupByLibrary.simpleMessage("عنوان البريد الإلكتروني"),
         "emailAlreadyInUse": MessageLookupByLibrary.simpleMessage(
@@ -161,6 +163,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "thisEmailAlreadyExists": MessageLookupByLibrary.simpleMessage(
             "هذا البريد الإلكتروني مستخدم بالفعل."),
         "today": MessageLookupByLibrary.simpleMessage("اليوم"),
+        "type": MessageLookupByLibrary.simpleMessage("النوع"),
         "uHaveToVerifyAccountFirst":
             MessageLookupByLibrary.simpleMessage("يجب التحقق من حسابك أولاً"),
         "userNotEmailPasswordToNewPass": MessageLookupByLibrary.simpleMessage(

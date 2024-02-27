@@ -57,7 +57,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "deviceMode": MessageLookupByLibrary.simpleMessage("Device mode"),
         "doNotHaveAnAccount":
             MessageLookupByLibrary.simpleMessage("Don\'t have an account ? "),
+        "edit": MessageLookupByLibrary.simpleMessage("Edit"),
         "editProfile": MessageLookupByLibrary.simpleMessage("Edit profile"),
+        "email": MessageLookupByLibrary.simpleMessage("E-mail"),
         "emailAddress": MessageLookupByLibrary.simpleMessage("Email address"),
         "emailAlreadyInUse": MessageLookupByLibrary.simpleMessage(
             "The account already exists for that email."),
@@ -159,6 +161,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "thisEmailAlreadyExists": MessageLookupByLibrary.simpleMessage(
             "This email is already in use."),
         "today": MessageLookupByLibrary.simpleMessage("Today"),
+        "type": MessageLookupByLibrary.simpleMessage("Type"),
         "uHaveToVerifyAccountFirst": MessageLookupByLibrary.simpleMessage(
             "You have to verify your account first"),
         "userNotEmailPasswordToNewPass": MessageLookupByLibrary.simpleMessage(
