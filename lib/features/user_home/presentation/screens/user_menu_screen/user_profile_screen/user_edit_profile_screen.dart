@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 
 import '../../../widgets/circular_image_widget.dart';
 import '../../../widgets/menu_widgets/profile/edit_profile/edit_profile_item_widget/edit_profile_item_widget.dart';
+import '../../../widgets/menu_widgets/profile/edit_profile/save_button_widget.dart';
 
 class UserEditProfileScreen extends StatelessWidget {
   const UserEditProfileScreen({super.key});
@@ -15,7 +16,7 @@ class UserEditProfileScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final AuthUserEntity user = ProviderDependency.config.currentUser!;
     return EmptyScreenWithTitle(
-      bottomPadding: 60,
+      actions: const [SaveButtonWidget()],
       title: S.of(context).editProfile,
       children: [
         Align(

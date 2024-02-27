@@ -10,16 +10,19 @@ class EmptyScreenWithTitle extends StatelessWidget {
     required this.children,
     required this.title,
     this.bottomPadding = 52,
+    this.actions,
   });
 
   final String title;
   final double bottomPadding;
+  final List<Widget>? actions;
   final List<Widget> children;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        actions: actions,
         leadingWidth: 100,
         leading: const BackButtonLeading(showBackButton: true),
       ),
