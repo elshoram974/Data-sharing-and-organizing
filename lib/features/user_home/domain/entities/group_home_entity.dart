@@ -1,10 +1,13 @@
+import 'package:flutter/material.dart';
+
 final class GroupHomeEntity {
   final String? imageLink;
   final String groupName;
-  final String? lastMessage;
+  final TextSpan? lastMessage;
   final int? unReadCounter;
   final bool isUnread;
   final DateTime lastMessageTime;
+  bool isSelected;
 
   GroupHomeEntity({
     this.imageLink,
@@ -13,5 +16,6 @@ final class GroupHomeEntity {
     this.unReadCounter,
     this.isUnread = false,
     required this.lastMessageTime,
+    this.isSelected = false,
   });
 }
