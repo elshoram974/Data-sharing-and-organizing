@@ -101,5 +101,7 @@
     "yourGroups": "مجموعاتك",
     "createAnotherAccount": "إنشاء حساب آخر",
     "currentPassword": "كلمة المرور الحالية",
-    "reTypeNewPassword": "أعد كتابة كلمة المرور الجديدة"
+    "reTypeNewPassword": "أعد كتابة كلمة المرور الجديدة",
+    "youCanMakeNewGroups": "بإمكانك إنشاء مجموعات جديدة بحرية.",
+    "thereIsNoNotifications": "لا يوجد حاليًا أي إشعارات."
 }

@@ -1071,6 +1071,26 @@ class S {
       args: [],
     );
   }
+
+  /// `Feel free to create new groups.`
+  String get youCanMakeNewGroups {
+    return Intl.message(
+      'Feel free to create new groups.',
+      name: 'youCanMakeNewGroups',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `There are currently no notifications.`
+  String get thereIsNoNotifications {
+    return Intl.message(
+      'There are currently no notifications.',
+      name: 'thereIsNoNotifications',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

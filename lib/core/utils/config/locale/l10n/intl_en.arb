@@ -101,5 +101,7 @@
     "yourGroups": "Your groups",
     "createAnotherAccount": "Create another account",
     "currentPassword": "Current Password",
-    "reTypeNewPassword": "Re-type new Password"
+    "reTypeNewPassword": "Re-type new Password",
+    "youCanMakeNewGroups": "Feel free to create new groups.",
+    "thereIsNoNotifications": "There are currently no notifications."
 }

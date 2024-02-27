@@ -147,6 +147,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage(
                 "انتهت صلاحية رمز التحقق. لقد قمنا بإرسال رمز آخر."),
         "themeMode": MessageLookupByLibrary.simpleMessage("وضع المظهر"),
+        "thereIsNoNotifications":
+            MessageLookupByLibrary.simpleMessage("لا يوجد حاليًا أي إشعارات."),
         "thereIsProblemWithServerTryAgainLater":
             MessageLookupByLibrary.simpleMessage(
                 "هناك مشكلة في الخادم. حاول مرة أخرى لاحقًا."),
@@ -174,6 +176,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "wrongPassword": MessageLookupByLibrary.simpleMessage(
             "تم تقديم كلمة مرور خاطئة لهذا المستخدم."),
         "yesterday": MessageLookupByLibrary.simpleMessage("أمس"),
+        "youCanMakeNewGroups": MessageLookupByLibrary.simpleMessage(
+            "بإمكانك إنشاء مجموعات جديدة بحرية."),
         "youCanNotUseSamePreviousPassword":
             MessageLookupByLibrary.simpleMessage(
                 "لا يمكنك استخدام نفس كلمة المرور السابقة."),

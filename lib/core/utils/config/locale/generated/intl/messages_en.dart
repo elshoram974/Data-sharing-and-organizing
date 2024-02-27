@@ -145,6 +145,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage(
                 "The verification code has expired. We have sent another code."),
         "themeMode": MessageLookupByLibrary.simpleMessage("Theme mode"),
+        "thereIsNoNotifications": MessageLookupByLibrary.simpleMessage(
+            "There are currently no notifications."),
         "thereIsProblemWithServerTryAgainLater":
             MessageLookupByLibrary.simpleMessage(
                 "There is a problem with the server. Try again later."),
@@ -172,6 +174,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "wrongPassword": MessageLookupByLibrary.simpleMessage(
             "Wrong password provided for that user."),
         "yesterday": MessageLookupByLibrary.simpleMessage("Yesterday"),
+        "youCanMakeNewGroups": MessageLookupByLibrary.simpleMessage(
+            "Feel free to create new groups."),
         "youCanNotUseSamePreviousPassword":
             MessageLookupByLibrary.simpleMessage(
                 "You can\'t use the same previous password."),
