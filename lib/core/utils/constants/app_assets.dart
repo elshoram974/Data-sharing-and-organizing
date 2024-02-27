@@ -12,4 +12,5 @@ abstract final class AppAssets {
   static const String fontSizeIcon = '$_images/font_size.svg';
   static const String editSquare = '$_images/edit_square.svg';
   static const String person = '$_images/person.svg';
+  static const String group = '$_images/group.svg';
 }
