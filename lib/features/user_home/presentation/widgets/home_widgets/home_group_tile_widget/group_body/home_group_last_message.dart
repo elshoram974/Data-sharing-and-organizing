@@ -3,8 +3,13 @@ import 'package:data_sharing_organizing/core/utils/styles.dart';
 import 'package:flutter/material.dart';
 
 class HomeGroupLastMessage extends StatelessWidget {
-  const HomeGroupLastMessage({super.key, required this.lastMessage});
+  const HomeGroupLastMessage({
+    super.key,
+    this.maxLines = 1,
+    required this.lastMessage,
+  });
 
+  final int? maxLines;
   final InlineSpan lastMessage;
 
   @override
@@ -13,7 +18,7 @@ class HomeGroupLastMessage extends StatelessWidget {
       child: Text.rich(
         lastMessage,
         overflow: TextOverflow.ellipsis,
-        maxLines: 1,
+        maxLines: maxLines,
         style: AppStyle.styleBoldInika24.copyWith(
           fontSize: 13,
           color: AppColor.gray,
