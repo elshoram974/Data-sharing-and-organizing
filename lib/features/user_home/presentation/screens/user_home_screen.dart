@@ -1,3 +1,5 @@
+import 'package:data_sharing_organizing/core/shared/empty_page_text.dart';
+import 'package:data_sharing_organizing/core/utils/config/locale/generated/l10n.dart';
 import 'package:flutter/material.dart';
 
 import '../../domain/entities/group_home_entity.dart';
@@ -9,68 +11,39 @@ class UserHomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MainBodyWidget(children: groupsItems);
+    final List<GroupHomeEntity> groupsItems = [
+      GroupHomeEntity(
+        imageLink:
+            'https://images.justwatch.com/poster/248497985/s592/one-piece',
+        groupName: 'First year in THIET',
+        lastMessage: const TextSpan(
+            text:
+                'Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message '),
+        unReadCounter: null,
+        isUnread: false,
+        lastMessageTime: DateTime.now(),
+      ),
+      GroupHomeEntity(
+        imageLink:
+            'https://images.justwatch.com/poster/248497985/s592/one-piece',
+        groupName: 'First year in THIET',
+        lastMessage: const TextSpan(
+            text:
+                'Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message '),
+        unReadCounter: null,
+        isUnread: false,
+        lastMessageTime: DateTime.now(),
+      ),
+    ];
+
+    return MainBodyWidget(children: [
+      if (groupsItems.isEmpty) EmptyPageText(S.of(context).youCanMakeNewGroups),
+      for (GroupHomeEntity e in groupsItems)
+        HomeGroupTile(
+          onTap: () {},
+          onLongPress: () {},
+          groupHomeEntity: e,
+        ),
+    ]);
   }
 }
-
-final List<HomeGroupTile> groupsItems = [
-  HomeGroupTile(
-    groupHomeEntity: GroupHomeEntity(
-      imageLink: 'https://images.justwatch.com/poster/248497985/s592/one-piece',
-      groupName: 'First year in THIET',
-      lastMessage:
-          'Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message ',
-      unReadCounter: null,
-      isUnread: false,
-      lastMessageTime: DateTime.now(),
-    ),
-  ),
-  HomeGroupTile(
-    groupHomeEntity: GroupHomeEntity(
-      imageLink:
-          'https://icon2.cleanpng.com/20180320/hww/kisspng-computer-icons-directory-computer-file-png-transparent-no-5ab134adbd3e51.0821639815215627977751.jpg',
-      groupName: 'First year in THIET',
-      lastMessage:
-          'Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message ',
-      unReadCounter: null,
-      isUnread: false,
-      lastMessageTime: DateTime.now().subtract(const Duration(days: 1)),
-    ),
-  ),
-  HomeGroupTile(
-    groupHomeEntity: GroupHomeEntity(
-      imageLink:
-          'https://icon2.cleanpng.com/20180320/hww/kisspng-computer-icons-directory-computer-file-png-transparent-no-5ab134adbd3e51.0821639815215627977751.jpg',
-      groupName: 'First year in THIET',
-      lastMessage:
-          'Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message ',
-      unReadCounter: null,
-      isUnread: false,
-      lastMessageTime: DateTime.now().subtract(const Duration(days: 2)),
-    ),
-  ),
-  HomeGroupTile(
-    groupHomeEntity: GroupHomeEntity(
-      imageLink:
-          'https://icon2.cleanpng.com/20180320/hww/kisspng-computer-icons-directory-computer-file-png-transparent-no-5ab134adbd3e51.0821639815215627977751.jpg',
-      groupName: 'First year in THIET',
-      lastMessage:
-          'Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message ',
-      unReadCounter: null,
-      isUnread: false,
-      lastMessageTime: DateTime.now().subtract(const Duration(days: 6)),
-    ),
-  ),
-  HomeGroupTile(
-    groupHomeEntity: GroupHomeEntity(
-      imageLink:
-          'https://icon2.cleanpng.com/20180320/hww/kisspng-computer-icons-directory-computer-file-png-transparent-no-5ab134adbd3e51.0821639815215627977751.jpg',
-      groupName: 'First year in THIET',
-      lastMessage:
-          'Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message ',
-      unReadCounter: null,
-      isUnread: false,
-      lastMessageTime: DateTime.now().subtract(const Duration(days: 7)),
-    ),
-  ),
-];

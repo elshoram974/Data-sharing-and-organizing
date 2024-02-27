@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 final class GroupHomeEntity {
   final String? imageLink;
   final String groupName;
-  final TextSpan? lastMessage;
+  final InlineSpan? lastMessage;
   final int? unReadCounter;
   final bool isUnread;
   final DateTime lastMessageTime;

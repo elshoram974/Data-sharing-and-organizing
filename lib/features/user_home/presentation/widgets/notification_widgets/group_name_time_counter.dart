@@ -4,7 +4,7 @@ import 'package:data_sharing_organizing/core/utils/styles.dart';
 import 'package:flutter/material.dart';
 
 import '../../../domain/entities/group_home_entity.dart';
-import '../home_widgets/home_group_tile_widget/group_unread_counter.dart';
+import '../home_widgets/home_group_tile_widget/group_body/group_unread_counter.dart';
 
 class GroupNameAndTimeAndCounterTile extends StatelessWidget {
   const GroupNameAndTimeAndCounterTile({
