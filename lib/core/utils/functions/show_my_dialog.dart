@@ -22,40 +22,6 @@ abstract final class ShowMyDialog {
     );
   }
 
-  static Future<T?> warning<T>(
-    BuildContext context, {
-    required String body,
-  }) {
-    return showDialog<T>(
-      context: context,
-      builder: (context) {
-        return CustomDialog(
-          title: S.of(context).warning,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          body: body,
-          textCancel: S.of(context).gotIt,
-        );
-      },
-    );
-  }
-
-  static Future<T?> error<T>(
-    BuildContext context, {
-    required String body,
-  }) {
-    return showDialog<T>(
-      context: context,
-      builder: (context) {
-        return CustomDialog(
-          title: S.of(context).error,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          body: body,
-          textCancel: S.of(context).gotIt,
-        );
-      },
-    );
-  }
-
   static Future<bool?> back(
     BuildContext context, {
     String? body,

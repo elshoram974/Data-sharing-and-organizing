@@ -5,6 +5,7 @@ import 'package:data_sharing_organizing/core/utils/config/routes/routes.dart';
 import 'package:data_sharing_organizing/core/utils/enums/user_provider_enum.dart';
 import 'package:data_sharing_organizing/core/utils/enums/user_role/user_type_enum.dart';
 import 'package:data_sharing_organizing/core/utils/enums/user_status_enum.dart';
+import 'package:data_sharing_organizing/core/utils/functions/show_custom_dialog.dart';
 import 'package:data_sharing_organizing/core/utils/functions/show_my_dialog.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
@@ -85,7 +86,7 @@ class LoginCubit extends Cubit<LoginState> {
       if (data.userStatus == UserStatus.pending && data.userStatusMessage == 'want to verify the account') {
         await ShowMyDialog.verifyDialog(data);
       } else {
-        await ShowMyDialog.error(
+        await ShowCustomDialog.error(
           AppRoute.key.currentContext!,
           body: 'Account status: ${data.userStatus}, ${data.userStatusMessage}',
         );

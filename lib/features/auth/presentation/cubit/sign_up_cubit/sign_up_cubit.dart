@@ -4,6 +4,7 @@ import 'package:data_sharing_organizing/core/status/success/success.dart';
 import 'package:data_sharing_organizing/core/utils/config/locale/generated/l10n.dart';
 import 'package:data_sharing_organizing/core/utils/config/routes/routes.dart';
 import 'package:data_sharing_organizing/core/utils/enums/user_role/user_type_enum.dart';
+import 'package:data_sharing_organizing/core/utils/functions/show_custom_dialog.dart';
 import 'package:data_sharing_organizing/core/utils/functions/show_my_dialog.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
@@ -91,8 +92,9 @@ class SignUpCubit extends Cubit<SignUpState> {
   // end sign up----------------------------
 
   void _chooseUserRoleDialog() async {
-    await ShowMyDialog.warning(
+    await ShowCustomDialog.warning(
       _context!,
+      textCancel: S.of(_context).gotIt,
       body: S.of(_context).YouHaveChooseTypeOfAccountPersonalOrBusiness,
     );
   }
