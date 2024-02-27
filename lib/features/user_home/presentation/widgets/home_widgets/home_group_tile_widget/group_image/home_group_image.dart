@@ -1,4 +1,5 @@
 import 'package:data_sharing_organizing/core/shared/image/group.dart';
+import 'package:data_sharing_organizing/core/utils/services/dependency/provider_dependency.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../domain/entities/group_home_entity.dart';
@@ -17,6 +18,7 @@ class HomeGroupImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final bool isArabic = ProviderDependency.config.isArabic;
     return Stack(
       children: [
         CircularImageWidget(
@@ -26,7 +28,8 @@ class HomeGroupImage extends StatelessWidget {
         ),
         Positioned(
           bottom: 0,
-          right: 0,
+          right: isArabic ? null : 0,
+          left: isArabic ? 0 : null,
           child: SelectedIcon(isSelected: groupHomeEntity.isSelected),
         ),
       ],
