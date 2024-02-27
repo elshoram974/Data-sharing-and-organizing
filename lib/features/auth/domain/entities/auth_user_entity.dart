@@ -12,13 +12,16 @@ class AuthUserEntity extends Equatable {
   @HiveField(1)
   final String name;
   @HiveField(2)
-  final String email;
+  final String? image;
   @HiveField(3)
-  final String password;
+  final String email;
   @HiveField(4)
+  final String password;
+  @HiveField(5)
   final UserType userType;
 
   const AuthUserEntity({
+    this.image,
     required this.id,
     required this.name,
     required this.email,
@@ -28,6 +31,7 @@ class AuthUserEntity extends Equatable {
 
   AuthUserEntity copyWith({
     int? id,
+    String? image,
     String? name,
     String? email,
     String? password,
@@ -35,6 +39,7 @@ class AuthUserEntity extends Equatable {
   }) {
     return AuthUserEntity(
       id: id ?? this.id,
+      image: image ?? this.image,
       name: name ?? this.name,
       email: email ?? this.email,
       password: password ?? this.password,
@@ -45,6 +50,7 @@ class AuthUserEntity extends Equatable {
   factory AuthUserEntity.fromFirebaseAuth(User user) {
     return AuthUserEntity(
       id: 0,
+      image: user.photoURL ?? '',
       name: user.displayName ?? '',
       email: user.email ?? '',
       password: user.uid,
@@ -53,5 +59,5 @@ class AuthUserEntity extends Equatable {
   }
 
   @override
-  List<Object?> get props => [name, email, password, userType];
+  List<Object?> get props => [name, image, email, password, userType];
 }

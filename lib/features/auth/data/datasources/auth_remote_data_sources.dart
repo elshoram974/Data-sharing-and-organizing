@@ -47,6 +47,7 @@ class AuthRemoteDataSourceImp extends AuthRemoteDataSource {
       AppLinks.loginByProvider,
       {
         'name': user.name,
+        'image': user.image,
         'email': user.email,
         'password': user.password,
         'provider': provider.inString,

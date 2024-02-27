@@ -16,6 +16,7 @@ final class LoginUserEntity extends AuthUserEntity {
   LoginUserEntity copyWith({
     int? id,
     String? name,
+    String? image,
     String? email,
     String? password,
     UserType? userType,
