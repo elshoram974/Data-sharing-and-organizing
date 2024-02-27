@@ -14,7 +14,7 @@ class UserEditProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final AuthUserEntity user = ProviderDependency.config.currentUser!;
+    final AuthUserEntity user = ProviderDependency.userMain.user;
     return EmptyScreenWithTitle(
       actions: const [SaveButtonWidget()],
       title: S.of(context).editProfile,

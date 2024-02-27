@@ -28,7 +28,7 @@ class AuthRepositoriesImp extends AuthRepositories {
       () async {
         User authUser = await remoteDataSource.login(user);
         if (user.keepLogin && authUser.userStatus == UserStatus.active) {
-          await localDataSource.saveUser(user);
+          await localDataSource.saveUser(authUser.copyWith(password: user.password));
         }
 
         return authUser;
