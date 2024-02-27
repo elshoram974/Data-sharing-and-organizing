@@ -8,13 +8,10 @@ class PersonImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.white,
-      child: SvgPicture.asset(
-        AppAssets.person,
-        fit: BoxFit.cover,
-        alignment: Alignment.topCenter,
-      ),
+    return SvgPicture.asset(
+      AppAssets.person,
+      fit: BoxFit.cover,
+      alignment: Alignment.topCenter,
     );
   }
 }
