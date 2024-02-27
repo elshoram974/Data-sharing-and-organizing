@@ -5,12 +5,12 @@ import 'package:flutter/material.dart';
 class HomeGroupLastMessage extends StatelessWidget {
   const HomeGroupLastMessage({super.key, required this.lastMessage});
 
-  final String lastMessage;
+  final InlineSpan lastMessage;
 
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      child: Text(
+      child: Text.rich(
         lastMessage,
         overflow: TextOverflow.ellipsis,
         maxLines: 1,

@@ -1,7 +1,7 @@
 import 'package:data_sharing_organizing/core/utils/constants/app_constants.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../domain/entities/group_home_entity.dart';
+import '../../../../../domain/entities/group_home_entity.dart';
 import 'group_unread_counter.dart';
 import 'home_group_last_message.dart';
 
