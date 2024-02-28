@@ -9,13 +9,12 @@ part 'user_home_state.dart';
 
 class UserHomeCubit extends Cubit<UserHomeState> {
   UserHomeCubit() : super(UserHomeInitial(groupsItems)) {
-    _groups.addAll(groupsItems);
-    currentGroups.addAll(_groups);
+    currentGroups.addAll(groupsItems);
   }
-  final List<GroupHomeEntity> _groups = [];
   final List<GroupHomeEntity> currentGroups = [];
   final List<GroupHomeEntity> selectedGroups = [];
 
+  // * when tap on tile
   void onTapGroup(GroupHomeEntity group) {
     if (isSelected) {
       onLongTapGroup(group);
@@ -24,8 +23,21 @@ class UserHomeCubit extends Cubit<UserHomeState> {
     }
   }
 
-  void onLongTapGroup(GroupHomeEntity group) =>
-      _selectGroup(group, !group.isSelected);
+  void onLongTapGroup(GroupHomeEntity group) => _selectGroup(group, !group.isSelected);
+
+  // * when tap on pop up item when select groups
+  void onSelectPopUpItem(value) {
+    switch (value) {
+      case HomeSelectedPopUpItem.exitGroup:
+      case HomeSelectedPopUpItem.markAsUnRead:
+      case HomeSelectedPopUpItem.selectAll:
+        _makeAllSelectedOrNot(true);
+      case HomeSelectedPopUpItem.muteNotification:
+      case HomeSelectedPopUpItem.unmuteNotification:
+    }
+  }
+
+  // * helper functions
 
   void _selectGroup(GroupHomeEntity group, bool makeSelected) {
     final replaced = group.copyWith(isSelected: makeSelected);
@@ -42,26 +54,17 @@ class UserHomeCubit extends Cubit<UserHomeState> {
   }
 
   void _makeAllSelectedOrNot(bool makeSelected) {
-    selectedGroups.clear();
-    if (makeSelected) selectedGroups.addAll(currentGroups);
-
     for (int i = 0; i < currentGroups.length; i++) {
       currentGroups[i] = currentGroups[i].copyWith(isSelected: makeSelected);
     }
 
+    selectedGroups.clear();
+    if (makeSelected) selectedGroups.addAll(currentGroups);
+
     emit(UserHomeSelectGroups(currentGroups, makeSelected));
   }
 
-  void onSelectPopUpItem(value) {
-    switch (value) {
-      case HomeSelectedPopUpItem.exitGroup:
-      case HomeSelectedPopUpItem.markAsUnRead:
-      case HomeSelectedPopUpItem.selectAll:
-      case HomeSelectedPopUpItem.muteNotification:
-      case HomeSelectedPopUpItem.unmuteNotification:
-    }
-  }
-
+  // * when go back
   bool onWillPop() {
     if (isSelected) {
       _makeAllSelectedOrNot(false);
@@ -70,6 +73,7 @@ class UserHomeCubit extends Cubit<UserHomeState> {
     return true;
   }
 
+  // * get functions
   bool get isSelected => selectedGroups.isNotEmpty;
   bool get isAllSelected => selectedGroups.length == currentGroups.length;
 }
@@ -88,6 +92,26 @@ final List<GroupHomeEntity> groupsItems = [
   GroupHomeEntity(
     imageLink: 'https://images.justwatch.com/poster/248497985/s592/one-piece',
     groupName: 'First year in THIET',
+    lastMessage: const TextSpan(
+        text:
+            'Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message '),
+    unReadCounter: null,
+    isUnread: false,
+    lastMessageTime: DateTime.now(),
+  ),
+  GroupHomeEntity(
+    imageLink: 'https://images.justwatch.com/poster/248497985/s592/one-piece',
+    groupName: 'Second year in THIET',
+    lastMessage: const TextSpan(
+        text:
+            'Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message '),
+    unReadCounter: null,
+    isUnread: false,
+    lastMessageTime: DateTime.now(),
+  ),
+  GroupHomeEntity(
+    imageLink: 'https://images.justwatch.com/poster/248497985/s592/one-piece',
+    groupName: 'Third year in THIET',
     lastMessage: const TextSpan(
         text:
             'Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message '),

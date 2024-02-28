@@ -26,7 +26,7 @@ final class HomePopUpItemEntity extends Equatable {
       HomePopUpItemEntity(
         text: S.of(context).exitGroup,
         value: HomeSelectedPopUpItem.exitGroup,
-        isVisible: true,
+        isVisible: cubit.selectedGroups.length == 1,
       ),
       HomePopUpItemEntity(
         text: S.of(context).markAsUnRead,
@@ -41,14 +41,12 @@ final class HomePopUpItemEntity extends Equatable {
       HomePopUpItemEntity(
         text: S.of(context).muteNotification,
         value: HomeSelectedPopUpItem.muteNotification,
-        isVisible: cubit.selectedGroups.length == 1 &&
-            !cubit.selectedGroups.first.isMute,
+        isVisible: cubit.selectedGroups.length == 1 && !cubit.selectedGroups.first.isMute,
       ),
       HomePopUpItemEntity(
         text: S.of(context).unmuteNotification,
         value: HomeSelectedPopUpItem.unmuteNotification,
-        isVisible: cubit.selectedGroups.length == 1 &&
-            cubit.selectedGroups.first.isMute,
+        isVisible: cubit.selectedGroups.length == 1 && cubit.selectedGroups.first.isMute,
       ),
     ];
   }
