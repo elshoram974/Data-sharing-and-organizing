@@ -15,9 +15,11 @@ class MainUserAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 110,
-      padding: const EdgeInsets.symmetric(
-        horizontal: AppConst.defaultPadding,
-        vertical: 11,
+      padding: EdgeInsets.only(
+        left: ProviderDependency.config.isArabic ? 0 : AppConst.defaultPadding,
+        right: ProviderDependency.config.isArabic ? AppConst.defaultPadding : 0,
+        top: 11,
+        bottom: 11,
       ),
       alignment: Alignment.bottomLeft,
       decoration: appBarDecoration(context),
