@@ -1,6 +1,11 @@
 import 'package:data_sharing_organizing/core/shared/app_logo_Name_home.dart';
 import 'package:data_sharing_organizing/core/utils/constants/app_constants.dart';
+import 'package:data_sharing_organizing/core/utils/services/dependency/provider_dependency.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../cubit/user_home_cubit/user_home_cubit.dart';
+import '../home_widgets/home_selected_app_bar.dart';
 
 class MainUserAppBar extends StatelessWidget implements PreferredSizeWidget {
   const MainUserAppBar({super.key, this.hight = 110});
@@ -16,7 +21,7 @@ class MainUserAppBar extends StatelessWidget implements PreferredSizeWidget {
       ),
       alignment: Alignment.bottomLeft,
       decoration: appBarDecoration(context),
-      child: const AppLogoWithNameHome(),
+      child: const _AppBarBody(),
     );
   }
 
@@ -34,5 +39,25 @@ class MainUserAppBar extends StatelessWidget implements PreferredSizeWidget {
   }
 
   @override
-  Size get preferredSize => Size(double.maxFinite, AppConst.isWeb ? hight / 2 : hight);
+  Size get preferredSize =>
+      Size(double.maxFinite, AppConst.isWeb ? hight / 2 : hight);
+}
+
+class _AppBarBody extends StatelessWidget {
+  const _AppBarBody();
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<UserHomeCubit, UserHomeState>(
+      buildWhen: (p, c) => c is UserHomeSelectGroups,
+      builder: (context, state) {
+        final UserHomeCubit c = ProviderDependency.userHome;
+        return Visibility(
+          visible: c.isSelected,
+          replacement: const AppLogoWithNameHome(),
+          child: HomeSelectedAppBar(cubit: c),
+        );
+      },
+    );
+  }
 }

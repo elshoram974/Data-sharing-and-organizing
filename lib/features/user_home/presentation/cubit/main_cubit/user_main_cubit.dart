@@ -3,6 +3,7 @@ import 'package:data_sharing_organizing/core/status/success/success.dart';
 import 'package:data_sharing_organizing/core/utils/config/locale/generated/l10n.dart';
 import 'package:data_sharing_organizing/core/utils/config/routes/routes.dart';
 import 'package:data_sharing_organizing/core/utils/functions/show_custom_dialog.dart';
+import 'package:data_sharing_organizing/core/utils/services/dependency/provider_dependency.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -26,6 +27,7 @@ class UserMainCubit extends Cubit<UserMainState> {
   int navIndex = 0;
 
   void onNavChange(int val, bool inPageChange) {
+    ProviderDependency.userHome.onWillPop();
     navIndex = val;
     if (!inPageChange) navController.jumpToPage(navIndex);
     emit(UserMainChangeNavBar(navIndex));

@@ -21,10 +21,12 @@ class UserHomeCubit extends Cubit<UserHomeState> {
     } else {
       // go to screen
     }
+    print(selectedGroups.length);
   }
 
-  void onLongTapGroup(GroupHomeEntity group) => _selectGroup(group, !group.isSelected);
-  
+  void onLongTapGroup(GroupHomeEntity group) =>
+      _selectGroup(group, !group.isSelected);
+
   void _selectGroup(GroupHomeEntity group, bool makeSelected) {
     final replaced = group.copyWith(isSelected: makeSelected);
     if (makeSelected) {
@@ -37,6 +39,21 @@ class UserHomeCubit extends Cubit<UserHomeState> {
     currentGroups[index] = replaced;
 
     emit(UserHomeSelectGroups([group], makeSelected));
+  }
+
+  void _makeAllSelectedOrNot(bool makeSelected) {
+    selectedGroups.clear();
+    if (makeSelected) selectedGroups.addAll(currentGroups);
+
+    for (int i = 0; i < currentGroups.length; i++) {
+      currentGroups[i] = currentGroups[i].copyWith(isSelected: makeSelected);
+    }
+
+    emit(UserHomeSelectGroups(currentGroups, makeSelected));
+  }
+
+  void onWillPop() {
+    if (isSelected) _makeAllSelectedOrNot(false);
   }
 
   bool get isSelected => selectedGroups.isNotEmpty;
