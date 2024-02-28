@@ -119,6 +119,7 @@
     "exitGroup": "الخروج من المجموعة",
     "markAsUnRead": "وضع علامة كغير مقروء",
     "selectAll": "تحديد الكل",
+    "deselectAll": "إلغاء تحديد الكل",
     "muteNotification": "كتم الإشعارات",
     "unmuteNotification": "تفعيل الإشعارات"
 }

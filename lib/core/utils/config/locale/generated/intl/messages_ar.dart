@@ -55,6 +55,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("كلمة المرور الحالية"),
         "darkMode": MessageLookupByLibrary.simpleMessage("الوضع المظلم"),
         "defaultScale": MessageLookupByLibrary.simpleMessage("افتراضي"),
+        "deselectAll": MessageLookupByLibrary.simpleMessage("إلغاء تحديد الكل"),
         "deviceMode": MessageLookupByLibrary.simpleMessage("وضع الجهاز"),
         "doNotHaveAnAccount":
             MessageLookupByLibrary.simpleMessage("ليس لديك حساب ؟ "),

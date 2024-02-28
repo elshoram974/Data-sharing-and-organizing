@@ -119,6 +119,7 @@
     "exitGroup": "Exit group",
     "markAsUnRead": "Mark as unread",
     "selectAll": "Select all",
+    "deselectAll": "Deselect all",
     "muteNotification": "Mute notification",
     "unmuteNotification": "Unmute notification"
 }

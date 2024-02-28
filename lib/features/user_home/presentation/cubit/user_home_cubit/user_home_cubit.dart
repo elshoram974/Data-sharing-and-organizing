@@ -23,17 +23,23 @@ class UserHomeCubit extends Cubit<UserHomeState> {
     }
   }
 
-  void onLongTapGroup(GroupHomeEntity group) => _selectGroup(group, !group.isSelected);
+  void onLongTapGroup(GroupHomeEntity group) =>
+      _selectGroup(group, !group.isSelected);
 
   // * when tap on pop up item when select groups
   void onSelectPopUpItem(value) {
     switch (value) {
       case HomeSelectedPopUpItem.exitGroup:
+        print('exitGroup');
       case HomeSelectedPopUpItem.markAsUnRead:
+        print('markAsUnRead');
       case HomeSelectedPopUpItem.selectAll:
-        _makeAllSelectedOrNot(true);
+      case HomeSelectedPopUpItem.deselectAll:
+        _makeAllSelectedOrNot(!isAllSelected);
       case HomeSelectedPopUpItem.muteNotification:
+        print('muteNotification');
       case HomeSelectedPopUpItem.unmuteNotification:
+        print('unmuteNotification');
     }
   }
 
