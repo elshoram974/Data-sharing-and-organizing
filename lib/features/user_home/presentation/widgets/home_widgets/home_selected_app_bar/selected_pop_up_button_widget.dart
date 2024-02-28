@@ -13,11 +13,11 @@ class SelectedPopUpMenuButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final homeList = HomePopUpItemEntity.list(context, cubit);
+    final List<HomePopUpItemEntity> homeList = HomePopUpItemEntity.list(context, cubit);
 
     return PopupMenuButton<HomeSelectedPopUpItem>(
       position: PopupMenuPosition.under,
-      onSelected: onSelectPopUpItem,
+      onSelected: cubit.onSelectPopUpItem,
       shape: RoundedRectangleBorder(
         side: const BorderSide(color: AppColor.primary),
         borderRadius: BorderRadius.circular(AppConst.borderRadius),
@@ -35,15 +35,5 @@ class SelectedPopUpMenuButton extends StatelessWidget {
       ],
       child: const Icon(Icons.more_vert),
     );
-  }
-
-  void onSelectPopUpItem(value) {
-    switch (value) {
-      case HomeSelectedPopUpItem.exitGroup:
-      case HomeSelectedPopUpItem.markAsUnRead:
-      case HomeSelectedPopUpItem.selectAll:
-      case HomeSelectedPopUpItem.muteNotification:
-      case HomeSelectedPopUpItem.unmuteNotification:
-    }
   }
 }

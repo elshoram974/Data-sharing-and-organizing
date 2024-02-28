@@ -1,3 +1,4 @@
+import 'package:data_sharing_organizing/core/utils/enums/home_selected_pop_up_enum.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -49,6 +50,16 @@ class UserHomeCubit extends Cubit<UserHomeState> {
     }
 
     emit(UserHomeSelectGroups(currentGroups, makeSelected));
+  }
+
+  void onSelectPopUpItem(value) {
+    switch (value) {
+      case HomeSelectedPopUpItem.exitGroup:
+      case HomeSelectedPopUpItem.markAsUnRead:
+      case HomeSelectedPopUpItem.selectAll:
+      case HomeSelectedPopUpItem.muteNotification:
+      case HomeSelectedPopUpItem.unmuteNotification:
+    }
   }
 
   bool onWillPop() {
