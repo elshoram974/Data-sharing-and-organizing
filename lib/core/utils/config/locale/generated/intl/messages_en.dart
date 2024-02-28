@@ -56,7 +56,6 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Current Password"),
         "darkMode": MessageLookupByLibrary.simpleMessage("Dark mode"),
         "defaultScale": MessageLookupByLibrary.simpleMessage("Default"),
-        "deselectAll": MessageLookupByLibrary.simpleMessage("Deselect all"),
         "deviceMode": MessageLookupByLibrary.simpleMessage("Device mode"),
         "doNotHaveAnAccount":
             MessageLookupByLibrary.simpleMessage("Don\'t have an account ? "),

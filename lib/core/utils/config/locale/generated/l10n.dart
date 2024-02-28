@@ -1172,16 +1172,6 @@ class S {
     );
   }
 
-  /// `Deselect all`
-  String get deselectAll {
-    return Intl.message(
-      'Deselect all',
-      name: 'deselectAll',
-      desc: '',
-      args: [],
-    );
-  }
-
   /// `Mute notification`
   String get muteNotification {
     return Intl.message(
