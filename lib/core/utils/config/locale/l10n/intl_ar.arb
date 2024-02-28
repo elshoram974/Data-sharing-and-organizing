@@ -107,5 +107,13 @@
     "ifYouLogOutNowYouWillLoseAllUnsavedData": "إذا قمت بتسجيل الخروج الآن، ستفقد كل البيانات غير المحفوظة. هل أنت متأكد أنك تريد تسجيل الخروج؟",
     "edit": "تعديل",
     "email": "البريد الالكتروني",
-    "type": "النوع"
+    "type": "النوع",
+    "selectedWithNumber": "تم تحديد {number}",
+    "@selectedWithNumber": {
+        "placeholders": {
+            "number": {
+                "type": "int"
+            }
+        }
+    }
 }

@@ -8,6 +8,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../auth/domain/entities/auth_user_entity.dart';
 import '../../../../auth/domain/usecases/log_out_use_case.dart';
 import '../../cubit/main_cubit/user_main_cubit.dart';
+import '../../cubit/user_home_cubit/user_home_cubit.dart';
 import 'res/desktop_main_screen.dart';
 import 'res/phone_main_screen.dart';
 import 'res/tablet_main_screen.dart';
@@ -18,11 +19,16 @@ class UserMainScreens extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => UserMainCubit(
-        user: user,
-        logOutUseCase: sl.get<LogOutUseCase>(),
-      ),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => UserMainCubit(
+            user: user,
+            logOutUseCase: sl.get<LogOutUseCase>(),
+          ),
+        ),
+        BlocProvider(create: (context) => UserHomeCubit()),
+      ],
       child: const _UserMainScreens(),
     );
   }
@@ -34,6 +40,7 @@ class _UserMainScreens extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     ProviderDependency.userMain = BlocProvider.of<UserMainCubit>(context);
+    ProviderDependency.userHome = BlocProvider.of<UserHomeCubit>(context);
 
     return BlocBuilder<UserMainCubit, UserMainState>(
       buildWhen: (p, c) => c is UserMainChangeNavBar,

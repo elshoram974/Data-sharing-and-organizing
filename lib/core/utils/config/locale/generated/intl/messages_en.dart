@@ -24,6 +24,8 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m1(max) => "Can\'t be more than ${max}";
 
+  static String m2(number) => "${number} selected";
+
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "YouHaveChooseTypeOfAccountPersonalOrBusiness":
@@ -134,6 +136,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "rememberMe": MessageLookupByLibrary.simpleMessage("Remember me"),
         "resend": MessageLookupByLibrary.simpleMessage("Resend"),
         "save": MessageLookupByLibrary.simpleMessage("Save"),
+        "selectedWithNumber": m2,
         "sendRequest": MessageLookupByLibrary.simpleMessage("Send request"),
         "settings": MessageLookupByLibrary.simpleMessage("Settings"),
         "sharikna": MessageLookupByLibrary.simpleMessage("Sharikna"),

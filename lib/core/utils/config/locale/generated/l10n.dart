@@ -1131,6 +1131,16 @@ class S {
       args: [],
     );
   }
+
+  /// `{number} selected`
+  String selectedWithNumber(int number) {
+    return Intl.message(
+      '$number selected',
+      name: 'selectedWithNumber',
+      desc: '',
+      args: [number],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

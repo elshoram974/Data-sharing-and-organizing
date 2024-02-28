@@ -107,5 +107,13 @@
     "ifYouLogOutNowYouWillLoseAllUnsavedData": "If you log out now, you will lose all unsaved data. Are you sure you want to log out?",
     "edit": "Edit",
     "email": "E-mail",
-    "type": "Type"
+    "type": "Type",
+    "selectedWithNumber": "{number} selected",
+    "@selectedWithNumber": {
+        "placeholders": {
+            "number": {
+                "type": "int"
+            }
+        }
+    }
 }
