@@ -48,5 +48,6 @@ final class GroupHomeEntity extends Equatable {
         unReadCounter,
         isUnread,
         lastMessageTime,
+        isSelected
       ];
 }

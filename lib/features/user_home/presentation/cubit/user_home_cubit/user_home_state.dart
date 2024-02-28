@@ -15,8 +15,8 @@ final class UserHomeInitial extends UserHomeState {
   List<Object> get props => [groups];
 }
 
-final class UserHomeSelectGroup extends UserHomeState {
-  const UserHomeSelectGroup(this.groups, this.makeSelected);
+final class UserHomeSelectGroups extends UserHomeState {
+  const UserHomeSelectGroups(this.groups, this.makeSelected);
 
   final List<GroupHomeEntity> groups;
   final bool makeSelected;

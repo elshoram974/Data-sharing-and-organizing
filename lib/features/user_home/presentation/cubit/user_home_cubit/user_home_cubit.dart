@@ -23,79 +23,23 @@ class UserHomeCubit extends Cubit<UserHomeState> {
     }
   }
 
-  void onLongTapGroup(GroupHomeEntity group) {
-    _selectGroup(group, !group.isSelected);
-  }
-
+  void onLongTapGroup(GroupHomeEntity group) => _selectGroup(group, !group.isSelected);
+  
   void _selectGroup(GroupHomeEntity group, bool makeSelected) {
-    group = group.copyWith(isSelected: makeSelected);
+    final replaced = group.copyWith(isSelected: makeSelected);
     if (makeSelected) {
-      selectedGroups.add(group);
+      selectedGroups.add(replaced);
     } else {
       selectedGroups.remove(group);
     }
 
-    final int index = groupsItems.indexOf(group);
+    final int index = currentGroups.indexOf(group);
+    currentGroups[index] = replaced;
 
-    currentGroups[index] = group;
-
-    emit(UserHomeSelectGroup([group], makeSelected));
-  }
-
-  void _addOrRemoveFromSelectedGroups(
-    List<GroupHomeEntity> groupsToSelect,
-    bool makeSelected,
-  ) {
-    final GroupHomeHelper helper = GroupHomeHelper(currentGroups);
-    if (makeSelected) {
-      selectedGroups.addAll(groupsToSelect);
-    } else {
-      selectedGroups.removeWhere((e) => groupsToSelect.contains(e));
-    }
-    final List<GroupHomeEntity> temp = [];
-    temp.addAll(helper.makeGroupsSelectedOrNot(groupsToSelect, makeSelected));
-
-    currentGroups.clear();
-    currentGroups.addAll(temp);
-
-    emit(UserHomeSelectGroup(groupsToSelect, makeSelected));
+    emit(UserHomeSelectGroups([group], makeSelected));
   }
 
   bool get isSelected => selectedGroups.isNotEmpty;
-}
-
-final class GroupHomeHelper {
-  const GroupHomeHelper(this.groups);
-
-  final List<GroupHomeEntity> groups;
-
-  List<GroupHomeEntity> getSelectedOrNotGroups(bool selected) {
-    return groups.where((e) => e.isSelected == selected).toList();
-  }
-
-  List<GroupHomeEntity> makeGroupsSelectedOrNot(
-    List<GroupHomeEntity> groupsToSelect,
-    bool makeSelected,
-  ) {
-    final List<GroupHomeEntity> temp = [];
-
-    for (final GroupHomeEntity e in groups) {
-      if (groupsToSelect.contains(e)) {
-        temp.add(e.copyWith(isSelected: makeSelected));
-      } else {
-        temp.add(e);
-      }
-    }
-    return temp;
-  }
-
-  List<GroupHomeEntity> groupsWithOut(List<GroupHomeEntity> deletedGroups) {
-    final List<GroupHomeEntity> temp = [];
-    for (final GroupHomeEntity e in groups) {
-      if (!deletedGroups.contains(e)) temp.add(e);
-    }
-    return temp;
-  }
 }
 
 final List<GroupHomeEntity> groupsItems = [
