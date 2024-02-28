@@ -21,7 +21,6 @@ class UserHomeCubit extends Cubit<UserHomeState> {
     } else {
       // go to screen
     }
-    print(selectedGroups.length);
   }
 
   void onLongTapGroup(GroupHomeEntity group) =>
