@@ -60,6 +60,7 @@ class UserHomeCubit extends Cubit<UserHomeState> {
   }
 
   bool get isSelected => selectedGroups.isNotEmpty;
+  bool get isAllSelected => selectedGroups.length == currentGroups.length;
 }
 
 final List<GroupHomeEntity> groupsItems = [

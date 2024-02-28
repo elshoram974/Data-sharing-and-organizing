@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../cubit/user_home_cubit/user_home_cubit.dart';
-import '../home_widgets/home_selected_app_bar.dart';
+import '../home_widgets/home_selected_app_bar/home_selected_app_bar.dart';
 
 class MainUserAppBar extends StatelessWidget implements PreferredSizeWidget {
   const MainUserAppBar({super.key, this.hight = 110});
@@ -15,11 +15,9 @@ class MainUserAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 110,
-      padding: EdgeInsets.only(
-        left: ProviderDependency.config.isArabic ? 0 : AppConst.defaultPadding,
-        right: ProviderDependency.config.isArabic ? AppConst.defaultPadding : 0,
-        top: 11,
-        bottom: 11,
+      padding: const EdgeInsets.symmetric(
+        horizontal: AppConst.defaultPadding,
+        vertical: 11,
       ),
       alignment: Alignment.bottomLeft,
       decoration: appBarDecoration(context),
