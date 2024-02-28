@@ -51,17 +51,18 @@ class UserMainCubit extends Cubit<UserMainState> {
     );
   }
 
-  bool canGoBack() {
+  @override
+  Future<void> close() {
+    navController.dispose();
+    return super.close();
+  }
+
+  bool onWillPop() {
+    if (!ProviderDependency.userHome.onWillPop()) return false;
     if (navIndex != 0) {
       onNavChange(0, false);
       return false;
     }
     return true;
-  }
-
-  @override
-  Future<void> close() {
-    navController.dispose();
-    return super.close();
   }
 }

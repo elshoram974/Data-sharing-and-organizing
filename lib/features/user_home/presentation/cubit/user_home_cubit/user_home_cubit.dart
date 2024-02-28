@@ -51,8 +51,12 @@ class UserHomeCubit extends Cubit<UserHomeState> {
     emit(UserHomeSelectGroups(currentGroups, makeSelected));
   }
 
-  void onWillPop() {
-    if (isSelected) _makeAllSelectedOrNot(false);
+  bool onWillPop() {
+    if (isSelected) {
+      _makeAllSelectedOrNot(false);
+      return false;
+    }
+    return true;
   }
 
   bool get isSelected => selectedGroups.isNotEmpty;
