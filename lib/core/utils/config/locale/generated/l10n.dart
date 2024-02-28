@@ -1141,6 +1141,66 @@ class S {
       args: [number],
     );
   }
+
+  /// `Exit group`
+  String get exitGroup {
+    return Intl.message(
+      'Exit group',
+      name: 'exitGroup',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Mark as unread`
+  String get markAsUnRead {
+    return Intl.message(
+      'Mark as unread',
+      name: 'markAsUnRead',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Select all`
+  String get selectAll {
+    return Intl.message(
+      'Select all',
+      name: 'selectAll',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Deselect all`
+  String get deselectAll {
+    return Intl.message(
+      'Deselect all',
+      name: 'deselectAll',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Mute notification`
+  String get muteNotification {
+    return Intl.message(
+      'Mute notification',
+      name: 'muteNotification',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Unmute notification`
+  String get unmuteNotification {
+    return Intl.message(
+      'Unmute notification',
+      name: 'unmuteNotification',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

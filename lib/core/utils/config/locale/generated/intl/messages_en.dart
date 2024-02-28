@@ -56,6 +56,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Current Password"),
         "darkMode": MessageLookupByLibrary.simpleMessage("Dark mode"),
         "defaultScale": MessageLookupByLibrary.simpleMessage("Default"),
+        "deselectAll": MessageLookupByLibrary.simpleMessage("Deselect all"),
         "deviceMode": MessageLookupByLibrary.simpleMessage("Device mode"),
         "doNotHaveAnAccount":
             MessageLookupByLibrary.simpleMessage("Don\'t have an account ? "),
@@ -77,6 +78,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "error": MessageLookupByLibrary.simpleMessage("Error"),
         "errorInPassword":
             MessageLookupByLibrary.simpleMessage("Error in password"),
+        "exitGroup": MessageLookupByLibrary.simpleMessage("Exit group"),
         "extraLarge": MessageLookupByLibrary.simpleMessage("Extra Large"),
         "fillField": MessageLookupByLibrary.simpleMessage("fill this field"),
         "fontSize": MessageLookupByLibrary.simpleMessage("Font size"),
@@ -102,7 +104,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "lightMode": MessageLookupByLibrary.simpleMessage("Light mode"),
         "login": MessageLookupByLibrary.simpleMessage("Login"),
         "logout": MessageLookupByLibrary.simpleMessage("Log out"),
+        "markAsUnRead": MessageLookupByLibrary.simpleMessage("Mark as unread"),
         "menu": MessageLookupByLibrary.simpleMessage("Menu"),
+        "muteNotification":
+            MessageLookupByLibrary.simpleMessage("Mute notification"),
         "name": MessageLookupByLibrary.simpleMessage("Name"),
         "newPassword": MessageLookupByLibrary.simpleMessage("New password"),
         "noCodeReceived":
@@ -136,6 +141,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "rememberMe": MessageLookupByLibrary.simpleMessage("Remember me"),
         "resend": MessageLookupByLibrary.simpleMessage("Resend"),
         "save": MessageLookupByLibrary.simpleMessage("Save"),
+        "selectAll": MessageLookupByLibrary.simpleMessage("Select all"),
         "selectedWithNumber": m2,
         "sendRequest": MessageLookupByLibrary.simpleMessage("Send request"),
         "settings": MessageLookupByLibrary.simpleMessage("Settings"),
@@ -167,6 +173,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "type": MessageLookupByLibrary.simpleMessage("Type"),
         "uHaveToVerifyAccountFirst": MessageLookupByLibrary.simpleMessage(
             "You have to verify your account first"),
+        "unmuteNotification":
+            MessageLookupByLibrary.simpleMessage("Unmute notification"),
         "userNotEmailPasswordToNewPass": MessageLookupByLibrary.simpleMessage(
             "User is not email_password to make new pass"),
         "userNotEmailPasswordToSendVerificationCode":

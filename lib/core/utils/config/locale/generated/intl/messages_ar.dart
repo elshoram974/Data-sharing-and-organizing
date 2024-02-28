@@ -55,6 +55,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("كلمة المرور الحالية"),
         "darkMode": MessageLookupByLibrary.simpleMessage("الوضع المظلم"),
         "defaultScale": MessageLookupByLibrary.simpleMessage("افتراضي"),
+        "deselectAll": MessageLookupByLibrary.simpleMessage("إلغاء تحديد الكل"),
         "deviceMode": MessageLookupByLibrary.simpleMessage("وضع الجهاز"),
         "doNotHaveAnAccount":
             MessageLookupByLibrary.simpleMessage("ليس لديك حساب ؟ "),
@@ -78,6 +79,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "error": MessageLookupByLibrary.simpleMessage("خطأ"),
         "errorInPassword":
             MessageLookupByLibrary.simpleMessage("خطأ في كلمة المرور"),
+        "exitGroup": MessageLookupByLibrary.simpleMessage("الخروج من المجموعة"),
         "extraLarge": MessageLookupByLibrary.simpleMessage("كبير جداً"),
         "fillField": MessageLookupByLibrary.simpleMessage("املأ هذا الحقل"),
         "fontSize": MessageLookupByLibrary.simpleMessage("حجم الخط"),
@@ -104,7 +106,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "lightMode": MessageLookupByLibrary.simpleMessage("الوضع الفاتح"),
         "login": MessageLookupByLibrary.simpleMessage("تسجيل الدخول"),
         "logout": MessageLookupByLibrary.simpleMessage("تسجيل الخروج"),
+        "markAsUnRead":
+            MessageLookupByLibrary.simpleMessage("وضع علامة كغير مقروء"),
         "menu": MessageLookupByLibrary.simpleMessage("القائمة"),
+        "muteNotification":
+            MessageLookupByLibrary.simpleMessage("كتم الإشعارات"),
         "name": MessageLookupByLibrary.simpleMessage("الاسم"),
         "newPassword": MessageLookupByLibrary.simpleMessage("كلمة مرور جديدة"),
         "noCodeReceived":
@@ -137,6 +143,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "rememberMe": MessageLookupByLibrary.simpleMessage("تذكرني"),
         "resend": MessageLookupByLibrary.simpleMessage("إعادة الإرسال"),
         "save": MessageLookupByLibrary.simpleMessage("حفظ"),
+        "selectAll": MessageLookupByLibrary.simpleMessage("تحديد الكل"),
         "selectedWithNumber": m2,
         "sendRequest": MessageLookupByLibrary.simpleMessage("إرسال الطلب"),
         "settings": MessageLookupByLibrary.simpleMessage("الإعدادات"),
@@ -169,6 +176,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "type": MessageLookupByLibrary.simpleMessage("النوع"),
         "uHaveToVerifyAccountFirst":
             MessageLookupByLibrary.simpleMessage("يجب التحقق من حسابك أولاً"),
+        "unmuteNotification":
+            MessageLookupByLibrary.simpleMessage("تفعيل الإشعارات"),
         "userNotEmailPasswordToNewPass": MessageLookupByLibrary.simpleMessage(
             "المستخدم ليس عبارة عن حساب بالبريد الإلكتروني وكلمة مرور لتغيير كلمة المرور"),
         "userNotEmailPasswordToSendVerificationCode":
