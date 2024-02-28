@@ -8,6 +8,7 @@ final class GroupHomeEntity extends Equatable {
   final int? unReadCounter;
   final bool isUnread;
   final DateTime lastMessageTime;
+  final bool isMute;
   final bool isSelected;
 
   const GroupHomeEntity({
@@ -18,6 +19,7 @@ final class GroupHomeEntity extends Equatable {
     this.isUnread = false,
     required this.lastMessageTime,
     this.isSelected = false,
+    this.isMute = false,
   });
 
   GroupHomeEntity copyWith({
@@ -27,12 +29,14 @@ final class GroupHomeEntity extends Equatable {
     int? unReadCounter,
     bool? isUnread,
     DateTime? lastMessageTime,
-    bool? isSelected = false,
+    bool? isSelected,
+    bool? isMute,
   }) {
     return GroupHomeEntity(
       lastMessage: lastMessage ?? this.lastMessage,
       unReadCounter: unReadCounter ?? this.unReadCounter,
       isSelected: isSelected ?? this.isSelected,
+      isMute: isMute ?? this.isMute,
       isUnread: isUnread ?? this.isUnread,
       imageLink: imageLink ?? this.imageLink,
       groupName: groupName ?? this.groupName,
@@ -48,6 +52,7 @@ final class GroupHomeEntity extends Equatable {
         unReadCounter,
         isUnread,
         lastMessageTime,
-        isSelected
+        isSelected,
+        isMute
       ];
 }
