@@ -7,6 +7,7 @@ abstract class HomeLocalDataSource {
   const HomeLocalDataSource();
   List<GroupHomeEntity> getAllGroups();
   Future<int> removeAllGroups();
+  Future<Iterable<int>> saveGroupsInLast(List<GroupHomeEntity> newGroups);
   Future<Iterable<int>> saveGroups(List<GroupHomeEntity> newGroups);
   Future<int> removeSomeGroups(List<GroupHomeEntity> removedGroups);
   List<GroupHomeEntity> getSavedGroupsPerPage(int page, int pageSize);
@@ -15,7 +16,8 @@ abstract class HomeLocalDataSource {
 
 class HomeLocalDataSourceImp extends HomeLocalDataSource {
   HomeLocalDataSourceImp();
-  late final Box<GroupHomeEntity> groupsBox = Hive.box<GroupHomeEntity>(AppStrings.groupsBox);
+  late final Box<GroupHomeEntity> groupsBox =
+      Hive.box<GroupHomeEntity>(AppStrings.groupsBox);
 
   @override
   List<GroupHomeEntity> getAllGroups() => groupsBox.values.toList();
@@ -23,6 +25,15 @@ class HomeLocalDataSourceImp extends HomeLocalDataSource {
   @override
   Future<int> removeAllGroups() {
     return groupsBox.isNotEmpty ? groupsBox.clear() : Future.value(1);
+  }
+
+  @override
+  Future<Iterable<int>> saveGroupsInLast(List<GroupHomeEntity> newGroups) {
+    final List<GroupHomeEntity> groups = [];
+    groups.addAll(getAllGroups());
+    groups.removeWhere((element) => newGroups.contains(element));
+    groups.addAll(newGroups);
+    return groupsBox.addAll(groups);
   }
 
   @override
