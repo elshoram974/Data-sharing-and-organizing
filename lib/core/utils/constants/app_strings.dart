@@ -9,4 +9,6 @@ abstract final class AppStrings {
   static const String fontScale = 'fontScale';
 
   static const String userBox = 'userBox';
+
+  static const String groupsBox = 'groupsBox';
 }
