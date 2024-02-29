@@ -6,6 +6,7 @@ import '../../../../features/auth/presentation/cubit/verify_code_cubit/verify_co
 import '../../../../features/splash/presentation/cubit/config_cubit.dart';
 import '../../../../features/user_home/presentation/cubit/main_cubit/user_main_cubit.dart';
 import '../../../../features/user_home/presentation/cubit/user_home_cubit/user_home_cubit.dart';
+import '../../../../features/user_home/presentation/cubit/user_notification_cubit/user_notification_cubit.dart';
 
 abstract class ProviderDependency {
   const ProviderDependency();
@@ -23,4 +24,5 @@ abstract class ProviderDependency {
   // * User Home Cubits
   static late UserMainCubit userMain;
   static late UserHomeCubit userHome;
+  static late UserNotificationCubit userNotification;
 }
