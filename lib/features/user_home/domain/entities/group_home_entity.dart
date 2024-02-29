@@ -2,6 +2,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 
 final class GroupHomeEntity extends Equatable {
+  final int id;
   final String? imageLink;
   final String groupName;
   final InlineSpan? lastMessage;
@@ -12,6 +13,7 @@ final class GroupHomeEntity extends Equatable {
   final bool isSelected;
 
   const GroupHomeEntity({
+    required this.id,
     this.imageLink,
     required this.groupName,
     this.lastMessage,
@@ -23,6 +25,7 @@ final class GroupHomeEntity extends Equatable {
   });
 
   GroupHomeEntity copyWith({
+    int? id,
     String? imageLink,
     String? groupName,
     InlineSpan? lastMessage,
@@ -33,6 +36,7 @@ final class GroupHomeEntity extends Equatable {
     bool? isMute,
   }) {
     return GroupHomeEntity(
+      id: id ?? this.id,
       lastMessage: lastMessage ?? this.lastMessage,
       unReadCounter: unReadCounter ?? this.unReadCounter,
       isSelected: isSelected ?? this.isSelected,
@@ -46,12 +50,12 @@ final class GroupHomeEntity extends Equatable {
 
   @override
   List<Object?> get props => [
+        id,
         imageLink,
         groupName,
         lastMessage,
         unReadCounter,
         isUnread,
-        lastMessageTime,
         isSelected,
         isMute
       ];

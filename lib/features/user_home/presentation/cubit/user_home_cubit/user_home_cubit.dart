@@ -86,6 +86,7 @@ class UserHomeCubit extends Cubit<UserHomeState> {
 
 final List<GroupHomeEntity> groupsItems = [
   GroupHomeEntity(
+    id: 1,
     imageLink: 'https://images.justwatch.com/poster/248497985/s592/one-piece',
     groupName: 'aFirst year in THIET',
     lastMessage: const TextSpan(
@@ -96,6 +97,7 @@ final List<GroupHomeEntity> groupsItems = [
     lastMessageTime: DateTime.now(),
   ),
   GroupHomeEntity(
+    id: 2,
     imageLink: 'https://images.justwatch.com/poster/248497985/s592/one-piece',
     groupName: 'First year in THIET',
     lastMessage: const TextSpan(
@@ -106,6 +108,7 @@ final List<GroupHomeEntity> groupsItems = [
     lastMessageTime: DateTime.now(),
   ),
   GroupHomeEntity(
+    id: 3,
     imageLink: 'https://images.justwatch.com/poster/248497985/s592/one-piece',
     groupName: 'Second year in THIET',
     lastMessage: const TextSpan(
@@ -116,6 +119,7 @@ final List<GroupHomeEntity> groupsItems = [
     lastMessageTime: DateTime.now(),
   ),
   GroupHomeEntity(
+    id: 4,
     imageLink: 'https://images.justwatch.com/poster/248497985/s592/one-piece',
     groupName: 'Third year in THIET',
     lastMessage: const TextSpan(
