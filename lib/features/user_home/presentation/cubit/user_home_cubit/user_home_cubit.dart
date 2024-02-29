@@ -46,7 +46,7 @@ class UserHomeCubit extends Cubit<UserHomeState> {
   // * helper functions
 
   void _selectGroup(GroupHomeEntity group, bool makeSelected) {
-    final replaced = group.copyWith(isSelected: makeSelected);
+    final GroupHomeEntity replaced = group.copyWith(isSelected: makeSelected);
     if (makeSelected) {
       selectedGroups.add(replaced);
     } else {
