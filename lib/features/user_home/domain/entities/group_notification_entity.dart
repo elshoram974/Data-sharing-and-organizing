@@ -1,33 +1,44 @@
-import 'package:equatable/equatable.dart';
-import 'package:flutter/material.dart';
+import 'package:data_sharing_organizing/core/utils/enums/message_type/message_type.dart';
 
-final class GroupNotificationEntity extends Equatable {
-  final String? imageLink;
-  final String groupName;
-  final InlineSpan? lastMessage;
-  final bool isUnread;
-  final DateTime lastMessageTime;
+import 'group_home_entity.dart';
+
+final class GroupNotificationEntity extends GroupHomeEntity {
   final bool isExpanded;
 
   const GroupNotificationEntity({
-    this.imageLink,
-    required this.groupName,
-    this.lastMessage,
-    this.isUnread = false,
-    required this.lastMessageTime,
     this.isExpanded = false,
-  });
+    required super.id,
+    super.imageLink,
+    required super.groupName,
+    required super.lastMessageType,
+    required super.lastMessageTime,
+    super.lastMessage,
+    super.lastMessageFrom = 'You',
+    super.unReadCounter,
+    super.isUnread = false,
+  }) : super(isSelected: false, isMute: false);
 
+  @override
   GroupNotificationEntity copyWith({
+    int? id,
     String? imageLink,
     String? groupName,
-    InlineSpan? lastMessage,
-    bool? isUnread,
+    String? lastMessage,
+    MessageType? lastMessageType,
+    String? lastMessageFrom,
     DateTime? lastMessageTime,
+    int? unReadCounter,
+    bool? isSelected,
+    bool? isUnread,
+    bool? isMute,
     bool? isExpanded,
   }) {
     return GroupNotificationEntity(
+      id: id ?? this.id,
       lastMessage: lastMessage ?? this.lastMessage,
+      lastMessageType: lastMessageType ?? this.lastMessageType,
+      lastMessageFrom: lastMessageFrom ?? this.lastMessageFrom,
+      unReadCounter: unReadCounter ?? this.unReadCounter,
       isExpanded: isExpanded ?? this.isExpanded,
       isUnread: isUnread ?? this.isUnread,
       imageLink: imageLink ?? this.imageLink,
@@ -38,9 +49,13 @@ final class GroupNotificationEntity extends Equatable {
 
   @override
   List<Object?> get props => [
+        id,
         imageLink,
         groupName,
         lastMessage,
+        lastMessageType,
+        lastMessageFrom,
+        unReadCounter,
         isUnread,
         lastMessageTime,
         isExpanded,

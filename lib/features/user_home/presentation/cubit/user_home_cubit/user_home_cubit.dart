@@ -1,6 +1,6 @@
 import 'package:data_sharing_organizing/core/utils/enums/home_selected_pop_up_enum.dart';
+import 'package:data_sharing_organizing/core/utils/enums/message_type/message_type.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../domain/entities/group_home_entity.dart';
@@ -89,10 +89,8 @@ final List<GroupHomeEntity> groupsItems = [
     id: 1,
     imageLink: 'https://images.justwatch.com/poster/248497985/s592/one-piece',
     groupName: 'aFirst year in THIET',
-    lastMessage: const TextSpan(
-        text:
-            'Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message '),
-    unReadCounter: null,
+    lastMessageType: MessageType.textMessage,
+    lastMessage:'Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message ',    unReadCounter: null,
     isUnread: false,
     lastMessageTime: DateTime.now(),
   ),
@@ -100,9 +98,8 @@ final List<GroupHomeEntity> groupsItems = [
     id: 2,
     imageLink: 'https://images.justwatch.com/poster/248497985/s592/one-piece',
     groupName: 'First year in THIET',
-    lastMessage: const TextSpan(
-        text:
-            'Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message '),
+    lastMessage: 'Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message ',
+    lastMessageType: MessageType.textMessage,
     unReadCounter: null,
     isUnread: false,
     lastMessageTime: DateTime.now(),
@@ -111,9 +108,8 @@ final List<GroupHomeEntity> groupsItems = [
     id: 3,
     imageLink: 'https://images.justwatch.com/poster/248497985/s592/one-piece',
     groupName: 'Second year in THIET',
-    lastMessage: const TextSpan(
-        text:
-            'Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message '),
+    lastMessage: 'محمد يلعب بالكرة',
+    lastMessageType: MessageType.document,
     unReadCounter: null,
     isUnread: false,
     lastMessageTime: DateTime.now(),
@@ -122,9 +118,8 @@ final List<GroupHomeEntity> groupsItems = [
     id: 4,
     imageLink: 'https://images.justwatch.com/poster/248497985/s592/one-piece',
     groupName: 'Third year in THIET',
-    lastMessage: const TextSpan(
-        text:
-            'Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message '),
+    lastMessage: 'Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message ',
+    lastMessageType: MessageType.textMessage,
     unReadCounter: null,
     isUnread: false,
     lastMessageTime: DateTime.now(),
