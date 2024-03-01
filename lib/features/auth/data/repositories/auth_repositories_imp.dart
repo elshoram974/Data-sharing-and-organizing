@@ -97,7 +97,7 @@ class AuthRepositoriesImp extends AuthRepositories {
       Success(localDataSource.getCurrentUser());
 
   @override
-  Future<Status<int>> logOut() async => Success(await localDataSource.logOut());
+  Future<Status<void>> logOut() async => Success(await localDataSource.logOut());
 
   @override
   Future<Status<User>> newPassword(({int id, String newPass}) param) {

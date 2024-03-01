@@ -43,8 +43,8 @@ class UserMainCubit extends Cubit<UserMainState> {
       textCancel: S.of(context).cancel,
       onPressConfirm: () async {
         navIndex = 0;
-        final Status<int> status = await logOutUseCase();
-        if (status is Success<int>) {
+        final Status<void> status = await logOutUseCase();
+        if (status is Success<void>) {
           if (context.mounted) context.go(AppRoute.login);
         }
       },

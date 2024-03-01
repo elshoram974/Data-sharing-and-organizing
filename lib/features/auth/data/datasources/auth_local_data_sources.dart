@@ -1,39 +1,35 @@
 import 'package:data_sharing_organizing/core/utils/constants/app_strings.dart';
 import 'package:hive/hive.dart';
 
+import '../../../user_home/domain/entities/group_home_entity.dart';
 import '../../domain/entities/auth_user_entity.dart';
 
 abstract class AuthLocalDataSource {
   const AuthLocalDataSource();
   Future<int> saveUser(AuthUserEntity user);
   AuthUserEntity? getCurrentUser();
-  Future<int> logOut();
+  Future<void> logOut();
 }
 
 class AuthLocalDataSourceImp extends AuthLocalDataSource {
   AuthLocalDataSourceImp();
+  late final Box<AuthUserEntity> userBox = Hive.box<AuthUserEntity>(AppStrings.userBox);
 
   @override
-  Future<int> saveUser(AuthUserEntity user) {
-    final Box<AuthUserEntity> userBox =
-        Hive.box<AuthUserEntity>(AppStrings.userBox);
-
-    return userBox.add(user);
-  }
+  Future<int> saveUser(AuthUserEntity user) => userBox.add(user);
 
   @override
   AuthUserEntity? getCurrentUser() {
-    final Box<AuthUserEntity> userBox =
-        Hive.box<AuthUserEntity>(AppStrings.userBox);
-    List<AuthUserEntity> users = userBox.values.toList();
+    final List<AuthUserEntity> users = userBox.values.toList();
     if (users.isEmpty) return null;
     return users.last;
   }
 
   @override
-  Future<int> logOut() {
-    final Box<AuthUserEntity> userBox =
-        Hive.box<AuthUserEntity>(AppStrings.userBox);
-    return userBox.clear();
+  Future<void> logOut() async {
+    await Future.wait([
+    Hive.box<GroupHomeEntity>(AppStrings.groupsBox).clear(),
+    userBox.clear(),
+  ]);
   }
 }
