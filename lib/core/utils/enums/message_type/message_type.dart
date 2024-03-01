@@ -56,7 +56,7 @@ enum MessageType {
       case MessageType.textMessage:
         return null;
       case MessageType.voiceMessage:
-        return Icons.mic_outlined;
+        return Icons.mic_none_outlined;
       case MessageType.document:
         return Icons.insert_drive_file_outlined;
       case MessageType.video:
