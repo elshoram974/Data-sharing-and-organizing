@@ -32,7 +32,10 @@ class NotificationTile extends StatelessWidget {
           top: 7,
         ),
         decoration: BoxDecoration(
-          border: Border.all(color: groupNotificationEntity.isUnread ? AppColor.primary : AppColor.gray),
+          border: Border.all(
+              color: groupNotificationEntity.isUnread
+                  ? AppColor.primary
+                  : AppColor.gray),
           borderRadius: BorderRadius.circular(AppConst.borderRadius),
         ),
         child: _GroupListTile(
@@ -56,6 +59,9 @@ class _GroupListTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
+      crossAxisAlignment: groupNotificationEntity.isExpanded
+          ? CrossAxisAlignment.start
+          : CrossAxisAlignment.center,
       children: [
         NotificationGroupImage(imageLink: groupNotificationEntity.imageLink),
         const SizedBox(width: 8),
