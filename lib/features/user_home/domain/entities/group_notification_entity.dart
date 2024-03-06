@@ -48,16 +48,5 @@ final class GroupNotificationEntity extends GroupHomeEntity {
   }
 
   @override
-  List<Object?> get props => [
-        id,
-        imageLink,
-        groupName,
-        lastMessage,
-        lastMessageType,
-        lastMessageFrom,
-        unReadCounter,
-        isUnread,
-        lastMessageTime,
-        isExpanded,
-      ];
+  List<Object?> get props => [id];
 }

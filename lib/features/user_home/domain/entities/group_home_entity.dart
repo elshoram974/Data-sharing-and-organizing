@@ -81,16 +81,5 @@ class GroupHomeEntity extends Equatable {
   }
 
   @override
-  List<Object?> get props => [
-        id,
-        imageLink,
-        groupName,
-        lastMessage,
-        lastMessageType,
-        lastMessageFrom,
-        unReadCounter,
-        isUnread,
-        isSelected,
-        isMute
-      ];
+  List<Object?> get props => [id];
 }
