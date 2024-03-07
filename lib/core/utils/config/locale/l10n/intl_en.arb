@@ -116,7 +116,7 @@
             }
         }
     },
-    "exitGroup": "Exit group",
+    "exitGroups": "Exit groups",
     "markAsUnRead": "Mark as unread",
     "selectAll": "Select all",
     "deselectAll": "Deselect all",

@@ -79,7 +79,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "error": MessageLookupByLibrary.simpleMessage("خطأ"),
         "errorInPassword":
             MessageLookupByLibrary.simpleMessage("خطأ في كلمة المرور"),
-        "exitGroup": MessageLookupByLibrary.simpleMessage("الخروج من المجموعة"),
+        "exitGroups":
+            MessageLookupByLibrary.simpleMessage("الخروج من المجموعات"),
         "extraLarge": MessageLookupByLibrary.simpleMessage("كبير جداً"),
         "fillField": MessageLookupByLibrary.simpleMessage("املأ هذا الحقل"),
         "fontSize": MessageLookupByLibrary.simpleMessage("حجم الخط"),

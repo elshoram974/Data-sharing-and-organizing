@@ -1142,11 +1142,11 @@ class S {
     );
   }
 
-  /// `Exit group`
-  String get exitGroup {
+  /// `Exit groups`
+  String get exitGroups {
     return Intl.message(
-      'Exit group',
-      name: 'exitGroup',
+      'Exit groups',
+      name: 'exitGroups',
       desc: '',
       args: [],
     );

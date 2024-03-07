@@ -24,9 +24,9 @@ final class HomePopUpItemEntity extends Equatable {
   ) {
     return [
       HomePopUpItemEntity(
-        text: S.of(context).exitGroup,
+        text: S.of(context).exitGroups,
         value: HomeSelectedPopUpItem.exitGroup,
-        isVisible: cubit.selectedGroups.length == 1,
+        isVisible: true,
       ),
       HomePopUpItemEntity(
         text: S.of(context).markAsUnRead,

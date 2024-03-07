@@ -78,7 +78,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "error": MessageLookupByLibrary.simpleMessage("Error"),
         "errorInPassword":
             MessageLookupByLibrary.simpleMessage("Error in password"),
-        "exitGroup": MessageLookupByLibrary.simpleMessage("Exit group"),
+        "exitGroups": MessageLookupByLibrary.simpleMessage("Exit groups"),
         "extraLarge": MessageLookupByLibrary.simpleMessage("Extra Large"),
         "fillField": MessageLookupByLibrary.simpleMessage("fill this field"),
         "fontSize": MessageLookupByLibrary.simpleMessage("Font size"),
