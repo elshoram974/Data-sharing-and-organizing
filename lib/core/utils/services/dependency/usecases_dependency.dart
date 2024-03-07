@@ -7,6 +7,9 @@ import '../../../../features/auth/domain/usecases/request_to_send_code_use_case.
 import '../../../../features/auth/domain/usecases/sign_up_use_case.dart';
 import '../../../../features/auth/domain/usecases/social_login_use_case.dart';
 import '../../../../features/auth/domain/usecases/verify_code_use_case.dart';
+import '../../../../features/user_home/domain/repositories/home_repositories.dart';
+import '../../../../features/user_home/domain/usecases/home_use_case/exit_from_some_groups.dart';
+import '../../../../features/user_home/domain/usecases/home_use_case/get_groups.dart';
 import 'locator.dart';
 
 void useCasesDependency() {
@@ -33,5 +36,12 @@ void useCasesDependency() {
   );
   sl.registerLazySingleton<LogOutUseCase>(
     () => LogOutUseCase(sl.get<AuthRepositoriesImp>()),
+  );
+
+  sl.registerLazySingleton<GetGroupsUseCase>(
+    () => GetGroupsUseCase(sl.get<HomeRepositories>()),
+  );
+  sl.registerLazySingleton<ExitFromSomeGroups>(
+    () => ExitFromSomeGroups(sl.get<HomeRepositories>()),
   );
 }

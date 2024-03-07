@@ -4,6 +4,10 @@ import 'package:get_it/get_it.dart';
 import '../../../../features/auth/data/datasources/auth_local_data_sources.dart';
 import '../../../../features/auth/data/datasources/auth_remote_data_sources.dart';
 import '../../../../features/auth/data/repositories/auth_repositories_imp.dart';
+import '../../../../features/user_home/data/datasources/home_datasources/home_local_data_sources.dart';
+import '../../../../features/user_home/data/datasources/home_datasources/home_remote_data_sources.dart';
+import '../../../../features/user_home/data/repositories/home_repositories_imp.dart';
+import '../../../../features/user_home/domain/repositories/home_repositories.dart';
 import '../notification_services.dart';
 import '../social_services.dart';
 import 'cubit_dependency.dart';
@@ -24,6 +28,12 @@ void initDependencies() {
     AuthRepositoriesImp(
       localDataSource: sl.get<AuthLocalDataSourceImp>(),
       remoteDataSource: sl.get<AuthRemoteDataSourceImp>(),
+    ),
+  );
+  sl.registerSingleton<HomeRepositories>(
+    HomeRepositoriesImp(
+      localDataSource: sl.get<HomeLocalDataSource>(),
+      remoteDataSource: sl.get<HomeRemoteDataSource>(),
     ),
   );
 
