@@ -5,4 +5,5 @@ import '../entities/group_home_entity.dart';
 
 abstract class HomeRepositories {
   Future<Status<List<GroupHomeEntity>>> getGroups(({AuthUserEntity user, int page}) param);
+  Future<Status<bool>> exitFromSomeGroups(({AuthUserEntity user, List<GroupHomeEntity> removedGroups}) param);
 }
