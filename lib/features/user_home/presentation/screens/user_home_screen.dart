@@ -21,13 +21,10 @@ class UserHomeScreen extends StatelessWidget {
         return RefreshIndicator(
           onRefresh: c.getGroups,
           child: MainBodyWidget(
+            controller: c.scrollController,
             children: [
-              if (state is GetGroupsLoadingState)
-                Container(
-                  padding: const EdgeInsets.all(AppConst.defaultPadding),
-                  alignment: Alignment.center,
-                  child: const CircularProgressIndicator(),
-                ),
+              if (state is GetGroupsInFirstLoadingState)
+                const GetGroupsLoading(),
               if (c.currentGroups.isEmpty)
                 EmptyPageText(S.of(context).youCanMakeNewGroups),
               ...List.generate(
@@ -41,10 +38,25 @@ class UserHomeScreen extends StatelessWidget {
                   );
                 },
               ),
+              if (state is GetGroupsInLastLoadingState)
+                const GetGroupsLoading(),
             ],
           ),
         );
       },
+    );
+  }
+}
+
+class GetGroupsLoading extends StatelessWidget {
+  const GetGroupsLoading({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.all(AppConst.defaultPadding),
+      alignment: Alignment.center,
+      child: const CircularProgressIndicator(),
     );
   }
 }
