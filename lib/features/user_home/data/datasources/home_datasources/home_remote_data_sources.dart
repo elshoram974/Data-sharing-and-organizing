@@ -13,7 +13,7 @@ abstract class HomeRemoteDataSource {
     int page,
     int pageSize,
   );
-  Future<List<GroupHomeEntity>> exitFromSomeGroups(
+  Future<bool> exitFromSomeGroups(
     AuthUserEntity user,
     List<GroupHomeEntity> removedGroups,
   );
@@ -39,7 +39,7 @@ class HomeRemoteDataSourceImp extends HomeRemoteDataSource {
   }
 
   @override
-  Future<List<GroupHomeEntity>> exitFromSomeGroups(
+  Future<bool> exitFromSomeGroups(
     AuthUserEntity user,
     List<GroupHomeEntity> removedGroups,
   ) async {
@@ -53,6 +53,6 @@ class HomeRemoteDataSourceImp extends HomeRemoteDataSource {
       {'userId': user.id, 'removedGroupsIds': json.encode(groupsIds)},
     );
     print(response);
-    return [];
+    return response['status'] == 'success';
   }
 }
