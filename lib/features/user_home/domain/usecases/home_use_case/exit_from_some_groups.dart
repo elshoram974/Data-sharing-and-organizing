@@ -8,7 +8,7 @@ import '../../repositories/home_repositories.dart';
 final class ExitFromSomeGroups extends UseCase<bool, ({List<GroupHomeEntity> removedGroups, AuthUserEntity user})> {
   final HomeRepositories homeRepositories;
 
-  ExitFromSomeGroups(this.homeRepositories);
+  const ExitFromSomeGroups(this.homeRepositories);
 
   @override
   Future<Status<bool>> call(({List<GroupHomeEntity> removedGroups, AuthUserEntity user}) param) {

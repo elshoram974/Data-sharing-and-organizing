@@ -8,7 +8,7 @@ import '../../repositories/home_repositories.dart';
 final class GetGroupsUseCase extends UseCase<List<GroupHomeEntity>, ({AuthUserEntity user, int page})> {
   final HomeRepositories homeRepositories;
 
-  GetGroupsUseCase(this.homeRepositories);
+  const GetGroupsUseCase(this.homeRepositories);
 
   @override
   Future<Status<List<GroupHomeEntity>>> call(({AuthUserEntity user, int page}) param) {
