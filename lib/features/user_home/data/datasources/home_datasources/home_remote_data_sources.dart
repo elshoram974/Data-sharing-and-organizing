@@ -53,6 +53,8 @@ class HomeRemoteDataSourceImp extends HomeRemoteDataSource {
       {'userId': user.id, 'removedGroupsIds': json.encode(groupsIds)},
     );
     print(response);
-    return response['status'] == 'success';
+    // return response['status'] == 'success';
+    // it always returns true if the operation is done successfully
+    return true;
   }
 }

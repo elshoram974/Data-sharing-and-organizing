@@ -10,10 +10,10 @@ Future<T> handleRequestErrors<T>(
   try {
     return await function();
   } catch (e) {
-    if (e is TimeoutException) {
-      throw MyHttpException(type: HttpExceptionType.connectionTimeout);
-    } else if (e is SocketException) {
+    if (e is SocketException) {
       throw MyHttpException(type: HttpExceptionType.connectionError);
+    } else if (e is TimeoutException) {
+      throw MyHttpException(type: HttpExceptionType.connectionTimeout);
     } else {
       throw MyHttpException(
         type: HttpExceptionType.unknown,
