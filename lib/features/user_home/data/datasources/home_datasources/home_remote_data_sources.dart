@@ -13,7 +13,7 @@ abstract class HomeRemoteDataSource {
     int page,
     int pageSize,
   );
-  Future<List<GroupHomeEntity>> removeSomeGroups(
+  Future<List<GroupHomeEntity>> exitFromSomeGroups(
     AuthUserEntity user,
     List<GroupHomeEntity> removedGroups,
   );
@@ -39,7 +39,7 @@ class HomeRemoteDataSourceImp extends HomeRemoteDataSource {
   }
 
   @override
-  Future<List<GroupHomeEntity>> removeSomeGroups(
+  Future<List<GroupHomeEntity>> exitFromSomeGroups(
     AuthUserEntity user,
     List<GroupHomeEntity> removedGroups,
   ) async {
