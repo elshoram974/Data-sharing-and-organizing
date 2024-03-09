@@ -23,24 +23,28 @@ class HomeGroupLastMessage extends StatelessWidget {
   Widget build(BuildContext context) {
     final IconData? icon = lastMessageType.icon();
     return Expanded(
-      child: Text.rich(
-        TextSpan(
-          children: [
-            TextSpan(text: '$lastMessageFrom:'),
-            if (icon != null)
-              WidgetSpan(
-                alignment: ui.PlaceholderAlignment.middle,
-                child: Icon(icon, size: 18, color: AppColor.gray),
-              ),
-            TextSpan(text: lastMessage),
-          ],
-        ),
-        overflow: TextOverflow.ellipsis,
-        maxLines: maxLines,
-        textDirection: detectRtlDirectionality(lastMessage),
-        style: AppStyle.styleBoldInika24.copyWith(
-          fontSize: 13,
-          color: AppColor.gray,
+      child: AnimatedSize(
+        alignment: Alignment.topCenter,
+        duration: const Duration(milliseconds: 300),
+        child: Text.rich(
+          TextSpan(
+            children: [
+              TextSpan(text: '$lastMessageFrom:'),
+              if (icon != null)
+                WidgetSpan(
+                  alignment: ui.PlaceholderAlignment.middle,
+                  child: Icon(icon, size: 18, color: AppColor.gray),
+                ),
+              TextSpan(text: lastMessage),
+            ],
+          ),
+          overflow: TextOverflow.ellipsis,
+          maxLines: maxLines,
+          textDirection: detectRtlDirectionality(lastMessage),
+          style: AppStyle.styleBoldInika24.copyWith(
+            fontSize: 13,
+            color: AppColor.gray,
+          ),
         ),
       ),
     );

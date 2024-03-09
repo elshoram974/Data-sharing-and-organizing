@@ -59,9 +59,7 @@ class _GroupListTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
-      crossAxisAlignment: groupNotificationEntity.isExpanded
-          ? CrossAxisAlignment.start
-          : CrossAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         NotificationGroupImage(imageLink: groupNotificationEntity.imageLink),
         const SizedBox(width: 8),
