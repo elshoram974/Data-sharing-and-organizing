@@ -42,6 +42,23 @@ class UserHomeCubit extends Cubit<UserHomeState> {
     return super.close();
   }
 
+  // * MarkAsUnRead from groups
+  Future<void> _markAsUnRead() async {
+    final Status<Iterable<int>> status = await markAsUnReadUsecase(selectedGroups);
+
+    if (status is Success<Iterable<int>>) {
+      for(int i =0 ; i < selectedGroups.length ; i++) {
+          final int listIndex = currentGroups.indexOf(selectedGroups[i]);
+          currentGroups[listIndex] = currentGroups[listIndex].copyWith(isUnread: true);
+      }
+      emit(HomeSuccessState(currentGroups));
+      _makeAllSelectedOrNot(false);
+    } else if (status is Failure<Iterable<int>>) {
+      _failureStatus(status.error, true);
+    }
+    EasyLoading.dismiss();
+  }
+
   // * exit from groups
   Future<void> _exitGroups() async {
     emit(const GetGroupsLoadingState(true));
@@ -101,7 +118,7 @@ class UserHomeCubit extends Cubit<UserHomeState> {
       case HomeSelectedPopUpItem.exitGroup:
         _exitGroups();
       case HomeSelectedPopUpItem.markAsUnRead:
-        print('markAsUnRead');
+        _markAsUnRead();
       case HomeSelectedPopUpItem.selectAll:
       case HomeSelectedPopUpItem.deselectAll:
         _makeAllSelectedOrNot(!isAllSelected);
