@@ -28,13 +28,15 @@ class HomeRepositoriesImp extends HomeRepositories {
     return executeAndHandleErrors<List<GroupHomeEntity>>(
       () async {
         groups.clear();
-        groups.addAll(await remoteDataSource.getGroups(param.user, param.page, groupsPerPage));
+        groups.addAll(await remoteDataSource.getGroups(
+            param.user, param.page, groupsPerPage));
         await localDataSource.saveGroups(groups);
         return groups;
       },
       () async {
         groups.clear();
-        groups.addAll(localDataSource.getSavedGroupsPerPage(param.page, groupsPerPage));
+        groups.addAll(
+            localDataSource.getSavedGroupsPerPage(param.page, groupsPerPage));
         return groups;
       },
     );
@@ -46,10 +48,16 @@ class HomeRepositoriesImp extends HomeRepositories {
   ) {
     return executeAndHandleErrors<bool>(
       () async {
-        final bool isExit = await remoteDataSource.exitFromSomeGroups(param.user, param.removedGroups);
+        final bool isExit = await remoteDataSource.exitFromSomeGroups(
+            param.user, param.removedGroups);
         if (isExit) await localDataSource.removeSomeGroups(param.removedGroups);
         return isExit;
       },
     );
+  }
+
+  @override
+  Future<Status<Iterable<int>>> markAsUnRead(List<GroupHomeEntity> groups) {
+    return executeAndHandleErrors<Iterable<int>>(()=> localDataSource.markAsUnRead(groups));
   }
 }

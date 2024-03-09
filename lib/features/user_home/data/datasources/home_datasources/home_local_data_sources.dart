@@ -59,7 +59,6 @@ class HomeLocalDataSourceImp extends HomeLocalDataSource {
     int startIndex = (page - 1) * pageSize;
     List<GroupHomeEntity> allGroups = getAllGroups();
     allGroups.sort((a, b) => b.lastMessageTime.compareTo(a.lastMessageTime)); // Sort in descending order
-    print(allGroups.skip(startIndex).take(pageSize).toList().length);
     return allGroups.skip(startIndex).take(pageSize).toList();
   }
 
@@ -81,7 +80,6 @@ class HomeLocalDataSourceImp extends HomeLocalDataSource {
 
 // TODO: delete this
 List<GroupHomeEntity> staticGroups() {
-  print('new static groups');
   return [
     GroupHomeEntity(
       id: 1,
