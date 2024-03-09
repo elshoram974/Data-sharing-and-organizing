@@ -21,11 +21,11 @@ final class UserHomeSelectGroups extends UserHomeState {
   List<Object> get props => [groups, makeSelected];
 }
 
-final class GetGroupsInFirstLoadingState extends UserHomeState {
-  const GetGroupsInFirstLoadingState();
-}
-final class GetGroupsInLastLoadingState extends UserHomeState {
-  const GetGroupsInLastLoadingState();
+final class GetGroupsLoadingState extends UserHomeState {
+  final bool inFirst;
+  const GetGroupsLoadingState(this.inFirst);
+  @override
+  List<Object> get props => [inFirst];
 }
 
 final class HomeSuccessState extends UserHomeState {

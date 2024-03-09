@@ -9,6 +9,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 
 import '../../../domain/entities/group_home_entity.dart';
+import '../../../domain/usecases/home_use_case/exit_from_some_groups.dart';
 import '../../../domain/usecases/home_use_case/get_groups.dart';
 import '../main_cubit/user_main_cubit.dart';
 
@@ -17,12 +18,14 @@ part 'user_home_state.dart';
 class UserHomeCubit extends Cubit<UserHomeState> {
   UserHomeCubit({
     required this.getGroupsUseCase,
+    required this.exitFromSomeGroups,
   }) : super(const UserHomeInitial()) {
     getGroups();
     scrollController = ScrollController();
     scrollController.addListener(_onScroll);
   }
   final GetGroupsUseCase getGroupsUseCase;
+  final ExitFromSomeGroups exitFromSomeGroups;
 
   late final ScrollController scrollController;
   final UserMainCubit userMain = ProviderDependency.userMain;
@@ -36,28 +39,43 @@ class UserHomeCubit extends Cubit<UserHomeState> {
     return super.close();
   }
 
-  // * GetGroups
-  Future<void> getGroups([inFirst = true, int page = 1]) async {
-    if (inFirst) {
-      emit(const GetGroupsInFirstLoadingState());
-    } else {
-      emit(const GetGroupsInLastLoadingState());
-    }
+  // * exit from groups
+  Future<void> _exitGroups() async {
+    emit(const GetGroupsLoadingState(true));
+    EasyLoading.show(dismissOnTap: false);
     // await Future.delayed(Duration(seconds: 3));
-    final Status<List<GroupHomeEntity>> status =
-        await getGroupsUseCase((page: page, user: userMain.user));
-    if (inFirst) {
+    final Status<bool> status = await exitFromSomeGroups(
+        (removedGroups: selectedGroups, user: userMain.user));
+
+    if (status is Success<bool>) {
+      currentGroups.removeWhere((e) => selectedGroups.contains(e));
       _makeAllSelectedOrNot(false);
+      emit(HomeSuccessState(currentGroups));
+      if (currentGroups.length < 10) getGroups();
+      debugPrint('deleted: ${status.data}');
+    } else if (status is Failure<bool>) {
+      _failureStatus(status.error, true);
+    }
+    EasyLoading.dismiss();
+  }
+
+  // * GetGroups
+  Future<void> getGroups([bool inFirst = true, int page = 1]) async {
+    emit(GetGroupsLoadingState(inFirst));
+    // await Future.delayed(Duration(seconds: 3));
+    final Status<List<GroupHomeEntity>> status = await getGroupsUseCase((page: page, user: userMain.user));
+    if (inFirst) {
+      if (isSelected) _makeAllSelectedOrNot(false);
       _currentPage = 1;
       currentGroups.clear();
     }
     if (status is Success<List<GroupHomeEntity>>) {
       currentGroups.addAll(status.data);
       emit(HomeSuccessState(status.data));
-      debugPrint('groups: ${status.data}');
+      debugPrint('success groups: ${status.data}');
     } else if (status is Failure<List<GroupHomeEntity>>) {
       currentGroups.addAll(status.data!);
-      debugPrint('groups: ${status.data}');
+      debugPrint('failure groups: ${status.data}');
       _failureStatus(status.error, inFirst);
     }
   }
@@ -78,7 +96,7 @@ class UserHomeCubit extends Cubit<UserHomeState> {
   void onSelectPopUpItem(value) {
     switch (value) {
       case HomeSelectedPopUpItem.exitGroup:
-        print('exitGroup');
+        _exitGroups();
       case HomeSelectedPopUpItem.markAsUnRead:
         print('markAsUnRead');
       case HomeSelectedPopUpItem.selectAll:
@@ -94,8 +112,9 @@ class UserHomeCubit extends Cubit<UserHomeState> {
   // * helper functions
   int _currentPage = 1;
   void _onScroll() {
-    if (scrollController.position.pixels >= .75 * scrollController.position.maxScrollExtent) {
-      if (state is! GetGroupsInLastLoadingState) {
+    if (scrollController.position.pixels ==
+        scrollController.position.maxScrollExtent) {
+      if (state is! GetGroupsLoadingState) {
         _currentPage++;
         getGroups(false, _currentPage);
       }
