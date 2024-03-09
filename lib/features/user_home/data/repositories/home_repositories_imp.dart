@@ -1,4 +1,3 @@
-import 'package:data_sharing_organizing/core/status/errors/failure.dart';
 import 'package:data_sharing_organizing/core/status/status.dart';
 import 'package:data_sharing_organizing/core/utils/functions/execute_and_handle_remote_errors.dart';
 
@@ -21,24 +20,34 @@ class HomeRepositoriesImp extends HomeRepositories {
   final int groupsPerPage = 10;
 
   @override
-  Future<Status<List<GroupHomeEntity>>> getGroups(({int page, AuthUserEntity user}) param) async {
-    final Status<List<GroupHomeEntity>> res = await executeAndHandleErrors<List<GroupHomeEntity>>(
-      () => remoteDataSource.getGroups(param.user, param.page, groupsPerPage),
-    );
+  Future<Status<List<GroupHomeEntity>>> getGroups(
+    ({int page, AuthUserEntity user}) param,
+  ) {
+    final List<GroupHomeEntity> groups = [];
 
-    if (res is Failure<List<GroupHomeEntity>>) {
-      final List<GroupHomeEntity> groups = localDataSource.getSavedGroupsPerPage(param.page, groupsPerPage);
-      return res.copyWith(data: groups);
-    }
-    return res;
+    return executeAndHandleErrors<List<GroupHomeEntity>>(
+      () async {
+        groups.clear();
+        groups.addAll(await remoteDataSource.getGroups(param.user, param.page, groupsPerPage));
+        await localDataSource.saveGroups(groups);
+        return groups;
+      },
+      () async {
+        groups.clear();
+        groups.addAll(localDataSource.getSavedGroupsPerPage(param.page, groupsPerPage));
+        return groups;
+      },
+    );
   }
 
   @override
-  Future<Status<bool>> exitFromSomeGroups(({List<GroupHomeEntity> removedGroups, AuthUserEntity user}) param) {
+  Future<Status<bool>> exitFromSomeGroups(
+    ({List<GroupHomeEntity> removedGroups, AuthUserEntity user}) param,
+  ) {
     return executeAndHandleErrors<bool>(
-      ()async{
+      () async {
         final bool isExit = await remoteDataSource.exitFromSomeGroups(param.user, param.removedGroups);
-        if(isExit) await localDataSource.removeSomeGroups(param.removedGroups);
+        if (isExit) await localDataSource.removeSomeGroups(param.removedGroups);
         return isExit;
       },
     );
