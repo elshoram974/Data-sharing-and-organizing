@@ -5,7 +5,8 @@ class MainBodyWidget extends StatelessWidget {
   const MainBodyWidget({
     super.key,
     required this.children,
-    this.makeHorizontalPadding = true, this.controller,
+    this.makeHorizontalPadding = true,
+    this.controller,
   });
   final List<Widget> children;
   final bool makeHorizontalPadding;
@@ -14,6 +15,7 @@ class MainBodyWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView(
+      physics: const AlwaysScrollableScrollPhysics(),
       controller: controller,
       padding: EdgeInsets.only(
         top: 25,
