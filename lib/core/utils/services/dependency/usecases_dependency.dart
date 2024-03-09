@@ -10,6 +10,7 @@ import '../../../../features/auth/domain/usecases/verify_code_use_case.dart';
 import '../../../../features/user_home/domain/repositories/home_repositories.dart';
 import '../../../../features/user_home/domain/usecases/home_use_case/exit_from_some_groups.dart';
 import '../../../../features/user_home/domain/usecases/home_use_case/get_groups.dart';
+import '../../../../features/user_home/domain/usecases/home_use_case/mark_as_un_read.dart';
 import 'locator.dart';
 
 void useCasesDependency() {
@@ -43,5 +44,8 @@ void useCasesDependency() {
   );
   sl.registerLazySingleton<ExitFromSomeGroups>(
     () => ExitFromSomeGroups(sl.get<HomeRepositories>()),
+  );
+  sl.registerLazySingleton<MarkAsUnRead>(
+    () => MarkAsUnRead(sl.get<HomeRepositories>()),
   );
 }
