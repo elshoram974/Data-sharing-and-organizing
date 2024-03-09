@@ -11,6 +11,7 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import '../../../domain/entities/group_home_entity.dart';
 import '../../../domain/usecases/home_use_case/exit_from_some_groups.dart';
 import '../../../domain/usecases/home_use_case/get_groups.dart';
+import '../../../domain/usecases/home_use_case/mark_as_un_read.dart';
 import '../main_cubit/user_main_cubit.dart';
 
 part 'user_home_state.dart';
@@ -19,6 +20,7 @@ class UserHomeCubit extends Cubit<UserHomeState> {
   UserHomeCubit({
     required this.getGroupsUseCase,
     required this.exitFromSomeGroups,
+    required this.markAsUnReadUsecase, 
   }) : super(const UserHomeInitial()) {
     getGroups();
     scrollController = ScrollController();
@@ -26,6 +28,7 @@ class UserHomeCubit extends Cubit<UserHomeState> {
   }
   final GetGroupsUseCase getGroupsUseCase;
   final ExitFromSomeGroups exitFromSomeGroups;
+  final MarkAsUnRead markAsUnReadUsecase;
 
   late final ScrollController scrollController;
   final UserMainCubit userMain = ProviderDependency.userMain;
