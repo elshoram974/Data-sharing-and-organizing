@@ -23,7 +23,7 @@ class UserHomeScreen extends StatelessWidget {
           child: MainBodyWidget(
             controller: c.scrollController,
             children: [
-              if (state is GetGroupsInFirstLoadingState)
+              if (state is GetGroupsLoadingState && state.inFirst)
                 const GetGroupsLoading(),
               if (c.currentGroups.isEmpty)
                 EmptyPageText(S.of(context).youCanMakeNewGroups),
@@ -38,7 +38,7 @@ class UserHomeScreen extends StatelessWidget {
                   );
                 },
               ),
-              if (state is GetGroupsInLastLoadingState)
+              if (state is GetGroupsLoadingState && !state.inFirst)
                 const GetGroupsLoading(),
             ],
           ),
