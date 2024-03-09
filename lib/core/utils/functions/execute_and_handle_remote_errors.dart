@@ -5,13 +5,17 @@ import '../../status/success/success.dart';
 import '../exceptions/http_exception.dart';
 
 Future<Status<T>> executeAndHandleErrors<T>(
-  Future<T> Function() function,
-) async {
+  Future<T> Function() function, [
+  Future<T?> Function()? functionWhenError,
+]) async {
   try {
-    return Success(await function());
+    return Success<T>(await function());
   } catch (e) {
-    if (e is MyHttpException) return ServerFailure.fromHttpException(e);
+    T? data;
+    if (functionWhenError != null) data = await functionWhenError();
 
-    return Failure(e.toString());
+    if (e is MyHttpException) return ServerFailure<T>.fromHttpException(e).copyWith(data: data);
+
+    return Failure<T>(e.toString()).copyWith(data: data);
   }
 }
