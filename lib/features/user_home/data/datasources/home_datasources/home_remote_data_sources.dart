@@ -32,7 +32,7 @@ class HomeRemoteDataSourceImp extends HomeRemoteDataSource {
   ) async {
     Map<String, dynamic> response = await service.post(
       AppLinks.getGroups,
-      {'userId': user.id, 'pageNumber': page, 'groupsPerPage': 10},
+      {'userId':'${user.id}', 'pageNumber': '$page', 'groupsPerPage': '$pageSize'},
     );
     print(response);
     return [];
