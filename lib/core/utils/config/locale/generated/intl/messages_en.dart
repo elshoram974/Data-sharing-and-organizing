@@ -90,6 +90,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "exitGroups": MessageLookupByLibrary.simpleMessage("Exit groups"),
         "extraLarge": MessageLookupByLibrary.simpleMessage("Extra Large"),
         "fillField": MessageLookupByLibrary.simpleMessage("fill this field"),
+        "firstName": MessageLookupByLibrary.simpleMessage("First name"),
         "fontSize": MessageLookupByLibrary.simpleMessage("Font size"),
         "forgetPassword":
             MessageLookupByLibrary.simpleMessage("Forget password ? "),
@@ -110,6 +111,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Invalid verification type."),
         "language": MessageLookupByLibrary.simpleMessage("Language"),
         "large": MessageLookupByLibrary.simpleMessage("Large"),
+        "lastName": MessageLookupByLibrary.simpleMessage("Last name"),
         "lightMode": MessageLookupByLibrary.simpleMessage("Light mode"),
         "login": MessageLookupByLibrary.simpleMessage("Login"),
         "logout": MessageLookupByLibrary.simpleMessage("Log out"),
@@ -118,6 +120,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "muteNotification":
             MessageLookupByLibrary.simpleMessage("Mute notification"),
         "name": MessageLookupByLibrary.simpleMessage("Name"),
+        "nameChangedSuccessfully":
+            MessageLookupByLibrary.simpleMessage("Name changed successfully"),
         "newPassword": MessageLookupByLibrary.simpleMessage("New password"),
         "noCodeReceived":
             MessageLookupByLibrary.simpleMessage("No code received? "),

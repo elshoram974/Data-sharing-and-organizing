@@ -126,5 +126,8 @@
     "areYouSureAboutDeleteYourAccount": "Are you sure about delete your account?",
     "deletingYourAccountWillRemoveAllOfYourInformationFromOurDatabase": "Deleting your account will remove all of your information from our database ",
     "delete": "Delete",
-    "changeName": "Change name"
+    "changeName": "Change name",
+    "firstName": "First name",
+    "lastName": "Last name",
+    "nameChangedSuccessfully": "Name changed successfully"
 }

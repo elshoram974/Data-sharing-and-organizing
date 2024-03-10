@@ -126,5 +126,8 @@
     "areYouSureAboutDeleteYourAccount": "هل أنت متأكد من حذف حسابك؟",
     "deletingYourAccountWillRemoveAllOfYourInformationFromOurDatabase": "سيؤدي حذف حسابك إلى إزالة جميع معلوماتك من قاعدة بياناتنا",
     "delete": "حذف",
-    "changeName": "تغيير الاسم"
+    "changeName": "تغيير الاسم",
+    "firstName": "الاسم الأول",
+    "lastName": "الاسم الأخير",
+    "nameChangedSuccessfully": "تم تغيير الاسم بنجاح"
 }

@@ -91,6 +91,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("الخروج من المجموعات"),
         "extraLarge": MessageLookupByLibrary.simpleMessage("كبير جداً"),
         "fillField": MessageLookupByLibrary.simpleMessage("املأ هذا الحقل"),
+        "firstName": MessageLookupByLibrary.simpleMessage("الاسم الأول"),
         "fontSize": MessageLookupByLibrary.simpleMessage("حجم الخط"),
         "forgetPassword":
             MessageLookupByLibrary.simpleMessage("هل نسيت كلمة المرور ؟ "),
@@ -112,6 +113,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("نوع التحقق غير صالح"),
         "language": MessageLookupByLibrary.simpleMessage("اللغة"),
         "large": MessageLookupByLibrary.simpleMessage("كبير"),
+        "lastName": MessageLookupByLibrary.simpleMessage("الاسم الأخير"),
         "lightMode": MessageLookupByLibrary.simpleMessage("الوضع الفاتح"),
         "login": MessageLookupByLibrary.simpleMessage("تسجيل الدخول"),
         "logout": MessageLookupByLibrary.simpleMessage("تسجيل الخروج"),
@@ -121,6 +123,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "muteNotification":
             MessageLookupByLibrary.simpleMessage("كتم الإشعارات"),
         "name": MessageLookupByLibrary.simpleMessage("الاسم"),
+        "nameChangedSuccessfully":
+            MessageLookupByLibrary.simpleMessage("تم تغيير الاسم بنجاح"),
         "newPassword": MessageLookupByLibrary.simpleMessage("كلمة مرور جديدة"),
         "noCodeReceived":
             MessageLookupByLibrary.simpleMessage("لم يتم استلام رمز؟ "),
