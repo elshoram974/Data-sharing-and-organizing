@@ -1,6 +1,7 @@
 import 'package:data_sharing_organizing/core/shared/switch/my_switch_list_tile.dart';
 import 'package:data_sharing_organizing/core/utils/config/locale/generated/l10n.dart';
 import 'package:data_sharing_organizing/core/utils/constants/app_constants.dart';
+import 'package:data_sharing_organizing/core/utils/extension/theme_ex.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../core/utils/services/dependency/provider_dependency.dart';
@@ -29,7 +30,7 @@ class DarkModeListTile extends StatelessWidget {
           Text(S.of(context).darkMode, style: style),
         ],
       ),
-      value: cubit.appIsDark,
+      value: context.isDarkMode,
       onChanged: (value) {
         if (value) {
           cubit.changeMode(ThemeMode.dark);

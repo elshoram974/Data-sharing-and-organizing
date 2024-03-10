@@ -1,7 +1,6 @@
 import 'package:data_sharing_organizing/core/status/status.dart';
 import 'package:data_sharing_organizing/core/status/success/success.dart';
 import 'package:data_sharing_organizing/core/utils/config/locale/locale_handler.dart';
-import 'package:data_sharing_organizing/core/utils/config/themes/app_theme.dart';
 import 'package:data_sharing_organizing/core/utils/constants/app_strings.dart';
 import 'package:data_sharing_organizing/core/utils/services/init_local.dart';
 import 'package:equatable/equatable.dart';
@@ -56,10 +55,6 @@ class ConfigCubit extends Cubit<ConfigState> {
     emit(ChangeFontScale(textScaler));
   }
   //  end font scale factor ----------------------------------------------
-
-  bool get appIsDark =>
-      themeMode == ThemeMode.dark ||
-      (themeMode == ThemeMode.system && AppTheme.isDarkMode());
 
   bool get isLoggedIn => currentUser != null;
   bool get isArabic => appLocale.languageCode == 'ar';

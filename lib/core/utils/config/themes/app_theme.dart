@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 
+import '../../services/dependency/provider_dependency.dart';
 import 'data/my_check_box_theme_data.dart';
 import 'data/my_list_tile_theme_data.dart';
 import 'data/my_radio_theme_data.dart';
@@ -51,6 +52,7 @@ class AppTheme {
   static bool isDarkMode() {
     final SchedulerBinding s = SchedulerBinding.instance;
     final Brightness brightness = s.platformDispatcher.platformBrightness;
-    return brightness == Brightness.dark;
+    final ThemeMode themeMode = ProviderDependency.config.themeMode;
+    return (brightness == Brightness.dark && themeMode == ThemeMode.system) || themeMode == ThemeMode.dark;
   }
 }
