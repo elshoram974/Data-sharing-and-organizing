@@ -28,4 +28,19 @@ class EditProfileRepositoriesImp extends EditProfileRepositories {
       },
     );
   }
+
+  @override
+  Future<Status<AuthUserEntity>> changePassword(
+    int userId,
+    String pass,
+    String newPass,
+  ) {
+    return executeAndHandleErrors<AuthUserEntity>(
+      () async {
+        await remoteDataSource.changePass(userId, pass, newPass);
+        final AuthUserEntity user = await localDataSource.changePassword(newPass);
+        return user;
+      },
+    );
+  }
 }
