@@ -26,6 +26,7 @@ abstract class AppRoute {
   static const String userProfile =  UserRoutes.userProfile;
   static const String userEditProfile = UserRoutes.userEditProfile;
   static const String userChangePassword = UserRoutes.userChangePassword;
+  static const String userChangeName = UserRoutes.userChangeName;
   static const String userGroups = UserRoutes.userGroups;
   static const String deleteAccount = UserRoutes.deleteAccount;
   // * ------ End user screens ------ *//
