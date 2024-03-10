@@ -1,3 +1,4 @@
+import 'package:data_sharing_organizing/core/utils/extension/theme_ex.dart';
 import 'package:data_sharing_organizing/core/utils/services/dependency/provider_dependency.dart';
 import 'package:flutter/material.dart';
 
@@ -5,7 +6,7 @@ import '../../../features/splash/presentation/cubit/config_cubit.dart';
 
 abstract final class AppColor {
   const AppColor();
-  static final ConfigCubit cubit = ProviderDependency.config;
+  static final ConfigCubit _cubit = ProviderDependency.config;
 
   static const int _primaryInt = 0xFFF5576C;
   static const Color primary = Color(_primaryInt);
@@ -15,13 +16,17 @@ abstract final class AppColor {
 
   static const int _grayInt = 0xFF949494;
   static const Color gray = Color(_grayInt);
+  static const Color grayLight = Color(0xffc8c8c8);
 
   static const int _activeInt = 0xFFE87282;
   static const Color active = Color(_activeInt);
 
   static const Color _selectedLight = secondary;
   static const Color _selectedDark = Color(0xFF616161);
-  static Color get selected => cubit.appIsDark ? _selectedDark : _selectedLight;
+  static Color selected(BuildContext _) =>
+      _cubit.appIsDark || _.isDarkMode ? _selectedDark : _selectedLight;
+  static Color grayLightDark(BuildContext _) =>
+      _cubit.appIsDark || _.isDarkMode ? gray : grayLight;
 
   // static const int _activeLightInt = 0xFFFF0022;
   // static const Color activeLight = Color(_activeLightInt);

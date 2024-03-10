@@ -32,7 +32,7 @@ class HomeGroupTile extends StatelessWidget {
         padding: const EdgeInsets.only(
             left: 8, right: AppConst.defaultPadding, bottom: 7, top: 7),
         decoration: BoxDecoration(
-          color: groupHomeEntity.isSelected ? AppColor.selected : null,
+          color: groupHomeEntity.isSelected ? AppColor.selected(context) : null,
           borderRadius: BorderRadius.circular(AppConst.borderRadius),
           border: Border.all(color: getBorderColor()),
         ),
