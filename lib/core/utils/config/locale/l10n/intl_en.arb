@@ -125,5 +125,6 @@
     "deleteAccount": "Delete account",
     "areYouSureAboutDeleteYourAccount": "Are you sure about delete your account?",
     "deletingYourAccountWillRemoveAllOfYourInformationFromOurDatabase": "Deleting your account will remove all of your information from our database ",
-    "delete": "Delete"
+    "delete": "Delete",
+    "changeName": "Change name"
 }

@@ -42,6 +42,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
         "cantBeLessThan": m0,
         "cantBeMoreThan": m1,
+        "changeName": MessageLookupByLibrary.simpleMessage("Change name"),
         "changePassword":
             MessageLookupByLibrary.simpleMessage("Change password"),
         "codeVerification":

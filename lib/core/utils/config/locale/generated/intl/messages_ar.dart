@@ -40,6 +40,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "cancel": MessageLookupByLibrary.simpleMessage("إلغاء"),
         "cantBeLessThan": m0,
         "cantBeMoreThan": m1,
+        "changeName": MessageLookupByLibrary.simpleMessage("تغيير الاسم"),
         "changePassword":
             MessageLookupByLibrary.simpleMessage("تغيير كلمة المرور"),
         "codeVerification":
