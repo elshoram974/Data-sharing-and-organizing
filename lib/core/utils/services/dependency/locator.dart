@@ -1,17 +1,11 @@
 import 'package:data_sharing_organizing/core/utils/services/api_services.dart';
 import 'package:get_it/get_it.dart';
 
-import '../../../../features/auth/data/datasources/auth_local_data_sources.dart';
-import '../../../../features/auth/data/datasources/auth_remote_data_sources.dart';
-import '../../../../features/auth/data/repositories/auth_repositories_imp.dart';
-import '../../../../features/user_home/data/datasources/home_datasources/home_local_data_sources.dart';
-import '../../../../features/user_home/data/datasources/home_datasources/home_remote_data_sources.dart';
-import '../../../../features/user_home/data/repositories/home_repositories_imp.dart';
-import '../../../../features/user_home/domain/repositories/home_repositories.dart';
 import '../notification_services.dart';
 import '../social_services.dart';
 import 'cubit_dependency.dart';
 import 'data_source_dependency.dart';
+import 'repositories_dependency.dart';
 import 'usecases_dependency.dart';
 
 final GetIt sl = GetIt.instance;
@@ -24,18 +18,7 @@ void initDependencies() {
 
   dataSourceDependency();
 
-  sl.registerSingleton<AuthRepositoriesImp>(
-    AuthRepositoriesImp(
-      localDataSource: sl.get<AuthLocalDataSourceImp>(),
-      remoteDataSource: sl.get<AuthRemoteDataSourceImp>(),
-    ),
-  );
-  sl.registerSingleton<HomeRepositories>(
-    HomeRepositoriesImp(
-      localDataSource: sl.get<HomeLocalDataSource>(),
-      remoteDataSource: sl.get<HomeRemoteDataSource>(),
-    ),
-  );
+  repositoriesDependency();
 
   useCasesDependency();
 
