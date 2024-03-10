@@ -1201,6 +1201,36 @@ class S {
       args: [],
     );
   }
+
+  /// `Delete account`
+  String get deleteAccount {
+    return Intl.message(
+      'Delete account',
+      name: 'deleteAccount',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Are you sure about delete your account?`
+  String get areYouSureAboutDeleteYourAccount {
+    return Intl.message(
+      'Are you sure about delete your account?',
+      name: 'areYouSureAboutDeleteYourAccount',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Deleting your account will remove all of your information from our database `
+  String get deletingYourAccountWillRemoveAllOfYourInformationFromOurDatabase {
+    return Intl.message(
+      'Deleting your account will remove all of your information from our database ',
+      name: 'deletingYourAccountWillRemoveAllOfYourInformationFromOurDatabase',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

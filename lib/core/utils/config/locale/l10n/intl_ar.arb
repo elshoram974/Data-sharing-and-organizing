@@ -121,5 +121,8 @@
     "selectAll": "تحديد الكل",
     "deselectAll": "إلغاء تحديد الكل",
     "muteNotification": "كتم الإشعارات",
-    "unmuteNotification": "تفعيل الإشعارات"
+    "unmuteNotification": "تفعيل الإشعارات",
+    "deleteAccount": "حذف الحساب",
+    "areYouSureAboutDeleteYourAccount": "هل أنت متأكد من حذف حسابك؟",
+    "deletingYourAccountWillRemoveAllOfYourInformationFromOurDatabase": "سيؤدي حذف حسابك إلى إزالة جميع معلوماتك من قاعدة بياناتنا"
 }

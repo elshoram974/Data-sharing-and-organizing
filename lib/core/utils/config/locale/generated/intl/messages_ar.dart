@@ -31,6 +31,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "YouHaveChooseTypeOfAccountPersonalOrBusiness":
             MessageLookupByLibrary.simpleMessage(
                 "عليك تحديد ان كان الحساب خاص أو لشركة"),
+        "areYouSureAboutDeleteYourAccount":
+            MessageLookupByLibrary.simpleMessage("هل أنت متأكد من حذف حسابك؟"),
         "areYouSureYouWantToReturnBack": MessageLookupByLibrary.simpleMessage(
             "هل أنت متأكد أنك تريد العودة؟"),
         "back": MessageLookupByLibrary.simpleMessage("رجوع"),
@@ -55,6 +57,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("كلمة المرور الحالية"),
         "darkMode": MessageLookupByLibrary.simpleMessage("الوضع المظلم"),
         "defaultScale": MessageLookupByLibrary.simpleMessage("افتراضي"),
+        "deleteAccount": MessageLookupByLibrary.simpleMessage("حذف الحساب"),
+        "deletingYourAccountWillRemoveAllOfYourInformationFromOurDatabase":
+            MessageLookupByLibrary.simpleMessage(
+                "سيؤدي حذف حسابك إلى إزالة جميع معلوماتك من قاعدة بياناتنا"),
         "deselectAll": MessageLookupByLibrary.simpleMessage("إلغاء تحديد الكل"),
         "deviceMode": MessageLookupByLibrary.simpleMessage("وضع الجهاز"),
         "doNotHaveAnAccount":

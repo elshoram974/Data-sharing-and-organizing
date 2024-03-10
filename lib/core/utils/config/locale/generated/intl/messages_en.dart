@@ -31,6 +31,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "YouHaveChooseTypeOfAccountPersonalOrBusiness":
             MessageLookupByLibrary.simpleMessage(
                 "You have to choose the type of your account if it personal or business account."),
+        "areYouSureAboutDeleteYourAccount":
+            MessageLookupByLibrary.simpleMessage(
+                "Are you sure about delete your account?"),
         "areYouSureYouWantToReturnBack": MessageLookupByLibrary.simpleMessage(
             "Are you sure you want to return back"),
         "back": MessageLookupByLibrary.simpleMessage("Back"),
@@ -56,6 +59,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Current Password"),
         "darkMode": MessageLookupByLibrary.simpleMessage("Dark mode"),
         "defaultScale": MessageLookupByLibrary.simpleMessage("Default"),
+        "deleteAccount": MessageLookupByLibrary.simpleMessage("Delete account"),
+        "deletingYourAccountWillRemoveAllOfYourInformationFromOurDatabase":
+            MessageLookupByLibrary.simpleMessage(
+                "Deleting your account will remove all of your information from our database "),
         "deselectAll": MessageLookupByLibrary.simpleMessage("Deselect all"),
         "deviceMode": MessageLookupByLibrary.simpleMessage("Device mode"),
         "doNotHaveAnAccount":

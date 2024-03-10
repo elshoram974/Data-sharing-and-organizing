@@ -121,5 +121,8 @@
     "selectAll": "Select all",
     "deselectAll": "Deselect all",
     "muteNotification": "Mute notification",
-    "unmuteNotification": "Unmute notification"
+    "unmuteNotification": "Unmute notification",
+    "deleteAccount": "Delete account",
+    "areYouSureAboutDeleteYourAccount": "Are you sure about delete your account?",
+    "deletingYourAccountWillRemoveAllOfYourInformationFromOurDatabase": "Deleting your account will remove all of your information from our database "
 }
