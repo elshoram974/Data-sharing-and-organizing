@@ -3,9 +3,13 @@ import 'package:data_sharing_organizing/core/shared/responsive/constrained_box.d
 import 'package:data_sharing_organizing/core/utils/config/locale/generated/l10n.dart';
 import 'package:data_sharing_organizing/core/utils/constants/app_constants.dart';
 import 'package:data_sharing_organizing/core/utils/extension/padding_ex.dart';
+import 'package:data_sharing_organizing/core/utils/services/dependency/locator.dart';
 import 'package:data_sharing_organizing/core/utils/styles.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../domain/repositories/edit_profile_repositories.dart';
+import '../../../cubit/menu_cubits/change_pass_cubit/change_pass_cubit.dart';
 import '../../../widgets/menu_widgets/profile/change_pass_widgets/change_password_buttons_widgets.dart';
 import '../../../widgets/menu_widgets/profile/change_pass_widgets/password_fields_widgets.dart';
 
@@ -14,23 +18,26 @@ class UserChangePassScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return EmptyScreenWithTitle(
-      title: S.of(context).changePassword,
-      bottomPadding: 0.5 * AppConst.defaultPadding,
-      children: [
-        ResConstrainedBoxAlign(
-          child: Column(
-            children: [
-              Text(
-                S.of(context).yourNewPasswordMustBeDifferentFromPreviously,
-                style: AppStyle.styleRegular15.copyWith(fontSize: 12),
-              ),
-              const PasswordFieldsWidgets(),
-              const ChangePasswordButtonsWidget(),
-            ],
-          ),
-        ).horizontalPadding(AppConst.defaultPadding),
-      ],
+    return BlocProvider(
+      create: (context) => ChangePassCubit(sl.get<EditProfileRepositories>()),
+      child: EmptyScreenWithTitle(
+        title: S.of(context).changePassword,
+        bottomPadding: 0.5 * AppConst.defaultPadding,
+        children: [
+          ResConstrainedBoxAlign(
+            child: Column(
+              children: [
+                Text(
+                  S.of(context).yourNewPasswordMustBeDifferentFromPreviously,
+                  style: AppStyle.styleRegular15.copyWith(fontSize: 12),
+                ),
+                const PasswordFieldsWidgets(),
+                const ChangePasswordButtonsWidget(),
+              ],
+            ),
+          ).horizontalPadding(AppConst.defaultPadding),
+        ],
+      ),
     );
   }
 }

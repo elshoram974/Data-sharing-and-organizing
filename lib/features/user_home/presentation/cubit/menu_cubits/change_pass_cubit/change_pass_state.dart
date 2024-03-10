@@ -11,11 +11,30 @@ final class ChangePassInitial extends ChangePassState {
   const ChangePassInitial();
 }
 
-final class ChangePassFunctionState extends ChangePassState {
-  const ChangePassFunctionState(this.pass, this.newPass);
-  final String pass;
-  final String newPass;
+final class ChangePassLoading extends ChangePassState {
+  const ChangePassLoading();
+}
+
+final class ChangePassSuccess extends ChangePassState {
+  const ChangePassSuccess(this.user);
+  final AuthUserEntity user;
 
   @override
-  List<Object> get props => [pass, newPass];
+  List<Object> get props => [user];
+}
+
+final class ChangePassFailure extends ChangePassState {
+  const ChangePassFailure(this.error);
+  final String error;
+
+  @override
+  List<Object> get props => [error];
+}
+
+final class ChangePassValidFields extends ChangePassState {
+  const ChangePassValidFields(this.isValid);
+  final bool isValid;
+
+  @override
+  List<Object> get props => [isValid];
 }
