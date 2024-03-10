@@ -4,14 +4,13 @@ import 'package:data_sharing_organizing/core/utils/config/locale/generated/l10n.
 import 'package:data_sharing_organizing/core/utils/constants/app_constants.dart';
 import 'package:data_sharing_organizing/core/utils/extension/padding_ex.dart';
 import 'package:data_sharing_organizing/core/utils/services/dependency/locator.dart';
-import 'package:data_sharing_organizing/core/utils/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../domain/repositories/edit_profile_repositories.dart';
 import '../../../cubit/menu_cubits/change_name_cubit/change_name_cubit.dart';
-import '../../../widgets/menu_widgets/profile/change_pass_widgets/change_password_buttons_widgets.dart';
-import '../../../widgets/menu_widgets/profile/change_pass_widgets/password_fields_widgets.dart';
+import '../../../widgets/menu_widgets/profile/change_name_widgets/change_name_widgets.dart';
+import '../../../widgets/menu_widgets/profile/change_name_widgets/name_fields.dart';
 
 class UserChangeNameScreen extends StatelessWidget {
   const UserChangeNameScreen({super.key});
@@ -22,17 +21,14 @@ class UserChangeNameScreen extends StatelessWidget {
       create: (context) => ChangeNameCubit(sl.get<EditProfileRepositories>()),
       child: EmptyScreenWithTitle(
         title: S.of(context).changeName,
-        bottomPadding: 0.5 * AppConst.defaultPadding,
+        bottomPadding: 97,
         children: [
-          ResConstrainedBoxAlign(
+          const ResConstrainedBoxAlign(
             child: Column(
               children: [
-                Text(
-                  S.of(context).yourNewPasswordMustBeDifferentFromPreviously,
-                  style: AppStyle.styleRegular15.copyWith(fontSize: 12),
-                ),
-                const PasswordFieldsWidgets(),
-                const ChangePasswordButtonsWidget(),
+                NameFieldsWidgets(),
+                SizedBox(height: 100),
+                ChangeNameButtonsWidget(),
               ],
             ),
           ).horizontalPadding(AppConst.defaultPadding),

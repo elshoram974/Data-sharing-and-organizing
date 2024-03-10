@@ -1,12 +1,14 @@
 import 'package:data_sharing_organizing/core/status/errors/failure.dart';
 import 'package:data_sharing_organizing/core/status/status.dart';
 import 'package:data_sharing_organizing/core/status/success/success.dart';
+import 'package:data_sharing_organizing/core/utils/config/locale/generated/l10n.dart';
 import 'package:data_sharing_organizing/core/utils/config/routes/routes.dart';
 import 'package:data_sharing_organizing/core/utils/services/dependency/provider_dependency.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../../../auth/domain/entities/auth_user_entity.dart';
 import '../../../../domain/repositories/edit_profile_repositories.dart';
@@ -24,24 +26,25 @@ class ChangeNameCubit extends Cubit<ChangeNameState> {
   final AuthUserEntity user = ProviderDependency.userMain.user;
 
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
-  FocusNode focusNode = FocusNode();
+  bool isValid = false;
   late String firstName;
   late String lastName;
 
   Future<void> changeName() async {
-    if (!formKey.currentState!.validate()) return;
+    if (!isValid) return;
     EasyLoading.show(dismissOnTap: false);
     emit(const ChangeNameLoading());
-    final Status<AuthUserEntity> status =
-        await editProfileRepo.changePassword(user.id, firstName, lastName);
+    final Status<AuthUserEntity> status = Success<AuthUserEntity>(user.copyWith(name: 'Mohammed Riyad'));
     // final Status<AuthUserEntity> status = await editProfileRepo.changeName(user.id, firstName, lastName);
     EasyLoading.dismiss();
 
     if (status is Success<AuthUserEntity>) {
       emit(ChangeNameSuccess(status.data));
-      ProviderDependency.userMain.user = status.data;
-      AppRoute.key.currentState!.pop();
-      EasyLoading.showSuccess('Name changed');
+      // TODO: make the next line in local datasource
+      ProviderDependency.userMain.user = status.data.copyWith(password: user.password);
+      ProviderDependency.userMain.navIndex = 0;
+      AppRoute.key.currentContext?.go('/');
+      EasyLoading.showSuccess(S.current.nameChangedSuccessfully);
     } else {
       status as Failure<AuthUserEntity>;
       emit(ChangeNameFailure(status.error));
@@ -52,13 +55,16 @@ class ChangeNameCubit extends Cubit<ChangeNameState> {
     }
   }
 
-  void onFieldsChange() {
-    emit(ChangeNameValidFields(formKey.currentState!.validate()));
+  void onChangeFirstName(String val) {
+    firstName = val.trim();
+    isValid = formKey.currentState!.validate() && user.name != '$firstName $lastName';
+
+    emit(ChangeNameValidFields(isValid));
   }
 
-  @override
-  Future<void> close() {
-    focusNode.dispose();
-    return super.close();
+  void onChangeLastName(String val) {
+    lastName = val.trim();
+    isValid = formKey.currentState!.validate() && user.name != '$firstName $lastName';
+    emit(ChangeNameValidFields(isValid));
   }
 }
