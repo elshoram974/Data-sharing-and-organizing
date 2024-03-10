@@ -19,7 +19,7 @@ class UserMainCubit extends Cubit<UserMainState> {
     required this.logOutUseCase,
     required this.user,
   }) : super(const UserMainInitial());
-  final AuthUserEntity user;
+  AuthUserEntity user;
   final LogOutUseCase logOutUseCase;
 
   final GlobalKey pageKey = GlobalKey();
