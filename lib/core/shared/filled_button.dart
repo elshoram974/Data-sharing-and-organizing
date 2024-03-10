@@ -8,9 +8,13 @@ class MyFilledButton extends StatelessWidget {
     required this.text,
     this.onPressed,
     this.style,
+    this.filledColor,
+    this.minimumSize,
   });
   final String text;
   final TextStyle? style;
+  final Color? filledColor;
+  final Size? minimumSize;
   final void Function()? onPressed;
 
   @override
@@ -18,8 +22,8 @@ class MyFilledButton extends StatelessWidget {
     return FilledButton(
       onPressed: onPressed,
       style: FilledButton.styleFrom(
-        minimumSize: const Size(100, 48),
-        backgroundColor: AppColor.primary,
+        minimumSize: minimumSize ?? const Size(100, 48),
+        backgroundColor: filledColor ?? AppColor.primary,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(AppConst.borderRadius),
         ),
