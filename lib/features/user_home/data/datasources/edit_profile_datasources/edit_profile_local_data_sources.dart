@@ -28,7 +28,7 @@ class EditProfileLocalDataSourceImp extends EditProfileLocalDataSource {
   @override
   Future<AuthUserEntity> changeName(String fName, String lName) async {
     final AuthUserEntity savedUser = _userBox.values.last.copyWith(name: '$fName $lName');
-    _userBox.clear();
+    await _userBox.clear();
     await _userBox.add(savedUser);
     return savedUser;
   }

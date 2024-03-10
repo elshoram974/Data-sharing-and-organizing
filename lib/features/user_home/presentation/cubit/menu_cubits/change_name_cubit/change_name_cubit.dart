@@ -34,14 +34,11 @@ class ChangeNameCubit extends Cubit<ChangeNameState> {
     if (!isValid) return;
     EasyLoading.show(dismissOnTap: false);
     emit(const ChangeNameLoading());
-    final Status<AuthUserEntity> status = Success<AuthUserEntity>(user.copyWith(name: 'Mohammed Riyad'));
-    // final Status<AuthUserEntity> status = await editProfileRepo.changeName(user.id, firstName, lastName);
+    final Status<AuthUserEntity> status = await editProfileRepo.changeName(user.id, firstName, lastName);
     EasyLoading.dismiss();
 
     if (status is Success<AuthUserEntity>) {
       emit(ChangeNameSuccess(status.data));
-      // TODO: make the next line in local datasource
-      ProviderDependency.userMain.user = status.data.copyWith(password: user.password);
       ProviderDependency.userMain.navIndex = 0;
       AppRoute.key.currentContext?.go('/');
       EasyLoading.showSuccess(S.current.nameChangedSuccessfully);
