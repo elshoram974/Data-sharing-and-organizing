@@ -7,7 +7,7 @@ abstract class EditProfileLocalDataSource {
   const EditProfileLocalDataSource();
 
   Future<AuthUserEntity> changePassword(String newPass);
-  Future<AuthUserEntity> changeName(int userId, String fName, String lName);
+  Future<AuthUserEntity> changeName(String fName, String lName);
 }
 
 class EditProfileLocalDataSourceImp extends EditProfileLocalDataSource {
@@ -26,7 +26,7 @@ class EditProfileLocalDataSourceImp extends EditProfileLocalDataSource {
   }
 
   @override
-  Future<AuthUserEntity> changeName(int userId, String fName, String lName) async {
+  Future<AuthUserEntity> changeName(String fName, String lName) async {
     final AuthUserEntity savedUser = _userBox.values.last.copyWith(name: '$fName $lName');
     _userBox.clear();
     await _userBox.add(savedUser);

@@ -43,4 +43,15 @@ class EditProfileRepositoriesImp extends EditProfileRepositories {
       },
     );
   }
+  
+  @override
+  Future<Status<AuthUserEntity>> changeName(int userId, String fName, String lName) {
+    return executeAndHandleErrors<AuthUserEntity>(
+      () async {
+        await remoteDataSource.changeName(userId, fName, lName);
+        final AuthUserEntity user = await localDataSource.changeName(fName, lName);
+        return user;
+      },
+    );
+  }
 }
