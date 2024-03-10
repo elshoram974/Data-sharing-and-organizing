@@ -57,6 +57,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("كلمة المرور الحالية"),
         "darkMode": MessageLookupByLibrary.simpleMessage("الوضع المظلم"),
         "defaultScale": MessageLookupByLibrary.simpleMessage("افتراضي"),
+        "delete": MessageLookupByLibrary.simpleMessage("حذف"),
         "deleteAccount": MessageLookupByLibrary.simpleMessage("حذف الحساب"),
         "deletingYourAccountWillRemoveAllOfYourInformationFromOurDatabase":
             MessageLookupByLibrary.simpleMessage(

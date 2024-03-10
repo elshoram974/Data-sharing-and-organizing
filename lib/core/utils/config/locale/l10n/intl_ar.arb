@@ -124,5 +124,6 @@
     "unmuteNotification": "تفعيل الإشعارات",
     "deleteAccount": "حذف الحساب",
     "areYouSureAboutDeleteYourAccount": "هل أنت متأكد من حذف حسابك؟",
-    "deletingYourAccountWillRemoveAllOfYourInformationFromOurDatabase": "سيؤدي حذف حسابك إلى إزالة جميع معلوماتك من قاعدة بياناتنا"
+    "deletingYourAccountWillRemoveAllOfYourInformationFromOurDatabase": "سيؤدي حذف حسابك إلى إزالة جميع معلوماتك من قاعدة بياناتنا",
+    "delete": "حذف"
 }
