@@ -26,6 +26,7 @@ abstract final class UserRoutes {
   static const String userEditProfile = ProfileRoutes.userEditProfile;
   static const String userChangePassword = ProfileRoutes.userChangePassword;
   static const String userGroups = ProfileRoutes.userGroups;
+  static const String deleteAccount = ProfileRoutes.deleteAccount;
   // * ------ End profile screens ------ *//
 
   static GoRoute call() {

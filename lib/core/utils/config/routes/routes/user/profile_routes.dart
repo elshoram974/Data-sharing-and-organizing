@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../../../../features/user_home/presentation/screens/user_menu_screen/user_profile_screen/delete_account_screen.dart';
 import '../../../../../../features/user_home/presentation/screens/user_menu_screen/user_profile_screen/user_change_pass_screen.dart';
 import '../../../../../../features/user_home/presentation/screens/user_menu_screen/user_profile_screen/user_edit_profile_screen.dart';
 import '../../../../../../features/user_home/presentation/screens/user_menu_screen/user_profile_screen/user_groups_screen.dart';
@@ -21,6 +22,9 @@ abstract final class ProfileRoutes {
 
   static const String _userGroups = 'userGroups';
   static const String userGroups = '$userProfile/$_userGroups';
+
+  static const String _deleteAccount = 'deleteAccount';
+  static const String deleteAccount = '$userProfile/$_deleteAccount';
 
   static GoRoute call() {
     return GoRoute(
@@ -57,6 +61,15 @@ abstract final class ProfileRoutes {
             context: context,
             state: state,
             child: const UserGroupsScreen(),
+          ),
+        ),
+        GoRoute(
+          path: _deleteAccount,
+          pageBuilder: (context, state) => MyCustomTransition.slideTransition(
+            offset: const Offset(-1, 0),
+            context: context,
+            state: state,
+            child: const DeleteAccountScreen(),
           ),
         ),
       ],

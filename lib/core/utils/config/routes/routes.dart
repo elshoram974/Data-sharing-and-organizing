@@ -27,6 +27,7 @@ abstract class AppRoute {
   static const String userEditProfile = UserRoutes.userEditProfile;
   static const String userChangePassword = UserRoutes.userChangePassword;
   static const String userGroups = UserRoutes.userGroups;
+  static const String deleteAccount = UserRoutes.deleteAccount;
   // * ------ End user screens ------ *//
 
   static final GoRouter router = GoRouter(

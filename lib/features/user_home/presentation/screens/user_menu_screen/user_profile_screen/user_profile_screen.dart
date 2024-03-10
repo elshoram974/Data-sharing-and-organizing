@@ -35,6 +35,10 @@ class UserProfileScreen extends StatelessWidget {
           onTap: () => context.push(AppRoute.signUp),
         ),
         ProfileTileWidget(
+          title: S.of(context).deleteAccount,
+          onTap: () => context.push(AppRoute.deleteAccount),
+        ),
+        ProfileTileWidget(
           title: S.of(context).logout,
           onTap: ProviderDependency.userMain.logOut,
         ),
@@ -42,6 +46,3 @@ class UserProfileScreen extends StatelessWidget {
     );
   }
 }
-
-
-
