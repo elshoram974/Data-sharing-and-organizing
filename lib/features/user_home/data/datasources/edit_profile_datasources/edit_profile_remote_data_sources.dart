@@ -7,6 +7,7 @@ abstract class EditProfileRemoteDataSource {
   const EditProfileRemoteDataSource();
   Future<bool> deleteAccount(AuthUserEntity user);
   Future<AuthUserEntity> changePass(int userId, String pass, String newPass);
+  Future<AuthUserEntity> changeName(int userId, String fName, String lName);
 }
 
 class EditProfileRemoteDataSourceImp extends EditProfileRemoteDataSource {
@@ -29,6 +30,15 @@ class EditProfileRemoteDataSourceImp extends EditProfileRemoteDataSource {
     Map<String, dynamic> response = await service.post(
       'AppLinks.change pass', // TODO: change pass link
       {'userId': '$userId', 'currentPass': pass, 'newPass': newPass},
+    );
+    return AppUser.fromMap(response).user!;
+  }
+
+  @override
+  Future<AuthUserEntity> changeName(int userId, String fName, String lName) async {
+    Map<String, dynamic> response = await service.post(
+      'AppLinks.change name', // TODO: change name link
+      {'userId': '$userId', 'first_name': fName, 'last_name': lName},
     );
     return AppUser.fromMap(response).user!;
   }

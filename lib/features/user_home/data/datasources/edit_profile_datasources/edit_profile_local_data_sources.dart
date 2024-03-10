@@ -7,16 +7,27 @@ abstract class EditProfileLocalDataSource {
   const EditProfileLocalDataSource();
 
   Future<AuthUserEntity> changePassword(String newPass);
+  Future<AuthUserEntity> changeName(int userId, String fName, String lName);
 }
 
 class EditProfileLocalDataSourceImp extends EditProfileLocalDataSource {
   EditProfileLocalDataSourceImp();
 
-  late final Box<AuthUserEntity> _userBox = Hive.box<AuthUserEntity>(AppStrings.userBox);
+  late final Box<AuthUserEntity> _userBox =
+      Hive.box<AuthUserEntity>(AppStrings.userBox);
 
   @override
   Future<AuthUserEntity> changePassword(String newPass) async {
-    final AuthUserEntity savedUser = _userBox.values.last.copyWith(password: newPass);
+    final AuthUserEntity savedUser =
+        _userBox.values.last.copyWith(password: newPass);
+    _userBox.clear();
+    await _userBox.add(savedUser);
+    return savedUser;
+  }
+
+  @override
+  Future<AuthUserEntity> changeName(int userId, String fName, String lName) async {
+    final AuthUserEntity savedUser = _userBox.values.last.copyWith(name: '$fName $lName');
     _userBox.clear();
     await _userBox.add(savedUser);
     return savedUser;
