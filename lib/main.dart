@@ -16,6 +16,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 
 import 'features/auth/presentation/cubit/login_cubit/login_cubit.dart';
+import 'features/user_home/presentation/cubit/menu_cubits/change_photo/change_photo_cubit.dart';
 import 'firebase_options.dart';
 
 void main() async {
@@ -52,6 +53,7 @@ class MyApp extends StatelessWidget {
       providers: [
         BlocProvider(create: (context) => sl.get<ConfigCubit>()),
         BlocProvider(create: (context) => sl.get<LoginCubit>()),
+        BlocProvider(create: (context) => sl.get<ChangePhotoCubit>()),
       ],
       child: const DataSharingApp(),
     );

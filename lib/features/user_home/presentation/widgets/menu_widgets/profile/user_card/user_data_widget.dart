@@ -2,8 +2,10 @@ import 'package:data_sharing_organizing/core/shared/image/person.dart';
 import 'package:data_sharing_organizing/core/utils/services/dependency/provider_dependency.dart';
 import 'package:data_sharing_organizing/core/utils/styles.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../../auth/domain/entities/auth_user_entity.dart';
+import '../../../../cubit/menu_cubits/change_photo/change_photo_cubit.dart';
 import '../../../circular_image_widget.dart';
 
 class UserDataWidget extends StatelessWidget {
@@ -16,13 +18,7 @@ class UserDataWidget extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        const Align(
-          child: CircularImageWidget(
-            imageLink: '',
-            dimension: 110,
-            errorWidget: PersonImage(),
-          ),
-        ),
+        const _ImageInCard(),
         Text(
           user.name,
           textAlign: TextAlign.center,
@@ -42,6 +38,27 @@ class UserDataWidget extends StatelessWidget {
           ),
         ),
       ],
+    );
+  }
+}
+
+class _ImageInCard extends StatelessWidget {
+  const _ImageInCard();
+
+  @override
+  Widget build(BuildContext context) {
+    final ChangePhotoCubit c = BlocProvider.of<ChangePhotoCubit>(context);
+
+    return BlocBuilder<ChangePhotoCubit, ChangePhotoState>(
+      builder: (context, state) {
+        return Align(
+          child: CircularImageWidget(
+            imageLink: c.imageLink,
+            dimension: 110,
+            errorWidget: const PersonImage(),
+          ),
+        );
+      },
     );
   }
 }
