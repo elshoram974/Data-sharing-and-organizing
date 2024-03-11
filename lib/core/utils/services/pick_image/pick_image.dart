@@ -38,7 +38,14 @@ final class HandlePickedImage {
               ? CropAspectRatioPreset.square
               : CropAspectRatioPreset.original,
         ),
-        WebUiSettings(context: AppRoute.key.currentContext!),
+        WebUiSettings(
+          context: AppRoute.key.currentContext!,
+          enableZoom: true,
+          enableResize: aspectRatioPresets != null,
+          mouseWheelZoom: true,
+          showZoomer: true,
+          enableExif: true,
+        ),
       ],
     );
   }
