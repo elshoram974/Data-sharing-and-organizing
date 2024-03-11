@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../presentation/cubit/user_notification_cubit/user_notification_cubit.dart';
-import '../../presentation/screens/user_home_screen.dart';
+import '../../presentation/screens/home/user_home_screen.dart';
 import '../../presentation/screens/user_menu_screen/user_menu_screen.dart';
 import '../../presentation/screens/user_notification_screen.dart';
 

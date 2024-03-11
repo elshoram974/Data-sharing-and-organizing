@@ -1,12 +1,14 @@
 import 'package:data_sharing_organizing/core/status/errors/failure.dart';
 import 'package:data_sharing_organizing/core/status/status.dart';
 import 'package:data_sharing_organizing/core/status/success/success.dart';
+import 'package:data_sharing_organizing/core/utils/config/routes/routes.dart';
 import 'package:data_sharing_organizing/core/utils/enums/home_selected_pop_up_enum.dart';
 import 'package:data_sharing_organizing/core/utils/services/dependency/provider_dependency.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../domain/entities/group_home_entity.dart';
 import '../../../domain/usecases/home_use_case/exit_from_some_groups.dart';
@@ -105,12 +107,11 @@ class UserHomeCubit extends Cubit<UserHomeState> {
     if (isSelected) {
       onLongTapGroup(group);
     } else {
-      // go to screen
+      AppRoute.key.currentContext?.push(AppRoute.group,extra: group);
     }
   }
 
-  void onLongTapGroup(GroupHomeEntity group) =>
-      _selectGroup(group, !group.isSelected);
+  void onLongTapGroup(GroupHomeEntity group) => _selectGroup(group, !group.isSelected);
 
   // * when tap on pop up item when select groups
   void onSelectPopUpItem(value) {

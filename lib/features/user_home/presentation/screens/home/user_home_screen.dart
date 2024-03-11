@@ -5,10 +5,10 @@ import 'package:data_sharing_organizing/core/utils/services/dependency/provider_
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../domain/entities/group_home_entity.dart';
-import '../cubit/user_home_cubit/user_home_cubit.dart';
-import '../widgets/home_widgets/home_group_tile_widget/home_group_tile.dart';
-import '../widgets/main_screen_widgets/main_body.dart';
+import '../../../domain/entities/group_home_entity.dart';
+import '../../cubit/user_home_cubit/user_home_cubit.dart';
+import '../../widgets/home_widgets/home_group_tile_widget/home_group_tile.dart';
+import '../../widgets/main_screen_widgets/main_body.dart';
 
 class UserHomeScreen extends StatelessWidget {
   const UserHomeScreen({super.key});

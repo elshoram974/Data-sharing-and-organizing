@@ -8,6 +8,7 @@ import '../../../../../../features/user_home/presentation/screens/user_menu_scre
 import '../../../../functions/on_close_app.dart';
 import '../../my_custom_transition.dart';
 import '../../routes.dart';
+import 'group_routes.dart';
 import 'profile_routes.dart';
 
 abstract final class UserRoutes {
@@ -29,6 +30,10 @@ abstract final class UserRoutes {
   static const String userGroups = ProfileRoutes.userGroups;
   static const String deleteAccount = ProfileRoutes.deleteAccount;
   // * ------ End profile screens ------ *//
+
+  // * group screens *//
+  static const String group = GroupRoutes.group;
+  // * ------ End group screens ------ *//
 
   static GoRoute call() {
     return GoRoute(
@@ -68,6 +73,7 @@ abstract final class UserRoutes {
           ),
         ),
         ProfileRoutes.call(),
+        GroupRoutes.call(),
       ],
     );
   }
