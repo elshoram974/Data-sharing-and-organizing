@@ -1,10 +1,10 @@
+import 'package:data_sharing_organizing/core/utils/config/locale/generated/l10n.dart';
 import 'package:data_sharing_organizing/core/utils/constants/app_color.dart';
 import 'package:data_sharing_organizing/core/utils/constants/app_constants.dart';
 import 'package:data_sharing_organizing/core/utils/enums/selected_pop_up_enum.dart';
-import 'package:data_sharing_organizing/core/utils/styles.dart';
+import 'package:data_sharing_organizing/core/utils/functions/my_popup_button_item.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../domain/entities/pop_up_item_entity.dart';
 import '../../../cubit/user_home_cubit/user_home_cubit.dart';
 
 class SelectedPopUpMenuButton extends StatelessWidget {
@@ -13,8 +13,6 @@ class SelectedPopUpMenuButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final List<HomePopUpItemEntity> homeList = HomePopUpItemEntity.homeList(context, cubit);
-
     return PopupMenuButton<HomeSelectedPopUpItem>(
       position: PopupMenuPosition.under,
       onSelected: cubit.onSelectPopUpItem,
@@ -23,15 +21,12 @@ class SelectedPopUpMenuButton extends StatelessWidget {
         borderRadius: BorderRadius.circular(AppConst.borderRadius),
       ),
       itemBuilder: (context) => [
-        for (final HomePopUpItemEntity e in homeList)
-          if (e.isVisible)
-            PopupMenuItem(
-              value: e.value,
-              child: Text(
-                e.text,
-                style: AppStyle.styleBoldInika24.copyWith(fontSize: 13),
-              ),
-            ),
+        myPopupButton(HomeSelectedPopUpItem.exitGroup, S.of(context).exitGroups),
+        myPopupButton(HomeSelectedPopUpItem.markAsUnRead, S.of(context).markAsUnRead),
+        if (!cubit.isAllSelected) myPopupButton(HomeSelectedPopUpItem.selectAll, S.of(context).selectAll),
+        if (cubit.isAllSelected) myPopupButton(HomeSelectedPopUpItem.deselectAll, S.of(context).deselectAll),
+        if (cubit.selectedGroups.length == 1 && !cubit.selectedGroups.first.isMute) myPopupButton(HomeSelectedPopUpItem.muteNotification, S.of(context).muteNotification),
+        if (cubit.selectedGroups.length == 1 && cubit.selectedGroups.first.isMute) myPopupButton(HomeSelectedPopUpItem.unmuteNotification, S.of(context).unmuteNotification),
       ],
       child: const Icon(Icons.more_vert),
     );
