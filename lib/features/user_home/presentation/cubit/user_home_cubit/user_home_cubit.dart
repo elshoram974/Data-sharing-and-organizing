@@ -2,7 +2,7 @@ import 'package:data_sharing_organizing/core/status/errors/failure.dart';
 import 'package:data_sharing_organizing/core/status/status.dart';
 import 'package:data_sharing_organizing/core/status/success/success.dart';
 import 'package:data_sharing_organizing/core/utils/config/routes/routes.dart';
-import 'package:data_sharing_organizing/core/utils/enums/home_selected_pop_up_enum.dart';
+import 'package:data_sharing_organizing/core/utils/enums/selected_pop_up_enum.dart';
 import 'package:data_sharing_organizing/core/utils/services/dependency/provider_dependency.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';

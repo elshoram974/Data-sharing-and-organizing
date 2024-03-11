@@ -1,10 +1,10 @@
 import 'package:data_sharing_organizing/core/utils/constants/app_color.dart';
 import 'package:data_sharing_organizing/core/utils/constants/app_constants.dart';
-import 'package:data_sharing_organizing/core/utils/enums/home_selected_pop_up_enum.dart';
+import 'package:data_sharing_organizing/core/utils/enums/selected_pop_up_enum.dart';
 import 'package:data_sharing_organizing/core/utils/styles.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../domain/entities/home_pop_up_item_entity.dart';
+import '../../../../domain/entities/pop_up_item_entity.dart';
 import '../../../cubit/user_home_cubit/user_home_cubit.dart';
 
 class SelectedPopUpMenuButton extends StatelessWidget {
@@ -13,7 +13,7 @@ class SelectedPopUpMenuButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final List<HomePopUpItemEntity> homeList = HomePopUpItemEntity.list(context, cubit);
+    final List<HomePopUpItemEntity> homeList = HomePopUpItemEntity.homeList(context, cubit);
 
     return PopupMenuButton<HomeSelectedPopUpItem>(
       position: PopupMenuPosition.under,

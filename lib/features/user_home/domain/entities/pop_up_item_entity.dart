@@ -1,12 +1,13 @@
 import 'package:data_sharing_organizing/core/utils/config/locale/generated/l10n.dart';
-import 'package:data_sharing_organizing/core/utils/enums/home_selected_pop_up_enum.dart';
+import 'package:data_sharing_organizing/core/utils/enums/selected_pop_up_enum.dart';
+import 'package:data_sharing_organizing/core/utils/services/dependency/provider_dependency.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 
 import '../../presentation/cubit/user_home_cubit/user_home_cubit.dart';
 
-final class HomePopUpItemEntity extends Equatable {
-  final HomeSelectedPopUpItem value;
+final class HomePopUpItemEntity<T> extends Equatable {
+  final T value;
   final String text;
   final bool isVisible;
 
@@ -18,42 +19,62 @@ final class HomePopUpItemEntity extends Equatable {
   @override
   List<Object?> get props => [value, text];
 
-  static List<HomePopUpItemEntity> list(
+  static List<HomePopUpItemEntity> homeList(
     BuildContext context,
     UserHomeCubit cubit,
   ) {
     return [
-      HomePopUpItemEntity(
+      HomePopUpItemEntity<HomeSelectedPopUpItem>(
         text: S.of(context).exitGroups,
         value: HomeSelectedPopUpItem.exitGroup,
         isVisible: true,
       ),
-      HomePopUpItemEntity(
+      HomePopUpItemEntity<HomeSelectedPopUpItem>(
         text: S.of(context).markAsUnRead,
         value: HomeSelectedPopUpItem.markAsUnRead,
         isVisible: true,
       ),
-      HomePopUpItemEntity(
+      HomePopUpItemEntity<HomeSelectedPopUpItem>(
         text: S.of(context).selectAll,
         value: HomeSelectedPopUpItem.selectAll,
         isVisible: !cubit.isAllSelected,
       ),
-      HomePopUpItemEntity(
+      HomePopUpItemEntity<HomeSelectedPopUpItem>(
         text: S.of(context).deselectAll,
         value: HomeSelectedPopUpItem.deselectAll,
         isVisible: cubit.isAllSelected,
       ),
-      HomePopUpItemEntity(
+      HomePopUpItemEntity<HomeSelectedPopUpItem>(
         text: S.of(context).muteNotification,
         value: HomeSelectedPopUpItem.muteNotification,
         isVisible: cubit.selectedGroups.length == 1 &&
             !cubit.selectedGroups.first.isMute,
       ),
-      HomePopUpItemEntity(
+      HomePopUpItemEntity<HomeSelectedPopUpItem>(
         text: S.of(context).unmuteNotification,
         value: HomeSelectedPopUpItem.unmuteNotification,
         isVisible: cubit.selectedGroups.length == 1 &&
             cubit.selectedGroups.first.isMute,
+      ),
+    ];
+  }
+
+  static List<HomePopUpItemEntity> editPhotoList(BuildContext context) {
+    return [
+      HomePopUpItemEntity<EditPhotoSelectedPopUpItem>(
+        text: S.of(context).openCamera,
+        value: EditPhotoSelectedPopUpItem.openCamera,
+        isVisible: true,
+      ),
+      HomePopUpItemEntity<EditPhotoSelectedPopUpItem>(
+        text: S.of(context).openGallery,
+        value: EditPhotoSelectedPopUpItem.openGallery,
+        isVisible: true,
+      ),
+      HomePopUpItemEntity<EditPhotoSelectedPopUpItem>(
+        text: S.of(context).delete,
+        value: EditPhotoSelectedPopUpItem.deletePhoto,
+        isVisible: ProviderDependency.userMain.user.image != null,
       ),
     ];
   }
