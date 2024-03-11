@@ -133,6 +133,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "notification": MessageLookupByLibrary.simpleMessage("Notification"),
         "oR": MessageLookupByLibrary.simpleMessage("OR"),
         "onLockScreen": MessageLookupByLibrary.simpleMessage("On lock screen"),
+        "openCamera": MessageLookupByLibrary.simpleMessage("Open camera"),
+        "openGallery": MessageLookupByLibrary.simpleMessage("Open gallery"),
         "orConnectUsing":
             MessageLookupByLibrary.simpleMessage("Or connect using"),
         "password": MessageLookupByLibrary.simpleMessage("Password"),

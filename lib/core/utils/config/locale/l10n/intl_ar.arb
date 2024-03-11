@@ -129,5 +129,7 @@
     "changeName": "تغيير الاسم",
     "firstName": "الاسم الأول",
     "lastName": "الاسم الأخير",
-    "nameChangedSuccessfully": "تم تغيير الاسم بنجاح"
+    "nameChangedSuccessfully": "تم تغيير الاسم بنجاح",
+    "openCamera": "فتح الكاميرا",
+    "openGallery": "فتح المعرض"
 }

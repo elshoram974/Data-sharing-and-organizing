@@ -1281,6 +1281,26 @@ class S {
       args: [],
     );
   }
+
+  /// `Open camera`
+  String get openCamera {
+    return Intl.message(
+      'Open camera',
+      name: 'openCamera',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Open gallery`
+  String get openGallery {
+    return Intl.message(
+      'Open gallery',
+      name: 'openGallery',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

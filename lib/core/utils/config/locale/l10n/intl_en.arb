@@ -129,5 +129,7 @@
     "changeName": "Change name",
     "firstName": "First name",
     "lastName": "Last name",
-    "nameChangedSuccessfully": "Name changed successfully"
+    "nameChangedSuccessfully": "Name changed successfully",
+    "openCamera": "Open camera",
+    "openGallery": "Open gallery"
 }
