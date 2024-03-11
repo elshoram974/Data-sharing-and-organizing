@@ -78,6 +78,10 @@ dependencies:
   # * Splash screen
   flutter_native_splash: ^2.3.9
 
+  # * pick file from device
+  image_picker: ^1.0.7
+  image_cropper: ^5.0.1
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
