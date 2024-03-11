@@ -131,5 +131,6 @@
     "lastName": "الاسم الأخير",
     "nameChangedSuccessfully": "تم تغيير الاسم بنجاح",
     "openCamera": "فتح الكاميرا",
-    "openGallery": "فتح المعرض"
+    "openGallery": "فتح المعرض",
+    "openFiles": "فتح الملفات"
 }

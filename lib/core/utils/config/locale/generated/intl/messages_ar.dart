@@ -137,6 +137,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "oR": MessageLookupByLibrary.simpleMessage("أو"),
         "onLockScreen": MessageLookupByLibrary.simpleMessage("على شاشة القفل"),
         "openCamera": MessageLookupByLibrary.simpleMessage("فتح الكاميرا"),
+        "openFiles": MessageLookupByLibrary.simpleMessage("فتح الملفات"),
         "openGallery": MessageLookupByLibrary.simpleMessage("فتح المعرض"),
         "orConnectUsing": MessageLookupByLibrary.simpleMessage(
             "أو قم بتسجيل الدخول باستخدام"),

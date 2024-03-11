@@ -1301,6 +1301,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Open files`
+  String get openFiles {
+    return Intl.message(
+      'Open files',
+      name: 'openFiles',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

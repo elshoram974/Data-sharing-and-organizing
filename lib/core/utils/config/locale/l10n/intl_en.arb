@@ -131,5 +131,6 @@
     "lastName": "Last name",
     "nameChangedSuccessfully": "Name changed successfully",
     "openCamera": "Open camera",
-    "openGallery": "Open gallery"
+    "openGallery": "Open gallery",
+    "openFiles": "Open files"
 }
