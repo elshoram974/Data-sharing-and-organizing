@@ -91,6 +91,7 @@ List<GroupHomeEntity> staticGroups() {
       unReadCounter: null,
       isUnread: false,
       lastMessageTime: DateTime(2023),
+      ownerId: 42
     ),
     GroupHomeEntity(
       id: 2,
@@ -102,6 +103,7 @@ List<GroupHomeEntity> staticGroups() {
       unReadCounter: null,
       isUnread: false,
       lastMessageTime: DateTime(2024),
+      ownerId: 42
     ),
     GroupHomeEntity(
       id: 3,
@@ -112,6 +114,7 @@ List<GroupHomeEntity> staticGroups() {
       unReadCounter: null,
       isUnread: false,
       lastMessageTime: DateTime(2024),
+      ownerId: 42
     ),
     GroupHomeEntity(
       id: 4,
@@ -123,6 +126,7 @@ List<GroupHomeEntity> staticGroups() {
       unReadCounter: null,
       isUnread: false,
       lastMessageTime: DateTime(2024),
+      ownerId: 42
     ),
     GroupHomeEntity(
       id: 5,
@@ -134,6 +138,7 @@ List<GroupHomeEntity> staticGroups() {
       unReadCounter: null,
       isUnread: false,
       lastMessageTime: DateTime(2024),
+      ownerId: 42
     ),
     GroupHomeEntity(
       id: 6,
@@ -145,6 +150,7 @@ List<GroupHomeEntity> staticGroups() {
       unReadCounter: null,
       isUnread: false,
       lastMessageTime: DateTime(2024),
+      ownerId: 42
     ),
     GroupHomeEntity(
       id: 7,
@@ -155,6 +161,7 @@ List<GroupHomeEntity> staticGroups() {
       unReadCounter: null,
       isUnread: false,
       lastMessageTime: DateTime(2024),
+      ownerId: 1
     ),
     GroupHomeEntity(
       id: 8,
@@ -166,6 +173,7 @@ List<GroupHomeEntity> staticGroups() {
       unReadCounter: null,
       isUnread: false,
       lastMessageTime: DateTime.now(),
+      ownerId: 1
     ),
     GroupHomeEntity(
       id: 9,
@@ -177,6 +185,7 @@ List<GroupHomeEntity> staticGroups() {
       unReadCounter: null,
       isUnread: false,
       lastMessageTime: DateTime(2024),
+      ownerId: 1
     ),
     GroupHomeEntity(
       id: 10,
@@ -188,6 +197,7 @@ List<GroupHomeEntity> staticGroups() {
       unReadCounter: null,
       isUnread: false,
       lastMessageTime: DateTime(2024),
+      ownerId: 1
     ),
     GroupHomeEntity(
       id: 11,
@@ -198,6 +208,7 @@ List<GroupHomeEntity> staticGroups() {
       unReadCounter: null,
       isUnread: false,
       lastMessageTime: DateTime(2024),
+      ownerId: 1
     ),
     GroupHomeEntity(
       id: 12,
@@ -209,6 +220,7 @@ List<GroupHomeEntity> staticGroups() {
       unReadCounter: null,
       isUnread: false,
       lastMessageTime: DateTime(2024),
+      ownerId: 1
     ),
     GroupHomeEntity(
       id: 13,
@@ -220,6 +232,7 @@ List<GroupHomeEntity> staticGroups() {
       unReadCounter: null,
       isUnread: false,
       lastMessageTime: DateTime(2024),
+      ownerId: 1
     ),
     GroupHomeEntity(
       id: 14,
@@ -231,6 +244,7 @@ List<GroupHomeEntity> staticGroups() {
       unReadCounter: null,
       isUnread: false,
       lastMessageTime: DateTime(2024),
+      ownerId: 1
     ),
     GroupHomeEntity(
       id: 15,
@@ -241,6 +255,7 @@ List<GroupHomeEntity> staticGroups() {
       unReadCounter: null,
       isUnread: false,
       lastMessageTime: DateTime(2024),
+      ownerId: 1
     ),
     GroupHomeEntity(
       id: 16,
@@ -252,6 +267,7 @@ List<GroupHomeEntity> staticGroups() {
       unReadCounter: null,
       isUnread: false,
       lastMessageTime: DateTime(2024),
+      ownerId: 1
     ),
     GroupHomeEntity(
       id: 17,
@@ -263,6 +279,7 @@ List<GroupHomeEntity> staticGroups() {
       unReadCounter: null,
       isUnread: false,
       lastMessageTime: DateTime(2024),
+      ownerId: 1
     ),
     GroupHomeEntity(
       id: 18,
@@ -274,6 +291,7 @@ List<GroupHomeEntity> staticGroups() {
       unReadCounter: null,
       isUnread: false,
       lastMessageTime: DateTime(2024),
+      ownerId: 1
     ),
     GroupHomeEntity(
       id: 19,
@@ -284,6 +302,7 @@ List<GroupHomeEntity> staticGroups() {
       unReadCounter: null,
       isUnread: false,
       lastMessageTime: DateTime(2024),
+      ownerId: 1
     ),
     GroupHomeEntity(
       id: 20,
@@ -295,6 +314,7 @@ List<GroupHomeEntity> staticGroups() {
       unReadCounter: null,
       isUnread: false,
       lastMessageTime: DateTime(2024),
+      ownerId: 1
     ),
     GroupHomeEntity(
       id: 21,
@@ -306,6 +326,7 @@ List<GroupHomeEntity> staticGroups() {
       unReadCounter: null,
       isUnread: false,
       lastMessageTime: DateTime(2024),
+      ownerId: 1
     ),
     GroupHomeEntity(
       id: 22,
@@ -317,6 +338,7 @@ List<GroupHomeEntity> staticGroups() {
       unReadCounter: null,
       isUnread: false,
       lastMessageTime: DateTime(2024),
+      ownerId: 1
     ),
     GroupHomeEntity(
       id: 23,
@@ -327,6 +349,7 @@ List<GroupHomeEntity> staticGroups() {
       unReadCounter: null,
       isUnread: false,
       lastMessageTime: DateTime(2024),
+      ownerId: 1
     ),
     GroupHomeEntity(
       id: 24,
@@ -338,6 +361,7 @@ List<GroupHomeEntity> staticGroups() {
       unReadCounter: null,
       isUnread: false,
       lastMessageTime: DateTime(2024),
+      ownerId: 1
     ),
   ];
 }

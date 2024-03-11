@@ -33,6 +33,7 @@ final list = [
         'Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message ',
     isUnread: true,
     lastMessageTime: DateTime.now(),
+    ownerId: 42
   ),
   GroupNotificationEntity(
     id: 1,
@@ -42,6 +43,7 @@ final list = [
     lastMessage:
         'Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message ',
     lastMessageTime: DateTime.now(),
+    ownerId: 42
   ),
   GroupNotificationEntity(
     id: 2,
@@ -51,5 +53,6 @@ final list = [
     lastMessage:
         'Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message ',
     lastMessageTime: DateTime.now(),
+    ownerId: 42
   ),
 ];

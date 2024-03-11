@@ -36,6 +36,9 @@ class GroupHomeEntity extends Equatable {
   @HiveField(9)
   final MessageType lastMessageType;
 
+  @HiveField(10)
+  final int ownerId;
+
   final bool isSelected;
 
   const GroupHomeEntity({
@@ -50,6 +53,7 @@ class GroupHomeEntity extends Equatable {
     required this.lastMessageTime,
     this.isSelected = false,
     this.isMute = false,
+    required this.ownerId,
   });
 
   GroupHomeEntity copyWith({
@@ -64,6 +68,7 @@ class GroupHomeEntity extends Equatable {
     bool? isMute,
     MessageType? lastMessageType,
     String? lastMessageFrom,
+    int? ownerId,
   }) {
     return GroupHomeEntity(
       id: id ?? this.id,
@@ -77,9 +82,10 @@ class GroupHomeEntity extends Equatable {
       lastMessageTime: lastMessageTime ?? this.lastMessageTime,
       lastMessageType: lastMessageType ?? this.lastMessageType,
       lastMessageFrom: lastMessageFrom ?? this.lastMessageFrom,
+      ownerId: ownerId ?? this.ownerId,
     );
   }
 
   @override
-  List<Object?> get props => [id];
+  List<Object?> get props => [id, ownerId];
 }
