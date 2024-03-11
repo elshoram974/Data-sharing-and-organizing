@@ -5,7 +5,7 @@ import '../../../../../../features/user_home/presentation/screens/user_menu_scre
 import '../../../../../../features/user_home/presentation/screens/user_menu_screen/user_profile_screen/user_change_name_screen.dart';
 import '../../../../../../features/user_home/presentation/screens/user_menu_screen/user_profile_screen/user_change_pass_screen.dart';
 import '../../../../../../features/user_home/presentation/screens/user_menu_screen/user_profile_screen/user_edit_profile_screen.dart';
-import '../../../../../../features/user_home/presentation/screens/user_menu_screen/user_profile_screen/user_groups_screen.dart';
+import '../../../../../../features/user_home/presentation/screens/user_menu_screen/user_profile_screen/user_my_groups_screen.dart';
 import '../../../../../../features/user_home/presentation/screens/user_menu_screen/user_profile_screen/user_profile_screen.dart';
 import '../../../../functions/on_close_app.dart';
 import '../../my_custom_transition.dart';
@@ -22,8 +22,8 @@ abstract final class ProfileRoutes {
   static const String _userEditProfile = 'userEditProfile';
   static const String userEditProfile = '$userProfile/$_userEditProfile';
 
-  static const String _userGroups = 'userGroups';
-  static const String userGroups = '$userProfile/$_userGroups';
+  static const String _userMyGroups = 'userGroups';
+  static const String userMyGroups = '$userProfile/$_userMyGroups';
 
   static const String _deleteAccount = 'deleteAccount';
   static const String deleteAccount = '$userProfile/$_deleteAccount';
@@ -60,17 +60,17 @@ abstract final class ProfileRoutes {
           ),
         ),
         GoRoute(
-          path: _userGroups,
+          path: _userMyGroups,
           onExit: (_) => onCloseApp(
             context: _,
             canGoTo: [],
-            currentRoute: userGroups,
+            currentRoute: userMyGroups,
           ),
           pageBuilder: (context, state) => MyCustomTransition.slideTransition(
             offset: const Offset(-1, 0),
             context: context,
             state: state,
-            child: const UserGroupsScreen(),
+            child: const UserMyGroupsScreen(),
           ),
         ),
         GoRoute(

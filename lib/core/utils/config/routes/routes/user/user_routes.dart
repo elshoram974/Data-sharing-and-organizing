@@ -17,7 +17,8 @@ abstract final class UserRoutes {
   static const String userHome = '/home';
 
   static const String _notificationsSettings = 'notificationsSettings';
-  static const String notificationsSettings = '$userHome/$_notificationsSettings';
+  static const String notificationsSettings =
+      '$userHome/$_notificationsSettings';
 
   static const String _userSettings = 'userSettings';
   static const String userSettings = '$userHome/$_userSettings';
@@ -27,7 +28,7 @@ abstract final class UserRoutes {
   static const String userEditProfile = ProfileRoutes.userEditProfile;
   static const String userChangePassword = ProfileRoutes.userChangePassword;
   static const String userChangeName = ProfileRoutes.userChangeName;
-  static const String userGroups = ProfileRoutes.userGroups;
+  static const String userMyGroups = ProfileRoutes.userMyGroups;
   static const String deleteAccount = ProfileRoutes.deleteAccount;
   // * ------ End profile screens ------ *//
 

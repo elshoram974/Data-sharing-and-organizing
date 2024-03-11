@@ -28,7 +28,7 @@ class UserProfileScreen extends StatelessWidget {
         ),
         ProfileTileWidget(
           title: S.of(context).yourGroups,
-          onTap: () => context.push(AppRoute.userGroups),
+          onTap: () => context.push(AppRoute.userMyGroups),
         ),
         ProfileTileWidget(
           title: S.of(context).createAnotherAccount,

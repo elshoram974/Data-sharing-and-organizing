@@ -1,27 +1,29 @@
 import 'package:data_sharing_organizing/core/shared/circular_loading_indicator.dart';
 import 'package:data_sharing_organizing/core/shared/empty_page_text.dart';
 import 'package:data_sharing_organizing/core/utils/config/locale/generated/l10n.dart';
-import 'package:data_sharing_organizing/core/utils/services/dependency/provider_dependency.dart';
+import 'package:data_sharing_organizing/core/utils/constants/app_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../domain/entities/group_home_entity.dart';
-import '../../cubit/user_home_cubit/user_home_cubit.dart';
-import '../../widgets/home_widgets/home_group_tile_widget/home_group_tile.dart';
-import '../../widgets/main_screen_widgets/main_body.dart';
+import '../../../../../domain/entities/group_home_entity.dart';
+import '../../../../cubit/user_home_cubit/user_home_cubit.dart';
+import '../../../home_widgets/home_group_tile_widget/home_group_tile.dart';
 
-class UserHomeScreen extends StatelessWidget {
-  const UserHomeScreen({super.key});
+class UserMyGroupsBody extends StatelessWidget {
+  const UserMyGroupsBody({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final UserHomeCubit c = ProviderDependency.userHome;
-    return BlocBuilder<UserHomeCubit, UserHomeState>(
-      builder: (context, state) {
-        return RefreshIndicator(
-          onRefresh: c.getGroups,
-          child: MainBodyWidget(
+    final UserHomeCubit c = BlocProvider.of<UserHomeCubit>(context);
+    return RefreshIndicator(
+      onRefresh: c.getGroups,
+      child: BlocBuilder<UserHomeCubit, UserHomeState>(
+        builder: (context, state) {
+          return ListView(
             controller: c.scrollController,
+            physics: const AlwaysScrollableScrollPhysics(),
+            padding:
+                const EdgeInsets.symmetric(horizontal: AppConst.defaultPadding),
             children: [
               if (state is GetGroupsLoadingState && state.inFirst)
                 const CircularLoadingIndicator(),
@@ -41,10 +43,9 @@ class UserHomeScreen extends StatelessWidget {
               if (state is GetGroupsLoadingState && !state.inFirst)
                 const CircularLoadingIndicator(),
             ],
-          ),
-        );
-      },
+          );
+        },
+      ),
     );
   }
 }
-

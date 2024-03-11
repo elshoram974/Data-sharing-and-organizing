@@ -16,7 +16,7 @@ bool onCloseApp({
   switch (currentRoute) {
     case AppRoute.userHome:
       canBack = ProviderDependency.userMain.onWillPop();
-    case AppRoute.userGroups:
+    case AppRoute.userMyGroups:
       canBack = ProviderDependency.userHome.onWillPop();
   }
 
