@@ -1,6 +1,5 @@
 import 'package:data_sharing_organizing/core/utils/config/locale/generated/l10n.dart';
 import 'package:data_sharing_organizing/core/utils/enums/selected_pop_up_enum.dart';
-import 'package:data_sharing_organizing/core/utils/services/dependency/provider_dependency.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 
@@ -55,26 +54,6 @@ final class HomePopUpItemEntity<T> extends Equatable {
         value: HomeSelectedPopUpItem.unmuteNotification,
         isVisible: cubit.selectedGroups.length == 1 &&
             cubit.selectedGroups.first.isMute,
-      ),
-    ];
-  }
-
-  static List<HomePopUpItemEntity> editPhotoList(BuildContext context) {
-    return [
-      HomePopUpItemEntity<EditPhotoSelectedPopUpItem>(
-        text: S.of(context).openCamera,
-        value: EditPhotoSelectedPopUpItem.openCamera,
-        isVisible: true,
-      ),
-      HomePopUpItemEntity<EditPhotoSelectedPopUpItem>(
-        text: S.of(context).openGallery,
-        value: EditPhotoSelectedPopUpItem.openGallery,
-        isVisible: true,
-      ),
-      HomePopUpItemEntity<EditPhotoSelectedPopUpItem>(
-        text: S.of(context).delete,
-        value: EditPhotoSelectedPopUpItem.deletePhoto,
-        isVisible: ProviderDependency.userMain.user.image != null,
       ),
     ];
   }

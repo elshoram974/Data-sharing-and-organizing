@@ -8,3 +8,18 @@ sealed class ChangePhotoState extends Equatable {
 }
 
 final class ChangePhotoInitial extends ChangePhotoState {}
+final class ChangePhotoSuccess extends ChangePhotoState {
+  const ChangePhotoSuccess(this.imageLink);
+  final String imageLink;
+
+  @override
+  List<Object> get props => [imageLink];
+}
+
+final class ChangePhotoFailure extends ChangePhotoState {
+  const ChangePhotoFailure(this.error);
+  final String error;
+
+  @override
+  List<Object> get props => [error];
+}

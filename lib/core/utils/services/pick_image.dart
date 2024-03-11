@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 
-import '../../config/locale/generated/l10n.dart';
-import '../dependency/locator.dart';
+import '../config/locale/generated/l10n.dart';
+import 'dependency/locator.dart';
 
 final class HandlePickedImage {
   static Future<String?> pickImage(ImageSource source) async {

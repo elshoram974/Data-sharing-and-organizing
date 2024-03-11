@@ -12,6 +12,7 @@ enum HomeSelectedPopUpItem {
 enum EditPhotoSelectedPopUpItem {
   openCamera,
   openGallery,
+  openFiles,
   deletePhoto;
 
   ImageSource pickFrom() {
