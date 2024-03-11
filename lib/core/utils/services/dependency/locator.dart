@@ -1,5 +1,6 @@
 import 'package:data_sharing_organizing/core/utils/services/api_services.dart';
 import 'package:get_it/get_it.dart';
+import 'package:image_picker/image_picker.dart';
 
 import '../notification_services.dart';
 import '../social_services.dart';
@@ -12,6 +13,7 @@ final GetIt sl = GetIt.instance;
 
 void initDependencies() {
   // Dependency
+  sl.registerSingleton<ImagePicker>(ImagePicker());
   sl.registerSingleton<APIServices>(const APIServices());
   sl.registerSingleton<NotificationApi>(const NotificationApi());
   sl.registerLazySingleton<SocialServices>(() => const SocialServices());
