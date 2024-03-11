@@ -39,8 +39,7 @@ class MainUserAppBar extends StatelessWidget implements PreferredSizeWidget {
   }
 
   @override
-  Size get preferredSize =>
-      Size(double.maxFinite, AppConst.isWeb ? hight / 2 : hight);
+  Size get preferredSize => Size(double.maxFinite, AppConst.isWeb ? hight / 1.7 : hight);
 }
 
 class _AppBarBody extends StatelessWidget {

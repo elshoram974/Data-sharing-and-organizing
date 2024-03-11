@@ -22,7 +22,8 @@ class UserHomeCubit extends Cubit<UserHomeState> {
   UserHomeCubit({
     required this.getGroupsUseCase,
     required this.exitFromSomeGroups,
-    required this.markAsUnReadUsecase, 
+    required this.markAsUnReadUsecase,
+    required this.isMyGroups,
   }) : super(const UserHomeInitial()) {
     getGroups();
     scrollController = ScrollController();
@@ -31,9 +32,11 @@ class UserHomeCubit extends Cubit<UserHomeState> {
   final GetGroupsUseCase getGroupsUseCase;
   final ExitFromSomeGroups exitFromSomeGroups;
   final MarkAsUnRead markAsUnReadUsecase;
+  final bool isMyGroups;
 
   late final ScrollController scrollController;
   final UserMainCubit userMain = ProviderDependency.userMain;
+  final List<GroupHomeEntity> myGroups = [];
   final List<GroupHomeEntity> currentGroups = [];
   final List<GroupHomeEntity> selectedGroups = [];
 
@@ -49,9 +52,16 @@ class UserHomeCubit extends Cubit<UserHomeState> {
     final Status<Iterable<int>> status = await markAsUnReadUsecase(selectedGroups);
 
     if (status is Success<Iterable<int>>) {
-      for(int i =0 ; i < selectedGroups.length ; i++) {
+      if (isMyGroups) {
+        for (int i = 0; i < selectedGroups.length; i++) {
+          final int listIndexMyGroups = myGroups.indexOf(selectedGroups[i]);
+          myGroups[listIndexMyGroups] = myGroups[listIndexMyGroups].copyWith(isUnread: true);
+        }
+      } else {
+        for (int i = 0; i < selectedGroups.length; i++) {
           final int listIndex = currentGroups.indexOf(selectedGroups[i]);
           currentGroups[listIndex] = currentGroups[listIndex].copyWith(isUnread: true);
+        }
       }
       emit(HomeSuccessState(currentGroups));
       _makeAllSelectedOrNot(false);
@@ -66,11 +76,11 @@ class UserHomeCubit extends Cubit<UserHomeState> {
     emit(const GetGroupsLoadingState(true));
     EasyLoading.show(dismissOnTap: false);
     // await Future.delayed(Duration(seconds: 3));
-    final Status<bool> status = await exitFromSomeGroups(
-        (removedGroups: selectedGroups, user: userMain.user));
+    final Status<bool> status = await exitFromSomeGroups((removedGroups: selectedGroups, user: userMain.user));
 
     if (status is Success<bool>) {
       currentGroups.removeWhere((e) => selectedGroups.contains(e));
+      myGroups.removeWhere((e) => selectedGroups.contains(e));
       _makeAllSelectedOrNot(false);
       emit(HomeSuccessState(currentGroups));
       if (currentGroups.length < 10) getGroups();
@@ -85,18 +95,31 @@ class UserHomeCubit extends Cubit<UserHomeState> {
   Future<void> getGroups([bool inFirst = true, int page = 1]) async {
     emit(GetGroupsLoadingState(inFirst));
     // await Future.delayed(Duration(seconds: 3));
-    final Status<List<GroupHomeEntity>> status = await getGroupsUseCase((page: page, user: userMain.user));
+    final Status<List<GroupHomeEntity>> status = await getGroupsUseCase((
+      page: page,
+      user: userMain.user,
+      getMyGroups: isMyGroups,
+    ));
     if (inFirst) {
       if (isSelected) _makeAllSelectedOrNot(false);
       _currentPage = 1;
+      myGroups.clear();
       currentGroups.clear();
     }
     if (status is Success<List<GroupHomeEntity>>) {
-      currentGroups.addAll(status.data);
+      if (isMyGroups) {
+        myGroups.addAll(status.data);
+      } else {
+        currentGroups.addAll(status.data);
+      }
       emit(HomeSuccessState(status.data));
       debugPrint('success groups: ${status.data}');
     } else if (status is Failure<List<GroupHomeEntity>>) {
-      currentGroups.addAll(status.data!);
+      if (isMyGroups) {
+        myGroups.addAll(status.data!);
+      } else {
+        currentGroups.addAll(status.data!);
+      }
       debugPrint('failure groups: ${status.data}');
       _failureStatus(status.error, inFirst);
     }
@@ -107,11 +130,12 @@ class UserHomeCubit extends Cubit<UserHomeState> {
     if (isSelected) {
       onLongTapGroup(group);
     } else {
-      AppRoute.key.currentContext?.push(AppRoute.group,extra: group);
+      AppRoute.key.currentContext?.push(AppRoute.group, extra: group);
     }
   }
 
-  void onLongTapGroup(GroupHomeEntity group) => _selectGroup(group, !group.isSelected);
+  void onLongTapGroup(GroupHomeEntity group) =>
+      _selectGroup(group, !group.isSelected);
 
   // * when tap on pop up item when select groups
   void onSelectPopUpItem(value) {
@@ -133,8 +157,7 @@ class UserHomeCubit extends Cubit<UserHomeState> {
   // * helper functions
   int _currentPage = 1;
   void _onScroll() {
-    if (scrollController.position.pixels ==
-        scrollController.position.maxScrollExtent) {
+    if (scrollController.position.pixels == scrollController.position.maxScrollExtent) {
       if (state is! GetGroupsLoadingState) {
         _currentPage++;
         getGroups(false, _currentPage);
@@ -157,21 +180,37 @@ class UserHomeCubit extends Cubit<UserHomeState> {
       selectedGroups.remove(group);
     }
 
-    final int index = currentGroups.indexOf(group);
-    currentGroups[index] = replaced;
+    if (isMyGroups) {
+      final int index = myGroups.indexOf(group);
+      myGroups[index] = replaced;
+    } else {
+      final int index = currentGroups.indexOf(group);
+      currentGroups[index] = replaced;
+    }
 
     emit(UserHomeSelectGroups([group], makeSelected));
   }
 
   void _makeAllSelectedOrNot(bool makeSelected) {
-    for (int i = 0; i < currentGroups.length; i++) {
-      currentGroups[i] = currentGroups[i].copyWith(isSelected: makeSelected);
+    if (isMyGroups) {
+      for (int i = 0; i < myGroups.length; i++) {
+        myGroups[i] = myGroups[i].copyWith(isSelected: makeSelected);
+      }
+
+      selectedGroups.clear();
+      if (makeSelected) selectedGroups.addAll(myGroups);
+
+      emit(UserHomeSelectGroups(myGroups, makeSelected));
+    } else {
+      for (int i = 0; i < currentGroups.length; i++) {
+        currentGroups[i] = currentGroups[i].copyWith(isSelected: makeSelected);
+      }
+
+      selectedGroups.clear();
+      if (makeSelected) selectedGroups.addAll(currentGroups);
+
+      emit(UserHomeSelectGroups(currentGroups, makeSelected));
     }
-
-    selectedGroups.clear();
-    if (makeSelected) selectedGroups.addAll(currentGroups);
-
-    emit(UserHomeSelectGroups(currentGroups, makeSelected));
   }
 
   // * when go back
@@ -185,5 +224,7 @@ class UserHomeCubit extends Cubit<UserHomeState> {
 
   // * get functions
   bool get isSelected => selectedGroups.isNotEmpty;
-  bool get isAllSelected => selectedGroups.length >= currentGroups.length;
+  bool get isAllSelected =>
+      selectedGroups.length >=
+      (isMyGroups ? myGroups.length : currentGroups.length);
 }

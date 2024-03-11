@@ -27,7 +27,7 @@ class UserMainScreens extends StatelessWidget {
             logOutUseCase: sl.get<LogOutUseCase>(),
           ),
         ),
-        BlocProvider(create: (context) => sl.get<UserHomeCubit>()),
+        BlocProvider(create: (context) => sl.get<UserHomeCubit>(param1: false)),
       ],
       child: const _UserMainScreens(),
     );

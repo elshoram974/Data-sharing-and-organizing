@@ -173,7 +173,7 @@ List<GroupHomeEntity> staticGroups() {
       unReadCounter: null,
       isUnread: false,
       lastMessageTime: DateTime.now(),
-      ownerId: 1
+      ownerId: 42
     ),
     GroupHomeEntity(
       id: 9,

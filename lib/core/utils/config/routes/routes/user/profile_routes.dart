@@ -7,6 +7,7 @@ import '../../../../../../features/user_home/presentation/screens/user_menu_scre
 import '../../../../../../features/user_home/presentation/screens/user_menu_screen/user_profile_screen/user_edit_profile_screen.dart';
 import '../../../../../../features/user_home/presentation/screens/user_menu_screen/user_profile_screen/user_groups_screen.dart';
 import '../../../../../../features/user_home/presentation/screens/user_menu_screen/user_profile_screen/user_profile_screen.dart';
+import '../../../../functions/on_close_app.dart';
 import '../../my_custom_transition.dart';
 import 'user_routes.dart';
 
@@ -60,6 +61,11 @@ abstract final class ProfileRoutes {
         ),
         GoRoute(
           path: _userGroups,
+          onExit: (_) => onCloseApp(
+            context: _,
+            canGoTo: [],
+            currentRoute: userGroups,
+          ),
           pageBuilder: (context, state) => MyCustomTransition.slideTransition(
             offset: const Offset(-1, 0),
             context: context,

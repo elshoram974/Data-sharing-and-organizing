@@ -21,23 +21,21 @@ class HomeRepositoriesImp extends HomeRepositories {
 
   @override
   Future<Status<List<GroupHomeEntity>>> getGroups(
-    ({int page, AuthUserEntity user}) param,
+    ({int page, AuthUserEntity user, bool getMyGroups}) param,
   ) {
     final List<GroupHomeEntity> groups = [];
 
     return executeAndHandleErrors<List<GroupHomeEntity>>(
       () async {
         groups.clear();
-        groups.addAll(await remoteDataSource.getGroups(
-            param.user, param.page, groupsPerPage));
+        groups.addAll(await remoteDataSource.getGroups(param.user, param.page, param.getMyGroups? 1000 : groupsPerPage));
         await localDataSource.saveGroups(groups);
-        return groups;
+        return !param.getMyGroups? groups: groups.where((group) => group.ownerId == param.user.id).toList();
       },
       () async {
         groups.clear();
-        groups.addAll(
-            localDataSource.getSavedGroupsPerPage(param.page, groupsPerPage));
-        return groups;
+        groups.addAll(localDataSource.getSavedGroupsPerPage(param.page, param.getMyGroups? 1000 : groupsPerPage));
+        return !param.getMyGroups? groups: groups.where((group) => group.ownerId == param.user.id).toList();
       },
     );
   }

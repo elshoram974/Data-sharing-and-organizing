@@ -21,8 +21,9 @@ void cubitDependency() {
   );
 
   // * home cubits
-  sl.registerLazySingleton(
-    () => UserHomeCubit(
+  sl.registerFactoryParam<UserHomeCubit,bool,void>(
+    (bool isMyGroups,void _) => UserHomeCubit(
+      isMyGroups: isMyGroups,
       getGroupsUseCase: sl.get<GetGroupsUseCase>(),
       exitFromSomeGroups: sl.get<ExitFromSomeGroups>(),
       markAsUnReadUsecase: sl.get<MarkAsUnRead>(),
