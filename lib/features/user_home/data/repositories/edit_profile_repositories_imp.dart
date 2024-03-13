@@ -3,6 +3,7 @@ import 'package:data_sharing_organizing/core/utils/functions/execute_and_handle_
 import 'package:data_sharing_organizing/core/utils/services/dependency/locator.dart';
 
 import 'package:data_sharing_organizing/features/auth/domain/entities/auth_user_entity.dart';
+import 'package:data_sharing_organizing/features/user_home/domain/entities/upload_file_entity.dart';
 
 import '../../../auth/domain/usecases/log_out_use_case.dart';
 import '../../domain/repositories/edit_profile_repositories.dart';
@@ -50,6 +51,28 @@ class EditProfileRepositoriesImp extends EditProfileRepositories {
       () async {
         await remoteDataSource.changeName(userId, fName, lName);
         final AuthUserEntity user = await localDataSource.changeName(fName, lName);
+        return user;
+      },
+    );
+  }
+
+  @override
+  Future<Status<AuthUserEntity>> changeImage(UploadFileEntity uploadedFile) {
+    return executeAndHandleErrors<AuthUserEntity>(
+      () async {
+        final AuthUserEntity user = await remoteDataSource.changeImage(uploadedFile);
+        await localDataSource.changeImage(uploadedFile.filePath, user.image!);
+        return user;
+      },
+    );
+  }
+
+  @override
+  Future<Status<AuthUserEntity>> deleteImage(int userId, String imageLink) {
+    return executeAndHandleErrors<AuthUserEntity>(
+      () async {
+        final AuthUserEntity user = await remoteDataSource.deleteImage(userId,imageLink);
+        await localDataSource.deleteImage(imageLink);
         return user;
       },
     );
