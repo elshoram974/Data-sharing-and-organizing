@@ -5,11 +5,13 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../auth/domain/entities/auth_user_entity.dart';
+import '../../../../domain/repositories/edit_profile_repositories.dart';
 
 part 'change_photo_state.dart';
 
 class ChangePhotoCubit extends Cubit<ChangePhotoState> {
-  ChangePhotoCubit() : super(ChangePhotoInitial());
+  ChangePhotoCubit(this.editProfileRepo) : super(ChangePhotoInitial());
+  final EditProfileRepositories editProfileRepo;
   String? imageLink = ProviderDependency.userMain.user.image;
 
   void changeImage(EditPhotoSelectedPopUpItem value) async {

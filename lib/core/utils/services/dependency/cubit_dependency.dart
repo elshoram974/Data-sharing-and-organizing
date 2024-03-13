@@ -3,6 +3,7 @@ import '../../../../features/auth/domain/usecases/login_use_case.dart';
 import '../../../../features/auth/domain/usecases/social_login_use_case.dart';
 import '../../../../features/auth/presentation/cubit/login_cubit/login_cubit.dart';
 import '../../../../features/splash/presentation/cubit/config_cubit.dart';
+import '../../../../features/user_home/domain/repositories/edit_profile_repositories.dart';
 import '../../../../features/user_home/domain/usecases/home_use_case/exit_from_some_groups.dart';
 import '../../../../features/user_home/domain/usecases/home_use_case/get_groups.dart';
 import '../../../../features/user_home/domain/usecases/home_use_case/mark_as_un_read.dart';
@@ -32,5 +33,5 @@ void cubitDependency() {
   );
 
   // * menu cubits
-  sl.registerLazySingleton(() => ChangePhotoCubit());
+  sl.registerLazySingleton(() => ChangePhotoCubit(sl.get<EditProfileRepositories>()));
 }
