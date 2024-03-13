@@ -6,6 +6,7 @@ import '../../../../../../../auth/domain/entities/auth_user_entity.dart';
 import '../../../../../cubit/menu_cubits/change_photo/change_photo_cubit.dart';
 import '../../../../circular_image_widget.dart';
 import 'change_image_button.dart';
+import 'indicator_when_upload.dart';
 
 class EditImageWidget extends StatelessWidget {
   const EditImageWidget({super.key, required this.user});
@@ -25,6 +26,7 @@ class EditImageWidget extends StatelessWidget {
                 dimension: 210,
                 errorWidget: const PersonImage(),
               ),
+              if (state is ProgressUploadingPhoto) IndicatorWhenUpload(cubit: c, value: state.value),
               const Positioned(
                 bottom: 0,
                 right: 16,
