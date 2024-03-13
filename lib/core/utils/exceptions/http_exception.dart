@@ -1,9 +1,7 @@
-import 'package:http/http.dart';
-
 import '../enums/http_exception_type_enum.dart';
 import '../extension/http_exception_type_ex.dart';
 
-class MyHttpException implements Exception {
+class MyHttpException<T> implements Exception {
   /// Prefer using one of the other constructors.
   /// They're most likely better fitting.
   MyHttpException({
@@ -19,7 +17,7 @@ class MyHttpException implements Exception {
   factory MyHttpException.badResponse({
     required int statusCode,
     required,
-    required Response response,
+    required T response,
   }) =>
       MyHttpException(
         type: HttpExceptionType.badResponse,
@@ -100,7 +98,7 @@ class MyHttpException implements Exception {
         error: error,
       );
 
-  final Response? response;
+  final T? response;
 
   final HttpExceptionType type;
 
