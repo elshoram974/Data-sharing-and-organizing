@@ -35,7 +35,7 @@ class APIServices {
     required final String filePath,
     required final Map<String, dynamic> body,
     required final http.Client client,
-    required void Function(int sent, int total) onProgress,
+    required final void Function(int sent, int total) onProgress,
   }) async {
     final http.MultipartRequest request = http.MultipartRequest('POST', Uri.parse(link));
 
