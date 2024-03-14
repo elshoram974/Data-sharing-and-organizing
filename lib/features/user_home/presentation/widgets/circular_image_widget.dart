@@ -1,7 +1,5 @@
-import 'package:data_sharing_organizing/core/shared/image/android_image.dart';
-import 'package:data_sharing_organizing/core/shared/image/web_image.dart';
+import 'package:data_sharing_organizing/core/shared/image/open_image/open_image.dart';
 import 'package:data_sharing_organizing/core/utils/constants/app_color.dart';
-import 'package:data_sharing_organizing/core/utils/constants/app_constants.dart';
 import 'package:flutter/material.dart';
 
 class CircularImageWidget extends StatelessWidget {
@@ -26,9 +24,7 @@ class CircularImageWidget extends StatelessWidget {
         color: AppColor.secondary,
         shape: BoxShape.circle,
       ),
-      child: AppConst.isWeb
-          ? WebImage(imageLink: imageLink, errorWidget: errorWidget)
-          : AndroidImage(imageLink: imageLink, errorWidget: errorWidget),
+      child: OpenImage(imageLink: imageLink, errorWidget: errorWidget),
     );
   }
 }
