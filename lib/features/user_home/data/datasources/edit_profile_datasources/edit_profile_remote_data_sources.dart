@@ -1,3 +1,4 @@
+import 'package:data_sharing_organizing/core/utils/constants/app_links.dart';
 import 'package:data_sharing_organizing/core/utils/services/api_services.dart';
 
 import '../../../../auth/data/models/app_user/app_user.dart';
@@ -21,7 +22,7 @@ class EditProfileRemoteDataSourceImp extends EditProfileRemoteDataSource {
   @override
   Future<bool> deleteAccount(AuthUserEntity user) async {
     Map<String, dynamic> response = await service.post(
-      'AppLinks.delete', // TODO: delete link
+      AppLinks.deleteUser,
       {'userId': '${user.id}'},
     );
     print(response);
@@ -32,16 +33,17 @@ class EditProfileRemoteDataSourceImp extends EditProfileRemoteDataSource {
   Future<AuthUserEntity> changePass(
       int userId, String pass, String newPass) async {
     Map<String, dynamic> response = await service.post(
-      'AppLinks.change pass', // TODO: change pass link
+      AppLinks.changePassword,
       {'userId': '$userId', 'currentPass': pass, 'newPass': newPass},
     );
     return AppUser.fromMap(response).user!;
   }
 
   @override
-  Future<AuthUserEntity> changeName(int userId, String fName, String lName) async {
+  Future<AuthUserEntity> changeName(
+      int userId, String fName, String lName) async {
     Map<String, dynamic> response = await service.post(
-      'AppLinks.change name', // TODO: change name link
+      AppLinks.changeName,
       {'userId': '$userId', 'first_name': fName, 'last_name': lName},
     );
     return AppUser.fromMap(response).user!;
@@ -49,11 +51,11 @@ class EditProfileRemoteDataSourceImp extends EditProfileRemoteDataSource {
 
   @override
   Future<AuthUserEntity> changeImage(UploadFileEntity uploadImageEntity) async {
-     Map<String, dynamic> response = await service.uploadFile(
-      link: 'link', // TODO: add change link
+    Map<String, dynamic> response = await service.uploadFile(
+      link: AppLinks.changeUserImage,
       fieldName: 'image', // TODO: make sure the field name is image
       filePath: uploadImageEntity.filePath,
-      body: {'userId': uploadImageEntity.user.id},
+      body: {'userId': '${uploadImageEntity.user.id}'},
       client: uploadImageEntity.client,
       onProgress: uploadImageEntity.onProgress,
     );
@@ -63,7 +65,7 @@ class EditProfileRemoteDataSourceImp extends EditProfileRemoteDataSource {
   @override
   Future<AuthUserEntity> deleteImage(int userId, String imageLink) async {
     Map<String, dynamic> response = await service.post(
-      'AppLinks.change name', // TODO: change name link
+      AppLinks.deleteUserImage,
       {'userId': '$userId', 'imageLink': imageLink},
     );
     return AppUser.fromMap(response).user!;
