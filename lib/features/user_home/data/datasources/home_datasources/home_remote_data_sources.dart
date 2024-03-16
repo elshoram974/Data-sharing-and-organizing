@@ -31,8 +31,13 @@ class HomeRemoteDataSourceImp extends HomeRemoteDataSource {
     int pageSize,
   ) async {
     Map<String, dynamic> response = await service.post(
-      AppLinks.getGroups,
-      {'userId':'${user.id}', 'pageNumber': '$page', 'groupsPerPage': '$pageSize'},
+      AppLinks.userHome,
+      {
+        'user_id': '${user.id}',
+        'user_password': user.password,
+        'pageNumber': '$page',
+        'groupsPerPage': '$pageSize',
+      },
     );
     print(response);
     return [];
@@ -47,10 +52,9 @@ class HomeRemoteDataSourceImp extends HomeRemoteDataSource {
     for (final e in removedGroups) {
       groupsIds.add(e.id);
     }
-    // TODO: implement removeSomeGroups
     Map<String, dynamic> response = await service.post(
-      'AppLinks.getGroups',
-      {'userId': user.id, 'removedGroupsIds': json.encode(groupsIds)},
+      AppLinks.removeGroups,
+      {'userId': '${user.id}', 'removedGroupsIds': json.encode(groupsIds)},
     );
     print(response);
     // return response['status'] == 'success';
