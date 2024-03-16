@@ -16,8 +16,11 @@ abstract final class AppLinks {
 
   // * user home
   static const String _home = '$_baseLink/home';
-  static const String getGroups = '$_home/getGroups.php';
+  static const String userHome = '$_home/home.php';
 
   // * user profile
-  // static const String _profile = '$_baseLink/profile';
+  static const String _changes = '$_baseLink/changes';
+  static const String changeName = '$_changes/changename';
+  static const String changePassword = '$_changes/changepassword';
+  static const String deleteUser = '$_changes/deleteuser';
 }
