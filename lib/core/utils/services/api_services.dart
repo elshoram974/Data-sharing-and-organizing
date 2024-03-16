@@ -11,7 +11,7 @@ class APIServices {
 
   Future<Map<String, dynamic>> post(
     final String link,
-    final Map<String, dynamic> body,
+    final Map<String, String?> body,
   ) async {
     http.Response response = await handleRequestErrors<http.Response>(
       () => http.post(Uri.parse(link), body: body),
@@ -33,13 +33,13 @@ class APIServices {
     required final String link,
     required final String fieldName,
     required final String filePath,
-    required final Map<String, dynamic> body,
+    required final Map<String, String> body,
     required final http.Client client,
     required final void Function(int sent, int total) onProgress,
   }) async {
     final http.MultipartRequest request = http.MultipartRequest('POST', Uri.parse(link));
-
-    body.forEach((key, value) => request.fields[key] = value);
+    
+    request.fields.addAll(body);
 
     final http.MultipartFile file = await http.MultipartFile.fromPath(fieldName, filePath);
 
