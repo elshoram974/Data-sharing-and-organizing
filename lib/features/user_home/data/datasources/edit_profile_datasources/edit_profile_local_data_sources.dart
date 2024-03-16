@@ -7,10 +7,11 @@ import '../../../../auth/domain/entities/auth_user_entity.dart';
 abstract class EditProfileLocalDataSource {
   const EditProfileLocalDataSource();
 
-  Future<AuthUserEntity> changePassword(String newPass);
-  Future<AuthUserEntity> changeName(String fName, String lName);
-  Future<AuthUserEntity> changeImage(String imageLink , String newLink);
-  Future<AuthUserEntity> deleteImage(String imageLink);
+  Future<AuthUserEntity> changePassword(
+      String newPass, AuthUserEntity userToReplace);
+  // Future<AuthUserEntity> changeImage(String imageLink , String newLink);
+  // Future<AuthUserEntity> deleteImage(String imageLink);
+  Future<AuthUserEntity> changeUser(AuthUserEntity userToReplace);
 }
 
 class EditProfileLocalDataSourceImp extends EditProfileLocalDataSource {
@@ -20,45 +21,48 @@ class EditProfileLocalDataSourceImp extends EditProfileLocalDataSource {
       Hive.box<AuthUserEntity>(AppStrings.userBox);
 
   @override
-  Future<AuthUserEntity> changePassword(String newPass) async {
-    final AuthUserEntity savedUser =
-        _userBox.values.last.copyWith(password: newPass);
-    _userBox.clear();
-    await _userBox.add(savedUser);
-    return savedUser;
+  Future<AuthUserEntity> changePassword(String newPass, AuthUserEntity userToReplace) {
+    return changeUser(userToReplace, newPass);
   }
 
-  @override
-  Future<AuthUserEntity> changeName(String fName, String lName) async {
-    final AuthUserEntity savedUser = _userBox.values.last.copyWith(name: '$fName $lName');
-    await _userBox.clear();
-    await _userBox.add(savedUser);
-    return savedUser;
-  }
-  
-  @override
-  Future<AuthUserEntity> changeImage(String imageLink , String newLink) async{
-    final AuthUserEntity user = _userBox.values.last.copyWith(image: newLink);
-    await Future.wait([_userBox.clear(),CachedNetworkImage.evictFromCache(imageLink)]);
-   
-    await _userBox.add(user);
+  // @override
+  // Future<AuthUserEntity> changeImage(String imageLink , String newLink) async{
+  //   final AuthUserEntity user = _userBox.values.last.copyWith(image: newLink);
+  //   await Future.wait([_userBox.clear(),CachedNetworkImage.evictFromCache(imageLink)]);
 
-    return user;
-  }
-  @override
-  Future<AuthUserEntity> deleteImage(String imageLink) async{
-    AuthUserEntity user = _userBox.values.last;
-    await Future.wait([_userBox.clear(),CachedNetworkImage.evictFromCache(imageLink)]);
-    user = AuthUserEntity(
-          image: null,
-          id: user.id,
-          name: user.name,
-          email: user.email,
-          password: user.password,
-          userType: user.userType,
-        );
-    await _userBox.add(user);
+  //   await _userBox.add(user);
 
-    return user;
+  //   return user;
+  // }
+  // @override
+  // Future<AuthUserEntity> deleteImage(String imageLink) async{
+  //   AuthUserEntity user = _userBox.values.last;
+  //   await Future.wait([_userBox.clear(),CachedNetworkImage.evictFromCache(imageLink)]);
+  //   user = AuthUserEntity(
+  //         image: null,
+  //         id: user.id,
+  //         name: user.name,
+  //         email: user.email,
+  //         password: user.password,
+  //         userType: user.userType,
+  //       );
+  //   await _userBox.add(user);
+
+  //   return user;
+  // }
+
+  @override
+  Future<AuthUserEntity> changeUser(AuthUserEntity userToReplace, [String? passToSave]) async {
+    final AuthUserEntity savedUser = _userBox.values.last;
+    await Future.wait([
+      _userBox.clear(),
+      if(userToReplace.image != savedUser.image) CachedNetworkImage.evictFromCache(savedUser.image ?? ''),
+    ]);
+
+    final AuthUserEntity userToSave = userToReplace;
+    userToSave.copyWith(password: passToSave ?? savedUser.password);
+
+    await _userBox.add(userToSave);
+    return userToSave;
   }
 }

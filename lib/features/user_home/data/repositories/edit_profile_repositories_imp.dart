@@ -38,20 +38,18 @@ class EditProfileRepositoriesImp extends EditProfileRepositories {
   ) {
     return executeAndHandleErrors<AuthUserEntity>(
       () async {
-        await remoteDataSource.changePass(userId, pass, newPass);
-        final AuthUserEntity user = await localDataSource.changePassword(newPass);
-        return user;
+        final AuthUserEntity user = await remoteDataSource.changePass(userId, pass, newPass);
+        return localDataSource.changePassword(newPass, user);
       },
     );
   }
-  
+
   @override
   Future<Status<AuthUserEntity>> changeName(int userId, String fName, String lName) {
     return executeAndHandleErrors<AuthUserEntity>(
       () async {
-        await remoteDataSource.changeName(userId, fName, lName);
-        final AuthUserEntity user = await localDataSource.changeName(fName, lName);
-        return user;
+        final AuthUserEntity user = await remoteDataSource.changeName(userId, fName, lName);
+        return localDataSource.changeUser(user);
       },
     );
   }
@@ -61,8 +59,7 @@ class EditProfileRepositoriesImp extends EditProfileRepositories {
     return executeAndHandleErrors<AuthUserEntity>(
       () async {
         final AuthUserEntity user = await remoteDataSource.changeImage(uploadedFile);
-        await localDataSource.changeImage(uploadedFile.filePath, user.image!);
-        return user;
+        return localDataSource.changeUser(user);
       },
     );
   }
@@ -71,9 +68,8 @@ class EditProfileRepositoriesImp extends EditProfileRepositories {
   Future<Status<AuthUserEntity>> deleteImage(int userId, String imageLink) {
     return executeAndHandleErrors<AuthUserEntity>(
       () async {
-        final AuthUserEntity user = await remoteDataSource.deleteImage(userId,imageLink);
-        await localDataSource.deleteImage(imageLink);
-        return user;
+        final AuthUserEntity user = await remoteDataSource.deleteImage(userId, imageLink);
+        return localDataSource.changeUser(user);
       },
     );
   }
