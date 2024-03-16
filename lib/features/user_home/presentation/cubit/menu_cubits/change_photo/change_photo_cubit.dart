@@ -37,7 +37,7 @@ class ChangePhotoCubit extends Cubit<ChangePhotoState> {
 
     EasyLoading.show();
     emit(const ProgressUploadingPhoto());
-    Status<AuthUserEntity> status = await editProfileRepo.deleteImage(ProviderDependency.userMain.user.id, imageLink!);
+    Status<AuthUserEntity> status = await editProfileRepo.deleteImage(ProviderDependency.userMain.user.id);
     if (status is Success<AuthUserEntity>) {
       ProviderDependency.userMain.user = status.data;
       imageLink = null;

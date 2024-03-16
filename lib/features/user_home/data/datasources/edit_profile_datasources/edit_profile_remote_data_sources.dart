@@ -11,7 +11,7 @@ abstract class EditProfileRemoteDataSource {
   Future<AuthUserEntity> changePass(int userId, String pass, String newPass);
   Future<AuthUserEntity> changeName(int userId, String fName, String lName);
   Future<AuthUserEntity> changeImage(UploadFileEntity uploadImageEntity);
-  Future<AuthUserEntity> deleteImage(int userId, String imageLink);
+  Future<AuthUserEntity> deleteImage(int userId);
 }
 
 class EditProfileRemoteDataSourceImp extends EditProfileRemoteDataSource {
@@ -62,10 +62,10 @@ class EditProfileRemoteDataSourceImp extends EditProfileRemoteDataSource {
   }
 
   @override
-  Future<AuthUserEntity> deleteImage(int userId, String imageLink) async {
+  Future<AuthUserEntity> deleteImage(int userId) async {
     Map<String, dynamic> response = await service.post(
       AppLinks.deleteUserImage,
-      {'userId': '$userId', 'imageLink': imageLink},
+      {'userId': '$userId'},
     );
     return AppUser.fromMap(response).user!;
   }

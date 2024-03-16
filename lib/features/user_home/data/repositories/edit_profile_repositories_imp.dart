@@ -65,10 +65,10 @@ class EditProfileRepositoriesImp extends EditProfileRepositories {
   }
 
   @override
-  Future<Status<AuthUserEntity>> deleteImage(int userId, String imageLink) {
+  Future<Status<AuthUserEntity>> deleteImage(int userId) {
     return executeAndHandleErrors<AuthUserEntity>(
       () async {
-        final AuthUserEntity user = await remoteDataSource.deleteImage(userId, imageLink);
+        final AuthUserEntity user = await remoteDataSource.deleteImage(userId);
         return localDataSource.changeUser(user);
       },
     );

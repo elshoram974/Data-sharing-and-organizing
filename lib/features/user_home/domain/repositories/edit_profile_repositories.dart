@@ -8,5 +8,5 @@ abstract class EditProfileRepositories {
   Future<Status<AuthUserEntity>> changePassword(int userId, String pass, String newPass);
   Future<Status<bool>> deleteAccount(AuthUserEntity user);
   Future<Status<AuthUserEntity>> changeImage(UploadFileEntity uploadedFile);
-  Future<Status<AuthUserEntity>> deleteImage(int userId, String imageLink);
+  Future<Status<AuthUserEntity>> deleteImage(int userId);
 }
