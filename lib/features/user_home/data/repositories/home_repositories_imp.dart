@@ -26,8 +26,9 @@ class HomeRepositoriesImp extends HomeRepositories {
     return executeAndHandleErrors<List<GroupHomeEntity>>(
       () async {
         groups.clear();
-        groups.addAll(await remoteDataSource.getGroups(param.user, param.page, groupsPerPage));
-        await localDataSource.saveGroups(groups);
+        final ({AuthUserEntity user, List<GroupHomeEntity> groups}) results = await remoteDataSource.getGroups(param.user, param.page, groupsPerPage);
+        groups.addAll(results.groups);
+        await localDataSource.saveGroups(groups, results.user);
         return groups;
       },
       () async {
@@ -45,8 +46,9 @@ class HomeRepositoriesImp extends HomeRepositories {
     return executeAndHandleErrors<List<GroupHomeEntity>>(
       () async {
         groups.clear();
-        groups.addAll(await remoteDataSource.getGroups(user, 1, 1000));
-        await localDataSource.saveGroups(groups);
+        final ({AuthUserEntity user, List<GroupHomeEntity> groups}) results = await remoteDataSource.getGroups(user, 1, 1000);
+        groups.addAll(results.groups);
+        await localDataSource.saveGroups(groups, results.user);
         return groups.where((group) => group.ownerId == user.id).toList();
       },
       () async {

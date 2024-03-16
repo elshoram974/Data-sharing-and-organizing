@@ -2,13 +2,14 @@ import 'dart:convert';
 
 import 'package:data_sharing_organizing/core/utils/constants/app_links.dart';
 import 'package:data_sharing_organizing/core/utils/services/api_services.dart';
+import 'package:data_sharing_organizing/features/auth/data/models/app_user/app_user.dart';
 
 import '../../../../auth/domain/entities/auth_user_entity.dart';
 import '../../../domain/entities/group_home_entity.dart';
 
 abstract class HomeRemoteDataSource {
   const HomeRemoteDataSource();
-  Future<List<GroupHomeEntity>> getGroups(
+  Future<({AuthUserEntity user, List<GroupHomeEntity> groups})> getGroups(
     AuthUserEntity user,
     int page,
     int pageSize,
@@ -25,7 +26,7 @@ class HomeRemoteDataSourceImp extends HomeRemoteDataSource {
   const HomeRemoteDataSourceImp(this.service);
 
   @override
-  Future<List<GroupHomeEntity>> getGroups(
+  Future<({AuthUserEntity user, List<GroupHomeEntity> groups})> getGroups(
     AuthUserEntity user,
     int page,
     int pageSize,
@@ -39,8 +40,7 @@ class HomeRemoteDataSourceImp extends HomeRemoteDataSource {
         'groupsPerPage': '$pageSize',
       },
     );
-    print(response);
-    return [];
+    return (user: AppUser.fromJson(response['user']).user!, groups: <GroupHomeEntity>[]);
   }
 
   @override
