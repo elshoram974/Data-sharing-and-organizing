@@ -23,9 +23,8 @@ class EditProfileRemoteDataSourceImp extends EditProfileRemoteDataSource {
   Future<bool> deleteAccount(AuthUserEntity user) async {
     Map<String, dynamic> response = await service.post(
       AppLinks.deleteUser,
-      {'userId': '${user.id}'},
+      {'user_id': '${user.id}'},
     );
-    print(response);
     return response['status'] == 'success';
   }
 
@@ -34,7 +33,7 @@ class EditProfileRemoteDataSourceImp extends EditProfileRemoteDataSource {
       int userId, String pass, String newPass) async {
     Map<String, dynamic> response = await service.post(
       AppLinks.changePassword,
-      {'userId': '$userId', 'currentPass': pass, 'newPass': newPass},
+      {'user_id': '$userId', 'current_password': pass, 'new_password': newPass},
     );
     return AppUser.fromMap(response).user!;
   }
@@ -44,7 +43,7 @@ class EditProfileRemoteDataSourceImp extends EditProfileRemoteDataSource {
       int userId, String fName, String lName) async {
     Map<String, dynamic> response = await service.post(
       AppLinks.changeName,
-      {'userId': '$userId', 'first_name': fName, 'last_name': lName},
+      {'user_id': '$userId', 'new_first_name': fName, 'new_last_name': lName},
     );
     return AppUser.fromMap(response).user!;
   }
