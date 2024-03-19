@@ -21,11 +21,11 @@ class EditProfileRemoteDataSourceImp extends EditProfileRemoteDataSource {
 
   @override
   Future<bool> deleteAccount(AuthUserEntity user) async {
-    Map<String, dynamic> response = await service.post(
+    await service.post(
       AppLinks.deleteUser,
       {'user_id': '${user.id}'},
     );
-    return response['status'] == 'success';
+    return true;
   }
 
   @override
