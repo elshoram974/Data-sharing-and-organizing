@@ -67,7 +67,7 @@ class SignUpCubit extends Cubit<SignUpState> {
 
     await EasyLoading.dismiss();
     if (signUpStatus is Success<User>) {
-      _successStatus(signUpStatus.data);
+      _successStatus(signUpStatus.data.copyWith(password: password));
     } else if (signUpStatus is Failure<User>) {
       _failureStatus(signUpStatus.error);
     }

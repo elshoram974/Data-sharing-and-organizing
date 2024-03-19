@@ -51,7 +51,7 @@ class CreateNewPasswordCubit extends Cubit<CreateNewPasswordState> {
     ));
     await EasyLoading.dismiss();
     if (savedStatus is Success<User>) {
-      _savedSuccess(savedStatus.data);
+      _savedSuccess(savedStatus.data.copyWith(password: newPassword));
     } else if (savedStatus is Failure<User>) {
       _failureState(savedStatus.error);
     }

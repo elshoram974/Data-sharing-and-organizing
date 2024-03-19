@@ -78,8 +78,9 @@ class ServerFailure<T> extends Failure<T> {
       case 'User is not email_password to make new pass':
         return ServerFailure(S.current.userNotEmailPasswordToNewPass);
       case 'User is not email_password to send verification code.':
-        return ServerFailure(
-            S.current.userNotEmailPasswordToSendVerificationCode);
+        return ServerFailure(S.current.userNotEmailPasswordToSendVerificationCode);
+      case 'password is changed':
+        return ServerFailure(S.current.thePassIsChangedFromAnotherDevice);
       default:
         return ServerFailure(errorMessage);
     }

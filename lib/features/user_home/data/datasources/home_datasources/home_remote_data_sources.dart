@@ -40,6 +40,7 @@ class HomeRemoteDataSourceImp extends HomeRemoteDataSource {
         'groupsPerPage': '$pageSize',
       },
     );
+    print(response);
     return (user: AppUser.fromJson(response['user']).user!, groups: <GroupHomeEntity>[]);
   }
 

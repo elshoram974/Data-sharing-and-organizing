@@ -39,6 +39,39 @@ class User extends AuthUserEntity {
           password: userPassword,
         );
 
+  @override
+  User copyWith({
+    int? id,
+    String? image,
+    String? firstName,
+    String? lastName,
+    String? name,
+    String? email,
+    String? password,
+    UserType? userType,
+    UserStatus? userStatus,
+    String? userStatusMessage,
+    DateTime? accountCreatedDatetime,
+    DateTime? accountLastlogin,
+    UserProvider? userProvider,
+  }) {
+    assert(name == null, 'don\'t put name in name Field');
+    return User(
+      userId: id ?? userId,
+      userEmail: email ?? userEmail,
+      userFirstName: firstName ?? userFirstName,
+      userLastName: lastName ?? userLastName,
+      userPassword: password ?? userPassword,
+      userType: userType ?? this.userType,
+      userStatus: userStatus ?? this.userStatus,
+      userStatusMessage: userStatusMessage ?? this.userStatusMessage,
+      userImage: image ?? this.image,
+      accountCreatedDatetime: accountCreatedDatetime ??this.accountCreatedDatetime,
+      accountLastlogin:  accountLastlogin ?? this.accountLastlogin,
+      userProvider: userProvider ?? this.userProvider,
+    );
+  }
+
   factory User.fromMap(Map<String, dynamic> data) {
     return User(
       userId: data['user_id'] as int,
@@ -48,7 +81,8 @@ class User extends AuthUserEntity {
       userPassword: data['user_password'] as String,
       userProvider: UserProvider.fromString(data['user_provider'] as String?),
       accountLastlogin: DateTime.tryParse(data['user_lastlogin'] as String),
-      accountCreatedDatetime: DateTime.tryParse(data['user_createdat'] as String),
+      accountCreatedDatetime:
+          DateTime.tryParse(data['user_createdat'] as String),
       userImage: data['user_image'] as dynamic,
       userType: UserType.fromString(data['user_type'] as String?),
       userStatus: UserStatus.fromString(data['user_status'] as String),
