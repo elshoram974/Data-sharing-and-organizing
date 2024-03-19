@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../../../features/user_home/domain/entities/group_home_entity.dart';
-import '../../../../../../features/user_home/presentation/screens/home/user_group_screen.dart';
+import '../../../../../../features/chat/presentation/screens/group_screen.dart';
 import '../../my_custom_transition.dart';
 import 'user_routes.dart';
 

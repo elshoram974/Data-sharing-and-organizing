@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../../domain/entities/group_home_entity.dart';
-import '../../widgets/main_screen_widgets/main_body.dart';
+import '../../../user_home/domain/entities/group_home_entity.dart';
+import '../../../user_home/presentation/widgets/main_screen_widgets/main_body.dart';
 
 class UserGroupScreen extends StatelessWidget {
   const UserGroupScreen({super.key, required this.group});
