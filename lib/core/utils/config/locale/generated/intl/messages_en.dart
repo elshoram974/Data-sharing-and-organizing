@@ -169,6 +169,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "stayHere": MessageLookupByLibrary.simpleMessage("Stay here"),
         "support": MessageLookupByLibrary.simpleMessage("Support"),
         "system": MessageLookupByLibrary.simpleMessage("System"),
+        "thePassIsChangedFromAnotherDevice":
+            MessageLookupByLibrary.simpleMessage(
+                "The password is changed from another device"),
         "thePasswordIsVeryWeak": MessageLookupByLibrary.simpleMessage(
             "The password is very weak. Please use a stronger password."),
         "theVerificationCodeHasExpiredWeSentAnotherCode":

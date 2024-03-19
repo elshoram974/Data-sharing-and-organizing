@@ -802,6 +802,16 @@ class S {
     );
   }
 
+  /// `The password is changed from another device`
+  String get thePassIsChangedFromAnotherDevice {
+    return Intl.message(
+      'The password is changed from another device',
+      name: 'thePassIsChangedFromAnotherDevice',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `This user is not email and password provider to send verification code.`
   String get userNotEmailPasswordToSendVerificationCode {
     return Intl.message(

@@ -172,6 +172,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "stayHere": MessageLookupByLibrary.simpleMessage("ابق هنا"),
         "support": MessageLookupByLibrary.simpleMessage("الدعم"),
         "system": MessageLookupByLibrary.simpleMessage("النظام"),
+        "thePassIsChangedFromAnotherDevice":
+            MessageLookupByLibrary.simpleMessage(
+                "تم تغيير الرقم السري من جهاز اخر"),
         "thePasswordIsVeryWeak": MessageLookupByLibrary.simpleMessage(
             "كلمة المرور ضعيفة جدًا. يرجى استخدام كلمة مرور أقوى."),
         "theVerificationCodeHasExpiredWeSentAnotherCode":
