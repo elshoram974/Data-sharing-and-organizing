@@ -70,4 +70,21 @@ abstract final class ShowMyDialog {
       },
     );
   }
+
+  static Future<T?> accountStatusChanged<T>(
+    BuildContext context,
+    User user,
+  ) {
+    return showDialog<T>(
+      context: context,
+      builder: (context) {
+        return CustomDialog(
+          title: 'Account is ${user.userStatus.inString}',
+          crossAxisAlignment: CrossAxisAlignment.center,
+          body: user.userStatusMessage ?? '________________',
+          textCancel: S.of(context).gotIt,
+        );
+      },
+    );
+  }
 }
