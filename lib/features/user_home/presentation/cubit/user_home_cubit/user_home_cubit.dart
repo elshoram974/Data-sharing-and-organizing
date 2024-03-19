@@ -1,6 +1,7 @@
 import 'package:data_sharing_organizing/core/status/errors/failure.dart';
 import 'package:data_sharing_organizing/core/status/status.dart';
 import 'package:data_sharing_organizing/core/status/success/success.dart';
+import 'package:data_sharing_organizing/core/utils/config/locale/generated/l10n.dart';
 import 'package:data_sharing_organizing/core/utils/config/routes/routes.dart';
 import 'package:data_sharing_organizing/core/utils/enums/selected_pop_up_enum.dart';
 import 'package:data_sharing_organizing/core/utils/services/dependency/provider_dependency.dart';
@@ -151,10 +152,14 @@ class UserHomeCubit extends Cubit<UserHomeState> {
     }
   }
 
-  void _failureStatus(String error, bool showDialog) {
+  void _failureStatus(String error, bool showDialog) async{
     emit(HomeFailureState(error));
     if (showDialog) {
       EasyLoading.showError(error, duration: const Duration(seconds: 5));
+      await Future.delayed(const Duration(seconds: 3));
+     if(error == S.current.thePassIsChangedFromAnotherDevice){
+      ProviderDependency.userMain.logoutWithoutDialog(AppRoute.key.currentContext!);
+     }
     }
   }
 

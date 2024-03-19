@@ -28,8 +28,7 @@ void cubitDependency() {
       isMyGroups: isMyGroups,
       getGroupsUseCase: sl.get<GetGroupsUseCase>(),
       exitFromSomeGroups: sl.get<ExitFromSomeGroups>(),
-      markAsUnReadUsecase: sl.get<MarkAsUnRead>(),
-    ),
+      markAsUnReadUsecase: sl.get<MarkAsUnRead>(),    ),
   );
 
   // * menu cubits

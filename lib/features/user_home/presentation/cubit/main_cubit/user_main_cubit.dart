@@ -7,6 +7,7 @@ import 'package:data_sharing_organizing/core/utils/services/dependency/provider_
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../auth/domain/entities/auth_user_entity.dart';
@@ -41,14 +42,18 @@ class UserMainCubit extends Cubit<UserMainState> {
       body: S.of(context).ifYouLogOutNowYouWillLoseAllUnsavedData,
       textConfirm: S.of(context).logout,
       textCancel: S.of(context).cancel,
-      onPressConfirm: () async {
-        navIndex = 0;
-        final Status<void> status = await logOutUseCase();
-        if (status is Success<void>) {
-          if (context.mounted) context.go(AppRoute.login);
-        }
-      },
+      onPressConfirm: () => logoutWithoutDialog(context),
     );
+  }
+
+  void logoutWithoutDialog(BuildContext context) async {
+    EasyLoading.show(dismissOnTap: false);
+    navIndex = 0;
+    final Status<void> status = await logOutUseCase();
+    if (status is Success<void>) {
+      if (context.mounted) context.go(AppRoute.login);
+    }
+    EasyLoading.dismiss();
   }
 
   @override
