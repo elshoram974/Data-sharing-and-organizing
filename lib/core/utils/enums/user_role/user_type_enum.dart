@@ -17,18 +17,18 @@ enum UserType {
 
   factory UserType.fromString(String? stringRole) {
     Map<String, UserType> map = {};
-    for (UserType e in UserType.values) {
+    for (UserType e in values) {
       map[e.inString] = e;
     }
 
-    return map[stringRole] ?? UserType.personal;
+    return map[stringRole] ?? personal;
   }
 
   String name(BuildContext context) {
     switch (this) {
-      case UserType.business:
+      case business:
         return S.of(context).businessAccount;
-      case UserType.personal:
+      case personal:
         return S.of(context).personalAccount;
     }
   }

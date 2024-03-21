@@ -8,10 +8,10 @@ enum UserProvider {
 
   factory UserProvider.fromString(String? stringRole) {
     Map<String, UserProvider> map = {};
-    for (UserProvider e in UserProvider.values) {
+    for (UserProvider e in values) {
       map[e.inString] = e;
     }
 
-    return map[stringRole] ?? UserProvider.emailPassword;
+    return map[stringRole] ?? emailPassword;
   }
 }

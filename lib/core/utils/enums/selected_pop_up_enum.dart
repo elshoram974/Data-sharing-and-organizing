@@ -17,7 +17,7 @@ enum EditPhotoSelectedPopUpItem {
 
   ImageSource pickFrom() {
     switch (this) {
-      case EditPhotoSelectedPopUpItem.openCamera:
+      case openCamera:
         return ImageSource.camera;
       default:
         return ImageSource.gallery;

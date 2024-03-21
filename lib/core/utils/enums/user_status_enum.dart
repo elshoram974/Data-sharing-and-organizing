@@ -10,10 +10,10 @@ enum UserStatus {
 
   factory UserStatus.fromString(String? stringRole) {
     Map<String, UserStatus> map = {};
-    for (UserStatus e in UserStatus.values) {
+    for (UserStatus e in values) {
       map[e.inString] = e;
     }
 
-    return map[stringRole] ?? UserStatus.active;
+    return map[stringRole] ?? active;
   }
 }

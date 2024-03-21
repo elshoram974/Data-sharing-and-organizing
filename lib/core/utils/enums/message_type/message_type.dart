@@ -40,34 +40,34 @@ enum MessageType {
 
   factory MessageType.fromString(String? stringRole) {
     Map<String, MessageType> map = {};
-    for (MessageType e in MessageType.values) {
+    for (MessageType e in values) {
       map[e.inString] = e;
     }
 
-    return map[stringRole] ?? MessageType.other;
+    return map[stringRole] ?? other;
   }
 
   IconData? icon() {
     switch (this) {
-      case MessageType.photo:
+      case photo:
         return Icons.photo_outlined;
-      case MessageType.recordFile:
+      case recordFile:
         return Icons.audio_file_outlined;
-      case MessageType.textMessage:
+      case textMessage:
         return null;
-      case MessageType.voiceMessage:
+      case voiceMessage:
         return Icons.mic_none_outlined;
-      case MessageType.document:
+      case document:
         return Icons.insert_drive_file_outlined;
-      case MessageType.video:
+      case video:
         return Icons.video_collection_outlined;
-      case MessageType.location:
+      case location:
         return Icons.location_on_outlined;
-      case MessageType.instructions:
+      case instructions:
         return Icons.info_outline;
-      case MessageType.poll:
+      case poll:
         return Icons.how_to_vote_outlined;
-      case MessageType.other:
+      case other:
       default:
         return null;
     }

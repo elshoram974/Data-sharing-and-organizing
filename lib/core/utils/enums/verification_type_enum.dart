@@ -7,10 +7,10 @@ enum VerificationType {
 
   factory VerificationType.fromString(String? stringRole) {
     Map<String, VerificationType> map = {};
-    for (VerificationType e in VerificationType.values) {
+    for (VerificationType e in values) {
       map[e.inString] = e;
     }
 
-    return map[stringRole] ?? VerificationType.createEmail;
+    return map[stringRole] ?? createEmail;
   }
 }
