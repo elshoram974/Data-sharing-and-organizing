@@ -59,10 +59,8 @@ class EditProfileLocalDataSourceImp extends EditProfileLocalDataSource {
       if(userToReplace.image != savedUser.image) CachedNetworkImage.evictFromCache(savedUser.image ?? ''),
     ]);
 
-    final AuthUserEntity userToSave = userToReplace;
-    userToSave.copyWith(password: passToSave ?? savedUser.password);
 
-    await _userBox.add(userToSave);
-    return userToSave;
+    await _userBox.add(userToReplace.copyWith(password: passToSave ?? savedUser.password));
+    return _userBox.values.last;
   }
 }
