@@ -133,5 +133,6 @@
     "nameChangedSuccessfully": "تم تغيير الاسم بنجاح",
     "openCamera": "فتح الكاميرا",
     "openGallery": "فتح المعرض",
-    "openFiles": "فتح الملفات"
+    "openFiles": "فتح الملفات",
+    "theImageYouAreTryingToDeleteDoesNotExist": "الصورة التي تحاول حذفها غير موجودة."
 }

@@ -169,6 +169,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "stayHere": MessageLookupByLibrary.simpleMessage("Stay here"),
         "support": MessageLookupByLibrary.simpleMessage("Support"),
         "system": MessageLookupByLibrary.simpleMessage("System"),
+        "theImageYouAreTryingToDeleteDoesNotExist":
+            MessageLookupByLibrary.simpleMessage(
+                "The image you are trying to delete does not exist."),
         "thePassIsChangedFromAnotherDevice":
             MessageLookupByLibrary.simpleMessage(
                 "The password is changed from another device"),

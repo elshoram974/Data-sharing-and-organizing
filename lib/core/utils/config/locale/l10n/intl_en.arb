@@ -133,5 +133,6 @@
     "nameChangedSuccessfully": "Name changed successfully",
     "openCamera": "Open camera",
     "openGallery": "Open gallery",
-    "openFiles": "Open files"
+    "openFiles": "Open files",
+    "theImageYouAreTryingToDeleteDoesNotExist": "The image you are trying to delete does not exist."
 }

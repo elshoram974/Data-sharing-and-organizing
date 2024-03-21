@@ -1321,6 +1321,16 @@ class S {
       args: [],
     );
   }
+
+  /// `The image you are trying to delete does not exist.`
+  String get theImageYouAreTryingToDeleteDoesNotExist {
+    return Intl.message(
+      'The image you are trying to delete does not exist.',
+      name: 'theImageYouAreTryingToDeleteDoesNotExist',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

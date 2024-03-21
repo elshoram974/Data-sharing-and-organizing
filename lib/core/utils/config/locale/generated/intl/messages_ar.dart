@@ -172,6 +172,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "stayHere": MessageLookupByLibrary.simpleMessage("ابق هنا"),
         "support": MessageLookupByLibrary.simpleMessage("الدعم"),
         "system": MessageLookupByLibrary.simpleMessage("النظام"),
+        "theImageYouAreTryingToDeleteDoesNotExist":
+            MessageLookupByLibrary.simpleMessage(
+                "الصورة التي تحاول حذفها غير موجودة."),
         "thePassIsChangedFromAnotherDevice":
             MessageLookupByLibrary.simpleMessage(
                 "تم تغيير الرقم السري من جهاز اخر"),
