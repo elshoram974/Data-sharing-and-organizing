@@ -47,6 +47,8 @@ class ServerFailure<T> extends Failure<T> {
       return ServerFailure(S.current.yourRequestNotFoundTryAgainLater);
     } else if (statusCode == 500) {
       return ServerFailure(S.current.thereIsProblemWithServerTryAgainLater);
+    } else if (statusCode == 413) {
+      return ServerFailure(S.current.theUploadedFileExceedsTheMaximumAllowedSizePleaseUploadSmallerFile);
     }
     return loginValid(jsonDecode(response.body)['message']);
   }
@@ -83,8 +85,11 @@ class ServerFailure<T> extends Failure<T> {
       case 'password is changed':
         return ServerFailure(S.current.thePassIsChangedFromAnotherDevice);
       case 'this user is not put image':
-        return ServerFailure(
-            S.current.theImageYouAreTryingToDeleteDoesNotExist);
+        return ServerFailure(S.current.theImageYouAreTryingToDeleteDoesNotExist);
+      case 'This file is not support':
+        return ServerFailure(S.current.theUploadedFileTypeIsNotSupportedPleaseUploadAnImageFile);
+      case 'This file is larg in size':
+        return ServerFailure(S.current.theUploadedFileExceedsTheMaximumAllowedSizePleaseUploadSmallerFile);
       default:
         return ServerFailure(errorMessage);
     }
