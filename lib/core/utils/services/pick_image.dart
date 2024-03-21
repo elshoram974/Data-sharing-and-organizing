@@ -8,7 +8,8 @@ import '../config/locale/generated/l10n.dart';
 import 'dependency/locator.dart';
 
 final class HandlePickedImage {
-  static Future<String?> pickImage(ImageSource source) async {
+  static Future<String?> pickImage(
+      ImageSource source) async {
     final XFile? image = await sl.get<ImagePicker>().pickImage(source: source);
     if (image == null) return null;
 
@@ -45,6 +46,7 @@ final class HandlePickedImage {
           mouseWheelZoom: true,
           showZoomer: true,
           enableExif: true,
+          presentStyle: CropperPresentStyle.page,
         ),
       ],
     );
