@@ -46,7 +46,7 @@ abstract final class UserRoutes {
       ),
       redirect: (context, state) {
         if (state.extra == null && state.fullPath == userHome) return '/';
-        // TODO: Meke redirect to other screens
+        // TODO: Make redirect to other screens
         return null;
       },
       pageBuilder: (context, state) => MyCustomTransition.slideTransition(
