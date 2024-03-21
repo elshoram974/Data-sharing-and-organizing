@@ -79,7 +79,6 @@ class UserHomeCubit extends Cubit<UserHomeState> {
       _makeAllSelectedOrNot(false);
       emit(HomeSuccessState(currentGroups));
       if (currentGroups.length < 10) getGroups();
-      debugPrint('deleted: ${status.data}');
     } else if (status is Failure<bool>) {
       _failureStatus(status.error, true);
     }
@@ -104,11 +103,8 @@ class UserHomeCubit extends Cubit<UserHomeState> {
       currentGroups.addAll(status.data);
 
       emit(HomeSuccessState(status.data));
-      debugPrint('success groups: ${status.data}');
     } else if (status is Failure<List<GroupHomeEntity>>) {
       currentGroups.addAll(status.data!);
-
-      debugPrint('failure groups: ${status.data}');
       _failureStatus(status.error, inFirst);
     }
   }
@@ -176,7 +172,6 @@ class UserHomeCubit extends Cubit<UserHomeState> {
     final int index = currentGroups.indexOf(group);
     currentGroups[index] = replaced;
 
-    print(currentGroups);
     emit(UserHomeSelectGroups([group], makeSelected));
   }
 
