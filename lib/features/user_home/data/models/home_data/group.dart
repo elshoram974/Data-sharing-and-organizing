@@ -157,4 +157,7 @@ class GroupDetails extends GroupHomeEntity {
       unReadCounter: unReadCounter ?? this.unReadCounter,
     );
   }
+
+  @override
+  List<Object?> get props => [id, ownerId];
 }

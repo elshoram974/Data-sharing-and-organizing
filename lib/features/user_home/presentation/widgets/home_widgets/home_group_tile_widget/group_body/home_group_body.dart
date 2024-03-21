@@ -15,8 +15,7 @@ class HomeGroupBody extends StatelessWidget {
       child: Column(
         children: [
           GroupNameAndTimeTile(groupHomeEntity: groupHomeEntity),
-          if (groupHomeEntity.lastMessage != null)
-            HomeGroupSubtitle(groupHomeEntity: groupHomeEntity),
+          HomeGroupSubtitle(groupHomeEntity: groupHomeEntity),
         ],
       ),
     );
