@@ -39,7 +39,6 @@ class HomeLocalDataSourceImp extends HomeLocalDataSource {
           groups.add(
             ng.copyWith(
               isMute: g.isMute,
-              isUnread: g.isUnread,
               unReadCounter: g.unReadCounter,
             ),
           );
@@ -71,7 +70,7 @@ class HomeLocalDataSourceImp extends HomeLocalDataSource {
 
     for (int i = 0; i < groups.length; i++) {
       if (groupsToEdit.contains(groups[i])) {
-        groups[i] = groups[i].copyWith(isUnread: true);
+        groups[i] = groups[i].copyWith(unReadCounter: 0);
       }
     }
 

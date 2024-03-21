@@ -33,7 +33,7 @@ class NotificationSubtitle extends StatelessWidget {
           isExpanded: groupNotificationEntity.isExpanded,
           size: 32,
           padding: EdgeInsets.zero,
-          color: groupNotificationEntity.isUnread
+          color: groupNotificationEntity.unReadCounter != null
               ? AppColor.active
               : AppColor.gray,
           onPressed: onPressExpanded,

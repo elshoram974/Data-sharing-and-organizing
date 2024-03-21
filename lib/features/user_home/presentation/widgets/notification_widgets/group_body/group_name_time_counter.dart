@@ -29,8 +29,8 @@ class GroupNameAndTimeAndCounterTile extends StatelessWidget {
                 ),
               ),
               const SizedBox(width: 8),
-              if (groupNotificationEntity.isUnread) ...[
-                const GroupUnreadCounter(unReadCounter: null),
+              if (groupNotificationEntity.unReadCounter != null) ...[
+                GroupUnreadCounter(unReadCounter: groupNotificationEntity.unReadCounter),
                 const SizedBox(width: 8),
               ],
             ],
@@ -43,7 +43,7 @@ class GroupNameAndTimeAndCounterTile extends StatelessWidget {
               false,
             ),
             style: TextStyle(
-              color: groupNotificationEntity.isUnread
+              color: groupNotificationEntity.unReadCounter != null
                   ? AppColor.active
                   : AppColor.gray,
               fontSize: 10,

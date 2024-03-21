@@ -44,8 +44,7 @@ class UserHomeCubit extends Cubit<UserHomeState> {
     if (status is Success<Iterable<int>>) {
       for (int i = 0; i < selectedGroups.length; i++) {
         final int listIndex = currentGroups.indexOf(selectedGroups[i]);
-        currentGroups[listIndex] =
-            currentGroups[listIndex].copyWith(isUnread: true);
+        currentGroups[listIndex] = currentGroups[listIndex].copyWith(unReadCounter: 0);
       }
       emit(HomeSuccessState(currentGroups));
       _makeAllSelectedOrNot(false);

@@ -43,7 +43,7 @@ class HomeGroupTile extends StatelessWidget {
 
   Color getBorderColor() {
     if (groupHomeEntity.isSelected) return AppColor.active;
-    if (groupHomeEntity.isUnread) return AppColor.primary;
+    if (groupHomeEntity.unReadCounter != null) return AppColor.primary;
     return AppColor.gray;
   }
 }

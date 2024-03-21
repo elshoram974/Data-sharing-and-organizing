@@ -13,7 +13,7 @@ class GroupUnreadCounter extends StatelessWidget {
       radius: 11.5,
       backgroundColor: AppColor.active,
       child: Text(
-        '${unReadCounter ?? ''}',
+        '${unReadCounter == 0 ? '' : unReadCounter}',
         style: AppStyle.styleBoldInika24.copyWith(
           fontSize: 10,
           color: Colors.white,

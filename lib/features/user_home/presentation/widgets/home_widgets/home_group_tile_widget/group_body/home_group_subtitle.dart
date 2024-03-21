@@ -22,7 +22,7 @@ class HomeGroupSubtitle extends StatelessWidget {
           lastMessageType: groupHomeEntity.lastMessageType!,
         ),
         const SizedBox(width: AppConst.defaultPadding),
-        if (groupHomeEntity.isUnread)
+        if (groupHomeEntity.unReadCounter != null)
           GroupUnreadCounter(unReadCounter: groupHomeEntity.unReadCounter),
       ],
     );

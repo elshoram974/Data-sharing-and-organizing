@@ -20,21 +20,20 @@ class GroupHomeEntityAdapter extends TypeAdapter<GroupHomeEntity> {
       id: fields[0] as int,
       imageLink: fields[1] as String?,
       groupName: fields[2] as String,
-      lastMessage: fields[7] as String?,
-      lastMessageType: fields[9] as MessageType?,
-      lastMessageFrom: fields[8] as String?,
+      lastMessage: fields[6] as String?,
+      lastMessageType: fields[8] as MessageType?,
+      lastMessageFrom: fields[7] as String?,
       unReadCounter: fields[4] as int?,
-      isUnread: fields[5] as bool,
-      lastMessageTime: fields[6] as DateTime?,
+      lastMessageTime: fields[5] as DateTime?,
       isMute: fields[3] as bool,
-      ownerId: fields[10] as int,
+      ownerId: fields[9] as int,
     );
   }
 
   @override
   void write(BinaryWriter writer, GroupHomeEntity obj) {
     writer
-      ..writeByte(11)
+      ..writeByte(10)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -46,16 +45,14 @@ class GroupHomeEntityAdapter extends TypeAdapter<GroupHomeEntity> {
       ..writeByte(4)
       ..write(obj.unReadCounter)
       ..writeByte(5)
-      ..write(obj.isUnread)
-      ..writeByte(6)
       ..write(obj.lastMessageTime)
-      ..writeByte(7)
+      ..writeByte(6)
       ..write(obj.lastMessage)
-      ..writeByte(8)
+      ..writeByte(7)
       ..write(obj.lastMessageFrom)
-      ..writeByte(9)
+      ..writeByte(8)
       ..write(obj.lastMessageType)
-      ..writeByte(10)
+      ..writeByte(9)
       ..write(obj.ownerId);
   }
 

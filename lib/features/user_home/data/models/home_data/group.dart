@@ -40,7 +40,6 @@ class GroupDetails extends GroupHomeEntity {
     required this.groupStatusMessage,
     super.isMute,
     super.isSelected,
-    super.isUnread,
     super.lastMessage,
     super.lastMessageFrom,
     super.lastMessageTime,
@@ -54,7 +53,7 @@ class GroupDetails extends GroupHomeEntity {
 
   @override
   String toString() {
-    return 'Group(groupId: $groupId, groupName: $groupName, groupOwnerId: $groupOwnerId, groupCreationDate: $groupCreationDate, groupDescription: $groupDescription, groupVisibility: $groupVisibility, groupAccessType: $groupAccessType, groupCategory: $groupCategory, groupImage: $groupImage, groupType: $groupType, groupDiscussionType: $discussionType, groupStatus: $groupStatus, groupStatusMessage: $groupStatusMessage, isSelected: $isSelected, isMuted: $isMute, isUnread: $isUnread, unReadCounter: $unReadCounter, lastMessageTime: $lastMessageTime, lastMessageType: $lastMessageType, lastMessageFrom: $lastMessageFrom, lastMessage: $lastMessage)';
+    return 'Group(groupId: $groupId, groupName: $groupName, groupOwnerId: $groupOwnerId, groupCreationDate: $groupCreationDate, groupDescription: $groupDescription, groupVisibility: $groupVisibility, groupAccessType: $groupAccessType, groupCategory: $groupCategory, groupImage: $groupImage, groupType: $groupType, groupDiscussionType: $discussionType, groupStatus: $groupStatus, groupStatusMessage: $groupStatusMessage, isSelected: $isSelected, isMuted: $isMute, unReadCounter: $unReadCounter, lastMessageTime: $lastMessageTime, lastMessageType: $lastMessageType, lastMessageFrom: $lastMessageFrom, lastMessage: $lastMessage)';
   }
 
   factory GroupDetails.fromMap(Map<String, dynamic> data) => GroupDetails(
@@ -125,7 +124,6 @@ class GroupDetails extends GroupHomeEntity {
     String? imageLink,
     String? lastMessage,
     int? unReadCounter,
-    bool? isUnread,
     DateTime? lastMessageTime,
     bool? isSelected,
     bool? isMute,
@@ -149,7 +147,6 @@ class GroupDetails extends GroupHomeEntity {
       groupStatusMessage: groupStatusMessage ?? this.groupStatusMessage,
       isMute: isMute ?? this.isMute,
       isSelected: isSelected ?? this.isSelected,
-      isUnread: isUnread ?? this.isUnread,
       lastMessage: lastMessage ?? this.lastMessage,
       lastMessageFrom: lastMessageFrom ?? this.lastMessageFrom,
       lastMessageTime: lastMessageTime ?? this.lastMessageTime,

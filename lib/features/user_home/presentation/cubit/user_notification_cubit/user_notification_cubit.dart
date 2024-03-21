@@ -31,7 +31,7 @@ final list = [
       groupName: 'First year in THIET aa aa a a a a a a a a a a a a',
       lastMessage:
           'Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message ',
-      isUnread: true,
+      unReadCounter: 0,
       lastMessageTime: DateTime.now(),
       ownerId: 42),
   GroupNotificationEntity(
@@ -48,6 +48,7 @@ final list = [
       lastMessageType: MessageType.voiceMessage,
       imageLink: '',
       groupName: 'First year in THIET',
+      unReadCounter: 1,
       lastMessage:
           'Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message ',
       lastMessageTime: DateTime.now(),

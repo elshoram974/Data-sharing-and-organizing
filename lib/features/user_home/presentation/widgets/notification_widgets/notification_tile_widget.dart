@@ -33,7 +33,7 @@ class NotificationTile extends StatelessWidget {
         ),
         decoration: BoxDecoration(
           border: Border.all(
-              color: groupNotificationEntity.isUnread
+              color: groupNotificationEntity.unReadCounter != null
                   ? AppColor.primary
                   : AppColor.gray),
           borderRadius: BorderRadius.circular(AppConst.borderRadius),
