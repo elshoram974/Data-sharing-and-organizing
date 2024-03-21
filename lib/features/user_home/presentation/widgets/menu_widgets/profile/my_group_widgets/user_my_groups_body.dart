@@ -20,7 +20,6 @@ class UserMyGroupsBody extends StatelessWidget {
       child: BlocBuilder<UserHomeCubit, UserHomeState>(
         builder: (context, state) {
           return ListView(
-            controller: c.scrollController,
             physics: const AlwaysScrollableScrollPhysics(),
             padding:
                 const EdgeInsets.symmetric(horizontal: AppConst.defaultPadding),

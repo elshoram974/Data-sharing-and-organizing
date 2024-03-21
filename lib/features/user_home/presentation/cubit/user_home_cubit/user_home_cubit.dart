@@ -6,7 +6,6 @@ import 'package:data_sharing_organizing/core/utils/config/routes/routes.dart';
 import 'package:data_sharing_organizing/core/utils/enums/selected_pop_up_enum.dart';
 import 'package:data_sharing_organizing/core/utils/services/dependency/provider_dependency.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:go_router/go_router.dart';
@@ -27,25 +26,15 @@ class UserHomeCubit extends Cubit<UserHomeState> {
     required this.isMyGroups,
   }) : super(const UserHomeInitial()) {
     getGroups();
-    scrollController = ScrollController();
-    scrollController.addListener(_onScroll);
   }
   final GetGroupsUseCase getGroupsUseCase;
   final ExitFromSomeGroups exitFromSomeGroups;
   final MarkAsUnRead markAsUnReadUsecase;
   final bool isMyGroups;
 
-  late final ScrollController scrollController;
   final UserMainCubit userMain = ProviderDependency.userMain;
   final List<GroupHomeEntity> currentGroups = [];
   final List<GroupHomeEntity> selectedGroups = [];
-
-  @override
-  Future<void> close() {
-    scrollController.removeListener(_onScroll);
-    scrollController.dispose();
-    return super.close();
-  }
 
   // * MarkAsUnRead from groups
   Future<void> _markAsUnRead() async {
@@ -90,13 +79,11 @@ class UserHomeCubit extends Cubit<UserHomeState> {
     emit(GetGroupsLoadingState(inFirst));
     // await Future.delayed(Duration(seconds: 3));
     final Status<List<GroupHomeEntity>> status = await getGroupsUseCase((
-      page: page,
       user: userMain.user,
       getMyGroups: isMyGroups,
     ));
     if (inFirst) {
       if (isSelected) _makeAllSelectedOrNot(false);
-      _currentPage = 1;
       currentGroups.clear();
     }
     if (status is Success<List<GroupHomeEntity>>) {
@@ -139,17 +126,6 @@ class UserHomeCubit extends Cubit<UserHomeState> {
   }
 
   // * helper functions
-  int _currentPage = 1;
-  void _onScroll() {
-    if (scrollController.position.pixels ==
-        scrollController.position.maxScrollExtent) {
-      if (state is! GetGroupsLoadingState) {
-        _currentPage++;
-        getGroups(false, _currentPage);
-      }
-    }
-  }
-
   void _failureStatus(String error, bool showDialog) async {
     emit(HomeFailureState(error));
     if (showDialog) {

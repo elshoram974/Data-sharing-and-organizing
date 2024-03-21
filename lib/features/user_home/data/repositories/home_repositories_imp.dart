@@ -18,22 +18,20 @@ class HomeRepositoriesImp extends HomeRepositories {
     required this.remoteDataSource,
   });
 
-  final int groupsPerPage = 10;
-
   @override
-  Future<Status<List<GroupHomeEntity>>> getGroups(({int page, AuthUserEntity user}) param) {
+  Future<Status<List<GroupHomeEntity>>> getGroups(AuthUserEntity user) {
     final List<GroupHomeEntity> groups = [];
 
     return executeAndHandleErrors<List<GroupHomeEntity>>(
       () async {
         groups.clear();
-        final HomeData results = await remoteDataSource.getGroups(param.user, param.page, groupsPerPage);
+        final HomeData results = await remoteDataSource.getGroups(user);
         groups.addAll(results.groups);
         return await localDataSource.saveGroups(groups, results.user);
       },
       () async {
         groups.clear();
-        groups.addAll(localDataSource.getSavedGroupsPerPage(param.page, groupsPerPage));
+        groups.addAll(localDataSource.getAllGroups());
         return groups;
       },
     );
@@ -46,13 +44,13 @@ class HomeRepositoriesImp extends HomeRepositories {
     return executeAndHandleErrors<List<GroupHomeEntity>>(
       () async {
         groups.clear();
-        final HomeData results = await remoteDataSource.getGroups(user, 1, 1000);
+        final HomeData results = await remoteDataSource.getGroups(user);
         groups.addAll(results.groups);
         return (await localDataSource.saveGroups(groups, results.user)).where((group) => group.ownerId == user.id).toList();
       },
       () async {
         groups.clear();
-        groups.addAll(localDataSource.getSavedGroupsPerPage(1, 1000));
+        groups.addAll(localDataSource.getAllGroups());
         return groups.where((group) => group.ownerId == user.id).toList();
       },
     );

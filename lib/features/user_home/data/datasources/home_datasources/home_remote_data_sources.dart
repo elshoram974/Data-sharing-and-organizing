@@ -9,11 +9,7 @@ import '../../models/home_data/home_data.dart';
 
 abstract class HomeRemoteDataSource {
   const HomeRemoteDataSource();
-  Future<HomeData> getGroups(
-    AuthUserEntity user,
-    int page,
-    int pageSize,
-  );
+  Future<HomeData> getGroups(AuthUserEntity user);
   Future<bool> exitFromSomeGroups(
     AuthUserEntity user,
     List<GroupHomeEntity> removedGroups,
@@ -26,18 +22,12 @@ class HomeRemoteDataSourceImp extends HomeRemoteDataSource {
   const HomeRemoteDataSourceImp(this.service);
 
   @override
-  Future<HomeData> getGroups(
-    AuthUserEntity user,
-    int page,
-    int pageSize,
-  ) async {
+  Future<HomeData> getGroups(AuthUserEntity user) async {
     Map<String, dynamic> response = await service.post(
       AppLinks.userHome,
       {
         'user_id': '${user.id}',
         'user_password': user.password,
-        'pageNumber': '$page',
-        'groupsPerPage': '$pageSize',
       },
     );
     return HomeData.fromMap(response);

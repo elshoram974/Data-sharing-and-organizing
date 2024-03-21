@@ -21,7 +21,6 @@ class UserHomeScreen extends StatelessWidget {
         return RefreshIndicator(
           onRefresh: c.getGroups,
           child: MainBodyWidget(
-            controller: c.scrollController,
             children: [
               if (state is GetGroupsLoadingState && state.inFirst)
                 const CircularLoadingIndicator(),
