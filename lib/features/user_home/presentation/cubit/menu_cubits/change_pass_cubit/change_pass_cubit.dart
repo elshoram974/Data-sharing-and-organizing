@@ -35,6 +35,7 @@ class ChangePassCubit extends Cubit<ChangePassState> {
 
     if (status is Success<AuthUserEntity>) {
       emit(ChangePassSuccess(status.data));
+      ProviderDependency.userMain.user = status.data;
       AppRoute.key.currentState!.pop();
       EasyLoading.showSuccess('Password changed');
     } else {

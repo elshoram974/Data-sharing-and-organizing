@@ -14,18 +14,18 @@ abstract class EditProfileLocalDataSource {
 class EditProfileLocalDataSourceImp extends EditProfileLocalDataSource {
   EditProfileLocalDataSourceImp();
 
-  late final Box<AuthUserEntity> _userBox =
-      Hive.box<AuthUserEntity>(AppStrings.userBox);
+  late final Box<AuthUserEntity> _userBox = Hive.box<AuthUserEntity>(AppStrings.userBox);
 
   @override
-  Future<AuthUserEntity> changePassword(
-      String newPass, AuthUserEntity userToReplace) {
+  Future<AuthUserEntity> changePassword(String newPass, AuthUserEntity userToReplace) {
     return changeUser(userToReplace, newPass);
   }
 
   @override
-  Future<AuthUserEntity> changeUser(AuthUserEntity userToReplace,
-      [String? passToSave]) async {
+  Future<AuthUserEntity> changeUser(
+    AuthUserEntity userToReplace, [
+    String? passToSave,
+  ]) async {
     final AuthUserEntity savedUser = _userBox.values.last;
     await Future.wait([
       _userBox.clear(),
