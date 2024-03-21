@@ -42,7 +42,7 @@ class HomeLocalDataSourceImp extends HomeLocalDataSource {
         groups.add(e);
       }
     }
-    Future.wait([_changeUser(userToReplace), removeAllGroups()]);
+    await Future.wait([_changeUser(userToReplace), removeAllGroups()]);
     return await groupsBox.addAll(groups);
   }
 
@@ -91,7 +91,10 @@ class HomeLocalDataSourceImp extends HomeLocalDataSource {
     ]);
 
     final AuthUserEntity userToSave = userToReplace;
-    userToSave.copyWith(password: savedUser.password);
+    userToSave.copyWith(
+      password: savedUser.password,
+      image: userToReplace.image,
+    );
 
     await userBox.add(userToSave.copyWith(password: savedUser.password));
     return userToSave;

@@ -55,8 +55,6 @@ class EditProfileRemoteDataSourceImp extends EditProfileRemoteDataSource {
       fieldName: 'file',
       filePath: uploadImageEntity.filePath,
       body: {'user_id': '${uploadImageEntity.user.id}'},
-      client: uploadImageEntity.client,
-      onProgress: uploadImageEntity.onProgress,
     );
     return AppUser.fromMap(response).user!;
   }

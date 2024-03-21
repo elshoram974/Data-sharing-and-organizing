@@ -37,6 +37,7 @@ class User extends AuthUserEntity {
           name: "$userFirstName $userLastName",
           email: userEmail,
           password: userPassword,
+          image: userImage,
         );
 
   @override

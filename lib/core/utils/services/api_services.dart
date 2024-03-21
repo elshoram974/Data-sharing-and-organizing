@@ -34,8 +34,6 @@ class APIServices {
     required final String fieldName,
     required final String filePath,
     required final Map<String, String> body,
-    required final http.Client client,
-    required final void Function(int sent, int total) onProgress,
   }) async {
     final http.MultipartRequest request = http.MultipartRequest('POST', Uri.parse(link));
     
@@ -44,16 +42,19 @@ class APIServices {
     final http.MultipartFile file = await http.MultipartFile.fromPath(fieldName, filePath);
 
     request.files.add(file);
-    http.StreamedResponse response = await handleRequestErrors<http.StreamedResponse>(
-      () async {
-        http.StreamedResponse sR = await client.send(request);
-        sR.stream.listen((List<int> chunk) {
-          final double progress = sR.contentLength == null ? 0.0 : chunk.length / sR.contentLength!;
-          onProgress(sR.contentLength! * progress.toInt(), sR.contentLength!);
-        });
-        return sR;
-      },
-    );
+
+    http.StreamedResponse response = await request.send();
+
+
+    // http.StreamedResponse response = await handleRequestErrors<http.StreamedResponse>(
+    //   () async {
+    //     http.StreamedResponse sR = await client.send(request);
+    //     sR.stream.listen((List<int> chunk) {
+    //       final double progress = sR.contentLength == null ? 0.0 : chunk.length / sR.contentLength!;
+    //     });
+    //     return sR;
+    //   },
+    // );
 
     if (response.statusCode != 200) {
       throw MyHttpException.badResponse(

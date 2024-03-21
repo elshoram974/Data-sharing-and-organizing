@@ -1,4 +1,3 @@
-import 'package:data_sharing_organizing/core/utils/constants/app_constants.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../cubit/menu_cubits/change_photo/change_photo_cubit.dart';
@@ -18,11 +17,11 @@ class IndicatorWhenUpload extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           CircularProgressIndicator(value: value),
-          const SizedBox(height: AppConst.defaultPadding),
-          IconButton(
-            onPressed: cubit.cancelUploading,
-            icon: const Icon(Icons.close),
-          ),
+          // const SizedBox(height: AppConst.defaultPadding),
+          // IconButton(
+          //   onPressed: cubit.cancelUploading,
+          //   icon: const Icon(Icons.close),
+          // ),
         ],
       ),
     );
