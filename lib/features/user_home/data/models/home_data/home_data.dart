@@ -17,7 +17,7 @@ class HomeData {
 
   factory HomeData.fromMap(Map<String, dynamic> data) => HomeData(
         status: data['status'] as String,
-        groups: (data['groups'] as List<Map<String, dynamic>>)
+        groups: (data['groups'] as List<dynamic>)
             .map((e) => GroupDetails.fromMap(e))
             .toList(),
         user: User.fromMap(data['user'] as Map<String, dynamic>),
