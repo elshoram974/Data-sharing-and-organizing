@@ -9,7 +9,8 @@ abstract class HomeLocalDataSource {
   const HomeLocalDataSource();
   List<GroupHomeEntity> getAllGroups();
   Future<int> removeAllGroups();
-  Future<Iterable<int>> saveGroups(List<GroupHomeEntity> newGroups, AuthUserEntity userToReplace);
+  Future<Iterable<int>> saveGroups(
+      List<GroupHomeEntity> newGroups, AuthUserEntity userToReplace);
   Future<int> removeSomeGroups(List<GroupHomeEntity> removedGroups);
   List<GroupHomeEntity> getSavedGroupsPerPage(int page, int pageSize);
   Future<Iterable<int>> markAsUnRead(List<GroupHomeEntity> groupsToEdit);
@@ -17,7 +18,8 @@ abstract class HomeLocalDataSource {
 
 class HomeLocalDataSourceImp extends HomeLocalDataSource {
   HomeLocalDataSourceImp();
-  late final Box<GroupHomeEntity> groupsBox = Hive.box<GroupHomeEntity>(AppStrings.groupsBox);
+  late final Box<GroupHomeEntity> groupsBox =
+      Hive.box<GroupHomeEntity>(AppStrings.groupsBox);
 
   @override
   List<GroupHomeEntity> getAllGroups() {
@@ -30,7 +32,8 @@ class HomeLocalDataSourceImp extends HomeLocalDataSource {
   }
 
   @override
-  Future<Iterable<int>> saveGroups(List<GroupHomeEntity> newGroups, AuthUserEntity userToReplace) async {
+  Future<Iterable<int>> saveGroups(
+      List<GroupHomeEntity> newGroups, AuthUserEntity userToReplace) async {
     final List<GroupHomeEntity> groups = [];
     groups.addAll(getAllGroups());
     for (final GroupHomeEntity e in newGroups) {
@@ -39,7 +42,7 @@ class HomeLocalDataSourceImp extends HomeLocalDataSource {
         groups.add(e);
       }
     }
-    Future.wait([_changeUser(userToReplace),removeAllGroups()]);
+    Future.wait([_changeUser(userToReplace), removeAllGroups()]);
     return await groupsBox.addAll(groups);
   }
 
@@ -57,7 +60,8 @@ class HomeLocalDataSourceImp extends HomeLocalDataSource {
   List<GroupHomeEntity> getSavedGroupsPerPage(int page, int pageSize) {
     int startIndex = (page - 1) * pageSize;
     List<GroupHomeEntity> allGroups = getAllGroups();
-    allGroups.sort((a, b) => b.lastMessageTime.compareTo(a.lastMessageTime)); // Sort in descending order
+    allGroups.sort((a, b) => (b.lastMessageTime ?? DateTime(2020)).compareTo(
+        a.lastMessageTime ?? DateTime(2020))); // Sort in descending order
     return allGroups.skip(startIndex).take(pageSize).toList();
   }
 
@@ -76,12 +80,14 @@ class HomeLocalDataSourceImp extends HomeLocalDataSource {
     return await groupsBox.addAll(groups);
   }
 
-    Future<AuthUserEntity> _changeUser(AuthUserEntity userToReplace) async {
-    final Box<AuthUserEntity> userBox = Hive.box<AuthUserEntity>(AppStrings.userBox);
+  Future<AuthUserEntity> _changeUser(AuthUserEntity userToReplace) async {
+    final Box<AuthUserEntity> userBox =
+        Hive.box<AuthUserEntity>(AppStrings.userBox);
     final AuthUserEntity savedUser = userBox.values.last;
     await Future.wait([
       userBox.clear(),
-      if(userToReplace.image != savedUser.image) CachedNetworkImage.evictFromCache(savedUser.image ?? ''),
+      if (userToReplace.image != savedUser.image)
+        CachedNetworkImage.evictFromCache(savedUser.image ?? ''),
     ]);
 
     final AuthUserEntity userToSave = userToReplace;

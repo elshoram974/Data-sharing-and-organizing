@@ -7,6 +7,7 @@ import 'package:data_sharing_organizing/features/user_home/domain/entities/group
 import '../../domain/repositories/home_repositories.dart';
 import '../datasources/home_datasources/home_local_data_sources.dart';
 import '../datasources/home_datasources/home_remote_data_sources.dart';
+import '../models/home_data/home_data.dart';
 
 class HomeRepositoriesImp extends HomeRepositories {
   final HomeLocalDataSource localDataSource;
@@ -26,7 +27,7 @@ class HomeRepositoriesImp extends HomeRepositories {
     return executeAndHandleErrors<List<GroupHomeEntity>>(
       () async {
         groups.clear();
-        final ({AuthUserEntity user, List<GroupHomeEntity> groups}) results = await remoteDataSource.getGroups(param.user, param.page, groupsPerPage);
+        final HomeData results = await remoteDataSource.getGroups(param.user, param.page, groupsPerPage);
         groups.addAll(results.groups);
         await localDataSource.saveGroups(groups, results.user);
         return groups;
@@ -46,7 +47,7 @@ class HomeRepositoriesImp extends HomeRepositories {
     return executeAndHandleErrors<List<GroupHomeEntity>>(
       () async {
         groups.clear();
-        final ({AuthUserEntity user, List<GroupHomeEntity> groups}) results = await remoteDataSource.getGroups(user, 1, 1000);
+        final HomeData results = await remoteDataSource.getGroups(user, 1, 1000);
         groups.addAll(results.groups);
         await localDataSource.saveGroups(groups, results.user);
         return groups.where((group) => group.ownerId == user.id).toList();

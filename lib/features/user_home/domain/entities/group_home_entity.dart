@@ -25,16 +25,16 @@ class GroupHomeEntity extends Equatable {
   final bool isUnread;
 
   @HiveField(6)
-  final DateTime lastMessageTime;
+  final DateTime? lastMessageTime;
 
   @HiveField(7)
   final String? lastMessage;
 
   @HiveField(8)
-  final String lastMessageFrom;
+  final String? lastMessageFrom;
 
   @HiveField(9)
-  final MessageType lastMessageType;
+  final MessageType? lastMessageType;
 
   @HiveField(10)
   final int ownerId;
@@ -46,11 +46,11 @@ class GroupHomeEntity extends Equatable {
     this.imageLink,
     required this.groupName,
     this.lastMessage,
-    required this.lastMessageType,
-    this.lastMessageFrom = 'You',
+    this.lastMessageType,
+    this.lastMessageFrom,
     this.unReadCounter,
     this.isUnread = false,
-    required this.lastMessageTime,
+    this.lastMessageTime,
     this.isSelected = false,
     this.isMute = false,
     required this.ownerId,
