@@ -32,22 +32,24 @@ class HomeLocalDataSourceImp extends HomeLocalDataSource {
   }
 
   @override
-  Future<List<GroupHomeEntity>> saveGroups(
-      List<GroupHomeEntity> newGroups, AuthUserEntity userToReplace) async {
+  Future<List<GroupHomeEntity>> saveGroups(List<GroupHomeEntity> newGroups, AuthUserEntity userToReplace) async {
     final List<GroupHomeEntity> groups = [];
-    groups.addAll(getAllGroups());
-    for (final GroupHomeEntity e in newGroups) {
-      if (groups.contains(e)) {
-        final int i = groups.indexOf(e);
-        groups[i] = e.copyWith(
-          isMute: groups[i].isMute,
-          isUnread: groups[i].isUnread,
-          unReadCounter: groups[i].unReadCounter,
-        );
-      } else {
-        groups.add(e);
+    final List<GroupHomeEntity> savedGroups = getAllGroups();
+    for (final GroupHomeEntity ng in newGroups) {
+      for (final GroupHomeEntity g in savedGroups) {
+        if (ng.id == g.id) {
+          groups.add(
+            ng.copyWith(
+              isMute: g.isMute,
+              isUnread: g.isUnread,
+              unReadCounter: g.unReadCounter,
+            ),
+          );
+        }
       }
+      if (!groups.any((g) => ng.id == g.id)) groups.add(ng);
     }
+
     await Future.wait([_changeUser(userToReplace), removeAllGroups()]);
     await groupsBox.addAll(groups);
 
@@ -68,8 +70,8 @@ class HomeLocalDataSourceImp extends HomeLocalDataSource {
   List<GroupHomeEntity> getSavedGroupsPerPage(int page, int pageSize) {
     int startIndex = (page - 1) * pageSize;
     List<GroupHomeEntity> allGroups = getAllGroups();
-    allGroups.sort((a, b) => (b.lastMessageTime ?? DateTime(2020)).compareTo(
-        a.lastMessageTime ?? DateTime(2020))); // Sort in descending order
+    allGroups.sort((a, b) => (b.lastMessageTime ?? DateTime(2020))
+        .compareTo(a.lastMessageTime ?? DateTime(2020)));
     return allGroups.skip(startIndex).take(pageSize).toList();
   }
 
