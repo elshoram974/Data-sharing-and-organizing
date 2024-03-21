@@ -6,25 +6,27 @@ import 'package:data_sharing_organizing/core/utils/enums/home/group_discussion_t
 import 'package:data_sharing_organizing/core/utils/enums/home/group_status_enum.dart';
 import 'package:data_sharing_organizing/core/utils/enums/home/group_type_enum.dart';
 import 'package:data_sharing_organizing/core/utils/enums/home/group_visibility_enum.dart';
+import 'package:data_sharing_organizing/core/utils/enums/message_type/message_type.dart';
 
-class GroupDetails {
-  int groupId;
-  String groupName;
-  int groupOwnerId;
-  DateTime? groupCreationDate;
-  String? groupDescription;
-  GroupVisibility groupVisibility;
-  GroupAccessType groupAccessType;
-  GroupCategory groupCategory;
-  String? groupImage;
-  GroupType groupType;
-  GroupDiscussionType discussionType;
-  GroupStatus groupStatus;
-  String? groupStatusMessage;
+import '../../../domain/entities/group_home_entity.dart';
 
-  GroupDetails({
+class GroupDetails extends GroupHomeEntity {
+  final int groupId;
+  final int groupOwnerId;
+  final DateTime? groupCreationDate;
+  final String? groupDescription;
+  final GroupVisibility groupVisibility;
+  final GroupAccessType groupAccessType;
+  final GroupCategory groupCategory;
+  final String? groupImage;
+  final GroupType groupType;
+  final GroupDiscussionType discussionType;
+  final GroupStatus groupStatus;
+  final String? groupStatusMessage;
+
+  const GroupDetails({
     required this.groupId,
-    required this.groupName,
+    required super.groupName,
     required this.groupOwnerId,
     required this.groupCreationDate,
     required this.groupDescription,
@@ -36,7 +38,11 @@ class GroupDetails {
     required this.discussionType,
     required this.groupStatus,
     required this.groupStatusMessage,
-  });
+  }) : super(
+          id: groupId,
+          ownerId: groupOwnerId,
+          imageLink: groupImage,
+        );
 
   @override
   String toString() {
@@ -92,6 +98,7 @@ class GroupDetails {
   /// Converts [GroupDetails] to a JSON string.
   String toJson() => json.encode(toMap());
 
+  @override
   GroupDetails copyWith({
     int? groupId,
     String? groupName,
@@ -106,6 +113,17 @@ class GroupDetails {
     GroupDiscussionType? discussionType,
     GroupStatus? groupStatus,
     String? groupStatusMessage,
+    int? id,
+    String? imageLink,
+    String? lastMessage,
+    int? unReadCounter,
+    bool? isUnread,
+    DateTime? lastMessageTime,
+    bool? isSelected,
+    bool? isMute,
+    MessageType? lastMessageType,
+    String? lastMessageFrom,
+    int? ownerId,
   }) {
     return GroupDetails(
       groupId: groupId ?? this.groupId,
