@@ -182,8 +182,12 @@ class _FullScreenPageState extends State<FullScreenPage>
         : widget.backgroundColor;
     return Scaffold(
       appBar: widget.appBar,
+      bottomNavigationBar: widget.appBar == null
+          ? null
+          : SizedBox.fromSize(size: widget.appBar!.preferredSize),
       backgroundColor: backgroundColor,
       extendBodyBehindAppBar: true,
+      extendBody: true,
       body: GestureDetector(
         onDoubleTapDown: (details) async {
           if (controller.value != Matrix4.identity()) {
@@ -214,9 +218,8 @@ class _FullScreenPageState extends State<FullScreenPage>
                 AnimatedPositioned(
                   duration: animationDuration,
                   curve: Curves.fastOutSlowIn,
-                  top:
-                      widget.appBar?.preferredSize.height ?? 0 + positionYDelta,
-                  bottom: 0 - positionYDelta,
+                  top: widget.appBar?.preferredSize.height ?? 0 + positionYDelta,
+                  bottom: widget.appBar?.preferredSize.height ?? 0 - positionYDelta,
                   left: 0,
                   right: 0,
                   child: widget.child,

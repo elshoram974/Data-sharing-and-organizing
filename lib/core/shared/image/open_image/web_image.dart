@@ -15,6 +15,7 @@ class WebImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FullScreenWidget(
+      appBar: AppBar(leading: const CloseButton(color: Colors.white54)),
       openFullPage: imageLink != null,
       widgetInFullScreen: _TheImage(
         imageLink: imageLink,

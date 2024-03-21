@@ -39,21 +39,18 @@ class _TheImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Hero(
-      tag: imageLink ?? errorWidget ?? '',
-      child: CachedNetworkImage(
-        imageUrl: imageLink ?? '',
-        imageBuilder: (context, imageProvider) => Container(
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              image: imageProvider,
-              fit: fit,
-            ),
+    return CachedNetworkImage(
+      imageUrl: imageLink ?? '',
+      imageBuilder: (context, imageProvider) => Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: imageProvider,
+            fit: fit,
           ),
         ),
-        placeholder: (context, url) => const CircularProgressIndicator(),
-        errorWidget: errorWidget == null ? null : (_, url, e) => errorWidget!,
       ),
+      placeholder: (context, url) => const CircularProgressIndicator(),
+      errorWidget: errorWidget == null ? null : (_, url, e) => errorWidget!,
     );
   }
 }
