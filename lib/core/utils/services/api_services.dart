@@ -1,10 +1,12 @@
 import 'dart:async';
 import 'dart:convert';
 
+
 import 'package:http/http.dart' as http;
 
 import '../exceptions/http_exception.dart';
 import '../functions/handle_request_errors.dart';
+import 'pick_image.dart';
 
 class APIServices {
   const APIServices();
@@ -32,29 +34,24 @@ class APIServices {
   Future<Map<String, dynamic>> uploadFile({
     required final String link,
     required final String fieldName,
-    required final String filePath,
+    required final MyFileData  fileToUpload,
     required final Map<String, String> body,
   }) async {
-    final http.MultipartRequest request = http.MultipartRequest('POST', Uri.parse(link));
-    
+    final http.MultipartRequest request =
+        http.MultipartRequest('POST', Uri.parse(link));
+
     request.fields.addAll(body);
 
-    final http.MultipartFile file = await http.MultipartFile.fromPath(fieldName, filePath);
+    final http.MultipartFile file = http.MultipartFile.fromBytes(
+      fieldName,
+      fileToUpload.file,
+      filename: '${fileToUpload.nameWithoutExt}.${fileToUpload.ext}',
+    );
 
     request.files.add(file);
 
-    http.StreamedResponse response = await request.send();
-
-
-    // http.StreamedResponse response = await handleRequestErrors<http.StreamedResponse>(
-    //   () async {
-    //     http.StreamedResponse sR = await client.send(request);
-    //     sR.stream.listen((List<int> chunk) {
-    //       final double progress = sR.contentLength == null ? 0.0 : chunk.length / sR.contentLength!;
-    //     });
-    //     return sR;
-    //   },
-    // );
+    http.StreamedResponse streamedResponse = await request.send();
+    http.Response response = await http.Response.fromStream(streamedResponse);
 
     if (response.statusCode != 200) {
       throw MyHttpException.badResponse(
@@ -63,6 +60,6 @@ class APIServices {
       );
     }
 
-    return jsonDecode(await response.stream.bytesToString());
+    return jsonDecode(response.body);
   }
 }

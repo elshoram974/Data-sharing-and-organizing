@@ -50,13 +50,13 @@ class ChangePhotoCubit extends Cubit<ChangePhotoState> {
   }
 
   void _changeImage(EditPhotoSelectedPopUpItem pickFrom) async {
-    final String? imagePath =
+    final MyFileData? image =
         await HandlePickedImage.pickImage(pickFrom.pickFrom());
-    if (imagePath == null) return errMessage(S.current.cancel);
+    if (image == null) return errMessage(S.current.cancel);
     emit(const ProgressUploadingPhoto());
     final UploadFileEntity uploadedFile = UploadFileEntity(
       user: ProviderDependency.userMain.user,
-      filePath: imagePath,
+      file: image,
     );
     Status<AuthUserEntity> status =
         await editProfileRepo.changeImage(uploadedFile);

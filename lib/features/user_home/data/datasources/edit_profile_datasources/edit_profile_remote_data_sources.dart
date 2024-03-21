@@ -53,7 +53,7 @@ class EditProfileRemoteDataSourceImp extends EditProfileRemoteDataSource {
     Map<String, dynamic> response = await service.uploadFile(
       link: AppLinks.changeUserImage,
       fieldName: 'file',
-      filePath: uploadImageEntity.filePath,
+      fileToUpload: uploadImageEntity.file,
       body: {'user_id': '${uploadImageEntity.user.id}'},
     );
     return AppUser.fromMap(response).user!;
