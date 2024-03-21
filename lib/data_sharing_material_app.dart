@@ -16,7 +16,8 @@ class DataSharingApp extends StatelessWidget {
   Widget build(BuildContext context) {
     final ConfigCubit c = BlocProvider.of<ConfigCubit>(context, listen: true);
     return MediaQuery(
-      data: MediaQuery.of(context).copyWith(textScaler: TextScaler.linear(c.textScaler)),
+      data: MediaQuery.of(context)
+          .copyWith(textScaler: TextScaler.linear(c.textScaler)),
       child: MaterialApp.router(
         localizationsDelegates: const [
           S.delegate,

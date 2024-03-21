@@ -26,7 +26,8 @@ class EditImageWidget extends StatelessWidget {
                 dimension: 210,
                 errorWidget: const PersonImage(),
               ),
-              if (state is ProgressUploadingPhoto) IndicatorWhenUpload(cubit: c, value: state.value),
+              if (state is ProgressUploadingPhoto)
+                IndicatorWhenUpload(cubit: c, value: state.value),
               const Positioned(
                 bottom: 0,
                 right: 16,

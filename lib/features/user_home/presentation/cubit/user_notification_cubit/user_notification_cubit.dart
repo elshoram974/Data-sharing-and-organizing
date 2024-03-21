@@ -25,34 +25,31 @@ class UserNotificationCubit extends Cubit<UserNotificationState> {
 
 final list = [
   GroupNotificationEntity(
-    id: 0,
-    lastMessageType: MessageType.location,
-    imageLink: 'https://images.justwatch.com/poster/248497985/s592/one-piece',
-    groupName: 'First year in THIET aa aa a a a a a a a a a a a a',
-    lastMessage:
-        'Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message ',
-    isUnread: true,
-    lastMessageTime: DateTime.now(),
-    ownerId: 42
-  ),
+      id: 0,
+      lastMessageType: MessageType.location,
+      imageLink: 'https://images.justwatch.com/poster/248497985/s592/one-piece',
+      groupName: 'First year in THIET aa aa a a a a a a a a a a a a',
+      lastMessage:
+          'Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message ',
+      isUnread: true,
+      lastMessageTime: DateTime.now(),
+      ownerId: 42),
   GroupNotificationEntity(
-    id: 1,
-    lastMessageType: MessageType.photo,
-    imageLink: '',
-    groupName: 'First year in THIET',
-    lastMessage:
-        'Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message ',
-    lastMessageTime: DateTime.now(),
-    ownerId: 42
-  ),
+      id: 1,
+      lastMessageType: MessageType.photo,
+      imageLink: '',
+      groupName: 'First year in THIET',
+      lastMessage:
+          'Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message ',
+      lastMessageTime: DateTime.now(),
+      ownerId: 42),
   GroupNotificationEntity(
-    id: 2,
-    lastMessageType: MessageType.voiceMessage,
-    imageLink: '',
-    groupName: 'First year in THIET',
-    lastMessage:
-        'Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message ',
-    lastMessageTime: DateTime.now(),
-    ownerId: 42
-  ),
+      id: 2,
+      lastMessageType: MessageType.voiceMessage,
+      imageLink: '',
+      groupName: 'First year in THIET',
+      lastMessage:
+          'Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message ',
+      lastMessageTime: DateTime.now(),
+      ownerId: 42),
 ];

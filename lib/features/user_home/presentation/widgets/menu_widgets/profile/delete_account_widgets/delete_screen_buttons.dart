@@ -40,12 +40,14 @@ class DeleteScreenButtons extends StatelessWidget {
 
   Future<void> onPressDelete(BuildContext context) async {
     EasyLoading.show(dismissOnTap: false);
-    final Status<bool> status = await sl.get<EditProfileRepositories>().deleteAccount(ProviderDependency.userMain.user);
+    final Status<bool> status = await sl
+        .get<EditProfileRepositories>()
+        .deleteAccount(ProviderDependency.userMain.user);
     EasyLoading.dismiss();
 
     if (status is Success<bool>) {
       if (status.data) {
-        ProviderDependency.userMain.navIndex = 0 ;
+        ProviderDependency.userMain.navIndex = 0;
         if (context.mounted) context.go(AppRoute.login);
       } else {
         EasyLoading.showError('Refused', duration: const Duration(seconds: 5));

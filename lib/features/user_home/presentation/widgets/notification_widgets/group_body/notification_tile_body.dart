@@ -19,7 +19,8 @@ class NotificationTileBody extends StatelessWidget {
     return Expanded(
       child: Column(
         children: [
-          GroupNameAndTimeAndCounterTile(groupNotificationEntity: groupNotificationEntity),
+          GroupNameAndTimeAndCounterTile(
+              groupNotificationEntity: groupNotificationEntity),
           if (groupNotificationEntity.lastMessage != null)
             NotificationSubtitle(
               groupNotificationEntity: groupNotificationEntity,

@@ -24,7 +24,9 @@ class DeleteAccountTextInBody extends StatelessWidget {
             horizontal: AppConst.defaultPadding,
           ),
           child: Text(
-            S.of(context).deletingYourAccountWillRemoveAllOfYourInformationFromOurDatabase,
+            S
+                .of(context)
+                .deletingYourAccountWillRemoveAllOfYourInformationFromOurDatabase,
             style: AppStyle.styleRegular15.copyWith(fontSize: 12),
           ),
         ),

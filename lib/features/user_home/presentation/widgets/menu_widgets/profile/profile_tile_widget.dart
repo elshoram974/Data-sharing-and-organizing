@@ -19,13 +19,18 @@ class ProfileTileWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return ResConstrainedBoxAlign(
       child: ListTile(
-        contentPadding: const EdgeInsets.symmetric(horizontal: AppConst.defaultPadding),
+        contentPadding:
+            const EdgeInsets.symmetric(horizontal: AppConst.defaultPadding),
         shape: context.isPhoneWidth
             ? const RoundedRectangleBorder(borderRadius: BorderRadius.zero)
-            : RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppConst.borderRadius)),
+            : RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(AppConst.borderRadius)),
         title: Text(
           title,
-          style: Theme.of(context).textTheme.titleLarge?.copyWith(fontFamily: AppStrings.inika),
+          style: Theme.of(context)
+              .textTheme
+              .titleLarge
+              ?.copyWith(fontFamily: AppStrings.inika),
         ),
         trailing: const Icon(Icons.arrow_forward_ios),
         onTap: onTap,

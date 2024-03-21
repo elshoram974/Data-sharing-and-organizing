@@ -25,7 +25,8 @@ class NameWithEditButtonWidget extends StatelessWidget {
               Flexible(
                 child: Text(
                   textBody,
-                  style: AppStyle.styleBoldInika24.copyWith(color: AppColor.primary),
+                  style: AppStyle.styleBoldInika24
+                      .copyWith(color: AppColor.primary),
                 ),
               ),
               IconButton(

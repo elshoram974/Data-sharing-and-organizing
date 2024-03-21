@@ -34,7 +34,8 @@ class ChangeNameCubit extends Cubit<ChangeNameState> {
     if (!isValid) return;
     EasyLoading.show(dismissOnTap: false);
     emit(const ChangeNameLoading());
-    final Status<AuthUserEntity> status = await editProfileRepo.changeName(user.id, firstName, lastName);
+    final Status<AuthUserEntity> status =
+        await editProfileRepo.changeName(user.id, firstName, lastName);
     EasyLoading.dismiss();
 
     if (status is Success<AuthUserEntity>) {
@@ -54,14 +55,16 @@ class ChangeNameCubit extends Cubit<ChangeNameState> {
 
   void onChangeFirstName(String val) {
     firstName = val.trim();
-    isValid = formKey.currentState!.validate() && user.name != '$firstName $lastName';
+    isValid =
+        formKey.currentState!.validate() && user.name != '$firstName $lastName';
 
     emit(ChangeNameValidFields(isValid));
   }
 
   void onChangeLastName(String val) {
     lastName = val.trim();
-    isValid = formKey.currentState!.validate() && user.name != '$firstName $lastName';
+    isValid =
+        formKey.currentState!.validate() && user.name != '$firstName $lastName';
     emit(ChangeNameValidFields(isValid));
   }
 }

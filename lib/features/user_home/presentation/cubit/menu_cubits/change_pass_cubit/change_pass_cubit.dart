@@ -29,7 +29,8 @@ class ChangePassCubit extends Cubit<ChangePassState> {
     if (!formKey.currentState!.validate()) return;
     EasyLoading.show(dismissOnTap: false);
     emit(const ChangePassLoading());
-    final Status<AuthUserEntity> status = await editProfileRepo.changePassword(user.id, oldPass, newPass);
+    final Status<AuthUserEntity> status =
+        await editProfileRepo.changePassword(user.id, oldPass, newPass);
     EasyLoading.dismiss();
 
     if (status is Success<AuthUserEntity>) {

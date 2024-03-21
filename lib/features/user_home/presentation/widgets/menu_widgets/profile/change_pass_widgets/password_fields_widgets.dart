@@ -26,7 +26,8 @@ class PasswordFieldsWidgets extends StatelessWidget {
               onChanged: (val) => c.oldPass = val,
               textInputAction: TextInputAction.next,
               onFieldSubmitted: (_) => c.firstFocus.requestFocus(),
-              validator: (val) => AppValidator.auth(val, 8, 200, FieldType.password),
+              validator: (val) =>
+                  AppValidator.auth(val, 8, 200, FieldType.password),
             ),
             PasswordField(
               focusNode: c.firstFocus,
@@ -35,7 +36,8 @@ class PasswordFieldsWidgets extends StatelessWidget {
               onChanged: (val) => c.newPass = val,
               textInputAction: TextInputAction.next,
               onFieldSubmitted: (_) => c.secondFocus.requestFocus(),
-              validator: (val) => AppValidator.auth(val, 8, 200, FieldType.password),
+              validator: (val) =>
+                  AppValidator.auth(val, 8, 200, FieldType.password),
             ),
             PasswordField(
               hint: S.of(context).reTypeNewPassword,

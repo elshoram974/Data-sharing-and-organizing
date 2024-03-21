@@ -29,7 +29,8 @@ class NavigationRailBar extends StatelessWidget {
         fontSize: inDesktopSize ? 14 : null,
         fontWeight: FontWeight.bold,
       ),
-      onDestinationSelected: (_) => ProviderDependency.userMain.onNavChange(_, false),
+      onDestinationSelected: (_) =>
+          ProviderDependency.userMain.onNavChange(_, false),
       destinations: [
         for (MainScreens e in MainScreens.getItems(context))
           NavigationRailDestination(

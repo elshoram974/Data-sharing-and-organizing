@@ -37,7 +37,8 @@ class ChangePhotoCubit extends Cubit<ChangePhotoState> {
 
     EasyLoading.show();
     emit(const ProgressUploadingPhoto());
-    Status<AuthUserEntity> status = await editProfileRepo.deleteImage(ProviderDependency.userMain.user.id);
+    Status<AuthUserEntity> status =
+        await editProfileRepo.deleteImage(ProviderDependency.userMain.user.id);
     if (status is Success<AuthUserEntity>) {
       ProviderDependency.userMain.user = status.data;
       imageLink = null;
@@ -50,7 +51,8 @@ class ChangePhotoCubit extends Cubit<ChangePhotoState> {
   }
 
   void _changeImage(EditPhotoSelectedPopUpItem pickFrom) async {
-    final String? imagePath = await HandlePickedImage.pickImage(pickFrom.pickFrom());
+    final String? imagePath =
+        await HandlePickedImage.pickImage(pickFrom.pickFrom());
     if (imagePath == null) return errMessage(S.current.cancel);
     _client = http.Client();
     emit(const ProgressUploadingPhoto());
@@ -60,7 +62,8 @@ class ChangePhotoCubit extends Cubit<ChangePhotoState> {
       client: _client!,
       onProgress: (sent, total) => emit(ProgressUploadingPhoto(sent / total)),
     );
-    Status<AuthUserEntity> status = await editProfileRepo.changeImage(uploadedFile);
+    Status<AuthUserEntity> status =
+        await editProfileRepo.changeImage(uploadedFile);
     if (status is Success<AuthUserEntity>) {
       ProviderDependency.userMain.user = status.data;
       imageLink = null;

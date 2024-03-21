@@ -6,7 +6,6 @@ import '../../../cubit/user_home_cubit/user_home_cubit.dart';
 import '../../../widgets/menu_widgets/profile/my_group_widgets/my_groups_app_bar.dart';
 import '../../../widgets/menu_widgets/profile/my_group_widgets/user_my_groups_body.dart';
 
-
 class UserMyGroupsScreen extends StatelessWidget {
   const UserMyGroupsScreen({super.key});
 

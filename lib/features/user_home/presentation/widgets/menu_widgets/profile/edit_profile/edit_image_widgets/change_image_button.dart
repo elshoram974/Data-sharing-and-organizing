@@ -24,10 +24,18 @@ class ChangeImageButton extends StatelessWidget {
       onSelected: c.changeImage,
       itemBuilder: (context) {
         return [
-            if (!AppConst.isWeb) myPopupButton(EditPhotoSelectedPopUpItem.openCamera, S.of(context).openCamera),
-            if (!AppConst.isWeb) myPopupButton(EditPhotoSelectedPopUpItem.openGallery, S.of(context).openGallery),
-            if (AppConst.isWeb) myPopupButton(EditPhotoSelectedPopUpItem.openFiles, S.of(context).openFiles),
-            if (ProviderDependency.userMain.user.image != null) myPopupButton(EditPhotoSelectedPopUpItem.deletePhoto, S.of(context).delete),
+          if (!AppConst.isWeb)
+            myPopupButton(EditPhotoSelectedPopUpItem.openCamera,
+                S.of(context).openCamera),
+          if (!AppConst.isWeb)
+            myPopupButton(EditPhotoSelectedPopUpItem.openGallery,
+                S.of(context).openGallery),
+          if (AppConst.isWeb)
+            myPopupButton(
+                EditPhotoSelectedPopUpItem.openFiles, S.of(context).openFiles),
+          if (ProviderDependency.userMain.user.image != null)
+            myPopupButton(
+                EditPhotoSelectedPopUpItem.deletePhoto, S.of(context).delete),
         ];
       },
       child: const CircleAvatar(

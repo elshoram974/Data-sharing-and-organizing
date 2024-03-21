@@ -49,12 +49,14 @@ class UserHomeCubit extends Cubit<UserHomeState> {
 
   // * MarkAsUnRead from groups
   Future<void> _markAsUnRead() async {
-    final Status<Iterable<int>> status = await markAsUnReadUsecase(selectedGroups);
+    final Status<Iterable<int>> status =
+        await markAsUnReadUsecase(selectedGroups);
 
     if (status is Success<Iterable<int>>) {
       for (int i = 0; i < selectedGroups.length; i++) {
         final int listIndex = currentGroups.indexOf(selectedGroups[i]);
-        currentGroups[listIndex] = currentGroups[listIndex].copyWith(isUnread: true);
+        currentGroups[listIndex] =
+            currentGroups[listIndex].copyWith(isUnread: true);
       }
       emit(HomeSuccessState(currentGroups));
       _makeAllSelectedOrNot(false);
@@ -69,7 +71,8 @@ class UserHomeCubit extends Cubit<UserHomeState> {
     emit(const GetGroupsLoadingState(true));
     EasyLoading.show(dismissOnTap: false);
     // await Future.delayed(Duration(seconds: 3));
-    final Status<bool> status = await exitFromSomeGroups((removedGroups: selectedGroups, user: userMain.user));
+    final Status<bool> status = await exitFromSomeGroups(
+        (removedGroups: selectedGroups, user: userMain.user));
 
     if (status is Success<bool>) {
       currentGroups.removeWhere((e) => selectedGroups.contains(e));
@@ -98,15 +101,13 @@ class UserHomeCubit extends Cubit<UserHomeState> {
       currentGroups.clear();
     }
     if (status is Success<List<GroupHomeEntity>>) {
-      
       currentGroups.addAll(status.data);
-      
+
       emit(HomeSuccessState(status.data));
       debugPrint('success groups: ${status.data}');
     } else if (status is Failure<List<GroupHomeEntity>>) {
-      
       currentGroups.addAll(status.data!);
-      
+
       debugPrint('failure groups: ${status.data}');
       _failureStatus(status.error, inFirst);
     }
@@ -144,7 +145,8 @@ class UserHomeCubit extends Cubit<UserHomeState> {
   // * helper functions
   int _currentPage = 1;
   void _onScroll() {
-    if (scrollController.position.pixels == scrollController.position.maxScrollExtent) {
+    if (scrollController.position.pixels ==
+        scrollController.position.maxScrollExtent) {
       if (state is! GetGroupsLoadingState) {
         _currentPage++;
         getGroups(false, _currentPage);
@@ -152,14 +154,15 @@ class UserHomeCubit extends Cubit<UserHomeState> {
     }
   }
 
-  void _failureStatus(String error, bool showDialog) async{
+  void _failureStatus(String error, bool showDialog) async {
     emit(HomeFailureState(error));
     if (showDialog) {
       EasyLoading.showError(error, duration: const Duration(seconds: 5));
       await Future.delayed(const Duration(seconds: 3));
-     if(error == S.current.thePassIsChangedFromAnotherDevice){
-      ProviderDependency.userMain.logoutWithoutDialog(AppRoute.key.currentContext!);
-     }
+      if (error == S.current.thePassIsChangedFromAnotherDevice) {
+        ProviderDependency.userMain
+            .logoutWithoutDialog(AppRoute.key.currentContext!);
+      }
     }
   }
 
@@ -169,7 +172,7 @@ class UserHomeCubit extends Cubit<UserHomeState> {
       selectedGroups.add(replaced);
     } else {
       selectedGroups.remove(group);
-    }    
+    }
     final int index = currentGroups.indexOf(group);
     currentGroups[index] = replaced;
     emit(UserHomeSelectGroups([group], makeSelected));

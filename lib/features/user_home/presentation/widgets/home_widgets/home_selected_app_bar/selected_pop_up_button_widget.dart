@@ -21,12 +21,24 @@ class SelectedPopUpMenuButton extends StatelessWidget {
         borderRadius: BorderRadius.circular(AppConst.borderRadius),
       ),
       itemBuilder: (context) => [
-        myPopupButton(HomeSelectedPopUpItem.exitGroup, S.of(context).exitGroups),
-        myPopupButton(HomeSelectedPopUpItem.markAsUnRead, S.of(context).markAsUnRead),
-        if (!cubit.isAllSelected) myPopupButton(HomeSelectedPopUpItem.selectAll, S.of(context).selectAll),
-        if (cubit.isAllSelected) myPopupButton(HomeSelectedPopUpItem.deselectAll, S.of(context).deselectAll),
-        if (cubit.selectedGroups.length == 1 && !cubit.selectedGroups.first.isMute) myPopupButton(HomeSelectedPopUpItem.muteNotification, S.of(context).muteNotification),
-        if (cubit.selectedGroups.length == 1 && cubit.selectedGroups.first.isMute) myPopupButton(HomeSelectedPopUpItem.unmuteNotification, S.of(context).unmuteNotification),
+        myPopupButton(
+            HomeSelectedPopUpItem.exitGroup, S.of(context).exitGroups),
+        myPopupButton(
+            HomeSelectedPopUpItem.markAsUnRead, S.of(context).markAsUnRead),
+        if (!cubit.isAllSelected)
+          myPopupButton(
+              HomeSelectedPopUpItem.selectAll, S.of(context).selectAll),
+        if (cubit.isAllSelected)
+          myPopupButton(
+              HomeSelectedPopUpItem.deselectAll, S.of(context).deselectAll),
+        if (cubit.selectedGroups.length == 1 &&
+            !cubit.selectedGroups.first.isMute)
+          myPopupButton(HomeSelectedPopUpItem.muteNotification,
+              S.of(context).muteNotification),
+        if (cubit.selectedGroups.length == 1 &&
+            cubit.selectedGroups.first.isMute)
+          myPopupButton(HomeSelectedPopUpItem.unmuteNotification,
+              S.of(context).unmuteNotification),
       ],
       child: const Icon(Icons.more_vert),
     );

@@ -18,7 +18,8 @@ class MenuItemTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      contentPadding: const EdgeInsets.symmetric(horizontal: AppConst.defaultPadding),
+      contentPadding:
+          const EdgeInsets.symmetric(horizontal: AppConst.defaultPadding),
       shape: const RoundedRectangleBorder(side: BorderSide.none),
       onTap: onTap,
       title: Row(

@@ -8,6 +8,7 @@ sealed class ChangePhotoState extends Equatable {
 }
 
 final class ChangePhotoInitial extends ChangePhotoState {}
+
 final class ProgressUploadingPhoto extends ChangePhotoState {
   const ProgressUploadingPhoto([this.value]);
   final double? value;

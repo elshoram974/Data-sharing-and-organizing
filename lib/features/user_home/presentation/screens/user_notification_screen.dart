@@ -28,7 +28,8 @@ class UserNotificationScreen extends StatelessWidget {
                 final notification = c.currentNotifications[index];
                 return NotificationTile(
                   onTap: () => print('tapped on ${notification.groupName}'),
-                  onPressExpanded: (isExpanded) => c.onPressExpanded(notification),
+                  onPressExpanded: (isExpanded) =>
+                      c.onPressExpanded(notification),
                   groupNotificationEntity: notification,
                 );
               },
