@@ -52,9 +52,9 @@ class EditProfileRemoteDataSourceImp extends EditProfileRemoteDataSource {
   Future<AuthUserEntity> changeImage(UploadFileEntity uploadImageEntity) async {
     Map<String, dynamic> response = await service.uploadFile(
       link: AppLinks.changeUserImage,
-      fieldName: 'image', // TODO: make sure the field name is image
+      fieldName: 'file',
       filePath: uploadImageEntity.filePath,
-      body: {'userId': '${uploadImageEntity.user.id}'},
+      body: {'user_id': '${uploadImageEntity.user.id}'},
       client: uploadImageEntity.client,
       onProgress: uploadImageEntity.onProgress,
     );
@@ -65,7 +65,7 @@ class EditProfileRemoteDataSourceImp extends EditProfileRemoteDataSource {
   Future<AuthUserEntity> deleteImage(int userId) async {
     Map<String, dynamic> response = await service.post(
       AppLinks.deleteUserImage,
-      {'userId': '$userId'},
+      {'user_id': '$userId'},
     );
     return AppUser.fromMap(response).user!;
   }
