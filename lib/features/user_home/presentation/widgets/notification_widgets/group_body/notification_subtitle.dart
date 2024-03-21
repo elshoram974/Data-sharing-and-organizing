@@ -22,11 +22,12 @@ class NotificationSubtitle extends StatelessWidget {
           ? CrossAxisAlignment.end
           : CrossAxisAlignment.center,
       children: [
+        if (groupNotificationEntity.lastMessage != null)
         HomeGroupLastMessage(
           maxLines: groupNotificationEntity.isExpanded ? 500 : 1,
           lastMessage: groupNotificationEntity.lastMessage!,
-          lastMessageFrom: groupNotificationEntity.lastMessageFrom,
-          lastMessageType: groupNotificationEntity.lastMessageType,
+          lastMessageFrom: groupNotificationEntity.lastMessageFrom!,
+          lastMessageType: groupNotificationEntity.lastMessageType!,
         ),
         ExpandIcon(
           isExpanded: groupNotificationEntity.isExpanded,

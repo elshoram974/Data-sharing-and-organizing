@@ -36,15 +36,19 @@ class GroupNameAndTimeAndCounterTile extends StatelessWidget {
             ],
           ),
         ),
-        Text(
-          DateToString.call(groupNotificationEntity.lastMessageTime, false),
-          style: TextStyle(
-            color: groupNotificationEntity.isUnread
-                ? AppColor.active
-                : AppColor.gray,
-            fontSize: 10,
+        if (groupNotificationEntity.lastMessage != null)
+          Text(
+            DateToString.call(
+              groupNotificationEntity.lastMessageTime!,
+              false,
+            ),
+            style: TextStyle(
+              color: groupNotificationEntity.isUnread
+                  ? AppColor.active
+                  : AppColor.gray,
+              fontSize: 10,
+            ),
           ),
-        ),
       ],
     );
   }

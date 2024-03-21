@@ -21,13 +21,14 @@ class GroupNameAndTimeTile extends StatelessWidget {
             style: AppStyle.styleBoldInika24.copyWith(fontSize: 16),
           ),
         ),
-        Text(
-          DateToString.call(groupHomeEntity.lastMessageTime, false),
-          style: TextStyle(
-            color: groupHomeEntity.isUnread ? AppColor.active : AppColor.gray,
-            fontSize: 10,
+        if (groupHomeEntity.lastMessage != null)
+          Text(
+            DateToString.call(groupHomeEntity.lastMessageTime!, false),
+            style: TextStyle(
+              color: groupHomeEntity.isUnread ? AppColor.active : AppColor.gray,
+              fontSize: 10,
+            ),
           ),
-        ),
       ],
     );
   }
