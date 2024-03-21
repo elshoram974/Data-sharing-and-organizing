@@ -9,7 +9,7 @@ abstract class HomeLocalDataSource {
   const HomeLocalDataSource();
   List<GroupHomeEntity> getAllGroups();
   Future<int> removeAllGroups();
-  Future<Iterable<int>> saveGroups(
+  Future<List<GroupHomeEntity>> saveGroups(
       List<GroupHomeEntity> newGroups, AuthUserEntity userToReplace);
   Future<int> removeSomeGroups(List<GroupHomeEntity> removedGroups);
   List<GroupHomeEntity> getSavedGroupsPerPage(int page, int pageSize);
@@ -32,18 +32,26 @@ class HomeLocalDataSourceImp extends HomeLocalDataSource {
   }
 
   @override
-  Future<Iterable<int>> saveGroups(
+  Future<List<GroupHomeEntity>> saveGroups(
       List<GroupHomeEntity> newGroups, AuthUserEntity userToReplace) async {
     final List<GroupHomeEntity> groups = [];
     groups.addAll(getAllGroups());
     for (final GroupHomeEntity e in newGroups) {
       if (groups.contains(e)) {
-        groups.remove(e);
+        final int i = groups.indexOf(e);
+        groups[i] = e.copyWith(
+          isMute: groups[i].isMute,
+          isUnread: groups[i].isUnread,
+          unReadCounter: groups[i].unReadCounter,
+        );
+      } else {
         groups.add(e);
       }
     }
     await Future.wait([_changeUser(userToReplace), removeAllGroups()]);
-    return await groupsBox.addAll(groups);
+    await groupsBox.addAll(groups);
+
+    return groups;
   }
 
   @override

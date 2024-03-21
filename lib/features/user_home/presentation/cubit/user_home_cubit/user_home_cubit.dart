@@ -175,6 +175,8 @@ class UserHomeCubit extends Cubit<UserHomeState> {
     }
     final int index = currentGroups.indexOf(group);
     currentGroups[index] = replaced;
+
+    print(currentGroups);
     emit(UserHomeSelectGroups([group], makeSelected));
   }
 

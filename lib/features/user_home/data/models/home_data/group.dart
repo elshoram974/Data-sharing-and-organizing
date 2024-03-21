@@ -38,6 +38,14 @@ class GroupDetails extends GroupHomeEntity {
     required this.discussionType,
     required this.groupStatus,
     required this.groupStatusMessage,
+    super.isMute,
+    super.isSelected,
+    super.isUnread,
+    super.lastMessage,
+    super.lastMessageFrom,
+    super.lastMessageTime,
+    super.lastMessageType,
+    super.unReadCounter,
   }) : super(
           id: groupId,
           ownerId: groupOwnerId,
@@ -46,7 +54,7 @@ class GroupDetails extends GroupHomeEntity {
 
   @override
   String toString() {
-    return 'Group(groupId: $groupId, groupName: $groupName, groupOwnerId: $groupOwnerId, groupCreationDate: $groupCreationDate, groupDescription: $groupDescription, groupVisibility: $groupVisibility, groupAccessType: $groupAccessType, groupCategory: $groupCategory, groupImage: $groupImage, groupType: $groupType, groupDiscussionType: $discussionType, groupStatus: $groupStatus, groupStatusMessage: $groupStatusMessage)';
+    return 'Group(groupId: $groupId, groupName: $groupName, groupOwnerId: $groupOwnerId, groupCreationDate: $groupCreationDate, groupDescription: $groupDescription, groupVisibility: $groupVisibility, groupAccessType: $groupAccessType, groupCategory: $groupCategory, groupImage: $groupImage, groupType: $groupType, groupDiscussionType: $discussionType, groupStatus: $groupStatus, groupStatusMessage: $groupStatusMessage, isSelected: $isSelected, isMuted: $isMute, isUnread: $isUnread, unReadCounter: $unReadCounter, lastMessageTime: $lastMessageTime, lastMessageType: $lastMessageType, lastMessageFrom: $lastMessageFrom, lastMessage: $lastMessage)';
   }
 
   factory GroupDetails.fromMap(Map<String, dynamic> data) => GroupDetails(
@@ -139,6 +147,14 @@ class GroupDetails extends GroupHomeEntity {
       discussionType: discussionType ?? this.discussionType,
       groupStatus: groupStatus ?? this.groupStatus,
       groupStatusMessage: groupStatusMessage ?? this.groupStatusMessage,
+      isMute: isMute ?? this.isMute,
+      isSelected: isSelected ?? this.isSelected,
+      isUnread: isUnread ?? this.isUnread,
+      lastMessage: lastMessage ?? this.lastMessage,
+      lastMessageFrom: lastMessageFrom ?? this.lastMessageFrom,
+      lastMessageTime: lastMessageTime ?? this.lastMessageTime,
+      lastMessageType: lastMessageType ?? this.lastMessageType,
+      unReadCounter: unReadCounter ?? this.unReadCounter,
     );
   }
 }

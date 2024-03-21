@@ -29,8 +29,7 @@ class HomeRepositoriesImp extends HomeRepositories {
         groups.clear();
         final HomeData results = await remoteDataSource.getGroups(param.user, param.page, groupsPerPage);
         groups.addAll(results.groups);
-        await localDataSource.saveGroups(groups, results.user);
-        return groups;
+        return await localDataSource.saveGroups(groups, results.user);
       },
       () async {
         groups.clear();
@@ -49,8 +48,7 @@ class HomeRepositoriesImp extends HomeRepositories {
         groups.clear();
         final HomeData results = await remoteDataSource.getGroups(user, 1, 1000);
         groups.addAll(results.groups);
-        await localDataSource.saveGroups(groups, results.user);
-        return groups.where((group) => group.ownerId == user.id).toList();
+        return (await localDataSource.saveGroups(groups, results.user)).where((group) => group.ownerId == user.id).toList();
       },
       () async {
         groups.clear();
