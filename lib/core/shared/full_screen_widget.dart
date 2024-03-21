@@ -9,9 +9,10 @@ class FullScreenWidget extends StatelessWidget {
     this.disposeLevel = DisposeLevel.medium,
     this.widgetInFullScreen,
     this.appBar,
-    this.openFullPage = true,
+    this.openFullPage = true,required this.imageLink,
   });
 
+  final String? imageLink;
   final PreferredSizeWidget? appBar;
   final bool openFullPage;
   final Widget child;
@@ -36,6 +37,7 @@ class FullScreenWidget extends StatelessWidget {
                   pageBuilder: (BuildContext context, _, __) {
                     return FullScreenPage(
                       appBar: appBar,
+                      imageLink: imageLink,
                       backgroundColor: backgroundColor,
                       backgroundIsTransparent: backgroundIsTransparent,
                       disposeLevel: disposeLevel,
@@ -59,10 +61,11 @@ class FullScreenPage extends StatefulWidget {
     this.backgroundColor = Colors.black,
     this.backgroundIsTransparent = true,
     this.disposeLevel = DisposeLevel.medium,
-    this.appBar,
+    this.appBar, this.imageLink,
   });
 
   final Widget child;
+  final String? imageLink;
   final Color backgroundColor;
   final bool backgroundIsTransparent;
   final DisposeLevel disposeLevel;
@@ -218,11 +221,16 @@ class _FullScreenPageState extends State<FullScreenPage>
                 AnimatedPositioned(
                   duration: animationDuration,
                   curve: Curves.fastOutSlowIn,
-                  top: widget.appBar?.preferredSize.height ?? 0 + positionYDelta,
-                  bottom: widget.appBar?.preferredSize.height ?? 0 - positionYDelta,
+                  top:
+                      widget.appBar?.preferredSize.height ?? 0 + positionYDelta,
+                  bottom:
+                      widget.appBar?.preferredSize.height ?? 0 - positionYDelta,
                   left: 0,
                   right: 0,
-                  child: widget.child,
+                  child: Hero(
+                    tag: widget.imageLink ?? UniqueKey(),
+                    child: widget.child,
+                  ),
                 )
               ],
             ),

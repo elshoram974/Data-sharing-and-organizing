@@ -16,10 +16,14 @@ class AndroidImage extends StatelessWidget {
   Widget build(BuildContext context) {
     return FullScreenWidget(
       openFullPage: imageLink != null,
-      widgetInFullScreen: _TheImage(
-        imageLink: imageLink,
-        errorWidget: errorWidget,
-        fit: BoxFit.contain,
+      imageLink: imageLink,
+      widgetInFullScreen: Hero(
+        tag: imageLink ?? UniqueKey(),
+        child: _TheImage(
+          imageLink: imageLink,
+          errorWidget: errorWidget,
+          fit: BoxFit.contain,
+        ),
       ),
       child: _TheImage(imageLink: imageLink, errorWidget: errorWidget),
     );

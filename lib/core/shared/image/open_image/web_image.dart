@@ -17,6 +17,7 @@ class WebImage extends StatelessWidget {
     return FullScreenWidget(
       appBar: AppBar(leading: const CloseButton(color: Colors.white54)),
       openFullPage: imageLink != null,
+      imageLink: imageLink,
       widgetInFullScreen: _TheImage(
         imageLink: imageLink,
         errorWidget: errorWidget,
@@ -43,13 +44,10 @@ class _TheImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Hero(
-      tag: imageLink ?? errorWidget ?? '',
-      child: Image.network(
-        imageLink ?? '',
-        errorBuilder: errorWidget == null ? null : (_, e, s) => errorWidget!,
-        fit: fit,
-      ),
+    return Image.network(
+      imageLink ?? '',
+      errorBuilder: errorWidget == null ? null : (_, e, s) => errorWidget!,
+      fit: fit,
     );
   }
 }
