@@ -177,6 +177,12 @@ class MessageLookup extends MessageLookupByLibrary {
                 "The password is changed from another device"),
         "thePasswordIsVeryWeak": MessageLookupByLibrary.simpleMessage(
             "The password is very weak. Please use a stronger password."),
+        "theUploadedFileExceedsTheMaximumAllowedSizePleaseUploadSmallerFile":
+            MessageLookupByLibrary.simpleMessage(
+                "The uploaded file exceeds the maximum allowed size. Please upload a smaller file."),
+        "theUploadedFileTypeIsNotSupportedPleaseUploadAnImageFile":
+            MessageLookupByLibrary.simpleMessage(
+                "The uploaded file type is not supported. Please upload an image file."),
         "theVerificationCodeHasExpiredWeSentAnotherCode":
             MessageLookupByLibrary.simpleMessage(
                 "The verification code has expired. We have sent another code."),

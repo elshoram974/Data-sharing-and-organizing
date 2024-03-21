@@ -1331,6 +1331,28 @@ class S {
       args: [],
     );
   }
+
+  /// `The uploaded file type is not supported. Please upload an image file.`
+  String get theUploadedFileTypeIsNotSupportedPleaseUploadAnImageFile {
+    return Intl.message(
+      'The uploaded file type is not supported. Please upload an image file.',
+      name: 'theUploadedFileTypeIsNotSupportedPleaseUploadAnImageFile',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `The uploaded file exceeds the maximum allowed size. Please upload a smaller file.`
+  String
+      get theUploadedFileExceedsTheMaximumAllowedSizePleaseUploadSmallerFile {
+    return Intl.message(
+      'The uploaded file exceeds the maximum allowed size. Please upload a smaller file.',
+      name:
+          'theUploadedFileExceedsTheMaximumAllowedSizePleaseUploadSmallerFile',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

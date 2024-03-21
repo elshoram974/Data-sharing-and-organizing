@@ -134,5 +134,7 @@
     "openCamera": "Open camera",
     "openGallery": "Open gallery",
     "openFiles": "Open files",
-    "theImageYouAreTryingToDeleteDoesNotExist": "The image you are trying to delete does not exist."
+    "theImageYouAreTryingToDeleteDoesNotExist": "The image you are trying to delete does not exist.",
+    "theUploadedFileTypeIsNotSupportedPleaseUploadAnImageFile": "The uploaded file type is not supported. Please upload an image file.",
+    "theUploadedFileExceedsTheMaximumAllowedSizePleaseUploadSmallerFile": "The uploaded file exceeds the maximum allowed size. Please upload a smaller file."
 }

@@ -134,5 +134,7 @@
     "openCamera": "فتح الكاميرا",
     "openGallery": "فتح المعرض",
     "openFiles": "فتح الملفات",
-    "theImageYouAreTryingToDeleteDoesNotExist": "الصورة التي تحاول حذفها غير موجودة."
+    "theImageYouAreTryingToDeleteDoesNotExist": "الصورة التي تحاول حذفها غير موجودة.",
+    "theUploadedFileTypeIsNotSupportedPleaseUploadAnImageFile": "نوع الملف المرفوع غير مدعوم. يرجى تحميل ملف صورة.",
+    "theUploadedFileExceedsTheMaximumAllowedSizePleaseUploadSmallerFile": "حجم الملف المرفوع يتجاوز الحد الأقصى المسموح به. يرجى تحميل ملف أصغر."
 }

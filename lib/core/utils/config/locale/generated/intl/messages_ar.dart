@@ -180,6 +180,12 @@ class MessageLookup extends MessageLookupByLibrary {
                 "تم تغيير الرقم السري من جهاز اخر"),
         "thePasswordIsVeryWeak": MessageLookupByLibrary.simpleMessage(
             "كلمة المرور ضعيفة جدًا. يرجى استخدام كلمة مرور أقوى."),
+        "theUploadedFileExceedsTheMaximumAllowedSizePleaseUploadSmallerFile":
+            MessageLookupByLibrary.simpleMessage(
+                "حجم الملف المرفوع يتجاوز الحد الأقصى المسموح به. يرجى تحميل ملف أصغر."),
+        "theUploadedFileTypeIsNotSupportedPleaseUploadAnImageFile":
+            MessageLookupByLibrary.simpleMessage(
+                "نوع الملف المرفوع غير مدعوم. يرجى تحميل ملف صورة."),
         "theVerificationCodeHasExpiredWeSentAnotherCode":
             MessageLookupByLibrary.simpleMessage(
                 "انتهت صلاحية رمز التحقق. لقد قمنا بإرسال رمز آخر."),
