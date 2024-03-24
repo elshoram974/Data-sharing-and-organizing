@@ -35,7 +35,9 @@ class ServerFailure<T> extends Failure<T> {
 
       case HttpExceptionType.badResponse:
         return ServerFailure.fromBadResponse(
-          FailureBody.fromJson((e.response as Response).body),
+          FailureBody.fromJson((e.response as Response).body).copyWith(
+            httpExceptionType: HttpExceptionType.badResponse,
+          ),
         );
 
       case HttpExceptionType.cancel:
