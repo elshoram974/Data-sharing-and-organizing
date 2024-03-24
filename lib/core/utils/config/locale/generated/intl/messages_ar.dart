@@ -43,6 +43,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "changeName": MessageLookupByLibrary.simpleMessage("تغيير الاسم"),
         "changePassword":
             MessageLookupByLibrary.simpleMessage("تغيير كلمة المرور"),
+        "clientTookTooLong": MessageLookupByLibrary.simpleMessage(
+            "العميل استغرق وقتًا طويلاً في إرسال الطلب. يرجى التحقق من اتصال الشبكة الخاص بك والمحاولة مرة أخرى."),
         "codeVerification":
             MessageLookupByLibrary.simpleMessage("تحقق من الرمز"),
         "confirm": MessageLookupByLibrary.simpleMessage("تأكيد"),
@@ -162,12 +164,18 @@ class MessageLookup extends MessageLookupByLibrary {
         "selectAll": MessageLookupByLibrary.simpleMessage("تحديد الكل"),
         "selectedWithNumber": m2,
         "sendRequest": MessageLookupByLibrary.simpleMessage("إرسال الطلب"),
+        "serverTookTooLong": MessageLookupByLibrary.simpleMessage(
+            "استغرق الخادم وقتًا طويلاً في إرسال الاستجابة. يرجى المحاولة مرة أخرى لاحقًا."),
+        "serverTookTooLongToRespond": MessageLookupByLibrary.simpleMessage(
+            "استغرق الخادم وقتًا طويلاً في الرد. يرجى المحاولة مرة أخرى لاحقًا."),
         "settings": MessageLookupByLibrary.simpleMessage("الإعدادات"),
         "sharikna": MessageLookupByLibrary.simpleMessage("شاركنا"),
         "showPassword":
             MessageLookupByLibrary.simpleMessage("إظهار كلمة المرور"),
         "signUp": MessageLookupByLibrary.simpleMessage("التسجيل"),
         "small": MessageLookupByLibrary.simpleMessage("صغير"),
+        "sslCertificateNotTrusted": MessageLookupByLibrary.simpleMessage(
+            "شهادة SSL للخادم غير موثوق بها. يرجى التحقق من اتصال الشبكة الخاص بك أو الاتصال بمسؤول الخادم."),
         "statusBar": MessageLookupByLibrary.simpleMessage("شريط الحالة"),
         "stayHere": MessageLookupByLibrary.simpleMessage("ابق هنا"),
         "support": MessageLookupByLibrary.simpleMessage("الدعم"),
@@ -204,8 +212,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "type": MessageLookupByLibrary.simpleMessage("النوع"),
         "uHaveToVerifyAccountFirst":
             MessageLookupByLibrary.simpleMessage("يجب التحقق من حسابك أولاً"),
+        "unknownErrorOccurred": MessageLookupByLibrary.simpleMessage(
+            "حدث خطأ غير معروف. يرجى المحاولة مرة أخرى في وقت لاحق أو الاتصال بالدعم للمساعدة."),
         "unmuteNotification":
             MessageLookupByLibrary.simpleMessage("تفعيل الإشعارات"),
+        "userIsNotActivePleaseContactSupportForFurtherAssistance":
+            MessageLookupByLibrary.simpleMessage(
+                "المستخدم غير نشط. يرجى الاتصال بالدعم للمساعدة الإضافية."),
         "userNotEmailPasswordToNewPass": MessageLookupByLibrary.simpleMessage(
             "المستخدم ليس عبارة عن حساب بالبريد الإلكتروني وكلمة مرور لتغيير كلمة المرور"),
         "userNotEmailPasswordToSendVerificationCode":

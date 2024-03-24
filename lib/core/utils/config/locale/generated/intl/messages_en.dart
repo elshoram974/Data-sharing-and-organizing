@@ -45,6 +45,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "changeName": MessageLookupByLibrary.simpleMessage("Change name"),
         "changePassword":
             MessageLookupByLibrary.simpleMessage("Change password"),
+        "clientTookTooLong": MessageLookupByLibrary.simpleMessage(
+            "The client took too long to send the request. Please check your network connection and try again."),
         "codeVerification":
             MessageLookupByLibrary.simpleMessage("Code verification"),
         "confirm": MessageLookupByLibrary.simpleMessage("Confirm"),
@@ -160,11 +162,17 @@ class MessageLookup extends MessageLookupByLibrary {
         "selectAll": MessageLookupByLibrary.simpleMessage("Select all"),
         "selectedWithNumber": m2,
         "sendRequest": MessageLookupByLibrary.simpleMessage("Send request"),
+        "serverTookTooLong": MessageLookupByLibrary.simpleMessage(
+            "The server took too long to send a response. Please try again later."),
+        "serverTookTooLongToRespond": MessageLookupByLibrary.simpleMessage(
+            "The server took too long to respond. Please try again later."),
         "settings": MessageLookupByLibrary.simpleMessage("Settings"),
         "sharikna": MessageLookupByLibrary.simpleMessage("Sharikna"),
         "showPassword": MessageLookupByLibrary.simpleMessage("Show password"),
         "signUp": MessageLookupByLibrary.simpleMessage("Sign up"),
         "small": MessageLookupByLibrary.simpleMessage("Small"),
+        "sslCertificateNotTrusted": MessageLookupByLibrary.simpleMessage(
+            "The server\'s SSL certificate is not trusted. Please check your network connection or contact the server administrator."),
         "statusBar": MessageLookupByLibrary.simpleMessage("Status bar"),
         "stayHere": MessageLookupByLibrary.simpleMessage("Stay here"),
         "support": MessageLookupByLibrary.simpleMessage("Support"),
@@ -201,8 +209,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "type": MessageLookupByLibrary.simpleMessage("Type"),
         "uHaveToVerifyAccountFirst": MessageLookupByLibrary.simpleMessage(
             "You have to verify your account first"),
+        "unknownErrorOccurred": MessageLookupByLibrary.simpleMessage(
+            "An unknown error occurred. Please try again later or contact support for assistance."),
         "unmuteNotification":
             MessageLookupByLibrary.simpleMessage("Unmute notification"),
+        "userIsNotActivePleaseContactSupportForFurtherAssistance":
+            MessageLookupByLibrary.simpleMessage(
+                "User is not active. Please contact support for further assistance."),
         "userNotEmailPasswordToNewPass": MessageLookupByLibrary.simpleMessage(
             "User is not email_password to make new pass"),
         "userNotEmailPasswordToSendVerificationCode":

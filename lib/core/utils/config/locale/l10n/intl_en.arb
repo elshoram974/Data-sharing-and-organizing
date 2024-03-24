@@ -136,5 +136,11 @@
     "openFiles": "Open files",
     "theImageYouAreTryingToDeleteDoesNotExist": "The image you are trying to delete does not exist.",
     "theUploadedFileTypeIsNotSupportedPleaseUploadAnImageFile": "The uploaded file type is not supported. Please upload an image file.",
-    "theUploadedFileExceedsTheMaximumAllowedSizePleaseUploadSmallerFile": "The uploaded file exceeds the maximum allowed size. Please upload a smaller file."
+    "theUploadedFileExceedsTheMaximumAllowedSizePleaseUploadSmallerFile": "The uploaded file exceeds the maximum allowed size. Please upload a smaller file.",
+    "userIsNotActivePleaseContactSupportForFurtherAssistance": "User is not active. Please contact support for further assistance.",
+    "unknownErrorOccurred": "An unknown error occurred. Please try again later or contact support for assistance.",
+    "clientTookTooLong": "The client took too long to send the request. Please check your network connection and try again.",
+    "serverTookTooLong": "The server took too long to send a response. Please try again later.",
+    "sslCertificateNotTrusted": "The server's SSL certificate is not trusted. Please check your network connection or contact the server administrator.",
+    "serverTookTooLongToRespond": "The server took too long to respond. Please try again later."
 }

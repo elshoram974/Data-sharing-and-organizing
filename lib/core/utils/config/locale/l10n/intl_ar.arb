@@ -136,5 +136,11 @@
     "openFiles": "فتح الملفات",
     "theImageYouAreTryingToDeleteDoesNotExist": "الصورة التي تحاول حذفها غير موجودة.",
     "theUploadedFileTypeIsNotSupportedPleaseUploadAnImageFile": "نوع الملف المرفوع غير مدعوم. يرجى تحميل ملف صورة.",
-    "theUploadedFileExceedsTheMaximumAllowedSizePleaseUploadSmallerFile": "حجم الملف المرفوع يتجاوز الحد الأقصى المسموح به. يرجى تحميل ملف أصغر."
+    "theUploadedFileExceedsTheMaximumAllowedSizePleaseUploadSmallerFile": "حجم الملف المرفوع يتجاوز الحد الأقصى المسموح به. يرجى تحميل ملف أصغر.",
+    "userIsNotActivePleaseContactSupportForFurtherAssistance": "المستخدم غير نشط. يرجى الاتصال بالدعم للمساعدة الإضافية.",
+    "unknownErrorOccurred": "حدث خطأ غير معروف. يرجى المحاولة مرة أخرى في وقت لاحق أو الاتصال بالدعم للمساعدة.",
+    "clientTookTooLong": "العميل استغرق وقتًا طويلاً في إرسال الطلب. يرجى التحقق من اتصال الشبكة الخاص بك والمحاولة مرة أخرى.",
+    "serverTookTooLong": "استغرق الخادم وقتًا طويلاً في إرسال الاستجابة. يرجى المحاولة مرة أخرى لاحقًا.",
+    "sslCertificateNotTrusted": "شهادة SSL للخادم غير موثوق بها. يرجى التحقق من اتصال الشبكة الخاص بك أو الاتصال بمسؤول الخادم.",
+    "serverTookTooLongToRespond": "استغرق الخادم وقتًا طويلاً في الرد. يرجى المحاولة مرة أخرى لاحقًا."
 }

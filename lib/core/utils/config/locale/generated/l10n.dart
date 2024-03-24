@@ -1353,6 +1353,66 @@ class S {
       args: [],
     );
   }
+
+  /// `User is not active. Please contact support for further assistance.`
+  String get userIsNotActivePleaseContactSupportForFurtherAssistance {
+    return Intl.message(
+      'User is not active. Please contact support for further assistance.',
+      name: 'userIsNotActivePleaseContactSupportForFurtherAssistance',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `An unknown error occurred. Please try again later or contact support for assistance.`
+  String get unknownErrorOccurred {
+    return Intl.message(
+      'An unknown error occurred. Please try again later or contact support for assistance.',
+      name: 'unknownErrorOccurred',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `The client took too long to send the request. Please check your network connection and try again.`
+  String get clientTookTooLong {
+    return Intl.message(
+      'The client took too long to send the request. Please check your network connection and try again.',
+      name: 'clientTookTooLong',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `The server took too long to send a response. Please try again later.`
+  String get serverTookTooLong {
+    return Intl.message(
+      'The server took too long to send a response. Please try again later.',
+      name: 'serverTookTooLong',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `The server's SSL certificate is not trusted. Please check your network connection or contact the server administrator.`
+  String get sslCertificateNotTrusted {
+    return Intl.message(
+      'The server\'s SSL certificate is not trusted. Please check your network connection or contact the server administrator.',
+      name: 'sslCertificateNotTrusted',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `The server took too long to respond. Please try again later.`
+  String get serverTookTooLongToRespond {
+    return Intl.message(
+      'The server took too long to respond. Please try again later.',
+      name: 'serverTookTooLongToRespond',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
