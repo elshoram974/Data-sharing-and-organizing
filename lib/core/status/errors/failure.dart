@@ -1,11 +1,12 @@
 import '../status.dart';
+import 'failure_body.dart';
 
 class Failure<T> extends Status<T> {
-  final String error;
+  final FailureBody failure;
   final T? data;
-  const Failure(this.error, [this.data]);
+  const Failure(this.failure, [this.data]);
 
-  Failure<T> copyWith({String? error, T? data}) {
-    return Failure(error ?? this.error, data ?? this.data);
+  Failure<T> copyWith({FailureBody? failure, String? error, T? data}) {
+    return Failure(failure ?? this.failure, data ?? this.data);
   }
 }
