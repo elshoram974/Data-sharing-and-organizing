@@ -25,7 +25,8 @@ class ForgotPasswordFields extends StatelessWidget {
               onChanged: (val) => c.newPassword = val,
               textInputAction: TextInputAction.next,
               onFieldSubmitted: (_) => c.focusNode.requestFocus(),
-              validator: (val) => AppValidator.auth(val, 8, 200, FieldType.password),
+              validator: (val) =>
+                  AppValidator.auth(val, 8, 200, FieldType.password),
             ),
             AuthPasswordField(
               label: S.of(context).confirmPassword,

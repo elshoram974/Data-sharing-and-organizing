@@ -14,15 +14,16 @@ class EmailField extends StatelessWidget {
   Widget build(BuildContext context) {
     final RecoverAccountCubit cubit = ProviderDependency.recoverAccount;
     return AuthField(
-      fieldKey: cubit.formKey ,
+      fieldKey: cubit.formKey,
       label: S.of(context).emailAddress,
       hint: S.of(context).emailAddress,
       autofillHints: const [AutofillHints.email],
       keyboardType: TextInputType.emailAddress,
       textInputAction: TextInputAction.done,
       onSaved: (val) => cubit.email = val!.trim(),
-      onFieldSubmitted: (_) => cubit.recoverAccount() ,
-      validator: (val) => AppValidator.auth(val?.trim(), 0, 200, FieldType.email),
+      onFieldSubmitted: (_) => cubit.recoverAccount(),
+      validator: (val) =>
+          AppValidator.auth(val?.trim(), 0, 200, FieldType.email),
     );
   }
 }

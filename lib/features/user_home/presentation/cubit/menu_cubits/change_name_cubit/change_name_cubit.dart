@@ -45,9 +45,9 @@ class ChangeNameCubit extends Cubit<ChangeNameState> {
       EasyLoading.showSuccess(S.current.nameChangedSuccessfully);
     } else {
       status as Failure<AuthUserEntity>;
-      emit(ChangeNameFailure(status.error));
+      emit(ChangeNameFailure(status.failure.message));
       EasyLoading.showError(
-        status.error,
+        status.failure.message,
         duration: const Duration(seconds: 5),
       );
     }

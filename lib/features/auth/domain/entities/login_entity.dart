@@ -7,7 +7,7 @@ final class LoginUserEntity extends AuthUserEntity {
     required super.email,
     required super.password,
     this.keepLogin = true,
-  }) : super(id:0, name: '', userType: UserType.personal);
+  }) : super(id: 0, name: '', userType: UserType.personal);
 
   factory LoginUserEntity.none() =>
       const LoginUserEntity(email: '', password: '');

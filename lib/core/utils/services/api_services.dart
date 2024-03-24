@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
 
-
 import 'package:http/http.dart' as http;
 
 import '../exceptions/http_exception.dart';
@@ -34,7 +33,7 @@ class APIServices {
   Future<Map<String, dynamic>> uploadFile({
     required final String link,
     required final String fieldName,
-    required final MyFileData  fileToUpload,
+    required final MyFileData fileToUpload,
     required final Map<String, String> body,
   }) async {
     final http.MultipartRequest request =

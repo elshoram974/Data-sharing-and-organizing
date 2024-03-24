@@ -28,7 +28,8 @@ final class HandlePickedImage {
   static Future<MyFileData?> pickImage(ImageSource source) async {
     final XFile? image = await sl.get<ImagePicker>().pickImage(source: source);
     if (image == null) return null;
-    final String mimeType = image.mimeType ?? 'image/${image.path.split('.').last}';
+    final String mimeType =
+        image.mimeType ?? 'image/${image.path.split('.').last}';
     final List<String> mime = mimeType.split('/');
     if (mime.first != 'image') return null;
 

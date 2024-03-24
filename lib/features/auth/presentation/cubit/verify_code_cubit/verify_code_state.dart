@@ -14,6 +14,7 @@ final class VerifyCodeInitial extends VerifyCodeState {
 final class VerifyCodeLoadingState extends VerifyCodeState {
   const VerifyCodeLoadingState();
 }
+
 final class VerifyCodeLoadingResendCodeState extends VerifyCodeState {
   final int duration;
   const VerifyCodeLoadingResendCodeState(this.duration);

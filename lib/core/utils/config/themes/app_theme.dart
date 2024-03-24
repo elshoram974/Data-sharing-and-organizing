@@ -53,6 +53,7 @@ class AppTheme {
     final SchedulerBinding s = SchedulerBinding.instance;
     final Brightness brightness = s.platformDispatcher.platformBrightness;
     final ThemeMode themeMode = ProviderDependency.config.themeMode;
-    return (brightness == Brightness.dark && themeMode == ThemeMode.system) || themeMode == ThemeMode.dark;
+    return (brightness == Brightness.dark && themeMode == ThemeMode.system) ||
+        themeMode == ThemeMode.dark;
   }
 }

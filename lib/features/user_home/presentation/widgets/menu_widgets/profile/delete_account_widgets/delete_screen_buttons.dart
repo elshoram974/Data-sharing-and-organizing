@@ -54,7 +54,7 @@ class DeleteScreenButtons extends StatelessWidget {
       }
     } else {
       EasyLoading.showError(
-        (status as Failure<bool>).error,
+        (status as Failure<bool>).failure.message,
         duration: const Duration(seconds: 5),
       );
     }

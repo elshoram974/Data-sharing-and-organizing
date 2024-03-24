@@ -13,10 +13,11 @@ class RecoverBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ProviderDependency.recoverAccount = BlocProvider.of<RecoverAccountCubit>(context);
+    ProviderDependency.recoverAccount =
+        BlocProvider.of<RecoverAccountCubit>(context);
 
     return AuthBody(
-      previousRouteNameFunction:(_)=> S.of(_).recoverYourAccount,
+      previousRouteNameFunction: (_) => S.of(_).recoverYourAccount,
       introHeader: S.of(context).recoverYourAccount,
       introBody: S.of(context).enterYourCredentialsToContinue,
       onWillPop: ProviderDependency.recoverAccount.onWillPop,

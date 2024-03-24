@@ -60,7 +60,7 @@ class LoginCubit extends Cubit<LoginState> {
       final User data = loginState.data;
       await _inSuccess(data.copyWith(password: password));
     } else if (loginState is Failure<User>) {
-      final String error = loginState.error;
+      final String error = loginState.failure.message;
       _inFailure(error);
     }
   }
@@ -78,13 +78,16 @@ class LoginCubit extends Cubit<LoginState> {
       if (data.userType == UserType.business) {
         // TODO: to admin home
       } else {
-        AppRoute.key.currentContext?.pushReplacement(AppRoute.userHome, extra: data);
+        AppRoute.key.currentContext
+            ?.pushReplacement(AppRoute.userHome, extra: data);
       }
     } else {
-      if (data.userStatus == UserStatus.pending && data.userStatusMessage == 'want to verify the account') {
+      if (data.userStatus == UserStatus.pending &&
+          data.userStatusMessage == 'want to verify the account') {
         await ShowMyDialog.verifyDialog(data);
       } else {
-        await ShowMyDialog.accountStatusChanged(AppRoute.key.currentContext!, data);
+        await ShowMyDialog.accountStatusChanged(
+            AppRoute.key.currentContext!, data);
       }
     }
   }
@@ -99,7 +102,7 @@ class LoginCubit extends Cubit<LoginState> {
       final User data = loginState.data;
       await _inSuccess(data);
     } else if (loginState is Failure<User>) {
-      final String error = loginState.error;
+      final String error = loginState.failure.message;
       _inFailure(error);
     }
   }

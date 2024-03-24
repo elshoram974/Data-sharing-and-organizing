@@ -1,6 +1,5 @@
 import 'package:equatable/equatable.dart';
 
-
 final class HomePopUpItemEntity<T> extends Equatable {
   final T value;
   final String text;

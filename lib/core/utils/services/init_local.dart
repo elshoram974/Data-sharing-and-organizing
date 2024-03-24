@@ -6,8 +6,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 
 import '../enums/message_type/message_type.dart';
 
-  late final Box<String> config ;
-
+late final Box<String> config;
 
 Future<void> localInstance() async {
   await Future.wait([
@@ -16,9 +15,9 @@ Future<void> localInstance() async {
   _registerAdapterFn();
 
   await Future.wait([
-     Hive.openBox<AuthUserEntity>(AppStrings.userBox),
-     Hive.openBox<GroupHomeEntity>(AppStrings.groupsBox),
-     Hive.openBox<String>(AppStrings.localConfig),
+    Hive.openBox<AuthUserEntity>(AppStrings.userBox),
+    Hive.openBox<GroupHomeEntity>(AppStrings.groupsBox),
+    Hive.openBox<String>(AppStrings.localConfig),
   ]);
 
   _makeConfigInstance();
@@ -31,4 +30,5 @@ void _registerAdapterFn() {
   Hive.registerAdapter<GroupHomeEntity>(GroupHomeEntityAdapter());
 }
 
-Future<void> _makeConfigInstance() async => config = Hive.box<String>(AppStrings.localConfig);
+Future<void> _makeConfigInstance() async =>
+    config = Hive.box<String>(AppStrings.localConfig);

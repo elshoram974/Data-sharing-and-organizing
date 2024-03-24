@@ -67,8 +67,9 @@ class User extends AuthUserEntity {
       userStatus: userStatus ?? this.userStatus,
       userStatusMessage: userStatusMessage ?? this.userStatusMessage,
       userImage: image ?? this.image,
-      accountCreatedDatetime: accountCreatedDatetime ??this.accountCreatedDatetime,
-      accountLastlogin:  accountLastlogin ?? this.accountLastlogin,
+      accountCreatedDatetime:
+          accountCreatedDatetime ?? this.accountCreatedDatetime,
+      accountLastlogin: accountLastlogin ?? this.accountLastlogin,
       userProvider: userProvider ?? this.userProvider,
     );
   }

@@ -22,7 +22,8 @@ class DarkModeListTile extends StatelessWidget {
     final ConfigCubit cubit = ProviderDependency.config;
     return MySwitchListTile(
       contentPadding: EdgeInsets.zero,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppConst.borderRadius)),
+      shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(AppConst.borderRadius)),
       title: Row(
         children: [
           Icon(Icons.dark_mode_outlined, color: color),

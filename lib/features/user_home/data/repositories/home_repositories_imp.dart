@@ -46,7 +46,9 @@ class HomeRepositoriesImp extends HomeRepositories {
         groups.clear();
         final HomeData results = await remoteDataSource.getGroups(user);
         groups.addAll(results.groups);
-        return (await localDataSource.saveGroups(groups, results.user)).where((group) => group.ownerId == user.id).toList();
+        return (await localDataSource.saveGroups(groups, results.user))
+            .where((group) => group.ownerId == user.id)
+            .toList();
       },
       () async {
         groups.clear();
@@ -72,6 +74,7 @@ class HomeRepositoriesImp extends HomeRepositories {
 
   @override
   Future<Status<Iterable<int>>> markAsUnRead(List<GroupHomeEntity> groups) {
-    return executeAndHandleErrors<Iterable<int>>(()=> localDataSource.markAsUnRead(groups));
+    return executeAndHandleErrors<Iterable<int>>(
+        () => localDataSource.markAsUnRead(groups));
   }
 }

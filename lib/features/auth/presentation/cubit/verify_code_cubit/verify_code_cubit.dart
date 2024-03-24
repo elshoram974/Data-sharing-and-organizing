@@ -54,7 +54,7 @@ class VerifyCodeCubit extends Cubit<VerifyCodeState> {
     if (verifyStatus is Success<User>) {
       _verifySuccess(verifyStatus.data, nextRoute);
     } else if (verifyStatus is Failure<User>) {
-      _failureState(verifyStatus.error);
+      _failureState(verifyStatus.failure.message);
     }
   }
 
@@ -93,7 +93,7 @@ class VerifyCodeCubit extends Cubit<VerifyCodeState> {
     if (status is Success<User>) {
       _start();
     } else if (status is Failure<User>) {
-      _failureState(status.error);
+      _failureState(status.failure.message);
     }
   }
 

@@ -53,7 +53,7 @@ class CreateNewPasswordCubit extends Cubit<CreateNewPasswordState> {
     if (savedStatus is Success<User>) {
       _savedSuccess(savedStatus.data.copyWith(password: newPassword));
     } else if (savedStatus is Failure<User>) {
-      _failureState(savedStatus.error);
+      _failureState(savedStatus.failure.message);
     }
   }
 

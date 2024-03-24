@@ -28,7 +28,7 @@ class ResendWidget extends StatelessWidget {
           ),
           prefixText: S.of(context).noCodeReceived,
           buttonText: S.of(context).resend,
-          onTap: cubit.waitingTime == 0 ? ()=> cubit.resendCode() : null,
+          onTap: cubit.waitingTime == 0 ? () => cubit.resendCode() : null,
         );
       },
     );

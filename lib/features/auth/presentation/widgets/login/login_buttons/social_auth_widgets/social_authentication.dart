@@ -14,7 +14,8 @@ class SocialAuthentication extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        MyTitleDivider(title: S.of(context).orConnectUsing).bottomPadding(AppConst.defaultPadding),
+        MyTitleDivider(title: S.of(context).orConnectUsing)
+            .bottomPadding(AppConst.defaultPadding),
         const ProvidersButtons()
       ],
     ).verticalPadding(25);

@@ -39,7 +39,7 @@ class RecoverAccountCubit extends Cubit<RecoverAccountState> {
     if (requestStatus is Success<User>) {
       _successStatus(requestStatus.data);
     } else if (requestStatus is Failure<User>) {
-      _failureStatus(requestStatus.error);
+      _failureStatus(requestStatus.failure.message);
     }
   }
 

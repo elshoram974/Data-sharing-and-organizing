@@ -9,7 +9,8 @@ class FullScreenWidget extends StatelessWidget {
     this.disposeLevel = DisposeLevel.medium,
     this.widgetInFullScreen,
     this.appBar,
-    this.openFullPage = true,required this.imageLink,
+    this.openFullPage = true,
+    required this.imageLink,
   });
 
   final String? imageLink;
@@ -61,7 +62,8 @@ class FullScreenPage extends StatefulWidget {
     this.backgroundColor = Colors.black,
     this.backgroundIsTransparent = true,
     this.disposeLevel = DisposeLevel.medium,
-    this.appBar, this.imageLink,
+    this.appBar,
+    this.imageLink,
   });
 
   final Widget child;

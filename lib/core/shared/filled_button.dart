@@ -30,7 +30,8 @@ class MyFilledButton extends StatelessWidget {
       ),
       child: Text(
         text,
-        style: style?.copyWith(color: Colors.white) ?? const TextStyle(color: Colors.white),
+        style: style?.copyWith(color: Colors.white) ??
+            const TextStyle(color: Colors.white),
       ),
     );
   }

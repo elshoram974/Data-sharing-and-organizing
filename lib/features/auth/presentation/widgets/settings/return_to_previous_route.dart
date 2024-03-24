@@ -7,7 +7,8 @@ import '../auth_filled_button.dart';
 
 class ReturnToPreviousRoute extends StatelessWidget {
   final String Function(BuildContext) previousRouteNameFunction;
-  const ReturnToPreviousRoute({super.key, required this.previousRouteNameFunction});
+  const ReturnToPreviousRoute(
+      {super.key, required this.previousRouteNameFunction});
 
   @override
   Widget build(BuildContext context) {

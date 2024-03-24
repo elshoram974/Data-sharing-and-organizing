@@ -5,13 +5,15 @@ import '../../../../auth/domain/entities/auth_user_entity.dart';
 import '../../entities/group_home_entity.dart';
 import '../../repositories/home_repositories.dart';
 
-final class ExitFromSomeGroups extends UseCase<bool, ({List<GroupHomeEntity> removedGroups, AuthUserEntity user})> {
+final class ExitFromSomeGroups extends UseCase<bool,
+    ({List<GroupHomeEntity> removedGroups, AuthUserEntity user})> {
   final HomeRepositories homeRepositories;
 
   const ExitFromSomeGroups(this.homeRepositories);
 
   @override
-  Future<Status<bool>> call(({List<GroupHomeEntity> removedGroups, AuthUserEntity user}) param) {
+  Future<Status<bool>> call(
+      ({List<GroupHomeEntity> removedGroups, AuthUserEntity user}) param) {
     return homeRepositories.exitFromSomeGroups(param);
   }
 }

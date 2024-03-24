@@ -40,9 +40,9 @@ class ChangePassCubit extends Cubit<ChangePassState> {
       EasyLoading.showSuccess('Password changed');
     } else {
       status as Failure<AuthUserEntity>;
-      emit(ChangePassFailure(status.error));
+      emit(ChangePassFailure(status.failure.message));
       EasyLoading.showError(
-        status.error,
+        status.failure.message,
         duration: const Duration(seconds: 5),
       );
     }

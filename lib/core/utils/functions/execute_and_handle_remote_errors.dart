@@ -1,4 +1,5 @@
 import '../../status/errors/failure.dart';
+import '../../status/errors/failure_body.dart';
 import '../../status/errors/server_failure.dart';
 import '../../status/status.dart';
 import '../../status/success/success.dart';
@@ -16,6 +17,6 @@ Future<Status<T>> executeAndHandleErrors<T>(
 
     if (e is MyHttpException) return ServerFailure<T>.fromHttpException(e).copyWith(data: data);
 
-    return Failure<T>(e.toString()).copyWith(data: data);
+    return Failure<T>(FailureBody(message: e.toString()), data);
   }
 }

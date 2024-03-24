@@ -44,12 +44,13 @@ class UserHomeCubit extends Cubit<UserHomeState> {
     if (status is Success<Iterable<int>>) {
       for (int i = 0; i < selectedGroups.length; i++) {
         final int listIndex = currentGroups.indexOf(selectedGroups[i]);
-        currentGroups[listIndex] = currentGroups[listIndex].copyWith(unReadCounter: 0);
+        currentGroups[listIndex] =
+            currentGroups[listIndex].copyWith(unReadCounter: 0);
       }
       emit(HomeSuccessState(currentGroups));
       _makeAllSelectedOrNot(false);
     } else if (status is Failure<Iterable<int>>) {
-      _failureStatus(status.error, true);
+      _failureStatus(status.failure.message, true);
     }
     EasyLoading.dismiss();
   }
@@ -68,7 +69,7 @@ class UserHomeCubit extends Cubit<UserHomeState> {
       emit(HomeSuccessState(currentGroups));
       if (currentGroups.length < 10) getGroups();
     } else if (status is Failure<bool>) {
-      _failureStatus(status.error, true);
+      _failureStatus(status.failure.message, true);
     }
     EasyLoading.dismiss();
   }
@@ -91,7 +92,7 @@ class UserHomeCubit extends Cubit<UserHomeState> {
       emit(HomeSuccessState(status.data));
     } else if (status is Failure<List<GroupHomeEntity>>) {
       currentGroups.addAll(status.data!);
-      _failureStatus(status.error, inFirst);
+      _failureStatus(status.failure.message, inFirst);
     }
   }
 

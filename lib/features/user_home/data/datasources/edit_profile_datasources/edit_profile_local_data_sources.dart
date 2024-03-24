@@ -7,17 +7,20 @@ import '../../../../auth/domain/entities/auth_user_entity.dart';
 abstract class EditProfileLocalDataSource {
   const EditProfileLocalDataSource();
 
-  Future<AuthUserEntity> changePassword(String newPass, AuthUserEntity userToReplace);
+  Future<AuthUserEntity> changePassword(
+      String newPass, AuthUserEntity userToReplace);
   Future<AuthUserEntity> changeUser(AuthUserEntity userToReplace);
 }
 
 class EditProfileLocalDataSourceImp extends EditProfileLocalDataSource {
   EditProfileLocalDataSourceImp();
 
-  late final Box<AuthUserEntity> _userBox = Hive.box<AuthUserEntity>(AppStrings.userBox);
+  late final Box<AuthUserEntity> _userBox =
+      Hive.box<AuthUserEntity>(AppStrings.userBox);
 
   @override
-  Future<AuthUserEntity> changePassword(String newPass, AuthUserEntity userToReplace) {
+  Future<AuthUserEntity> changePassword(
+      String newPass, AuthUserEntity userToReplace) {
     return changeUser(userToReplace, newPass);
   }
 

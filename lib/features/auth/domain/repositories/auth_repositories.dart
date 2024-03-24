@@ -12,7 +12,9 @@ abstract class AuthRepositories {
   Status<AuthUserEntity?> currentUser();
   Future<Status<void>> logOut();
   Future<Status<User>> signUp(AuthUserEntity user);
-  Future<Status<User>> requestToSendCode(({String email, VerificationType verification}) param);
-  Future<Status<User>> verifyCode(({int id , String code, VerificationType verification}) param);
-  Future<Status<User>> newPassword(({int id , String newPass}) param);
+  Future<Status<User>> requestToSendCode(
+      ({String email, VerificationType verification}) param);
+  Future<Status<User>> verifyCode(
+      ({int id, String code, VerificationType verification}) param);
+  Future<Status<User>> newPassword(({int id, String newPass}) param);
 }

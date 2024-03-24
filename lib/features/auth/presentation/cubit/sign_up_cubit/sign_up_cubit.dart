@@ -69,7 +69,7 @@ class SignUpCubit extends Cubit<SignUpState> {
     if (signUpStatus is Success<User>) {
       _successStatus(signUpStatus.data.copyWith(password: password));
     } else if (signUpStatus is Failure<User>) {
-      _failureStatus(signUpStatus.error);
+      _failureStatus(signUpStatus.failure.message);
     }
   }
 

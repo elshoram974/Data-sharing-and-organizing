@@ -13,7 +13,7 @@ void dataSourceDependency() {
   sl.registerSingleton<AuthRemoteDataSourceImp>(
     AuthRemoteDataSourceImp(sl.get<APIServices>()),
   );
-  
+
   // home
   sl.registerSingleton<HomeLocalDataSource>(HomeLocalDataSourceImp());
   sl.registerSingleton<HomeRemoteDataSource>(
@@ -21,7 +21,8 @@ void dataSourceDependency() {
   );
 
   // edit profile
-  sl.registerSingleton<EditProfileLocalDataSource>(EditProfileLocalDataSourceImp());
+  sl.registerSingleton<EditProfileLocalDataSource>(
+      EditProfileLocalDataSourceImp());
   sl.registerSingleton<EditProfileRemoteDataSource>(
     EditProfileRemoteDataSourceImp(sl.get<APIServices>()),
   );

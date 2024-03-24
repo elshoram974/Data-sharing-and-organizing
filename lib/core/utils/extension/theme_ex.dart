@@ -6,6 +6,7 @@ extension ThemeEx on BuildContext {
   bool get isDarkMode {
     final Brightness brightness = MediaQuery.platformBrightnessOf(this);
     final ThemeMode themeMode = ProviderDependency.config.themeMode;
-    return (brightness == Brightness.dark && themeMode == ThemeMode.system) || themeMode == ThemeMode.dark;
+    return (brightness == Brightness.dark && themeMode == ThemeMode.system) ||
+        themeMode == ThemeMode.dark;
   }
 }

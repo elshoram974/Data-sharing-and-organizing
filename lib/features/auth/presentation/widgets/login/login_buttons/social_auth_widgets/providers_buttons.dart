@@ -12,7 +12,8 @@ class ProvidersButtons extends StatelessWidget {
     return Row(
       children: [
         const Expanded(flex: 5, child: SizedBox()),
-        for (LoginProvidersViewModel e in LoginProvidersViewModel.providers) ...[
+        for (LoginProvidersViewModel e
+            in LoginProvidersViewModel.providers) ...[
           const Expanded(child: SizedBox()),
           InkWell(
             onTap: e.onTap,

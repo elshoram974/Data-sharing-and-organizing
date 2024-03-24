@@ -13,9 +13,10 @@ class CodeVerificationBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ProviderDependency.verificationCode = BlocProvider.of<VerifyCodeCubit>(context);
+    ProviderDependency.verificationCode =
+        BlocProvider.of<VerifyCodeCubit>(context);
     return AuthBody(
-      previousRouteNameFunction:(_)=> S.of(_).codeVerification,
+      previousRouteNameFunction: (_) => S.of(_).codeVerification,
       introHeader: S.of(context).codeVerification,
       introBody: S.of(context).enterDigitCodeThatHasBeenSentToYourEmail,
       onWillPop: ProviderDependency.verificationCode.onWillPop,

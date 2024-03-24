@@ -44,8 +44,8 @@ class ChangePhotoCubit extends Cubit<ChangePhotoState> {
       emit(ChangePhotoSuccess(imageLink ?? ''));
     } else {
       status as Failure<AuthUserEntity>;
-      emit(ChangePhotoFailure(status.error));
-      errMessage(status.error);
+      emit(ChangePhotoFailure(status.failure.message));
+      errMessage(status.failure.message);
     }
   }
 
@@ -66,8 +66,8 @@ class ChangePhotoCubit extends Cubit<ChangePhotoState> {
       emit(ChangePhotoSuccess(imageLink ?? ''));
     } else {
       status as Failure<AuthUserEntity>;
-      emit(ChangePhotoFailure(status.error));
-      errMessage(status.error);
+      emit(ChangePhotoFailure(status.failure.message));
+      errMessage(status.failure.message);
     }
   }
 

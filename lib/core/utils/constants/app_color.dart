@@ -1,7 +1,6 @@
 import 'package:data_sharing_organizing/core/utils/extension/theme_ex.dart';
 import 'package:flutter/material.dart';
 
-
 abstract final class AppColor {
   const AppColor();
   static const int _primaryInt = 0xFFF5576C;
@@ -19,7 +18,8 @@ abstract final class AppColor {
 
   static const Color _selectedLight = secondary;
   static const Color _selectedDark = Color(0xFF616161);
-  static Color selected(BuildContext _) =>  _.isDarkMode ? _selectedDark : _selectedLight;
+  static Color selected(BuildContext _) =>
+      _.isDarkMode ? _selectedDark : _selectedLight;
   static Color grayLightDark(BuildContext _) => _.isDarkMode ? gray : grayLight;
 
   // static const int _activeLightInt = 0xFFFF0022;

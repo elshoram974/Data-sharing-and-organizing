@@ -16,7 +16,7 @@ class ForgotPasswordScreen extends StatelessWidget {
     return BlocProvider(
       create: (context) => CreateNewPasswordCubit(
         userId: userId,
-        createNewPasswordUseCase: sl.get<NewPasswordUseCase>() ,
+        createNewPasswordUseCase: sl.get<NewPasswordUseCase>(),
       ),
       child: const Scaffold(body: ForgotPasswordBody()),
     );

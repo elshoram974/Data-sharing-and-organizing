@@ -11,7 +11,8 @@ import '../widgets/settings/return_to_previous_route.dart';
 
 class AuthSettingsScreen extends StatelessWidget {
   final String Function(BuildContext) previousRouteNameFunction;
-  const AuthSettingsScreen({super.key, required this.previousRouteNameFunction});
+  const AuthSettingsScreen(
+      {super.key, required this.previousRouteNameFunction});
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +33,8 @@ class AuthSettingsScreen extends StatelessWidget {
           SizedBox(height: h * 0.05),
           DarkModeListTile(color: color, style: style),
           SizedBox(height: h * 0.06),
-          ReturnToPreviousRoute(previousRouteNameFunction: previousRouteNameFunction),
+          ReturnToPreviousRoute(
+              previousRouteNameFunction: previousRouteNameFunction),
         ],
       ),
     );

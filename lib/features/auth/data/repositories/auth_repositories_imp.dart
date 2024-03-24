@@ -28,7 +28,8 @@ class AuthRepositoriesImp extends AuthRepositories {
       () async {
         User authUser = await remoteDataSource.login(user);
         if (user.keepLogin && authUser.userStatus == UserStatus.active) {
-          await localDataSource.saveUser(authUser.copyWith(password: user.password));
+          await localDataSource
+              .saveUser(authUser.copyWith(password: user.password));
         }
 
         return authUser;
@@ -97,7 +98,8 @@ class AuthRepositoriesImp extends AuthRepositories {
       Success(localDataSource.getCurrentUser());
 
   @override
-  Future<Status<void>> logOut() async => Success(await localDataSource.logOut());
+  Future<Status<void>> logOut() async =>
+      Success(await localDataSource.logOut());
 
   @override
   Future<Status<User>> newPassword(({int id, String newPass}) param) {

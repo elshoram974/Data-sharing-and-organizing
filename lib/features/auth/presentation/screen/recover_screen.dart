@@ -12,7 +12,8 @@ class RecoverScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => RecoverAccountCubit(sl.get<RequestToSendCodeUseCase>()),
+      create: (context) =>
+          RecoverAccountCubit(sl.get<RequestToSendCodeUseCase>()),
       child: const Scaffold(body: RecoverBody()),
     );
   }
