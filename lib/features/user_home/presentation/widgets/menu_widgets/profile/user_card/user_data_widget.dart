@@ -49,6 +49,8 @@ class _ImageInCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final ChangePhotoCubit c = BlocProvider.of<ChangePhotoCubit>(context);
 
+    c.imageLink = ProviderDependency.userMain.user.image;
+
     return BlocBuilder<ChangePhotoCubit, ChangePhotoState>(
       builder: (context, state) {
         return Align(

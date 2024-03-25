@@ -18,7 +18,7 @@ part 'change_photo_state.dart';
 class ChangePhotoCubit extends Cubit<ChangePhotoState> {
   ChangePhotoCubit(this.editProfileRepo) : super(ChangePhotoInitial());
   final EditProfileRepositories editProfileRepo;
-  String? imageLink = ProviderDependency.userMain.user.image;
+  String? imageLink;
 
   void changeImage(EditPhotoSelectedPopUpItem popupValue) async {
     switch (popupValue) {

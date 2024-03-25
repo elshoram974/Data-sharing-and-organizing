@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:data_sharing_organizing/core/utils/constants/app_strings.dart';
+import 'package:data_sharing_organizing/core/utils/services/dependency/provider_dependency.dart';
 import 'package:hive/hive.dart';
 
 import '../../../../auth/domain/entities/auth_user_entity.dart';
@@ -90,13 +91,12 @@ class HomeLocalDataSourceImp extends HomeLocalDataSource {
         CachedNetworkImage.evictFromCache(savedUser.image ?? ''),
     ]);
 
-    final AuthUserEntity userToSave = userToReplace;
-    userToSave.copyWith(
+    final AuthUserEntity userToSave = userToReplace.copyWith(
       password: savedUser.password,
-      image: userToReplace.image,
     );
+    ProviderDependency.userMain.user = userToSave;
 
-    await userBox.add(userToSave.copyWith(password: savedUser.password));
+    await userBox.add(userToSave);
     return userToSave;
   }
 }
