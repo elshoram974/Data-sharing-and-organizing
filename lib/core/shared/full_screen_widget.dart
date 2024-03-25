@@ -229,10 +229,7 @@ class _FullScreenPageState extends State<FullScreenPage>
                       widget.appBar?.preferredSize.height ?? 0 - positionYDelta,
                   left: 0,
                   right: 0,
-                  child: Hero(
-                    tag: widget.imageLink ?? UniqueKey(),
-                    child: widget.child,
-                  ),
+                  child: widget.child,
                 )
               ],
             ),
