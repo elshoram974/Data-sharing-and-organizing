@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../user_home/domain/entities/group_home_entity.dart';
-import '../../../user_home/presentation/widgets/main_screen_widgets/main_body.dart';
+import '../widgets/group_app_bar.dart';
 
 class UserGroupScreen extends StatelessWidget {
   const UserGroupScreen({super.key, required this.group});
@@ -10,10 +10,12 @@ class UserGroupScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MainBodyWidget(
-      children: [
-        Text(group.groupName),
-      ],
+    return Scaffold(
+      body: ListView(
+        children: [
+          GroupAppBar(group: group),
+        ],
+      ),
     );
   }
 }
