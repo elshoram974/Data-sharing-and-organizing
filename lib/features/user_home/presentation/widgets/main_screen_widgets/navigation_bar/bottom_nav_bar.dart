@@ -10,21 +10,34 @@ class BottomNavBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BottomNavigationBar(
-      currentIndex: navIndex,
-      showUnselectedLabels: false,
-      landscapeLayout: BottomNavigationBarLandscapeLayout.linear,
-      selectedItemColor: AppColor.active,
-      onTap: (_) => ProviderDependency.userMain.onNavChange(_, false),
-      items: [
-        for (MainScreens e in MainScreens.getItems(context))
-          BottomNavigationBarItem(
-            activeIcon: Icon(e.activeIcon),
-            icon: Icon(e.icon),
-            tooltip: e.name,
-            label: e.name,
+    return Container(
+      decoration: BoxDecoration(
+        boxShadow: [
+          BoxShadow(
+            blurRadius: 4,
+            spreadRadius: 4,
+            color: Colors.black.withOpacity(0.25),
+            offset: const Offset(0, 4),
           ),
-      ],
+        ]
+      ),
+      child: BottomNavigationBar(
+        currentIndex: navIndex,
+        showUnselectedLabels: false,
+        backgroundColor: AppColor.background(context),
+        landscapeLayout: BottomNavigationBarLandscapeLayout.linear,
+        selectedItemColor: AppColor.active,
+        onTap: (_) => ProviderDependency.userMain.onNavChange(_, false),
+        items: [
+          for (MainScreens e in MainScreens.getItems(context))
+            BottomNavigationBarItem(
+              activeIcon: Icon(e.activeIcon),
+              icon: Icon(e.icon),
+              tooltip: e.name,
+              label: e.name,
+            ),
+        ],
+      ),
     );
   }
 }

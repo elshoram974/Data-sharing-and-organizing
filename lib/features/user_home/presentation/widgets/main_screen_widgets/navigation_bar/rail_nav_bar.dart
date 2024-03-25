@@ -20,6 +20,7 @@ class NavigationRailBar extends StatelessWidget {
       selectedIndex: navIndex,
       labelType: inDesktopSize ? null : NavigationRailLabelType.selected,
       groupAlignment: -0.3,
+      backgroundColor: AppColor.background(context),
       extended: inDesktopSize,
       useIndicator: true,
       elevation: 10,
