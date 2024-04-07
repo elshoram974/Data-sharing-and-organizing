@@ -44,7 +44,20 @@ class ChatPage extends StatefulWidget {
 }
 
 class _ChatPageState extends State<ChatPage> {
-  List<types.Message> _messages = [];
+  List<types.Message> _messages = [
+    types.TextMessage(
+      createdAt: DateTime(2024, 4, 7, 16, 44).millisecondsSinceEpoch,
+      text: 'Hi there!\ni\'m Mohammed El Shora',
+      author: const types.User(
+        firstName: "Mohammed",
+        lastName: "El Shora",
+        role: types.Role.admin,
+        id: 'Mohammed El Shora',
+      ),
+      // duration: Duration(seconds: 5),
+      id: "aaa",
+    )
+  ];
   final _user = const types.User(
     id: '82091008-a484-4a89-ae75-a22bf8d6f3ac',
   );
