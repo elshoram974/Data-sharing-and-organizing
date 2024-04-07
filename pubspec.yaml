@@ -81,6 +81,15 @@ dependencies:
   # * pick file from device
   image_picker: ^1.0.7
   image_cropper: ^5.0.1
+  path_provider: ^2.1.2
+  file_picker: ^8.0.0+1
+  open_filex: ^4.4.0
+  mime: ^1.0.5
+
+  # * easy ui for chat
+  flutter_chat_ui: ^1.6.12
+  flutter_chat_types: ^3.6.2
+  bubble: ^1.2.1
 
 dev_dependencies:
   flutter_test:
