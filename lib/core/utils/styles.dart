@@ -21,6 +21,12 @@ abstract final class AppStyle {
     fontWeight: FontWeight.bold,
     fontFamily: AppStrings.inika,
   );
+  static const TextStyle styleBoldInika13 = TextStyle(
+    fontSize: 13,
+    color: Colors.white,
+    fontWeight: FontWeight.bold,
+    fontFamily: AppStrings.inika,
+  );
   static const TextStyle styleBoldInika24 = TextStyle(
     fontSize: 24,
     fontWeight: FontWeight.bold,
