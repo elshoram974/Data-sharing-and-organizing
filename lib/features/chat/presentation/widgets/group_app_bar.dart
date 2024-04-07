@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import '../../../user_home/domain/entities/group_home_entity.dart';
 import '../../../user_home/presentation/widgets/circular_image_widget.dart';
 
-class GroupAppBar extends StatelessWidget {
+class GroupAppBar extends StatelessWidget implements PreferredSizeWidget {
   const GroupAppBar({super.key, required this.group});
 
   final GroupHomeEntity group;
@@ -25,6 +25,7 @@ class GroupAppBar extends StatelessWidget {
         ],
       ),
       child: AppBar(
+        forceMaterialTransparency: true,
         title: Row(
           children: [
             CircularImageWidget(
@@ -42,4 +43,7 @@ class GroupAppBar extends StatelessWidget {
       ),
     );
   }
+
+  @override
+  Size get preferredSize => AppBar().preferredSize;
 }

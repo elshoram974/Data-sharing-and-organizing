@@ -1,9 +1,7 @@
 import 'package:bubble/bubble.dart';
 import 'package:data_sharing_organizing/core/utils/constants/app_color.dart';
 import 'package:data_sharing_organizing/core/utils/constants/app_constants.dart';
-import 'package:data_sharing_organizing/core/utils/enums/user_role/user_type_enum.dart';
 import 'package:data_sharing_organizing/core/utils/functions/convert_date_to_string.dart';
-import 'package:data_sharing_organizing/core/utils/services/dependency/provider_dependency.dart';
 import 'package:data_sharing_organizing/core/utils/styles.dart';
 import 'package:flutter/material.dart';
 
@@ -14,17 +12,17 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
 import 'package:flutter_chat_ui/flutter_chat_ui.dart';
+import 'package:flutter_chat_ui/src/models/date_header.dart';
 import 'package:http/http.dart' as http;
 import 'package:image_picker/image_picker.dart';
+import 'package:intl/intl.dart';
 import 'package:mime/mime.dart';
 import 'package:open_filex/open_filex.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:uuid/uuid.dart';
 
-import '../../../auth/domain/entities/auth_user_entity.dart';
 import '../../../user_home/domain/entities/group_home_entity.dart';
 import '../widgets/group_app_bar.dart';
-import '../widgets/message_widgets/message_widget.dart';
 
 class UserGroupScreen extends StatelessWidget {
   const UserGroupScreen({super.key, required this.group});
@@ -33,38 +31,13 @@ class UserGroupScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChatPage();
-    // return Scaffold(
-    //   body: Column(
-    //     children: [
-    //       GroupAppBar(group: group),
-    //       Expanded(
-    //         child: CustomScrollView(
-    //           slivers: [
-    //             ...List.generate(
-    //               20,
-    //               (index) => MessageWidget(
-    //                 messageCreator: index % 2 == 0
-    //                     ? const AuthUserEntity(
-    //                         id: 20,
-    //                         name: 'name',
-    //                         email: 'email',
-    //                         password: 'password',
-    //                         userType: UserType.personal)
-    //                     : ProviderDependency.userMain.user,
-    //               ),
-    //             ),
-    //           ],
-    //         ),
-    //       ),
-    //     ],
-    //   ),
-    // );
+    return ChatPage(group: group);
   }
 }
 
 class ChatPage extends StatefulWidget {
-  const ChatPage({super.key});
+  const ChatPage({super.key, required this.group});
+  final GroupHomeEntity group;
 
   @override
   State<ChatPage> createState() => _ChatPageState();
@@ -258,55 +231,117 @@ class _ChatPageState extends State<ChatPage> {
     });
   }
 
-  @override
-  Widget build(BuildContext context) => Scaffold(
-        body: Chat(
-          onAvatarTap: (p0) {},
-          onMessageLongPress: (context, p1) {},
-          messages: _messages,
-          onAttachmentPressed: _handleAttachmentPressed,
-          onMessageTap: _handleMessageTap,
-          onPreviewDataFetched: _handlePreviewDataFetched,
-          onSendPressed: _handleSendPressed,
-          showUserAvatars: true,
-          showUserNames: true,
-          bubbleBuilder: (
-            Widget child, {
-            required message,
-            required nextMessageInGroup,
-          }) =>
-              Bubble(
-            padding: const BubbleEdges.all(0),
-            radius: const Radius.circular(5),
-            color: _user.id != message.author.id
-                ? const Color(0xFFC8C8C8)
-                : AppColor.primary,
-            margin: nextMessageInGroup
-                ? const BubbleEdges.symmetric(horizontal: 6)
-                : null,
-            nip: nextMessageInGroup
-                ? BubbleNip.no
-                : _user.id != message.author.id
-                    ? BubbleNip.leftBottom
-                    : BubbleNip.rightBottom,
-            child: child,
+  Column customBubble(
+    Widget child, {
+    required types.Message message,
+    required bool nextMessageInGroup,
+  }) {
+    final bool isTheUser = _user.id == message.author.id;
+    return Column(
+      crossAxisAlignment:
+          isTheUser ? CrossAxisAlignment.end : CrossAxisAlignment.start,
+      children: [
+        Bubble(
+          padding: const BubbleEdges.all(0),
+          radius: const Radius.circular(5),
+          color: isTheUser ? AppColor.primary : const Color(0xFFC8C8C8),
+          margin: nextMessageInGroup
+              ? const BubbleEdges.symmetric(horizontal: 6)
+              : null,
+          nip: nextMessageInGroup
+              ? BubbleNip.no
+              : isTheUser
+                  ? BubbleNip.rightBottom
+                  : BubbleNip.leftBottom,
+          child: child,
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(
+            horizontal: 6,
+            vertical: 2,
           ),
-          user: _user,
-          theme: DefaultChatTheme(
-            primaryColor: AppColor.primary,
-            backgroundColor: AppColor.background(context),
-            inputBorderRadius: BorderRadius.zero,
-            secondaryColor: const Color(0xFFC8C8C8),
-            messageBorderRadius: 5,
-            messageInsetsVertical: 8,
-            messageInsetsHorizontal: 8,
-            sentMessageBodyTextStyle: AppStyle.styleBoldInika13,
-            inputTextStyle: AppStyle.styleBoldInika13,
-            attachmentButtonIcon: const Icon(
-              Icons.attach_file_outlined,
-              color: Colors.white,
+          child: Text(
+            DateFormat.jm().format(
+              DateTime.fromMillisecondsSinceEpoch(message.createdAt ?? 0),
             ),
+            style: const TextStyle(fontSize: 8, color: AppColor.gray),
           ),
         ),
-      );
+      ],
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: GroupAppBar(group: widget.group),
+      body: Chat(
+        onAvatarTap: (p0) {},
+        onMessageLongPress: (context, p1) {},
+        messages: _messages,
+        onAttachmentPressed: _handleAttachmentPressed,
+        onMessageTap: _handleMessageTap,
+        onPreviewDataFetched: _handlePreviewDataFetched,
+        onSendPressed: _handleSendPressed,
+        showUserAvatars: true,
+        showUserNames: true,
+        bubbleBuilder: customBubble,
+        dateHeaderBuilder: (_) => dateHeader(context, _),
+        user: _user,
+        theme: DefaultChatTheme(
+          inputMargin: const EdgeInsets.only(
+            left: AppConst.defaultPadding,
+            right: AppConst.defaultPadding,
+            bottom: 0.5 * AppConst.defaultPadding,
+          ),
+          primaryColor: AppColor.primary,
+          backgroundColor: AppColor.background(context),
+          inputBorderRadius: BorderRadius.circular(15),
+          secondaryColor: const Color(0xFFC8C8C8),
+          messageBorderRadius: 5,
+          messageInsetsVertical: 8,
+          messageInsetsHorizontal: 8,
+          sentMessageBodyTextStyle: AppStyle.styleBoldInika13,
+          receivedMessageBodyTextStyle: AppStyle.styleBoldInika13,
+          inputTextStyle: AppStyle.styleBoldInika13,
+          inputElevation: 1,
+          inputPadding: EdgeInsets.zero,
+          inputBackgroundColor: AppColor.grayLightDark(context),
+          attachmentButtonIcon: const MyAttachmentButtonIcon(),
+        ),
+      ),
+    );
+  }
+
+  Bubble dateHeader(BuildContext context, DateHeader dateHeader) {
+    return Bubble(
+      margin: const BubbleEdges.only(
+        top: AppConst.defaultPadding,
+        bottom: 0.5 * AppConst.defaultPadding,
+      ),
+      alignment: Alignment.center,
+      nip: BubbleNip.no,
+      color: AppColor.grayLightDark(context),
+      child: Text(
+        DateToString.call(dateHeader.dateTime, false),
+        textAlign: TextAlign.center,
+        style: const TextStyle(fontSize: 11.0),
+      ),
+    );
+  }
+}
+
+class MyAttachmentButtonIcon extends StatelessWidget {
+  const MyAttachmentButtonIcon({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Transform.rotate(
+      angle: 45,
+      child: const Icon(
+        Icons.attach_file_outlined,
+        color: Colors.white,
+      ),
+    );
+  }
 }
