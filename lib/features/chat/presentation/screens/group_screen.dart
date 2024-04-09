@@ -15,7 +15,7 @@ import 'package:flutter_chat_ui/flutter_chat_ui.dart';
 import 'package:flutter_chat_ui/src/models/date_header.dart';
 import 'package:http/http.dart' as http;
 import 'package:image_picker/image_picker.dart';
-import 'package:intl/intl.dart';
+import 'package:intl/intl.dart' as intl;
 import 'package:mime/mime.dart';
 import 'package:open_filex/open_filex.dart';
 import 'package:path_provider/path_provider.dart';
@@ -244,43 +244,50 @@ class _ChatPageState extends State<ChatPage> {
     });
   }
 
-  Column customBubble(
+  Directionality customBubble(
     Widget child, {
     required types.Message message,
     required bool nextMessageInGroup,
   }) {
     final bool isTheUser = _user.id == message.author.id;
-    return Column(
-      crossAxisAlignment:
-          isTheUser ? CrossAxisAlignment.end : CrossAxisAlignment.start,
-      children: [
-        Bubble(
-          padding: const BubbleEdges.all(0),
-          radius: const Radius.circular(5),
-          color: isTheUser ? AppColor.primary : const Color(0xFFC8C8C8),
-          margin: nextMessageInGroup
-              ? const BubbleEdges.symmetric(horizontal: 6)
-              : null,
-          nip: nextMessageInGroup
-              ? BubbleNip.no
-              : isTheUser
-                  ? BubbleNip.rightBottom
-                  : BubbleNip.leftBottom,
-          child: child,
-        ),
-        Padding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: 6,
-            vertical: 2,
-          ),
-          child: Text(
-            DateFormat.jm().format(
-              DateTime.fromMillisecondsSinceEpoch(message.createdAt ?? 0),
+    return Directionality(
+      textDirection: TextDirection.ltr,
+      child: Column(
+        crossAxisAlignment:
+            isTheUser ? CrossAxisAlignment.end : CrossAxisAlignment.start,
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(left: 8, bottom: 2),
+            child: Text(
+              "${message.author.firstName ?? ''} ${message.author.lastName ?? ''}",
+              style: AppStyle.styleBoldInika16.copyWith(fontSize: 10),
             ),
-            style: const TextStyle(fontSize: 8, color: AppColor.gray),
           ),
-        ),
-      ],
+          Bubble(
+            padding: const BubbleEdges.all(0),
+            radius: const Radius.circular(5),
+            color:
+                isTheUser ? AppColor.primary : AppColor.grayLightDark(context),
+            margin: !nextMessageInGroup
+                ? const BubbleEdges.symmetric(horizontal: 6)
+                : null,
+            nip: isTheUser ? BubbleNip.rightTop : BubbleNip.leftTop,
+            child: child,
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(
+              horizontal: 14,
+              vertical: 2,
+            ),
+            child: Text(
+              intl.DateFormat.jm().format(
+                DateTime.fromMillisecondsSinceEpoch(message.createdAt ?? 0),
+              ),
+              style: const TextStyle(fontSize: 8, color: AppColor.gray),
+            ),
+          ),
+        ],
+      ),
     );
   }
 
@@ -301,6 +308,7 @@ class _ChatPageState extends State<ChatPage> {
         bubbleBuilder: customBubble,
         dateHeaderBuilder: (_) => dateHeader(context, _),
         user: _user,
+        nameBuilder: (u) => const SizedBox.shrink(),
         theme: DefaultChatTheme(
           inputMargin: const EdgeInsets.only(
             left: AppConst.defaultPadding,
@@ -310,7 +318,7 @@ class _ChatPageState extends State<ChatPage> {
           primaryColor: AppColor.primary,
           backgroundColor: AppColor.background(context),
           inputBorderRadius: BorderRadius.circular(15),
-          secondaryColor: const Color(0xFFC8C8C8),
+          secondaryColor: AppColor.grayLightDark(context),
           messageBorderRadius: 5,
           messageInsetsVertical: 8,
           messageInsetsHorizontal: 8,
@@ -336,9 +344,13 @@ class _ChatPageState extends State<ChatPage> {
       nip: BubbleNip.no,
       color: AppColor.grayLightDark(context),
       child: Text(
-        DateToString.call(dateHeader.dateTime, false),
+        DateToString.call(dateHeader.dateTime, true),
         textAlign: TextAlign.center,
-        style: const TextStyle(fontSize: 11.0),
+        style: const TextStyle(
+          fontSize: 11.0,
+          color: Colors.black38,
+          fontWeight: FontWeight.bold,
+        ),
       ),
     );
   }
