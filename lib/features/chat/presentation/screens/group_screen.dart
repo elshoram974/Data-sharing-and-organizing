@@ -2,6 +2,7 @@ import 'package:bubble/bubble.dart';
 import 'package:data_sharing_organizing/core/utils/constants/app_color.dart';
 import 'package:data_sharing_organizing/core/utils/constants/app_constants.dart';
 import 'package:data_sharing_organizing/core/utils/functions/convert_date_to_string.dart';
+import 'package:data_sharing_organizing/core/utils/functions/detect_text_direction.dart';
 import 'package:data_sharing_organizing/core/utils/styles.dart';
 import 'package:flutter/material.dart';
 
@@ -31,19 +32,19 @@ class UserGroupScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChatPage(group: group);
+    return ChatScreen(group: group);
   }
 }
 
-class ChatPage extends StatefulWidget {
-  const ChatPage({super.key, required this.group});
+class ChatScreen extends StatefulWidget {
+  const ChatScreen({super.key, required this.group});
   final GroupHomeEntity group;
 
   @override
-  State<ChatPage> createState() => _ChatPageState();
+  State<ChatScreen> createState() => _ChatScreenState();
 }
 
-class _ChatPageState extends State<ChatPage> {
+class _ChatScreenState extends State<ChatScreen> {
   List<types.Message> _messages = [
     types.TextMessage(
       createdAt: DateTime(2024, 4, 7, 16, 44).millisecondsSinceEpoch,
@@ -250,33 +251,40 @@ class _ChatPageState extends State<ChatPage> {
     required bool nextMessageInGroup,
   }) {
     final bool isTheUser = _user.id == message.author.id;
+    final bool isTextMessage = message is types.TextMessage;
+    const double border = 5;
     return Directionality(
       textDirection: TextDirection.ltr,
       child: Column(
         crossAxisAlignment:
             isTheUser ? CrossAxisAlignment.end : CrossAxisAlignment.start,
         children: [
-          Padding(
-            padding: const EdgeInsets.only(left: 8, bottom: 2),
-            child: Text(
-              "${message.author.firstName ?? ''} ${message.author.lastName ?? ''}",
-              style: AppStyle.styleBoldInika16.copyWith(fontSize: 10),
-            ),
-          ),
           Bubble(
-            padding: const BubbleEdges.all(0),
-            radius: const Radius.circular(5),
-            color:
-                isTheUser ? AppColor.primary : AppColor.grayLightDark(context),
-            margin: !nextMessageInGroup
+            padding: isTextMessage
+                ? const BubbleEdges.all(0)
+                : const BubbleEdges.all(border),
+            radius: const Radius.circular(0.5 * AppConst.borderRadius),
+            color: isTheUser
+                ? AppColor.primary
+                : AppColor.grayLightDark(context),
+            margin: nextMessageInGroup
                 ? const BubbleEdges.symmetric(horizontal: 6)
                 : null,
-            nip: isTheUser ? BubbleNip.rightTop : BubbleNip.leftTop,
-            child: child,
+            nip: nextMessageInGroup
+                ? BubbleNip.no
+                : isTheUser
+                    ? BubbleNip.rightBottom
+                    : BubbleNip.leftBottom,
+            child: Directionality(
+              textDirection: detectRtlDirectionality(
+                isTextMessage ? message.text : 'A',
+              ),
+              child: child,
+            ),
           ),
           Padding(
             padding: const EdgeInsets.symmetric(
-              horizontal: 14,
+              horizontal: 6,
               vertical: 2,
             ),
             child: Text(
@@ -291,13 +299,24 @@ class _ChatPageState extends State<ChatPage> {
     );
   }
 
+  final TextStyle linkDescription =
+      const TextStyle(color: Colors.black, fontSize: 11);
+  final TextStyle linkTitle =
+      const TextStyle(color: Colors.black, fontWeight: FontWeight.w600);
+  final TextStyle link = TextStyle(
+    color: Colors.blue.shade300,
+    decoration: TextDecoration.underline,
+  );
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: GroupAppBar(group: widget.group),
       body: Chat(
         onAvatarTap: (p0) {},
-        onMessageLongPress: (context, p1) {},
+        onMessageLongPress: (context, p1) {
+          print(p1);
+        },
         messages: _messages,
         onAttachmentPressed: _handleAttachmentPressed,
         onMessageTap: _handleMessageTap,
@@ -307,8 +326,10 @@ class _ChatPageState extends State<ChatPage> {
         showUserNames: true,
         bubbleBuilder: customBubble,
         dateHeaderBuilder: (_) => dateHeader(context, _),
+        inputOptions: InputOptions(
+          onTextChanged: (val) => setState(() {}),
+        ),
         user: _user,
-        nameBuilder: (u) => const SizedBox.shrink(),
         theme: DefaultChatTheme(
           inputMargin: const EdgeInsets.only(
             left: AppConst.defaultPadding,
@@ -319,9 +340,15 @@ class _ChatPageState extends State<ChatPage> {
           backgroundColor: AppColor.background(context),
           inputBorderRadius: BorderRadius.circular(15),
           secondaryColor: AppColor.grayLightDark(context),
-          messageBorderRadius: 5,
+          messageBorderRadius: 0.5 * AppConst.borderRadius,
           messageInsetsVertical: 8,
           messageInsetsHorizontal: 8,
+          receivedMessageBodyLinkTextStyle: link,
+          receivedMessageLinkTitleTextStyle: linkTitle,
+          receivedMessageLinkDescriptionTextStyle: linkDescription,
+          sentMessageBodyLinkTextStyle: link,
+          sentMessageLinkTitleTextStyle: linkTitle,
+          sentMessageLinkDescriptionTextStyle: linkDescription,
           sentMessageBodyTextStyle: AppStyle.styleBoldInika13,
           receivedMessageBodyTextStyle: AppStyle.styleBoldInika13,
           inputTextStyle: AppStyle.styleBoldInika13,
