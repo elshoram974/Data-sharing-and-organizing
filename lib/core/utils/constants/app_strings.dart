@@ -7,6 +7,7 @@ abstract final class AppStrings {
   static const String themeMode = 'themeMode';
   static const String locale = 'locale';
   static const String fontScale = 'fontScale';
+  static const String floatingButtonPlace = 'floatingButtonPlace';
 
   static const String userBox = 'userBox';
 
