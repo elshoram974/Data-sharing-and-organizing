@@ -7,4 +7,27 @@ abstract class GroupState extends Equatable {
   List<Object> get props => [];
 }
 
-class GroupInitial extends GroupState {}
+class GroupInitial extends GroupState {
+  const GroupInitial();
+}
+
+class GroupOpenFloatingButtonState extends GroupState {
+  const GroupOpenFloatingButtonState(this.openIt);
+  final bool openIt;
+  @override
+  List<bool> get props => [openIt];
+}
+
+class GroupChooseScreenState extends GroupState {
+  const GroupChooseScreenState(this.currentScreen);
+  final int currentScreen;
+  @override
+  List<int> get props => [currentScreen];
+}
+
+class GroupChangeButtonPlaceState extends GroupState {
+  const GroupChangeButtonPlaceState(this.top);
+  final double top;
+  @override
+  List<double> get props => [top];
+}

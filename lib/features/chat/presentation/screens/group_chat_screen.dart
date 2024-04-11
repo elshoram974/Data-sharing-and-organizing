@@ -22,7 +22,6 @@ import 'package:open_filex/open_filex.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:uuid/uuid.dart';
 
-
 class GroupChatScreen extends StatefulWidget {
   const GroupChatScreen({super.key});
 
@@ -296,10 +295,8 @@ class _GroupChatScreenState extends State<GroupChatScreen> {
   @override
   Widget build(BuildContext context) {
     return Chat(
-      onAvatarTap: (p0) {},
-      onMessageLongPress: (context, p1) {
-        print(p1);
-      },
+      onAvatarTap: (user) {},
+      onMessageLongPress: (context, message) {},
       messages: _messages,
       onAttachmentPressed: _handleAttachmentPressed,
       onMessageTap: _handleMessageTap,
