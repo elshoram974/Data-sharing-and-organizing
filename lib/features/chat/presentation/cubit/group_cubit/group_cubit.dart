@@ -2,27 +2,24 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../domain/repositories/init_group_repo.dart';
 import '../../screens/group_chat_screen.dart';
 
 part 'group_state.dart';
 
 class GroupCubit extends Cubit<GroupState> {
-  GroupCubit() : super(const GroupInitial()) {
-    _getFloatingButtonPlace();
-  }
-  late double top;
+  final GroupInitRepositories initRepo;
+  GroupCubit(this.initRepo) : super(const GroupInitial());
+
+  late double top = initRepo.getButtonPlace();
+
   bool isOpened = false;
 
   int currentScreen = 0;
 
   double _dragPositionX = 0.0;
 
-  _getFloatingButtonPlace() {
-    top = 0;
-    emit(GroupChangeButtonPlaceState(top));
-  }
-
-  void onPanUpdate(DragUpdateDetails details, BuildContext _) {
+  void onPanUpdate(DragUpdateDetails details, BuildContext _) async {
     top += details.delta.dy;
     final double height = MediaQuery.of(_).size.height - 180;
     if (top < 0) {
@@ -30,11 +27,11 @@ class GroupCubit extends Cubit<GroupState> {
     } else if (top > height) {
       top = height;
     }
+    await initRepo.saveButtonPlace(top);
     emit(GroupChangeButtonPlaceState(top));
   }
 
-  void onHorizontalDragStart(DragStartDetails d) =>
-      _dragPositionX = d.localPosition.dx;
+  void onHorizontalDragStart(DragStartDetails d) => _dragPositionX = d.localPosition.dx;
 
   void openFloatingButtonByTap() {
     isOpened = !isOpened;

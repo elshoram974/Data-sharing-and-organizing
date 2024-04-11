@@ -1,8 +1,10 @@
+import 'package:data_sharing_organizing/core/utils/services/dependency/locator.dart';
 import 'package:data_sharing_organizing/core/utils/services/dependency/provider_dependency.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../user_home/domain/entities/group_home_entity.dart';
+import '../../domain/repositories/init_group_repo.dart';
 import '../cubit/group_cubit/group_cubit.dart';
 import '../widgets/group_app_bar.dart';
 import '../widgets/group_floating_button_widget.dart';
@@ -14,7 +16,7 @@ class UserGroupScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => GroupCubit(),
+      create: (context) => GroupCubit(sl.get<GroupInitRepositories>()),
       child: _UserGroupScreen(group: group),
     );
   }
