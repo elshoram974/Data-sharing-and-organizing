@@ -90,6 +90,8 @@ dependencies:
   flutter_chat_ui: ^1.6.12
   flutter_chat_types: ^3.6.2
   bubble: ^1.2.1
+  meta: ^1.10.0
+  uuid: ^4.4.0
 
 dev_dependencies:
   flutter_test:
