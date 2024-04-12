@@ -1,7 +1,6 @@
-import 'package:bubble/bubble.dart';
 import 'package:data_sharing_organizing/core/utils/constants/app_color.dart';
 import 'package:data_sharing_organizing/core/utils/constants/app_constants.dart';
-import 'package:data_sharing_organizing/core/utils/functions/detect_text_direction.dart';
+import 'package:data_sharing_organizing/core/utils/services/dependency/provider_dependency.dart';
 import 'package:data_sharing_organizing/core/utils/styles.dart';
 import 'package:flutter/material.dart';
 
@@ -20,8 +19,9 @@ import 'package:path_provider/path_provider.dart';
 import 'package:uuid/uuid.dart';
 
 import '../cubit/const_values.dart';
+import '../widgets/chat_widgets/chat_custom_bubble.dart';
+import '../widgets/chat_widgets/my_attachment_button.dart';
 import '../widgets/date_header.dart';
-import '../widgets/message_date.dart';
 
 class GroupChatScreen extends StatefulWidget {
   const GroupChatScreen({super.key});
@@ -62,6 +62,8 @@ class _GroupChatScreenState extends State<GroupChatScreen> {
   }
 
   void _handleAttachmentPressed() {
+    ProviderDependency.group.closeFloatingButton();
+
     showModalBottomSheet<void>(
       context: context,
       builder: (BuildContext context) => SafeArea(
@@ -105,6 +107,7 @@ class _GroupChatScreenState extends State<GroupChatScreen> {
   }
 
   void _handleFileSelection() async {
+    ProviderDependency.group.closeFloatingButton();
     final result = await FilePicker.platform.pickFiles(
       type: FileType.any,
     );
@@ -125,6 +128,7 @@ class _GroupChatScreenState extends State<GroupChatScreen> {
   }
 
   void _handleImageSelection() async {
+    ProviderDependency.group.closeFloatingButton();
     final result = await ImagePicker().pickImage(
       imageQuality: 70,
       maxWidth: 1440,
@@ -151,6 +155,7 @@ class _GroupChatScreenState extends State<GroupChatScreen> {
   }
 
   void _handleMessageTap(BuildContext _, types.Message message) async {
+    ProviderDependency.group.closeFloatingButton();
     if (message is types.FileMessage) {
       var localPath = message.uri;
 
@@ -210,6 +215,8 @@ class _GroupChatScreenState extends State<GroupChatScreen> {
   }
 
   void _handleSendPressed(types.PartialText message) {
+    ProviderDependency.group.closeFloatingButton();
+
     final textMessage = types.TextMessage(
       author: _user,
       createdAt: DateTime.now().millisecondsSinceEpoch,
@@ -231,53 +238,14 @@ class _GroupChatScreenState extends State<GroupChatScreen> {
     });
   }
 
-  Directionality customBubble(
-    Widget child, {
-    required types.Message message,
-    required bool nextMessageInGroup,
-  }) {
-    final bool isTheUser = _user.id == message.author.id;
-    final bool isTextMessage = message is types.TextMessage;
-    const double border = 5;
-    return Directionality(
-      textDirection: TextDirection.ltr,
-      child: Column(
-        crossAxisAlignment:
-            isTheUser ? CrossAxisAlignment.end : CrossAxisAlignment.start,
-        children: [
-          Bubble(
-            padding: isTextMessage
-                ? const BubbleEdges.all(0)
-                : const BubbleEdges.all(border),
-            radius: const Radius.circular(0.5 * AppConst.borderRadius),
-            color:
-                isTheUser ? AppColor.primary : AppColor.grayLightDark(context),
-            margin: nextMessageInGroup
-                ? const BubbleEdges.symmetric(horizontal: 6)
-                : null,
-            nip: nextMessageInGroup
-                ? BubbleNip.no
-                : isTheUser
-                    ? BubbleNip.rightBottom
-                    : BubbleNip.leftBottom,
-            child: Directionality(
-              textDirection: detectRtlDirectionality(
-                isTextMessage ? message.text : 'A',
-              ),
-              child: child,
-            ),
-          ),
-          MessageDate(6, millisecondsSinceEpoch: message.createdAt ?? 0),
-        ],
-      ),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return Chat(
-      onAvatarTap: (user) {},
+      onAvatarTap: (user) {
+        ProviderDependency.group.closeFloatingButton();
+      },
       onMessageLongPress: (context, message) {},
+      onBackgroundTap: ProviderDependency.group.closeFloatingButton,
       messages: _messages,
       onAttachmentPressed: _handleAttachmentPressed,
       onMessageTap: _handleMessageTap,
@@ -288,51 +256,53 @@ class _GroupChatScreenState extends State<GroupChatScreen> {
       bubbleBuilder: customBubble,
       dateHeaderBuilder: (_) => DateHeaderWidget(_),
       inputOptions: InputOptions(
-        onTextChanged: (val) => setState(() {}),
+        onTextFieldTap: ProviderDependency.group.closeFloatingButton,
       ),
       user: _user,
-      theme: DefaultChatTheme(
-        inputMargin: const EdgeInsets.only(
-          left: AppConst.defaultPadding,
-          right: AppConst.defaultPadding,
-          bottom: 0.5 * AppConst.defaultPadding,
-        ),
-        primaryColor: AppColor.primary,
-        backgroundColor: AppColor.background(context),
-        inputBorderRadius: BorderRadius.circular(15),
-        secondaryColor: AppColor.grayLightDark(context),
-        messageBorderRadius: 0.5 * AppConst.borderRadius,
-        messageInsetsVertical: 8,
-        messageInsetsHorizontal: 8,
-        receivedMessageBodyLinkTextStyle: link,
-        receivedMessageLinkTitleTextStyle: linkTitle,
-        receivedMessageLinkDescriptionTextStyle: linkDescription,
-        sentMessageBodyLinkTextStyle: link,
-        sentMessageLinkTitleTextStyle: linkTitle,
-        sentMessageLinkDescriptionTextStyle: linkDescription,
-        sentMessageBodyTextStyle: AppStyle.styleBoldInika13,
-        receivedMessageBodyTextStyle: AppStyle.styleBoldInika13,
-        inputTextStyle: AppStyle.styleBoldInika13,
-        inputElevation: 1,
-        inputPadding: EdgeInsets.zero,
-        inputBackgroundColor: AppColor.grayLightDark(context),
-        attachmentButtonIcon: const MyAttachmentButtonIcon(),
-      ),
+      theme: _chatTheme(context),
     );
   }
-}
 
-class MyAttachmentButtonIcon extends StatelessWidget {
-  const MyAttachmentButtonIcon({super.key});
+  ChatCustomBubble customBubble(
+    Widget child, {
+    required types.Message message,
+    required bool nextMessageInGroup,
+  }) {
+    return ChatCustomBubble(
+      isTheUser: _user.id == message.author.id,
+      message: message,
+      nextMessageInGroup: nextMessageInGroup,
+      child: child,
+    );
+  }
 
-  @override
-  Widget build(BuildContext context) {
-    return Transform.rotate(
-      angle: 45,
-      child: const Icon(
-        Icons.attach_file_outlined,
-        color: Colors.white,
+  DefaultChatTheme _chatTheme(BuildContext context) {
+    return DefaultChatTheme(
+      inputMargin: const EdgeInsets.only(
+        left: AppConst.defaultPadding,
+        right: AppConst.defaultPadding,
+        bottom: 0.5 * AppConst.defaultPadding,
       ),
+      primaryColor: AppColor.primary,
+      backgroundColor: AppColor.background(context),
+      inputBorderRadius: BorderRadius.circular(15),
+      secondaryColor: AppColor.grayLightDark(context),
+      messageBorderRadius: 0.5 * AppConst.borderRadius,
+      messageInsetsVertical: 8,
+      messageInsetsHorizontal: 8,
+      receivedMessageBodyLinkTextStyle: link,
+      receivedMessageLinkTitleTextStyle: linkTitle,
+      receivedMessageLinkDescriptionTextStyle: linkDescription,
+      sentMessageBodyLinkTextStyle: link,
+      sentMessageLinkTitleTextStyle: linkTitle,
+      sentMessageLinkDescriptionTextStyle: linkDescription,
+      sentMessageBodyTextStyle: AppStyle.styleBoldInika13,
+      receivedMessageBodyTextStyle: AppStyle.styleBoldInika13,
+      inputTextStyle: AppStyle.styleBoldInika13,
+      inputElevation: 1,
+      inputPadding: EdgeInsets.zero,
+      inputBackgroundColor: AppColor.grayLightDark(context),
+      attachmentButtonIcon: const MyAttachmentButtonIcon(),
     );
   }
 }

@@ -39,6 +39,11 @@ class GroupCubit extends Cubit<GroupState> {
     emit(GroupOpenFloatingButtonState(isOpened));
   }
 
+  void closeFloatingButton() {
+    isOpened = false;
+    emit(GroupOpenFloatingButtonState(isOpened));
+  }
+
   void openFloatingButtonByDrag(DragUpdateDetails d) {
     final double delta = _dragPositionX - d.localPosition.dx;
     if (delta < 0) {

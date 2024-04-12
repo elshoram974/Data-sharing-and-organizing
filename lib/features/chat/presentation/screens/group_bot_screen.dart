@@ -1,7 +1,6 @@
-import 'package:bubble/bubble.dart';
 import 'package:data_sharing_organizing/core/utils/constants/app_color.dart';
 import 'package:data_sharing_organizing/core/utils/constants/app_constants.dart';
-import 'package:data_sharing_organizing/core/utils/functions/detect_text_direction.dart';
+import 'package:data_sharing_organizing/core/utils/services/dependency/provider_dependency.dart';
 import 'package:data_sharing_organizing/core/utils/styles.dart';
 import 'package:flutter/material.dart';
 
@@ -17,8 +16,8 @@ import 'package:path_provider/path_provider.dart';
 import 'package:uuid/uuid.dart';
 
 import '../cubit/const_values.dart';
+import '../widgets/bot_widgets/bot_custom_bubble.dart';
 import '../widgets/date_header.dart';
-import '../widgets/message_date.dart';
 
 class GroupBOTScreen extends StatefulWidget {
   const GroupBOTScreen({super.key});
@@ -34,7 +33,7 @@ class _GroupBOTScreenState extends State<GroupBOTScreen> {
       text: 'Hi there!\ni\'m BOT',
       author: const types.User(
         firstName: "BOT",
-        role: types.Role.agent,
+        role: types.Role.admin,
         id: 'Bot',
       ),
       id: "aaa",
@@ -57,6 +56,7 @@ class _GroupBOTScreenState extends State<GroupBOTScreen> {
   }
 
   void _handleMessageTap(BuildContext _, types.Message message) async {
+    ProviderDependency.group.closeFloatingButton();
     if (message is types.FileMessage) {
       var localPath = message.uri;
 
@@ -116,12 +116,10 @@ class _GroupBOTScreenState extends State<GroupBOTScreen> {
   }
 
   void _handleSendPressed(types.PartialText message) {
+    ProviderDependency.group.closeFloatingButton();
+
     final textMessage = types.TextMessage(
-      author: const types.User(
-        firstName: "BOT",
-        role: types.Role.agent,
-        id: 'Bot',
-      ),
+      author: _user,
       createdAt: DateTime.now().millisecondsSinceEpoch,
       id: const Uuid().v4(),
       text: message.text,
@@ -141,91 +139,64 @@ class _GroupBOTScreenState extends State<GroupBOTScreen> {
     });
   }
 
-  Directionality customBubble(
-    Widget child, {
-    required types.Message message,
-    required bool nextMessageInGroup,
-  }) {
-    final bool isTheUser = _user.id == message.author.id;
-    final bool isTextMessage = message is types.TextMessage;
-    const double border = 5;
-    return Directionality(
-      textDirection: TextDirection.ltr,
-      child: Column(
-        crossAxisAlignment:
-            isTheUser ? CrossAxisAlignment.end : CrossAxisAlignment.start,
-        children: [
-          Visibility(
-            visible: !isTheUser,
-            child: Padding(
-              padding: const EdgeInsets.only(bottom: 2),
-              child: Text(
-                message.author.firstName.toString(),
-                style: AppStyle.styleBoldInika16.copyWith(fontSize: 10),
-              ),
-            ),
-          ),
-          Bubble(
-            padding: isTextMessage
-                ? const BubbleEdges.all(0)
-                : const BubbleEdges.all(border),
-            radius: const Radius.circular(0.5 * AppConst.borderRadius),
-            color:
-                isTheUser ? AppColor.primary : AppColor.grayLightDark(context),
-            margin: null,
-            nip: isTheUser ? BubbleNip.rightTop : BubbleNip.leftTop,
-            child: Directionality(
-              textDirection: detectRtlDirectionality(
-                isTextMessage ? message.text : 'A',
-              ),
-              child: child,
-            ),
-          ),
-          MessageDate(10, millisecondsSinceEpoch: message.createdAt ?? 0),
-        ],
-      ),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return Chat(
       messages: _messages,
+      onBackgroundTap: ProviderDependency.group.closeFloatingButton,
       onMessageTap: _handleMessageTap,
       onPreviewDataFetched: _handlePreviewDataFetched,
       onSendPressed: _handleSendPressed,
       bubbleBuilder: customBubble,
       dateHeaderBuilder: (_) => DateHeaderWidget(_),
-      inputOptions: const InputOptions(
+      inputOptions: InputOptions(
         sendButtonVisibilityMode: SendButtonVisibilityMode.always,
+        onTextFieldTap: ProviderDependency.group.closeFloatingButton,
       ),
       user: _user,
-      theme: DefaultChatTheme(
-        inputMargin: const EdgeInsets.only(
-          left: AppConst.defaultPadding,
-          right: AppConst.defaultPadding,
-          bottom: 0.5 * AppConst.defaultPadding,
-        ),
-        primaryColor: AppColor.primary,
-        backgroundColor: AppColor.background(context),
-        inputBorderRadius: BorderRadius.circular(15),
-        secondaryColor: AppColor.grayLightDark(context),
-        messageBorderRadius: 0.5 * AppConst.borderRadius,
-        messageInsetsVertical: 8,
-        messageInsetsHorizontal: 8,
-        receivedMessageBodyLinkTextStyle: link,
-        receivedMessageLinkTitleTextStyle: linkTitle,
-        receivedMessageLinkDescriptionTextStyle: linkDescription,
-        sentMessageBodyLinkTextStyle: link,
-        sentMessageLinkTitleTextStyle: linkTitle,
-        sentMessageLinkDescriptionTextStyle: linkDescription,
-        sentMessageBodyTextStyle: AppStyle.styleBoldInika13,
-        receivedMessageBodyTextStyle: AppStyle.styleBoldInika13,
-        inputTextStyle: AppStyle.styleBoldInika13,
-        inputElevation: 1,
-        inputPadding: EdgeInsets.zero,
-        inputBackgroundColor: AppColor.grayLightDark(context),
+      theme: botChatTheme(context),
+    );
+  }
+
+  BotCustomBubble customBubble(
+    Widget child, {
+    required types.Message message,
+    required bool nextMessageInGroup,
+  }) {
+    return BotCustomBubble(
+      isTheUser: _user.id == message.author.id,
+      message: message,
+      nextMessageInGroup: nextMessageInGroup,
+      child: child,
+    );
+  }
+
+  DefaultChatTheme botChatTheme(BuildContext context) {
+    return DefaultChatTheme(
+      inputMargin: const EdgeInsets.only(
+        left: AppConst.defaultPadding,
+        right: AppConst.defaultPadding,
+        bottom: 0.5 * AppConst.defaultPadding,
       ),
+      primaryColor: AppColor.primary,
+      backgroundColor: AppColor.background(context),
+      inputBorderRadius: BorderRadius.circular(15),
+      secondaryColor: AppColor.grayLightDark(context),
+      messageBorderRadius: 0.5 * AppConst.borderRadius,
+      messageInsetsVertical: 8,
+      messageInsetsHorizontal: 8,
+      receivedMessageBodyLinkTextStyle: link,
+      receivedMessageLinkTitleTextStyle: linkTitle,
+      receivedMessageLinkDescriptionTextStyle: linkDescription,
+      sentMessageBodyLinkTextStyle: link,
+      sentMessageLinkTitleTextStyle: linkTitle,
+      sentMessageLinkDescriptionTextStyle: linkDescription,
+      sentMessageBodyTextStyle: AppStyle.styleBoldInika13,
+      receivedMessageBodyTextStyle: AppStyle.styleBoldInika13,
+      inputTextStyle: AppStyle.styleBoldInika13,
+      inputElevation: 1,
+      inputPadding: EdgeInsets.zero,
+      inputBackgroundColor: AppColor.grayLightDark(context),
     );
   }
 }
