@@ -3,6 +3,7 @@ import '../../../../features/auth/presentation/cubit/login_cubit/login_cubit.dar
 import '../../../../features/auth/presentation/cubit/recoverAccount_cubit/recover_account_cubit.dart';
 import '../../../../features/auth/presentation/cubit/sign_up_cubit/sign_up_cubit.dart';
 import '../../../../features/auth/presentation/cubit/verify_code_cubit/verify_code_cubit.dart';
+import '../../../../features/chat/presentation/cubit/bot_cubit/bot_cubit.dart';
 import '../../../../features/chat/presentation/cubit/group_cubit/group_cubit.dart';
 import '../../../../features/splash/presentation/cubit/config_cubit.dart';
 import '../../../../features/user_home/presentation/cubit/main_cubit/user_main_cubit.dart';
@@ -29,4 +30,5 @@ abstract class ProviderDependency {
   
   // * Group Cubits
   static late GroupCubit group;
+  static late BOTCubit bot;
 }
