@@ -21,7 +21,7 @@ class DirectionsBackButton extends StatelessWidget {
         height: 38,
         width: double.infinity,
         child: MyFilledButton(
-          onPressed: botCubit.closeDirection,
+          onPressed: botCubit.closeLastDirection,
           filledColor: AppColor.active,
           text: S.of(context).back,
           style: AppStyle.styleBoldInika16,

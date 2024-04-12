@@ -3,6 +3,7 @@ import 'package:data_sharing_organizing/core/utils/constants/app_color.dart';
 import 'package:data_sharing_organizing/core/utils/constants/app_constants.dart';
 import 'package:data_sharing_organizing/core/utils/styles.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../user_home/domain/entities/group_home_entity.dart';
 import '../../../user_home/presentation/widgets/circular_image_widget.dart';
@@ -26,6 +27,11 @@ class GroupAppBar extends StatelessWidget implements PreferredSizeWidget {
       ),
       child: AppBar(
         forceMaterialTransparency: true,
+        automaticallyImplyLeading: false,
+        leading: IconButton(
+          onPressed: context.pop,
+          icon: const Icon(Icons.arrow_back),
+        ),
         title: Row(
           children: [
             CircularImageWidget(

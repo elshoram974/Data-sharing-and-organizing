@@ -1,3 +1,4 @@
+import 'package:data_sharing_organizing/core/utils/config/routes/routes.dart';
 import 'package:data_sharing_organizing/core/utils/services/dependency/provider_dependency.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
@@ -54,7 +55,7 @@ class BOTCubit extends Cubit<BOTState> {
     _changeDirection();
   }
 
-  void closeDirection() {
+  void closeLastDirection() {
     if (_directionStack.isEmpty) return;
     _directionStack.removeLast();
     _changeDirection();
@@ -93,7 +94,6 @@ class BOTCubit extends Cubit<BOTState> {
 
   void _addMessage(types.Message message) {
     botMessages.insert(0, message);
-    print(botMessages[0].id);
     emit(SetState(_i++));
   }
 
@@ -165,5 +165,10 @@ class BOTCubit extends Cubit<BOTState> {
     );
 
     _addMessage(textMessage);
+  }
+
+  void onPopInvoked(bool didPop) {
+    if (_directionStack.isEmpty) return AppRoute.key.currentState?.pop();
+    closeLastDirection();
   }
 }
