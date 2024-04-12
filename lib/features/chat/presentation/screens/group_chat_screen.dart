@@ -1,7 +1,6 @@
 import 'package:bubble/bubble.dart';
 import 'package:data_sharing_organizing/core/utils/constants/app_color.dart';
 import 'package:data_sharing_organizing/core/utils/constants/app_constants.dart';
-import 'package:data_sharing_organizing/core/utils/functions/convert_date_to_string.dart';
 import 'package:data_sharing_organizing/core/utils/functions/detect_text_direction.dart';
 import 'package:data_sharing_organizing/core/utils/styles.dart';
 import 'package:flutter/material.dart';
@@ -13,14 +12,16 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
 import 'package:flutter_chat_ui/flutter_chat_ui.dart';
-import 'package:flutter_chat_ui/src/models/date_header.dart';
 import 'package:http/http.dart' as http;
 import 'package:image_picker/image_picker.dart';
-import 'package:intl/intl.dart' as intl;
 import 'package:mime/mime.dart';
 import 'package:open_filex/open_filex.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:uuid/uuid.dart';
+
+import '../cubit/const_values.dart';
+import '../widgets/date_header.dart';
+import '../widgets/message_date.dart';
 
 class GroupChatScreen extends StatefulWidget {
   const GroupChatScreen({super.key});
@@ -266,31 +267,11 @@ class _GroupChatScreenState extends State<GroupChatScreen> {
               child: child,
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 6,
-              vertical: 2,
-            ),
-            child: Text(
-              intl.DateFormat.jm().format(
-                DateTime.fromMillisecondsSinceEpoch(message.createdAt ?? 0),
-              ),
-              style: const TextStyle(fontSize: 8, color: AppColor.gray),
-            ),
-          ),
+          MessageDate(6, millisecondsSinceEpoch: message.createdAt ?? 0),
         ],
       ),
     );
   }
-
-  final TextStyle linkDescription =
-      const TextStyle(color: Colors.black, fontSize: 11);
-  final TextStyle linkTitle =
-      const TextStyle(color: Colors.black, fontWeight: FontWeight.w600);
-  final TextStyle link = TextStyle(
-    color: Colors.blue.shade300,
-    decoration: TextDecoration.underline,
-  );
 
   @override
   Widget build(BuildContext context) {
@@ -305,7 +286,7 @@ class _GroupChatScreenState extends State<GroupChatScreen> {
       showUserAvatars: true,
       showUserNames: true,
       bubbleBuilder: customBubble,
-      dateHeaderBuilder: (_) => dateHeader(context, _),
+      dateHeaderBuilder: (_) => DateHeaderWidget(_),
       inputOptions: InputOptions(
         onTextChanged: (val) => setState(() {}),
       ),
@@ -336,27 +317,6 @@ class _GroupChatScreenState extends State<GroupChatScreen> {
         inputPadding: EdgeInsets.zero,
         inputBackgroundColor: AppColor.grayLightDark(context),
         attachmentButtonIcon: const MyAttachmentButtonIcon(),
-      ),
-    );
-  }
-
-  Bubble dateHeader(BuildContext context, DateHeader dateHeader) {
-    return Bubble(
-      margin: const BubbleEdges.only(
-        top: AppConst.defaultPadding,
-        bottom: 0.5 * AppConst.defaultPadding,
-      ),
-      alignment: Alignment.center,
-      nip: BubbleNip.no,
-      color: AppColor.grayLightDark(context),
-      child: Text(
-        DateToString.call(dateHeader.dateTime, true),
-        textAlign: TextAlign.center,
-        style: const TextStyle(
-          fontSize: 11.0,
-          color: Colors.black38,
-          fontWeight: FontWeight.bold,
-        ),
       ),
     );
   }

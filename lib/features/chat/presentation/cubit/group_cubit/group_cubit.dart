@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../domain/repositories/init_group_repo.dart';
+import '../../screens/group_bot_screen.dart';
 import '../../screens/group_chat_screen.dart';
 
 part 'group_state.dart';
@@ -58,6 +59,6 @@ class GroupCubit extends Cubit<GroupState> {
 }
 
 final List<Widget> screens = [
-  const Center(child: Text('Bot screen')),
+  const GroupBOTScreen(),
   const GroupChatScreen(),
 ];
