@@ -2,6 +2,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../user_home/domain/entities/group_home_entity.dart';
 import '../../../domain/repositories/init_group_repo.dart';
 import '../../screens/group_bot_screen.dart';
 import '../../screens/group_chat_screen.dart';
@@ -10,7 +11,8 @@ part 'group_state.dart';
 
 class GroupCubit extends Cubit<GroupState> {
   final GroupInitRepositories initRepo;
-  GroupCubit(this.initRepo) : super(const GroupInitial());
+  final GroupHomeEntity group;
+  GroupCubit(this.initRepo, this.group) : super(const GroupInitial());
 
   late double top = initRepo.getButtonPlace();
 
@@ -32,7 +34,8 @@ class GroupCubit extends Cubit<GroupState> {
     emit(GroupChangeButtonPlaceState(top));
   }
 
-  void onHorizontalDragStart(DragStartDetails d) => _dragPositionX = d.localPosition.dx;
+  void onHorizontalDragStart(DragStartDetails d) =>
+      _dragPositionX = d.localPosition.dx;
 
   void openFloatingButtonByTap() {
     isOpened = !isOpened;

@@ -12,14 +12,26 @@ import 'package:path_provider/path_provider.dart';
 import 'package:uuid/uuid.dart';
 
 import '../../../domain/entities/author_message_entity.dart';
+import '../../../domain/entities/direction_entity.dart';
+import '../group_cubit/group_cubit.dart';
 
 part 'bot_state.dart';
 
-class BOTCubit extends Cubit<BotState> {
+class BOTCubit extends Cubit<BOTState> {
   BOTCubit() : super(const BotInitial()) {
     _loadMessages();
+    _loadDirections();
   }
-  final types.User currentUser = MessageAuthor.messageAuthorFromAuth(ProviderDependency.userHome.userMain.user);
+  int _i = 0;
+
+  final types.User currentUser = MessageAuthor.messageAuthorFromAuth(
+    ProviderDependency.userHome.userMain.user,
+  );
+  final GroupCubit groupCubit = ProviderDependency.group;
+  final List<DirectionEntity> currentDirections = [];
+  final List<DirectionEntity> _allGroupDirections = [];
+  final List<DirectionEntity> _directionStack = [];
+
   void _loadMessages() async {
     // final response = await rootBundle.loadString('assets/messages.json');
     // final messages = (jsonDecode(response) as List)
@@ -30,8 +42,41 @@ class BOTCubit extends Cubit<BotState> {
     //   botMessages = messages;
     // });
   }
+  void _loadDirections() async {
+    _allGroupDirections.addAll(
+      directions.where((e) => e.groupId == groupCubit.group.id),
+    );
+    _changeDirection();
+  }
 
-  int i = 0;
+  void openDirection(DirectionEntity newDirection) {
+    _directionStack.add(newDirection);
+    _changeDirection();
+  }
+
+  void closeDirection() {
+    if (_directionStack.isEmpty) return;
+    _directionStack.removeLast();
+    _changeDirection();
+  }
+
+  void _changeDirection() {
+    currentDirections.clear();
+
+    if (_directionStack.isEmpty) {
+      currentDirections.addAll(
+        _allGroupDirections.where((e) => e.insideDirectionId == 0),
+      );
+      emit(OpenDirectionState(DirectionEntity.newEmpty()));
+    } else {
+      currentDirections.addAll(
+        _allGroupDirections.where(
+          (e) => e.insideDirectionId == _directionStack.last.id,
+        ),
+      );
+      emit(OpenDirectionState(_directionStack.last));
+    }
+  }
 
   List<types.Message> botMessages = [
     types.TextMessage(
@@ -49,7 +94,7 @@ class BOTCubit extends Cubit<BotState> {
   void _addMessage(types.Message message) {
     botMessages.insert(0, message);
     print(botMessages[0].id);
-    emit(SetState(i++));
+    emit(SetState(_i++));
   }
 
   void handleMessageTap(BuildContext _, types.Message message) async {
@@ -67,7 +112,7 @@ class BOTCubit extends Cubit<BotState> {
           );
 
           botMessages[index] = updatedMessage;
-          emit(SetState(i++));
+          emit(SetState(_i++));
 
           final client = http.Client();
           final request = await client.get(Uri.parse(message.uri));
@@ -88,7 +133,7 @@ class BOTCubit extends Cubit<BotState> {
           );
 
           botMessages[index] = updatedMessage;
-          emit(SetState(i++));
+          emit(SetState(_i++));
         }
       }
 
@@ -106,7 +151,7 @@ class BOTCubit extends Cubit<BotState> {
     );
 
     botMessages[index] = updatedMessage;
-    emit(SetState(i++));
+    emit(SetState(_i++));
   }
 
   void handleSendPressed(types.PartialText message) {

@@ -22,7 +22,7 @@ class UserGroupScreen extends StatelessWidget {
       child: MultiBlocProvider(
         providers: [
           BlocProvider<GroupCubit>(
-            create: (context) => GroupCubit(sl.get<GroupInitRepositories>()),
+            create: (context) => GroupCubit(sl.get<GroupInitRepositories>(),group),
           ),
           BlocProvider<BOTCubit>(create: (context) => BOTCubit()),
           BlocProvider<ChatCubit>(create: (context) => ChatCubit()),
