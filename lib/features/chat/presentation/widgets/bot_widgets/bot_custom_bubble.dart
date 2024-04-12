@@ -37,7 +37,7 @@ class BotCustomBubble extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.only(bottom: 2),
               child: Text(
-                message.author.firstName.toString(),
+                "${message.author.firstName ?? ''} ${message.author.lastName ?? ''}",
                 style: AppStyle.styleBoldInika16.copyWith(fontSize: 10),
               ),
             ),
