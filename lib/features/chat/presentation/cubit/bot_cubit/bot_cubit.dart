@@ -11,15 +11,15 @@ import 'package:open_filex/open_filex.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:uuid/uuid.dart';
 
+import '../../../domain/entities/author_message_entity.dart';
+
 part 'bot_state.dart';
 
 class BOTCubit extends Cubit<BotState> {
   BOTCubit() : super(const BotInitial()) {
     _loadMessages();
   }
-  final currentUser = const types.User(
-    id: '82091008-a484-4a89-ae75-a22bf8d6f3ac',
-  );
+  final types.User currentUser = MessageAuthor.messageAuthorFromAuth(ProviderDependency.userHome.userMain.user);
   void _loadMessages() async {
     // final response = await rootBundle.loadString('assets/messages.json');
     // final messages = (jsonDecode(response) as List)
