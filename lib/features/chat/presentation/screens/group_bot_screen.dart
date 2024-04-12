@@ -14,6 +14,7 @@ import 'package:http/http.dart' as http;
 import 'package:open_filex/open_filex.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:uuid/uuid.dart';
+import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 
 import '../cubit/const_values.dart';
 import '../widgets/bot_widgets/bot_custom_bubble.dart';
@@ -141,20 +142,35 @@ class _GroupBOTScreenState extends State<GroupBOTScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Chat(
-      messages: _messages,
-      onBackgroundTap: ProviderDependency.group.closeFloatingButton,
-      onMessageTap: _handleMessageTap,
-      onPreviewDataFetched: _handlePreviewDataFetched,
-      onSendPressed: _handleSendPressed,
-      bubbleBuilder: customBubble,
-      dateHeaderBuilder: (_) => DateHeaderWidget(_),
-      inputOptions: InputOptions(
-        sendButtonVisibilityMode: SendButtonVisibilityMode.always,
-        onTextFieldTap: ProviderDependency.group.closeFloatingButton,
-      ),
-      user: _user,
-      theme: botChatTheme(context),
+    return Column(
+      children: [
+        Expanded(
+          child: Chat(
+            messages: _messages,
+            onBackgroundTap: ProviderDependency.group.closeFloatingButton,
+            onMessageTap: _handleMessageTap,
+            onPreviewDataFetched: _handlePreviewDataFetched,
+            onSendPressed: _handleSendPressed,
+            bubbleBuilder: customBubble,
+            dateHeaderBuilder: (_) => DateHeaderWidget(_),
+            inputOptions: InputOptions(
+              sendButtonVisibilityMode: SendButtonVisibilityMode.always,
+              onTextFieldTap: ProviderDependency.group.closeFloatingButton,
+            ),
+            user: _user,
+            theme: botChatTheme(context),
+          ),
+        ),
+        KeyboardVisibilityBuilder(
+          builder: (context, isKeyboardVisible) {
+            return Container(
+              color: AppColor.active,
+              height: isKeyboardVisible ? 0 : 300,
+              width: double.infinity,
+            );
+          },
+        ),
+      ],
     );
   }
 
