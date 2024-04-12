@@ -24,8 +24,7 @@ class DirectionsBottomWidget extends StatelessWidget {
           width: double.infinity,
           alignment: Alignment.center,
           child: SingleChildScrollView(
-            padding:
-                const EdgeInsets.symmetric(horizontal: AppConst.defaultPadding),
+            padding: const EdgeInsets.all(AppConst.defaultPadding),
             child: BlocBuilder<BOTCubit, BOTState>(
               buildWhen: (p, c) => c is OpenDirectionState,
               builder: (context, state) {
@@ -42,7 +41,8 @@ class DirectionsBottomWidget extends StatelessWidget {
                           child: MyFilledButton(
                             onPressed: () => c.openDirection(dir),
                             text: dir.name,
-                            style: AppStyle.styleBoldInika16.copyWith(height: 0.8),
+                            style:
+                                AppStyle.styleBoldInika16.copyWith(height: 0.8),
                           ),
                         );
                       },
