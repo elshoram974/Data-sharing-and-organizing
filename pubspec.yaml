@@ -92,6 +92,8 @@ dependencies:
   bubble: ^1.2.1
   uuid: ^4.4.0
   flutter_keyboard_visibility: ^6.0.0
+  # to make flex wrap
+  flex_list: ^1.0.0
 
 dev_dependencies:
   flutter_test:
