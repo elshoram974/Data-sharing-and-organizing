@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 
 class DirectionEntity extends Equatable {
-  const DirectionEntity( {
+  const DirectionEntity({
     required this.id,
     required this.name,
     required this.insideDirectionId,
@@ -11,6 +11,15 @@ class DirectionEntity extends Equatable {
   final int groupId;
   final String name;
   final int insideDirectionId;
+
+  factory DirectionEntity.newEmpty() {
+    return const DirectionEntity(
+      id: -1,
+      name: '',
+      insideDirectionId: 0,
+      groupId: -1,
+    );
+  }
 
   @override
   List<Object?> get props => [id, name, insideDirectionId];
