@@ -5,6 +5,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../user_home/domain/entities/group_home_entity.dart';
 import '../../domain/repositories/init_group_repo.dart';
+import '../cubit/bot_cubit/bot_cubit.dart';
+import '../cubit/chat_cubit/chat_cubit.dart';
 import '../cubit/group_cubit/group_cubit.dart';
 import '../widgets/group_app_bar.dart';
 import '../widgets/group_floating_button_widget.dart';
@@ -15,8 +17,14 @@ class UserGroupScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => GroupCubit(sl.get<GroupInitRepositories>()),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<GroupCubit>(
+          create: (context) => GroupCubit(sl.get<GroupInitRepositories>()),
+        ),
+        BlocProvider<BOTCubit>(create: (context) => BOTCubit()),
+        BlocProvider<ChatCubit>(create: (context) => ChatCubit()),
+      ],
       child: _UserGroupScreen(group: group),
     );
   }
