@@ -31,6 +31,8 @@ class BOTCubit extends Cubit<BotState> {
     // });
   }
 
+  int i = 0;
+
   List<types.Message> botMessages = [
     types.TextMessage(
       createdAt: DateTime(2024, 4, 7, 16, 44).millisecondsSinceEpoch,
@@ -47,7 +49,7 @@ class BOTCubit extends Cubit<BotState> {
   void _addMessage(types.Message message) {
     botMessages.insert(0, message);
     print(botMessages[0].id);
-    emit(const SetState());
+    emit(SetState(i++));
   }
 
   void handleMessageTap(BuildContext _, types.Message message) async {
@@ -65,7 +67,7 @@ class BOTCubit extends Cubit<BotState> {
           );
 
           botMessages[index] = updatedMessage;
-          emit(const SetState());
+          emit(SetState(i++));
 
           final client = http.Client();
           final request = await client.get(Uri.parse(message.uri));
@@ -86,7 +88,7 @@ class BOTCubit extends Cubit<BotState> {
           );
 
           botMessages[index] = updatedMessage;
-          emit(const SetState());
+          emit(SetState(i++));
         }
       }
 
@@ -104,9 +106,7 @@ class BOTCubit extends Cubit<BotState> {
     );
 
     botMessages[index] = updatedMessage;
-    emit(const SetState());
-
-    // TODO: if no changes edit all of emits when update
+    emit(SetState(i++));
   }
 
   void handleSendPressed(types.PartialText message) {

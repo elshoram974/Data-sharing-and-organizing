@@ -12,8 +12,9 @@ final class BotInitial extends BotState {
 }
 
 final class SetState extends BotState {
-  const SetState();
+  const SetState(this.i);
+  final int i;
 
   @override
-  List<String> get props => [const Uuid().v4()];
+  List<int> get props => [i];
 }
