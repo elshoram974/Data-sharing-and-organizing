@@ -32,6 +32,8 @@ class MyFilledButton extends StatelessWidget {
         text,
         style: style?.copyWith(color: Colors.white) ??
             const TextStyle(color: Colors.white),
+        maxLines: 2,
+        overflow: TextOverflow.ellipsis,
       ),
     );
   }
