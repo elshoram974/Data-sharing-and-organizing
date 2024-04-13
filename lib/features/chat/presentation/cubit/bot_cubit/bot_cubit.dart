@@ -94,7 +94,7 @@ class BOTCubit extends Cubit<BOTState> {
     } else if (bottomHeight > maxHeight) {
       bottomHeight = maxHeight;
     }
-    await botRepo.saveBottomHeight(bottomHeight);
+    await botRepo.saveBottomHeight(bottomHeight , groupCubit.group.id);
     emit(ChangeDirectionBottomHeightState(bottomHeight));
   }
 

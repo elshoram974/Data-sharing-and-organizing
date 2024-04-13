@@ -1,4 +1,4 @@
 abstract class BOTRepositories {
   const BOTRepositories();
-  Future<void> saveBottomHeight(double newTop);
+  Future<void> saveBottomHeight(double height , int groupId);
 }
