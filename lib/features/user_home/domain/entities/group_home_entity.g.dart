@@ -27,13 +27,14 @@ class GroupHomeEntityAdapter extends TypeAdapter<GroupHomeEntity> {
       lastMessageTime: fields[5] as DateTime?,
       isMute: fields[3] as bool,
       ownerId: fields[9] as int,
+      bottomHeight: fields[10] as double?,
     );
   }
 
   @override
   void write(BinaryWriter writer, GroupHomeEntity obj) {
     writer
-      ..writeByte(10)
+      ..writeByte(11)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -53,7 +54,9 @@ class GroupHomeEntityAdapter extends TypeAdapter<GroupHomeEntity> {
       ..writeByte(8)
       ..write(obj.lastMessageType)
       ..writeByte(9)
-      ..write(obj.ownerId);
+      ..write(obj.ownerId)
+      ..writeByte(10)
+      ..write(obj.bottomHeight);
   }
 
   @override
