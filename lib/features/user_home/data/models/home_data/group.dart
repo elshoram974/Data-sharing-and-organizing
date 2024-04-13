@@ -45,6 +45,7 @@ class GroupDetails extends GroupHomeEntity {
     super.lastMessageTime,
     super.lastMessageType,
     super.unReadCounter,
+    super.bottomHeight,
   }) : super(
           id: groupId,
           ownerId: groupOwnerId,
@@ -130,6 +131,7 @@ class GroupDetails extends GroupHomeEntity {
     MessageType? lastMessageType,
     String? lastMessageFrom,
     int? ownerId,
+    double? bottomHeight,
   }) {
     return GroupDetails(
       groupId: groupId ?? this.groupId,
@@ -152,6 +154,7 @@ class GroupDetails extends GroupHomeEntity {
       lastMessageTime: lastMessageTime ?? this.lastMessageTime,
       lastMessageType: lastMessageType ?? this.lastMessageType,
       unReadCounter: unReadCounter ?? this.unReadCounter,
+      bottomHeight: bottomHeight ?? this.bottomHeight,
     );
   }
 

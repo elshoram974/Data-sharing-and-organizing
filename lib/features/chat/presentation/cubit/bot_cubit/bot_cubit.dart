@@ -33,7 +33,7 @@ class BOTCubit extends Cubit<BOTState> {
   final List<DirectionEntity> _allGroupDirections = [];
   final List<DirectionEntity> _directionStack = [];
 
-  double bottomHeight = 250;
+  late double bottomHeight = groupCubit.group.bottomHeight ?? 250;
 
   void _loadMessages() async {
     // final response = await rootBundle.loadString('assets/messages.json');

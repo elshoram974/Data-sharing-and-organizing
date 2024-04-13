@@ -36,6 +36,9 @@ class GroupHomeEntity extends Equatable {
   @HiveField(9)
   final int ownerId;
 
+  @HiveField(10)
+  final double? bottomHeight;
+
   final bool isSelected;
 
   const GroupHomeEntity({
@@ -50,6 +53,7 @@ class GroupHomeEntity extends Equatable {
     this.isSelected = false,
     this.isMute = false,
     required this.ownerId,
+    this.bottomHeight,
   });
 
   GroupHomeEntity copyWith({
@@ -64,6 +68,7 @@ class GroupHomeEntity extends Equatable {
     MessageType? lastMessageType,
     String? lastMessageFrom,
     int? ownerId,
+    double? bottomHeight,
   }) {
     return GroupHomeEntity(
       id: id ?? this.id,
@@ -77,6 +82,7 @@ class GroupHomeEntity extends Equatable {
       lastMessageType: lastMessageType ?? this.lastMessageType,
       lastMessageFrom: lastMessageFrom ?? this.lastMessageFrom,
       ownerId: ownerId ?? this.ownerId,
+      bottomHeight: bottomHeight ?? this.bottomHeight,
     );
   }
 

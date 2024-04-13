@@ -16,6 +16,7 @@ final class GroupNotificationEntity extends GroupHomeEntity {
     super.lastMessageFrom = 'You',
     super.unReadCounter,
     required super.ownerId,
+    super.bottomHeight,
   }) : super(isSelected: false, isMute: false);
 
   @override
@@ -33,6 +34,7 @@ final class GroupNotificationEntity extends GroupHomeEntity {
     bool? isMute,
     bool? isExpanded,
     int? ownerId,
+    double? bottomHeight,
   }) {
     return GroupNotificationEntity(
       id: id ?? this.id,
@@ -45,6 +47,7 @@ final class GroupNotificationEntity extends GroupHomeEntity {
       groupName: groupName ?? this.groupName,
       lastMessageTime: lastMessageTime ?? this.lastMessageTime,
       ownerId: ownerId ?? this.ownerId,
+      bottomHeight: bottomHeight ?? this.bottomHeight,
     );
   }
 
