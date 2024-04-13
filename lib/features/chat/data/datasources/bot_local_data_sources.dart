@@ -1,4 +1,5 @@
 import 'package:data_sharing_organizing/core/utils/constants/app_strings.dart';
+import 'package:data_sharing_organizing/core/utils/services/dependency/provider_dependency.dart';
 import 'package:hive/hive.dart';
 
 import '../../../user_home/data/datasources/home_datasources/home_local_data_sources.dart';
@@ -25,6 +26,7 @@ class BOTLocalDataSourceImp extends BOTLocalDataSource {
         groups[i] = groups[i].copyWith(bottomHeight: height);
         await _removeAllGroups();
         await groupsBox.addAll(groups);
+        ProviderDependency.userHome.updateGroupLocally(groups[i]);
         return;
       }
     }

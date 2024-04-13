@@ -37,6 +37,13 @@ class UserHomeCubit extends Cubit<UserHomeState> {
   final List<GroupHomeEntity> currentGroups = [];
   final List<GroupHomeEntity> selectedGroups = [];
 
+  void updateGroupLocally(GroupHomeEntity groupUpdated) {
+    final int index = currentGroups.indexOf(groupUpdated);
+    currentGroups[index] = groupUpdated;
+
+    emit(UserHomeUpdateGroup(groupUpdated));
+  }
+
   // * MarkAsUnRead from groups
   Future<void> _markAsUnRead() async {
     final Status<Iterable<int>> status =
@@ -130,7 +137,8 @@ class UserHomeCubit extends Cubit<UserHomeState> {
   void _failureStatus(FailureBody failure, bool showDialog) async {
     emit(HomeFailureState(failure.message));
     if (showDialog) {
-      EasyLoading.showError(failure.message, duration: const Duration(seconds: 5));
+      EasyLoading.showError(failure.message,
+          duration: const Duration(seconds: 5));
       await Future.delayed(const Duration(seconds: 3));
       if (failure.httpExceptionType == HttpExceptionType.badResponse) {
         ProviderDependency.userMain

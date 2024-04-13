@@ -41,6 +41,7 @@ class HomeLocalDataSourceImp extends HomeLocalDataSource {
             ng.copyWith(
               isMute: g.isMute,
               unReadCounter: g.unReadCounter,
+              bottomHeight: g.bottomHeight,
             ),
           );
         }

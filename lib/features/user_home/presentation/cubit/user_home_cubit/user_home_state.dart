@@ -11,6 +11,24 @@ final class UserHomeInitial extends UserHomeState {
   const UserHomeInitial();
 }
 
+final class UserHomeUpdateGroup extends UserHomeState {
+  const UserHomeUpdateGroup(this.group);
+
+  final GroupHomeEntity group;
+
+  @override
+  List<Object> get props => [
+        group.id,
+        group.groupName,
+        group.isMute,
+        group.ownerId,
+        group.bottomHeight ?? 250,
+        group.imageLink ?? '',
+        group.lastMessage ?? '',
+        group.lastMessageFrom ?? '',
+      ];
+}
+
 final class UserHomeSelectGroups extends UserHomeState {
   const UserHomeSelectGroups(this.groups, this.makeSelected);
 
