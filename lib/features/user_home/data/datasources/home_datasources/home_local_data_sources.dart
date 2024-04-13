@@ -10,16 +10,14 @@ abstract class HomeLocalDataSource {
   const HomeLocalDataSource();
   List<GroupHomeEntity> getAllGroups();
   Future<int> removeAllGroups();
-  Future<List<GroupHomeEntity>> saveGroups(
-      List<GroupHomeEntity> newGroups, AuthUserEntity userToReplace);
+  Future<List<GroupHomeEntity>> saveGroups(List<GroupHomeEntity> newGroups, AuthUserEntity userToReplace);
   Future<int> removeSomeGroups(List<GroupHomeEntity> removedGroups);
   Future<Iterable<int>> markAsUnRead(List<GroupHomeEntity> groupsToEdit);
 }
 
 class HomeLocalDataSourceImp extends HomeLocalDataSource {
   HomeLocalDataSourceImp();
-  late final Box<GroupHomeEntity> groupsBox =
-      Hive.box<GroupHomeEntity>(AppStrings.groupsBox);
+  late final Box<GroupHomeEntity> groupsBox = Hive.box<GroupHomeEntity>(AppStrings.groupsBox);
 
   @override
   List<GroupHomeEntity> getAllGroups() {

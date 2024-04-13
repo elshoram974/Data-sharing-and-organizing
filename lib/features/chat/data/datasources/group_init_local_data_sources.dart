@@ -8,7 +8,7 @@ abstract class GroupInitLocalDataSource {
 }
 
 class GroupInitLocalDataSourceImp extends GroupInitLocalDataSource {
-  GroupInitLocalDataSourceImp();
+  const GroupInitLocalDataSourceImp();
 
   @override
   double? getFloatingPlace() {

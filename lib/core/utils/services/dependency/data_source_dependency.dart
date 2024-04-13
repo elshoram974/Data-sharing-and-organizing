@@ -30,7 +30,7 @@ void dataSourceDependency() {
   );
 
   // group
-  sl.registerSingleton<GroupInitLocalDataSource>(GroupInitLocalDataSourceImp());
-  sl.registerSingleton<BOTLocalDataSource>(BOTLocalDataSourceImp());
+  sl.registerSingleton<GroupInitLocalDataSource>(const GroupInitLocalDataSourceImp());
+  sl.registerSingleton<BOTLocalDataSource>(BOTLocalDataSourceImp(sl.get<HomeLocalDataSource>()));
 
 }
