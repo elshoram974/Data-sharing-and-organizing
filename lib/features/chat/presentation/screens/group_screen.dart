@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 
 import '../../../user_home/domain/entities/group_home_entity.dart';
+import '../../domain/repositories/bot_repo.dart';
 import '../../domain/repositories/init_group_repo.dart';
 import '../cubit/bot_cubit/bot_cubit.dart';
 import '../cubit/chat_cubit/chat_cubit.dart';
@@ -22,11 +23,14 @@ class UserGroupScreen extends StatelessWidget {
       child: MultiBlocProvider(
         providers: [
           BlocProvider<GroupCubit>(
-            create: (context) =>
-                GroupCubit(sl.get<GroupInitRepositories>(), group),
+            create: (_) => GroupCubit(sl.get<GroupInitRepositories>(), group),
           ),
-          BlocProvider<BOTCubit>(create: (context) => BOTCubit()),
-          BlocProvider<ChatCubit>(create: (context) => ChatCubit()),
+          BlocProvider<BOTCubit>(
+            create: (_) => BOTCubit(sl.get<BOTRepositories>()),
+          ),
+          BlocProvider<ChatCubit>(
+            create: (_) => ChatCubit(),
+          ),
         ],
         child: _UserGroupScreen(group: group),
       ),

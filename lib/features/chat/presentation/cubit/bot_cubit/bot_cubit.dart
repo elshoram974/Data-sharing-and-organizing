@@ -14,12 +14,15 @@ import 'package:uuid/uuid.dart';
 
 import '../../../domain/entities/author_message_entity.dart';
 import '../../../domain/entities/direction_entity.dart';
+import '../../../domain/repositories/bot_repo.dart';
 import '../group_cubit/group_cubit.dart';
 
 part 'bot_state.dart';
 
 class BOTCubit extends Cubit<BOTState> {
-  BOTCubit() : super(const BotInitial()) {
+  final BOTRepositories botRepo;
+
+  BOTCubit(this.botRepo) : super(const BotInitial()) {
     _loadMessages();
     _loadDirections();
   }
@@ -81,7 +84,7 @@ class BOTCubit extends Cubit<BOTState> {
     }
   }
 
-  void changeHeight(DragUpdateDetails details, BuildContext _) {
+  void changeHeight(DragUpdateDetails details, BuildContext _) async{
     bottomHeight += -details.delta.dy;
     final double maxHeight = MediaQuery.sizeOf(_).height - 250;
     const double minHeight = 50;
@@ -91,7 +94,7 @@ class BOTCubit extends Cubit<BOTState> {
     } else if (bottomHeight > maxHeight) {
       bottomHeight = maxHeight;
     }
-    // await initRepo.saveButtonPlace(top);
+    await botRepo.saveBottomHeight(bottomHeight);
     emit(ChangeDirectionBottomHeightState(bottomHeight));
   }
 
