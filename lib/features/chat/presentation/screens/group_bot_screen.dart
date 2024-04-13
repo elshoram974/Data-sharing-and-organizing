@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../cubit/bot_cubit/bot_cubit.dart';
 import '../widgets/bot_widgets/bot_chat_widget.dart';
-import '../widgets/bot_widgets/directions_bottom_widget.dart';
+import '../widgets/bot_widgets/directions_bottom_widget/directions_bottom_widget.dart';
 
 class GroupBOTScreen extends StatelessWidget {
   const GroupBOTScreen({super.key});

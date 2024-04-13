@@ -4,7 +4,7 @@ import 'package:data_sharing_organizing/core/utils/constants/app_color.dart';
 import 'package:data_sharing_organizing/core/utils/styles.dart';
 import 'package:flutter/material.dart';
 
-import '../../cubit/bot_cubit/bot_cubit.dart';
+import '../../../cubit/bot_cubit/bot_cubit.dart';
 
 class DirectionsBackButton extends StatelessWidget {
   const DirectionsBackButton({super.key, required this.botCubit});
