@@ -37,6 +37,7 @@ class UserHomeCubit extends Cubit<UserHomeState> {
   final List<GroupHomeEntity> currentGroups = [];
   final List<GroupHomeEntity> selectedGroups = [];
 
+  // * Update group inside it
   void updateGroupLocally(GroupHomeEntity groupUpdated) {
     final int index = currentGroups.indexOf(groupUpdated);
     currentGroups[index] = groupUpdated;
