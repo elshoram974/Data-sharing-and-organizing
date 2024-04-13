@@ -58,7 +58,6 @@ class DirectionsBottomWidget extends StatelessWidget {
                         buildWhen: (p, c) => c is OpenDirectionState,
                         builder: (context, state) {
                           return FlexList(
-                            key: c.bottomKey,
                             horizontalSpacing: 0.5 * AppConst.defaultPadding,
                             verticalSpacing: 20,
                             children: [

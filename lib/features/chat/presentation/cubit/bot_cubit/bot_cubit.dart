@@ -35,8 +35,6 @@ class BOTCubit extends Cubit<BOTState> {
 
   double bottomHeight = 250;
 
-  GlobalKey bottomKey = GlobalKey();
-
   void _loadMessages() async {
     // final response = await rootBundle.loadString('assets/messages.json');
     // final messages = (jsonDecode(response) as List)
@@ -84,19 +82,14 @@ class BOTCubit extends Cubit<BOTState> {
   }
 
   void changeHeight(DragUpdateDetails details, BuildContext _) {
-    final RenderBox? r =
-        bottomKey.currentContext?.findRenderObject() as RenderBox?;
     bottomHeight += -details.delta.dy;
     final double maxHeight = MediaQuery.sizeOf(_).height - 250;
     const double minHeight = 50;
 
-    final max = r?.size.height != null ? r!.size.height + 70 : maxHeight;
     if (bottomHeight < minHeight) {
       bottomHeight = minHeight;
     } else if (bottomHeight > maxHeight) {
       bottomHeight = maxHeight;
-    } else if (bottomHeight > max) {
-      bottomHeight = max;
     }
     // await initRepo.saveButtonPlace(top);
     emit(ChangeDirectionBottomHeightState(bottomHeight));
