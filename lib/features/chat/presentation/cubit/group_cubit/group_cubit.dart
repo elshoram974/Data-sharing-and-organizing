@@ -24,7 +24,7 @@ class GroupCubit extends Cubit<GroupState> {
 
   void onPanUpdate(DragUpdateDetails details, BuildContext _) async {
     top += details.delta.dy;
-    final double height = MediaQuery.of(_).size.height - 180;
+    final double height = MediaQuery.sizeOf(_).height - 180;
     if (top < 0) {
       top = 0;
     } else if (top > height) {

@@ -26,3 +26,11 @@ final class OpenDirectionState extends BOTState {
   @override
   List<DirectionEntity> get props => [newDirection];
 }
+
+final class ChangeDirectionBottomHeightState extends BOTState {
+  const ChangeDirectionBottomHeightState(this.newHeight);
+  final double newHeight;
+
+  @override
+  List<double> get props => [newHeight];
+}
