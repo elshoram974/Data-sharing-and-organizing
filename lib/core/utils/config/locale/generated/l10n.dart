@@ -1413,6 +1413,26 @@ class S {
       args: [],
     );
   }
+
+  /// `Add directory`
+  String get addDirectory {
+    return Intl.message(
+      'Add directory',
+      name: 'addDirectory',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Add file or message`
+  String get addFileOrMessage {
+    return Intl.message(
+      'Add file or message',
+      name: 'addFileOrMessage',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

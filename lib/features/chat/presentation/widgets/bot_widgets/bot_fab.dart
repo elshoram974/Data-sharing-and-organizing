@@ -1,4 +1,5 @@
 import 'package:data_sharing_organizing/core/shared/expandable_fab.dart';
+import 'package:data_sharing_organizing/core/utils/config/locale/generated/l10n.dart';
 import 'package:data_sharing_organizing/core/utils/constants/app_color.dart';
 import 'package:data_sharing_organizing/core/utils/services/dependency/provider_dependency.dart';
 import 'package:flutter/material.dart';
@@ -29,13 +30,13 @@ class BotFAB extends StatelessWidget {
                 ),
                 children: [
                   ActionButton(
-                    tooltip: 'add',
-                    onPressed: () => _showAction(context, 0),
+                    tooltip: S.of(context).addDirectory,
+                    onPressed: () => _showAction(context, "U can add directory here"),
                     icon: const Icon(Icons.create_new_folder_outlined),
                   ),
                   ActionButton(
-                    tooltip: 'add',
-                    onPressed: () => _showAction(context, 1),
+                    tooltip: S.of(context).addFileOrMessage,
+                    onPressed: () => _showAction(context, "U can add file here"),
                     icon: const MyAttachmentButtonIcon(iconColor: null),
                   ),
                 ],
@@ -45,13 +46,12 @@ class BotFAB extends StatelessWidget {
     );
   }
 
-  void _showAction(BuildContext context, int index) {
-    const actionTitles = ['Create Post', 'Upload Photo', 'Upload Video'];
+  void _showAction(BuildContext context, String title) {
     showDialog<void>(
       context: context,
       builder: (context) {
         return AlertDialog(
-          content: Text(actionTitles[index]),
+          content: Text(title),
           actions: [
             TextButton(
               onPressed: () => Navigator.of(context).pop(),

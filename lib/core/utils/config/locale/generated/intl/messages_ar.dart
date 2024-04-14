@@ -31,6 +31,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "YouHaveChooseTypeOfAccountPersonalOrBusiness":
             MessageLookupByLibrary.simpleMessage(
                 "عليك تحديد ان كان الحساب خاص أو لشركة"),
+        "addDirectory": MessageLookupByLibrary.simpleMessage("إضافة مجلد"),
+        "addFileOrMessage":
+            MessageLookupByLibrary.simpleMessage("إضافة ملف أو رسالة"),
         "areYouSureAboutDeleteYourAccount":
             MessageLookupByLibrary.simpleMessage("هل أنت متأكد من حذف حسابك؟"),
         "areYouSureYouWantToReturnBack": MessageLookupByLibrary.simpleMessage(

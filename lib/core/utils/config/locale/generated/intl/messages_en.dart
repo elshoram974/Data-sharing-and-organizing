@@ -31,6 +31,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "YouHaveChooseTypeOfAccountPersonalOrBusiness":
             MessageLookupByLibrary.simpleMessage(
                 "You have to choose the type of your account if it personal or business account."),
+        "addDirectory": MessageLookupByLibrary.simpleMessage("Add directory"),
+        "addFileOrMessage":
+            MessageLookupByLibrary.simpleMessage("Add file or message"),
         "areYouSureAboutDeleteYourAccount":
             MessageLookupByLibrary.simpleMessage(
                 "Are you sure about delete your account?"),
