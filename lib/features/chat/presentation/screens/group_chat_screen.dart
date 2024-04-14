@@ -20,7 +20,7 @@ import 'package:uuid/uuid.dart';
 
 import '../cubit/const_values.dart';
 import '../widgets/chat_widgets/chat_custom_bubble.dart';
-import '../widgets/chat_widgets/my_attachment_button.dart';
+import '../widgets/my_attachment_button.dart';
 import '../widgets/date_header.dart';
 
 class GroupChatScreen extends StatefulWidget {

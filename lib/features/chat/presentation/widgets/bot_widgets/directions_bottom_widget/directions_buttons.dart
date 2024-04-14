@@ -21,7 +21,7 @@ class DirectionsButtons extends StatelessWidget {
       child: SingleChildScrollView(
         padding: const EdgeInsets.only(
           top: 0.5 * AppConst.defaultPadding,
-          bottom: AppConst.defaultPadding,
+          bottom: 60,
           left: AppConst.defaultPadding,
           right: AppConst.defaultPadding,
         ),

@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
 
 class MyAttachmentButtonIcon extends StatelessWidget {
-  const MyAttachmentButtonIcon({super.key});
+  const MyAttachmentButtonIcon({super.key, this.iconColor = Colors.white});
+
+  final Color? iconColor;
 
   @override
   Widget build(BuildContext context) {
     return Transform.rotate(
       angle: 45,
-      child: const Icon(
+      child: Icon(
         Icons.attach_file_outlined,
-        color: Colors.white,
+        color: iconColor,
       ),
     );
   }
