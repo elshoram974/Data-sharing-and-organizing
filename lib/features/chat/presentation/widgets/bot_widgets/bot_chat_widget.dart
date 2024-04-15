@@ -25,7 +25,7 @@ class BotChatWidget extends StatelessWidget {
         onBackgroundTap: ProviderDependency.group.closeFloatingButton,
         onMessageTap: c.handleMessageTap,
         onPreviewDataFetched: c.handlePreviewDataFetched,
-        onSendPressed: c.handleSendPressed,
+        onSendPressed: (m) => c.handleSendPressed(m, types.Status.sending),
         bubbleBuilder: customBubble,
         dateHeaderBuilder: (_) => DateHeaderWidget(_),
         inputOptions: InputOptions(

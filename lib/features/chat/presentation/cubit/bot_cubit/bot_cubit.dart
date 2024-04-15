@@ -168,17 +168,30 @@ class BOTCubit extends Cubit<BOTState> {
     emit(SetState(_i++));
   }
 
-  void handleSendPressed(types.PartialText message) {
+  void handleSendPressed(types.PartialText message, [types.Status? status]) {
     ProviderDependency.group.closeFloatingButton();
 
-    final textMessage = types.TextMessage(
+    final types.TextMessage textMessage = types.TextMessage(
       author: currentUser,
       createdAt: DateTime.now().millisecondsSinceEpoch,
       id: const Uuid().v4(),
       text: message.text,
+      status: status,
     );
 
     _addMessage(textMessage);
+
+    if (textMessage.status == types.Status.sending) {
+      Future.delayed(const Duration(seconds: 3), () async {
+        final index =
+            botMessages.indexWhere((element) => element.id == textMessage.id);
+        final updatedMessage = (botMessages[index] as types.TextMessage)
+            .copyWith(status: types.Status.seen);
+
+        botMessages[index] = updatedMessage;
+        emit(SetState(_i++));
+      });
+    }
   }
 
   void _botReply() {
