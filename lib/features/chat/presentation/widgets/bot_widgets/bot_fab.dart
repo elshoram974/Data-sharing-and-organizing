@@ -21,9 +21,8 @@ class BotFAB extends StatelessWidget {
       return BlocBuilder<GroupCubit, GroupState>(
         buildWhen: (p, c) => c is GroupChooseScreenState,
         builder: (context, state) {
-          final isAdmin = c.group.ownerId == ProviderDependency.userMain.user.id; // TODO: make it for all admins
           return c.currentScreen == 0 &&
-                  (c.group.accessType != GroupAccessType.onlyRead || isAdmin) &&
+                  (c.group.accessType != GroupAccessType.onlyRead || c.isAdmin) &&
                   !isKeyboardVisible
               ? ExpandableFab(
                   distance: 70,
