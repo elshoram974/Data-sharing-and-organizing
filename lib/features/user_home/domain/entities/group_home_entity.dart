@@ -1,3 +1,4 @@
+import 'package:data_sharing_organizing/core/utils/enums/home/group_access_type_enum.dart';
 import 'package:data_sharing_organizing/core/utils/enums/home/group_discussion_type_enum.dart';
 import 'package:data_sharing_organizing/core/utils/enums/message_type/message_type.dart';
 import 'package:equatable/equatable.dart';
@@ -43,9 +44,11 @@ class GroupHomeEntity extends Equatable {
   @HiveField(11)
   final GroupDiscussionType discussion;
 
+  final GroupAccessType accessType;
+
   final bool isSelected;
 
-  const GroupHomeEntity( {
+  const GroupHomeEntity({
     required this.id,
     this.imageLink,
     required this.groupName,
@@ -59,6 +62,7 @@ class GroupHomeEntity extends Equatable {
     required this.ownerId,
     this.bottomHeight,
     required this.discussion,
+    this.accessType = GroupAccessType.onlyRead,
   });
 
   GroupHomeEntity copyWith({
@@ -75,6 +79,7 @@ class GroupHomeEntity extends Equatable {
     int? ownerId,
     double? bottomHeight,
     GroupDiscussionType? discussion,
+    GroupAccessType? accessType,
   }) {
     return GroupHomeEntity(
       id: id ?? this.id,
@@ -89,7 +94,8 @@ class GroupHomeEntity extends Equatable {
       lastMessageFrom: lastMessageFrom ?? this.lastMessageFrom,
       ownerId: ownerId ?? this.ownerId,
       bottomHeight: bottomHeight ?? this.bottomHeight,
-      discussion: discussion ?? this.discussion
+      discussion: discussion ?? this.discussion,
+      accessType: accessType ?? this.accessType,
     );
   }
 

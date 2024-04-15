@@ -16,7 +16,6 @@ class GroupDetails extends GroupHomeEntity {
   final DateTime? groupCreationDate;
   final String? groupDescription;
   final GroupVisibility groupVisibility;
-  final GroupAccessType groupAccessType;
   final GroupCategory groupCategory;
   final String? groupImage;
   final GroupType groupType;
@@ -30,7 +29,7 @@ class GroupDetails extends GroupHomeEntity {
     required this.groupCreationDate,
     required this.groupDescription,
     required this.groupVisibility,
-    required this.groupAccessType,
+    required super.accessType,
     required this.groupCategory,
     required this.groupImage,
     required this.groupType,
@@ -53,7 +52,7 @@ class GroupDetails extends GroupHomeEntity {
 
   @override
   String toString() {
-    return 'Group(groupId: $groupId, groupName: $groupName, groupOwnerId: $groupOwnerId, groupCreationDate: $groupCreationDate, groupDescription: $groupDescription, groupVisibility: $groupVisibility, groupAccessType: $groupAccessType, groupCategory: $groupCategory, groupImage: $groupImage, groupType: $groupType, groupDiscussionType: $discussion, groupStatus: $groupStatus, groupStatusMessage: $groupStatusMessage, isSelected: $isSelected, isMuted: $isMute, unReadCounter: $unReadCounter, lastMessageTime: $lastMessageTime, lastMessageType: $lastMessageType, lastMessageFrom: $lastMessageFrom, lastMessage: $lastMessage)';
+    return 'Group(groupId: $groupId, groupName: $groupName, groupOwnerId: $groupOwnerId, groupCreationDate: $groupCreationDate, groupDescription: $groupDescription, groupVisibility: $groupVisibility, groupAccessType: $accessType, groupCategory: $groupCategory, groupImage: $groupImage, groupType: $groupType, groupDiscussionType: $discussion, groupStatus: $groupStatus, groupStatusMessage: $groupStatusMessage, isSelected: $isSelected, isMuted: $isMute, unReadCounter: $unReadCounter, lastMessageTime: $lastMessageTime, lastMessageType: $lastMessageType, lastMessageFrom: $lastMessageFrom, lastMessage: $lastMessage)';
   }
 
   factory GroupDetails.fromMap(Map<String, dynamic> data) => GroupDetails(
@@ -65,7 +64,7 @@ class GroupDetails extends GroupHomeEntity {
         groupDescription: data['group_description'] as String?,
         groupVisibility:
             GroupVisibility.fromString(data['group_visibility'] as String?),
-        groupAccessType:
+        accessType:
             GroupAccessType.fromString(data['group_access_type'] as String?),
         groupCategory:
             GroupCategory.fromString(data['group_category'] as String?),
@@ -84,7 +83,7 @@ class GroupDetails extends GroupHomeEntity {
         'group_creation_date': groupCreationDate?.toIso8601String(),
         'group_description': groupDescription,
         'group_visibility': groupVisibility.inString,
-        'group_access_type': groupAccessType.inString,
+        'group_access_type': accessType.inString,
         'group_category': groupCategory.inString,
         'group_image': groupImage,
         'group_type': groupType.inString,
@@ -113,7 +112,7 @@ class GroupDetails extends GroupHomeEntity {
     DateTime? groupCreationDate,
     String? groupDescription,
     GroupVisibility? groupVisibility,
-    GroupAccessType? groupAccessType,
+    GroupAccessType? accessType,
     GroupCategory? groupCategory,
     String? groupImage,
     GroupType? groupType,
@@ -139,7 +138,7 @@ class GroupDetails extends GroupHomeEntity {
       groupCreationDate: groupCreationDate ?? this.groupCreationDate,
       groupDescription: groupDescription ?? this.groupDescription,
       groupVisibility: groupVisibility ?? this.groupVisibility,
-      groupAccessType: groupAccessType ?? this.groupAccessType,
+      accessType: accessType ?? this.accessType,
       groupCategory: groupCategory ?? this.groupCategory,
       groupImage: groupImage ?? this.groupImage,
       groupType: groupType ?? this.groupType,

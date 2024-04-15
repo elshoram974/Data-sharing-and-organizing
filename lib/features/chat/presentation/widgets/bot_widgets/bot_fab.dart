@@ -1,6 +1,7 @@
 import 'package:data_sharing_organizing/core/shared/expandable_fab.dart';
 import 'package:data_sharing_organizing/core/utils/config/locale/generated/l10n.dart';
 import 'package:data_sharing_organizing/core/utils/constants/app_color.dart';
+import 'package:data_sharing_organizing/core/utils/enums/home/group_access_type_enum.dart';
 import 'package:data_sharing_organizing/core/utils/services/dependency/provider_dependency.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -18,7 +19,9 @@ class BotFAB extends StatelessWidget {
     return BlocBuilder<GroupCubit, GroupState>(
       buildWhen: (p, c) => c is GroupChooseScreenState,
       builder: (context, state) {
-        return c.currentScreen == 0
+        final isAdmin = c.group.ownerId == ProviderDependency.userMain.user.id; // TODO: make it for all admins
+        return c.currentScreen == 0 &&
+                (c.group.accessType != GroupAccessType.onlyRead || isAdmin)
             ? ExpandableFab(
                 distance: 70,
                 degreeStart: 0,
@@ -31,12 +34,14 @@ class BotFAB extends StatelessWidget {
                 children: [
                   ActionButton(
                     tooltip: S.of(context).addDirectory,
-                    onPressed: () => _showAction(context, "U can add directory here"),
+                    onPressed: () =>
+                        _showAction(context, "U can add directory here"),
                     icon: const Icon(Icons.create_new_folder_outlined),
                   ),
                   ActionButton(
                     tooltip: S.of(context).addFileOrMessage,
-                    onPressed: () => _showAction(context, "U can add file here"),
+                    onPressed: () =>
+                        _showAction(context, "U can add file here"),
                     icon: const MyAttachmentButtonIcon(iconColor: null),
                   ),
                 ],
@@ -47,11 +52,16 @@ class BotFAB extends StatelessWidget {
   }
 
   void _showAction(BuildContext context, String title) {
+    final GroupAccessType accessType =
+        ProviderDependency.group.group.accessType;
+    final text = accessType == GroupAccessType.readWrite
+        ? "U can add data directly"
+        : "Your data will be wait for accepted from admins";
     showDialog<void>(
       context: context,
       builder: (context) {
         return AlertDialog(
-          content: Text(title),
+          content: Text("$title \n$text"),
           actions: [
             TextButton(
               onPressed: () => Navigator.of(context).pop(),

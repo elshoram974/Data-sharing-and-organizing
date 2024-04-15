@@ -1,3 +1,4 @@
+import 'package:data_sharing_organizing/core/utils/enums/home/group_access_type_enum.dart';
 import 'package:data_sharing_organizing/core/utils/enums/home/group_discussion_type_enum.dart';
 import 'package:data_sharing_organizing/core/utils/enums/message_type/message_type.dart';
 
@@ -19,6 +20,7 @@ final class GroupNotificationEntity extends GroupHomeEntity {
     required super.ownerId,
     super.bottomHeight,
     required super.discussion,
+    super.accessType,
   }) : super(isSelected: false, isMute: false);
 
   @override
@@ -38,6 +40,7 @@ final class GroupNotificationEntity extends GroupHomeEntity {
     int? ownerId,
     double? bottomHeight,
     GroupDiscussionType? discussion,
+    GroupAccessType? accessType
   }) {
     return GroupNotificationEntity(
       id: id ?? this.id,
@@ -52,6 +55,7 @@ final class GroupNotificationEntity extends GroupHomeEntity {
       ownerId: ownerId ?? this.ownerId,
       bottomHeight: bottomHeight ?? this.bottomHeight,
       discussion: discussion ?? this.discussion,
+      accessType : accessType ?? this.accessType,
     );
   }
 
