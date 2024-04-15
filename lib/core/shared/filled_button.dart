@@ -7,6 +7,7 @@ class MyFilledButton extends StatelessWidget {
     super.key,
     required this.text,
     this.onPressed,
+    this.onLongPress,
     this.style,
     this.filledColor,
     this.minimumSize,
@@ -16,11 +17,13 @@ class MyFilledButton extends StatelessWidget {
   final Color? filledColor;
   final Size? minimumSize;
   final void Function()? onPressed;
+  final void Function()? onLongPress;
 
   @override
   Widget build(BuildContext context) {
     return FilledButton(
       onPressed: onPressed,
+      onLongPress: onLongPress,
       style: FilledButton.styleFrom(
         minimumSize: minimumSize ?? const Size(100, 48),
         backgroundColor: filledColor ?? AppColor.primary,
