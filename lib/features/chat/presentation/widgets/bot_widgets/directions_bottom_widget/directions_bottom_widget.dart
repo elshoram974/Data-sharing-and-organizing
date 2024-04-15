@@ -19,7 +19,7 @@ class DirectionsBottomWidget extends StatelessWidget {
           buildWhen: (p, c) => c is ChangeDirectionBottomHeightState,
           builder: (context, state) {
             return SizedBox(
-              height: isKeyboardVisible ? 0 : c.bottomHeight,
+              height: isKeyboardVisible || c.isNoDirections ? 0 : c.bottomHeight,
               width: double.infinity,
               child: const Column(
                 children: [
@@ -34,6 +34,3 @@ class DirectionsBottomWidget extends StatelessWidget {
     );
   }
 }
-
-
-

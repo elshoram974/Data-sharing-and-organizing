@@ -38,6 +38,8 @@ class BOTCubit extends Cubit<BOTState> {
 
   late double bottomHeight = groupCubit.group.bottomHeight ?? 250;
 
+  bool get isNoDirections => _allGroupDirections.isEmpty;
+
   void _loadMessages() async {
     // final response = await rootBundle.loadString('assets/messages.json');
     // final messages = (jsonDecode(response) as List)
@@ -84,7 +86,7 @@ class BOTCubit extends Cubit<BOTState> {
     }
   }
 
-  void changeHeight(DragUpdateDetails details, BuildContext _) async{
+  void changeHeight(DragUpdateDetails details, BuildContext _) async {
     bottomHeight += -details.delta.dy;
     final double maxHeight = MediaQuery.sizeOf(_).height - 250;
     const double minHeight = 50;
@@ -94,7 +96,7 @@ class BOTCubit extends Cubit<BOTState> {
     } else if (bottomHeight > maxHeight) {
       bottomHeight = maxHeight;
     }
-    await botRepo.saveBottomHeight(bottomHeight , groupCubit.group.id);
+    await botRepo.saveBottomHeight(bottomHeight, groupCubit.group.id);
     emit(ChangeDirectionBottomHeightState(bottomHeight));
   }
 
