@@ -1,5 +1,6 @@
 import 'package:data_sharing_organizing/core/utils/constants/app_color.dart';
 import 'package:data_sharing_organizing/core/utils/constants/app_constants.dart';
+import 'package:data_sharing_organizing/core/utils/enums/home/group_discussion_type_enum.dart';
 import 'package:data_sharing_organizing/core/utils/services/dependency/provider_dependency.dart';
 import 'package:data_sharing_organizing/core/utils/styles.dart';
 import 'package:flutter/material.dart';
@@ -62,6 +63,7 @@ class _GroupChatScreenState extends State<GroupChatScreen> {
   }
 
   void _handleAttachmentPressed() {
+    if (!enabled) return;
     ProviderDependency.group.closeFloatingButton();
 
     showModalBottomSheet<void>(
@@ -238,6 +240,9 @@ class _GroupChatScreenState extends State<GroupChatScreen> {
     });
   }
 
+  final bool enabled =
+      ProviderDependency.group.group.discussion == GroupDiscussionType.exist;
+
   @override
   Widget build(BuildContext context) {
     return Chat(
@@ -256,6 +261,10 @@ class _GroupChatScreenState extends State<GroupChatScreen> {
       bubbleBuilder: customBubble,
       dateHeaderBuilder: (_) => DateHeaderWidget(_),
       inputOptions: InputOptions(
+        enabled: enabled,
+        sendButtonVisibilityMode: enabled
+            ? SendButtonVisibilityMode.hidden
+            : SendButtonVisibilityMode.editing,
         onTextFieldTap: ProviderDependency.group.closeFloatingButton,
       ),
       user: _user,

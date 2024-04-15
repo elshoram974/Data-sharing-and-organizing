@@ -1,3 +1,4 @@
+import 'package:data_sharing_organizing/core/utils/enums/home/group_discussion_type_enum.dart';
 import 'package:data_sharing_organizing/core/utils/services/dependency/locator.dart';
 import 'package:data_sharing_organizing/core/utils/services/dependency/provider_dependency.dart';
 import 'package:flutter/material.dart';
@@ -49,7 +50,8 @@ class _UserGroupScreen extends StatelessWidget {
     final GroupCubit c = ProviderDependency.group;
     return Scaffold(
       appBar: GroupAppBar(group: group),
-      floatingActionButtonLocation: FloatingActionButtonLocation.miniCenterDocked,
+      floatingActionButtonLocation:
+          FloatingActionButtonLocation.miniCenterDocked,
       floatingActionButton: const BotFAB(),
       body: Stack(
         children: [
@@ -59,22 +61,23 @@ class _UserGroupScreen extends StatelessWidget {
               return screens[c.currentScreen];
             },
           ),
-          BlocBuilder<GroupCubit, GroupState>(
-            buildWhen: (p, c) => c is GroupChangeButtonPlaceState,
-            builder: (context, state) {
-              return Positioned(
-                left: 0,
-                top: c.top,
-                child: GestureDetector(
-                  onTap: c.openFloatingButtonByTap,
-                  onHorizontalDragStart: c.onHorizontalDragStart,
-                  onHorizontalDragUpdate: c.openFloatingButtonByDrag,
-                  onVerticalDragUpdate: (d) => c.onPanUpdate(d, context),
-                  child: const GroupFloatingButtonWidget(),
-                ),
-              );
-            },
-          ),
+          if (c.group.discussion != GroupDiscussionType.notExist)
+            BlocBuilder<GroupCubit, GroupState>(
+              buildWhen: (p, c) => c is GroupChangeButtonPlaceState,
+              builder: (context, state) {
+                return Positioned(
+                  left: 0,
+                  top: c.top,
+                  child: GestureDetector(
+                    onTap: c.openFloatingButtonByTap,
+                    onHorizontalDragStart: c.onHorizontalDragStart,
+                    onHorizontalDragUpdate: c.openFloatingButtonByDrag,
+                    onVerticalDragUpdate: (d) => c.onPanUpdate(d, context),
+                    child: const GroupFloatingButtonWidget(),
+                  ),
+                );
+              },
+            ),
         ],
       ),
     );
