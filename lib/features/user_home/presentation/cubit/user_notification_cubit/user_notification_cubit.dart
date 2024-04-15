@@ -1,3 +1,4 @@
+import 'package:data_sharing_organizing/core/utils/enums/home/group_discussion_type_enum.dart';
 import 'package:data_sharing_organizing/core/utils/enums/message_type/message_type.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
@@ -33,24 +34,29 @@ final list = [
           'Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message ',
       unReadCounter: 0,
       lastMessageTime: DateTime.now(),
-      ownerId: 42),
+      ownerId: 42,
+      discussion: GroupDiscussionType.exist),
   GroupNotificationEntity(
-      id: 1,
-      lastMessageType: MessageType.photo,
-      imageLink: '',
-      groupName: 'First year in THIET',
-      lastMessage:
-          'Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message ',
-      lastMessageTime: DateTime.now(),
-      ownerId: 42),
+    id: 1,
+    lastMessageType: MessageType.photo,
+    imageLink: '',
+    groupName: 'First year in THIET',
+    lastMessage:
+        'Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message ',
+    lastMessageTime: DateTime.now(),
+    ownerId: 42,
+    discussion: GroupDiscussionType.existButClosed,
+  ),
   GroupNotificationEntity(
-      id: 2,
-      lastMessageType: MessageType.voiceMessage,
-      imageLink: '',
-      groupName: 'First year in THIET',
-      unReadCounter: 1,
-      lastMessage:
-          'Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message ',
-      lastMessageTime: DateTime.now(),
-      ownerId: 42),
+    id: 2,
+    lastMessageType: MessageType.voiceMessage,
+    imageLink: '',
+    groupName: 'First year in THIET',
+    unReadCounter: 1,
+    lastMessage:
+        'Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message ',
+    lastMessageTime: DateTime.now(),
+    ownerId: 42,
+    discussion: GroupDiscussionType.notExist,
+  ),
 ];

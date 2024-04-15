@@ -4,6 +4,7 @@ import 'package:data_sharing_organizing/features/auth/domain/entities/auth_user_
 import 'package:data_sharing_organizing/features/user_home/domain/entities/group_home_entity.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
+import '../enums/home/group_discussion_type_enum.dart';
 import '../enums/message_type/message_type.dart';
 
 late final Box<String> config;
@@ -26,7 +27,8 @@ Future<void> localInstance() async {
 void _registerAdapterFn() {
   Hive.registerAdapter<UserType>(UserTypeAdapter());
   Hive.registerAdapter<AuthUserEntity>(AuthUserEntityAdapter());
-  Hive.registerAdapter<MessageType>(MessageTypeAdapter());
+  Hive.registerAdapter<MessageType>(MessageTypeAdapter()); //* it in group entity
+  Hive.registerAdapter<GroupDiscussionType>(GroupDiscussionTypeAdapter());//* it in group entity
   Hive.registerAdapter<GroupHomeEntity>(GroupHomeEntityAdapter());
 }
 

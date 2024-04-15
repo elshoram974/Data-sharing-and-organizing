@@ -20,7 +20,6 @@ class GroupDetails extends GroupHomeEntity {
   final GroupCategory groupCategory;
   final String? groupImage;
   final GroupType groupType;
-  final GroupDiscussionType discussionType;
   final GroupStatus groupStatus;
   final String? groupStatusMessage;
 
@@ -35,7 +34,7 @@ class GroupDetails extends GroupHomeEntity {
     required this.groupCategory,
     required this.groupImage,
     required this.groupType,
-    required this.discussionType,
+    required super.discussion,
     required this.groupStatus,
     required this.groupStatusMessage,
     super.isMute,
@@ -54,7 +53,7 @@ class GroupDetails extends GroupHomeEntity {
 
   @override
   String toString() {
-    return 'Group(groupId: $groupId, groupName: $groupName, groupOwnerId: $groupOwnerId, groupCreationDate: $groupCreationDate, groupDescription: $groupDescription, groupVisibility: $groupVisibility, groupAccessType: $groupAccessType, groupCategory: $groupCategory, groupImage: $groupImage, groupType: $groupType, groupDiscussionType: $discussionType, groupStatus: $groupStatus, groupStatusMessage: $groupStatusMessage, isSelected: $isSelected, isMuted: $isMute, unReadCounter: $unReadCounter, lastMessageTime: $lastMessageTime, lastMessageType: $lastMessageType, lastMessageFrom: $lastMessageFrom, lastMessage: $lastMessage)';
+    return 'Group(groupId: $groupId, groupName: $groupName, groupOwnerId: $groupOwnerId, groupCreationDate: $groupCreationDate, groupDescription: $groupDescription, groupVisibility: $groupVisibility, groupAccessType: $groupAccessType, groupCategory: $groupCategory, groupImage: $groupImage, groupType: $groupType, groupDiscussionType: $discussion, groupStatus: $groupStatus, groupStatusMessage: $groupStatusMessage, isSelected: $isSelected, isMuted: $isMute, unReadCounter: $unReadCounter, lastMessageTime: $lastMessageTime, lastMessageType: $lastMessageType, lastMessageFrom: $lastMessageFrom, lastMessage: $lastMessage)';
   }
 
   factory GroupDetails.fromMap(Map<String, dynamic> data) => GroupDetails(
@@ -72,7 +71,7 @@ class GroupDetails extends GroupHomeEntity {
             GroupCategory.fromString(data['group_category'] as String?),
         groupImage: data['group_image'] as String?,
         groupType: GroupType.fromString(data['group_type'] as String?),
-        discussionType: GroupDiscussionType.fromString(
+        discussion: GroupDiscussionType.fromString(
             data['group_discussion_type'] as String?),
         groupStatus: GroupStatus.fromString(data['group_status'] as String?),
         groupStatusMessage: data['group_status_message'] as String?,
@@ -89,7 +88,7 @@ class GroupDetails extends GroupHomeEntity {
         'group_category': groupCategory.inString,
         'group_image': groupImage,
         'group_type': groupType.inString,
-        'group_discussion_type': discussionType.inString,
+        'group_discussion_type': discussion.inString,
         'group_status': groupStatus.inString,
         'group_status_message': groupStatusMessage,
       };
@@ -118,7 +117,7 @@ class GroupDetails extends GroupHomeEntity {
     GroupCategory? groupCategory,
     String? groupImage,
     GroupType? groupType,
-    GroupDiscussionType? discussionType,
+    GroupDiscussionType? discussion,
     GroupStatus? groupStatus,
     String? groupStatusMessage,
     int? id,
@@ -144,7 +143,7 @@ class GroupDetails extends GroupHomeEntity {
       groupCategory: groupCategory ?? this.groupCategory,
       groupImage: groupImage ?? this.groupImage,
       groupType: groupType ?? this.groupType,
-      discussionType: discussionType ?? this.discussionType,
+      discussion: discussion ?? this.discussion,
       groupStatus: groupStatus ?? this.groupStatus,
       groupStatusMessage: groupStatusMessage ?? this.groupStatusMessage,
       isMute: isMute ?? this.isMute,
