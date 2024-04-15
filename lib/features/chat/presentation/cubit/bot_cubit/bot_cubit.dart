@@ -1,3 +1,4 @@
+import 'package:data_sharing_organizing/core/utils/config/locale/generated/l10n.dart';
 import 'package:data_sharing_organizing/core/utils/config/routes/routes.dart';
 import 'package:data_sharing_organizing/core/utils/services/dependency/provider_dependency.dart';
 import 'package:equatable/equatable.dart';
@@ -12,6 +13,7 @@ import 'package:open_filex/open_filex.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:uuid/uuid.dart';
 
+import '../../../../user_home/domain/entities/group_home_entity.dart';
 import '../../../domain/entities/author_message_entity.dart';
 import '../../../domain/entities/direction_entity.dart';
 import '../../../domain/repositories/bot_repo.dart';
@@ -70,13 +72,14 @@ class BOTCubit extends Cubit<BOTState> {
 
   void _changeDirection() {
     currentDirections.clear();
-
     if (_directionStack.isEmpty) {
+      handleSendPressed(types.PartialText(text: S.current.home));
       currentDirections.addAll(
         _allGroupDirections.where((e) => e.insideDirectionId == 0),
       );
       emit(OpenDirectionState(DirectionEntity.newEmpty()));
     } else {
+      handleSendPressed(types.PartialText(text: _directionStack.last.name));
       currentDirections.addAll(
         _allGroupDirections.where(
           (e) => e.insideDirectionId == _directionStack.last.id,
@@ -84,6 +87,7 @@ class BOTCubit extends Cubit<BOTState> {
       );
       emit(OpenDirectionState(_directionStack.last));
     }
+    _botReply();
   }
 
   void changeHeight(DragUpdateDetails details, BuildContext _) async {
@@ -100,18 +104,7 @@ class BOTCubit extends Cubit<BOTState> {
     emit(ChangeDirectionBottomHeightState(bottomHeight));
   }
 
-  List<types.Message> botMessages = [
-    types.TextMessage(
-      createdAt: DateTime(2024, 4, 7, 16, 44).millisecondsSinceEpoch,
-      text: 'Hi there!\ni\'m BOT',
-      author: const types.User(
-        firstName: "BOT",
-        role: types.Role.admin,
-        id: 'Bot',
-      ),
-      id: "aaa",
-    )
-  ];
+  List<types.Message> botMessages = [];
 
   void _addMessage(types.Message message) {
     botMessages.insert(0, message);
@@ -186,6 +179,35 @@ class BOTCubit extends Cubit<BOTState> {
     );
 
     _addMessage(textMessage);
+  }
+
+  void _botReply() {
+    final GroupHomeEntity group = groupCubit.group;
+    final String messageId = const Uuid().v4();
+    final int messageCreatedAt = DateTime.now().millisecondsSinceEpoch;
+    final types.User botAuthor = types.User(
+      firstName: "BOT",
+      role: types.Role.admin,
+      id: 'Bot ${group.id}',
+    );
+    if (_directionStack.isNotEmpty) {
+      return _addMessage(
+        types.TextMessage(
+          author: botAuthor,
+          id: messageId,
+          text: "${_directionStack.last.name} contains ...",
+          createdAt: messageCreatedAt,
+        ),
+      );
+    }
+    return _addMessage(
+      types.TextMessage(
+        author: botAuthor,
+        id: messageId,
+        text: 'Hi there!\ni\'m ${group.groupName} BOT',
+        createdAt: messageCreatedAt,
+      ),
+    );
   }
 
   void onPopInvoked(bool didPop) {
