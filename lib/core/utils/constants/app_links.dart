@@ -27,4 +27,8 @@ abstract final class AppLinks {
   static const String deleteUser = '$_changes/deleteuser.php';
   static const String changeUserImage = '$_changes/changephoto.php';
   static const String deleteUserImage = '$_changes/deletephoto.php';
+
+  // * group
+  // static const String _changes = '$_userLink/changes';
+  // static const String changeName = '$_changes/changename.php';
 }
