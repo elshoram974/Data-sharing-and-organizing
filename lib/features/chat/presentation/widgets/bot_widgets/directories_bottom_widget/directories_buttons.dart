@@ -8,12 +8,12 @@ import 'package:flex_list/flex_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../domain/entities/direction_entity.dart';
+import '../../../../domain/entities/directory_entity.dart';
 import '../../../cubit/bot_cubit/bot_cubit.dart';
-import 'directions_back_button.dart';
+import 'directories_back_button.dart';
 
-class DirectionsButtons extends StatelessWidget {
-  const DirectionsButtons({super.key});
+class DirectoriesButtons extends StatelessWidget {
+  const DirectoriesButtons({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -28,16 +28,16 @@ class DirectionsButtons extends StatelessWidget {
           right: AppConst.defaultPadding,
         ),
         child: BlocBuilder<BOTCubit, BOTState>(
-          buildWhen: (p, c) => c is OpenDirectionState,
+          buildWhen: (p, c) => c is OpenDirectoryState,
           builder: (context, state) {
             return FlexList(
               horizontalSpacing: 0.5 * AppConst.defaultPadding,
               verticalSpacing: 20,
               children: [
                 ...List.generate(
-                  c.currentDirections.length,
+                  c.currentDirectories.length,
                   (i) {
-                    final DirectionEntity dir = c.currentDirections[i];
+                    final DirectoryEntity dir = c.currentDirectories[i];
                     return Visibility(
                       visible: dir.isAccepted ||
                           c.groupCubit.isAdmin ||
@@ -46,7 +46,7 @@ class DirectionsButtons extends StatelessWidget {
                       child: SizedBox(
                         height: 38,
                         child: MyFilledButton(
-                          onPressed: () => c.openDirection(dir),
+                          onPressed: () => c.openDirectory(dir),
                           onLongPress: () => _showAction(context, dir, c),
                           text: dir.name,
                           filledColor: dir.isAccepted
@@ -59,7 +59,7 @@ class DirectionsButtons extends StatelessWidget {
                     );
                   },
                 ),
-                DirectionsBackButton(botCubit: c)
+                DirectoriesBackButton(botCubit: c)
               ],
             );
           },
@@ -71,7 +71,7 @@ class DirectionsButtons extends StatelessWidget {
 
 void _showAction(
   BuildContext _,
-  DirectionEntity dir,
+  DirectoryEntity dir,
   BOTCubit c,
 ) {
   final String content;
@@ -87,24 +87,36 @@ void _showAction(
   ];
 
   if (c.groupCubit.isAdmin) {
-    content =
-        S.of(_).userIdWantToAddDirNameDirection(dir.name, dir.createdById);
-    actions.insertAll(
-      0,
-      [
+    if (!dir.isAccepted) {
+      content =
+          S.of(_).userIdWantToAddDirNameDirectory(dir.name, dir.createdById);
+      actions.insertAll(
+        0,
+        [
+          TextButton(
+            onPressed: () => c.blockUserInteraction(dir.createdById),
+            child: Text(S.of(_).blockThisUser),
+          ),
+          TextButton(
+            onPressed: () => c.addDirectory(dir),
+            child: Text(S.of(_).addDirectory),
+          ),
+        ],
+      );
+    } else {
+      content = S.of(_).whatDoYouWantToDoWithDirNameDirectory(dir.name);
+      actions.insert(
+        0,
         TextButton(
-          onPressed: () => c.blockUserInteraction(dir.createdById),
-          child: Text(S.of(_).blockThisUser),
+          onPressed: () {},
+          child: Text(S.of(_).hide),
         ),
-        TextButton(
-          onPressed: () => c.addDirectory(dir),
-          child: Text(S.of(_).addDirectory),
-        ),
-      ],
-    );
+      );
+    }
   } else {
-    if (ProviderDependency.userMain.user.id != dir.createdById) return;
-    content = S.of(_).youAddedDirNameDirection(dir.name);
+    if (ProviderDependency.userMain.user.id != dir.createdById ||
+        dir.isAccepted) return;
+    content = S.of(_).youAddedDirNameDirectory(dir.name);
   }
 
   showDialog<void>(

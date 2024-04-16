@@ -19,16 +19,16 @@ final class SetState extends BOTState {
   List<int> get props => [i];
 }
 
-final class OpenDirectionState extends BOTState {
-  const OpenDirectionState(this.newDirection);
-  final DirectionEntity newDirection;
+final class OpenDirectoryState extends BOTState {
+  const OpenDirectoryState(this.newDirectory);
+  final DirectoryEntity newDirectory;
 
   @override
-  List<DirectionEntity> get props => [newDirection];
+  List<DirectoryEntity> get props => [newDirectory];
 }
 
-final class ChangeDirectionBottomHeightState extends BOTState {
-  const ChangeDirectionBottomHeightState(this.newHeight);
+final class ChangeDirectoryBottomHeightState extends BOTState {
+  const ChangeDirectoryBottomHeightState(this.newHeight);
   final double newHeight;
 
   @override

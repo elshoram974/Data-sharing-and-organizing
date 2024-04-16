@@ -15,7 +15,7 @@ import 'package:uuid/uuid.dart';
 
 import '../../../../user_home/domain/entities/group_home_entity.dart';
 import '../../../domain/entities/author_message_entity.dart';
-import '../../../domain/entities/direction_entity.dart';
+import '../../../domain/entities/directory_entity.dart';
 import '../../../domain/repositories/bot_repo.dart';
 import '../group_cubit/group_cubit.dart';
 
@@ -26,7 +26,7 @@ class BOTCubit extends Cubit<BOTState> {
 
   BOTCubit(this.botRepo) : super(const BotInitial()) {
     _loadMessages();
-    _loadDirections();
+    _loadDirectories();
   }
   int _i = 0;
 
@@ -34,13 +34,13 @@ class BOTCubit extends Cubit<BOTState> {
     ProviderDependency.userHome.userMain.user,
   );
   final GroupCubit groupCubit = ProviderDependency.group;
-  final List<DirectionEntity> currentDirections = [];
-  final List<DirectionEntity> _allGroupDirections = [];
-  final List<DirectionEntity> _directionStack = [];
+  final List<DirectoryEntity> currentDirectories = [];
+  final List<DirectoryEntity> _allGroupDirectories = [];
+  final List<DirectoryEntity> _directoriesStack = [];
 
   late double bottomHeight = groupCubit.group.bottomHeight ?? 250;
 
-  bool get isNoDirections => _allGroupDirections.isEmpty;
+  bool get isNoDirectories => _allGroupDirectories.isEmpty;
 
   void _loadMessages() async {
     // final response = await rootBundle.loadString('assets/messages.json');
@@ -52,47 +52,47 @@ class BOTCubit extends Cubit<BOTState> {
     //   botMessages = messages;
     // });
   }
-  void _loadDirections() async {
-    _allGroupDirections.addAll(
-      directions.where((e) => e.groupId == groupCubit.group.id),
+  void _loadDirectories() async {
+    _allGroupDirectories.addAll(
+      directories.where((e) => e.groupId == groupCubit.group.id),
     );
-    _changeDirection();
+    _changeDirectory();
   }
 
-  void openDirection(DirectionEntity newDirection) {
-    _directionStack.add(newDirection);
-    _changeDirection();
+  void openDirectory(DirectoryEntity newDirectory) {
+    _directoriesStack.add(newDirectory);
+    _changeDirectory();
   }
 
-  void closeLastDirection() {
-    if (_directionStack.isEmpty) return;
-    _directionStack.removeLast();
-    _changeDirection();
+  void closeLastDirectory() {
+    if (_directoriesStack.isEmpty) return;
+    _directoriesStack.removeLast();
+    _changeDirectory();
   }
 
-  void _changeDirection() {
-    currentDirections.clear();
-    if (_directionStack.isEmpty) {
+  void _changeDirectory() {
+    currentDirectories.clear();
+    if (_directoriesStack.isEmpty) {
       handleSendPressed(types.PartialText(text: S.current.home));
-      currentDirections.addAll(
-        _allGroupDirections.where((e) => e.insideDirectionId == 0),
+      currentDirectories.addAll(
+        _allGroupDirectories.where((e) => e.insideDirectoryId == 0),
       );
-      emit(OpenDirectionState(DirectionEntity.newEmpty()));
+      emit(OpenDirectoryState(DirectoryEntity.newEmpty()));
     } else {
-      handleSendPressed(types.PartialText(text: _directionStack.last.name));
-      currentDirections.addAll(
-        _allGroupDirections.where(
-          (e) => e.insideDirectionId == _directionStack.last.id,
+      handleSendPressed(types.PartialText(text: _directoriesStack.last.name));
+      currentDirectories.addAll(
+        _allGroupDirectories.where(
+          (e) => e.insideDirectoryId == _directoriesStack.last.id,
         ),
       );
-      emit(OpenDirectionState(_directionStack.last));
+      emit(OpenDirectoryState(_directoriesStack.last));
     }
     _botReply();
   }
 
-  // * crud directions
+  // * crud Directories
 
-  void deleteDirectory(DirectionEntity dir) {
+  void deleteDirectory(DirectoryEntity dir) {
     // TODO: deleteDirectory code
   }
 
@@ -100,7 +100,7 @@ class BOTCubit extends Cubit<BOTState> {
     // TODO: blockUserInteraction code
   }
 
-  void addDirectory(DirectionEntity dir) {
+  void addDirectory(DirectoryEntity dir) {
     // TODO: addDirectory code
   }
 
@@ -117,7 +117,7 @@ class BOTCubit extends Cubit<BOTState> {
       bottomHeight = maxHeight;
     }
     await botRepo.saveBottomHeight(bottomHeight, groupCubit.group.id);
-    emit(ChangeDirectionBottomHeightState(bottomHeight));
+    emit(ChangeDirectoryBottomHeightState(bottomHeight));
   }
 
   List<types.Message> botMessages = [];
@@ -199,8 +199,10 @@ class BOTCubit extends Cubit<BOTState> {
 
     if (textMessage.status == types.Status.sending) {
       Future.delayed(const Duration(seconds: 3), () async {
-        final int index = botMessages.indexWhere((element) => element.id == textMessage.id);
-        final types.Message updatedMessage = botMessages[index].copyWith(status: types.Status.seen);
+        final int index =
+            botMessages.indexWhere((element) => element.id == textMessage.id);
+        final types.Message updatedMessage =
+            botMessages[index].copyWith(status: types.Status.seen);
 
         botMessages[index] = updatedMessage;
         emit(SetState(_i++));
@@ -217,12 +219,12 @@ class BOTCubit extends Cubit<BOTState> {
       role: types.Role.admin,
       id: 'Bot ${group.id}',
     );
-    if (_directionStack.isNotEmpty) {
+    if (_directoriesStack.isNotEmpty) {
       return _addMessage(
         types.TextMessage(
           author: botAuthor,
           id: messageId,
-          text: "${_directionStack.last.name} contains ...",
+          text: "${_directoriesStack.last.name} contains ...",
           createdAt: messageCreatedAt,
         ),
       );
@@ -238,7 +240,7 @@ class BOTCubit extends Cubit<BOTState> {
   }
 
   void onPopInvoked(bool didPop) {
-    if (_directionStack.isEmpty) return AppRoute.key.currentState?.pop();
-    closeLastDirection();
+    if (_directoriesStack.isEmpty) return AppRoute.key.currentState?.pop();
+    closeLastDirectory();
   }
 }

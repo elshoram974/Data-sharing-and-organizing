@@ -6,22 +6,22 @@ import 'package:flutter/material.dart';
 
 import '../../../cubit/bot_cubit/bot_cubit.dart';
 
-class DirectionsBackButton extends StatelessWidget {
-  const DirectionsBackButton({super.key, required this.botCubit});
+class DirectoriesBackButton extends StatelessWidget {
+  const DirectoriesBackButton({super.key, required this.botCubit});
 
   final BOTCubit botCubit;
 
   @override
   Widget build(BuildContext context) {
     return Visibility(
-      visible: (botCubit.currentDirections.isNotEmpty &&
-              botCubit.currentDirections.first.insideDirectionId != 0) ||
-          botCubit.currentDirections.isEmpty,
+      visible: (botCubit.currentDirectories.isNotEmpty &&
+              botCubit.currentDirectories.first.insideDirectoryId != 0) ||
+          botCubit.currentDirectories.isEmpty,
       child: SizedBox(
         height: 38,
         width: double.infinity,
         child: MyFilledButton(
-          onPressed: botCubit.closeLastDirection,
+          onPressed: botCubit.closeLastDirectory,
           filledColor: AppColor.active,
           text: S.of(context).back,
           style: AppStyle.styleBoldInika16,
