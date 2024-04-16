@@ -1,5 +1,3 @@
-import 'package:data_sharing_organizing/core/utils/config/locale/generated/l10n.dart';
-import 'package:data_sharing_organizing/core/utils/config/routes/routes.dart';
 import 'package:data_sharing_organizing/core/utils/services/dependency/provider_dependency.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
@@ -13,34 +11,33 @@ import 'package:open_filex/open_filex.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:uuid/uuid.dart';
 
-import '../../../../user_home/domain/entities/group_home_entity.dart';
 import '../../../domain/entities/author_message_entity.dart';
-import '../../../domain/entities/directory_entity.dart';
-import '../../../domain/repositories/bot_repo.dart';
 import '../group_cubit/group_cubit.dart';
 
 part 'bot_state.dart';
 
-class BOTCubit extends Cubit<BOTState> {
-  final BOTRepositories botRepo;
-
-  BOTCubit(this.botRepo) : super(const BotInitial()) {
-    _loadMessages();
-    _loadDirectories();
-  }
-  int _i = 0;
+abstract class BOTCubit extends Cubit<BOTState> {
+  BOTCubit() : super(const BotInitial());
 
   final types.User currentUser = MessageAuthor.messageAuthorFromAuth(
     ProviderDependency.userHome.userMain.user,
   );
   final GroupCubit groupCubit = ProviderDependency.group;
-  final List<DirectoryEntity> currentDirectories = [];
-  final List<DirectoryEntity> _allGroupDirectories = [];
-  final List<DirectoryEntity> _directoriesStack = [];
 
-  late double bottomHeight = groupCubit.group.bottomHeight ?? 250;
+  List<types.Message> botMessages = [];
 
-  bool get isNoDirectories => _allGroupDirectories.isEmpty;
+  void addMessage(types.Message message);
+  void handleMessageTap(BuildContext _, types.Message message);
+  void handlePreviewDataFetched(types.TextMessage message, types.PreviewData previewData);
+  void handleSendPressed(types.PartialText message, [types.Status? status]);
+}
+
+class BOTCubitImp extends BOTCubit {
+  BOTCubitImp() {
+    _loadMessages();
+  }
+
+  int _i = 0;
 
   void _loadMessages() async {
     // final response = await rootBundle.loadString('assets/messages.json');
@@ -52,81 +49,14 @@ class BOTCubit extends Cubit<BOTState> {
     //   botMessages = messages;
     // });
   }
-  void _loadDirectories() async {
-    _allGroupDirectories.addAll(
-      directories.where((e) => e.groupId == groupCubit.group.id),
-    );
-    _changeDirectory();
-  }
 
-  void openDirectory(DirectoryEntity newDirectory) {
-    _directoriesStack.add(newDirectory);
-    _changeDirectory();
-  }
-
-  void closeLastDirectory() {
-    if (_directoriesStack.isEmpty) return;
-    _directoriesStack.removeLast();
-    _changeDirectory();
-  }
-
-  void _changeDirectory() {
-    currentDirectories.clear();
-    if (_directoriesStack.isEmpty) {
-      handleSendPressed(types.PartialText(text: S.current.home));
-      currentDirectories.addAll(
-        _allGroupDirectories.where((e) => e.insideDirectoryId == 0),
-      );
-      emit(OpenDirectoryState(DirectoryEntity.newEmpty()));
-    } else {
-      handleSendPressed(types.PartialText(text: _directoriesStack.last.name));
-      currentDirectories.addAll(
-        _allGroupDirectories.where(
-          (e) => e.insideDirectoryId == _directoriesStack.last.id,
-        ),
-      );
-      emit(OpenDirectoryState(_directoriesStack.last));
-    }
-    _botReply();
-  }
-
-  // * crud Directories
-
-  void deleteDirectory(DirectoryEntity dir) {
-    // TODO: deleteDirectory code
-  }
-
-  void blockUserInteraction(int createdById) {
-    // TODO: blockUserInteraction code
-  }
-
-  void addDirectory(DirectoryEntity dir) {
-    // TODO: addDirectory code
-  }
-
-  // ------------------
-
-  void changeHeight(DragUpdateDetails details, BuildContext _) async {
-    bottomHeight += -details.delta.dy;
-    final double maxHeight = MediaQuery.sizeOf(_).height - 250;
-    const double minHeight = 50;
-
-    if (bottomHeight < minHeight) {
-      bottomHeight = minHeight;
-    } else if (bottomHeight > maxHeight) {
-      bottomHeight = maxHeight;
-    }
-    await botRepo.saveBottomHeight(bottomHeight, groupCubit.group.id);
-    emit(ChangeDirectoryBottomHeightState(bottomHeight));
-  }
-
-  List<types.Message> botMessages = [];
-
-  void _addMessage(types.Message message) {
+  @override
+  void addMessage(types.Message message) {
     botMessages.insert(0, message);
     emit(SetState(_i++));
   }
 
+  @override
   void handleMessageTap(BuildContext _, types.Message message) async {
     ProviderDependency.group.closeFloatingButton();
     if (message is types.FileMessage) {
@@ -171,6 +101,7 @@ class BOTCubit extends Cubit<BOTState> {
     }
   }
 
+  @override
   void handlePreviewDataFetched(
     types.TextMessage message,
     types.PreviewData previewData,
@@ -184,9 +115,9 @@ class BOTCubit extends Cubit<BOTState> {
     emit(SetState(_i++));
   }
 
+  @override
   void handleSendPressed(types.PartialText message, [types.Status? status]) {
     ProviderDependency.group.closeFloatingButton();
-
     final types.TextMessage textMessage = types.TextMessage(
       author: currentUser,
       createdAt: DateTime.now().millisecondsSinceEpoch,
@@ -195,7 +126,7 @@ class BOTCubit extends Cubit<BOTState> {
       status: status,
     );
 
-    _addMessage(textMessage);
+    addMessage(textMessage);
 
     if (textMessage.status == types.Status.sending) {
       Future.delayed(const Duration(seconds: 3), () async {
@@ -208,39 +139,5 @@ class BOTCubit extends Cubit<BOTState> {
         emit(SetState(_i++));
       });
     }
-  }
-
-  void _botReply() {
-    final GroupHomeEntity group = groupCubit.group;
-    final String messageId = const Uuid().v4();
-    final int messageCreatedAt = DateTime.now().millisecondsSinceEpoch;
-    final types.User botAuthor = types.User(
-      firstName: "BOT",
-      role: types.Role.admin,
-      id: 'Bot ${group.id}',
-    );
-    if (_directoriesStack.isNotEmpty) {
-      return _addMessage(
-        types.TextMessage(
-          author: botAuthor,
-          id: messageId,
-          text: "${_directoriesStack.last.name} contains ...",
-          createdAt: messageCreatedAt,
-        ),
-      );
-    }
-    return _addMessage(
-      types.TextMessage(
-        author: botAuthor,
-        id: messageId,
-        text: 'Hi there!\ni\'m ${group.groupName} BOT',
-        createdAt: messageCreatedAt,
-      ),
-    );
-  }
-
-  void onPopInvoked(bool didPop) {
-    if (_directoriesStack.isEmpty) return AppRoute.key.currentState?.pop();
-    closeLastDirectory();
   }
 }

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 
-import '../../../cubit/bot_cubit/bot_cubit.dart';
+import '../../../cubit/bot_cubit/directories_cubit/directories_cubit.dart';
 import 'bottom_slider_button.dart';
 import 'directories_buttons.dart';
 
@@ -12,10 +12,10 @@ class DirectoriesBottomWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final BOTCubit c = ProviderDependency.bot;
+    final DirectoryCubit c = ProviderDependency.directory;
     return KeyboardVisibilityBuilder(
       builder: (context, isKeyboardVisible) {
-        return BlocBuilder<BOTCubit, BOTState>(
+        return BlocBuilder<DirectoryCubit, DirectoryState>(
           buildWhen: (p, c) => c is ChangeDirectoryBottomHeightState,
           builder: (context, state) {
             return SizedBox(

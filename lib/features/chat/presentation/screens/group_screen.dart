@@ -9,6 +9,7 @@ import '../../../user_home/domain/entities/group_home_entity.dart';
 import '../../domain/repositories/bot_repo.dart';
 import '../../domain/repositories/init_group_repo.dart';
 import '../cubit/bot_cubit/bot_cubit.dart';
+import '../cubit/bot_cubit/directories_cubit/directories_cubit.dart';
 import '../cubit/chat_cubit/chat_cubit.dart';
 import '../cubit/group_cubit/group_cubit.dart';
 import '../widgets/bot_widgets/bot_fab.dart';
@@ -28,7 +29,10 @@ class UserGroupScreen extends StatelessWidget {
             create: (_) => GroupCubit(sl.get<GroupInitRepositories>(), group),
           ),
           BlocProvider<BOTCubit>(
-            create: (_) => BOTCubit(sl.get<BOTRepositories>()),
+            create: (_) => BOTCubitImp(),
+          ),
+          BlocProvider<DirectoryCubit>(
+            create: (_) => DirectoryCubitImp(sl.get<BOTRepositories>()),
           ),
           BlocProvider<ChatCubit>(
             create: (_) => ChatCubit(),

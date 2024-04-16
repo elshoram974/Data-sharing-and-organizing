@@ -9,7 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../domain/entities/directory_entity.dart';
-import '../../../cubit/bot_cubit/bot_cubit.dart';
+import '../../../cubit/bot_cubit/directories_cubit/directories_cubit.dart';
 import 'directories_back_button.dart';
 
 class DirectoriesButtons extends StatelessWidget {
@@ -17,7 +17,7 @@ class DirectoriesButtons extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final BOTCubit c = ProviderDependency.bot;
+    final DirectoryCubit c = ProviderDependency.directory;
 
     return Expanded(
       child: SingleChildScrollView(
@@ -27,7 +27,7 @@ class DirectoriesButtons extends StatelessWidget {
           left: AppConst.defaultPadding,
           right: AppConst.defaultPadding,
         ),
-        child: BlocBuilder<BOTCubit, BOTState>(
+        child: BlocBuilder<DirectoryCubit, DirectoryState>(
           buildWhen: (p, c) => c is OpenDirectoryState,
           builder: (context, state) {
             return FlexList(
@@ -59,7 +59,7 @@ class DirectoriesButtons extends StatelessWidget {
                     );
                   },
                 ),
-                DirectoriesBackButton(botCubit: c)
+                DirectoriesBackButton(cubit: c)
               ],
             );
           },
@@ -72,7 +72,7 @@ class DirectoriesButtons extends StatelessWidget {
 void _showAction(
   BuildContext _,
   DirectoryEntity dir,
-  BOTCubit c,
+  DirectoryCubit c,
 ) {
   final String content;
   final List<TextButton> actions = [

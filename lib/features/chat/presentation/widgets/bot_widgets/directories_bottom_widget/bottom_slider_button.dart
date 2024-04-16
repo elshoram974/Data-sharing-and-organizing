@@ -9,7 +9,7 @@ class BottomSliderButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onVerticalDragUpdate: (d) => ProviderDependency.bot.changeHeight(d, context),
+      onVerticalDragUpdate: (d) => ProviderDependency.directory.changeHeight(d, context),
       child: Container(
         width: double.infinity,
         alignment: Alignment.center,
