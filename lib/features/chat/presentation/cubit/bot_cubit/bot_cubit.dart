@@ -90,6 +90,22 @@ class BOTCubit extends Cubit<BOTState> {
     _botReply();
   }
 
+  // * crud directions
+
+  void deleteDirectory(DirectionEntity dir) {
+    // TODO: deleteDirectory code
+  }
+
+  void blockUserInteraction(int createdById) {
+    // TODO: blockUserInteraction code
+  }
+
+  void addDirectory(DirectionEntity dir) {
+    // TODO: addDirectory code
+  }
+
+  // ------------------
+
   void changeHeight(DragUpdateDetails details, BuildContext _) async {
     bottomHeight += -details.delta.dy;
     final double maxHeight = MediaQuery.sizeOf(_).height - 250;

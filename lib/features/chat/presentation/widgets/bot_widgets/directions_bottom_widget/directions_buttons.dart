@@ -41,18 +41,19 @@ class DirectionsButtons extends StatelessWidget {
                     return Visibility(
                       visible: dir.isAccepted ||
                           c.groupCubit.isAdmin ||
-                          dir.createdById ==  ProviderDependency.userMain.user.id,
+                          dir.createdById ==
+                              ProviderDependency.userMain.user.id,
                       child: SizedBox(
                         height: 38,
                         child: MyFilledButton(
                           onPressed: () => c.openDirection(dir),
-                          onLongPress: () =>
-                              _showAction(context, dir, c.groupCubit.isAdmin),
+                          onLongPress: () => _showAction(context, dir, c),
                           text: dir.name,
                           filledColor: dir.isAccepted
                               ? null
                               : AppColor.grayLightDark(context),
-                          style: AppStyle.styleBoldInika16.copyWith(height: 0.8),
+                          style:
+                              AppStyle.styleBoldInika16.copyWith(height: 0.8),
                         ),
                       ),
                     );
@@ -66,51 +67,53 @@ class DirectionsButtons extends StatelessWidget {
       ),
     );
   }
+}
 
-  void _showAction(
-    BuildContext context,
-    DirectionEntity dir,
-    bool isAdmin,
-  ) {
-    final String content;
-    final List<Widget> actions = [
-      TextButton(
-        onPressed: () {}, // TODO: delete it
-        child: Text(S.of(context).delete),
-      ),
-      TextButton(
-        onPressed: () => Navigator.of(context).pop(),
-        child: Text(S.of(context).cancel),
-      ),
-    ];
+void _showAction(
+  BuildContext _,
+  DirectionEntity dir,
+  BOTCubit c,
+) {
+  final String content;
+  final List<TextButton> actions = [
+    TextButton(
+      onPressed: () => c.deleteDirectory(dir),
+      child: Text(S.of(_).delete),
+    ),
+    TextButton(
+      onPressed: Navigator.of(_).pop,
+      child: Text(S.of(_).cancel),
+    ),
+  ];
 
-    if (isAdmin) {
-      content = "user id '${dir.createdById}' want to add '${dir.name}' direction";
-      actions.insertAll(
-        0,
-        [
-          TextButton(
-            onPressed: () {}, // TODO: block it
-            child: const Text('Block this user'), // TODO: add lang
-          ),
-          TextButton(
-            onPressed: () {}, // TODO: add it
-            child: Text(S.of(context).addDirectory),
-          ),
-        ],
-      );
-    } else {
-      content = "U added '${dir.name}' direction ";
-    }
-
-    showDialog<void>(
-      context: context,
-      builder: (context) {
-        return AlertDialog(
-          content: Text(content),
-          actions: actions,
-        );
-      },
+  if (c.groupCubit.isAdmin) {
+    content =
+        S.of(_).userIdWantToAddDirNameDirection(dir.name, dir.createdById);
+    actions.insertAll(
+      0,
+      [
+        TextButton(
+          onPressed: () => c.blockUserInteraction(dir.createdById),
+          child: Text(S.of(_).blockThisUser),
+        ),
+        TextButton(
+          onPressed: () => c.addDirectory(dir),
+          child: Text(S.of(_).addDirectory),
+        ),
+      ],
     );
+  } else {
+    if (ProviderDependency.userMain.user.id != dir.createdById) return;
+    content = S.of(_).youAddedDirNameDirection(dir.name);
   }
+
+  showDialog<void>(
+    context: _,
+    builder: (context) {
+      return AlertDialog(
+        content: Text(content),
+        actions: actions,
+      );
+    },
+  );
 }
