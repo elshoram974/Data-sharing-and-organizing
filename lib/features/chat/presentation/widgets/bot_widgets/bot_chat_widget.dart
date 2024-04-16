@@ -28,6 +28,7 @@ class BotChatWidget extends StatelessWidget {
         onSendPressed: (m) => c.handleSendPressed(m, types.Status.sending),
         bubbleBuilder: customBubble,
         dateHeaderBuilder: (_) => DateHeaderWidget(_),
+        l10n: const ChatL10nEn(inputPlaceholder: "Ask AI"),
         inputOptions: InputOptions(
           sendButtonVisibilityMode: SendButtonVisibilityMode.always,
           onTextFieldTap: ProviderDependency.group.closeFloatingButton,

@@ -30,17 +30,14 @@ abstract class DirectoryCubit extends Cubit<DirectoryState> {
   final List<DirectoryEntity> _directoriesStack = [];
   bool get isNoDirectories => _allGroupDirectories.isEmpty;
 
-  // * directories_height
   void changeHeight(DragUpdateDetails details, BuildContext _);
 
   void openDirectory(DirectoryEntity newDirectory);
   void closeLastDirectory();
 
-  // * crud Directories
   void deleteDirectory(DirectoryEntity dir);
   void blockUserInteraction(int createdById);
   void addDirectory(DirectoryEntity dir);
-  // ------------------
 
   void botReply();
   
