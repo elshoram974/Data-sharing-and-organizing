@@ -2,8 +2,8 @@ import 'package:data_sharing_organizing/core/utils/constants/app_strings.dart';
 import 'package:data_sharing_organizing/core/utils/services/dependency/provider_dependency.dart';
 import 'package:hive/hive.dart';
 
-import '../../../user_home/data/datasources/home_datasources/home_local_data_sources.dart';
-import '../../../user_home/domain/entities/group_home_entity.dart';
+import '../../../../user_home/data/datasources/home_datasources/home_local_data_sources.dart';
+import '../../../../user_home/domain/entities/group_home_entity.dart';
 
 abstract class DirectoriesLocalDataSource {
   const DirectoriesLocalDataSource();

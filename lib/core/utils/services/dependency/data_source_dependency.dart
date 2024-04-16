@@ -1,7 +1,7 @@
 import '../../../../features/auth/data/datasources/auth_local_data_sources.dart';
 import '../../../../features/auth/data/datasources/auth_remote_data_sources.dart';
-import '../../../../features/chat/data/datasources/directories_local_data_sources.dart';
-import '../../../../features/chat/data/datasources/group_init_local_data_sources.dart';
+import '../../../../features/chat/data/datasources/local_data_sources/directories_local_data_sources.dart';
+import '../../../../features/chat/data/datasources/local_data_sources/group_init_local_data_sources.dart';
 import '../../../../features/user_home/data/datasources/edit_profile_datasources/edit_profile_local_data_sources.dart';
 import '../../../../features/user_home/data/datasources/edit_profile_datasources/edit_profile_remote_data_sources.dart';
 import '../../../../features/user_home/data/datasources/home_datasources/home_local_data_sources.dart';
