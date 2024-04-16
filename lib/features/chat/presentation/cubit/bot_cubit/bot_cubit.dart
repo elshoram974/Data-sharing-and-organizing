@@ -12,6 +12,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:uuid/uuid.dart';
 
 import '../../../domain/entities/author_message_entity.dart';
+import '../../../domain/entities/directory_entity.dart';
 import '../group_cubit/group_cubit.dart';
 
 part 'bot_state.dart';
@@ -59,6 +60,13 @@ class BOTCubitImp extends BOTCubit {
   @override
   void handleMessageTap(BuildContext _, types.Message message) async {
     ProviderDependency.group.closeFloatingButton();
+    print(message);
+    if (message.author == currentUser) {
+      if (message.metadata?.containsKey("directory") == true) {
+        DirectoryEntity? dir = message.metadata!["directory"];
+        print(dir);
+      }
+    }
     if (message is types.FileMessage) {
       var localPath = message.uri;
 

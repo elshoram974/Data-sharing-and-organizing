@@ -4,7 +4,10 @@ import '../../../domain/entities/directory_entity.dart';
 
 abstract class DirectoriesRemoteDataSource {
   const DirectoriesRemoteDataSource();
-  Future<List<DirectoryEntity>> getDirectoriesInside([int? dirId]);
+  Future<List<DirectoryEntity>> getDirectoriesInside({
+    int? dirId,
+    required int groupId,
+  });
 }
 
 class DirectoriesRemoteDataSourceImp extends DirectoriesRemoteDataSource {
@@ -13,10 +16,13 @@ class DirectoriesRemoteDataSourceImp extends DirectoriesRemoteDataSource {
   const DirectoriesRemoteDataSourceImp(this.service);
 
   @override
-  Future<List<DirectoryEntity>> getDirectoriesInside([int? dirId]) async {
+  Future<List<DirectoryEntity>> getDirectoriesInside({
+    int? dirId,
+    required int groupId,
+  }) async {
     Map<String, dynamic> response = await service.post(
       "AppLinks.getDirectoriesInside",
-      {'dir': '$dirId'},
+      {'dir': '$dirId', 'groupId': '$groupId'},
     );
     // TODO: write code of getting directories here
     throw UnimplementedError(response.toString());

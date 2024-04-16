@@ -19,8 +19,7 @@ class DirectoriesBottomWidget extends StatelessWidget {
           buildWhen: (p, c) => c is ChangeDirectoryBottomHeightState,
           builder: (context, state) {
             return SizedBox(
-              height:
-                  isKeyboardVisible || c.isNoDirectories ? 0 : c.bottomHeight,
+              height: isKeyboardVisible ? 0 : c.bottomHeight,
               width: double.infinity,
               child: const Column(
                 children: [

@@ -16,19 +16,24 @@ class DirectoriesRepositoriesImp extends DirectoriesRepositories {
   final DirectoriesRemoteDataSource remoteDataSource;
 
   @override
-  Future<void> saveBottomHeight(double height, int groupId) => localDataSource.saveBottomHeight(height, groupId);
+  Future<void> saveBottomHeight(double height, int groupId) =>
+      localDataSource.saveBottomHeight(height, groupId);
 
   @override
-  Stream<Status<List<DirectoryEntity>>> getDirectoriesInside([
+  Stream<Status<List<DirectoryEntity>>> getDirectoriesInside({
     int? dirId,
-  ]) async* {
+    required int groupId,
+  }) async* {
 
-    yield Success(localDataSource.getDirectoriesInside(dirId));
+    yield Success(localDataSource.getDirectoriesInside(dirId, groupId));
 
     yield* Stream.fromFuture(
       executeAndHandleErrors<List<DirectoryEntity>>(
         () async {
-          final List<DirectoryEntity> directories = await remoteDataSource.getDirectoriesInside(dirId);
+          final List<DirectoryEntity> directories = await remoteDataSource.getDirectoriesInside(
+            dirId: dirId,
+            groupId: groupId,
+          );
           await localDataSource.saveDirectories(directories);
           return directories;
         },

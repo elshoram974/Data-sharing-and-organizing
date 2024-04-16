@@ -4,7 +4,7 @@ sealed class DirectoryState extends Equatable {
   const DirectoryState();
 
   @override
-  List<Object> get props => [];
+  List<Object?> get props => [];
 }
 
 final class DirectoryInitial extends DirectoryState {
@@ -12,11 +12,11 @@ final class DirectoryInitial extends DirectoryState {
 }
 
 final class OpenDirectoryState extends DirectoryState {
-  const OpenDirectoryState(this.newDirectory);
-  final DirectoryEntity newDirectory;
+  const OpenDirectoryState(this.currentDirectories);
+  final List<DirectoryEntity> currentDirectories;
 
   @override
-  List<DirectoryEntity> get props => [newDirectory];
+  List<DirectoryEntity> get props => currentDirectories;
 }
 
 final class ChangeDirectoryBottomHeightState extends DirectoryState {
@@ -26,4 +26,3 @@ final class ChangeDirectoryBottomHeightState extends DirectoryState {
   @override
   List<double> get props => [newHeight];
 }
-

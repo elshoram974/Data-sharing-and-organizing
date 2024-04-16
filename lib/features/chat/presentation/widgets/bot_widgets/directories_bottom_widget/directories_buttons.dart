@@ -107,7 +107,7 @@ void _showAction(
       actions.insert(
         0,
         TextButton(
-          onPressed: () {},
+          onPressed: () => c.hideDirectory(dir),
           child: Text(S.of(_).hide),
         ),
       );

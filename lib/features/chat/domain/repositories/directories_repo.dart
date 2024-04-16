@@ -5,5 +5,5 @@ import '../entities/directory_entity.dart';
 abstract class DirectoriesRepositories {
   const DirectoriesRepositories();
   Future<void> saveBottomHeight(double height, int groupId);
-  Stream<Status<List<DirectoryEntity>>> getDirectoriesInside([int? dirId]);
+  Stream<Status<List<DirectoryEntity>>> getDirectoriesInside({int? dirId ,required int groupId});
 }

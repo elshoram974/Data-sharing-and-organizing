@@ -14,9 +14,7 @@ class DirectoriesBackButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Visibility(
-      visible: (cubit.currentDirectories.isNotEmpty &&
-              cubit.currentDirectories.first.insideDirectoryId != 0) ||
-          cubit.currentDirectories.isEmpty,
+      visible: cubit.canDirectoryPop,
       child: SizedBox(
         height: 38,
         width: double.infinity,

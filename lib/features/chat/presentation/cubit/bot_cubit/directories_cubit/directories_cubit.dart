@@ -1,3 +1,6 @@
+import 'package:data_sharing_organizing/core/status/errors/failure.dart';
+import 'package:data_sharing_organizing/core/status/status.dart';
+import 'package:data_sharing_organizing/core/status/success/success.dart';
 import 'package:data_sharing_organizing/core/utils/config/locale/generated/l10n.dart';
 import 'package:data_sharing_organizing/core/utils/config/routes/routes.dart';
 import 'package:data_sharing_organizing/core/utils/services/dependency/provider_dependency.dart';
@@ -5,6 +8,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:uuid/uuid.dart';
 
 import '../../../../../auth/domain/entities/auth_user_entity.dart';
@@ -22,14 +26,13 @@ abstract class DirectoryCubit extends Cubit<DirectoryState> {
 
   final BOTCubit botCubit = ProviderDependency.bot;
   final GroupCubit groupCubit = ProviderDependency.group;
-  final List<DirectoryEntity> currentDirectories = [];
+
+  final List<DirectoryEntity> _directoriesStack = [];
+  List<DirectoryEntity> currentDirectories = [];
 
   late double bottomHeight = groupCubit.group.bottomHeight ?? 250;
 
-  
-  final List<DirectoryEntity> _allGroupDirectories = [];
-  final List<DirectoryEntity> _directoriesStack = [];
-  bool get isNoDirectories => _allGroupDirectories.isEmpty;
+  bool get canDirectoryPop => _directoriesStack.isNotEmpty;
 
   void changeHeight(DragUpdateDetails details, BuildContext _);
 
@@ -37,19 +40,19 @@ abstract class DirectoryCubit extends Cubit<DirectoryState> {
   void closeLastDirectory();
 
   void deleteDirectory(DirectoryEntity dir);
-  void blockUserInteraction(AuthUserEntity createdBy);
+  void hideDirectory(DirectoryEntity dir);
   void addDirectory(DirectoryEntity dir);
+  void blockUserInteraction(AuthUserEntity createdBy);
 
   void botReply();
-  
+
   void onPopInvoked(bool didPop);
 }
 
 class DirectoryCubitImp extends DirectoryCubit {
-  DirectoryCubitImp(super.botRepo) {
-    _loadDirectories();
+  DirectoryCubitImp(super.dirRepo) {
+    _changeDirectory();
   }
-
 
   // * directories_height
   @override
@@ -68,13 +71,6 @@ class DirectoryCubitImp extends DirectoryCubit {
   }
   // ----------------------------------------------------------------
 
-  void _loadDirectories() async {
-    _allGroupDirectories.addAll(
-      directories.where((e) => e.groupId == groupCubit.group.id),
-    );
-    _changeDirectory();
-  }
-
   @override
   void openDirectory(DirectoryEntity newDirectory) {
     _directoriesStack.add(newDirectory);
@@ -89,24 +85,41 @@ class DirectoryCubitImp extends DirectoryCubit {
   }
 
   void _changeDirectory() {
-    currentDirectories.clear();
-    if (_directoriesStack.isEmpty) {
-      botCubit.handleSendPressed(types.PartialText(text: S.current.home));
-      currentDirectories.addAll(
-        _allGroupDirectories.where((e) => e.insideDirectoryId == 0),
-      );
-      emit(OpenDirectoryState(DirectoryEntity.newEmpty()));
-    } else {
-      botCubit.handleSendPressed(
-          types.PartialText(text: _directoriesStack.last.name));
-      currentDirectories.addAll(
-        _allGroupDirectories.where(
-          (e) => e.insideDirectoryId == _directoriesStack.last.id,
-        ),
-      );
-      emit(OpenDirectoryState(_directoriesStack.last));
-    }
-    botReply();
+    botCubit.addMessage(
+      types.TextMessage(
+          id: const Uuid().v4(),
+          author: botCubit.currentUser,
+          text: _directoriesStack.lastOrNull?.name ?? S.current.home,
+          metadata: {"directory": _directoriesStack.lastOrNull}),
+    );
+    _getDirectories(_directoriesStack.lastOrNull);
+  }
+
+  void _getDirectories([DirectoryEntity? dir]) {
+    final DirectoryEntity? lDir = _directoriesStack.lastOrNull;
+    EasyLoading.show();
+    dirRepo
+        .getDirectoriesInside(
+      dirId: dir?.id,
+      groupId: groupCubit.group.id,
+    )
+        .listen(
+      (event) async {
+        EasyLoading.dismiss();
+        final Status<List<DirectoryEntity>> status = event;
+        if (status is Success<List<DirectoryEntity>>) {
+          if (lDir == _directoriesStack.lastOrNull) {
+            currentDirectories = status.data;
+            botReply();
+            // TODO: get activities
+          }
+        } else {
+          status as Failure<List<DirectoryEntity>>;
+          failureStatus(status.failure.message, () {});
+        }
+        emit(OpenDirectoryState(currentDirectories));
+      },
+    );
   }
 
   // * crud Directories
@@ -117,13 +130,17 @@ class DirectoryCubitImp extends DirectoryCubit {
   }
 
   @override
-  void blockUserInteraction(AuthUserEntity createdBy) {
-    // TODO: blockUserInteraction code
+  void hideDirectory(DirectoryEntity dir) {
+    // TODO: hideDirectory code
   }
 
   @override
   void addDirectory(DirectoryEntity dir) {
     // TODO: addDirectory code
+  }
+  @override
+  void blockUserInteraction(AuthUserEntity createdBy) {
+    // TODO: blockUserInteraction code
   }
 
   // ------------------
@@ -163,4 +180,9 @@ class DirectoryCubitImp extends DirectoryCubit {
     if (_directoriesStack.isEmpty) return AppRoute.key.currentState?.pop();
     closeLastDirectory();
   }
+}
+
+void failureStatus(String error, void Function() emit) {
+  emit();
+  EasyLoading.showError(error, duration: const Duration(seconds: 5));
 }
