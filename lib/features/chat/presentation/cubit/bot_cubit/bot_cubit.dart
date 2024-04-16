@@ -199,10 +199,8 @@ class BOTCubit extends Cubit<BOTState> {
 
     if (textMessage.status == types.Status.sending) {
       Future.delayed(const Duration(seconds: 3), () async {
-        final index =
-            botMessages.indexWhere((element) => element.id == textMessage.id);
-        final updatedMessage = (botMessages[index] as types.TextMessage)
-            .copyWith(status: types.Status.seen);
+        final int index = botMessages.indexWhere((element) => element.id == textMessage.id);
+        final types.Message updatedMessage = botMessages[index].copyWith(status: types.Status.seen);
 
         botMessages[index] = updatedMessage;
         emit(SetState(_i++));
