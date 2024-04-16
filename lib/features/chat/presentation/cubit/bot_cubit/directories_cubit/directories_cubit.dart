@@ -114,8 +114,10 @@ class DirectoryCubitImp extends DirectoryCubit {
             // TODO: get activities
           }
         } else {
-          status as Failure<List<DirectoryEntity>>;
-          failureStatus(status.failure.message, () {});
+          if (!canDirectoryPop) {
+            status as Failure<List<DirectoryEntity>>;
+            failureStatus(status.failure.message, () {});
+          }
         }
         emit(OpenDirectoryState(currentDirectories));
       },
