@@ -1433,6 +1433,36 @@ class S {
       args: [],
     );
   }
+
+  /// `Block this user`
+  String get blockThisUser {
+    return Intl.message(
+      'Block this user',
+      name: 'blockThisUser',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You've added the '{directionName}' direction, but it's pending approval from the admin.`
+  String youAddedDirNameDirection(String directionName) {
+    return Intl.message(
+      'You\'ve added the \'$directionName\' direction, but it\'s pending approval from the admin.',
+      name: 'youAddedDirNameDirection',
+      desc: '',
+      args: [directionName],
+    );
+  }
+
+  /// `A user with the ID '{byUserId}' has requested to add the '{directionName}' direction here.`
+  String userIdWantToAddDirNameDirection(String directionName, int byUserId) {
+    return Intl.message(
+      'A user with the ID \'$byUserId\' has requested to add the \'$directionName\' direction here.',
+      name: 'userIdWantToAddDirNameDirection',
+      desc: '',
+      args: [directionName, byUserId],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

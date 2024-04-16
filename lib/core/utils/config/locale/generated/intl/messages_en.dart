@@ -26,6 +26,12 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m2(number) => "${number} selected";
 
+  static String m3(directionName, byUserId) =>
+      "A user with the ID \'${byUserId}\' has requested to add the \'${directionName}\' direction here.";
+
+  static String m4(directionName) =>
+      "You\'ve added the \'${directionName}\' direction, but it\'s pending approval from the admin.";
+
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "YouHaveChooseTypeOfAccountPersonalOrBusiness":
@@ -40,6 +46,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "areYouSureYouWantToReturnBack": MessageLookupByLibrary.simpleMessage(
             "Are you sure you want to return back"),
         "back": MessageLookupByLibrary.simpleMessage("Back"),
+        "blockThisUser":
+            MessageLookupByLibrary.simpleMessage("Block this user"),
         "businessAccount":
             MessageLookupByLibrary.simpleMessage("Business account"),
         "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
@@ -216,6 +224,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "An unknown error occurred. Please try again later or contact support for assistance."),
         "unmuteNotification":
             MessageLookupByLibrary.simpleMessage("Unmute notification"),
+        "userIdWantToAddDirNameDirection": m3,
         "userIsNotActivePleaseContactSupportForFurtherAssistance":
             MessageLookupByLibrary.simpleMessage(
                 "User is not active. Please contact support for further assistance."),
@@ -235,6 +244,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "wrongPassword": MessageLookupByLibrary.simpleMessage(
             "Wrong password provided for that user."),
         "yesterday": MessageLookupByLibrary.simpleMessage("Yesterday"),
+        "youAddedDirNameDirection": m4,
         "youCanMakeNewGroups": MessageLookupByLibrary.simpleMessage(
             "Feel free to create new groups."),
         "youCanNotUseSamePreviousPassword":

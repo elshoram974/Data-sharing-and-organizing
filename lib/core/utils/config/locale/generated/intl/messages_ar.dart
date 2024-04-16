@@ -26,6 +26,12 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m2(number) => "تم تحديد ${number}";
 
+  static String m3(directionName, byUserId) =>
+      "مستخدم بالمعرف \'${byUserId}\' يرغب في إضافة مجلد \'${directionName}\' هنا.";
+
+  static String m4(directionName) =>
+      "لقد أضفت مجلد \'${directionName}\', لكنه في انتظار موافقة الإدارة.";
+
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "YouHaveChooseTypeOfAccountPersonalOrBusiness":
@@ -39,6 +45,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "areYouSureYouWantToReturnBack": MessageLookupByLibrary.simpleMessage(
             "هل أنت متأكد أنك تريد العودة؟"),
         "back": MessageLookupByLibrary.simpleMessage("رجوع"),
+        "blockThisUser":
+            MessageLookupByLibrary.simpleMessage("حظر هذا المستخدم"),
         "businessAccount": MessageLookupByLibrary.simpleMessage("حساب الشركة"),
         "cancel": MessageLookupByLibrary.simpleMessage("إلغاء"),
         "cantBeLessThan": m0,
@@ -219,6 +227,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "حدث خطأ غير معروف. يرجى المحاولة مرة أخرى في وقت لاحق أو الاتصال بالدعم للمساعدة."),
         "unmuteNotification":
             MessageLookupByLibrary.simpleMessage("تفعيل الإشعارات"),
+        "userIdWantToAddDirNameDirection": m3,
         "userIsNotActivePleaseContactSupportForFurtherAssistance":
             MessageLookupByLibrary.simpleMessage(
                 "المستخدم غير نشط. يرجى الاتصال بالدعم للمساعدة الإضافية."),
@@ -238,6 +247,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "wrongPassword": MessageLookupByLibrary.simpleMessage(
             "تم تقديم كلمة مرور خاطئة لهذا المستخدم."),
         "yesterday": MessageLookupByLibrary.simpleMessage("أمس"),
+        "youAddedDirNameDirection": m4,
         "youCanMakeNewGroups": MessageLookupByLibrary.simpleMessage(
             "بإمكانك إنشاء مجموعات جديدة بحرية."),
         "youCanNotUseSamePreviousPassword":

@@ -144,5 +144,25 @@
     "sslCertificateNotTrusted": "شهادة SSL للخادم غير موثوق بها. يرجى التحقق من اتصال الشبكة الخاص بك أو الاتصال بمسؤول الخادم.",
     "serverTookTooLongToRespond": "استغرق الخادم وقتًا طويلاً في الرد. يرجى المحاولة مرة أخرى لاحقًا.",
     "addDirectory": "إضافة مجلد",
-    "addFileOrMessage": "إضافة ملف أو رسالة"
+    "addFileOrMessage": "إضافة ملف أو رسالة",
+    "blockThisUser": "حظر هذا المستخدم",
+    "youAddedDirNameDirection": "لقد أضفت مجلد '{directionName}', لكنه في انتظار موافقة الإدارة.",
+    "@youAddedDirNameDirection": {
+        "placeholders": {
+            "directionName": {
+                "type": "String"
+            }
+        }
+    },
+    "userIdWantToAddDirNameDirection": "مستخدم بالمعرف '{byUserId}' يرغب في إضافة مجلد '{directionName}' هنا.",
+    "@userIdWantToAddDirNameDirection": {
+        "placeholders": {
+            "directionName": {
+                "type": "String"
+            },
+            "byUserId": {
+                "type": "int"
+            }
+        }
+    }
 }

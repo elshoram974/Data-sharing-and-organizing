@@ -144,5 +144,25 @@
     "sslCertificateNotTrusted": "The server's SSL certificate is not trusted. Please check your network connection or contact the server administrator.",
     "serverTookTooLongToRespond": "The server took too long to respond. Please try again later.",
     "addDirectory": "Add directory",
-    "addFileOrMessage": "Add file or message"
+    "addFileOrMessage": "Add file or message",
+    "blockThisUser": "Block this user",
+    "youAddedDirNameDirection": "You've added the '{directionName}' direction, but it's pending approval from the admin.",
+    "@youAddedDirNameDirection": {
+        "placeholders": {
+            "directionName": {
+                "type": "String"
+            }
+        }
+    },
+    "userIdWantToAddDirNameDirection": "A user with the ID '{byUserId}' has requested to add the '{directionName}' direction here.",
+    "@userIdWantToAddDirNameDirection": {
+        "placeholders": {
+            "directionName": {
+                "type": "String"
+            },
+            "byUserId": {
+                "type": "int"
+            }
+        }
+    }
 }
