@@ -1,5 +1,6 @@
 import 'package:data_sharing_organizing/core/utils/constants/app_strings.dart';
 import 'package:data_sharing_organizing/core/utils/services/dependency/provider_dependency.dart';
+import 'package:data_sharing_organizing/features/chat/domain/entities/directory_entity.dart';
 import 'package:hive/hive.dart';
 
 import '../../../../user_home/data/datasources/home_datasources/home_local_data_sources.dart';
@@ -7,7 +8,12 @@ import '../../../../user_home/domain/entities/group_home_entity.dart';
 
 abstract class DirectoriesLocalDataSource {
   const DirectoriesLocalDataSource();
+  
   Future<void> saveBottomHeight(double height, int groupId);
+
+  List<DirectoryEntity> getDirectoriesInside(int? dirId);
+
+  Future<void> saveDirectories(List<DirectoryEntity> directories);
 }
 
 class DirectoriesLocalDataSourceImp extends DirectoriesLocalDataSource {
@@ -31,7 +37,18 @@ class DirectoriesLocalDataSourceImp extends DirectoriesLocalDataSource {
       }
     }
   }
-
+  
+  @override
+  List<DirectoryEntity> getDirectoriesInside(int? dirId) {
+    // TODO: implement getDirectoriesInside
+    throw UnimplementedError();
+  }
+  
+  @override
+  Future<void> saveDirectories(List<DirectoryEntity> directories) async{
+    // TODO: implement saveDirectories
+  }
+  
   // For that i need in home
   List<GroupHomeEntity> _getAllGroups() => homeLocal.getAllGroups();
   Future<int> _removeAllGroups() => homeLocal.removeAllGroups();
