@@ -24,11 +24,15 @@ class BotChatWidget extends StatelessWidget {
         messages: c.botMessages,
         onBackgroundTap: ProviderDependency.group.closeFloatingButton,
         onMessageTap: c.handleMessageTap,
+        onMessageDoubleTap: c.handleMessageDoubleTap,
         onPreviewDataFetched: c.handlePreviewDataFetched,
         onSendPressed: (m) => c.handleSendPressed(m, types.Status.sending),
         bubbleBuilder: customBubble,
         dateHeaderBuilder: (_) => DateHeaderWidget(_),
-        l10n: const ChatL10nEn(inputPlaceholder: "Ask AI"),
+        messageWidthRatio: 600,
+        l10n: ProviderDependency.config.isArabic
+            ? const ChatL10nAr(inputPlaceholder: "تحدث مع الذكاء الاصطناعي")
+            : const ChatL10nEn(inputPlaceholder: "Ask AI"),
         inputOptions: InputOptions(
           sendButtonVisibilityMode: SendButtonVisibilityMode.always,
           onTextFieldTap: ProviderDependency.group.closeFloatingButton,

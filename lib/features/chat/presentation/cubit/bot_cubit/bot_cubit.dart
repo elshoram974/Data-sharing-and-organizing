@@ -29,7 +29,9 @@ abstract class BOTCubit extends Cubit<BOTState> {
 
   void addMessage(types.Message message);
   void handleMessageTap(BuildContext _, types.Message message);
-  void handlePreviewDataFetched(types.TextMessage message, types.PreviewData previewData);
+  void handleMessageDoubleTap(BuildContext _, types.Message message);
+  void handlePreviewDataFetched(
+      types.TextMessage message, types.PreviewData previewData);
   void handleSendPressed(types.PartialText message, [types.Status? status]);
 }
 
@@ -55,6 +57,18 @@ class BOTCubitImp extends BOTCubit {
   void addMessage(types.Message message) {
     botMessages.insert(0, message);
     emit(SetState(_i++));
+  }
+
+  @override
+  void handleMessageDoubleTap(BuildContext _, types.Message message) async {
+    ProviderDependency.group.closeFloatingButton();
+    print(message);
+    if (message.author == currentUser) {
+      if (message.metadata?.containsKey("directory") == true) {
+        DirectoryEntity? dir = message.metadata!["directory"];
+        print(dir); // if null this mean in home
+      }
+    }
   }
 
   @override
