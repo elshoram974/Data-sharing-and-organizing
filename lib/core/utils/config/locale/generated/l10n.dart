@@ -1444,23 +1444,43 @@ class S {
     );
   }
 
-  /// `You've added the '{directionName}' direction, but it's pending approval from the admin.`
-  String youAddedDirNameDirection(String directionName) {
+  /// `You've added the '{directoryName}' directory, but it's pending approval from the admin.`
+  String youAddedDirNameDirectory(String directoryName) {
     return Intl.message(
-      'You\'ve added the \'$directionName\' direction, but it\'s pending approval from the admin.',
-      name: 'youAddedDirNameDirection',
+      'You\'ve added the \'$directoryName\' directory, but it\'s pending approval from the admin.',
+      name: 'youAddedDirNameDirectory',
       desc: '',
-      args: [directionName],
+      args: [directoryName],
     );
   }
 
-  /// `A user with the ID '{byUserId}' has requested to add the '{directionName}' direction here.`
-  String userIdWantToAddDirNameDirection(String directionName, int byUserId) {
+  /// `A user with the ID '{byUserId}' has requested to add the '{directoryName}' directory here.`
+  String userIdWantToAddDirNameDirectory(String directoryName, int byUserId) {
     return Intl.message(
-      'A user with the ID \'$byUserId\' has requested to add the \'$directionName\' direction here.',
-      name: 'userIdWantToAddDirNameDirection',
+      'A user with the ID \'$byUserId\' has requested to add the \'$directoryName\' directory here.',
+      name: 'userIdWantToAddDirNameDirectory',
       desc: '',
-      args: [directionName, byUserId],
+      args: [directoryName, byUserId],
+    );
+  }
+
+  /// `What action would you like to take with the '{directoryName}' directory?`
+  String whatDoYouWantToDoWithDirNameDirectory(String directoryName) {
+    return Intl.message(
+      'What action would you like to take with the \'$directoryName\' directory?',
+      name: 'whatDoYouWantToDoWithDirNameDirectory',
+      desc: '',
+      args: [directoryName],
+    );
+  }
+
+  /// `Hide`
+  String get hide {
+    return Intl.message(
+      'Hide',
+      name: 'hide',
+      desc: '',
+      args: [],
     );
   }
 }

@@ -26,11 +26,14 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m2(number) => "${number} selected";
 
-  static String m3(directionName, byUserId) =>
-      "A user with the ID \'${byUserId}\' has requested to add the \'${directionName}\' direction here.";
+  static String m3(directoryName, byUserId) =>
+      "A user with the ID \'${byUserId}\' has requested to add the \'${directoryName}\' directory here.";
 
-  static String m4(directionName) =>
-      "You\'ve added the \'${directionName}\' direction, but it\'s pending approval from the admin.";
+  static String m4(directoryName) =>
+      "What action would you like to take with the \'${directoryName}\' directory?";
+
+  static String m5(directoryName) =>
+      "You\'ve added the \'${directoryName}\' directory, but it\'s pending approval from the admin.";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -110,6 +113,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "goBack": MessageLookupByLibrary.simpleMessage("Go back"),
         "goTo": MessageLookupByLibrary.simpleMessage("Go to"),
         "gotIt": MessageLookupByLibrary.simpleMessage("Got it"),
+        "hide": MessageLookupByLibrary.simpleMessage("Hide"),
         "hidePassword": MessageLookupByLibrary.simpleMessage("Hide password"),
         "home": MessageLookupByLibrary.simpleMessage("Home"),
         "ifYouLogOutNowYouWillLoseAllUnsavedData":
@@ -224,7 +228,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "An unknown error occurred. Please try again later or contact support for assistance."),
         "unmuteNotification":
             MessageLookupByLibrary.simpleMessage("Unmute notification"),
-        "userIdWantToAddDirNameDirection": m3,
+        "userIdWantToAddDirNameDirectory": m3,
         "userIsNotActivePleaseContactSupportForFurtherAssistance":
             MessageLookupByLibrary.simpleMessage(
                 "User is not active. Please contact support for further assistance."),
@@ -241,10 +245,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "weakPassword": MessageLookupByLibrary.simpleMessage(
             "The password provided is too weak."),
         "welcomeBack": MessageLookupByLibrary.simpleMessage("Welcome back!"),
+        "whatDoYouWantToDoWithDirNameDirectory": m4,
         "wrongPassword": MessageLookupByLibrary.simpleMessage(
             "Wrong password provided for that user."),
         "yesterday": MessageLookupByLibrary.simpleMessage("Yesterday"),
-        "youAddedDirNameDirection": m4,
+        "youAddedDirNameDirectory": m5,
         "youCanMakeNewGroups": MessageLookupByLibrary.simpleMessage(
             "Feel free to create new groups."),
         "youCanNotUseSamePreviousPassword":

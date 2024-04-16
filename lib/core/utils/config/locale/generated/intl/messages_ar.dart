@@ -26,11 +26,14 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m2(number) => "تم تحديد ${number}";
 
-  static String m3(directionName, byUserId) =>
-      "مستخدم بالمعرف \'${byUserId}\' يرغب في إضافة مجلد \'${directionName}\' هنا.";
+  static String m3(directoryName, byUserId) =>
+      "مستخدم بالمعرف \'${byUserId}\' يرغب في إضافة مجلد \'${directoryName}\' هنا.";
 
-  static String m4(directionName) =>
-      "لقد أضفت مجلد \'${directionName}\', لكنه في انتظار موافقة الإدارة.";
+  static String m4(directoryName) =>
+      "ما الإجراء الذي تود اتخاذه مع مجلد \'${directoryName}\'؟";
+
+  static String m5(directoryName) =>
+      "لقد أضفت مجلد \'${directoryName}\', لكنه في انتظار موافقة الإدارة.";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -111,6 +114,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "goBack": MessageLookupByLibrary.simpleMessage("العودة"),
         "goTo": MessageLookupByLibrary.simpleMessage("اذهب الي"),
         "gotIt": MessageLookupByLibrary.simpleMessage("مفهوم"),
+        "hide": MessageLookupByLibrary.simpleMessage("إخفاء"),
         "hidePassword":
             MessageLookupByLibrary.simpleMessage("إخفاء كلمة المرور"),
         "home": MessageLookupByLibrary.simpleMessage("الصفحة الرئيسية"),
@@ -227,7 +231,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "حدث خطأ غير معروف. يرجى المحاولة مرة أخرى في وقت لاحق أو الاتصال بالدعم للمساعدة."),
         "unmuteNotification":
             MessageLookupByLibrary.simpleMessage("تفعيل الإشعارات"),
-        "userIdWantToAddDirNameDirection": m3,
+        "userIdWantToAddDirNameDirectory": m3,
         "userIsNotActivePleaseContactSupportForFurtherAssistance":
             MessageLookupByLibrary.simpleMessage(
                 "المستخدم غير نشط. يرجى الاتصال بالدعم للمساعدة الإضافية."),
@@ -244,10 +248,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "weakPassword": MessageLookupByLibrary.simpleMessage(
             "كلمة المرور المقدمة ضعيفة جدًا."),
         "welcomeBack": MessageLookupByLibrary.simpleMessage("مرحبًا بعودتك!"),
+        "whatDoYouWantToDoWithDirNameDirectory": m4,
         "wrongPassword": MessageLookupByLibrary.simpleMessage(
             "تم تقديم كلمة مرور خاطئة لهذا المستخدم."),
         "yesterday": MessageLookupByLibrary.simpleMessage("أمس"),
-        "youAddedDirNameDirection": m4,
+        "youAddedDirNameDirectory": m5,
         "youCanMakeNewGroups": MessageLookupByLibrary.simpleMessage(
             "بإمكانك إنشاء مجموعات جديدة بحرية."),
         "youCanNotUseSamePreviousPassword":

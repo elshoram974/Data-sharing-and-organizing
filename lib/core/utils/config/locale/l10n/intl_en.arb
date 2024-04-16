@@ -146,23 +146,32 @@
     "addDirectory": "Add directory",
     "addFileOrMessage": "Add file or message",
     "blockThisUser": "Block this user",
-    "youAddedDirNameDirection": "You've added the '{directionName}' direction, but it's pending approval from the admin.",
-    "@youAddedDirNameDirection": {
+    "youAddedDirNameDirectory": "You've added the '{directoryName}' directory, but it's pending approval from the admin.",
+    "@youAddedDirNameDirectory": {
         "placeholders": {
-            "directionName": {
+            "directoryName": {
                 "type": "String"
             }
         }
     },
-    "userIdWantToAddDirNameDirection": "A user with the ID '{byUserId}' has requested to add the '{directionName}' direction here.",
-    "@userIdWantToAddDirNameDirection": {
+    "userIdWantToAddDirNameDirectory": "A user with the ID '{byUserId}' has requested to add the '{directoryName}' directory here.",
+    "@userIdWantToAddDirNameDirectory": {
         "placeholders": {
-            "directionName": {
+            "directoryName": {
                 "type": "String"
             },
             "byUserId": {
                 "type": "int"
             }
         }
-    }
+    },
+    "whatDoYouWantToDoWithDirNameDirectory": "What action would you like to take with the '{directoryName}' directory?",
+    "@whatDoYouWantToDoWithDirNameDirectory": {
+        "placeholders": {
+            "directoryName": {
+                "type": "String"
+            }
+        }
+    },
+    "hide": "Hide"
 }

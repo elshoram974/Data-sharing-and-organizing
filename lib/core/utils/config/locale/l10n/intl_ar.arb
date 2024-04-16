@@ -146,23 +146,32 @@
     "addDirectory": "إضافة مجلد",
     "addFileOrMessage": "إضافة ملف أو رسالة",
     "blockThisUser": "حظر هذا المستخدم",
-    "youAddedDirNameDirection": "لقد أضفت مجلد '{directionName}', لكنه في انتظار موافقة الإدارة.",
-    "@youAddedDirNameDirection": {
+    "youAddedDirNameDirectory": "لقد أضفت مجلد '{directoryName}', لكنه في انتظار موافقة الإدارة.",
+    "@youAddedDirNameDirectory": {
         "placeholders": {
-            "directionName": {
+            "directoryName": {
                 "type": "String"
             }
         }
     },
-    "userIdWantToAddDirNameDirection": "مستخدم بالمعرف '{byUserId}' يرغب في إضافة مجلد '{directionName}' هنا.",
-    "@userIdWantToAddDirNameDirection": {
+    "userIdWantToAddDirNameDirectory": "مستخدم بالمعرف '{byUserId}' يرغب في إضافة مجلد '{directoryName}' هنا.",
+    "@userIdWantToAddDirNameDirectory": {
         "placeholders": {
-            "directionName": {
+            "directoryName": {
                 "type": "String"
             },
             "byUserId": {
                 "type": "int"
             }
         }
-    }
+    },
+    "whatDoYouWantToDoWithDirNameDirectory": "ما الإجراء الذي تود اتخاذه مع مجلد '{directoryName}'؟",
+    "@whatDoYouWantToDoWithDirNameDirectory": {
+        "placeholders": {
+            "directoryName": {
+                "type": "String"
+            }
+        }
+    },
+    "hide": "إخفاء"
 }
