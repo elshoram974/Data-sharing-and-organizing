@@ -3,7 +3,8 @@ import '../../../../features/auth/data/datasources/auth_remote_data_sources.dart
 import '../../../../features/auth/data/repositories/auth_repositories_imp.dart';
 import '../../../../features/chat/data/datasources/local_data_sources/directories_local_data_sources.dart';
 import '../../../../features/chat/data/datasources/local_data_sources/group_init_local_data_sources.dart';
-import '../../../../features/chat/data/repositories/bot_repo.dart';
+import '../../../../features/chat/data/datasources/remote_data_sources/directories_remote_data_sources.dart';
+import '../../../../features/chat/data/repositories/directories_repo.dart';
 import '../../../../features/chat/data/repositories/init_group_repo.dart';
 import '../../../../features/chat/domain/repositories/directories_repo.dart';
 import '../../../../features/chat/domain/repositories/init_group_repo.dart';
@@ -47,6 +48,9 @@ void repositoriesDependency() {
     GroupInitRepositoriesImp(sl.get<GroupInitLocalDataSource>()),
   );
   sl.registerSingleton<DirectoriesRepositories>(
-    DirectoriesRepositoriesImp(sl.get<DirectoriesLocalDataSource>()),
+    DirectoriesRepositoriesImp(
+      localDataSource: sl.get<DirectoriesLocalDataSource>(),
+      remoteDataSource: sl.get<DirectoriesRemoteDataSource>(),
+    ),
   );
 }
