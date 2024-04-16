@@ -5,13 +5,13 @@ import 'package:hive/hive.dart';
 import '../../../user_home/data/datasources/home_datasources/home_local_data_sources.dart';
 import '../../../user_home/domain/entities/group_home_entity.dart';
 
-abstract class BOTLocalDataSource {
-  const BOTLocalDataSource();
+abstract class DirectoriesLocalDataSource {
+  const DirectoriesLocalDataSource();
   Future<void> saveBottomHeight(double height, int groupId);
 }
 
-class BOTLocalDataSourceImp extends BOTLocalDataSource {
-  BOTLocalDataSourceImp(this.homeLocal);
+class DirectoriesLocalDataSourceImp extends DirectoriesLocalDataSource {
+  DirectoriesLocalDataSourceImp(this.homeLocal);
   final HomeLocalDataSource homeLocal;
 
   late final Box<GroupHomeEntity> groupsBox = Hive.box<GroupHomeEntity>(AppStrings.groupsBox);

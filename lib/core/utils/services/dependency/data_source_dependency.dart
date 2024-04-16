@@ -1,6 +1,6 @@
 import '../../../../features/auth/data/datasources/auth_local_data_sources.dart';
 import '../../../../features/auth/data/datasources/auth_remote_data_sources.dart';
-import '../../../../features/chat/data/datasources/bot_local_data_sources.dart';
+import '../../../../features/chat/data/datasources/directories_local_data_sources.dart';
 import '../../../../features/chat/data/datasources/group_init_local_data_sources.dart';
 import '../../../../features/user_home/data/datasources/edit_profile_datasources/edit_profile_local_data_sources.dart';
 import '../../../../features/user_home/data/datasources/edit_profile_datasources/edit_profile_remote_data_sources.dart';
@@ -31,6 +31,6 @@ void dataSourceDependency() {
 
   // group
   sl.registerSingleton<GroupInitLocalDataSource>(const GroupInitLocalDataSourceImp());
-  sl.registerSingleton<BOTLocalDataSource>(BOTLocalDataSourceImp(sl.get<HomeLocalDataSource>()));
+  sl.registerSingleton<DirectoriesLocalDataSource>(DirectoriesLocalDataSourceImp(sl.get<HomeLocalDataSource>()));
 
 }

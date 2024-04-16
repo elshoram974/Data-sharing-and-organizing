@@ -1,11 +1,11 @@
 import '../../../../features/auth/data/datasources/auth_local_data_sources.dart';
 import '../../../../features/auth/data/datasources/auth_remote_data_sources.dart';
 import '../../../../features/auth/data/repositories/auth_repositories_imp.dart';
-import '../../../../features/chat/data/datasources/bot_local_data_sources.dart';
+import '../../../../features/chat/data/datasources/directories_local_data_sources.dart';
 import '../../../../features/chat/data/datasources/group_init_local_data_sources.dart';
 import '../../../../features/chat/data/repositories/bot_repo.dart';
 import '../../../../features/chat/data/repositories/init_group_repo.dart';
-import '../../../../features/chat/domain/repositories/bot_repo.dart';
+import '../../../../features/chat/domain/repositories/directories_repo.dart';
 import '../../../../features/chat/domain/repositories/init_group_repo.dart';
 import '../../../../features/user_home/data/datasources/edit_profile_datasources/edit_profile_local_data_sources.dart';
 import '../../../../features/user_home/data/datasources/edit_profile_datasources/edit_profile_remote_data_sources.dart';
@@ -46,7 +46,7 @@ void repositoriesDependency() {
   sl.registerSingleton<GroupInitRepositories>(
     GroupInitRepositoriesImp(sl.get<GroupInitLocalDataSource>()),
   );
-  sl.registerSingleton<BOTRepositories>(
-    BOTRepositoriesImp(sl.get<BOTLocalDataSource>()),
+  sl.registerSingleton<DirectoriesRepositories>(
+    DirectoriesRepositoriesImp(sl.get<DirectoriesLocalDataSource>()),
   );
 }

@@ -10,15 +10,15 @@ import 'package:uuid/uuid.dart';
 import '../../../../../auth/domain/entities/auth_user_entity.dart';
 import '../../../../../user_home/domain/entities/group_home_entity.dart';
 import '../../../../domain/entities/directory_entity.dart';
-import '../../../../domain/repositories/bot_repo.dart';
+import '../../../../domain/repositories/directories_repo.dart';
 import '../../group_cubit/group_cubit.dart';
 import '../bot_cubit.dart';
 
 part 'directories_state.dart';
 
 abstract class DirectoryCubit extends Cubit<DirectoryState> {
-  final BOTRepositories botRepo;
-  DirectoryCubit(this.botRepo) : super(const DirectoryInitial());
+  final DirectoriesRepositories dirRepo;
+  DirectoryCubit(this.dirRepo) : super(const DirectoryInitial());
 
   final BOTCubit botCubit = ProviderDependency.bot;
   final GroupCubit groupCubit = ProviderDependency.group;
@@ -63,7 +63,7 @@ class DirectoryCubitImp extends DirectoryCubit {
     } else if (bottomHeight > maxHeight) {
       bottomHeight = maxHeight;
     }
-    await botRepo.saveBottomHeight(bottomHeight, groupCubit.group.id);
+    await dirRepo.saveBottomHeight(bottomHeight, groupCubit.group.id);
     emit(ChangeDirectoryBottomHeightState(bottomHeight));
   }
   // ----------------------------------------------------------------

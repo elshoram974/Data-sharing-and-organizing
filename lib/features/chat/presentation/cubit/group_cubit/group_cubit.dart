@@ -23,7 +23,7 @@ class GroupCubit extends Cubit<GroupState> {
 
   double _dragPositionX = 0.0;
 
-  late final isAdmin = group.ownerId == ProviderDependency.userMain.user.id; // TODO: make it for all admins
+  late final bool isAdmin = group.ownerId == ProviderDependency.userMain.user.id; // TODO: make it for all admins
 
   void onPanUpdate(DragUpdateDetails details, BuildContext _) async {
     top += details.delta.dy;

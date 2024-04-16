@@ -1,10 +1,10 @@
 
-import '../../domain/repositories/bot_repo.dart';
-import '../datasources/bot_local_data_sources.dart';
+import '../../domain/repositories/directories_repo.dart';
+import '../datasources/directories_local_data_sources.dart';
 
-class BOTRepositoriesImp extends BOTRepositories {
-  const BOTRepositoriesImp(this.localDataSource);
-  final BOTLocalDataSource localDataSource;
+class DirectoriesRepositoriesImp extends DirectoriesRepositories {
+  const DirectoriesRepositoriesImp(this.localDataSource);
+  final DirectoriesLocalDataSource localDataSource;
 
 
   @override
