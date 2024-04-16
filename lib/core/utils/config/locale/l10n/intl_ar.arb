@@ -154,14 +154,14 @@
             }
         }
     },
-    "userIdWantToAddDirNameDirectory": "مستخدم بالمعرف '{byUserId}' يرغب في إضافة مجلد '{directoryName}' هنا.",
-    "@userIdWantToAddDirNameDirectory": {
+    "userWantToAddDirectory": "عضو بإسم '{userName}' طلب إضافة المجلد '{directoryName}' هنا.",
+    "@userWantToAddDirectory": {
         "placeholders": {
             "directoryName": {
                 "type": "String"
             },
-            "byUserId": {
-                "type": "int"
+            "userName": {
+                "type": "String"
             }
         }
     },

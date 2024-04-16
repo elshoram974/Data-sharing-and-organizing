@@ -1454,13 +1454,13 @@ class S {
     );
   }
 
-  /// `A user with the ID '{byUserId}' has requested to add the '{directoryName}' directory here.`
-  String userIdWantToAddDirNameDirectory(String directoryName, int byUserId) {
+  /// `A member named '{userName}' has requested to add the '{directoryName}' directory here.`
+  String userWantToAddDirectory(String directoryName, String userName) {
     return Intl.message(
-      'A user with the ID \'$byUserId\' has requested to add the \'$directoryName\' directory here.',
-      name: 'userIdWantToAddDirNameDirectory',
+      'A member named \'$userName\' has requested to add the \'$directoryName\' directory here.',
+      name: 'userWantToAddDirectory',
       desc: '',
-      args: [directoryName, byUserId],
+      args: [directoryName, userName],
     );
   }
 

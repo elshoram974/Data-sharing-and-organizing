@@ -154,14 +154,14 @@
             }
         }
     },
-    "userIdWantToAddDirNameDirectory": "A user with the ID '{byUserId}' has requested to add the '{directoryName}' directory here.",
-    "@userIdWantToAddDirNameDirectory": {
+    "userWantToAddDirectory": "A member named '{userName}' has requested to add the '{directoryName}' directory here.",
+    "@userWantToAddDirectory": {
         "placeholders": {
             "directoryName": {
                 "type": "String"
             },
-            "byUserId": {
-                "type": "int"
+            "userName": {
+                "type": "String"
             }
         }
     },

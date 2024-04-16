@@ -7,6 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
 import 'package:uuid/uuid.dart';
 
+import '../../../../../auth/domain/entities/auth_user_entity.dart';
 import '../../../../../user_home/domain/entities/group_home_entity.dart';
 import '../../../../domain/entities/directory_entity.dart';
 import '../../../../domain/repositories/bot_repo.dart';
@@ -36,7 +37,7 @@ abstract class DirectoryCubit extends Cubit<DirectoryState> {
   void closeLastDirectory();
 
   void deleteDirectory(DirectoryEntity dir);
-  void blockUserInteraction(int createdById);
+  void blockUserInteraction(AuthUserEntity createdBy);
   void addDirectory(DirectoryEntity dir);
 
   void botReply();
@@ -116,7 +117,7 @@ class DirectoryCubitImp extends DirectoryCubit {
   }
 
   @override
-  void blockUserInteraction(int createdById) {
+  void blockUserInteraction(AuthUserEntity createdBy) {
     // TODO: blockUserInteraction code
   }
 

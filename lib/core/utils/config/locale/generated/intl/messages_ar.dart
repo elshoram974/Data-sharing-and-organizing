@@ -26,8 +26,8 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m2(number) => "تم تحديد ${number}";
 
-  static String m3(directoryName, byUserId) =>
-      "مستخدم بالمعرف \'${byUserId}\' يرغب في إضافة مجلد \'${directoryName}\' هنا.";
+  static String m3(directoryName, userName) =>
+      "عضو بإسم \'${userName}\' طلب إضافة المجلد \'${directoryName}\' هنا.";
 
   static String m4(directoryName) =>
       "ما الإجراء الذي تود اتخاذه مع مجلد \'${directoryName}\'؟";
@@ -231,7 +231,6 @@ class MessageLookup extends MessageLookupByLibrary {
             "حدث خطأ غير معروف. يرجى المحاولة مرة أخرى في وقت لاحق أو الاتصال بالدعم للمساعدة."),
         "unmuteNotification":
             MessageLookupByLibrary.simpleMessage("تفعيل الإشعارات"),
-        "userIdWantToAddDirNameDirectory": m3,
         "userIsNotActivePleaseContactSupportForFurtherAssistance":
             MessageLookupByLibrary.simpleMessage(
                 "المستخدم غير نشط. يرجى الاتصال بالدعم للمساعدة الإضافية."),
@@ -242,6 +241,7 @@ class MessageLookup extends MessageLookupByLibrary {
                 "هذا المستخدم ليس مزودًا ببريد إلكتروني وكلمة مرور لإرسال رمز التحقق."),
         "userNotFound": MessageLookupByLibrary.simpleMessage(
             "لا يوجد مستخدم لهذا البريد الإلكتروني."),
+        "userWantToAddDirectory": m3,
         "verify": MessageLookupByLibrary.simpleMessage("التحقق"),
         "verifyIt": MessageLookupByLibrary.simpleMessage("تحقق منه"),
         "warning": MessageLookupByLibrary.simpleMessage("تحذير"),
