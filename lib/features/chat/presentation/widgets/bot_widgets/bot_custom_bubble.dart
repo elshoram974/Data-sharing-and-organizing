@@ -2,7 +2,9 @@ import 'package:bubble/bubble.dart';
 import 'package:data_sharing_organizing/core/utils/constants/app_color.dart';
 import 'package:data_sharing_organizing/core/utils/constants/app_constants.dart';
 import 'package:data_sharing_organizing/core/utils/functions/detect_text_direction.dart';
+import 'package:data_sharing_organizing/core/utils/services/dependency/provider_dependency.dart';
 import 'package:data_sharing_organizing/core/utils/styles.dart';
+import 'package:data_sharing_organizing/features/chat/domain/entities/member_entity.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
@@ -26,6 +28,7 @@ class BotCustomBubble extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final bool isTextMessage = message is types.TextMessage;
+    final MemberEntity member = ActivityEntity.fromMessage(message)?.createdBy ?? MemberEntity.newEmpty();
     final bool isApproved =
         (ActivityEntity.fromMessage(message)?.isApproved) != false;
     const double border = 5;
@@ -57,11 +60,25 @@ class BotCustomBubble extends StatelessWidget {
                 : AppColor.background(context).withGreen(100),
             margin: null,
             nip: isTheUser ? BubbleNip.rightTop : BubbleNip.leftTop,
-            child: Directionality(
-              textDirection: detectRtlDirectionality(
-                isTextMessage ? (message as types.TextMessage).text : 'A',
-              ),
-              child: child,
+            child: Column(
+              children: [
+                Visibility(
+                  visible: !isTheUser &&
+                      (member.isAdmin ||
+                          member.user.id ==
+                              ProviderDependency.userMain.user.id),
+                  child: Text(
+                    "double tap to edit",
+                    style: AppStyle.styleBoldInika13.copyWith(fontSize: 9),
+                  ),
+                ),
+                Directionality(
+                  textDirection: detectRtlDirectionality(
+                    isTextMessage ? (message as types.TextMessage).text : 'A',
+                  ),
+                  child: child,
+                ),
+              ],
             ),
           ),
           MessageDate(10, millisecondsSinceEpoch: message.createdAt ?? 0),

@@ -1,8 +1,12 @@
+import 'dart:math';
+
 import 'package:data_sharing_organizing/core/status/errors/failure.dart';
 import 'package:data_sharing_organizing/core/status/status.dart';
 import 'package:data_sharing_organizing/core/status/success/success.dart';
 import 'package:data_sharing_organizing/core/utils/config/locale/generated/l10n.dart';
 import 'package:data_sharing_organizing/core/utils/config/routes/routes.dart';
+import 'package:data_sharing_organizing/core/utils/enums/message_type/message_type.dart';
+import 'package:data_sharing_organizing/core/utils/enums/user_role/user_type_enum.dart';
 import 'package:data_sharing_organizing/core/utils/services/dependency/provider_dependency.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
@@ -13,7 +17,9 @@ import 'package:uuid/uuid.dart';
 
 import '../../../../../auth/domain/entities/auth_user_entity.dart';
 import '../../../../../user_home/domain/entities/group_home_entity.dart';
+import '../../../../domain/entities/activity_entity.dart';
 import '../../../../domain/entities/directory_entity.dart';
+import '../../../../domain/entities/member_entity.dart';
 import '../../../../domain/repositories/directories_repo.dart';
 import '../../group_cubit/group_cubit.dart';
 import '../bot_cubit.dart';
@@ -36,6 +42,7 @@ abstract class DirectoryCubit extends Cubit<DirectoryState> {
 
   void changeHeight(DragUpdateDetails details, BuildContext _);
 
+  void goToDirectory(DirectoryEntity? dir);
   void openDirectory(DirectoryEntity newDirectory);
   void closeLastDirectory();
 
@@ -72,6 +79,18 @@ class DirectoryCubitImp extends DirectoryCubit {
   // ----------------------------------------------------------------
 
   @override
+  void goToDirectory(DirectoryEntity? dir) {
+    if (_directoriesStack.lastOrNull != dir) {
+      if (dir == null) {
+        _directoriesStack.clear();
+      } else {
+        _directoriesStack.add(dir);
+      }
+      return _changeDirectory();
+    }
+  }
+
+  @override
   void openDirectory(DirectoryEntity newDirectory) {
     _directoriesStack.add(newDirectory);
     _changeDirectory();
@@ -87,10 +106,13 @@ class DirectoryCubitImp extends DirectoryCubit {
   void _changeDirectory() {
     botCubit.addMessage(
       types.TextMessage(
-          id: const Uuid().v4(),
-          author: botCubit.currentUser,
-          text: _directoriesStack.lastOrNull?.name ?? S.current.home,
-          metadata: {"directory": _directoriesStack.lastOrNull}),
+        id: const Uuid().v4(),
+        author: botCubit.currentMember.messageAuthor(),
+        text: _directoriesStack.lastOrNull?.name ?? S.current.home,
+        metadata: {
+          "directory": _directoriesStack.lastOrNull
+        }, // *  to know the directory
+      ),
     );
     _getDirectories(_directoriesStack.lastOrNull);
   }
@@ -150,30 +172,47 @@ class DirectoryCubitImp extends DirectoryCubit {
   @override
   void botReply() {
     final GroupHomeEntity group = groupCubit.group;
-    final String messageId = const Uuid().v4();
-    final int messageCreatedAt = DateTime.now().millisecondsSinceEpoch;
-    final types.User botAuthor = types.User(
-      firstName: "BOT",
-      role: types.Role.admin,
-      id: 'Bot ${group.id}',
+    final int messageId = Random().nextInt(99999);
+    final DateTime messageCreatedAt = DateTime.now();
+
+    final MemberEntity botAuthor = MemberEntity(
+      user: AuthUserEntity(
+        id: group.id,
+        name: "BOT",
+        email: "bot@${group.groupName}",
+        password: '',
+        userType: UserType.personal,
+      ),
+      groupId: group.id,
+      canInteract: true,
+      joinDate: DateTime.now(),
+      isAdmin: true,
     );
     if (_directoriesStack.isNotEmpty) {
       return botCubit.addMessage(
-        types.TextMessage(
-          author: botAuthor,
+        ActivityEntity(
           id: messageId,
-          text: "${_directoriesStack.last.name} contains ...",
+          groupId: group.id,
+          createdBy: botAuthor,
+          content: "${_directoriesStack.last.name} contains ...",
           createdAt: messageCreatedAt,
-        ),
+          isApproved: messageId.isEven,
+          type: MessageType.textMessage,
+        ).toMessage().copyWith(
+              author: types.User(id: group.id.toString(), firstName: 'BOT'),
+            ),
       );
     }
     return botCubit.addMessage(
-      types.TextMessage(
-        author: botAuthor,
+      ActivityEntity(
         id: messageId,
-        text: 'Hi there!\ni\'m ${group.groupName} BOT',
+        groupId: group.id,
+        createdBy: botAuthor,
+        content: 'Hi there!\ni\'m ${group.groupName} BOT',
         createdAt: messageCreatedAt,
-      ),
+        isApproved: true,
+        type: MessageType.textMessage,
+      ).toMessage(),
     );
   }
 

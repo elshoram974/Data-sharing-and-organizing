@@ -1,3 +1,4 @@
+import 'package:data_sharing_organizing/core/utils/config/locale/generated/l10n.dart';
 import 'package:data_sharing_organizing/core/utils/services/dependency/provider_dependency.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
@@ -15,6 +16,7 @@ import '../../../../../core/utils/enums/message_type/message_type.dart';
 import '../../../data/models/attachment_model.dart';
 import '../../../domain/entities/activity_entity.dart';
 import '../../../domain/entities/directory_entity.dart';
+import '../../../domain/entities/member_entity.dart';
 import '../group_cubit/group_cubit.dart';
 
 part 'bot_state.dart';
@@ -23,15 +25,14 @@ abstract class BOTCubit extends Cubit<BOTState> {
   BOTCubit() : super(const BotInitial());
 
   final GroupCubit groupCubit = ProviderDependency.group;
-  late final types.User currentUser =
-      groupCubit.group.memberEntity.messageAuthor();
+  late final MemberEntity currentMember = groupCubit.group.memberEntity;
 
   late List<types.Message> botMessages = [
     ActivityEntity(
       id: 455,
       groupId: 5,
       content: "Test To approve it google.com",
-      createdBy: groupCubit.group.memberEntity,
+      createdBy: currentMember,
       createdAt: DateTime.now(),
       isApproved: false,
       type: MessageType.textMessage,
@@ -40,7 +41,7 @@ abstract class BOTCubit extends Cubit<BOTState> {
       id: 55,
       groupId: 5,
       content: "Test To approve it file",
-      createdBy: groupCubit.group.memberEntity,
+      createdBy: currentMember,
       createdAt: DateTime.now(),
       isApproved: true,
       attachment: AttachmentModel(
@@ -89,25 +90,19 @@ class BOTCubitImp extends BOTCubit {
   @override
   void handleMessageDoubleTap(BuildContext _, types.Message message) async {
     ProviderDependency.group.closeFloatingButton();
-    print(message);
-    if (message.author == currentUser) {
-      if (message.metadata?.containsKey("directory") == true) {
-        DirectoryEntity? dir = message.metadata!["directory"];
-        print(dir); // if null this mean in home
-      }
+    print(message.metadata);
+    if (message.metadata?.containsKey("activity") == true) {
+      final ActivityEntity activity = message.metadata!["activity"];
+      _showAction(_, activity);
+    } else if (message.metadata?.containsKey("directory") == true) {
+      DirectoryEntity? dir = message.metadata!["directory"];
+      ProviderDependency.directory.goToDirectory(dir);
     }
   }
 
   @override
   void handleMessageTap(BuildContext _, types.Message message) async {
     ProviderDependency.group.closeFloatingButton();
-    print(message);
-    if (message.author == currentUser) {
-      if (message.metadata?.containsKey("directory") == true) {
-        DirectoryEntity? dir = message.metadata!["directory"];
-        print(dir);
-      }
-    }
     if (message is types.FileMessage) {
       var localPath = message.uri;
 
@@ -170,7 +165,7 @@ class BOTCubitImp extends BOTCubit {
   void handleSendPressed(types.PartialText message, [types.Status? status]) {
     ProviderDependency.group.closeFloatingButton();
     final types.TextMessage textMessage = types.TextMessage(
-      author: currentUser,
+      author: currentMember.messageAuthor(),
       createdAt: DateTime.now().millisecondsSinceEpoch,
       id: const Uuid().v4(),
       text: message.text,
@@ -191,4 +186,64 @@ class BOTCubitImp extends BOTCubit {
       });
     }
   }
+}
+
+void _showAction(
+  BuildContext _,
+  ActivityEntity activity,
+) {
+  final String content;
+  final List<TextButton> actions = [
+    TextButton(
+      onPressed: () {},
+      child: Text(S.of(_).delete),
+    ),
+    TextButton(
+      onPressed: Navigator.of(_).pop,
+      child: Text(S.of(_).cancel),
+    ),
+  ];
+
+  if (ProviderDependency.group.isAdmin) {
+    if (!activity.isApproved) {
+      content = S.of(_).userWantToAddDirectory(
+          activity.content, activity.createdBy.user.name);
+      actions.insertAll(
+        0,
+        [
+          TextButton(
+            onPressed: () {},
+            child: Text(S.of(_).blockThisUser),
+          ),
+          TextButton(
+            onPressed: () {},
+            child: Text("add it"),
+          ),
+        ],
+      );
+    } else {
+      content = S.of(_).whatDoYouWantToDoWithDirNameDirectory(activity.content);
+      actions.insert(
+        0,
+        TextButton(
+          onPressed: () {},
+          child: Text(S.of(_).hide),
+        ),
+      );
+    }
+  } else {
+    if (ProviderDependency.userMain.user.id != activity.createdBy.user.id ||
+        activity.isApproved) return;
+    content = S.of(_).youAddedDirNameDirectory(activity.content);
+  }
+
+  showDialog<void>(
+    context: _,
+    builder: (context) {
+      return AlertDialog(
+        content: Text(content),
+        actions: actions,
+      );
+    },
+  );
 }

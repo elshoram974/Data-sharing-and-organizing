@@ -24,6 +24,7 @@ class BotChatWidget extends StatelessWidget {
         messages: c.botMessages,
         onBackgroundTap: ProviderDependency.group.closeFloatingButton,
         onMessageTap: c.handleMessageTap,
+        onMessageLongPress: c.handleMessageDoubleTap,
         onMessageDoubleTap: c.handleMessageDoubleTap,
         onPreviewDataFetched: c.handlePreviewDataFetched,
         onSendPressed: (m) => c.handleSendPressed(m, types.Status.sending),
@@ -37,7 +38,7 @@ class BotChatWidget extends StatelessWidget {
           sendButtonVisibilityMode: SendButtonVisibilityMode.always,
           onTextFieldTap: ProviderDependency.group.closeFloatingButton,
         ),
-        user: c.currentUser,
+        user: c.currentMember.messageAuthor(),
         theme: botChatTheme(context),
       ),
     );
@@ -49,7 +50,7 @@ class BotChatWidget extends StatelessWidget {
     required bool nextMessageInGroup,
   }) {
     return BotCustomBubble(
-      isTheUser: ProviderDependency.bot.currentUser.id == message.author.id,
+      isTheUser: ProviderDependency.bot.currentMember.messageAuthor().id == message.author.id,
       message: message,
       nextMessageInGroup: nextMessageInGroup,
       child: child,

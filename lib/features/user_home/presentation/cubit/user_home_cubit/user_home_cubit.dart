@@ -108,8 +108,9 @@ class UserHomeCubit extends Cubit<UserHomeState> {
           (status as Failure<List<GroupHomeEntity>>).failure,
           inFirst,
         );
+      } else {
+        emit(HomeSuccessState(currentGroups));
       }
-      emit(HomeSuccessState(currentGroups));
     });
   }
 
