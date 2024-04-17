@@ -110,7 +110,7 @@ class _GroupChatScreenState extends State<GroupChatScreen> {
 
   void _handleFileSelection() async {
     ProviderDependency.group.closeFloatingButton();
-    final result = await FilePicker.platform.pickFiles(
+    final FilePickerResult? result = await FilePicker.platform.pickFiles(
       type: FileType.any,
     );
 

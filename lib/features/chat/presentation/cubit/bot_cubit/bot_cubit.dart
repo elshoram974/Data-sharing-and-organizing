@@ -12,6 +12,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:uuid/uuid.dart';
 
 import '../../../../../core/utils/enums/message_type/message_type.dart';
+import '../../../data/models/attachment_model.dart';
 import '../../../domain/entities/activity_entity.dart';
 import '../../../domain/entities/directory_entity.dart';
 import '../group_cubit/group_cubit.dart';
@@ -29,7 +30,7 @@ abstract class BOTCubit extends Cubit<BOTState> {
     ActivityEntity(
       id: 455,
       groupId: 5,
-      content: "Test To approve it",
+      content: "Test To approve it google.com",
       createdBy: groupCubit.group.memberEntity,
       createdAt: DateTime.now(),
       isApproved: false,
@@ -42,9 +43,13 @@ abstract class BOTCubit extends Cubit<BOTState> {
       createdBy: groupCubit.group.memberEntity,
       createdAt: DateTime.now(),
       isApproved: true,
-      fileSize: 0.25,
-      attachmentLink:
-          "https://pbs.twimg.com/profile_images/1744393322418802688/-ZF7VwbA_400x400.jpg",
+      attachment: AttachmentModel(
+        size: 50000,
+        name: 'File name',
+        uri:
+            'https://pbs.twimg.com/profile_images/1744393322418802688/-ZF7VwbA_400x400.jpg',
+        mimeType: 'image/jpeg',
+      ),
       type: MessageType.other,
     ).toMessage()
   ];
@@ -157,6 +162,8 @@ class BOTCubitImp extends BOTCubit {
 
     botMessages[index] = updatedMessage;
     emit(SetState(_i++));
+    Future.delayed(
+        const Duration(milliseconds: 50), () => emit(SetState(_i++)));
   }
 
   @override

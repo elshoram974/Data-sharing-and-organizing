@@ -3,6 +3,7 @@ import 'package:data_sharing_organizing/core/utils/enums/notification_enum.dart'
 import 'package:equatable/equatable.dart';
 import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
 
+import '../../data/models/attachment_model.dart';
 import 'member_entity.dart';
 
 class ActivityEntity extends Equatable {
@@ -11,9 +12,8 @@ class ActivityEntity extends Equatable {
   final MemberEntity createdBy;
   final int? insideDirectoryId;
   final int? repliedOn;
-  final String? content;
-  final String? attachmentLink;
-  final double? fileSize;
+  final String content;
+  final AttachmentModel? attachment;
   final DateTime createdAt;
   final bool isApproved;
   final NotificationEnum notifyOthers;
@@ -25,9 +25,8 @@ class ActivityEntity extends Equatable {
     required this.createdBy,
     this.insideDirectoryId,
     this.repliedOn,
-    this.content,
-    this.attachmentLink,
-    this.fileSize,
+    required this.content,
+    this.attachment,
     required this.createdAt,
     required this.isApproved,
     this.notifyOthers = NotificationEnum.notify,
@@ -41,7 +40,7 @@ class ActivityEntity extends Equatable {
     int? insideDirectoryId,
     int? repliedOn,
     String? content,
-    String? attachmentLink,
+    AttachmentModel? attachment,
     double? fileSize,
     DateTime? createdAt,
     bool? isApproved,
@@ -54,8 +53,7 @@ class ActivityEntity extends Equatable {
       createdBy: createdBy ?? this.createdBy,
       createdAt: createdAt ?? this.createdAt,
       isApproved: isApproved ?? this.isApproved,
-      attachmentLink: attachmentLink ?? this.attachmentLink,
-      fileSize: fileSize ?? this.fileSize,
+      attachment: attachment ?? this.attachment,
       content: content ?? this.content,
       insideDirectoryId: insideDirectoryId ?? this.insideDirectoryId,
       notifyOthers: notifyOthers ?? this.notifyOthers,
@@ -64,11 +62,10 @@ class ActivityEntity extends Equatable {
     );
   }
 
-  ActivityEntity makeNull({
+  ActivityEntity copyWithNull({
     required int? insideDirectoryId,
     required int? repliedOn,
-    required String? content,
-    required String? attachmentLink,
+    required AttachmentModel? attachment,
     required double? fileSize,
   }) {
     return ActivityEntity(
@@ -77,8 +74,7 @@ class ActivityEntity extends Equatable {
       createdBy: createdBy,
       createdAt: createdAt,
       isApproved: isApproved,
-      attachmentLink: attachmentLink,
-      fileSize: fileSize,
+      attachment: attachment,
       content: content,
       insideDirectoryId: insideDirectoryId,
       notifyOthers: notifyOthers,
@@ -88,11 +84,11 @@ class ActivityEntity extends Equatable {
   }
 
   types.Message toMessage() {
-    final map = {"activity": this};
+    final Map<String, ActivityEntity> map = {"activity": this};
     switch (type) {
       case MessageType.textMessage:
         return types.TextMessage(
-          text: content!,
+          text: content,
           author: createdBy.messageAuthor(),
           id: id.toString(),
           createdAt: createdAt.millisecondsSinceEpoch,
@@ -104,25 +100,26 @@ class ActivityEntity extends Equatable {
         return types.ImageMessage(
           author: createdBy.messageAuthor(),
           id: id.toString(),
-          name: content ?? "image",
-          size: fileSize!,
-          uri: attachmentLink!,
+          name: content,
+          size: attachment!.size,
+          uri: attachment!.uri,
           createdAt: createdAt.millisecondsSinceEpoch,
           remoteId: id.toString(),
           metadata: map,
-          height: 50,
-          width: 50,
+          height: attachment!.height,
+          width: attachment!.width,
           type: types.MessageType.image,
         );
       default:
         return types.FileMessage(
           author: createdBy.messageAuthor(),
           id: id.toString(),
-          name: content!,
-          size: fileSize!,
-          uri: attachmentLink!,
+          name: content,
+          size: attachment!.size,
+          uri: attachment!.uri,
           createdAt: createdAt.millisecondsSinceEpoch,
           remoteId: id.toString(),
+          mimeType: attachment!.mimeType,
           metadata: map,
           type: types.MessageType.file,
         );
@@ -141,7 +138,7 @@ class ActivityEntity extends Equatable {
         createdBy,
         repliedOn,
         content,
-        attachmentLink,
+        attachment,
         createdAt,
         isApproved,
         notifyOthers,
