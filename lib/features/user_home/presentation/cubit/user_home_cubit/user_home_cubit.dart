@@ -86,23 +86,31 @@ class UserHomeCubit extends Cubit<UserHomeState> {
   // * GetGroups
   Future<void> getGroups([bool inFirst = true, int page = 1]) async {
     emit(GetGroupsLoadingState(inFirst));
-    // await Future.delayed(Duration(seconds: 3));
-    final Status<List<GroupHomeEntity>> status = await getGroupsUseCase((
+    Status<List<GroupHomeEntity>>? status;
+    getGroupsUseCase((
       user: userMain.user,
       getMyGroups: isMyGroups,
-    ));
-    if (inFirst) {
-      if (isSelected) _makeAllSelectedOrNot(false);
-      currentGroups.clear();
-    }
-    if (status is Success<List<GroupHomeEntity>>) {
-      currentGroups.addAll(status.data);
+    )).listen((tempStatus) {
+      status = tempStatus;
+      if (tempStatus is Success<List<GroupHomeEntity>>) {
+        if (inFirst) {
+          if (isSelected) _makeAllSelectedOrNot(false);
+          currentGroups.clear();
+        }
+        currentGroups.addAll(tempStatus.data);
 
-      emit(HomeSuccessState(status.data));
-    } else if (status is Failure<List<GroupHomeEntity>>) {
-      currentGroups.addAll(status.data!);
-      _failureStatus(status.failure, inFirst);
-    }
+        emit(HomeSuccessState(tempStatus.data));
+        emit(GetGroupsLoadingState(inFirst));
+      }
+    }).onDone(() {
+      if (status is Failure<List<GroupHomeEntity>>) {
+        _failureStatus(
+          (status as Failure<List<GroupHomeEntity>>).failure,
+          inFirst,
+        );
+      }
+      emit(HomeSuccessState(currentGroups));
+    });
   }
 
   // * when tap on tile

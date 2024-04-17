@@ -1,4 +1,5 @@
 import 'package:data_sharing_organizing/core/status/status.dart';
+import 'package:data_sharing_organizing/core/status/success/success.dart';
 import 'package:data_sharing_organizing/core/utils/functions/execute_and_handle_remote_errors.dart';
 
 import 'package:data_sharing_organizing/features/auth/domain/entities/auth_user_entity.dart';
@@ -19,42 +20,42 @@ class HomeRepositoriesImp extends HomeRepositories {
   });
 
   @override
-  Future<Status<List<GroupHomeEntity>>> getGroups(AuthUserEntity user) {
-    final List<GroupHomeEntity> groups = [];
+  Stream<Status<List<GroupHomeEntity>>> getGroups(AuthUserEntity user) async* {
+    yield Success(localDataSource.getAllGroups());
 
-    return executeAndHandleErrors<List<GroupHomeEntity>>(
-      () async {
-        groups.clear();
-        final HomeData results = await remoteDataSource.getGroups(user);
-        groups.addAll(results.groups);
-        return await localDataSource.saveGroups(groups, results.user);
-      },
-      () async {
-        groups.clear();
-        groups.addAll(localDataSource.getAllGroups());
-        return groups;
-      },
+    yield* Stream.fromFuture(
+      executeAndHandleErrors<List<GroupHomeEntity>>(
+        () async {
+          final List<GroupHomeEntity> groups = [];
+          final HomeData results = await remoteDataSource.getGroups(user);
+          groups.addAll(results.groups);
+          return await localDataSource.saveGroups(groups, results.user);
+        },
+      ),
     );
   }
 
   @override
-  Future<Status<List<GroupHomeEntity>>> getMyGroups(AuthUserEntity user) {
-    final List<GroupHomeEntity> groups = [];
+  Stream<Status<List<GroupHomeEntity>>> getMyGroups(AuthUserEntity user) async* {
+    
+    yield Success(
+      localDataSource
+          .getAllGroups()
+          .where((group) => group.ownerId == user.id)
+          .toList(),
+    );
 
-    return executeAndHandleErrors<List<GroupHomeEntity>>(
-      () async {
-        groups.clear();
-        final HomeData results = await remoteDataSource.getGroups(user);
-        groups.addAll(results.groups);
-        return (await localDataSource.saveGroups(groups, results.user))
-            .where((group) => group.ownerId == user.id)
-            .toList();
-      },
-      () async {
-        groups.clear();
-        groups.addAll(localDataSource.getAllGroups());
-        return groups.where((group) => group.ownerId == user.id).toList();
-      },
+    yield* Stream.fromFuture(
+      executeAndHandleErrors<List<GroupHomeEntity>>(
+        () async {
+          final List<GroupHomeEntity> groups = [];
+          final HomeData results = await remoteDataSource.getGroups(user);
+          groups.addAll(results.groups);
+          return (await localDataSource.saveGroups(groups, results.user))
+              .where((group) => group.ownerId == user.id)
+              .toList();
+        },
+      ),
     );
   }
 
