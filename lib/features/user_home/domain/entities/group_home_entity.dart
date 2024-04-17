@@ -4,6 +4,8 @@ import 'package:data_sharing_organizing/core/utils/enums/message_type/message_ty
 import 'package:equatable/equatable.dart';
 import 'package:hive/hive.dart';
 
+import '../../../chat/domain/entities/member_entity.dart';
+
 part 'group_home_entity.g.dart';
 
 @HiveType(typeId: 4)
@@ -44,6 +46,9 @@ class GroupHomeEntity extends Equatable {
   @HiveField(11)
   final GroupDiscussionType discussion;
 
+  @HiveField(12)
+  final MemberEntity memberEntity;
+
   final GroupAccessType accessType;
 
   final bool isSelected;
@@ -63,6 +68,7 @@ class GroupHomeEntity extends Equatable {
     this.bottomHeight,
     required this.discussion,
     this.accessType = GroupAccessType.onlyRead,
+    required this.memberEntity,
   });
 
   GroupHomeEntity copyWith({
@@ -80,6 +86,7 @@ class GroupHomeEntity extends Equatable {
     double? bottomHeight,
     GroupDiscussionType? discussion,
     GroupAccessType? accessType,
+    MemberEntity? memberEntity,
   }) {
     return GroupHomeEntity(
       id: id ?? this.id,
@@ -96,9 +103,10 @@ class GroupHomeEntity extends Equatable {
       bottomHeight: bottomHeight ?? this.bottomHeight,
       discussion: discussion ?? this.discussion,
       accessType: accessType ?? this.accessType,
+      memberEntity: memberEntity ?? this.memberEntity,
     );
   }
 
   @override
-  List<Object?> get props => [id, ownerId];
+  List<Object?> get props => [id, ownerId,memberEntity];
 }

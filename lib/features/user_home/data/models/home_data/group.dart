@@ -8,6 +8,7 @@ import 'package:data_sharing_organizing/core/utils/enums/home/group_type_enum.da
 import 'package:data_sharing_organizing/core/utils/enums/home/group_visibility_enum.dart';
 import 'package:data_sharing_organizing/core/utils/enums/message_type/message_type.dart';
 
+import '../../../../chat/domain/entities/member_entity.dart';
 import '../../../domain/entities/group_home_entity.dart';
 
 class GroupDetails extends GroupHomeEntity {
@@ -44,6 +45,7 @@ class GroupDetails extends GroupHomeEntity {
     super.lastMessageType,
     super.unReadCounter,
     super.bottomHeight,
+    required super.memberEntity,
   }) : super(
           id: groupId,
           ownerId: groupOwnerId,
@@ -52,7 +54,7 @@ class GroupDetails extends GroupHomeEntity {
 
   @override
   String toString() {
-    return 'Group(groupId: $groupId, groupName: $groupName, groupOwnerId: $groupOwnerId, groupCreationDate: $groupCreationDate, groupDescription: $groupDescription, groupVisibility: $groupVisibility, groupAccessType: $accessType, groupCategory: $groupCategory, groupImage: $groupImage, groupType: $groupType, groupDiscussionType: $discussion, groupStatus: $groupStatus, groupStatusMessage: $groupStatusMessage, isSelected: $isSelected, isMuted: $isMute, unReadCounter: $unReadCounter, lastMessageTime: $lastMessageTime, lastMessageType: $lastMessageType, lastMessageFrom: $lastMessageFrom, lastMessage: $lastMessage)';
+    return 'Group(groupId: $groupId, groupName: $groupName, groupOwnerId: $groupOwnerId, groupCreationDate: $groupCreationDate, groupDescription: $groupDescription, groupVisibility: $groupVisibility, groupAccessType: $accessType, groupCategory: $groupCategory, groupImage: $groupImage, groupType: $groupType, groupDiscussionType: $discussion, groupStatus: $groupStatus, groupStatusMessage: $groupStatusMessage, isSelected: $isSelected, isMuted: $isMute, unReadCounter: $unReadCounter, lastMessageTime: $lastMessageTime, lastMessageType: $lastMessageType, lastMessageFrom: $lastMessageFrom, lastMessage: $lastMessage , member: $memberEntity)';
   }
 
   factory GroupDetails.fromMap(Map<String, dynamic> data) => GroupDetails(
@@ -74,6 +76,7 @@ class GroupDetails extends GroupHomeEntity {
             data['group_discussion_type'] as String?),
         groupStatus: GroupStatus.fromString(data['group_status'] as String?),
         groupStatusMessage: data['group_status_message'] as String?,
+        memberEntity:  MemberEntity.test(), // TODO: متنساش تعمله ب ال model
       );
 
   Map<String, dynamic> toMap() => {
@@ -90,6 +93,7 @@ class GroupDetails extends GroupHomeEntity {
         'group_discussion_type': discussion.inString,
         'group_status': groupStatus.inString,
         'group_status_message': groupStatusMessage,
+        'member': memberEntity, // TODO: متنساش تعمله ب ال model
       };
 
   /// `dart:convert`
@@ -130,6 +134,7 @@ class GroupDetails extends GroupHomeEntity {
     String? lastMessageFrom,
     int? ownerId,
     double? bottomHeight,
+    MemberEntity? memberEntity, // TODO: make it model not entity
   }) {
     return GroupDetails(
       groupId: groupId ?? this.groupId,
@@ -153,9 +158,10 @@ class GroupDetails extends GroupHomeEntity {
       lastMessageType: lastMessageType ?? this.lastMessageType,
       unReadCounter: unReadCounter ?? this.unReadCounter,
       bottomHeight: bottomHeight ?? this.bottomHeight,
+      memberEntity: memberEntity ?? this.memberEntity,
     );
   }
 
   @override
-  List<Object?> get props => [id, ownerId];
+  List<Object?> get props => [id, ownerId,memberEntity];
 }

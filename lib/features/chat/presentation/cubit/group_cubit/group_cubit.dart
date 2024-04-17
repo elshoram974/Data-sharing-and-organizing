@@ -1,4 +1,3 @@
-import 'package:data_sharing_organizing/core/utils/services/dependency/provider_dependency.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -23,7 +22,7 @@ class GroupCubit extends Cubit<GroupState> {
 
   double _dragPositionX = 0.0;
 
-  late final bool isAdmin = group.ownerId == ProviderDependency.userMain.user.id; // TODO: make it for all admins
+  late final bool isAdmin = group.memberEntity.isAdmin;
 
   void onPanUpdate(DragUpdateDetails details, BuildContext _) async {
     top += details.delta.dy;

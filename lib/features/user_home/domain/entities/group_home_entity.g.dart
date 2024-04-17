@@ -29,13 +29,14 @@ class GroupHomeEntityAdapter extends TypeAdapter<GroupHomeEntity> {
       ownerId: fields[9] as int,
       bottomHeight: fields[10] as double?,
       discussion: fields[11] as GroupDiscussionType,
+      memberEntity: fields[12] as MemberEntity,
     );
   }
 
   @override
   void write(BinaryWriter writer, GroupHomeEntity obj) {
     writer
-      ..writeByte(12)
+      ..writeByte(13)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -59,7 +60,9 @@ class GroupHomeEntityAdapter extends TypeAdapter<GroupHomeEntity> {
       ..writeByte(10)
       ..write(obj.bottomHeight)
       ..writeByte(11)
-      ..write(obj.discussion);
+      ..write(obj.discussion)
+      ..writeByte(12)
+      ..write(obj.memberEntity);
   }
 
   @override

@@ -3,6 +3,7 @@ import 'package:data_sharing_organizing/core/utils/enums/message_type/message_ty
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
 
+import '../../../../chat/domain/entities/member_entity.dart';
 import '../../../domain/entities/group_notification_entity.dart';
 
 part 'user_notification_state.dart';
@@ -26,6 +27,7 @@ class UserNotificationCubit extends Cubit<UserNotificationState> {
 
 final list = [
   GroupNotificationEntity(
+    memberEntity: MemberEntity.test(),
       id: 0,
       lastMessageType: MessageType.location,
       imageLink: 'https://images.justwatch.com/poster/248497985/s592/one-piece',
@@ -37,6 +39,7 @@ final list = [
       ownerId: 42,
       discussion: GroupDiscussionType.exist),
   GroupNotificationEntity(
+    memberEntity: MemberEntity.test(),
     id: 1,
     lastMessageType: MessageType.photo,
     imageLink: '',
@@ -48,6 +51,7 @@ final list = [
     discussion: GroupDiscussionType.existButClosed,
   ),
   GroupNotificationEntity(
+    memberEntity: MemberEntity.test(),
     id: 2,
     lastMessageType: MessageType.voiceMessage,
     imageLink: '',

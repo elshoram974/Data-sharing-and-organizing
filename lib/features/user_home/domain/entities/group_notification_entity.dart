@@ -2,6 +2,7 @@ import 'package:data_sharing_organizing/core/utils/enums/home/group_access_type_
 import 'package:data_sharing_organizing/core/utils/enums/home/group_discussion_type_enum.dart';
 import 'package:data_sharing_organizing/core/utils/enums/message_type/message_type.dart';
 
+import '../../../chat/domain/entities/member_entity.dart';
 import 'group_home_entity.dart';
 
 final class GroupNotificationEntity extends GroupHomeEntity {
@@ -21,6 +22,7 @@ final class GroupNotificationEntity extends GroupHomeEntity {
     super.bottomHeight,
     required super.discussion,
     super.accessType,
+    required super.memberEntity,
   }) : super(isSelected: false, isMute: false);
 
   @override
@@ -40,7 +42,8 @@ final class GroupNotificationEntity extends GroupHomeEntity {
     int? ownerId,
     double? bottomHeight,
     GroupDiscussionType? discussion,
-    GroupAccessType? accessType
+    GroupAccessType? accessType,
+    MemberEntity? memberEntity,
   }) {
     return GroupNotificationEntity(
       id: id ?? this.id,
@@ -56,9 +59,10 @@ final class GroupNotificationEntity extends GroupHomeEntity {
       bottomHeight: bottomHeight ?? this.bottomHeight,
       discussion: discussion ?? this.discussion,
       accessType : accessType ?? this.accessType,
+      memberEntity: memberEntity ?? this.memberEntity,
     );
   }
 
   @override
-  List<Object?> get props => [id, ownerId];
+  List<Object?> get props => [id, ownerId , memberEntity];
 }

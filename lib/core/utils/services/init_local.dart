@@ -4,7 +4,9 @@ import 'package:data_sharing_organizing/features/auth/domain/entities/auth_user_
 import 'package:data_sharing_organizing/features/user_home/domain/entities/group_home_entity.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
+import '../../../features/chat/domain/entities/member_entity.dart';
 import '../enums/home/group_discussion_type_enum.dart';
+import '../enums/member_notification_enum.dart';
 import '../enums/message_type/message_type.dart';
 
 late final Box<String> config;
@@ -21,16 +23,18 @@ Future<void> localInstance() async {
     Hive.openBox<String>(AppStrings.localConfig),
   ]);
 
-  _makeConfigInstance();
+  config = Hive.box<String>(AppStrings.localConfig);
 }
 
 void _registerAdapterFn() {
-  Hive.registerAdapter<UserType>(UserTypeAdapter());
-  Hive.registerAdapter<AuthUserEntity>(AuthUserEntityAdapter());
+  Hive.registerAdapter<UserType>(UserTypeAdapter());  //* it in auth user entity
+  Hive.registerAdapter<AuthUserEntity>(AuthUserEntityAdapter());//* it in group entity
+
   Hive.registerAdapter<MessageType>(MessageTypeAdapter()); //* it in group entity
   Hive.registerAdapter<GroupDiscussionType>(GroupDiscussionTypeAdapter());//* it in group entity
-  Hive.registerAdapter<GroupHomeEntity>(GroupHomeEntityAdapter());
-}
 
-Future<void> _makeConfigInstance() async =>
-    config = Hive.box<String>(AppStrings.localConfig);
+  Hive.registerAdapter<MemberNotificationEnum>(MemberNotificationEnumAdapter());//* it in member entity
+  Hive.registerAdapter<MemberEntity>(MemberEntityAdapter());//* it in group entity
+
+  Hive.registerAdapter<GroupHomeEntity>(GroupHomeEntityAdapter()); //* it in member entity :(
+}
