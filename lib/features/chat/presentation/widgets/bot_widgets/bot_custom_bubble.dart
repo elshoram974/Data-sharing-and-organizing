@@ -1,4 +1,5 @@
 import 'package:bubble/bubble.dart';
+import 'package:data_sharing_organizing/core/utils/config/locale/generated/l10n.dart';
 import 'package:data_sharing_organizing/core/utils/constants/app_color.dart';
 import 'package:data_sharing_organizing/core/utils/constants/app_constants.dart';
 import 'package:data_sharing_organizing/core/utils/functions/detect_text_direction.dart';
@@ -28,7 +29,9 @@ class BotCustomBubble extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final bool isTextMessage = message is types.TextMessage;
-    final MemberEntity member = ActivityEntity.fromMessage(message)?.createdBy ?? MemberEntity.newEmpty();
+    final MemberEntity member =
+        ActivityEntity.fromMessage(message)?.createdBy ??
+            MemberEntity.newEmpty();
     final bool isApproved =
         (ActivityEntity.fromMessage(message)?.isApproved) != false;
     const double border = 5;
@@ -68,7 +71,7 @@ class BotCustomBubble extends StatelessWidget {
                           member.user.id ==
                               ProviderDependency.userMain.user.id),
                   child: Text(
-                    "double tap to edit",
+                    S.of(context).doubleTapToEdit,
                     style: AppStyle.styleBoldInika13.copyWith(fontSize: 9),
                   ),
                 ),

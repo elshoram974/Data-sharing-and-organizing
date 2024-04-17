@@ -201,5 +201,6 @@
                 "type": "String"
             }
         }
-    }
+    },
+    "doubleTapToEdit": "اضغط مرتين للتعديل"
 }

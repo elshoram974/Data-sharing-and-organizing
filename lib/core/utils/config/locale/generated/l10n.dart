@@ -1523,6 +1523,16 @@ class S {
       args: [activityName],
     );
   }
+
+  /// `Double tap to edit`
+  String get doubleTapToEdit {
+    return Intl.message(
+      'Double tap to edit',
+      name: 'doubleTapToEdit',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

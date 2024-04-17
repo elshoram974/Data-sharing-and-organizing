@@ -201,5 +201,6 @@
                 "type": "String"
             }
         }
-    }
+    },
+    "doubleTapToEdit": "Double tap to edit"
 }
