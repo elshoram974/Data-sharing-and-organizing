@@ -206,8 +206,7 @@ void _showAction(
 
   if (ProviderDependency.group.isAdmin) {
     if (!activity.isApproved) {
-      content = S.of(_).userWantToAddDirectory(
-          activity.content, activity.createdBy.user.name);
+      content = S.of(_).userWantToAddActivity(activity.content, activity.createdBy.user.name);
       actions.insertAll(
         0,
         [
@@ -217,12 +216,12 @@ void _showAction(
           ),
           TextButton(
             onPressed: () {},
-            child: Text("add it"),
+            child: Text(S.of(_).addActivity),
           ),
         ],
       );
     } else {
-      content = S.of(_).whatDoYouWantToDoWithDirNameDirectory(activity.content);
+      content = S.of(_).whatDoYouWantToDoWithThisActivity(activity.content);
       actions.insert(
         0,
         TextButton(
@@ -234,7 +233,7 @@ void _showAction(
   } else {
     if (ProviderDependency.userMain.user.id != activity.createdBy.user.id ||
         activity.isApproved) return;
-    content = S.of(_).youAddedDirNameDirectory(activity.content);
+    content = S.of(_).youAddedActivityName(activity.content);
   }
 
   showDialog<void>(

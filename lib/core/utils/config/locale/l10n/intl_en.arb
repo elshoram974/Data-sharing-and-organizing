@@ -173,5 +173,33 @@
             }
         }
     },
-    "hide": "Hide"
+    "hide": "Hide",
+    "addActivity": "Add activity",
+    "youAddedActivityName": "You've added the '{activityName}' activity, but it's pending approval from the admin.",
+    "@youAddedActivityName": {
+        "placeholders": {
+            "activityName": {
+                "type": "String"
+            }
+        }
+    },
+    "userWantToAddActivity": "A member named '{userName}' has requested to add the '{activityName}' activity here.",
+    "@userWantToAddActivity": {
+        "placeholders": {
+            "activityName": {
+                "type": "String"
+            },
+            "userName": {
+                "type": "String"
+            }
+        }
+    },
+    "whatDoYouWantToDoWithThisActivity": "What action would you like to take with the '{activityName}' activity?",
+    "@whatDoYouWantToDoWithThisActivity": {
+        "placeholders": {
+            "activityName": {
+                "type": "String"
+            }
+        }
+    }
 }

@@ -1483,6 +1483,46 @@ class S {
       args: [],
     );
   }
+
+  /// `Add activity`
+  String get addActivity {
+    return Intl.message(
+      'Add activity',
+      name: 'addActivity',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You've added the '{activityName}' activity, but it's pending approval from the admin.`
+  String youAddedActivityName(String activityName) {
+    return Intl.message(
+      'You\'ve added the \'$activityName\' activity, but it\'s pending approval from the admin.',
+      name: 'youAddedActivityName',
+      desc: '',
+      args: [activityName],
+    );
+  }
+
+  /// `A member named '{userName}' has requested to add the '{activityName}' activity here.`
+  String userWantToAddActivity(String activityName, String userName) {
+    return Intl.message(
+      'A member named \'$userName\' has requested to add the \'$activityName\' activity here.',
+      name: 'userWantToAddActivity',
+      desc: '',
+      args: [activityName, userName],
+    );
+  }
+
+  /// `What action would you like to take with the '{activityName}' activity?`
+  String whatDoYouWantToDoWithThisActivity(String activityName) {
+    return Intl.message(
+      'What action would you like to take with the \'$activityName\' activity?',
+      name: 'whatDoYouWantToDoWithThisActivity',
+      desc: '',
+      args: [activityName],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

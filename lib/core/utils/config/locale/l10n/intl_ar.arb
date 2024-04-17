@@ -146,7 +146,7 @@
     "addDirectory": "إضافة مجلد",
     "addFileOrMessage": "إضافة ملف أو رسالة",
     "blockThisUser": "حظر هذا المستخدم",
-    "youAddedDirNameDirectory": "لقد أضفت مجلد '{directoryName}', لكنه في انتظار موافقة الإدارة.",
+    "youAddedDirNameDirectory": "لقد أضفت مجلد '{directoryName}', لكنه في انتظار موافقة المسئول.",
     "@youAddedDirNameDirectory": {
         "placeholders": {
             "directoryName": {
@@ -173,5 +173,33 @@
             }
         }
     },
-    "hide": "إخفاء"
+    "hide": "إخفاء",
+    "addActivity": "إضافة نشاط",
+    "youAddedActivityName": "لقد قمت بإضافة نشاط '{activityName}', لكنه في انتظار موافقة المسئول.",
+    "@youAddedActivityName": {
+        "placeholders": {
+            "activityName": {
+                "type": "String"
+            }
+        }
+    },
+    "userWantToAddActivity": "طلب عضو يدعى '{userName}' إضافة نشاط '{activityName}' هنا.",
+    "@userWantToAddActivity": {
+        "placeholders": {
+            "activityName": {
+                "type": "String"
+            },
+            "userName": {
+                "type": "String"
+            }
+        }
+    },
+    "whatDoYouWantToDoWithThisActivity": "ما الإجراء الذي تود اتخاذه مع نشاط '{activityName}'؟",
+    "@whatDoYouWantToDoWithThisActivity": {
+        "placeholders": {
+            "activityName": {
+                "type": "String"
+            }
+        }
+    }
 }

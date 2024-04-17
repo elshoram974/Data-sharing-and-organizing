@@ -26,13 +26,22 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m2(number) => "${number} selected";
 
-  static String m3(directoryName, userName) =>
+  static String m3(activityName, userName) =>
+      "A member named \'${userName}\' has requested to add the \'${activityName}\' activity here.";
+
+  static String m4(directoryName, userName) =>
       "A member named \'${userName}\' has requested to add the \'${directoryName}\' directory here.";
 
-  static String m4(directoryName) =>
+  static String m5(directoryName) =>
       "What action would you like to take with the \'${directoryName}\' directory?";
 
-  static String m5(directoryName) =>
+  static String m6(activityName) =>
+      "What action would you like to take with the \'${activityName}\' activity?";
+
+  static String m7(activityName) =>
+      "You\'ve added the \'${activityName}\' activity, but it\'s pending approval from the admin.";
+
+  static String m8(directoryName) =>
       "You\'ve added the \'${directoryName}\' directory, but it\'s pending approval from the admin.";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
@@ -40,6 +49,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "YouHaveChooseTypeOfAccountPersonalOrBusiness":
             MessageLookupByLibrary.simpleMessage(
                 "You have to choose the type of your account if it personal or business account."),
+        "addActivity": MessageLookupByLibrary.simpleMessage("Add activity"),
         "addDirectory": MessageLookupByLibrary.simpleMessage("Add directory"),
         "addFileOrMessage":
             MessageLookupByLibrary.simpleMessage("Add file or message"),
@@ -238,18 +248,21 @@ class MessageLookup extends MessageLookupByLibrary {
                 "This user is not email and password provider to send verification code."),
         "userNotFound": MessageLookupByLibrary.simpleMessage(
             "No user found for that email."),
-        "userWantToAddDirectory": m3,
+        "userWantToAddActivity": m3,
+        "userWantToAddDirectory": m4,
         "verify": MessageLookupByLibrary.simpleMessage("Verify"),
         "verifyIt": MessageLookupByLibrary.simpleMessage("Verify it"),
         "warning": MessageLookupByLibrary.simpleMessage("Warning"),
         "weakPassword": MessageLookupByLibrary.simpleMessage(
             "The password provided is too weak."),
         "welcomeBack": MessageLookupByLibrary.simpleMessage("Welcome back!"),
-        "whatDoYouWantToDoWithDirNameDirectory": m4,
+        "whatDoYouWantToDoWithDirNameDirectory": m5,
+        "whatDoYouWantToDoWithThisActivity": m6,
         "wrongPassword": MessageLookupByLibrary.simpleMessage(
             "Wrong password provided for that user."),
         "yesterday": MessageLookupByLibrary.simpleMessage("Yesterday"),
-        "youAddedDirNameDirectory": m5,
+        "youAddedActivityName": m7,
+        "youAddedDirNameDirectory": m8,
         "youCanMakeNewGroups": MessageLookupByLibrary.simpleMessage(
             "Feel free to create new groups."),
         "youCanNotUseSamePreviousPassword":

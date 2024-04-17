@@ -26,20 +26,30 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m2(number) => "تم تحديد ${number}";
 
-  static String m3(directoryName, userName) =>
+  static String m3(activityName, userName) =>
+      "طلب عضو يدعى \'${userName}\' إضافة نشاط \'${activityName}\' هنا.";
+
+  static String m4(directoryName, userName) =>
       "عضو بإسم \'${userName}\' طلب إضافة المجلد \'${directoryName}\' هنا.";
 
-  static String m4(directoryName) =>
+  static String m5(directoryName) =>
       "ما الإجراء الذي تود اتخاذه مع مجلد \'${directoryName}\'؟";
 
-  static String m5(directoryName) =>
-      "لقد أضفت مجلد \'${directoryName}\', لكنه في انتظار موافقة الإدارة.";
+  static String m6(activityName) =>
+      "ما الإجراء الذي تود اتخاذه مع نشاط \'${activityName}\'؟";
+
+  static String m7(activityName) =>
+      "لقد قمت بإضافة نشاط \'${activityName}\', لكنه في انتظار موافقة المسئول.";
+
+  static String m8(directoryName) =>
+      "لقد أضفت مجلد \'${directoryName}\', لكنه في انتظار موافقة المسئول.";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "YouHaveChooseTypeOfAccountPersonalOrBusiness":
             MessageLookupByLibrary.simpleMessage(
                 "عليك تحديد ان كان الحساب خاص أو لشركة"),
+        "addActivity": MessageLookupByLibrary.simpleMessage("إضافة نشاط"),
         "addDirectory": MessageLookupByLibrary.simpleMessage("إضافة مجلد"),
         "addFileOrMessage":
             MessageLookupByLibrary.simpleMessage("إضافة ملف أو رسالة"),
@@ -241,18 +251,21 @@ class MessageLookup extends MessageLookupByLibrary {
                 "هذا المستخدم ليس مزودًا ببريد إلكتروني وكلمة مرور لإرسال رمز التحقق."),
         "userNotFound": MessageLookupByLibrary.simpleMessage(
             "لا يوجد مستخدم لهذا البريد الإلكتروني."),
-        "userWantToAddDirectory": m3,
+        "userWantToAddActivity": m3,
+        "userWantToAddDirectory": m4,
         "verify": MessageLookupByLibrary.simpleMessage("التحقق"),
         "verifyIt": MessageLookupByLibrary.simpleMessage("تحقق منه"),
         "warning": MessageLookupByLibrary.simpleMessage("تحذير"),
         "weakPassword": MessageLookupByLibrary.simpleMessage(
             "كلمة المرور المقدمة ضعيفة جدًا."),
         "welcomeBack": MessageLookupByLibrary.simpleMessage("مرحبًا بعودتك!"),
-        "whatDoYouWantToDoWithDirNameDirectory": m4,
+        "whatDoYouWantToDoWithDirNameDirectory": m5,
+        "whatDoYouWantToDoWithThisActivity": m6,
         "wrongPassword": MessageLookupByLibrary.simpleMessage(
             "تم تقديم كلمة مرور خاطئة لهذا المستخدم."),
         "yesterday": MessageLookupByLibrary.simpleMessage("أمس"),
-        "youAddedDirNameDirectory": m5,
+        "youAddedActivityName": m7,
+        "youAddedDirNameDirectory": m8,
         "youCanMakeNewGroups": MessageLookupByLibrary.simpleMessage(
             "بإمكانك إنشاء مجموعات جديدة بحرية."),
         "youCanNotUseSamePreviousPassword":
