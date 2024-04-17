@@ -76,7 +76,7 @@ class GroupDetails extends GroupHomeEntity {
             data['group_discussion_type'] as String?),
         groupStatus: GroupStatus.fromString(data['group_status'] as String?),
         groupStatusMessage: data['group_status_message'] as String?,
-        memberEntity:  MemberEntity.test(), // TODO: متنساش تعمله ب ال model
+        memberEntity:  MemberEntity.newEmpty(), // TODO: متنساش تعمله ب ال model
       );
 
   Map<String, dynamic> toMap() => {

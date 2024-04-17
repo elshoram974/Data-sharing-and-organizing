@@ -21,8 +21,8 @@ class MemberEntityAdapter extends TypeAdapter<MemberEntity> {
       groupId: fields[5] as int,
       canInteract: fields[1] as bool,
       notification: fields[2] == null
-          ? MemberNotificationEnum.notify
-          : fields[2] as MemberNotificationEnum,
+          ? NotificationEnum.notify
+          : fields[2] as NotificationEnum,
       joinDate: fields[3] as DateTime,
       isAdmin: fields[4] as bool,
     );

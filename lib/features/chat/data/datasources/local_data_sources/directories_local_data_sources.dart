@@ -13,7 +13,7 @@ abstract class DirectoriesLocalDataSource {
 
   Future<void> saveBottomHeight(double height, int groupId);
 
-  List<DirectoryEntity> getDirectoriesInside(int? dirId , int groupId);
+  List<DirectoryEntity> getDirectoriesInside(int? dirId, int groupId);
 
   Future<void> saveDirectories(List<DirectoryEntity> directories);
 }
@@ -22,7 +22,8 @@ class DirectoriesLocalDataSourceImp extends DirectoriesLocalDataSource {
   DirectoriesLocalDataSourceImp(this.homeLocal);
   final HomeLocalDataSource homeLocal;
 
-  late final Box<GroupHomeEntity> groupsBox = Hive.box<GroupHomeEntity>(AppStrings.groupsBox);
+  late final Box<GroupHomeEntity> groupsBox =
+      Hive.box<GroupHomeEntity>(AppStrings.groupsBox);
 
   @override
   Future<void> saveBottomHeight(double height, int groupId) async {
@@ -40,12 +41,15 @@ class DirectoriesLocalDataSourceImp extends DirectoriesLocalDataSource {
     }
   }
 
-  Iterable<DirectoryEntity> _allGroupDirectories(int groupId){
+  Iterable<DirectoryEntity> _allGroupDirectories(int groupId) {
     return directories.where((e) => e.groupId == groupId);
   }
+
   @override
   List<DirectoryEntity> getDirectoriesInside(int? dirId, int groupId) {
-    return _allGroupDirectories(groupId).where((e) => e.insideDirectoryId == (dirId ?? 0)).toList();
+    return _allGroupDirectories(groupId)
+        .where((e) => e.insideDirectoryId == dirId)
+        .toList();
   }
 
   @override
@@ -66,70 +70,61 @@ const AuthUserEntity me = AuthUserEntity(
   userType: UserType.personal,
 );
 
-
 List<DirectoryEntity> directories = [
   const DirectoryEntity(
     id: 9,
     name: 'مش معايا',
-    insideDirectoryId: 0,
     groupId: 1,
-    isAccepted: true,
+    isApproved: true,
     createdBy: me,
   ),
   const DirectoryEntity(
     id: 10,
     name: 'مش معايا',
-    insideDirectoryId: 0,
     groupId: 1,
-    isAccepted: true,
+    isApproved: true,
     createdBy: me,
   ),
   const DirectoryEntity(
     id: 11,
     name: 'AdvancedProgramming',
-    insideDirectoryId: 0,
     groupId: 5,
-    isAccepted: true,
+    isApproved: true,
     createdBy: me,
   ),
   const DirectoryEntity(
     id: 12,
     name: 'AI',
-    insideDirectoryId: 0,
     groupId: 5,
-    isAccepted: true,
+    isApproved: true,
     createdBy: me,
   ),
   const DirectoryEntity(
     id: 13,
     name: 'Embedded system',
-    insideDirectoryId: 0,
     groupId: 5,
-    isAccepted: true,
+    isApproved: true,
     createdBy: me,
   ),
   const DirectoryEntity(
     id: 14,
     name: 'أخلاقيات المهنة',
-    insideDirectoryId: 0,
     groupId: 5,
-    isAccepted: true,
+    isApproved: true,
     createdBy: me,
   ),
   const DirectoryEntity(
     id: 15,
     name: 'إدارة مشروعات',
-    insideDirectoryId: 0,
     groupId: 5,
-    isAccepted: true,
+    isApproved: true,
     createdBy: me,
   ),
   const DirectoryEntity(
     id: 16,
     name: 'مهارات البحث والتحليل',
-    insideDirectoryId: 0,
     groupId: 5,
-    isAccepted: true,
+    isApproved: true,
     createdBy: me,
   ),
   const DirectoryEntity(
@@ -137,7 +132,7 @@ List<DirectoryEntity> directories = [
     name: 'Advanced Data',
     insideDirectoryId: 11,
     groupId: 5,
-    isAccepted: true,
+    isApproved: true,
     createdBy: me,
   ),
   const DirectoryEntity(
@@ -145,7 +140,7 @@ List<DirectoryEntity> directories = [
     name: 'Advanced Sheets',
     insideDirectoryId: 11,
     groupId: 5,
-    isAccepted: true,
+    isApproved: true,
     createdBy: me,
   ),
   const DirectoryEntity(
@@ -153,7 +148,7 @@ List<DirectoryEntity> directories = [
     name: 'Advanced Exams',
     insideDirectoryId: 11,
     groupId: 5,
-    isAccepted: true,
+    isApproved: true,
     createdBy: me,
   ),
   const DirectoryEntity(
@@ -161,7 +156,7 @@ List<DirectoryEntity> directories = [
     name: 'Advanced Records',
     insideDirectoryId: 11,
     groupId: 5,
-    isAccepted: true,
+    isApproved: true,
     createdBy: me,
   ),
   const DirectoryEntity(
@@ -169,7 +164,7 @@ List<DirectoryEntity> directories = [
     name: 'Advanced Other',
     insideDirectoryId: 11,
     groupId: 5,
-    isAccepted: true,
+    isApproved: true,
     createdBy: me,
   ),
   const DirectoryEntity(
@@ -177,7 +172,7 @@ List<DirectoryEntity> directories = [
     name: 'Advanced Lectures',
     insideDirectoryId: 17,
     groupId: 5,
-    isAccepted: true,
+    isApproved: true,
     createdBy: me,
   ),
   const DirectoryEntity(
@@ -185,7 +180,7 @@ List<DirectoryEntity> directories = [
     name: 'Advanced Sections',
     insideDirectoryId: 17,
     groupId: 5,
-    isAccepted: true,
+    isApproved: true,
     createdBy: me,
   ),
   const DirectoryEntity(
@@ -193,7 +188,7 @@ List<DirectoryEntity> directories = [
     name: 'أخلاقيات بيانات',
     insideDirectoryId: 14,
     groupId: 5,
-    isAccepted: true,
+    isApproved: true,
     createdBy: me,
   ),
   const DirectoryEntity(
@@ -201,7 +196,7 @@ List<DirectoryEntity> directories = [
     name: 'أخلاقيات امتحانات',
     insideDirectoryId: 14,
     groupId: 5,
-    isAccepted: true,
+    isApproved: true,
     createdBy: me,
   ),
   const DirectoryEntity(
@@ -222,7 +217,7 @@ List<DirectoryEntity> directories = [
     name: 'AI Data',
     insideDirectoryId: 12,
     groupId: 5,
-    isAccepted: true,
+    isApproved: true,
     createdBy: me,
   ),
   const DirectoryEntity(
@@ -230,7 +225,7 @@ List<DirectoryEntity> directories = [
     name: 'AI sheets',
     insideDirectoryId: 12,
     groupId: 5,
-    isAccepted: true,
+    isApproved: true,
     createdBy: me,
   ),
   const DirectoryEntity(
@@ -238,7 +233,7 @@ List<DirectoryEntity> directories = [
     name: 'AI Exams',
     insideDirectoryId: 12,
     groupId: 5,
-    isAccepted: true,
+    isApproved: true,
     createdBy: me,
   ),
   const DirectoryEntity(
@@ -246,7 +241,7 @@ List<DirectoryEntity> directories = [
     name: 'أخلاقيات ميدتيرم',
     insideDirectoryId: 25,
     groupId: 5,
-    isAccepted: true,
+    isApproved: true,
     createdBy: me,
   ),
   const DirectoryEntity(
@@ -254,7 +249,7 @@ List<DirectoryEntity> directories = [
     name: 'Ai sheets lec',
     insideDirectoryId: 28,
     groupId: 5,
-    isAccepted: true,
+    isApproved: true,
     createdBy: me,
   ),
 ];

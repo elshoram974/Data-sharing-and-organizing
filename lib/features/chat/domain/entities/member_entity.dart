@@ -1,8 +1,11 @@
-import 'package:data_sharing_organizing/core/utils/enums/member_notification_enum.dart';
+import 'package:data_sharing_organizing/core/utils/enums/notification_enum.dart';
+import 'package:data_sharing_organizing/core/utils/enums/user_status_enum.dart';
 import 'package:equatable/equatable.dart';
 import 'package:hive/hive.dart';
+import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
 
 import '../../../../core/utils/enums/user_role/user_type_enum.dart';
+import '../../../auth/data/models/app_user/user.dart';
 import '../../../auth/domain/entities/auth_user_entity.dart';
 
 part 'member_entity.g.dart';
@@ -13,8 +16,8 @@ class MemberEntity extends Equatable {
   final AuthUserEntity user;
   @HiveField(1)
   final bool canInteract;
-  @HiveField(2, defaultValue: MemberNotificationEnum.notify)
-  final MemberNotificationEnum notification;
+  @HiveField(2, defaultValue: NotificationEnum.notify)
+  final NotificationEnum notification;
   @HiveField(3)
   final DateTime joinDate;
   @HiveField(4)
@@ -26,7 +29,7 @@ class MemberEntity extends Equatable {
     required this.user,
     required this.groupId,
     required this.canInteract,
-    this.notification = MemberNotificationEnum.notify,
+    this.notification = NotificationEnum.notify,
     required this.joinDate,
     required this.isAdmin,
   });
@@ -44,7 +47,7 @@ class MemberEntity extends Equatable {
     AuthUserEntity? user,
     int? groupId,
     bool? canInteract,
-    MemberNotificationEnum? notification,
+    NotificationEnum? notification,
     DateTime? joinDate,
     bool? isAdmin,
   }) {
@@ -58,11 +61,11 @@ class MemberEntity extends Equatable {
     );
   }
 
-  factory MemberEntity.test() {
+  factory MemberEntity.newEmpty() {
     return MemberEntity(
       user: const AuthUserEntity(
         id: -1,
-        name: '',
+        name: 'Test',
         email: '',
         password: '',
         userType: UserType.personal,
@@ -71,6 +74,45 @@ class MemberEntity extends Equatable {
       canInteract: true,
       joinDate: DateTime.now(),
       isAdmin: true,
+    );
+  }
+
+  types.User messageAuthor() {
+    final List<String> nameParts = user.name.split(" ");
+    final String fName = nameParts.first.trim();
+    final String lName = nameParts.sublist(1).join(" ").trim();
+    return types.User(
+        id: user.id.toString(),
+        firstName: fName,
+        lastName: lName,
+        imageUrl: user.image,
+        role: isAdmin ? types.Role.admin : types.Role.user,
+        createdAt: joinDate.millisecondsSinceEpoch,
+        metadata: {
+          "groupId": groupId,
+          "canInteract": canInteract,
+          "joinDate": joinDate,
+          "isAdmin": isAdmin,
+          "user": User(
+            userId: user.id,
+            userEmail: user.email,
+            userFirstName: fName,
+            userLastName: lName,
+            userPassword: user.password,
+            userType: user.userType,
+            userStatus: UserStatus.active,
+          ).toJson(),
+        });
+  }
+
+  factory MemberEntity.fromAuth(types.User u) {
+    final AuthUserEntity myU = User.fromJson(u.metadata?["user"] as String);
+    return MemberEntity(
+      user: myU,
+      groupId: u.metadata?["groupId"] as int? ?? -1,
+      canInteract: u.metadata?["canInteract"] as bool? ?? false,
+      joinDate: u.metadata?["joinDate"] as DateTime? ?? DateTime.now(),
+      isAdmin: u.metadata?["isAdmin"] as bool? ?? false,
     );
   }
 }

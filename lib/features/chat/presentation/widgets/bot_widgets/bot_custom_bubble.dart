@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
 
+import '../../../domain/entities/activity_entity.dart';
 import '../message_date.dart';
 
 class BotCustomBubble extends StatelessWidget {
@@ -25,6 +26,8 @@ class BotCustomBubble extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final bool isTextMessage = message is types.TextMessage;
+    final bool isApproved =
+        (ActivityEntity.fromMessage(message)?.isApproved) != false;
     const double border = 5;
     return Directionality(
       textDirection: TextDirection.ltr,
@@ -33,7 +36,7 @@ class BotCustomBubble extends StatelessWidget {
             isTheUser ? CrossAxisAlignment.end : CrossAxisAlignment.start,
         children: [
           Visibility(
-            visible: !isTheUser,
+            visible: !isTheUser || !isApproved,
             child: Padding(
               padding: const EdgeInsets.only(bottom: 2),
               child: Text(
@@ -47,8 +50,11 @@ class BotCustomBubble extends StatelessWidget {
                 ? const BubbleEdges.all(0)
                 : const BubbleEdges.all(border),
             radius: const Radius.circular(0.5 * AppConst.borderRadius),
-            color:
-                isTheUser ? AppColor.primary : AppColor.grayLightDark(context),
+            color: isApproved
+                ? isTheUser
+                    ? AppColor.primary
+                    : AppColor.grayLightDark(context)
+                : AppColor.background(context).withGreen(100),
             margin: null,
             nip: isTheUser ? BubbleNip.rightTop : BubbleNip.leftTop,
             child: Directionality(

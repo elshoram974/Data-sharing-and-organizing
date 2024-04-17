@@ -27,7 +27,7 @@ class UserNotificationCubit extends Cubit<UserNotificationState> {
 
 final list = [
   GroupNotificationEntity(
-    memberEntity: MemberEntity.test(),
+    memberEntity: MemberEntity.newEmpty(),
       id: 0,
       lastMessageType: MessageType.location,
       imageLink: 'https://images.justwatch.com/poster/248497985/s592/one-piece',
@@ -39,7 +39,7 @@ final list = [
       ownerId: 42,
       discussion: GroupDiscussionType.exist),
   GroupNotificationEntity(
-    memberEntity: MemberEntity.test(),
+    memberEntity: MemberEntity.newEmpty(),
     id: 1,
     lastMessageType: MessageType.photo,
     imageLink: '',
@@ -51,7 +51,7 @@ final list = [
     discussion: GroupDiscussionType.existButClosed,
   ),
   GroupNotificationEntity(
-    memberEntity: MemberEntity.test(),
+    memberEntity: MemberEntity.newEmpty(),
     id: 2,
     lastMessageType: MessageType.voiceMessage,
     imageLink: '',

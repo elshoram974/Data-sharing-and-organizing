@@ -39,7 +39,7 @@ class DirectoriesButtons extends StatelessWidget {
                   (i) {
                     final DirectoryEntity dir = c.currentDirectories[i];
                     return Visibility(
-                      visible: dir.isAccepted ||
+                      visible: dir.isApproved ||
                           c.groupCubit.isAdmin ||
                           dir.createdBy.id ==
                               ProviderDependency.userMain.user.id,
@@ -49,7 +49,7 @@ class DirectoriesButtons extends StatelessWidget {
                           onPressed: () => c.openDirectory(dir),
                           onLongPress: () => _showAction(context, dir, c),
                           text: dir.name,
-                          filledColor: dir.isAccepted
+                          filledColor: dir.isApproved
                               ? null
                               : AppColor.grayLightDark(context),
                           style:
@@ -87,7 +87,7 @@ void _showAction(
   ];
 
   if (c.groupCubit.isAdmin) {
-    if (!dir.isAccepted) {
+    if (!dir.isApproved) {
       content = S.of(_).userWantToAddDirectory(dir.name, dir.createdBy.name);
       actions.insertAll(
         0,
@@ -114,7 +114,7 @@ void _showAction(
     }
   } else {
     if (ProviderDependency.userMain.user.id != dir.createdBy.id ||
-        dir.isAccepted) return;
+        dir.isApproved) return;
     content = S.of(_).youAddedDirNameDirectory(dir.name);
   }
 

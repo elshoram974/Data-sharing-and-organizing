@@ -1,9 +1,9 @@
 import 'package:hive/hive.dart';
 
-part 'member_notification_enum.g.dart';
+part 'notification_enum.g.dart';
 
 @HiveType(typeId: 6)
-enum MemberNotificationEnum {
+enum NotificationEnum {
   @HiveField(0)
   notify('notify'),
   @HiveField(1)
@@ -12,11 +12,11 @@ enum MemberNotificationEnum {
   customNotify('custom_notify');
 
   final String inString;
-  const MemberNotificationEnum(this.inString);
+  const NotificationEnum(this.inString);
 
-  factory MemberNotificationEnum.fromString(String? stringRole) {
-    Map<String, MemberNotificationEnum> map = {};
-    for (MemberNotificationEnum e in values) {
+  factory NotificationEnum.fromString(String? stringRole) {
+    Map<String, NotificationEnum> map = {};
+    for (NotificationEnum e in values) {
       map[e.inString] = e;
     }
 

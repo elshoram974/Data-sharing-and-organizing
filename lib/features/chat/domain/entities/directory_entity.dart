@@ -7,23 +7,22 @@ class DirectoryEntity extends Equatable {
   const DirectoryEntity({
     required this.id,
     required this.name,
-    required this.insideDirectoryId,
+    this.insideDirectoryId,
     required this.groupId,
     required this.createdBy,
-    this.isAccepted = false,
+    this.isApproved = false,
   });
   final int id;
   final AuthUserEntity createdBy;
   final int groupId;
   final String name;
-  final int insideDirectoryId;
-  final bool isAccepted;
+  final int? insideDirectoryId;
+  final bool isApproved;
 
   factory DirectoryEntity.newEmpty() {
     return const DirectoryEntity(
       id: -1,
       name: '',
-      insideDirectoryId: 0,
       groupId: -1,
       createdBy: AuthUserEntity(
         id: -1,
@@ -36,5 +35,11 @@ class DirectoryEntity extends Equatable {
   }
 
   @override
-  List<Object?> get props => [id, name, insideDirectoryId , createdBy];
+  List<Object?> get props => [
+        id,
+        name,
+        insideDirectoryId,
+        isApproved,
+        createdBy,
+      ];
 }

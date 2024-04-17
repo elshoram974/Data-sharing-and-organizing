@@ -6,7 +6,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 
 import '../../../features/chat/domain/entities/member_entity.dart';
 import '../enums/home/group_discussion_type_enum.dart';
-import '../enums/member_notification_enum.dart';
+import '../enums/notification_enum.dart';
 import '../enums/message_type/message_type.dart';
 
 late final Box<String> config;
@@ -33,7 +33,7 @@ void _registerAdapterFn() {
   Hive.registerAdapter<MessageType>(MessageTypeAdapter()); //* it in group entity
   Hive.registerAdapter<GroupDiscussionType>(GroupDiscussionTypeAdapter());//* it in group entity
 
-  Hive.registerAdapter<MemberNotificationEnum>(MemberNotificationEnumAdapter());//* it in member entity
+  Hive.registerAdapter<NotificationEnum>(NotificationEnumAdapter()); //* it in member entity
   Hive.registerAdapter<MemberEntity>(MemberEntityAdapter());//* it in group entity
 
   Hive.registerAdapter<GroupHomeEntity>(GroupHomeEntityAdapter()); //* it in member entity :(

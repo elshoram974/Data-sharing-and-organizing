@@ -1,40 +1,39 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'member_notification_enum.dart';
+part of 'notification_enum.dart';
 
 // **************************************************************************
 // TypeAdapterGenerator
 // **************************************************************************
 
-class MemberNotificationEnumAdapter
-    extends TypeAdapter<MemberNotificationEnum> {
+class NotificationEnumAdapter extends TypeAdapter<NotificationEnum> {
   @override
   final int typeId = 6;
 
   @override
-  MemberNotificationEnum read(BinaryReader reader) {
+  NotificationEnum read(BinaryReader reader) {
     switch (reader.readByte()) {
       case 0:
-        return MemberNotificationEnum.notify;
+        return NotificationEnum.notify;
       case 1:
-        return MemberNotificationEnum.withoutNotify;
+        return NotificationEnum.withoutNotify;
       case 2:
-        return MemberNotificationEnum.customNotify;
+        return NotificationEnum.customNotify;
       default:
-        return MemberNotificationEnum.notify;
+        return NotificationEnum.notify;
     }
   }
 
   @override
-  void write(BinaryWriter writer, MemberNotificationEnum obj) {
+  void write(BinaryWriter writer, NotificationEnum obj) {
     switch (obj) {
-      case MemberNotificationEnum.notify:
+      case NotificationEnum.notify:
         writer.writeByte(0);
         break;
-      case MemberNotificationEnum.withoutNotify:
+      case NotificationEnum.withoutNotify:
         writer.writeByte(1);
         break;
-      case MemberNotificationEnum.customNotify:
+      case NotificationEnum.customNotify:
         writer.writeByte(2);
         break;
     }
@@ -46,7 +45,7 @@ class MemberNotificationEnumAdapter
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is MemberNotificationEnumAdapter &&
+      other is NotificationEnumAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }

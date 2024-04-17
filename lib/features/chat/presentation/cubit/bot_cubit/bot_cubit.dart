@@ -11,7 +11,8 @@ import 'package:open_filex/open_filex.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:uuid/uuid.dart';
 
-import '../../../domain/entities/author_message_entity.dart';
+import '../../../../../core/utils/enums/message_type/message_type.dart';
+import '../../../domain/entities/activity_entity.dart';
 import '../../../domain/entities/directory_entity.dart';
 import '../group_cubit/group_cubit.dart';
 
@@ -20,12 +21,33 @@ part 'bot_state.dart';
 abstract class BOTCubit extends Cubit<BOTState> {
   BOTCubit() : super(const BotInitial());
 
-  final types.User currentUser = MessageAuthor.messageAuthorFromAuth(
-    ProviderDependency.userHome.userMain.user,
-  );
   final GroupCubit groupCubit = ProviderDependency.group;
+  late final types.User currentUser =
+      groupCubit.group.memberEntity.messageAuthor();
 
-  List<types.Message> botMessages = [];
+  late List<types.Message> botMessages = [
+    ActivityEntity(
+      id: 455,
+      groupId: 5,
+      content: "Test To approve it",
+      createdBy: groupCubit.group.memberEntity,
+      createdAt: DateTime.now(),
+      isApproved: false,
+      type: MessageType.textMessage,
+    ).toMessage(),
+    ActivityEntity(
+      id: 55,
+      groupId: 5,
+      content: "Test To approve it file",
+      createdBy: groupCubit.group.memberEntity,
+      createdAt: DateTime.now(),
+      isApproved: true,
+      fileSize: 0.25,
+      attachmentLink:
+          "https://pbs.twimg.com/profile_images/1744393322418802688/-ZF7VwbA_400x400.jpg",
+      type: MessageType.other,
+    ).toMessage()
+  ];
 
   void addMessage(types.Message message);
   void handleMessageTap(BuildContext _, types.Message message);
