@@ -22,7 +22,9 @@ class BotFAB extends StatelessWidget {
         buildWhen: (p, c) => c is GroupChooseScreenState,
         builder: (context, state) {
           return c.currentScreen == 0 &&
-                  (c.group.accessType != GroupAccessType.onlyRead || c.isAdmin) &&
+                  (c.group.accessType != GroupAccessType.onlyRead ||
+                      c.isAdmin) &&
+                  c.group.memberEntity.canInteract &&
                   !isKeyboardVisible
               ? ExpandableFab(
                   distance: 70,
@@ -68,7 +70,7 @@ class BotFAB extends StatelessWidget {
           actions: [
             TextButton(
               onPressed: () => Navigator.of(context).pop(),
-              child: const Text('CLOSE'),
+              child: Text(S.of(context).cancel),
             ),
           ],
         );

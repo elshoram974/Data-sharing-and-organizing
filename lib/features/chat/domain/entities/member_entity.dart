@@ -68,9 +68,9 @@ class MemberEntity extends Equatable {
         userType: UserType.personal,
       ),
       groupId: -1,
-      canInteract: false,
+      canInteract: true,
       joinDate: DateTime.now(),
-      isAdmin: false,
+      isAdmin: true,
     );
   }
 }
