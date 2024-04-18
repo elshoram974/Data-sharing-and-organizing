@@ -24,25 +24,46 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m1(max) => "Can\'t be more than ${max}";
 
-  static String m2(number) => "${number} selected";
+  static String m2(activity) =>
+      "This action will approve the \'${activity}\' activity, making it visible to all members.";
 
-  static String m3(activityName, userName) =>
-      "A member named \'${userName}\' has requested to add the \'${activityName}\' activity here.";
+  static String m3(directoryName) =>
+      "This action will approve the \'${directoryName}\' directory, making it visible to all members.";
 
-  static String m4(directoryName, userName) =>
-      "A member named \'${userName}\' has requested to add the \'${directoryName}\' directory here.";
+  static String m4(activity) =>
+      "This action will delete the \'${activity}\' activity.";
 
   static String m5(directoryName) =>
+      "This action will also delete all activities within \'${directoryName}\'.";
+
+  static String m6(activity) =>
+      "This action will mark the \'${activity}\' activity as not approved, hiding it. You can approve it again later.";
+
+  static String m7(directoryName) =>
+      "This action will mark the \'${directoryName}\' directory as not approved, hiding it. You can approve it again later.";
+
+  static String m8(number) => "${number} selected";
+
+  static String m9(activityName, userName) =>
+      "A member named \'${userName}\' has requested to add the \'${activityName}\' activity here.";
+
+  static String m10(directoryName, userName) =>
+      "A member named \'${userName}\' has requested to add the \'${directoryName}\' directory here.";
+
+  static String m11(directoryName) =>
       "What action would you like to take with the \'${directoryName}\' directory?";
 
-  static String m6(activityName) =>
+  static String m12(activityName) =>
       "What action would you like to take with the \'${activityName}\' activity?";
 
-  static String m7(activityName) =>
+  static String m13(activityName) =>
       "You\'ve added the \'${activityName}\' activity, but it\'s pending approval from the admin.";
 
-  static String m8(directoryName) =>
+  static String m14(directoryName) =>
       "You\'ve added the \'${directoryName}\' directory, but it\'s pending approval from the admin.";
+
+  static String m15(userName, userEmail) =>
+      "You are about to block the member \'${userName}\' with the email \'${userEmail}\'. This action will prevent them from adding anything to the bot.";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -138,6 +159,12 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Invalid verification code"),
         "invalidVerificationType":
             MessageLookupByLibrary.simpleMessage("Invalid verification type."),
+        "itWillApproveActivity": m2,
+        "itWillApproveDirectoryNameDirectory": m3,
+        "itWillDeleteActivity": m4,
+        "itWillDeleteAllActivitiesInsideDirNameToo": m5,
+        "itWillMakeActivityNotApprovedHidden": m6,
+        "itWillMarkDirNameAsNotApprovedHidden": m7,
         "language": MessageLookupByLibrary.simpleMessage("Language"),
         "large": MessageLookupByLibrary.simpleMessage("Large"),
         "lastName": MessageLookupByLibrary.simpleMessage("Last name"),
@@ -187,7 +214,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "resend": MessageLookupByLibrary.simpleMessage("Resend"),
         "save": MessageLookupByLibrary.simpleMessage("Save"),
         "selectAll": MessageLookupByLibrary.simpleMessage("Select all"),
-        "selectedWithNumber": m2,
+        "selectedWithNumber": m8,
         "sendRequest": MessageLookupByLibrary.simpleMessage("Send request"),
         "serverTookTooLong": MessageLookupByLibrary.simpleMessage(
             "The server took too long to send a response. Please try again later."),
@@ -250,21 +277,22 @@ class MessageLookup extends MessageLookupByLibrary {
                 "This user is not email and password provider to send verification code."),
         "userNotFound": MessageLookupByLibrary.simpleMessage(
             "No user found for that email."),
-        "userWantToAddActivity": m3,
-        "userWantToAddDirectory": m4,
+        "userWantToAddActivity": m9,
+        "userWantToAddDirectory": m10,
         "verify": MessageLookupByLibrary.simpleMessage("Verify"),
         "verifyIt": MessageLookupByLibrary.simpleMessage("Verify it"),
         "warning": MessageLookupByLibrary.simpleMessage("Warning"),
         "weakPassword": MessageLookupByLibrary.simpleMessage(
             "The password provided is too weak."),
         "welcomeBack": MessageLookupByLibrary.simpleMessage("Welcome back!"),
-        "whatDoYouWantToDoWithDirNameDirectory": m5,
-        "whatDoYouWantToDoWithThisActivity": m6,
+        "whatDoYouWantToDoWithDirNameDirectory": m11,
+        "whatDoYouWantToDoWithThisActivity": m12,
         "wrongPassword": MessageLookupByLibrary.simpleMessage(
             "Wrong password provided for that user."),
         "yesterday": MessageLookupByLibrary.simpleMessage("Yesterday"),
-        "youAddedActivityName": m7,
-        "youAddedDirNameDirectory": m8,
+        "youAddedActivityName": m13,
+        "youAddedDirNameDirectory": m14,
+        "youAreAboutToBlockMember": m15,
         "youCanMakeNewGroups": MessageLookupByLibrary.simpleMessage(
             "Feel free to create new groups."),
         "youCanNotUseSamePreviousPassword":

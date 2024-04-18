@@ -202,5 +202,64 @@
             }
         }
     },
-    "doubleTapToEdit": "اضغط مرتين للتعديل"
+    "doubleTapToEdit": "اضغط مرتين للتعديل",
+    "itWillDeleteAllActivitiesInsideDirNameToo": "سيؤدي هذا الإجراء أيضًا إلى حذف جميع الأنشطة داخل '{directoryName}'.",
+    "@itWillDeleteAllActivitiesInsideDirNameToo": {
+        "placeholders": {
+            "directoryName": {
+                "type": "String"
+            }
+        }
+    },
+    "itWillMarkDirNameAsNotApprovedHidden": "هذا الإجراء سيجعل المجلد '{directoryName}' غير معتمد ومخفي. يمكنك تفعيله مرة أخرى لاحقًا.",
+    "@itWillMarkDirNameAsNotApprovedHidden": {
+        "placeholders": {
+            "directoryName": {
+                "type": "String"
+            }
+        }
+    },
+    "itWillApproveDirectoryNameDirectory": "سيقوم هذا الإجراء بالموافقة على المجلد '{directoryName}'، مما يجعله مرئيًا لجميع الأعضاء.",
+    "@itWillApproveDirectoryNameDirectory": {
+        "placeholders": {
+            "directoryName": {
+                "type": "String"
+            }
+        }
+    },
+    "youAreAboutToBlockMember": "أنت على وشك حظر العضو '{userName}' الذي يحمل البريد الإلكتروني '{userEmail}'. سيمنع هذا الإجراء من إضافة أي شيء إلى الروبوت.",
+    "@youAreAboutToBlockMember": {
+        "placeholders": {
+            "userName": {
+                "type": "String"
+            },
+            "userEmail": {
+                "type": "String"
+            }
+        }
+    },
+    "itWillDeleteActivity": "هذا الإجراء سيحذف نشاط '{activity}'.",
+    "@itWillDeleteActivity": {
+        "placeholders": {
+            "activity": {
+                "type": "String"
+            }
+        }
+    },
+    "itWillMakeActivityNotApprovedHidden": "هذا الإجراء سيجعل نشاط '{activity}' غير معتمد ومخفي. يمكنك الموافقة عليه مرة أخرى لاحقًا.",
+    "@itWillMakeActivityNotApprovedHidden": {
+        "placeholders": {
+            "activity": {
+                "type": "String"
+            }
+        }
+    },
+    "itWillApproveActivity": "هذا الإجراء سيعتمد نشاط '{activity}'، مما يجعله مرئيًا لجميع الأعضاء.",
+    "@itWillApproveActivity": {
+        "placeholders": {
+            "activity": {
+                "type": "String"
+            }
+        }
+    }
 }

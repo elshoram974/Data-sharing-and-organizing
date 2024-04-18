@@ -1533,6 +1533,76 @@ class S {
       args: [],
     );
   }
+
+  /// `This action will also delete all activities within '{directoryName}'.`
+  String itWillDeleteAllActivitiesInsideDirNameToo(String directoryName) {
+    return Intl.message(
+      'This action will also delete all activities within \'$directoryName\'.',
+      name: 'itWillDeleteAllActivitiesInsideDirNameToo',
+      desc: '',
+      args: [directoryName],
+    );
+  }
+
+  /// `This action will mark the '{directoryName}' directory as not approved, hiding it. You can approve it again later.`
+  String itWillMarkDirNameAsNotApprovedHidden(String directoryName) {
+    return Intl.message(
+      'This action will mark the \'$directoryName\' directory as not approved, hiding it. You can approve it again later.',
+      name: 'itWillMarkDirNameAsNotApprovedHidden',
+      desc: '',
+      args: [directoryName],
+    );
+  }
+
+  /// `This action will approve the '{directoryName}' directory, making it visible to all members.`
+  String itWillApproveDirectoryNameDirectory(String directoryName) {
+    return Intl.message(
+      'This action will approve the \'$directoryName\' directory, making it visible to all members.',
+      name: 'itWillApproveDirectoryNameDirectory',
+      desc: '',
+      args: [directoryName],
+    );
+  }
+
+  /// `You are about to block the member '{userName}' with the email '{userEmail}'. This action will prevent them from adding anything to the bot.`
+  String youAreAboutToBlockMember(String userName, String userEmail) {
+    return Intl.message(
+      'You are about to block the member \'$userName\' with the email \'$userEmail\'. This action will prevent them from adding anything to the bot.',
+      name: 'youAreAboutToBlockMember',
+      desc: '',
+      args: [userName, userEmail],
+    );
+  }
+
+  /// `This action will delete the '{activity}' activity.`
+  String itWillDeleteActivity(String activity) {
+    return Intl.message(
+      'This action will delete the \'$activity\' activity.',
+      name: 'itWillDeleteActivity',
+      desc: '',
+      args: [activity],
+    );
+  }
+
+  /// `This action will mark the '{activity}' activity as not approved, hiding it. You can approve it again later.`
+  String itWillMakeActivityNotApprovedHidden(String activity) {
+    return Intl.message(
+      'This action will mark the \'$activity\' activity as not approved, hiding it. You can approve it again later.',
+      name: 'itWillMakeActivityNotApprovedHidden',
+      desc: '',
+      args: [activity],
+    );
+  }
+
+  /// `This action will approve the '{activity}' activity, making it visible to all members.`
+  String itWillApproveActivity(String activity) {
+    return Intl.message(
+      'This action will approve the \'$activity\' activity, making it visible to all members.',
+      name: 'itWillApproveActivity',
+      desc: '',
+      args: [activity],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

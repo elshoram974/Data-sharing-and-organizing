@@ -17,7 +17,7 @@ void deleteDirectoryDialog({
   Navigator.pop(context);
   ShowCustomDialog.warning(
     context,
-    body: "it will delete all activities that inside '${dir.name}' too",
+    body: S.of(context).itWillDeleteAllActivitiesInsideDirNameToo(dir.name),
     textConfirm: S.of(context).delete,
     onPressConfirm: deleteFn,
   );
@@ -31,8 +31,7 @@ void hideDirectoryDialog({
   Navigator.pop(context);
   ShowCustomDialog.warning(
     context,
-    body:
-        "it will make '${dir.name}' directory not approved that will hide it , and u can make it approved again",
+    body: S.of(context).itWillMarkDirNameAsNotApprovedHidden(dir.name),
     textConfirm: S.of(context).hide,
     onPressConfirm: hideFn,
   );
@@ -46,8 +45,7 @@ void makeDirectoryApprovedDialog({
   Navigator.pop(context);
   ShowCustomDialog.warning(
     context,
-    body:
-        "it will make '${dir.name}' directory approved and all members can see it",
+    body: S.of(context).itWillApproveDirectoryNameDirectory(dir.name),
     textConfirm: S.of(context).addDirectory,
     onPressConfirm: approveFn,
   );
@@ -61,7 +59,7 @@ void blockUserInteractionDialog({
   Navigator.pop(context);
   ShowCustomDialog.warning(
     context,
-    body: "u r going to block '${user.name}' member with email '${user.email}'.\n it just make him won\'t be able to add anything to bot",
+    body: S.of(context).youAreAboutToBlockMember(user.name, user.email),
     textConfirm: S.of(context).blockThisUser,
     onPressConfirm: blockFn,
   );
@@ -77,7 +75,7 @@ void deleteActivityDialog({
   Navigator.pop(context);
   ShowCustomDialog.warning(
     context,
-    body: "it will delete '${activity.content}' activity",
+    body: S.of(context).itWillDeleteActivity(activity.content),
     textConfirm: S.of(context).delete,
     onPressConfirm: deleteFn,
   );
@@ -91,8 +89,7 @@ void hideActivityDialog({
   Navigator.pop(context);
   ShowCustomDialog.warning(
     context,
-    body:
-        "it will make '${activity.content}' activity not approved that will hide it , and u can make it approved again",
+    body: S.of(context).itWillMakeActivityNotApprovedHidden(activity.content),
     textConfirm: S.of(context).hide,
     onPressConfirm: hideFn,
   );
@@ -106,15 +103,11 @@ void makeActivityApprovedDialog({
   Navigator.pop(context);
   ShowCustomDialog.warning(
     context,
-    body:
-        "it will make '${activity.content}' activity approved and all members can see it",
+    body: S.of(context).itWillApproveActivity(activity.content),
     textConfirm: S.of(context).addDirectory,
     onPressConfirm: approveFn,
   );
 }
-
-
-
 
 void showActivityActions(
   BuildContext _,
@@ -145,7 +138,7 @@ void showActivityActions(
             child: Text(S.of(_).blockThisUser),
           ),
           TextButton(
-            onPressed:  () => bot.approvedActivity(activity, _),
+            onPressed: () => bot.approvedActivity(activity, _),
             child: Text(S.of(_).addActivity),
           ),
         ],

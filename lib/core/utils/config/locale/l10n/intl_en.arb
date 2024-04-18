@@ -202,5 +202,64 @@
             }
         }
     },
-    "doubleTapToEdit": "Double tap to edit"
+    "doubleTapToEdit": "Double tap to edit",
+    "itWillDeleteAllActivitiesInsideDirNameToo": "This action will also delete all activities within '{directoryName}'.",
+    "@itWillDeleteAllActivitiesInsideDirNameToo": {
+        "placeholders": {
+            "directoryName": {
+                "type": "String"
+            }
+        }
+    },
+    "itWillMarkDirNameAsNotApprovedHidden": "This action will mark the '{directoryName}' directory as not approved, hiding it. You can approve it again later.",
+    "@itWillMarkDirNameAsNotApprovedHidden": {
+        "placeholders": {
+            "directoryName": {
+                "type": "String"
+            }
+        }
+    },
+    "itWillApproveDirectoryNameDirectory": "This action will approve the '{directoryName}' directory, making it visible to all members.",
+    "@itWillApproveDirectoryNameDirectory": {
+        "placeholders": {
+            "directoryName": {
+                "type": "String"
+            }
+        }
+    },
+    "youAreAboutToBlockMember": "You are about to block the member '{userName}' with the email '{userEmail}'. This action will prevent them from adding anything to the bot.",
+    "@youAreAboutToBlockMember": {
+        "placeholders": {
+            "userName": {
+                "type": "String"
+            },
+            "userEmail": {
+                "type": "String"
+            }
+        }
+    },
+    "itWillDeleteActivity": "This action will delete the '{activity}' activity.",
+    "@itWillDeleteActivity": {
+        "placeholders": {
+            "activity": {
+                "type": "String"
+            }
+        }
+    },
+    "itWillMakeActivityNotApprovedHidden": "This action will mark the '{activity}' activity as not approved, hiding it. You can approve it again later.",
+    "@itWillMakeActivityNotApprovedHidden": {
+        "placeholders": {
+            "activity": {
+                "type": "String"
+            }
+        }
+    },
+    "itWillApproveActivity": "This action will approve the '{activity}' activity, making it visible to all members.",
+    "@itWillApproveActivity": {
+        "placeholders": {
+            "activity": {
+                "type": "String"
+            }
+        }
+    }
 }

@@ -24,25 +24,45 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m1(max) => "لا يمكن أن يكون أكثر من ${max}";
 
-  static String m2(number) => "تم تحديد ${number}";
+  static String m2(activity) =>
+      "هذا الإجراء سيعتمد نشاط \'${activity}\'، مما يجعله مرئيًا لجميع الأعضاء.";
 
-  static String m3(activityName, userName) =>
-      "طلب عضو يدعى \'${userName}\' إضافة نشاط \'${activityName}\' هنا.";
+  static String m3(directoryName) =>
+      "سيقوم هذا الإجراء بالموافقة على المجلد \'${directoryName}\'، مما يجعله مرئيًا لجميع الأعضاء.";
 
-  static String m4(directoryName, userName) =>
-      "عضو بإسم \'${userName}\' طلب إضافة المجلد \'${directoryName}\' هنا.";
+  static String m4(activity) => "هذا الإجراء سيحذف نشاط \'${activity}\'.";
 
   static String m5(directoryName) =>
+      "سيؤدي هذا الإجراء أيضًا إلى حذف جميع الأنشطة داخل \'${directoryName}\'.";
+
+  static String m6(activity) =>
+      "هذا الإجراء سيجعل نشاط \'${activity}\' غير معتمد ومخفي. يمكنك الموافقة عليه مرة أخرى لاحقًا.";
+
+  static String m7(directoryName) =>
+      "هذا الإجراء سيجعل المجلد \'${directoryName}\' غير معتمد ومخفي. يمكنك تفعيله مرة أخرى لاحقًا.";
+
+  static String m8(number) => "تم تحديد ${number}";
+
+  static String m9(activityName, userName) =>
+      "طلب عضو يدعى \'${userName}\' إضافة نشاط \'${activityName}\' هنا.";
+
+  static String m10(directoryName, userName) =>
+      "عضو بإسم \'${userName}\' طلب إضافة المجلد \'${directoryName}\' هنا.";
+
+  static String m11(directoryName) =>
       "ما الإجراء الذي تود اتخاذه مع مجلد \'${directoryName}\'؟";
 
-  static String m6(activityName) =>
+  static String m12(activityName) =>
       "ما الإجراء الذي تود اتخاذه مع نشاط \'${activityName}\'؟";
 
-  static String m7(activityName) =>
+  static String m13(activityName) =>
       "لقد قمت بإضافة نشاط \'${activityName}\', لكنه في انتظار موافقة المسئول.";
 
-  static String m8(directoryName) =>
+  static String m14(directoryName) =>
       "لقد أضفت مجلد \'${directoryName}\', لكنه في انتظار موافقة المسئول.";
+
+  static String m15(userName, userEmail) =>
+      "أنت على وشك حظر العضو \'${userName}\' الذي يحمل البريد الإلكتروني \'${userEmail}\'. سيمنع هذا الإجراء من إضافة أي شيء إلى الروبوت.";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -140,6 +160,12 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("رمز التحقيق غير صالح"),
         "invalidVerificationType":
             MessageLookupByLibrary.simpleMessage("نوع التحقق غير صالح"),
+        "itWillApproveActivity": m2,
+        "itWillApproveDirectoryNameDirectory": m3,
+        "itWillDeleteActivity": m4,
+        "itWillDeleteAllActivitiesInsideDirNameToo": m5,
+        "itWillMakeActivityNotApprovedHidden": m6,
+        "itWillMarkDirNameAsNotApprovedHidden": m7,
         "language": MessageLookupByLibrary.simpleMessage("اللغة"),
         "large": MessageLookupByLibrary.simpleMessage("كبير"),
         "lastName": MessageLookupByLibrary.simpleMessage("الاسم الأخير"),
@@ -189,7 +215,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "resend": MessageLookupByLibrary.simpleMessage("إعادة الإرسال"),
         "save": MessageLookupByLibrary.simpleMessage("حفظ"),
         "selectAll": MessageLookupByLibrary.simpleMessage("تحديد الكل"),
-        "selectedWithNumber": m2,
+        "selectedWithNumber": m8,
         "sendRequest": MessageLookupByLibrary.simpleMessage("إرسال الطلب"),
         "serverTookTooLong": MessageLookupByLibrary.simpleMessage(
             "استغرق الخادم وقتًا طويلاً في إرسال الاستجابة. يرجى المحاولة مرة أخرى لاحقًا."),
@@ -253,21 +279,22 @@ class MessageLookup extends MessageLookupByLibrary {
                 "هذا المستخدم ليس مزودًا ببريد إلكتروني وكلمة مرور لإرسال رمز التحقق."),
         "userNotFound": MessageLookupByLibrary.simpleMessage(
             "لا يوجد مستخدم لهذا البريد الإلكتروني."),
-        "userWantToAddActivity": m3,
-        "userWantToAddDirectory": m4,
+        "userWantToAddActivity": m9,
+        "userWantToAddDirectory": m10,
         "verify": MessageLookupByLibrary.simpleMessage("التحقق"),
         "verifyIt": MessageLookupByLibrary.simpleMessage("تحقق منه"),
         "warning": MessageLookupByLibrary.simpleMessage("تحذير"),
         "weakPassword": MessageLookupByLibrary.simpleMessage(
             "كلمة المرور المقدمة ضعيفة جدًا."),
         "welcomeBack": MessageLookupByLibrary.simpleMessage("مرحبًا بعودتك!"),
-        "whatDoYouWantToDoWithDirNameDirectory": m5,
-        "whatDoYouWantToDoWithThisActivity": m6,
+        "whatDoYouWantToDoWithDirNameDirectory": m11,
+        "whatDoYouWantToDoWithThisActivity": m12,
         "wrongPassword": MessageLookupByLibrary.simpleMessage(
             "تم تقديم كلمة مرور خاطئة لهذا المستخدم."),
         "yesterday": MessageLookupByLibrary.simpleMessage("أمس"),
-        "youAddedActivityName": m7,
-        "youAddedDirNameDirectory": m8,
+        "youAddedActivityName": m13,
+        "youAddedDirNameDirectory": m14,
+        "youAreAboutToBlockMember": m15,
         "youCanMakeNewGroups": MessageLookupByLibrary.simpleMessage(
             "بإمكانك إنشاء مجموعات جديدة بحرية."),
         "youCanNotUseSamePreviousPassword":
