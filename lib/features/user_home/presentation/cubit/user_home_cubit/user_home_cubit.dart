@@ -41,7 +41,7 @@ class UserHomeCubit extends Cubit<UserHomeState> {
   final List<GroupHomeEntity> selectedGroups = [];
 
   // * Update group inside it
-  void updateGroupLocally(GroupHomeEntity groupUpdated) async{
+  Future<void> updateGroupLocally(GroupHomeEntity groupUpdated) async{
     final int index = currentGroups.indexOf(groupUpdated);
     currentGroups[index] = groupUpdated;
 

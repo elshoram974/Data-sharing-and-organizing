@@ -6,7 +6,6 @@ import '../entities/data_in_directory.dart';
 
 abstract class BOTRepositories {
   const BOTRepositories();
-  Future<void> saveBottomHeight(double height, int groupId);
   List<types.Message> loadBotMessages(int groupId);
   Future<void> saveBotMessages(GroupHomeEntity group, List<types.Message> messages);
   Stream<Status<DataInDirectory>> getDirActInside({int? dirId, required int groupId});

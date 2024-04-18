@@ -19,14 +19,11 @@ import '../../models/attachment_model.dart';
 abstract class BOTLocalDataSource {
   BOTLocalDataSource();
 
-  Future<void> saveBottomHeight(double height, int groupId);
-
   DataInDirectory getDirActInside(int? dirId, int groupId);
 
   Future<void> saveDirActInside(DataInDirectory dataInDirectory);
 
-  Future<void> saveBotMessages(
-      GroupHomeEntity group, List<types.Message> messages);
+  Future<void> saveBotMessages(GroupHomeEntity group, List<types.Message> messages);
   List<types.Message> getBotMessages(int groupId);
 }
 
@@ -34,26 +31,8 @@ class BOTLocalDataSourceImp extends BOTLocalDataSource {
   BOTLocalDataSourceImp(this.homeLocal);
   final HomeLocalDataSource homeLocal;
 
-  late final Box<GroupHomeEntity> groupsBox =
-      Hive.box<GroupHomeEntity>(AppStrings.groupsBox);
-  late final Box<String> messageBox =
-      Hive.box<String>(AppStrings.botMessagesBox);
-
-  @override
-  Future<void> saveBottomHeight(double height, int groupId) async {
-    final List<GroupHomeEntity> groups = [];
-    groups.addAll(_getAllGroups());
-
-    for (int i = 0; i < groups.length; i++) {
-      if (groups[i].id == groupId) {
-        groups[i] = groups[i].copyWith(bottomHeight: height);
-        await _removeAllGroups();
-        await groupsBox.addAll(groups);
-        ProviderDependency.userHome.updateGroupLocally(groups[i]);
-        return;
-      }
-    }
-  }
+  late final Box<GroupHomeEntity> groupsBox = Hive.box<GroupHomeEntity>(AppStrings.groupsBox);
+  late final Box<String> messageBox = Hive.box<String>(AppStrings.botMessagesBox);
 
   Iterable<ActivityEntity> _allGroupActivities(int groupId) {
     return activities.where((e) => e.groupId == groupId);
@@ -80,10 +59,6 @@ class BOTLocalDataSourceImp extends BOTLocalDataSource {
   Future<void> saveDirActInside(DataInDirectory dataInDirectory) async {
     // TODO: implement saveDirectories
   }
-
-  // For that i need in home
-  List<GroupHomeEntity> _getAllGroups() => homeLocal.getAllGroups();
-  Future<int> _removeAllGroups() => homeLocal.removeAllGroups();
 
   @override
   Future<void> saveBotMessages(

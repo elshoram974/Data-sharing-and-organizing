@@ -18,10 +18,6 @@ class BOTRepositoriesImp extends BOTRepositories {
   final DirectoriesRemoteDataSource remoteDataSource;
 
   @override
-  Future<void> saveBottomHeight(double height, int groupId) =>
-      localDataSource.saveBottomHeight(height, groupId);
-
-  @override
   Stream<Status<DataInDirectory>> getDirActInside({
     int? dirId,
     required int groupId,

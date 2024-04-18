@@ -71,7 +71,8 @@ class DirectoryCubitImp extends DirectoryCubit {
     } else if (bottomHeight > maxHeight) {
       bottomHeight = maxHeight;
     }
-    await botRepo.saveBottomHeight(bottomHeight, groupCubit.group.id);
+    await ProviderDependency.userHome.updateGroupLocally(groupCubit.group.copyWith(bottomHeight: bottomHeight));
+
     emit(ChangeDirectoryBottomHeightState(bottomHeight));
   }
   // ----------------------------------------------------------------
