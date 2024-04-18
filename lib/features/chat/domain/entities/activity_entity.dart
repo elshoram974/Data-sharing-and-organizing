@@ -100,9 +100,10 @@ class ActivityEntity extends Equatable {
     );
   }
 
-  types.Message toMessage() {
-    final Map<String, String> map = {
-      "activity": ActivityModel.fromEntity(this).toJson()
+  types.Message toMessage(String? directory) {
+    final Map<String, String?> map = {
+      "activity": ActivityModel.fromEntity(this).toJson(),
+      "directory": directory,
     };
     final String uid = const Uuid().v4();
     switch (type) {
@@ -147,7 +148,9 @@ class ActivityEntity extends Equatable {
     final String? json = message.metadata?["activity"] as String?;
     if (json == null) return null;
 
-    return ActivityModel.fromJson(json);
+    return ActivityModel.fromJson(json).copyWith(
+      createdBy: MemberEntity.fromAuthor(message.author),
+    );
   }
 
   @override

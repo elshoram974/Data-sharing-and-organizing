@@ -1,3 +1,6 @@
+import 'dart:math';
+
+import 'package:data_sharing_organizing/core/utils/enums/message_type/message_type.dart';
 import 'package:data_sharing_organizing/core/utils/functions/handle_tapped_message.dart';
 import 'package:data_sharing_organizing/core/utils/services/dependency/provider_dependency.dart';
 import 'package:equatable/equatable.dart';
@@ -22,7 +25,8 @@ abstract class BOTCubit extends Cubit<BOTState> {
   BOTCubit() : super(const BotInitial());
 
   final GroupCubit groupCubit = ProviderDependency.group;
-  late final MemberEntity currentMember = groupCubit.group.memberEntity;
+  late final MemberEntity currentMember = groupCubit.group.memberEntity
+      .copyWith(user: ProviderDependency.userMain.user);
 
   late List<types.Message> botMessages = [];
 
@@ -62,11 +66,13 @@ class BOTCubitImp extends BOTCubit {
   void handleMessageDoubleTap(BuildContext _, types.Message message) async {
     ProviderDependency.group.closeFloatingButton();
     if (message.metadata?.containsKey("activity") == true) {
-      final ActivityEntity activity = ActivityModel.fromJson(message.metadata!["activity"]);
+      final ActivityEntity activity =
+          ActivityModel.fromJson(message.metadata!["activity"]);
       showActivityActions(_, activity);
     } else if (message.metadata?.containsKey("directory") == true) {
       final String? json = message.metadata!["directory"] as String?;
-      DirectoryEntity? dir =json == null ? null: DirectoryModel.fromJson(json);
+      DirectoryEntity? dir =
+          json == null ? null : DirectoryModel.fromJson(json);
       ProviderDependency.directory.goToDirectory(dir);
     }
   }
@@ -104,11 +110,23 @@ class BOTCubitImp extends BOTCubit {
   @override
   void handleSendPressed(types.PartialText message, [types.Status? status]) {
     ProviderDependency.group.closeFloatingButton();
+    final ActivityModel activityTemp = ActivityModel.fromEntity(
+      ActivityEntity(
+        id: Random().nextInt(9999999),
+        groupId: groupCubit.group.id,
+        createdBy: currentMember,
+        content: message.text,
+        createdAt: DateTime.now(),
+        isApproved: true,
+        type: MessageType.textMessage,
+      ),
+    );
     final types.TextMessage textMessage = types.TextMessage(
-      author: currentMember.messageAuthor(),
-      createdAt: DateTime.now().millisecondsSinceEpoch,
+      author: activityTemp.createdBy.messageAuthor(),
+      createdAt: activityTemp.createdAt.millisecondsSinceEpoch,
       id: const Uuid().v4(),
-      text: message.text,
+      text: activityTemp.content,
+      metadata: {"activity": activityTemp.toJson()},
       status: status,
     );
 

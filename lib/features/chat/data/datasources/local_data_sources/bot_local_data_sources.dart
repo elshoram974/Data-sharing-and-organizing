@@ -61,8 +61,7 @@ class BOTLocalDataSourceImp extends BOTLocalDataSource {
   }
 
   @override
-  Future<void> saveBotMessages(
-      GroupHomeEntity group, List<types.Message> messages) async {
+  Future<void> saveBotMessages(GroupHomeEntity group, List<types.Message> messages) async {
     await messageBox.delete(group.id);
 
     ProviderDependency.userHome.updateGroupLocally(

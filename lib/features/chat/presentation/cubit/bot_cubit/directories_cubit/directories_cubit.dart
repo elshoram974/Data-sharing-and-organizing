@@ -1,7 +1,10 @@
+import 'dart:math';
+
 import 'package:data_sharing_organizing/core/status/errors/failure.dart';
 import 'package:data_sharing_organizing/core/status/success/success.dart';
 import 'package:data_sharing_organizing/core/utils/config/locale/generated/l10n.dart';
 import 'package:data_sharing_organizing/core/utils/config/routes/routes.dart';
+import 'package:data_sharing_organizing/core/utils/enums/message_type/message_type.dart';
 import 'package:data_sharing_organizing/core/utils/functions/failure_status_dialog_emit.dart';
 import 'package:data_sharing_organizing/core/utils/services/dependency/provider_dependency.dart';
 import 'package:equatable/equatable.dart';
@@ -12,6 +15,7 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:uuid/uuid.dart';
 
 import '../../../../../auth/domain/entities/auth_user_entity.dart';
+import '../../../../data/models/activity_model.dart';
 import '../../../../data/models/directory_model.dart';
 import '../../../../domain/entities/activity_entity.dart';
 import '../../../../domain/entities/data_in_directory.dart';
@@ -47,7 +51,7 @@ abstract class DirectoryCubit extends Cubit<DirectoryState> {
   void makeDirectoryApproved(DirectoryEntity dir, BuildContext _);
   void blockUserInteraction(AuthUserEntity createdBy, BuildContext _);
 
-  void botReply(List<ActivityEntity> activities);
+  void botReply(List<ActivityEntity> activities, String? jsonDir);
 
   void onPopInvoked(bool didPop);
 }
@@ -71,7 +75,8 @@ class DirectoryCubitImp extends DirectoryCubit {
     } else if (bottomHeight > maxHeight) {
       bottomHeight = maxHeight;
     }
-    await ProviderDependency.userHome.updateGroupLocally(groupCubit.group.copyWith(bottomHeight: bottomHeight));
+    await ProviderDependency.userHome.updateGroupLocally(
+        groupCubit.group.copyWith(bottomHeight: bottomHeight));
 
     emit(ChangeDirectoryBottomHeightState(bottomHeight));
   }
@@ -105,15 +110,28 @@ class DirectoryCubitImp extends DirectoryCubit {
 
   void _changeDirectory() {
     final DirectoryEntity? dir = _directoriesStack.lastOrNull;
+    final ActivityModel activityTemp = ActivityModel.fromEntity(
+      ActivityEntity(
+        id: Random().nextInt(9999999),
+        groupId: groupCubit.group.id,
+        createdBy: botCubit.currentMember,
+        content: _directoriesStack.lastOrNull?.name ?? S.current.home,
+        createdAt: DateTime.now(),
+        isApproved: true,
+        type: MessageType.textMessage,
+      ),
+    );
     botCubit.addMessage(
       types.TextMessage(
         id: const Uuid().v4(),
-        author: botCubit.currentMember.messageAuthor(),
-        text: _directoriesStack.lastOrNull?.name ?? S.current.home,
+        author: activityTemp.createdBy.messageAuthor(),
+        text: activityTemp.content,
+        createdAt: activityTemp.createdAt.millisecondsSinceEpoch,
 
         /// *  to know the directory from [_directoriesStack.lastOrNull]
         metadata: {
-          "directory": dir == null ? null : DirectoryModel.fromEntity(dir)
+          "directory": dir == null ? null : DirectoryModel.fromEntity(dir),
+          "activity": activityTemp.toJson()
         },
       ),
     );
@@ -136,7 +154,10 @@ class DirectoryCubitImp extends DirectoryCubit {
         if (status is Success<DataInDirectory>) {
           if (lDir == _directoriesStack.lastOrNull) {
             currentDirectories = status.data.directories;
-            botReply(status.data.activities);
+            botReply(
+              status.data.activities,
+              dir == null ? null : DirectoryModel.fromEntity(dir).toJson(),
+            );
           }
         } else {
           if (!canDirectoryPop) {
@@ -192,10 +213,10 @@ class DirectoryCubitImp extends DirectoryCubit {
   // ------------------
 
   @override
-  void botReply(List<ActivityEntity> activities) {
+  void botReply(List<ActivityEntity> activities, String? jsonDir) {
     for (final ActivityEntity e in activities) {
       botCubit.addMessage(
-        e.toMessage().copyWith(
+        e.copyWith(createdAt: DateTime.now()).toMessage(jsonDir).copyWith(
               author: types.User(
                 id: "bot ${groupCubit.group.id}",
                 firstName: "BOT",

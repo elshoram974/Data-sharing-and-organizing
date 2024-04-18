@@ -105,13 +105,25 @@ class MemberEntity extends Equatable {
         });
   }
 
-  factory MemberEntity.fromAuth(types.User u) {
-    final AuthUserEntity myU = User.fromJson(u.metadata?["user"] as String);
+  factory MemberEntity.fromAuthor(types.User u) {
+    final String? json = u.metadata?["user"];
+    final AuthUserEntity myU;
+    if (json != null) {
+      myU = User.fromJson(json);
+    } else {
+      myU = AuthUserEntity(
+        id: -1,
+        name: (u.firstName ?? '') + (u.lastName ?? ''),
+        email: u.id,
+        password: '',
+        userType: UserType.personal,
+      );
+    }
     return MemberEntity(
       user: myU,
       groupId: u.metadata?["groupId"] as int? ?? -1,
       canInteract: u.metadata?["canInteract"] as bool? ?? false,
-      joinDate: DateTime.tryParse(u.metadata?["joinDate"] as String) ??
+      joinDate: DateTime.tryParse(u.metadata?["joinDate"] as String? ?? '') ??
           DateTime.now(),
       isAdmin: u.metadata?["isAdmin"] as bool? ?? false,
     );
