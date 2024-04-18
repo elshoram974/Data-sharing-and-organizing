@@ -12,6 +12,7 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../domain/entities/group_home_entity.dart';
+import '../../../domain/repositories/home_repositories.dart';
 import '../../../domain/usecases/home_use_case/exit_from_some_groups.dart';
 import '../../../domain/usecases/home_use_case/get_groups.dart';
 import '../../../domain/usecases/home_use_case/mark_as_un_read.dart';
@@ -20,7 +21,8 @@ import '../main_cubit/user_main_cubit.dart';
 part 'user_home_state.dart';
 
 class UserHomeCubit extends Cubit<UserHomeState> {
-  UserHomeCubit({
+  UserHomeCubit( {
+    required this.homeRepo,
     required this.getGroupsUseCase,
     required this.exitFromSomeGroups,
     required this.markAsUnReadUsecase,
@@ -28,6 +30,7 @@ class UserHomeCubit extends Cubit<UserHomeState> {
   }) : super(const UserHomeInitial()) {
     getGroups();
   }
+  final HomeRepositories homeRepo;
   final GetGroupsUseCase getGroupsUseCase;
   final ExitFromSomeGroups exitFromSomeGroups;
   final MarkAsUnRead markAsUnReadUsecase;
@@ -38,9 +41,11 @@ class UserHomeCubit extends Cubit<UserHomeState> {
   final List<GroupHomeEntity> selectedGroups = [];
 
   // * Update group inside it
-  void updateGroupLocally(GroupHomeEntity groupUpdated) {
+  void updateGroupLocally(GroupHomeEntity groupUpdated) async{
     final int index = currentGroups.indexOf(groupUpdated);
     currentGroups[index] = groupUpdated;
+
+    await homeRepo.updateGroupLocally(groupUpdated);
 
     emit(UserHomeUpdateGroup(groupUpdated));
   }

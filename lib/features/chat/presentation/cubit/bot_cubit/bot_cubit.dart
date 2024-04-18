@@ -54,7 +54,7 @@ class BOTCubitImp extends BOTCubit {
   @override
   void addMessage(types.Message message) async {
     botMessages.insert(0, message);
-    await botRepo.saveBotMessages(groupCubit.group.id, botMessages);
+    await botRepo.saveBotMessages(groupCubit.group, botMessages);
     emit(SetState(_i++));
   }
 
@@ -95,7 +95,7 @@ class BOTCubitImp extends BOTCubit {
     );
 
     botMessages[index] = updatedMessage;
-    await botRepo.saveBotMessages(groupCubit.group.id, botMessages);
+    await botRepo.saveBotMessages(groupCubit.group, botMessages);
     emit(SetState(_i++));
     Future.delayed(
         const Duration(milliseconds: 50), () => emit(SetState(_i++)));
@@ -122,7 +122,7 @@ class BOTCubitImp extends BOTCubit {
             botMessages[index].copyWith(status: types.Status.seen);
 
         botMessages[index] = updatedMessage;
-        await botRepo.saveBotMessages(groupCubit.group.id, botMessages);
+        await botRepo.saveBotMessages(groupCubit.group, botMessages);
 
         emit(SetState(_i++));
       });

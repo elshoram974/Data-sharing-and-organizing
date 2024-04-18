@@ -3,6 +3,7 @@ import 'package:data_sharing_organizing/core/status/success/success.dart';
 import 'package:data_sharing_organizing/core/utils/functions/execute_and_handle_remote_errors.dart';
 import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
 
+import '../../../user_home/domain/entities/group_home_entity.dart';
 import '../../domain/entities/data_in_directory.dart';
 import '../../domain/repositories/bot_repo.dart';
 import '../datasources/local_data_sources/bot_local_data_sources.dart';
@@ -42,8 +43,8 @@ class BOTRepositoriesImp extends BOTRepositories {
   }
 
   @override
-  Future<void> saveBotMessages(int groupId, List<types.Message> messages) {
-    return localDataSource.saveBotMessages(groupId, messages);
+  Future<void> saveBotMessages(GroupHomeEntity group, List<types.Message> messages) {
+    return localDataSource.saveBotMessages(group, messages);
   }
 
   @override

@@ -10,14 +10,18 @@ abstract class HomeLocalDataSource {
   const HomeLocalDataSource();
   List<GroupHomeEntity> getAllGroups();
   Future<int> removeAllGroups();
-  Future<List<GroupHomeEntity>> saveGroups(List<GroupHomeEntity> newGroups, AuthUserEntity userToReplace);
+  Future<List<GroupHomeEntity>> saveGroups(
+      List<GroupHomeEntity> newGroups, AuthUserEntity userToReplace);
   Future<int> removeSomeGroups(List<GroupHomeEntity> removedGroups);
   Future<Iterable<int>> markAsUnRead(List<GroupHomeEntity> groupsToEdit);
+
+  Future<void> updateThisGroup(GroupHomeEntity groupUpdated);
 }
 
 class HomeLocalDataSourceImp extends HomeLocalDataSource {
   HomeLocalDataSourceImp();
-  late final Box<GroupHomeEntity> groupsBox = Hive.box<GroupHomeEntity>(AppStrings.groupsBox);
+  late final Box<GroupHomeEntity> groupsBox =
+      Hive.box<GroupHomeEntity>(AppStrings.groupsBox);
 
   @override
   List<GroupHomeEntity> getAllGroups() {
@@ -97,5 +101,31 @@ class HomeLocalDataSourceImp extends HomeLocalDataSource {
 
     await userBox.add(userToSave);
     return userToSave;
+  }
+
+  @override
+  Future<void> updateThisGroup(GroupHomeEntity groupUpdated) async {
+    final List<GroupHomeEntity> groups = [];
+    groups.addAll(getAllGroups());
+
+    for (int i = 0; i < groups.length; i++) {
+      if (groupUpdated.id == groups[i].id) {
+        groups[i] = groups[i].copyWith(
+          accessType: groupUpdated.accessType,
+          bottomHeight: groupUpdated.bottomHeight,
+          discussion: groupUpdated.discussion,
+          groupName: groupUpdated.groupName,
+          imageLink: groupUpdated.imageLink,
+          isMute: groupUpdated.isMute,
+          lastActivity: groupUpdated.lastActivity,
+          memberEntity: groupUpdated.memberEntity,
+          ownerId: groupUpdated.ownerId,
+          unReadCounter: groupUpdated.unReadCounter,
+        );
+      }
+    }
+
+    await removeAllGroups();
+    await groupsBox.addAll(groups);
   }
 }

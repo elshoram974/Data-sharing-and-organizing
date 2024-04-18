@@ -25,7 +25,8 @@ abstract class BOTLocalDataSource {
 
   Future<void> saveDirActInside(DataInDirectory dataInDirectory);
 
-  Future<void> saveBotMessages(int groupId, List<types.Message> messages);
+  Future<void> saveBotMessages(
+      GroupHomeEntity group, List<types.Message> messages);
   List<types.Message> getBotMessages(int groupId);
 }
 
@@ -85,15 +86,22 @@ class BOTLocalDataSourceImp extends BOTLocalDataSource {
   Future<int> _removeAllGroups() => homeLocal.removeAllGroups();
 
   @override
-  Future<void> saveBotMessages(int groupId, List<types.Message> messages) async {
-    await messageBox.delete(groupId);
+  Future<void> saveBotMessages(
+      GroupHomeEntity group, List<types.Message> messages) async {
+    await messageBox.delete(group.id);
+
+    ProviderDependency.userHome.updateGroupLocally(
+      group.copyWith(
+        lastActivity: ActivityEntity.fromMessage(messages.first),
+      ),
+    );
 
     List<String> json = [];
     for (types.Message e in messages) {
       json.add(jsonEncode(e.toJson()));
     }
 
-    return await messageBox.put(groupId, jsonEncode(json));
+    return await messageBox.put(group.id, jsonEncode(json));
   }
 
   @override

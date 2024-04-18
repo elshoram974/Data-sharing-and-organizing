@@ -8,4 +8,6 @@ abstract class HomeRepositories {
   Stream<Status<List<GroupHomeEntity>>> getMyGroups(AuthUserEntity user);
   Future<Status<bool>> exitFromSomeGroups(({AuthUserEntity user, List<GroupHomeEntity> removedGroups}) param);
   Future<Status<Iterable<int>>> markAsUnRead(List<GroupHomeEntity> groups);
+
+  Future<void> updateGroupLocally(GroupHomeEntity groupUpdated);
 }

@@ -78,4 +78,9 @@ class HomeRepositoriesImp extends HomeRepositories {
     return executeAndHandleErrors<Iterable<int>>(
         () => localDataSource.markAsUnRead(groups));
   }
+  
+  @override
+  Future<void> updateGroupLocally(GroupHomeEntity groupUpdated) {
+    return localDataSource.updateThisGroup(groupUpdated);
+  }
 }
