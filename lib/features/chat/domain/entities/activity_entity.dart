@@ -3,22 +3,37 @@ import 'package:data_sharing_organizing/core/utils/enums/notification_enum.dart'
 import 'package:equatable/equatable.dart';
 import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
 import 'package:uuid/uuid.dart';
+import 'package:hive/hive.dart';
 
 import '../../data/models/activity_model.dart';
 import '../../data/models/attachment_model.dart';
 import 'member_entity.dart';
 
+part 'activity_entity.g.dart';
+
+@HiveType(typeId: 8)
 class ActivityEntity extends Equatable {
+  @HiveField(0)
   final int id;
+  @HiveField(1)
   final int groupId;
+  @HiveField(2)
   final MemberEntity createdBy;
+  @HiveField(3)
   final int? insideDirectoryId;
+  @HiveField(4)
   final int? repliedOn;
+  @HiveField(5)
   final String content;
+  @HiveField(6)
   final AttachmentModel? attachment;
+  @HiveField(7)
   final DateTime createdAt;
+  @HiveField(8)
   final bool isApproved;
+  @HiveField(9)
   final NotificationEnum notifyOthers;
+  @HiveField(10)
   final MessageType type;
 
   const ActivityEntity({

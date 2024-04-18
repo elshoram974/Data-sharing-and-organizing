@@ -29,6 +29,9 @@ class BotChatWidget extends StatelessWidget {
         onPreviewDataFetched: c.handlePreviewDataFetched,
         onSendPressed: (m) => c.handleSendPressed(m, types.Status.sending),
         bubbleBuilder: customBubble,
+        scrollToUnreadOptions: ScrollToUnreadOptions(
+          lastReadMessageId: c.botMessages.firstOrNull?.id,
+        ),
         dateHeaderBuilder: (_) => DateHeaderWidget(_),
         messageWidthRatio: 600,
         l10n: ProviderDependency.config.isArabic

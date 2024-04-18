@@ -4,6 +4,7 @@ import 'package:data_sharing_organizing/features/auth/domain/entities/auth_user_
 import 'package:data_sharing_organizing/features/user_home/domain/entities/group_home_entity.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
+import '../../../features/chat/domain/entities/activity_entity.dart';
 import '../../../features/chat/domain/entities/member_entity.dart';
 import '../enums/home/group_discussion_type_enum.dart';
 import '../enums/notification_enum.dart';
@@ -35,7 +36,9 @@ void _registerAdapterFn() {
   Hive.registerAdapter<GroupDiscussionType>(GroupDiscussionTypeAdapter());//* it in group entity
 
   Hive.registerAdapter<NotificationEnum>(NotificationEnumAdapter()); //* it in member entity
-  Hive.registerAdapter<MemberEntity>(MemberEntityAdapter());//* it in group entity
+  Hive.registerAdapter<MemberEntity>(MemberEntityAdapter());//* it in group and activity entity
+
+  Hive.registerAdapter<ActivityEntity>(ActivityEntityAdapter());//* it in group entity
 
   Hive.registerAdapter<GroupHomeEntity>(GroupHomeEntityAdapter()); //* it in member entity :(
 }

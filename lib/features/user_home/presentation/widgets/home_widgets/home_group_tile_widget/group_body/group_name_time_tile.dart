@@ -21,9 +21,9 @@ class GroupNameAndTimeTile extends StatelessWidget {
             style: AppStyle.styleBoldInika24.copyWith(fontSize: 16),
           ),
         ),
-        if (groupHomeEntity.lastMessage != null)
+        if (groupHomeEntity.lastActivity != null)
           Text(
-            DateToString.call(groupHomeEntity.lastMessageTime!, false),
+            DateToString.call(groupHomeEntity.lastActivity!.createdAt, false),
             style: TextStyle(
               color: groupHomeEntity.unReadCounter != null
                   ? AppColor.active

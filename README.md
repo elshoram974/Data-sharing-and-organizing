@@ -15,4 +15,4 @@ For help getting started with Flutter development, view the
 [online documentation](https://docs.flutter.dev/), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
 
--last typeId = `7` in `MemberEntity` for hive in `lib/features/chat/domain/entities/member_entity.dart`
+-last typeId = `8` in `ActivityEntity` for hive in `D:\my Aplications\data_sharing_organizing\lib\features\chat\domain\entities\activity_entity.dart`

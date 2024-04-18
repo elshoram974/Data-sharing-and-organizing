@@ -1,9 +1,9 @@
 import 'package:data_sharing_organizing/core/utils/enums/home/group_access_type_enum.dart';
 import 'package:data_sharing_organizing/core/utils/enums/home/group_discussion_type_enum.dart';
-import 'package:data_sharing_organizing/core/utils/enums/message_type/message_type.dart';
 import 'package:equatable/equatable.dart';
 import 'package:hive/hive.dart';
 
+import '../../../chat/domain/entities/activity_entity.dart';
 import '../../../chat/domain/entities/member_entity.dart';
 
 part 'group_home_entity.g.dart';
@@ -26,28 +26,19 @@ class GroupHomeEntity extends Equatable {
   final int? unReadCounter;
 
   @HiveField(5)
-  final DateTime? lastMessageTime;
-
-  @HiveField(6)
-  final String? lastMessage;
-
-  @HiveField(7)
-  final String? lastMessageFrom;
-
-  @HiveField(8)
-  final MessageType? lastMessageType;
-
-  @HiveField(9)
   final int ownerId;
 
-  @HiveField(10)
+  @HiveField(6)
   final double? bottomHeight;
 
-  @HiveField(11)
+  @HiveField(7)
   final GroupDiscussionType discussion;
 
-  @HiveField(12)
+  @HiveField(8)
   final MemberEntity memberEntity;
+
+  @HiveField(9)
+  final ActivityEntity? lastActivity;
 
   final GroupAccessType accessType;
 
@@ -57,11 +48,8 @@ class GroupHomeEntity extends Equatable {
     required this.id,
     this.imageLink,
     required this.groupName,
-    this.lastMessage,
-    this.lastMessageType,
-    this.lastMessageFrom,
     this.unReadCounter,
-    this.lastMessageTime,
+    this.lastActivity,
     this.isSelected = false,
     this.isMute = false,
     required this.ownerId,
@@ -75,13 +63,10 @@ class GroupHomeEntity extends Equatable {
     int? id,
     String? imageLink,
     String? groupName,
-    String? lastMessage,
+    ActivityEntity? lastActivity,
     int? unReadCounter,
-    DateTime? lastMessageTime,
     bool? isSelected,
     bool? isMute,
-    MessageType? lastMessageType,
-    String? lastMessageFrom,
     int? ownerId,
     double? bottomHeight,
     GroupDiscussionType? discussion,
@@ -90,15 +75,12 @@ class GroupHomeEntity extends Equatable {
   }) {
     return GroupHomeEntity(
       id: id ?? this.id,
-      lastMessage: lastMessage ?? this.lastMessage,
       unReadCounter: unReadCounter ?? this.unReadCounter,
       isSelected: isSelected ?? this.isSelected,
       isMute: isMute ?? this.isMute,
       imageLink: imageLink ?? this.imageLink,
       groupName: groupName ?? this.groupName,
-      lastMessageTime: lastMessageTime ?? this.lastMessageTime,
-      lastMessageType: lastMessageType ?? this.lastMessageType,
-      lastMessageFrom: lastMessageFrom ?? this.lastMessageFrom,
+      lastActivity: lastActivity ?? this.lastActivity,
       ownerId: ownerId ?? this.ownerId,
       bottomHeight: bottomHeight ?? this.bottomHeight,
       discussion: discussion ?? this.discussion,

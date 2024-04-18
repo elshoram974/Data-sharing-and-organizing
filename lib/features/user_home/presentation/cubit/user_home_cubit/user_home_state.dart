@@ -4,7 +4,7 @@ sealed class UserHomeState extends Equatable {
   const UserHomeState();
 
   @override
-  List<Object> get props => [];
+  List<Object?> get props => [];
 }
 
 final class UserHomeInitial extends UserHomeState {
@@ -17,15 +17,13 @@ final class UserHomeUpdateGroup extends UserHomeState {
   final GroupHomeEntity group;
 
   @override
-  List<Object> get props => [
+  List<Object?> get props => [
         group.id,
         group.groupName,
         group.isMute,
         group.ownerId,
-        group.bottomHeight ?? 250,
-        group.imageLink ?? '',
-        group.lastMessage ?? '',
-        group.lastMessageFrom ?? '',
+        group.bottomHeight,
+        group.lastActivity,
       ];
 }
 

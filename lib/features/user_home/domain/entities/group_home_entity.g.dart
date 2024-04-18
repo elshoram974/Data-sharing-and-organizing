@@ -20,23 +20,20 @@ class GroupHomeEntityAdapter extends TypeAdapter<GroupHomeEntity> {
       id: fields[0] as int,
       imageLink: fields[1] as String?,
       groupName: fields[2] as String,
-      lastMessage: fields[6] as String?,
-      lastMessageType: fields[8] as MessageType?,
-      lastMessageFrom: fields[7] as String?,
       unReadCounter: fields[4] as int?,
-      lastMessageTime: fields[5] as DateTime?,
+      lastActivity: fields[9] as ActivityEntity?,
       isMute: fields[3] as bool,
-      ownerId: fields[9] as int,
-      bottomHeight: fields[10] as double?,
-      discussion: fields[11] as GroupDiscussionType,
-      memberEntity: fields[12] as MemberEntity,
+      ownerId: fields[5] as int,
+      bottomHeight: fields[6] as double?,
+      discussion: fields[7] as GroupDiscussionType,
+      memberEntity: fields[8] as MemberEntity,
     );
   }
 
   @override
   void write(BinaryWriter writer, GroupHomeEntity obj) {
     writer
-      ..writeByte(13)
+      ..writeByte(10)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -48,21 +45,15 @@ class GroupHomeEntityAdapter extends TypeAdapter<GroupHomeEntity> {
       ..writeByte(4)
       ..write(obj.unReadCounter)
       ..writeByte(5)
-      ..write(obj.lastMessageTime)
-      ..writeByte(6)
-      ..write(obj.lastMessage)
-      ..writeByte(7)
-      ..write(obj.lastMessageFrom)
-      ..writeByte(8)
-      ..write(obj.lastMessageType)
-      ..writeByte(9)
       ..write(obj.ownerId)
-      ..writeByte(10)
+      ..writeByte(6)
       ..write(obj.bottomHeight)
-      ..writeByte(11)
+      ..writeByte(7)
       ..write(obj.discussion)
-      ..writeByte(12)
-      ..write(obj.memberEntity);
+      ..writeByte(8)
+      ..write(obj.memberEntity)
+      ..writeByte(9)
+      ..write(obj.lastActivity);
   }
 
   @override

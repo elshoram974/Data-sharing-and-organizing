@@ -15,11 +15,11 @@ class HomeGroupSubtitle extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        if (groupHomeEntity.lastMessage != null)
+        if (groupHomeEntity.lastActivity != null)
           HomeGroupLastMessage(
-            lastMessage: groupHomeEntity.lastMessage!,
-            lastMessageFrom: groupHomeEntity.lastMessageFrom!,
-            lastMessageType: groupHomeEntity.lastMessageType!,
+            lastMessage: groupHomeEntity.lastActivity!.content,
+            lastMessageFrom: groupHomeEntity.lastActivity!.createdBy.user.name,
+            lastMessageType: groupHomeEntity.lastActivity!.type,
           ),
         const SizedBox(width: AppConst.defaultPadding),
         if (groupHomeEntity.unReadCounter != null)

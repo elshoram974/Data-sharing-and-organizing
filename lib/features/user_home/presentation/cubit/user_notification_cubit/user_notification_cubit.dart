@@ -1,5 +1,6 @@
 import 'package:data_sharing_organizing/core/utils/enums/home/group_discussion_type_enum.dart';
 import 'package:data_sharing_organizing/core/utils/enums/message_type/message_type.dart';
+import 'package:data_sharing_organizing/features/chat/domain/entities/activity_entity.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
 
@@ -27,39 +28,57 @@ class UserNotificationCubit extends Cubit<UserNotificationState> {
 
 final list = [
   GroupNotificationEntity(
-    memberEntity: MemberEntity.newEmpty(),
+      memberEntity: MemberEntity.newEmpty(),
       id: 0,
-      lastMessageType: MessageType.location,
+      lastActivity: ActivityEntity(
+        id: 0,
+        groupId: 0,
+        createdBy: MemberEntity.newEmpty(),
+        content:
+            'Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message ',
+        createdAt: DateTime.now(),
+        isApproved: true,
+        type: MessageType.location,
+      ),
       imageLink: 'https://images.justwatch.com/poster/248497985/s592/one-piece',
       groupName: 'First year in THIET aa aa a a a a a a a a a a a a',
-      lastMessage:
-          'Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message ',
       unReadCounter: 0,
-      lastMessageTime: DateTime.now(),
       ownerId: 42,
       discussion: GroupDiscussionType.exist),
   GroupNotificationEntity(
     memberEntity: MemberEntity.newEmpty(),
     id: 1,
-    lastMessageType: MessageType.photo,
+    lastActivity: ActivityEntity(
+      id: 1,
+      groupId: 1,
+      createdBy: MemberEntity.newEmpty(),
+      content:
+          'Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message ',
+      createdAt: DateTime.now(),
+      isApproved: true,
+      type: MessageType.photo,
+    ),
     imageLink: '',
     groupName: 'First year in THIET',
-    lastMessage:
-        'Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message ',
-    lastMessageTime: DateTime.now(),
     ownerId: 42,
     discussion: GroupDiscussionType.existButClosed,
   ),
   GroupNotificationEntity(
     memberEntity: MemberEntity.newEmpty(),
     id: 2,
-    lastMessageType: MessageType.voiceMessage,
+    lastActivity: ActivityEntity(
+      id: 2,
+      groupId: 2,
+      createdBy: MemberEntity.newEmpty(),
+      content:
+          'Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message ',
+      createdAt: DateTime.now(),
+      isApproved: true,
+      type: MessageType.voiceMessage,
+    ),
     imageLink: '',
     groupName: 'First year in THIET',
     unReadCounter: 1,
-    lastMessage:
-        'Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message ',
-    lastMessageTime: DateTime.now(),
     ownerId: 42,
     discussion: GroupDiscussionType.notExist,
   ),

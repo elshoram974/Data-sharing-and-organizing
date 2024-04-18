@@ -8,6 +8,8 @@ import 'package:data_sharing_organizing/core/utils/enums/home/group_type_enum.da
 import 'package:data_sharing_organizing/core/utils/enums/home/group_visibility_enum.dart';
 import 'package:data_sharing_organizing/core/utils/enums/message_type/message_type.dart';
 
+import '../../../../chat/data/models/activity_model.dart';
+import '../../../../chat/domain/entities/activity_entity.dart';
 import '../../../../chat/domain/entities/member_entity.dart';
 import '../../../domain/entities/group_home_entity.dart';
 
@@ -22,6 +24,7 @@ class GroupDetails extends GroupHomeEntity {
   final GroupType groupType;
   final GroupStatus groupStatus;
   final String? groupStatusMessage;
+  final ActivityModel? lastActivityModel;
 
   const GroupDetails({
     required this.groupId,
@@ -39,10 +42,7 @@ class GroupDetails extends GroupHomeEntity {
     required this.groupStatusMessage,
     super.isMute,
     super.isSelected,
-    super.lastMessage,
-    super.lastMessageFrom,
-    super.lastMessageTime,
-    super.lastMessageType,
+    this.lastActivityModel,
     super.unReadCounter,
     super.bottomHeight,
     required super.memberEntity,
@@ -50,11 +50,12 @@ class GroupDetails extends GroupHomeEntity {
           id: groupId,
           ownerId: groupOwnerId,
           imageLink: groupImage,
+          lastActivity: lastActivityModel,
         );
 
   @override
   String toString() {
-    return 'Group(groupId: $groupId, groupName: $groupName, groupOwnerId: $groupOwnerId, groupCreationDate: $groupCreationDate, groupDescription: $groupDescription, groupVisibility: $groupVisibility, groupAccessType: $accessType, groupCategory: $groupCategory, groupImage: $groupImage, groupType: $groupType, groupDiscussionType: $discussion, groupStatus: $groupStatus, groupStatusMessage: $groupStatusMessage, isSelected: $isSelected, isMuted: $isMute, unReadCounter: $unReadCounter, lastMessageTime: $lastMessageTime, lastMessageType: $lastMessageType, lastMessageFrom: $lastMessageFrom, lastMessage: $lastMessage , member: $memberEntity)';
+    return 'Group(groupId: $groupId, groupName: $groupName, groupOwnerId: $groupOwnerId, groupCreationDate: $groupCreationDate, groupDescription: $groupDescription, groupVisibility: $groupVisibility, groupAccessType: $accessType, groupCategory: $groupCategory, groupImage: $groupImage, groupType: $groupType, groupDiscussionType: $discussion, groupStatus: $groupStatus, groupStatusMessage: $groupStatusMessage, isSelected: $isSelected, isMuted: $isMute, unReadCounter: $unReadCounter, lastActivity: $lastActivity , member: $memberEntity)';
   }
 
   factory GroupDetails.fromMap(Map<String, dynamic> data) => GroupDetails(
@@ -76,6 +77,7 @@ class GroupDetails extends GroupHomeEntity {
             data['group_discussion_type'] as String?),
         groupStatus: GroupStatus.fromString(data['group_status'] as String?),
         groupStatusMessage: data['group_status_message'] as String?,
+        lastActivityModel: data['last_activity'] == null ? null : ActivityModel.fromMap(data['last_activity'] as Map<String, dynamic>),
         memberEntity:  MemberEntity.newEmpty(), // TODO: متنساش تعمله ب ال model
       );
 
@@ -93,6 +95,7 @@ class GroupDetails extends GroupHomeEntity {
         'group_discussion_type': discussion.inString,
         'group_status': groupStatus.inString,
         'group_status_message': groupStatusMessage,
+        'last_activity': lastActivityModel?.toMap(),
         'member': memberEntity, // TODO: متنساش تعمله ب ال model
       };
 
@@ -125,7 +128,7 @@ class GroupDetails extends GroupHomeEntity {
     String? groupStatusMessage,
     int? id,
     String? imageLink,
-    String? lastMessage,
+    ActivityEntity? lastActivity,
     int? unReadCounter,
     DateTime? lastMessageTime,
     bool? isSelected,
@@ -152,10 +155,7 @@ class GroupDetails extends GroupHomeEntity {
       groupStatusMessage: groupStatusMessage ?? this.groupStatusMessage,
       isMute: isMute ?? this.isMute,
       isSelected: isSelected ?? this.isSelected,
-      lastMessage: lastMessage ?? this.lastMessage,
-      lastMessageFrom: lastMessageFrom ?? this.lastMessageFrom,
-      lastMessageTime: lastMessageTime ?? this.lastMessageTime,
-      lastMessageType: lastMessageType ?? this.lastMessageType,
+      lastActivityModel: lastActivity != null ? ActivityModel.fromEntity(lastActivity) : lastActivityModel,
       unReadCounter: unReadCounter ?? this.unReadCounter,
       bottomHeight: bottomHeight ?? this.bottomHeight,
       memberEntity: memberEntity ?? this.memberEntity,
