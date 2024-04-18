@@ -187,16 +187,16 @@ class DirectoryCubitImp extends DirectoryCubit {
 
   @override
   void botReply(List<ActivityEntity> activities) {
-    if (activities.isEmpty) return;
-    botCubit.addMessages(
-      activities
-          .map((e) => e.toMessage().copyWith(
-                  author: types.User(
+    for (final ActivityEntity e in activities) {
+      botCubit.addMessage(
+        e.toMessage().copyWith(
+              author: types.User(
                 id: "bot ${groupCubit.group.id}",
                 firstName: "BOT",
-              )))
-          .toList(),
-    );
+              ),
+            ),
+      );
+    }
   }
 
   @override

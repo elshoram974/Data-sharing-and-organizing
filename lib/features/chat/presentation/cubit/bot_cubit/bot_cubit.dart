@@ -24,11 +24,9 @@ abstract class BOTCubit extends Cubit<BOTState> {
   late List<types.Message> botMessages = [];
 
   void addMessage(types.Message message);
-  void addMessages(List<types.Message> messages);
   void handleMessageTap(BuildContext _, types.Message message);
   void handleMessageDoubleTap(BuildContext _, types.Message message);
-  void handlePreviewDataFetched(
-      types.TextMessage message, types.PreviewData previewData);
+  void handlePreviewDataFetched(types.TextMessage message, types.PreviewData previewData);
   void handleSendPressed(types.PartialText message, [types.Status? status]);
 
   void approvedActivity(ActivityEntity activity, BuildContext _);
@@ -40,13 +38,6 @@ class BOTCubitImp extends BOTCubit {
   BOTCubitImp();
 
   int _i = 0;
-
-  @override
-  void addMessages(List<types.Message> messages) {
-    // TODO: save last activity to last message in group
-    botMessages.insertAll(0, messages.reversed);
-    emit(SetState(_i++));
-  }
 
   @override
   void addMessage(types.Message message) {
