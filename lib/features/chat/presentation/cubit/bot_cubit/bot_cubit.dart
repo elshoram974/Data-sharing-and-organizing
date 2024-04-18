@@ -1,15 +1,11 @@
 import 'package:data_sharing_organizing/core/utils/config/locale/generated/l10n.dart';
+import 'package:data_sharing_organizing/core/utils/functions/handle_tapped_message.dart';
 import 'package:data_sharing_organizing/core/utils/services/dependency/provider_dependency.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'dart:io';
-
 import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
-import 'package:http/http.dart' as http;
-import 'package:open_filex/open_filex.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:uuid/uuid.dart';
 
 import '../../../../../core/utils/enums/message_type/message_type.dart';
@@ -46,6 +42,8 @@ abstract class BOTCubit extends Cubit<BOTState> {
       isApproved: true,
       attachment: AttachmentModel(
         size: 50000,
+        width: 3,
+        height: 4,
         name: 'File name',
         uri:
             'https://pbs.twimg.com/profile_images/1744393322418802688/-ZF7VwbA_400x400.jpg',
@@ -64,22 +62,9 @@ abstract class BOTCubit extends Cubit<BOTState> {
 }
 
 class BOTCubitImp extends BOTCubit {
-  BOTCubitImp() {
-    _loadMessages();
-  }
+  BOTCubitImp();
 
   int _i = 0;
-
-  void _loadMessages() async {
-    // final response = await rootBundle.loadString('assets/messages.json');
-    // final messages = (jsonDecode(response) as List)
-    //     .map((e) => types.Message.fromJson(e as Map<String, dynamic>))
-    //     .toList();
-
-    // setState(() {
-    //   botMessages = messages;
-    // });
-  }
 
   @override
   void addMessage(types.Message message) {
@@ -90,7 +75,6 @@ class BOTCubitImp extends BOTCubit {
   @override
   void handleMessageDoubleTap(BuildContext _, types.Message message) async {
     ProviderDependency.group.closeFloatingButton();
-    print(message.metadata);
     if (message.metadata?.containsKey("activity") == true) {
       final ActivityEntity activity = message.metadata!["activity"];
       _showAction(_, activity);
@@ -101,48 +85,16 @@ class BOTCubitImp extends BOTCubit {
   }
 
   @override
-  void handleMessageTap(BuildContext _, types.Message message) async {
+  void handleMessageTap(BuildContext _, types.Message message) {
     ProviderDependency.group.closeFloatingButton();
-    if (message is types.FileMessage) {
-      var localPath = message.uri;
-
-      if (message.uri.startsWith('http')) {
-        try {
-          final index =
-              botMessages.indexWhere((element) => element.id == message.id);
-          final updatedMessage =
-              (botMessages[index] as types.FileMessage).copyWith(
-            isLoading: true,
-          );
-
-          botMessages[index] = updatedMessage;
-          emit(SetState(_i++));
-
-          final client = http.Client();
-          final request = await client.get(Uri.parse(message.uri));
-          final bytes = request.bodyBytes;
-          final documentsDir = (await getApplicationDocumentsDirectory()).path;
-          localPath = '$documentsDir/${message.name}';
-
-          if (!File(localPath).existsSync()) {
-            final file = File(localPath);
-            await file.writeAsBytes(bytes);
-          }
-        } finally {
-          final index =
-              botMessages.indexWhere((element) => element.id == message.id);
-          final updatedMessage =
-              (botMessages[index] as types.FileMessage).copyWith(
-            isLoading: null,
-          );
-
-          botMessages[index] = updatedMessage;
-          emit(SetState(_i++));
-        }
-      }
-
-      await OpenFilex.open(localPath);
-    }
+    handleTappedMessage(
+      tappedMessage: message,
+      messages: botMessages,
+      updateMessage: (int index, types.Message updatedMessage) {
+        botMessages[index] = updatedMessage;
+        emit(SetState(_i++));
+      },
+    );
   }
 
   @override
@@ -206,7 +158,8 @@ void _showAction(
 
   if (ProviderDependency.group.isAdmin) {
     if (!activity.isApproved) {
-      content = S.of(_).userWantToAddActivity(activity.content, activity.createdBy.user.name);
+      content = S.of(_).userWantToAddActivity(
+          activity.content, activity.createdBy.user.name);
       actions.insertAll(
         0,
         [
