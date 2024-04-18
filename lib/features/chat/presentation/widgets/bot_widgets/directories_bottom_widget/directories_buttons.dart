@@ -77,7 +77,7 @@ void _showAction(
   final String content;
   final List<TextButton> actions = [
     TextButton(
-      onPressed: () => c.deleteDirectory(dir,_),
+      onPressed: () => c.deleteDirectory(dir, _),
       child: Text(S.of(_).delete),
     ),
     TextButton(
@@ -88,14 +88,17 @@ void _showAction(
 
   if (c.groupCubit.isAdmin) {
     if (!dir.isApproved) {
-      content = S.of(_).userWantToAddDirectory(dir.name, dir.createdBy.user.name);
+      content =
+          S.of(_).userWantToAddDirectory(dir.name, dir.createdBy.user.name);
       actions.insertAll(
         0,
         [
-          TextButton(
-            onPressed: () => c.blockUserInteraction(dir.createdBy.user, _),
-            child: Text(S.of(_).blockThisUser),
-          ),
+          if (dir.createdBy.user.id != ProviderDependency.userMain.user.id ||
+              dir.createdBy.user.id != c.groupCubit.group.ownerId)
+            TextButton(
+              onPressed: () => c.blockUserInteraction(dir.createdBy.user, _),
+              child: Text(S.of(_).blockThisUser),
+            ),
           TextButton(
             onPressed: () => c.makeDirectoryApproved(dir, _),
             child: Text(S.of(_).addDirectory),

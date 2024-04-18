@@ -51,7 +51,7 @@ abstract class DirectoryCubit extends Cubit<DirectoryState> {
   void makeDirectoryApproved(DirectoryEntity dir, BuildContext _);
   void blockUserInteraction(AuthUserEntity createdBy, BuildContext _);
 
-  void botReply(List<ActivityEntity> activities, String? jsonDir);
+  void botReply(List<ActivityEntity> activities);
 
   void onPopInvoked(bool didPop);
 }
@@ -154,10 +154,7 @@ class DirectoryCubitImp extends DirectoryCubit {
         if (status is Success<DataInDirectory>) {
           if (lDir == _directoriesStack.lastOrNull) {
             currentDirectories = status.data.directories;
-            botReply(
-              status.data.activities,
-              dir == null ? null : DirectoryModel.fromEntity(dir).toJson(),
-            );
+            botReply(status.data.activities);
           }
         } else {
           if (!canDirectoryPop) {
@@ -213,10 +210,10 @@ class DirectoryCubitImp extends DirectoryCubit {
   // ------------------
 
   @override
-  void botReply(List<ActivityEntity> activities, String? jsonDir) {
+  void botReply(List<ActivityEntity> activities) {
     for (final ActivityEntity e in activities) {
       botCubit.addMessage(
-        e.copyWith(createdAt: DateTime.now()).toMessage(jsonDir).copyWith(
+        e.copyWith(createdAt: DateTime.now()).toMessage().copyWith(
               author: types.User(
                 id: "bot ${groupCubit.group.id}",
                 firstName: "BOT",

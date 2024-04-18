@@ -100,11 +100,12 @@ class ActivityEntity extends Equatable {
     );
   }
 
-  types.Message toMessage(String? directory) {
+  types.Message toMessage([String? directory]) {
     final Map<String, String?> map = {
       "activity": ActivityModel.fromEntity(this).toJson(),
-      "directory": directory,
     };
+    if (directory != null) map["directory"] = directory;
+
     final String uid = const Uuid().v4();
     switch (type) {
       case MessageType.textMessage:

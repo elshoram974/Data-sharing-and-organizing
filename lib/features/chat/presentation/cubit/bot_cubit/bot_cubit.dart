@@ -40,6 +40,8 @@ abstract class BOTCubit extends Cubit<BOTState> {
   void approvedActivity(ActivityEntity activity, BuildContext _);
   void hideActivity(ActivityEntity activity, BuildContext _);
   void deleteActivity(ActivityEntity activity, BuildContext _);
+
+  bool canEditMessage(ActivityEntity activity);
 }
 
 class BOTCubitImp extends BOTCubit {
@@ -63,17 +65,23 @@ class BOTCubitImp extends BOTCubit {
   }
 
   @override
+  bool canEditMessage(ActivityEntity activity) {
+    return (ProviderDependency.group.isAdmin ||
+        (activity.createdBy.user.id == ProviderDependency.userMain.user.id &&
+            !activity.isApproved));
+  }
+
+  @override
   void handleMessageDoubleTap(BuildContext _, types.Message message) async {
     ProviderDependency.group.closeFloatingButton();
-    if (message.metadata?.containsKey("activity") == true) {
-      final ActivityEntity activity =
-          ActivityModel.fromJson(message.metadata!["activity"]);
-      showActivityActions(_, activity);
-    } else if (message.metadata?.containsKey("directory") == true) {
+    if (message.metadata?.containsKey("directory") == true) {
       final String? json = message.metadata!["directory"] as String?;
       DirectoryEntity? dir =
           json == null ? null : DirectoryModel.fromJson(json);
       ProviderDependency.directory.goToDirectory(dir);
+    } else if (message.metadata?.containsKey("activity") == true) {
+      final ActivityEntity activity = ActivityModel.fromJson(message.metadata!["activity"]);
+      if (canEditMessage(activity)) showActivityActions(_, activity);
     }
   }
 

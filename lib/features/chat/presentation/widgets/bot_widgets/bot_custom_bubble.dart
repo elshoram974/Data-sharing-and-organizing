@@ -5,11 +5,11 @@ import 'package:data_sharing_organizing/core/utils/constants/app_constants.dart'
 import 'package:data_sharing_organizing/core/utils/functions/detect_text_direction.dart';
 import 'package:data_sharing_organizing/core/utils/services/dependency/provider_dependency.dart';
 import 'package:data_sharing_organizing/core/utils/styles.dart';
-import 'package:data_sharing_organizing/features/chat/domain/entities/member_entity.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
 
+import '../../../data/models/activity_model.dart';
 import '../../../domain/entities/activity_entity.dart';
 import '../message_date.dart';
 
@@ -29,12 +29,18 @@ class BotCustomBubble extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final bool isTextMessage = message is types.TextMessage;
-    final MemberEntity member =
-        ActivityEntity.fromMessage(message)?.createdBy ??
-            MemberEntity.newEmpty();
-    final bool isApproved =
-        (ActivityEntity.fromMessage(message)?.isApproved) != false;
+    final ActivityEntity? m;
+    late final bool canEdit;
+    if (message.metadata?.containsKey("activity") == true) {
+      m = ActivityModel.fromJson(message.metadata!["activity"]);
+      canEdit = ProviderDependency.bot.canEditMessage(m);
+    } else {
+      m = null;
+      canEdit = false;
+    }
+    final bool isApproved = (m?.isApproved) != false;
     const double border = 5;
+    if (!canEdit && !isApproved) return const SizedBox.shrink();
     return Directionality(
       textDirection: TextDirection.ltr,
       child: Column(
@@ -66,10 +72,7 @@ class BotCustomBubble extends StatelessWidget {
             child: Column(
               children: [
                 Visibility(
-                  visible: !isTheUser &&
-                      (member.isAdmin ||
-                          member.user.id ==
-                              ProviderDependency.userMain.user.id),
+                  visible: !isTheUser && canEdit,
                   child: Text(
                     S.of(context).doubleTapToEdit,
                     style: AppStyle.styleBoldInika13.copyWith(fontSize: 9),

@@ -52,8 +52,9 @@ class BotChatWidget extends StatelessWidget {
     required types.Message message,
     required bool nextMessageInGroup,
   }) {
+    final BOTCubit c = ProviderDependency.bot;
     return BotCustomBubble(
-      isTheUser: ProviderDependency.bot.currentMember.messageAuthor().id == message.author.id,
+      isTheUser: c.currentMember.messageAuthor().id == message.author.id,
       message: message,
       nextMessageInGroup: nextMessageInGroup,
       child: child,

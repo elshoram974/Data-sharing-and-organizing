@@ -129,10 +129,12 @@ void showActivityActions(
 
   if (ProviderDependency.group.isAdmin) {
     if (!activity.isApproved) {
-      content = S.of(_).userWantToAddActivity(activity.content, activity.createdBy.user.name);
+      content = S.of(_).userWantToAddActivity(
+          activity.content, activity.createdBy.user.name);
       actions.insertAll(
         0,
         [
+          if(activity.createdBy.user.id != ProviderDependency.userMain.user.id || activity.createdBy.user.id != c.groupCubit.group.ownerId)
           TextButton(
             onPressed: () => c.blockUserInteraction(activity.createdBy.user, _),
             child: Text(S.of(_).blockThisUser),
@@ -154,8 +156,6 @@ void showActivityActions(
       );
     }
   } else {
-    if (ProviderDependency.userMain.user.id != activity.createdBy.user.id ||
-        activity.isApproved) return;
     content = S.of(_).youAddedActivityName(activity.content);
   }
 
