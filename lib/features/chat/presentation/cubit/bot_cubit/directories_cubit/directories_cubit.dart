@@ -1,8 +1,8 @@
 import 'package:data_sharing_organizing/core/status/errors/failure.dart';
-import 'package:data_sharing_organizing/core/status/status.dart';
 import 'package:data_sharing_organizing/core/status/success/success.dart';
 import 'package:data_sharing_organizing/core/utils/config/locale/generated/l10n.dart';
 import 'package:data_sharing_organizing/core/utils/config/routes/routes.dart';
+import 'package:data_sharing_organizing/core/utils/functions/failure_status_dialog_emit.dart';
 import 'package:data_sharing_organizing/core/utils/services/dependency/provider_dependency.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
@@ -18,6 +18,7 @@ import '../../../../domain/entities/directory_entity.dart';
 import '../../../../domain/repositories/bot_repo.dart';
 import '../../group_cubit/group_cubit.dart';
 import '../bot_cubit.dart';
+import '../bot_fn.dart';
 
 part 'directories_state.dart';
 
@@ -41,10 +42,10 @@ abstract class DirectoryCubit extends Cubit<DirectoryState> {
   void openDirectory(DirectoryEntity newDirectory);
   void closeLastDirectory();
 
-  void deleteDirectory(DirectoryEntity dir);
-  void hideDirectory(DirectoryEntity dir);
-  void addDirectory(DirectoryEntity dir);
-  void blockUserInteraction(AuthUserEntity createdBy);
+  void deleteDirectory(DirectoryEntity dir, BuildContext _);
+  void hideDirectory(DirectoryEntity dir, BuildContext _);
+  void makeDirectoryApproved(DirectoryEntity dir, BuildContext _);
+  void blockUserInteraction(AuthUserEntity createdBy, BuildContext _);
 
   void botReply(List<ActivityEntity> activities);
 
@@ -73,6 +74,7 @@ class DirectoryCubitImp extends DirectoryCubit {
   }
   // ----------------------------------------------------------------
 
+  // * change directories --------------------------------
   @override
   void goToDirectory(DirectoryEntity? dir) {
     if (_directoriesStack.lastOrNull != dir) {
@@ -109,10 +111,12 @@ class DirectoryCubitImp extends DirectoryCubit {
         metadata: {"directory": _directoriesStack.lastOrNull},
       ),
     );
-    _getDirectories(_directoriesStack.lastOrNull);
+    _getDirectoriesAndActivities(_directoriesStack.lastOrNull);
   }
+  // ----------------------------------------------------------------
 
-  void _getDirectories([DirectoryEntity? dir]) {
+  // * get directories and activities --------------------------------
+  void _getDirectoriesAndActivities([DirectoryEntity? dir]) {
     final DirectoryEntity? lDir = _directoriesStack.lastOrNull;
     EasyLoading.show();
     botRepo
@@ -121,10 +125,8 @@ class DirectoryCubitImp extends DirectoryCubit {
       groupId: groupCubit.group.id,
     )
         .listen(
-      (event) async {
+      (status) async {
         EasyLoading.dismiss();
-
-        final Status<DataInDirectory> status = event;
         if (status is Success<DataInDirectory>) {
           if (lDir == _directoriesStack.lastOrNull) {
             currentDirectories = status.data.directories;
@@ -140,26 +142,45 @@ class DirectoryCubitImp extends DirectoryCubit {
       },
     );
   }
+  // ----------------------------------------------------------------
 
   // * crud Directories
+  // TODO: make repo for directory edit functions
 
   @override
-  void deleteDirectory(DirectoryEntity dir) {
-    // TODO: deleteDirectory code
+  void deleteDirectory(DirectoryEntity dir, BuildContext _) {
+    deleteDirectoryDialog(
+      context: _,
+      dir: dir,
+      deleteFn: () {},
+    );
   }
 
   @override
-  void hideDirectory(DirectoryEntity dir) {
-    // TODO: hideDirectory code
+  void hideDirectory(DirectoryEntity dir, BuildContext _) {
+    hideDirectoryDialog(
+      context: _,
+      dir: dir,
+      hideFn: () {},
+    );
   }
 
   @override
-  void addDirectory(DirectoryEntity dir) {
-    // TODO: addDirectory code
+  void makeDirectoryApproved(DirectoryEntity dir, BuildContext _) {
+    makeDirectoryApprovedDialog(
+      context: _,
+      dir: dir,
+      approveFn: () {},
+    );
   }
+
   @override
-  void blockUserInteraction(AuthUserEntity createdBy) {
-    // TODO: blockUserInteraction code
+  void blockUserInteraction(AuthUserEntity createdBy, BuildContext _) {
+    blockUserInteractionDialog(
+      context: _,
+      user: createdBy,
+      blockFn: () {},
+    );
   }
 
   // ------------------
@@ -168,11 +189,13 @@ class DirectoryCubitImp extends DirectoryCubit {
   void botReply(List<ActivityEntity> activities) {
     if (activities.isEmpty) return;
     botCubit.addMessages(
-      activities.map((e) => e.toMessage().copyWith(
+      activities
+          .map((e) => e.toMessage().copyWith(
                   author: types.User(
                 id: "bot ${groupCubit.group.id}",
                 firstName: "BOT",
-              ))).toList(),
+              )))
+          .toList(),
     );
   }
 
@@ -181,9 +204,4 @@ class DirectoryCubitImp extends DirectoryCubit {
     if (_directoriesStack.isEmpty) return AppRoute.key.currentState?.pop();
     closeLastDirectory();
   }
-}
-
-void failureStatus(String error, void Function() emit) {
-  emit();
-  EasyLoading.showError(error, duration: const Duration(seconds: 5));
 }

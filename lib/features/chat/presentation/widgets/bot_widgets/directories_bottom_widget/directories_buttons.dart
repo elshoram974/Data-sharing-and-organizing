@@ -77,7 +77,7 @@ void _showAction(
   final String content;
   final List<TextButton> actions = [
     TextButton(
-      onPressed: () => c.deleteDirectory(dir),
+      onPressed: () => c.deleteDirectory(dir,_),
       child: Text(S.of(_).delete),
     ),
     TextButton(
@@ -93,11 +93,11 @@ void _showAction(
         0,
         [
           TextButton(
-            onPressed: () => c.blockUserInteraction(dir.createdBy),
+            onPressed: () => c.blockUserInteraction(dir.createdBy, _),
             child: Text(S.of(_).blockThisUser),
           ),
           TextButton(
-            onPressed: () => c.addDirectory(dir),
+            onPressed: () => c.makeDirectoryApproved(dir, _),
             child: Text(S.of(_).addDirectory),
           ),
         ],
@@ -107,7 +107,7 @@ void _showAction(
       actions.insert(
         0,
         TextButton(
-          onPressed: () => c.hideDirectory(dir),
+          onPressed: () => c.hideDirectory(dir, _),
           child: Text(S.of(_).hide),
         ),
       );

@@ -30,7 +30,10 @@ class DialogButtons extends StatelessWidget {
             flex: 10,
             child: FilledButton(
               onPressed: onPressConfirm,
-              child: Text(textConfirm ?? S.of(context).confirm),
+              child: Text(
+                textConfirm ?? S.of(context).confirm,
+                textAlign: TextAlign.center,
+              ),
             ),
           ),
         ),

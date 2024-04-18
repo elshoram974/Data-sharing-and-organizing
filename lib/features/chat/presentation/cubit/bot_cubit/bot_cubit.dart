@@ -1,4 +1,3 @@
-import 'package:data_sharing_organizing/core/utils/config/locale/generated/l10n.dart';
 import 'package:data_sharing_organizing/core/utils/functions/handle_tapped_message.dart';
 import 'package:data_sharing_organizing/core/utils/services/dependency/provider_dependency.dart';
 import 'package:equatable/equatable.dart';
@@ -12,6 +11,7 @@ import '../../../domain/entities/activity_entity.dart';
 import '../../../domain/entities/directory_entity.dart';
 import '../../../domain/entities/member_entity.dart';
 import '../group_cubit/group_cubit.dart';
+import 'bot_fn.dart';
 
 part 'bot_state.dart';
 
@@ -30,6 +30,10 @@ abstract class BOTCubit extends Cubit<BOTState> {
   void handlePreviewDataFetched(
       types.TextMessage message, types.PreviewData previewData);
   void handleSendPressed(types.PartialText message, [types.Status? status]);
+
+  void approvedActivity(ActivityEntity activity, BuildContext _);
+  void hideActivity(ActivityEntity activity, BuildContext _);
+  void deleteActivity(ActivityEntity activity, BuildContext _);
 }
 
 class BOTCubitImp extends BOTCubit {
@@ -39,12 +43,14 @@ class BOTCubitImp extends BOTCubit {
 
   @override
   void addMessages(List<types.Message> messages) {
+    // TODO: save last activity to last message in group
     botMessages.insertAll(0, messages.reversed);
     emit(SetState(_i++));
   }
 
   @override
   void addMessage(types.Message message) {
+    // TODO: save this activity to last message in group
     botMessages.insert(0, message);
     emit(SetState(_i++));
   }
@@ -54,7 +60,7 @@ class BOTCubitImp extends BOTCubit {
     ProviderDependency.group.closeFloatingButton();
     if (message.metadata?.containsKey("activity") == true) {
       final ActivityEntity activity = message.metadata!["activity"];
-      _showAction(_, activity);
+      showActivityActions(_, activity);
     } else if (message.metadata?.containsKey("directory") == true) {
       DirectoryEntity? dir = message.metadata!["directory"];
       ProviderDependency.directory.goToDirectory(dir);
@@ -115,64 +121,33 @@ class BOTCubitImp extends BOTCubit {
       });
     }
   }
-}
 
-void _showAction(
-  BuildContext _,
-  ActivityEntity activity,
-) {
-  final String content;
-  final List<TextButton> actions = [
-    TextButton(
-      onPressed: () {},
-      child: Text(S.of(_).delete),
-    ),
-    TextButton(
-      onPressed: Navigator.of(_).pop,
-      child: Text(S.of(_).cancel),
-    ),
-  ];
-
-  if (ProviderDependency.group.isAdmin) {
-    if (!activity.isApproved) {
-      content = S.of(_).userWantToAddActivity(
-          activity.content, activity.createdBy.user.name);
-      actions.insertAll(
-        0,
-        [
-          TextButton(
-            onPressed: () {},
-            child: Text(S.of(_).blockThisUser),
-          ),
-          TextButton(
-            onPressed: () {},
-            child: Text(S.of(_).addActivity),
-          ),
-        ],
-      );
-    } else {
-      content = S.of(_).whatDoYouWantToDoWithThisActivity(activity.content);
-      actions.insert(
-        0,
-        TextButton(
-          onPressed: () {},
-          child: Text(S.of(_).hide),
-        ),
-      );
-    }
-  } else {
-    if (ProviderDependency.userMain.user.id != activity.createdBy.user.id ||
-        activity.isApproved) return;
-    content = S.of(_).youAddedActivityName(activity.content);
+  // * activity edit
+  // TODO: make repo for activity edit functions
+  @override
+  void approvedActivity(ActivityEntity activity, BuildContext _) {
+    makeActivityApprovedDialog(
+      context: _,
+      activity: activity,
+      approveFn: () {},
+    );
   }
 
-  showDialog<void>(
-    context: _,
-    builder: (context) {
-      return AlertDialog(
-        content: Text(content),
-        actions: actions,
-      );
-    },
-  );
+  @override
+  void hideActivity(ActivityEntity activity, BuildContext _) {
+    hideActivityDialog(
+      context: _,
+      activity: activity,
+      hideFn: () {},
+    );
+  }
+
+  @override
+  void deleteActivity(ActivityEntity activity, BuildContext _) {
+    deleteActivityDialog(
+      context: _,
+      activity: activity,
+      deleteFn: () {},
+    );
+  }
 }
