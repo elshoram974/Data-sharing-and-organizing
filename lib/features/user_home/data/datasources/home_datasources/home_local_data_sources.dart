@@ -46,6 +46,7 @@ class HomeLocalDataSourceImp extends HomeLocalDataSource {
               isMute: g.isMute,
               unReadCounter: g.unReadCounter,
               bottomHeight: g.bottomHeight,
+              lastActivity: g.lastActivity,
             ),
           );
         }

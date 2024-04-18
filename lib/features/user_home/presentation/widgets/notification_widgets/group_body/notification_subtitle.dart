@@ -25,9 +25,7 @@ class NotificationSubtitle extends StatelessWidget {
         if (groupNotificationEntity.lastActivity != null)
           HomeGroupLastMessage(
             maxLines: groupNotificationEntity.isExpanded ? 500 : 1,
-            lastMessage: groupNotificationEntity.lastActivity!.content,
-            lastMessageFrom: groupNotificationEntity.lastActivity!.createdBy.user.name,
-            lastMessageType: groupNotificationEntity.lastActivity!.type,
+            lastActivity: groupNotificationEntity.lastActivity!,
           ),
         ExpandIcon(
           isExpanded: groupNotificationEntity.isExpanded,
