@@ -4,6 +4,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
 import 'package:uuid/uuid.dart';
 
+import '../../data/models/activity_model.dart';
 import '../../data/models/attachment_model.dart';
 import 'member_entity.dart';
 
@@ -85,7 +86,9 @@ class ActivityEntity extends Equatable {
   }
 
   types.Message toMessage() {
-    final Map<String, ActivityEntity> map = {"activity": this};
+    final Map<String, String> map = {
+      "activity": ActivityModel.fromEntity(this).toJson()
+    };
     final String uid = const Uuid().v4();
     switch (type) {
       case MessageType.textMessage:
@@ -126,7 +129,10 @@ class ActivityEntity extends Equatable {
   }
 
   static ActivityEntity? fromMessage(types.Message message) {
-    return message.metadata?["activity"] as ActivityEntity?;
+    final String? json = message.metadata?["activity"] as String?;
+    if (json == null) return null;
+
+    return ActivityModel.fromJson(json);
   }
 
   @override

@@ -1,5 +1,8 @@
+import 'dart:convert';
+
 import 'package:data_sharing_organizing/core/utils/constants/app_strings.dart';
 import 'package:data_sharing_organizing/core/utils/services/dependency/provider_dependency.dart';
+import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
 import 'package:hive/hive.dart';
 
 import '../../../../../core/utils/enums/message_type/message_type.dart';
@@ -14,13 +17,16 @@ import '../../../domain/entities/member_entity.dart';
 import '../../models/attachment_model.dart';
 
 abstract class BOTLocalDataSource {
-  const BOTLocalDataSource();
+  BOTLocalDataSource();
 
   Future<void> saveBottomHeight(double height, int groupId);
 
   DataInDirectory getDirActInside(int? dirId, int groupId);
 
   Future<void> saveDirActInside(DataInDirectory dataInDirectory);
+
+  Future<void> saveBotMessages(int groupId, List<types.Message> messages);
+  List<types.Message> getBotMessages(int groupId);
 }
 
 class BOTLocalDataSourceImp extends BOTLocalDataSource {
@@ -29,6 +35,8 @@ class BOTLocalDataSourceImp extends BOTLocalDataSource {
 
   late final Box<GroupHomeEntity> groupsBox =
       Hive.box<GroupHomeEntity>(AppStrings.groupsBox);
+  late final Box<String> messageBox =
+      Hive.box<String>(AppStrings.botMessagesBox);
 
   @override
   Future<void> saveBottomHeight(double height, int groupId) async {
@@ -62,7 +70,8 @@ class BOTLocalDataSourceImp extends BOTLocalDataSource {
           .toList(),
       activities: _allGroupActivities(groupId)
           .where((e) => e.insideDirectoryId == dirId)
-          .toList()..sort((a, b) => a.createdAt.compareTo(b.createdAt)),
+          .toList()
+        ..sort((a, b) => a.createdAt.compareTo(b.createdAt)),
     );
   }
 
@@ -74,9 +83,34 @@ class BOTLocalDataSourceImp extends BOTLocalDataSource {
   // For that i need in home
   List<GroupHomeEntity> _getAllGroups() => homeLocal.getAllGroups();
   Future<int> _removeAllGroups() => homeLocal.removeAllGroups();
+
+  @override
+  Future<void> saveBotMessages(int groupId, List<types.Message> messages) async {
+    await messageBox.delete(groupId);
+
+    List<String> json = [];
+    for (types.Message e in messages) {
+      json.add(jsonEncode(e.toJson()));
+    }
+
+    return await messageBox.put(groupId, jsonEncode(json));
+  }
+
+  @override
+  List<types.Message> getBotMessages(int groupId) {
+    final String? json = messageBox.get(groupId);
+    if (json == null) return [];
+    final List<types.Message> messages = [];
+    List<dynamic> jsonList = jsonDecode(json);
+    for (final String j in jsonList) {
+      messages.add(types.Message.fromJson(jsonDecode(j)));
+    }
+
+    return messages;
+  }
 }
 
-const AuthUserEntity me = AuthUserEntity(
+AuthUserEntity _me = const AuthUserEntity(
   id: 42,
   name: 'Mohammed El Shora',
   email: 'elshoram974@gmail.com',
@@ -85,7 +119,7 @@ const AuthUserEntity me = AuthUserEntity(
 );
 
 MemberEntity member = MemberEntity(
-  user: me,
+  user: _me,
   groupId: 5,
   canInteract: true,
   joinDate: DateTime(2001),
@@ -114,7 +148,8 @@ List<ActivityEntity> activities = [
       width: 3,
       height: 4,
       name: 'File name',
-      uri:'https://pbs.twimg.com/profile_images/1744393322418802688/-ZF7VwbA_400x400.jpg',
+      uri:
+          'https://pbs.twimg.com/profile_images/1744393322418802688/-ZF7VwbA_400x400.jpg',
       mimeType: 'image/jpeg',
     ),
     type: MessageType.other,
@@ -131,7 +166,8 @@ List<ActivityEntity> activities = [
       width: 3,
       height: 4,
       name: 'image name',
-      uri:'https://pbs.twimg.com/profile_images/1744393322418802688/-ZF7VwbA_400x400.jpg',
+      uri:
+          'https://pbs.twimg.com/profile_images/1744393322418802688/-ZF7VwbA_400x400.jpg',
     ),
     type: MessageType.photo,
   ),
@@ -187,185 +223,187 @@ List<ActivityEntity> activities = [
 ];
 
 List<DirectoryEntity> directories = [
-  const DirectoryEntity(
+  DirectoryEntity(
     id: 9,
     name: 'مش معايا',
     groupId: 1,
     isApproved: true,
-    createdBy: me,
+    createdBy: member,
   ),
-  const DirectoryEntity(
+  DirectoryEntity(
     id: 10,
     name: 'مش معايا',
     groupId: 1,
     isApproved: true,
-    createdBy: me,
+    createdBy: member,
   ),
-  const DirectoryEntity(
+  DirectoryEntity(
     id: 11,
     name: 'AdvancedProgramming',
     groupId: 5,
     isApproved: true,
-    createdBy: me,
+    createdBy: member,
   ),
-  const DirectoryEntity(
+  DirectoryEntity(
     id: 12,
     name: 'AI',
     groupId: 5,
     isApproved: true,
-    createdBy: me,
+    createdBy: member,
   ),
-  const DirectoryEntity(
+  DirectoryEntity(
     id: 13,
     name: 'Embedded system',
     groupId: 5,
     isApproved: true,
-    createdBy: me,
+    createdBy: member,
   ),
-  const DirectoryEntity(
+  DirectoryEntity(
     id: 14,
     name: 'أخلاقيات المهنة',
     groupId: 5,
     isApproved: true,
-    createdBy: me,
+    createdBy: member,
   ),
-  const DirectoryEntity(
+  DirectoryEntity(
     id: 15,
     name: 'إدارة مشروعات',
     groupId: 5,
     isApproved: true,
-    createdBy: me,
+    createdBy: member,
   ),
-  const DirectoryEntity(
+  DirectoryEntity(
     id: 16,
     name: 'مهارات البحث والتحليل',
     groupId: 5,
     isApproved: true,
-    createdBy: me,
+    createdBy: member,
   ),
-  const DirectoryEntity(
+  DirectoryEntity(
     id: 17,
     name: 'Advanced Data',
     insideDirectoryId: 11,
     groupId: 5,
     isApproved: true,
-    createdBy: me,
+    createdBy: member,
   ),
-  const DirectoryEntity(
+  DirectoryEntity(
     id: 18,
     name: 'Advanced Sheets',
     insideDirectoryId: 11,
     groupId: 5,
     isApproved: true,
-    createdBy: me,
+    createdBy: member,
   ),
-  const DirectoryEntity(
+  DirectoryEntity(
     id: 19,
     name: 'Advanced Exams',
     insideDirectoryId: 11,
     groupId: 5,
     isApproved: true,
-    createdBy: me,
+    createdBy: member,
   ),
-  const DirectoryEntity(
+  DirectoryEntity(
     id: 20,
     name: 'Advanced Records',
     insideDirectoryId: 11,
     groupId: 5,
     isApproved: true,
-    createdBy: me,
+    createdBy: member,
   ),
-  const DirectoryEntity(
+  DirectoryEntity(
     id: 21,
     name: 'Advanced Other',
     insideDirectoryId: 11,
     groupId: 5,
     isApproved: true,
-    createdBy: me,
+    createdBy: member,
   ),
-  const DirectoryEntity(
+  DirectoryEntity(
     id: 22,
     name: 'Advanced Lectures',
     insideDirectoryId: 17,
     groupId: 5,
     isApproved: true,
-    createdBy: me,
+    createdBy: member,
   ),
-  const DirectoryEntity(
+  DirectoryEntity(
     id: 23,
     name: 'Advanced Sections',
     insideDirectoryId: 17,
     groupId: 5,
     isApproved: true,
-    createdBy: me,
+    createdBy: member,
   ),
-  const DirectoryEntity(
+  DirectoryEntity(
     id: 24,
     name: 'أخلاقيات بيانات',
     insideDirectoryId: 14,
     groupId: 5,
     isApproved: true,
-    createdBy: me,
+    createdBy: member,
   ),
-  const DirectoryEntity(
+  DirectoryEntity(
     id: 25,
     name: 'أخلاقيات امتحانات',
     insideDirectoryId: 14,
     groupId: 5,
     isApproved: true,
-    createdBy: me,
+    createdBy: member,
   ),
-  const DirectoryEntity(
+  DirectoryEntity(
     id: 26,
     name: 'أخلاقيات اخرى',
     insideDirectoryId: 14,
     groupId: 5,
-    createdBy: AuthUserEntity(
-      id: 45,
-      name: 'MRE CODE',
-      email: 'mre9743@gmail.com',
-      password: '',
-      userType: UserType.personal,
+    createdBy: member.copyWith(
+      user: const AuthUserEntity(
+        id: 45,
+        name: 'MRE CODE',
+        email: 'mre9743@gmail.com',
+        password: '',
+        userType: UserType.personal,
+      ),
     ),
   ),
-  const DirectoryEntity(
+  DirectoryEntity(
     id: 27,
     name: 'AI Data',
     insideDirectoryId: 12,
     groupId: 5,
     isApproved: true,
-    createdBy: me,
+    createdBy: member,
   ),
-  const DirectoryEntity(
+  DirectoryEntity(
     id: 28,
     name: 'AI sheets',
     insideDirectoryId: 12,
     groupId: 5,
     isApproved: true,
-    createdBy: me,
+    createdBy: member,
   ),
-  const DirectoryEntity(
+  DirectoryEntity(
     id: 29,
     name: 'AI Exams',
     insideDirectoryId: 12,
     groupId: 5,
     isApproved: true,
-    createdBy: me,
+    createdBy: member,
   ),
-  const DirectoryEntity(
+  DirectoryEntity(
     id: 30,
     name: 'أخلاقيات ميدتيرم',
     insideDirectoryId: 25,
     groupId: 5,
     isApproved: true,
-    createdBy: me,
+    createdBy: member,
   ),
-  const DirectoryEntity(
+  DirectoryEntity(
     id: 31,
     name: 'Ai sheets lec',
     insideDirectoryId: 28,
     groupId: 5,
     isApproved: true,
-    createdBy: me,
+    createdBy: member,
   ),
 ];

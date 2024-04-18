@@ -7,9 +7,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
 import 'package:uuid/uuid.dart';
 
+import '../../../data/models/activity_model.dart';
+import '../../../data/models/directory_model.dart';
 import '../../../domain/entities/activity_entity.dart';
 import '../../../domain/entities/directory_entity.dart';
 import '../../../domain/entities/member_entity.dart';
+import '../../../domain/repositories/bot_repo.dart';
 import '../group_cubit/group_cubit.dart';
 import 'bot_fn.dart';
 
@@ -26,7 +29,8 @@ abstract class BOTCubit extends Cubit<BOTState> {
   void addMessage(types.Message message);
   void handleMessageTap(BuildContext _, types.Message message);
   void handleMessageDoubleTap(BuildContext _, types.Message message);
-  void handlePreviewDataFetched(types.TextMessage message, types.PreviewData previewData);
+  void handlePreviewDataFetched(
+      types.TextMessage message, types.PreviewData previewData);
   void handleSendPressed(types.PartialText message, [types.Status? status]);
 
   void approvedActivity(ActivityEntity activity, BuildContext _);
@@ -35,14 +39,22 @@ abstract class BOTCubit extends Cubit<BOTState> {
 }
 
 class BOTCubitImp extends BOTCubit {
-  BOTCubitImp();
+  final BOTRepositories botRepo;
+  BOTCubitImp(this.botRepo) {
+    _loadMessages();
+  }
 
   int _i = 0;
 
+  void _loadMessages() async {
+    botMessages = botRepo.loadBotMessages(groupCubit.group.id);
+    emit(SetState(_i++));
+  }
+
   @override
-  void addMessage(types.Message message) {
-    // TODO: save this activity to last message in group
+  void addMessage(types.Message message) async {
     botMessages.insert(0, message);
+    await botRepo.saveBotMessages(groupCubit.group.id, botMessages);
     emit(SetState(_i++));
   }
 
@@ -50,10 +62,11 @@ class BOTCubitImp extends BOTCubit {
   void handleMessageDoubleTap(BuildContext _, types.Message message) async {
     ProviderDependency.group.closeFloatingButton();
     if (message.metadata?.containsKey("activity") == true) {
-      final ActivityEntity activity = message.metadata!["activity"];
+      final ActivityEntity activity = ActivityModel.fromJson(message.metadata!["activity"]);
       showActivityActions(_, activity);
     } else if (message.metadata?.containsKey("directory") == true) {
-      DirectoryEntity? dir = message.metadata!["directory"];
+      final String? json = message.metadata!["directory"] as String?;
+      DirectoryEntity? dir =json == null ? null: DirectoryModel.fromJson(json);
       ProviderDependency.directory.goToDirectory(dir);
     }
   }
@@ -75,13 +88,14 @@ class BOTCubitImp extends BOTCubit {
   void handlePreviewDataFetched(
     types.TextMessage message,
     types.PreviewData previewData,
-  ) {
+  ) async {
     final index = botMessages.indexWhere((element) => element.id == message.id);
     final updatedMessage = (botMessages[index] as types.TextMessage).copyWith(
       previewData: previewData,
     );
 
     botMessages[index] = updatedMessage;
+    await botRepo.saveBotMessages(groupCubit.group.id, botMessages);
     emit(SetState(_i++));
     Future.delayed(
         const Duration(milliseconds: 50), () => emit(SetState(_i++)));
@@ -108,6 +122,8 @@ class BOTCubitImp extends BOTCubit {
             botMessages[index].copyWith(status: types.Status.seen);
 
         botMessages[index] = updatedMessage;
+        await botRepo.saveBotMessages(groupCubit.group.id, botMessages);
+
         emit(SetState(_i++));
       });
     }

@@ -20,6 +20,7 @@ Future<void> localInstance() async {
   await Future.wait([
     Hive.openBox<AuthUserEntity>(AppStrings.userBox),
     Hive.openBox<GroupHomeEntity>(AppStrings.groupsBox),
+    Hive.openBox<String>(AppStrings.botMessagesBox),
     Hive.openBox<String>(AppStrings.localConfig),
   ]);
 

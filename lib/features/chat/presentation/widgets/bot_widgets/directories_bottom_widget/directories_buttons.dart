@@ -41,7 +41,7 @@ class DirectoriesButtons extends StatelessWidget {
                     return Visibility(
                       visible: dir.isApproved ||
                           c.groupCubit.isAdmin ||
-                          dir.createdBy.id ==
+                          dir.createdBy.user.id ==
                               ProviderDependency.userMain.user.id,
                       child: SizedBox(
                         height: 38,
@@ -88,12 +88,12 @@ void _showAction(
 
   if (c.groupCubit.isAdmin) {
     if (!dir.isApproved) {
-      content = S.of(_).userWantToAddDirectory(dir.name, dir.createdBy.name);
+      content = S.of(_).userWantToAddDirectory(dir.name, dir.createdBy.user.name);
       actions.insertAll(
         0,
         [
           TextButton(
-            onPressed: () => c.blockUserInteraction(dir.createdBy, _),
+            onPressed: () => c.blockUserInteraction(dir.createdBy.user, _),
             child: Text(S.of(_).blockThisUser),
           ),
           TextButton(
@@ -113,7 +113,7 @@ void _showAction(
       );
     }
   } else {
-    if (ProviderDependency.userMain.user.id != dir.createdBy.id ||
+    if (ProviderDependency.userMain.user.id != dir.createdBy.user.id ||
         dir.isApproved) return;
     content = S.of(_).youAddedDirNameDirectory(dir.name);
   }

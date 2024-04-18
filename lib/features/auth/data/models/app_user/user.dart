@@ -82,9 +82,8 @@ class User extends AuthUserEntity {
       userLastName: data['user_last_name'] as String,
       userPassword: data['user_password'] as String,
       userProvider: UserProvider.fromString(data['user_provider'] as String?),
-      accountLastlogin: DateTime.tryParse(data['user_lastlogin'] as String),
-      accountCreatedDatetime:
-          DateTime.tryParse(data['user_createdat'] as String),
+      accountLastlogin: DateTime.tryParse(data['user_lastlogin'] as String? ?? ''),
+      accountCreatedDatetime: DateTime.tryParse(data['user_createdat'] as String? ?? ''),
       userImage: data['user_image'] as String?,
       userType: UserType.fromString(data['user_type'] as String?),
       userStatus: UserStatus.fromString(data['user_status'] as String),

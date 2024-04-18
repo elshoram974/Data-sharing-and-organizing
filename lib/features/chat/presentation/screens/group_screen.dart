@@ -29,7 +29,7 @@ class UserGroupScreen extends StatelessWidget {
             create: (_) => GroupCubit(sl.get<GroupInitRepositories>(), group),
           ),
           BlocProvider<BOTCubit>(
-            create: (_) => BOTCubitImp(),
+            create: (_) => BOTCubitImp(sl.get<BOTRepositories>()),
           ),
           BlocProvider<DirectoryCubit>(
             create: (_) => DirectoryCubitImp(sl.get<BOTRepositories>()),

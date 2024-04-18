@@ -12,6 +12,7 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:uuid/uuid.dart';
 
 import '../../../../../auth/domain/entities/auth_user_entity.dart';
+import '../../../../data/models/directory_model.dart';
 import '../../../../domain/entities/activity_entity.dart';
 import '../../../../domain/entities/data_in_directory.dart';
 import '../../../../domain/entities/directory_entity.dart';
@@ -23,8 +24,7 @@ import '../bot_fn.dart';
 part 'directories_state.dart';
 
 abstract class DirectoryCubit extends Cubit<DirectoryState> {
-  final BOTRepositories botRepo;
-  DirectoryCubit(this.botRepo) : super(const DirectoryInitial());
+  DirectoryCubit() : super(const DirectoryInitial());
 
   final BOTCubit botCubit = ProviderDependency.bot;
   final GroupCubit groupCubit = ProviderDependency.group;
@@ -53,7 +53,9 @@ abstract class DirectoryCubit extends Cubit<DirectoryState> {
 }
 
 class DirectoryCubitImp extends DirectoryCubit {
-  DirectoryCubitImp(super.botRepo) {
+  final BOTRepositories botRepo;
+
+  DirectoryCubitImp(this.botRepo) {
     _changeDirectory();
   }
 
@@ -101,6 +103,7 @@ class DirectoryCubitImp extends DirectoryCubit {
   }
 
   void _changeDirectory() {
+    final DirectoryEntity? dir = _directoriesStack.lastOrNull;
     botCubit.addMessage(
       types.TextMessage(
         id: const Uuid().v4(),
@@ -108,7 +111,9 @@ class DirectoryCubitImp extends DirectoryCubit {
         text: _directoriesStack.lastOrNull?.name ?? S.current.home,
 
         /// *  to know the directory from [_directoriesStack.lastOrNull]
-        metadata: {"directory": _directoriesStack.lastOrNull},
+        metadata: {
+          "directory": dir == null ? null : DirectoryModel.fromEntity(dir)
+        },
       ),
     );
     _getDirectoriesAndActivities(_directoriesStack.lastOrNull);
