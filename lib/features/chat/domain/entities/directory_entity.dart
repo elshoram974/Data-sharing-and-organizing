@@ -1,7 +1,6 @@
-import 'package:data_sharing_organizing/core/utils/enums/user_role/user_type_enum.dart';
 import 'package:equatable/equatable.dart';
 
-import '../../../auth/domain/entities/auth_user_entity.dart';
+import 'member_entity.dart';
 
 class DirectoryEntity extends Equatable {
   const DirectoryEntity({
@@ -13,24 +12,18 @@ class DirectoryEntity extends Equatable {
     this.isApproved = false,
   });
   final int id;
-  final AuthUserEntity createdBy;
+  final MemberEntity createdBy;
   final int groupId;
   final String name;
   final int? insideDirectoryId;
   final bool isApproved;
 
   factory DirectoryEntity.newEmpty() {
-    return const DirectoryEntity(
+    return DirectoryEntity(
       id: -1,
       name: '',
       groupId: -1,
-      createdBy: AuthUserEntity(
-        id: -1,
-        name: '',
-        email: '',
-        password: '',
-        userType: UserType.personal,
-      ),
+      createdBy: MemberEntity.newEmpty(),
     );
   }
 

@@ -1,5 +1,6 @@
 import 'package:data_sharing_organizing/core/utils/enums/notification_enum.dart';
 import 'package:data_sharing_organizing/core/utils/enums/user_status_enum.dart';
+import 'package:data_sharing_organizing/core/utils/functions/separate_name.dart';
 import 'package:equatable/equatable.dart';
 import 'package:hive/hive.dart';
 import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
@@ -78,28 +79,27 @@ class MemberEntity extends Equatable {
   }
 
   types.User messageAuthor() {
-    final List<String> nameParts = user.name.split(" ");
-    final String fName = nameParts.first.trim();
-    final String lName = nameParts.sublist(1).join(" ").trim();
+    final ({String fName, String lName}) separate = separateName(user.name);
     return types.User(
         id: user.id.toString(),
-        firstName: fName,
-        lastName: lName,
+        firstName: separate.fName,
+        lastName: separate.lName,
         imageUrl: user.image,
         role: isAdmin ? types.Role.admin : types.Role.user,
         createdAt: joinDate.millisecondsSinceEpoch,
         metadata: {
           "groupId": groupId,
           "canInteract": canInteract,
-          "joinDate": joinDate,
+          "joinDate": joinDate.toIso8601String(),
           "isAdmin": isAdmin,
           "user": User(
             userId: user.id,
             userEmail: user.email,
-            userFirstName: fName,
-            userLastName: lName,
+            userFirstName: separate.fName,
+            userLastName: separate.lName,
             userPassword: user.password,
             userType: user.userType,
+            accountCreatedDatetime: joinDate,
             userStatus: UserStatus.active,
           ).toJson(),
         });
@@ -111,7 +111,8 @@ class MemberEntity extends Equatable {
       user: myU,
       groupId: u.metadata?["groupId"] as int? ?? -1,
       canInteract: u.metadata?["canInteract"] as bool? ?? false,
-      joinDate: u.metadata?["joinDate"] as DateTime? ?? DateTime.now(),
+      joinDate: DateTime.tryParse(u.metadata?["joinDate"] as String) ??
+          DateTime.now(),
       isAdmin: u.metadata?["isAdmin"] as bool? ?? false,
     );
   }
