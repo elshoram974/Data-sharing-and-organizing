@@ -1,12 +1,8 @@
-import 'dart:math';
-
 import 'package:data_sharing_organizing/core/status/errors/failure.dart';
 import 'package:data_sharing_organizing/core/status/status.dart';
 import 'package:data_sharing_organizing/core/status/success/success.dart';
 import 'package:data_sharing_organizing/core/utils/config/locale/generated/l10n.dart';
 import 'package:data_sharing_organizing/core/utils/config/routes/routes.dart';
-import 'package:data_sharing_organizing/core/utils/enums/message_type/message_type.dart';
-import 'package:data_sharing_organizing/core/utils/enums/user_role/user_type_enum.dart';
 import 'package:data_sharing_organizing/core/utils/services/dependency/provider_dependency.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
@@ -16,19 +12,18 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:uuid/uuid.dart';
 
 import '../../../../../auth/domain/entities/auth_user_entity.dart';
-import '../../../../../user_home/domain/entities/group_home_entity.dart';
 import '../../../../domain/entities/activity_entity.dart';
+import '../../../../domain/entities/data_in_directory.dart';
 import '../../../../domain/entities/directory_entity.dart';
-import '../../../../domain/entities/member_entity.dart';
-import '../../../../domain/repositories/directories_repo.dart';
+import '../../../../domain/repositories/bot_repo.dart';
 import '../../group_cubit/group_cubit.dart';
 import '../bot_cubit.dart';
 
 part 'directories_state.dart';
 
 abstract class DirectoryCubit extends Cubit<DirectoryState> {
-  final DirectoriesRepositories dirRepo;
-  DirectoryCubit(this.dirRepo) : super(const DirectoryInitial());
+  final BOTRepositories botRepo;
+  DirectoryCubit(this.botRepo) : super(const DirectoryInitial());
 
   final BOTCubit botCubit = ProviderDependency.bot;
   final GroupCubit groupCubit = ProviderDependency.group;
@@ -51,13 +46,13 @@ abstract class DirectoryCubit extends Cubit<DirectoryState> {
   void addDirectory(DirectoryEntity dir);
   void blockUserInteraction(AuthUserEntity createdBy);
 
-  void botReply();
+  void botReply(List<ActivityEntity> activities);
 
   void onPopInvoked(bool didPop);
 }
 
 class DirectoryCubitImp extends DirectoryCubit {
-  DirectoryCubitImp(super.dirRepo) {
+  DirectoryCubitImp(super.botRepo) {
     _changeDirectory();
   }
 
@@ -73,7 +68,7 @@ class DirectoryCubitImp extends DirectoryCubit {
     } else if (bottomHeight > maxHeight) {
       bottomHeight = maxHeight;
     }
-    await dirRepo.saveBottomHeight(bottomHeight, groupCubit.group.id);
+    await botRepo.saveBottomHeight(bottomHeight, groupCubit.group.id);
     emit(ChangeDirectoryBottomHeightState(bottomHeight));
   }
   // ----------------------------------------------------------------
@@ -109,9 +104,9 @@ class DirectoryCubitImp extends DirectoryCubit {
         id: const Uuid().v4(),
         author: botCubit.currentMember.messageAuthor(),
         text: _directoriesStack.lastOrNull?.name ?? S.current.home,
-        metadata: {
-          "directory": _directoriesStack.lastOrNull
-        }, // *  to know the directory
+
+        /// *  to know the directory from [_directoriesStack.lastOrNull]
+        metadata: {"directory": _directoriesStack.lastOrNull},
       ),
     );
     _getDirectories(_directoriesStack.lastOrNull);
@@ -120,24 +115,24 @@ class DirectoryCubitImp extends DirectoryCubit {
   void _getDirectories([DirectoryEntity? dir]) {
     final DirectoryEntity? lDir = _directoriesStack.lastOrNull;
     EasyLoading.show();
-    dirRepo
-        .getDirectoriesInside(
+    botRepo
+        .getDirActInside(
       dirId: dir?.id,
       groupId: groupCubit.group.id,
     )
         .listen(
       (event) async {
         EasyLoading.dismiss();
-        final Status<List<DirectoryEntity>> status = event;
-        if (status is Success<List<DirectoryEntity>>) {
+
+        final Status<DataInDirectory> status = event;
+        if (status is Success<DataInDirectory>) {
           if (lDir == _directoriesStack.lastOrNull) {
-            currentDirectories = status.data;
-            botReply();
-            // TODO: get activities
+            currentDirectories = status.data.directories;
+            botReply(status.data.activities);
           }
         } else {
           if (!canDirectoryPop) {
-            status as Failure<List<DirectoryEntity>>;
+            status as Failure<DataInDirectory>;
             failureStatus(status.failure.message, () {});
           }
         }
@@ -170,49 +165,14 @@ class DirectoryCubitImp extends DirectoryCubit {
   // ------------------
 
   @override
-  void botReply() {
-    final GroupHomeEntity group = groupCubit.group;
-    final int messageId = Random().nextInt(99999);
-    final DateTime messageCreatedAt = DateTime.now();
-
-    final MemberEntity botAuthor = MemberEntity(
-      user: AuthUserEntity(
-        id: group.id,
-        name: "BOT",
-        email: "bot@${group.groupName}",
-        password: '',
-        userType: UserType.personal,
-      ),
-      groupId: group.id,
-      canInteract: true,
-      joinDate: DateTime.now(),
-      isAdmin: true,
-    );
-    if (_directoriesStack.isNotEmpty) {
-      return botCubit.addMessage(
-        ActivityEntity(
-          id: messageId,
-          groupId: group.id,
-          createdBy: botAuthor,
-          content: "${_directoriesStack.last.name} contains ...",
-          createdAt: messageCreatedAt,
-          isApproved: messageId.isEven,
-          type: MessageType.textMessage,
-        ).toMessage().copyWith(
-              author: types.User(id: group.id.toString(), firstName: 'BOT'),
-            ),
-      );
-    }
-    return botCubit.addMessage(
-      ActivityEntity(
-        id: messageId,
-        groupId: group.id,
-        createdBy: botAuthor,
-        content: 'Hi there!\ni\'m ${group.groupName} BOT',
-        createdAt: messageCreatedAt,
-        isApproved: true,
-        type: MessageType.textMessage,
-      ).toMessage(),
+  void botReply(List<ActivityEntity> activities) {
+    if (activities.isEmpty) return;
+    botCubit.addMessages(
+      activities.map((e) => e.toMessage().copyWith(
+                  author: types.User(
+                id: "bot ${groupCubit.group.id}",
+                firstName: "BOT",
+              ))).toList(),
     );
   }
 

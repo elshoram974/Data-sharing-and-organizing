@@ -2,6 +2,7 @@ import 'package:data_sharing_organizing/core/utils/enums/message_type/message_ty
 import 'package:data_sharing_organizing/core/utils/enums/notification_enum.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
+import 'package:uuid/uuid.dart';
 
 import '../../data/models/attachment_model.dart';
 import 'member_entity.dart';
@@ -85,21 +86,21 @@ class ActivityEntity extends Equatable {
 
   types.Message toMessage() {
     final Map<String, ActivityEntity> map = {"activity": this};
+    final String uid = const Uuid().v4();
     switch (type) {
       case MessageType.textMessage:
         return types.TextMessage(
           text: content,
           author: createdBy.messageAuthor(),
-          id: id.toString(),
+          id: uid,
           createdAt: createdAt.millisecondsSinceEpoch,
           remoteId: id.toString(),
           metadata: map,
-          type: types.MessageType.text,
         );
       case MessageType.photo:
         return types.ImageMessage(
           author: createdBy.messageAuthor(),
-          id: id.toString(),
+          id: uid,
           name: content,
           size: attachment!.size,
           uri: attachment!.uri,
@@ -108,12 +109,11 @@ class ActivityEntity extends Equatable {
           metadata: map,
           height: attachment!.height,
           width: attachment!.width,
-          type: types.MessageType.image,
         );
       default:
         return types.FileMessage(
           author: createdBy.messageAuthor(),
-          id: id.toString(),
+          id: uid,
           name: content,
           size: attachment!.size,
           uri: attachment!.uri,
@@ -121,7 +121,6 @@ class ActivityEntity extends Equatable {
           remoteId: id.toString(),
           mimeType: attachment!.mimeType,
           metadata: map,
-          type: types.MessageType.file,
         );
     }
   }

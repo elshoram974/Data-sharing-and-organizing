@@ -1,10 +1,10 @@
 import 'package:data_sharing_organizing/core/utils/services/api_services.dart';
 
-import '../../../domain/entities/directory_entity.dart';
+import '../../../domain/entities/data_in_directory.dart';
 
 abstract class DirectoriesRemoteDataSource {
   const DirectoriesRemoteDataSource();
-  Future<List<DirectoryEntity>> getDirectoriesInside({
+  Future<DataInDirectory> getDirActInside({
     int? dirId,
     required int groupId,
   });
@@ -16,7 +16,7 @@ class DirectoriesRemoteDataSourceImp extends DirectoriesRemoteDataSource {
   const DirectoriesRemoteDataSourceImp(this.service);
 
   @override
-  Future<List<DirectoryEntity>> getDirectoriesInside({
+  Future<DataInDirectory> getDirActInside({
     int? dirId,
     required int groupId,
   }) async {

@@ -6,7 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 
 import '../../../user_home/domain/entities/group_home_entity.dart';
-import '../../domain/repositories/directories_repo.dart';
+import '../../domain/repositories/bot_repo.dart';
 import '../../domain/repositories/init_group_repo.dart';
 import '../cubit/bot_cubit/bot_cubit.dart';
 import '../cubit/bot_cubit/directories_cubit/directories_cubit.dart';
@@ -32,7 +32,7 @@ class UserGroupScreen extends StatelessWidget {
             create: (_) => BOTCubitImp(),
           ),
           BlocProvider<DirectoryCubit>(
-            create: (_) => DirectoryCubitImp(sl.get<DirectoriesRepositories>()),
+            create: (_) => DirectoryCubitImp(sl.get<BOTRepositories>()),
           ),
           BlocProvider<ChatCubit>(
             create: (_) => ChatCubit(),

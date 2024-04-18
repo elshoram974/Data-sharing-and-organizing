@@ -36,8 +36,7 @@ class ChatCustomBubble extends StatelessWidget {
                 ? const BubbleEdges.all(0)
                 : const BubbleEdges.all(border),
             radius: const Radius.circular(0.5 * AppConst.borderRadius),
-            color:
-                isTheUser ? AppColor.primary : AppColor.grayLightDark(context),
+            color: isTheUser ? AppColor.primary : AppColor.grayLightDark(context),
             margin: nextMessageInGroup
                 ? const BubbleEdges.symmetric(horizontal: 6)
                 : null,

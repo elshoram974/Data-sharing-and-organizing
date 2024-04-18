@@ -1,25 +1,30 @@
 import 'package:data_sharing_organizing/core/utils/constants/app_strings.dart';
 import 'package:data_sharing_organizing/core/utils/services/dependency/provider_dependency.dart';
-import 'package:data_sharing_organizing/features/chat/domain/entities/directory_entity.dart';
 import 'package:hive/hive.dart';
 
+import '../../../../../core/utils/enums/message_type/message_type.dart';
 import '../../../../../core/utils/enums/user_role/user_type_enum.dart';
 import '../../../../auth/domain/entities/auth_user_entity.dart';
 import '../../../../user_home/data/datasources/home_datasources/home_local_data_sources.dart';
 import '../../../../user_home/domain/entities/group_home_entity.dart';
+import '../../../domain/entities/activity_entity.dart';
+import '../../../domain/entities/data_in_directory.dart';
+import '../../../domain/entities/directory_entity.dart';
+import '../../../domain/entities/member_entity.dart';
+import '../../models/attachment_model.dart';
 
-abstract class DirectoriesLocalDataSource {
-  const DirectoriesLocalDataSource();
+abstract class BOTLocalDataSource {
+  const BOTLocalDataSource();
 
   Future<void> saveBottomHeight(double height, int groupId);
 
-  List<DirectoryEntity> getDirectoriesInside(int? dirId, int groupId);
+  DataInDirectory getDirActInside(int? dirId, int groupId);
 
-  Future<void> saveDirectories(List<DirectoryEntity> directories);
+  Future<void> saveDirActInside(DataInDirectory dataInDirectory);
 }
 
-class DirectoriesLocalDataSourceImp extends DirectoriesLocalDataSource {
-  DirectoriesLocalDataSourceImp(this.homeLocal);
+class BOTLocalDataSourceImp extends BOTLocalDataSource {
+  BOTLocalDataSourceImp(this.homeLocal);
   final HomeLocalDataSource homeLocal;
 
   late final Box<GroupHomeEntity> groupsBox =
@@ -41,19 +46,28 @@ class DirectoriesLocalDataSourceImp extends DirectoriesLocalDataSource {
     }
   }
 
+  Iterable<ActivityEntity> _allGroupActivities(int groupId) {
+    return activities.where((e) => e.groupId == groupId);
+  }
+
   Iterable<DirectoryEntity> _allGroupDirectories(int groupId) {
     return directories.where((e) => e.groupId == groupId);
   }
 
   @override
-  List<DirectoryEntity> getDirectoriesInside(int? dirId, int groupId) {
-    return _allGroupDirectories(groupId)
-        .where((e) => e.insideDirectoryId == dirId)
-        .toList();
+  DataInDirectory getDirActInside(int? dirId, int groupId) {
+    return DataInDirectory(
+      directories: _allGroupDirectories(groupId)
+          .where((e) => e.insideDirectoryId == dirId)
+          .toList(),
+      activities: _allGroupActivities(groupId)
+          .where((e) => e.insideDirectoryId == dirId)
+          .toList()..sort((a, b) => a.createdAt.compareTo(b.createdAt)),
+    );
   }
 
   @override
-  Future<void> saveDirectories(List<DirectoryEntity> directories) async {
+  Future<void> saveDirActInside(DataInDirectory dataInDirectory) async {
     // TODO: implement saveDirectories
   }
 
@@ -69,6 +83,108 @@ const AuthUserEntity me = AuthUserEntity(
   password: '',
   userType: UserType.personal,
 );
+
+MemberEntity member = MemberEntity(
+  user: me,
+  groupId: 5,
+  canInteract: true,
+  joinDate: DateTime(2001),
+  isAdmin: true,
+);
+
+List<ActivityEntity> activities = [
+  ActivityEntity(
+    id: 455,
+    groupId: 5,
+    content: "1 Test To approve it google.com",
+    createdBy: member,
+    createdAt: DateTime(2015),
+    isApproved: false,
+    type: MessageType.textMessage,
+  ),
+  ActivityEntity(
+    id: 55,
+    groupId: 5,
+    content: "3 Test To approve it file",
+    createdBy: member,
+    createdAt: DateTime.now(),
+    isApproved: true,
+    attachment: const AttachmentModel(
+      size: 50000,
+      width: 3,
+      height: 4,
+      name: 'File name',
+      uri:'https://pbs.twimg.com/profile_images/1744393322418802688/-ZF7VwbA_400x400.jpg',
+      mimeType: 'image/jpeg',
+    ),
+    type: MessageType.other,
+  ),
+  ActivityEntity(
+    id: 56,
+    groupId: 5,
+    content: "2 Test To approve it image",
+    createdBy: member,
+    createdAt: DateTime(2024),
+    isApproved: true,
+    attachment: const AttachmentModel(
+      size: 50000,
+      width: 3,
+      height: 4,
+      name: 'image name',
+      uri:'https://pbs.twimg.com/profile_images/1744393322418802688/-ZF7VwbA_400x400.jpg',
+    ),
+    type: MessageType.photo,
+  ),
+  ActivityEntity(
+    id: 1,
+    groupId: 5,
+    content: "3 4 Hi to BOT .. You can ask me",
+    createdBy: member,
+    createdAt: DateTime.now(),
+    isApproved: false,
+    type: MessageType.textMessage,
+  ),
+  ActivityEntity(
+    id: 2,
+    groupId: 5,
+    insideDirectoryId: 14,
+    content: "بداخل اخلاقيات ككل",
+    createdBy: member,
+    createdAt: DateTime.now(),
+    isApproved: true,
+    type: MessageType.textMessage,
+  ),
+  ActivityEntity(
+    id: 3,
+    groupId: 5,
+    insideDirectoryId: 11,
+    content: "AdvancedProgramming subject",
+    createdBy: member,
+    createdAt: DateTime.now(),
+    isApproved: true,
+    type: MessageType.textMessage,
+  ),
+  ActivityEntity(
+    id: 4,
+    groupId: 5,
+    insideDirectoryId: 11,
+    content: "AdvancedProgramming \nU can choose what u want",
+    createdBy: member,
+    createdAt: DateTime.now(),
+    isApproved: true,
+    type: MessageType.textMessage,
+  ),
+  ActivityEntity(
+    id: 4,
+    groupId: 5,
+    insideDirectoryId: 11,
+    content: "AdvancedProgramming \nU can choose what u want\nagain",
+    createdBy: member,
+    createdAt: DateTime.now(),
+    isApproved: false,
+    type: MessageType.textMessage,
+  ),
+];
 
 List<DirectoryEntity> directories = [
   const DirectoryEntity(

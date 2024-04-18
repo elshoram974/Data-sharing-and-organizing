@@ -59,7 +59,7 @@ class BotCustomBubble extends StatelessWidget {
             color: isApproved
                 ? isTheUser
                     ? AppColor.primary
-                    : AppColor.grayLightDark(context)
+                    : AppColor.grayLightDark(context).withOpacity(0.8)
                 : AppColor.background(context).withGreen(100),
             margin: null,
             nip: isTheUser ? BubbleNip.rightTop : BubbleNip.leftTop,

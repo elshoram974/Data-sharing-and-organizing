@@ -8,8 +8,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
 import 'package:uuid/uuid.dart';
 
-import '../../../../../core/utils/enums/message_type/message_type.dart';
-import '../../../data/models/attachment_model.dart';
 import '../../../domain/entities/activity_entity.dart';
 import '../../../domain/entities/directory_entity.dart';
 import '../../../domain/entities/member_entity.dart';
@@ -23,37 +21,10 @@ abstract class BOTCubit extends Cubit<BOTState> {
   final GroupCubit groupCubit = ProviderDependency.group;
   late final MemberEntity currentMember = groupCubit.group.memberEntity;
 
-  late List<types.Message> botMessages = [
-    ActivityEntity(
-      id: 455,
-      groupId: 5,
-      content: "Test To approve it google.com",
-      createdBy: currentMember,
-      createdAt: DateTime.now(),
-      isApproved: false,
-      type: MessageType.textMessage,
-    ).toMessage(),
-    ActivityEntity(
-      id: 55,
-      groupId: 5,
-      content: "Test To approve it file",
-      createdBy: currentMember,
-      createdAt: DateTime.now(),
-      isApproved: true,
-      attachment: AttachmentModel(
-        size: 50000,
-        width: 3,
-        height: 4,
-        name: 'File name',
-        uri:
-            'https://pbs.twimg.com/profile_images/1744393322418802688/-ZF7VwbA_400x400.jpg',
-        mimeType: 'image/jpeg',
-      ),
-      type: MessageType.other,
-    ).toMessage()
-  ];
+  late List<types.Message> botMessages = [];
 
   void addMessage(types.Message message);
+  void addMessages(List<types.Message> messages);
   void handleMessageTap(BuildContext _, types.Message message);
   void handleMessageDoubleTap(BuildContext _, types.Message message);
   void handlePreviewDataFetched(
@@ -65,6 +36,12 @@ class BOTCubitImp extends BOTCubit {
   BOTCubitImp();
 
   int _i = 0;
+
+  @override
+  void addMessages(List<types.Message> messages) {
+    botMessages.insertAll(0, messages.reversed);
+    emit(SetState(_i++));
+  }
 
   @override
   void addMessage(types.Message message) {
