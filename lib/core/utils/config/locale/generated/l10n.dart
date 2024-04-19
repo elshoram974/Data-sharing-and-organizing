@@ -1603,6 +1603,16 @@ class S {
       args: [activity],
     );
   }
+
+  /// `You: `
+  String get youWithColon {
+    return Intl.message(
+      'You: ',
+      name: 'youWithColon',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

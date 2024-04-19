@@ -1,3 +1,4 @@
+import 'package:data_sharing_organizing/core/utils/config/locale/generated/l10n.dart';
 import 'package:data_sharing_organizing/core/utils/constants/app_color.dart';
 import 'package:data_sharing_organizing/core/utils/functions/detect_text_direction.dart';
 import 'package:data_sharing_organizing/core/utils/services/dependency/provider_dependency.dart';
@@ -22,16 +23,17 @@ class HomeGroupLastMessage extends StatelessWidget {
   Widget build(BuildContext context) {
     final IconData? icon = lastActivity.type.icon();
     final AuthUserEntity author = lastActivity.createdBy.user;
-    return Expanded(
+    return Flexible(
       child: AnimatedSize(
         alignment: Alignment.topCenter,
         duration: const Duration(milliseconds: 300),
         child: Text.rich(
           TextSpan(
             children: [
-              if(ProviderDependency.userMain.user.id != author.id)
               TextSpan(
-                text: '${author.name}: ',
+                text: ProviderDependency.userMain.user.id != author.id
+                    ? '${author.name}: '
+                    : S.of(context).youWithColon,
                 style: AppStyle.styleBoldInika24.copyWith(
                   fontSize: 13,
                   color: AppColor.gray,

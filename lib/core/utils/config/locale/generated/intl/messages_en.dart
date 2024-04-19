@@ -300,6 +300,7 @@ class MessageLookup extends MessageLookupByLibrary {
                 "You can\'t use the same previous password."),
         "youHaveToConfirmYourAccount": MessageLookupByLibrary.simpleMessage(
             "You have to confirm your account"),
+        "youWithColon": MessageLookupByLibrary.simpleMessage("You: "),
         "yourGroups": MessageLookupByLibrary.simpleMessage("Your groups"),
         "yourNewPasswordMustBeDifferentFromPreviously":
             MessageLookupByLibrary.simpleMessage(

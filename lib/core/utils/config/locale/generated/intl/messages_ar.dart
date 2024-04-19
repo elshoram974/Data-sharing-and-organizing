@@ -302,6 +302,7 @@ class MessageLookup extends MessageLookupByLibrary {
                 "لا يمكنك استخدام نفس كلمة المرور السابقة."),
         "youHaveToConfirmYourAccount":
             MessageLookupByLibrary.simpleMessage("يجب تأكيد حسابك"),
+        "youWithColon": MessageLookupByLibrary.simpleMessage("أنت: "),
         "yourGroups": MessageLookupByLibrary.simpleMessage("مجموعاتك"),
         "yourNewPasswordMustBeDifferentFromPreviously":
             MessageLookupByLibrary.simpleMessage(
