@@ -223,12 +223,15 @@ class _GroupChatScreenState extends State<GroupChatScreen> {
       showUserAvatars: true,
       showUserNames: true,
       bubbleBuilder: customBubble,
+      l10n: ProviderDependency.config.isArabic
+          ? const ChatL10nAr()
+          : const ChatL10nEn(),
       dateHeaderBuilder: (_) => DateHeaderWidget(_),
       inputOptions: InputOptions(
         enabled: enabled,
         sendButtonVisibilityMode: enabled
-            ? SendButtonVisibilityMode.hidden
-            : SendButtonVisibilityMode.editing,
+            ? SendButtonVisibilityMode.editing
+            : SendButtonVisibilityMode.hidden,
         onTextFieldTap: ProviderDependency.group.closeFloatingButton,
       ),
       user: _user,
@@ -275,7 +278,10 @@ class _GroupChatScreenState extends State<GroupChatScreen> {
       inputElevation: 1,
       inputPadding: EdgeInsets.zero,
       inputBackgroundColor: AppColor.grayLightDark(context),
-      attachmentButtonIcon: const MyAttachmentButtonIcon(),
+      attachmentButtonIcon: const Padding(
+        padding: EdgeInsets.symmetric(vertical: 10.0),
+        child: MyAttachmentButtonIcon(),
+      ),
     );
   }
 }

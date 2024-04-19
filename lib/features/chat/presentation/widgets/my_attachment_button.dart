@@ -1,3 +1,5 @@
+import 'dart:math' as math;
+
 import 'package:flutter/material.dart';
 
 class MyAttachmentButtonIcon extends StatelessWidget {
@@ -8,7 +10,7 @@ class MyAttachmentButtonIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Transform.rotate(
-      angle: 45,
+      angle: math.pi / 4,
       child: Icon(
         Icons.attach_file_outlined,
         color: iconColor,
