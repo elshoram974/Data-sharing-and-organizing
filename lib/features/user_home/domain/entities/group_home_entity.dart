@@ -96,6 +96,38 @@ class GroupHomeEntity extends Equatable {
     );
   }
 
+  GroupHomeEntity copyWithNull({
+    required int id,
+    required String? imageLink,
+    required String groupName,
+    required ActivityEntity? lastActivity,
+    required int? unReadCounter,
+    required bool isSelected,
+    required bool isMute,
+    required int ownerId,
+    required double? bottomHeight,
+    required GroupDiscussionType discussion,
+    required GroupAccessType accessType,
+    required MemberModel member,
+    required DateTime createdAt,
+  }) {
+    return GroupHomeEntity(
+      id: id,
+      unReadCounter: unReadCounter,
+      isSelected: isSelected,
+      isMute: isMute,
+      imageLink: imageLink,
+      groupName: groupName,
+      lastActivity: lastActivity,
+      ownerId: ownerId,
+      bottomHeight: bottomHeight,
+      discussion: discussion,
+      accessType: accessType,
+      memberEntity: member,
+      createdAt: createdAt,
+    );
+  }
+
   @override
   List<Object?> get props => [id, ownerId,memberEntity,createdAt];
 }

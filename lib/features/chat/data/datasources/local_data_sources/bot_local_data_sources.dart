@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:data_sharing_organizing/core/utils/constants/app_strings.dart';
 import 'package:data_sharing_organizing/core/utils/services/dependency/provider_dependency.dart';
+import 'package:data_sharing_organizing/features/chat/data/models/member_model.dart';
 import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
 import 'package:hive/hive.dart';
 
@@ -23,7 +24,8 @@ abstract class BOTLocalDataSource {
 
   Future<void> saveDirActInside(DataInDirectory dataInDirectory);
 
-  Future<void> saveBotMessages(GroupHomeEntity group, List<types.Message> messages);
+  Future<void> saveBotMessages(
+      GroupHomeEntity group, List<types.Message> messages);
   List<types.Message> getBotMessages(int groupId);
 }
 
@@ -31,8 +33,10 @@ class BOTLocalDataSourceImp extends BOTLocalDataSource {
   BOTLocalDataSourceImp(this.homeLocal);
   final HomeLocalDataSource homeLocal;
 
-  late final Box<GroupHomeEntity> groupsBox = Hive.box<GroupHomeEntity>(AppStrings.groupsBox);
-  late final Box<String> messageBox = Hive.box<String>(AppStrings.botMessagesBox);
+  late final Box<GroupHomeEntity> groupsBox =
+      Hive.box<GroupHomeEntity>(AppStrings.groupsBox);
+  late final Box<String> messageBox =
+      Hive.box<String>(AppStrings.botMessagesBox);
 
   Iterable<ActivityEntity> _allGroupActivities(int groupId) {
     return activities.where((e) => e.groupId == groupId);
@@ -61,12 +65,25 @@ class BOTLocalDataSourceImp extends BOTLocalDataSource {
   }
 
   @override
-  Future<void> saveBotMessages(GroupHomeEntity group, List<types.Message> messages) async {
+  Future<void> saveBotMessages(
+      GroupHomeEntity group, List<types.Message> messages) async {
     await messageBox.delete(group.id);
 
     ProviderDependency.userHome.updateGroupLocally(
-      group.copyWith(
+      group.copyWithNull(
+        id: group.id,
+        imageLink: group.imageLink,
+        groupName: group.groupName,
         lastActivity: ActivityEntity.fromMessage(messages.first),
+        unReadCounter: null,
+        isSelected: group.isSelected,
+        isMute: group.isMute,
+        ownerId: group.ownerId,
+        bottomHeight: group.bottomHeight,
+        discussion: group.discussion,
+        accessType: group.accessType,
+        member: MemberModel.fromEntity(group.memberEntity),
+        createdAt: group.createdAt,
       ),
     );
 

@@ -43,11 +43,16 @@ class UserHomeCubit extends Cubit<UserHomeState> {
 
   // * Update group inside it
   Future<void> updateGroupLocally(GroupHomeEntity groupUpdated) async {
-    final int index = currentGroups.indexOf(groupUpdated);
-    currentGroups[index] = groupUpdated;
-    currentGroups.sort(compareLastActivity);
+    for (int i = 0; i < currentGroups.length; i++) {
+      if (groupUpdated.id == currentGroups[i].id) {
+        currentGroups[i] = groupUpdated;
+        break;
+      }
+    }
 
     await homeRepo.updateGroupLocally(groupUpdated);
+
+    currentGroups.sort(compareLastActivity);
 
     emit(UserHomeUpdateGroup(groupUpdated));
   }

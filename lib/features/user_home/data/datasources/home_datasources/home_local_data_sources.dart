@@ -2,7 +2,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:data_sharing_organizing/core/utils/constants/app_strings.dart';
 import 'package:data_sharing_organizing/core/utils/functions/sort_groups_by_last_activity_time.dart';
 import 'package:data_sharing_organizing/core/utils/services/dependency/provider_dependency.dart';
-import 'package:data_sharing_organizing/features/chat/data/models/member_model.dart';
 import 'package:hive/hive.dart';
 
 import '../../../../auth/domain/entities/auth_user_entity.dart';
@@ -113,18 +112,8 @@ class HomeLocalDataSourceImp extends HomeLocalDataSource {
 
     for (int i = 0; i < groups.length; i++) {
       if (groupUpdated.id == groups[i].id) {
-        groups[i] = groups[i].copyWith(
-          accessType: groupUpdated.accessType,
-          bottomHeight: groupUpdated.bottomHeight,
-          discussion: groupUpdated.discussion,
-          groupName: groupUpdated.groupName,
-          imageLink: groupUpdated.imageLink,
-          isMute: groupUpdated.isMute,
-          lastActivity: groupUpdated.lastActivity,
-          member: MemberModel.fromEntity(groupUpdated.memberEntity),
-          ownerId: groupUpdated.ownerId,
-          unReadCounter: groupUpdated.unReadCounter,
-        );
+        groups[i] = groupUpdated;
+        break;
       }
     }
 

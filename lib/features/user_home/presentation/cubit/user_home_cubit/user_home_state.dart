@@ -24,6 +24,13 @@ final class UserHomeUpdateGroup extends UserHomeState {
         group.ownerId,
         group.bottomHeight,
         group.lastActivity,
+        group.isSelected,
+        group.unReadCounter,
+        group.memberEntity,
+        group.discussion,
+        group.accessType,
+        group.createdAt,
+        group.imageLink,
       ];
 }
 
