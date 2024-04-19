@@ -5,13 +5,18 @@ abstract final class DateToString {
   const DateToString();
 
   static String call(DateTime time, bool putTodayWord) {
+    final DateTime timeToday = DateTime(time.year, time.month, time.day);
+
     final DateTime now = DateTime.now();
-    if (time.day == now.day) {
+    final DateTime today = DateTime(now.year, now.month, now.day);
+    final DateTime yesterday = today.subtract(const Duration(days: 1));
+
+    if (timeToday.isAtSameMomentAs(today)) {
       if (putTodayWord) return S.current.today;
       return DateFormat.jm().format(time);
-    } else if (time.day == now.subtract(const Duration(days: 1)).day) {
+    } else if (timeToday.isAtSameMomentAs(yesterday)) {
       return S.current.yesterday;
-    } else if (time.day > now.subtract(const Duration(days: 7)).day) {
+    } else if (time.isAfter(now.subtract(const Duration(days: 8)))) {
       return DateFormat.E().format(time);
     }
     return DateFormat.yMMMd().format(time);

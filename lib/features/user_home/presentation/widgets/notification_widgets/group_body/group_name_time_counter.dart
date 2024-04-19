@@ -37,10 +37,10 @@ class GroupNameAndTimeAndCounterTile extends StatelessWidget {
             ],
           ),
         ),
-        if (groupNotificationEntity.lastActivity != null)
+        
           Text(
             DateToString.call(
-              groupNotificationEntity.lastActivity!.createdAt,
+              groupNotificationEntity.lastActivity?.createdAt ?? groupNotificationEntity.createdAt,
               false,
             ),
             style: TextStyle(

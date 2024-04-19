@@ -1,6 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:data_sharing_organizing/core/utils/constants/app_strings.dart';
+import 'package:data_sharing_organizing/core/utils/functions/sort_groups_by_last_activity_time.dart';
 import 'package:data_sharing_organizing/core/utils/services/dependency/provider_dependency.dart';
+import 'package:data_sharing_organizing/features/chat/data/models/member_model.dart';
 import 'package:hive/hive.dart';
 
 import '../../../../auth/domain/entities/auth_user_entity.dart';
@@ -25,7 +27,7 @@ class HomeLocalDataSourceImp extends HomeLocalDataSource {
 
   @override
   List<GroupHomeEntity> getAllGroups() {
-    return groupsBox.values.toList();
+    return groupsBox.values.toList()..sort(compareLastActivity);
   }
 
   @override
@@ -119,7 +121,7 @@ class HomeLocalDataSourceImp extends HomeLocalDataSource {
           imageLink: groupUpdated.imageLink,
           isMute: groupUpdated.isMute,
           lastActivity: groupUpdated.lastActivity,
-          memberEntity: groupUpdated.memberEntity,
+          member: MemberModel.fromEntity(groupUpdated.memberEntity),
           ownerId: groupUpdated.ownerId,
           unReadCounter: groupUpdated.unReadCounter,
         );

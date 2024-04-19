@@ -5,6 +5,7 @@ import 'package:data_sharing_organizing/core/status/success/success.dart';
 import 'package:data_sharing_organizing/core/utils/config/routes/routes.dart';
 import 'package:data_sharing_organizing/core/utils/enums/http_exception_type_enum.dart';
 import 'package:data_sharing_organizing/core/utils/enums/selected_pop_up_enum.dart';
+import 'package:data_sharing_organizing/core/utils/functions/sort_groups_by_last_activity_time.dart';
 import 'package:data_sharing_organizing/core/utils/services/dependency/provider_dependency.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -21,7 +22,7 @@ import '../main_cubit/user_main_cubit.dart';
 part 'user_home_state.dart';
 
 class UserHomeCubit extends Cubit<UserHomeState> {
-  UserHomeCubit( {
+  UserHomeCubit({
     required this.homeRepo,
     required this.getGroupsUseCase,
     required this.exitFromSomeGroups,
@@ -41,9 +42,10 @@ class UserHomeCubit extends Cubit<UserHomeState> {
   final List<GroupHomeEntity> selectedGroups = [];
 
   // * Update group inside it
-  Future<void> updateGroupLocally(GroupHomeEntity groupUpdated) async{
+  Future<void> updateGroupLocally(GroupHomeEntity groupUpdated) async {
     final int index = currentGroups.indexOf(groupUpdated);
     currentGroups[index] = groupUpdated;
+    currentGroups.sort(compareLastActivity);
 
     await homeRepo.updateGroupLocally(groupUpdated);
 
@@ -103,6 +105,7 @@ class UserHomeCubit extends Cubit<UserHomeState> {
           currentGroups.clear();
         }
         currentGroups.addAll(tempStatus.data);
+        currentGroups.sort(compareLastActivity);
 
         emit(HomeSuccessState(tempStatus.data));
         emit(GetGroupsLoadingState(inFirst));

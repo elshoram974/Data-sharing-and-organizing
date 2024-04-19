@@ -1,8 +1,8 @@
 import 'package:data_sharing_organizing/core/utils/enums/home/group_access_type_enum.dart';
 import 'package:data_sharing_organizing/core/utils/enums/home/group_discussion_type_enum.dart';
 
+import '../../../chat/data/models/member_model.dart';
 import '../../../chat/domain/entities/activity_entity.dart';
-import '../../../chat/domain/entities/member_entity.dart';
 import 'group_home_entity.dart';
 
 final class GroupNotificationEntity extends GroupHomeEntity {
@@ -20,6 +20,7 @@ final class GroupNotificationEntity extends GroupHomeEntity {
     required super.discussion,
     super.accessType,
     required super.memberEntity,
+    required super.createdAt,
   }) : super(isSelected: false, isMute: false);
 
   @override
@@ -37,7 +38,8 @@ final class GroupNotificationEntity extends GroupHomeEntity {
     double? bottomHeight,
     GroupDiscussionType? discussion,
     GroupAccessType? accessType,
-    MemberEntity? memberEntity,
+    MemberModel? member,
+    DateTime? createdAt,
   }) {
     return GroupNotificationEntity(
       id: id ?? this.id,
@@ -49,11 +51,12 @@ final class GroupNotificationEntity extends GroupHomeEntity {
       ownerId: ownerId ?? this.ownerId,
       bottomHeight: bottomHeight ?? this.bottomHeight,
       discussion: discussion ?? this.discussion,
-      accessType : accessType ?? this.accessType,
-      memberEntity: memberEntity ?? this.memberEntity,
+      accessType: accessType ?? this.accessType,
+      memberEntity: member ?? memberEntity,
+      createdAt: createdAt ?? this.createdAt,
     );
   }
 
   @override
-  List<Object?> get props => [id, ownerId , memberEntity];
+  List<Object?> get props => [...super.props];
 }

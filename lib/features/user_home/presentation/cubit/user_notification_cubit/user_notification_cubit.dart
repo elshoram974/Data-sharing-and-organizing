@@ -1,5 +1,6 @@
 import 'package:data_sharing_organizing/core/utils/enums/home/group_discussion_type_enum.dart';
 import 'package:data_sharing_organizing/core/utils/enums/message_type/message_type.dart';
+import 'package:data_sharing_organizing/core/utils/functions/sort_groups_by_last_activity_time.dart';
 import 'package:data_sharing_organizing/features/chat/domain/entities/activity_entity.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
@@ -11,6 +12,7 @@ part 'user_notification_state.dart';
 
 class UserNotificationCubit extends Cubit<UserNotificationState> {
   UserNotificationCubit() : super(const UserNotificationInitial()) {
+    list.sort(compareLastActivity);
     currentNotifications.addAll(list);
   }
   final List<GroupNotificationEntity> currentNotifications = [];
@@ -30,16 +32,8 @@ final list = [
   GroupNotificationEntity(
       memberEntity: MemberEntity.newEmpty(),
       id: 0,
-      lastActivity: ActivityEntity(
-        id: 0,
-        groupId: 0,
-        createdBy: MemberEntity.newEmpty(),
-        content:
-            'Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message Last message ',
-        createdAt: DateTime.now(),
-        isApproved: true,
-        type: MessageType.location,
-      ),
+      createdAt: DateTime(2001, 2, 3),
+      
       imageLink: 'https://images.justwatch.com/poster/248497985/s592/one-piece',
       groupName: 'First year in THIET aa aa a a a a a a a a a a a a',
       unReadCounter: 0,
@@ -48,6 +42,7 @@ final list = [
   GroupNotificationEntity(
     memberEntity: MemberEntity.newEmpty(),
     id: 1,
+    createdAt: DateTime.now(),
     lastActivity: ActivityEntity(
       id: 1,
       groupId: 1,
@@ -66,6 +61,7 @@ final list = [
   GroupNotificationEntity(
     memberEntity: MemberEntity.newEmpty(),
     id: 2,
+    createdAt: DateTime.now(),
     lastActivity: ActivityEntity(
       id: 2,
       groupId: 2,
