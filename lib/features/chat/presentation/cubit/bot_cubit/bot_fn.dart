@@ -104,7 +104,7 @@ void makeActivityApprovedDialog({
   ShowCustomDialog.warning(
     context,
     body: S.of(context).itWillApproveActivity(activity.content),
-    textConfirm: S.of(context).addDirectory,
+    textConfirm: S.of(context).addActivity,
     onPressConfirm: approveFn,
   );
 }
@@ -129,16 +129,15 @@ void showActivityActions(
 
   if (ProviderDependency.group.isAdmin) {
     if (!activity.isApproved) {
-      content = S.of(_).userWantToAddActivity(
-          activity.content, activity.createdBy.user.name);
+      content = S.of(_).userWantToAddActivity(activity.content, activity.createdBy.user.name);
       actions.insertAll(
         0,
         [
-          if(activity.createdBy.user.id != ProviderDependency.userMain.user.id || activity.createdBy.user.id != c.groupCubit.group.ownerId)
-          TextButton(
-            onPressed: () => c.blockUserInteraction(activity.createdBy.user, _),
-            child: Text(S.of(_).blockThisUser),
-          ),
+          if (activity.createdBy.user.id != ProviderDependency.userMain.user.id && !activity.createdBy.isAdmin)
+            TextButton(
+              onPressed: () => c.blockUserInteraction(activity.createdBy.user, _),
+              child: Text(S.of(_).blockThisUser),
+            ),
           TextButton(
             onPressed: () => bot.approvedActivity(activity, _),
             child: Text(S.of(_).addActivity),
@@ -159,7 +158,64 @@ void showActivityActions(
     content = S.of(_).youAddedActivityName(activity.content);
   }
 
-  showDialog<void>(
+  _showDialog(_, content, actions);
+}
+
+void showDirectoryActions(
+  BuildContext _,
+  DirectoryEntity dir,
+  DirectoryCubit c,
+) {
+  final String content;
+  final List<TextButton> actions = [
+    TextButton(
+      onPressed: () => c.deleteDirectory(dir, _),
+      child: Text(S.of(_).delete),
+    ),
+    TextButton(
+      onPressed: Navigator.of(_).pop,
+      child: Text(S.of(_).cancel),
+    ),
+  ];
+
+  if (c.groupCubit.isAdmin) {
+    if (!dir.isApproved) {
+      content = S.of(_).userWantToAddDirectory(dir.name, dir.createdBy.user.name);
+      actions.insertAll(
+        0,
+        [
+          if (dir.createdBy.user.id != ProviderDependency.userMain.user.id && !dir.createdBy.isAdmin)
+            TextButton(
+              onPressed: () => c.blockUserInteraction(dir.createdBy.user, _),
+              child: Text(S.of(_).blockThisUser),
+            ),
+          TextButton(
+            onPressed: () => c.makeDirectoryApproved(dir, _),
+            child: Text(S.of(_).addDirectory),
+          ),
+        ],
+      );
+    } else {
+      content = S.of(_).whatDoYouWantToDoWithDirNameDirectory(dir.name);
+      actions.insert(
+        0,
+        TextButton(
+          onPressed: () => c.hideDirectory(dir, _),
+          child: Text(S.of(_).hide),
+        ),
+      );
+    }
+  } else {
+    if (ProviderDependency.userMain.user.id != dir.createdBy.user.id || dir.isApproved) return;
+    content = S.of(_).youAddedDirNameDirectory(dir.name);
+  }
+
+  _showDialog(_, content, actions);
+}
+
+Future<void> _showDialog(
+    BuildContext _, String content, List<TextButton> actions) {
+  return showDialog<void>(
     context: _,
     builder: (context) {
       return AlertDialog(

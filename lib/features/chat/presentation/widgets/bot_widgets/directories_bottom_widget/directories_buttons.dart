@@ -1,5 +1,4 @@
 import 'package:data_sharing_organizing/core/shared/filled_button.dart';
-import 'package:data_sharing_organizing/core/utils/config/locale/generated/l10n.dart';
 import 'package:data_sharing_organizing/core/utils/constants/app_color.dart';
 import 'package:data_sharing_organizing/core/utils/constants/app_constants.dart';
 import 'package:data_sharing_organizing/core/utils/services/dependency/provider_dependency.dart';
@@ -9,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../domain/entities/directory_entity.dart';
+import '../../../cubit/bot_cubit/bot_fn.dart';
 import '../../../cubit/bot_cubit/directories_cubit/directories_cubit.dart';
 import 'directories_back_button.dart';
 
@@ -47,7 +47,7 @@ class DirectoriesButtons extends StatelessWidget {
                         height: 38,
                         child: MyFilledButton(
                           onPressed: () => c.openDirectory(dir),
-                          onLongPress: () => _showAction(context, dir, c),
+                          onLongPress: () => showDirectoryActions(context, dir, c),
                           text: dir.name,
                           filledColor: dir.isApproved
                               ? null
@@ -67,67 +67,4 @@ class DirectoriesButtons extends StatelessWidget {
       ),
     );
   }
-}
-
-void _showAction(
-  BuildContext _,
-  DirectoryEntity dir,
-  DirectoryCubit c,
-) {
-  final String content;
-  final List<TextButton> actions = [
-    TextButton(
-      onPressed: () => c.deleteDirectory(dir, _),
-      child: Text(S.of(_).delete),
-    ),
-    TextButton(
-      onPressed: Navigator.of(_).pop,
-      child: Text(S.of(_).cancel),
-    ),
-  ];
-
-  if (c.groupCubit.isAdmin) {
-    if (!dir.isApproved) {
-      content =
-          S.of(_).userWantToAddDirectory(dir.name, dir.createdBy.user.name);
-      actions.insertAll(
-        0,
-        [
-          if (dir.createdBy.user.id != ProviderDependency.userMain.user.id ||
-              dir.createdBy.user.id != c.groupCubit.group.ownerId)
-            TextButton(
-              onPressed: () => c.blockUserInteraction(dir.createdBy.user, _),
-              child: Text(S.of(_).blockThisUser),
-            ),
-          TextButton(
-            onPressed: () => c.makeDirectoryApproved(dir, _),
-            child: Text(S.of(_).addDirectory),
-          ),
-        ],
-      );
-    } else {
-      content = S.of(_).whatDoYouWantToDoWithDirNameDirectory(dir.name);
-      actions.insert(
-        0,
-        TextButton(
-          onPressed: () => c.hideDirectory(dir, _),
-          child: Text(S.of(_).hide),
-        ),
-      );
-    }
-  } else {
-    if (ProviderDependency.userMain.user.id != dir.createdBy.user.id ||
-        dir.isApproved) return;
-    content = S.of(_).youAddedDirNameDirectory(dir.name);
-  }
-
-  showDialog<void>(
-    context: _,
-    builder: (context) {
-      return AlertDialog(
-        content: Text(content),
-        actions: actions,
-      );
-    },
-  );
 }

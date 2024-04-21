@@ -76,12 +76,13 @@ class BOTCubitImp extends BOTCubit {
     ProviderDependency.group.closeFloatingButton();
     if (message.metadata?.containsKey("directory") == true) {
       final String? json = message.metadata!["directory"] as String?;
-      DirectoryEntity? dir =
-          json == null ? null : DirectoryModel.fromJson(json);
+      DirectoryEntity? dir = json == null ? null : DirectoryModel.fromJson(json);
       ProviderDependency.directory.goToDirectory(dir);
     } else if (message.metadata?.containsKey("activity") == true) {
       final ActivityEntity activity = ActivityModel.fromJson(message.metadata!["activity"]);
-      if (canEditMessage(activity)) showActivityActions(_, activity);
+      if (canEditMessage(activity) && "BOT" == message.author.firstName?.trim()) {
+        showActivityActions(_, activity);
+      }
     }
   }
 

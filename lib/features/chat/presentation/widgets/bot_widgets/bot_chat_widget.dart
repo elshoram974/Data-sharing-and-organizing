@@ -36,7 +36,7 @@ class BotChatWidget extends StatelessWidget {
         messageWidthRatio: 600,
         l10n: ProviderDependency.config.isArabic
             ? const ChatL10nAr(inputPlaceholder: "تحدث مع الذكاء الاصطناعي")
-            : const ChatL10nEn(inputPlaceholder: "Ask AI"),
+            : const ChatL10nEn(inputPlaceholder: "Ask AI..."),
         inputOptions: InputOptions(
           sendButtonVisibilityMode: SendButtonVisibilityMode.always,
           onTextFieldTap: ProviderDependency.group.closeFloatingButton,

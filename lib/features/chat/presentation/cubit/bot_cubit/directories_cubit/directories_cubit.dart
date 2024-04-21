@@ -130,7 +130,7 @@ class DirectoryCubitImp extends DirectoryCubit {
 
         /// *  to know the directory from [_directoriesStack.lastOrNull]
         metadata: {
-          "directory": dir == null ? null : DirectoryModel.fromEntity(dir),
+          "directory": dir == null ? null : DirectoryModel.fromEntity(dir).toJson(),
           "activity": activityTemp.toJson()
         },
       ),
