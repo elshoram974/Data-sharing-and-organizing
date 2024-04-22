@@ -31,6 +31,7 @@ abstract class BOTCubit extends Cubit<BOTState> {
   late List<types.Message> botMessages = [];
 
   void addMessage(types.Message message);
+  void addMessages(List<types.Message> messages);
   void handleMessageTap(BuildContext _, types.Message message);
   void handleMessageDoubleTap(BuildContext _, types.Message message);
   void handlePreviewDataFetched(
@@ -60,6 +61,13 @@ class BOTCubitImp extends BOTCubit {
   @override
   void addMessage(types.Message message) async {
     botMessages.insert(0, message);
+    await botRepo.saveBotMessages(groupCubit.group, botMessages);
+    emit(SetState(_i++));
+  }
+
+  @override
+  void addMessages(List<types.Message> messages) async {
+    botMessages.insertAll(0, messages.reversed);
     await botRepo.saveBotMessages(groupCubit.group, botMessages);
     emit(SetState(_i++));
   }

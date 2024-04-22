@@ -211,8 +211,9 @@ class DirectoryCubitImp extends DirectoryCubit {
 
   @override
   void botReply(List<ActivityEntity> activities) {
+    final List<types.Message> temp = [];
     for (final ActivityEntity e in activities) {
-      botCubit.addMessage(
+      temp.add(
         e.copyWith(createdAt: DateTime.now()).toMessage().copyWith(
               author: types.User(
                 id: "bot ${groupCubit.group.id}",
@@ -221,6 +222,7 @@ class DirectoryCubitImp extends DirectoryCubit {
             ),
       );
     }
+    botCubit.addMessages(temp);
   }
 
   @override
