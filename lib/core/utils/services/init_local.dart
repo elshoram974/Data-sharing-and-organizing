@@ -4,6 +4,7 @@ import 'package:data_sharing_organizing/features/auth/domain/entities/auth_user_
 import 'package:data_sharing_organizing/features/user_home/domain/entities/group_home_entity.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
+import '../../../features/chat/data/models/attachment_model.dart';
 import '../../../features/chat/domain/entities/activity_entity.dart';
 import '../../../features/chat/domain/entities/directory_entity.dart';
 import '../../../features/chat/domain/entities/member_entity.dart';
@@ -40,6 +41,8 @@ void _registerAdapterFn() {
 
   Hive.registerAdapter<NotificationEnum>(NotificationEnumAdapter()); //* it in member entity
   Hive.registerAdapter<MemberEntity>(MemberEntityAdapter());//* it in group and activity entity
+
+  Hive.registerAdapter<AttachmentModel>(AttachmentModelAdapter());//* it in activity entity
 
   Hive.registerAdapter<ActivityEntity>(ActivityEntityAdapter());//* it in group entity
   Hive.registerAdapter<DirectoryEntity>(DirectoryEntityAdapter());//* it in group entity

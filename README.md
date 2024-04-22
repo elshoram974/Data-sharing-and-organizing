@@ -15,4 +15,4 @@ For help getting started with Flutter development, view the
 [online documentation](https://docs.flutter.dev/), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
 
--last typeId = `9` in `DirectoryEntity` for hive in `D:\my Aplications\data_sharing_organizing\lib\features\chat\domain\entities\directory_entity.dart`
+-last typeId = `10` in `AttachmentModel` for hive in `lib/features/chat/data/models/attachment_model.dart`

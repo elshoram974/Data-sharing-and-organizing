@@ -2,13 +2,29 @@ import 'dart:convert';
 
 import 'package:equatable/equatable.dart';
 import 'package:mime/mime.dart';
+import 'package:hive/hive.dart';
 
+
+part 'attachment_model.g.dart';
+
+@HiveType(typeId: 10)
 class AttachmentModel extends Equatable {
+  @HiveField(0)
   final double size;
+
+  @HiveField(1)
   final double? height; //image
+
+  @HiveField(2)
   final double? width; //image
+
+  @HiveField(3)
   final String? mimeType; //file
+
+  @HiveField(4)
   final String name;
+
+  @HiveField(5)
   final String uri;
 
   /// [height] and [width] for image and [mimeType] for files
