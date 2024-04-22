@@ -18,14 +18,13 @@ import '../../../domain/entities/member_entity.dart';
 import '../../models/attachment_model.dart';
 
 abstract class BOTLocalDataSource {
-  BOTLocalDataSource();
+  const BOTLocalDataSource();
 
-  DataInDirectory getDirActInside(int? dirId, int groupId);
+  DataInDirectory getDirActInside(int? dirId, int groupId,[bool saveWithIt = true]);
 
   Future<void> saveDirActInside(DataInDirectory dataInDirectory);
 
-  Future<void> saveBotMessages(
-      GroupHomeEntity group, List<types.Message> messages);
+  Future<void> saveBotMessages(GroupHomeEntity group, List<types.Message> messages);
   List<types.Message> getBotMessages(int groupId);
 }
 
@@ -33,22 +32,24 @@ class BOTLocalDataSourceImp extends BOTLocalDataSource {
   BOTLocalDataSourceImp(this.homeLocal);
   final HomeLocalDataSource homeLocal;
 
-  late final Box<GroupHomeEntity> groupsBox =
-      Hive.box<GroupHomeEntity>(AppStrings.groupsBox);
-  late final Box<String> messageBox =
-      Hive.box<String>(AppStrings.botMessagesBox);
+  late final Box<String> messageBox = Hive.box<String>(AppStrings.botMessagesBox);
+  late final Box<ActivityEntity> activitiesBox = Hive.box<ActivityEntity>(AppStrings.activitiesBox);
+  late final Box<DirectoryEntity> directoriesBox = Hive.box<DirectoryEntity>(AppStrings.directoriesBox);
 
+  // * get Directories and activities ------------------------------
   Iterable<ActivityEntity> _allGroupActivities(int groupId) {
-    return activities.where((e) => e.groupId == groupId);
+    return activitiesBox.values.where((e) => e.groupId == groupId);
   }
 
   Iterable<DirectoryEntity> _allGroupDirectories(int groupId) {
-    return directories.where((e) => e.groupId == groupId);
+    return directoriesBox.values.where((e) => e.groupId == groupId);
   }
 
   @override
-  DataInDirectory getDirActInside(int? dirId, int groupId) {
-    return DataInDirectory(
+  DataInDirectory getDirActInside(int? dirId, int groupId,[bool saveWithIt = true]) {
+    final DataInDirectory dir = DataInDirectory(
+      groupId: groupId,
+      insideDirectoryId: dirId,
       directories: _allGroupDirectories(groupId)
           .where((e) => e.insideDirectoryId == dirId)
           .toList(),
@@ -57,16 +58,111 @@ class BOTLocalDataSourceImp extends BOTLocalDataSource {
           .toList()
         ..sort((a, b) => a.createdAt.compareTo(b.createdAt)),
     );
+    if (saveWithIt) {
+      if (dir.activities.isEmpty) {
+        final DataInDirectory actDir = DataInDirectory(
+          directories: dir.directories,
+          activities: _activities
+              .where(
+                (e) => e.groupId == groupId && e.insideDirectoryId == dirId,
+              )
+              .toList(),
+          groupId: groupId,
+          insideDirectoryId: dirId,
+        );
+        saveDirActInside(actDir);
+        return actDir;
+      } else if (dir.directories.isEmpty) {
+        final DataInDirectory actDir = DataInDirectory(
+          directories: _directories
+              .where(
+                  (e) => e.groupId == groupId && e.insideDirectoryId == dirId)
+              .toList(),
+          activities: dir.activities,
+          groupId: groupId,
+          insideDirectoryId: dirId,
+        );
+        saveDirActInside(actDir);
+        return actDir;
+      }
+    }
+    return dir;
+    // TODO: cancel all before this and add the next
+    // return DataInDirectory(
+    //   groupId: groupId,
+    //   insideDirectoryId: dirId,
+    //   directories: _allGroupDirectories(groupId)
+    //       .where((e) => e.insideDirectoryId == dirId)
+    //       .toList(),
+    //   activities: _allGroupActivities(groupId)
+    //       .where((e) => e.insideDirectoryId == dirId)
+    //       .toList()
+    //     ..sort((a, b) => a.createdAt.compareTo(b.createdAt)),
+    // );
+  }
+  // ----------------------------------------------------------------
+
+  // * save Directories and activities ------------------------------
+  Future<void> _saveGroupActivities(DataInDirectory data) async {
+    final DataInDirectory getDirAct = getDirActInside(data.insideDirectoryId, data.groupId, false);
+    final List<ActivityEntity> oldActivitiesInSide = getDirAct.activities;
+
+    final List<ActivityEntity> activitiesToSave = [];
+
+    activitiesToSave.addAll(activitiesBox.values);
+
+    if (oldActivitiesInSide.isEmpty) {
+      for (ActivityEntity newAct in data.activities) {
+        activitiesToSave.removeWhere((e) => e.id == newAct.id);
+      }
+    } else {
+      for (ActivityEntity oldActivityInSide in oldActivitiesInSide) {
+        activitiesToSave.removeWhere((e) => e.id == oldActivityInSide.id);
+      }
+    }
+
+    activitiesToSave.addAll(data.activities);
+    print("activitiesToSave ${activitiesToSave.length}");
+
+    await activitiesBox.clear();
+    await activitiesBox.addAll(activitiesToSave);
+  }
+
+  Future<void> _saveGroupDirectories(DataInDirectory data) async {
+    final DataInDirectory getDirAct = getDirActInside(data.insideDirectoryId, data.groupId, false);
+    final List<DirectoryEntity> oldDirInSide = getDirAct.directories;
+
+    final List<DirectoryEntity> directoriesToSave = [];
+
+    directoriesToSave.addAll(directoriesBox.values);
+
+    if (oldDirInSide.isEmpty) {
+      for (DirectoryEntity newDir in data.directories) {
+        directoriesToSave.removeWhere((e) => e.id == newDir.id);
+      }
+    } else {
+      for (DirectoryEntity dirInSide in oldDirInSide) {
+        directoriesToSave.removeWhere((e) => e.id == dirInSide.id);
+      }
+    }
+
+    directoriesToSave.addAll(data.directories);
+
+    await directoriesBox.clear();
+    await directoriesBox.addAll(directoriesToSave);
   }
 
   @override
-  Future<void> saveDirActInside(DataInDirectory dataInDirectory) async {
-    // TODO: implement saveDirectories
+  Future<void> saveDirActInside(DataInDirectory dataInDirectory) {
+    return Future.wait([
+      _saveGroupActivities(dataInDirectory),
+      _saveGroupDirectories(dataInDirectory),
+    ]);
   }
+  // ----------------------------------------------------------------
 
   @override
-  Future<void> saveBotMessages(
-      GroupHomeEntity group, List<types.Message> messages) async {
+  Future<void> saveBotMessages(GroupHomeEntity group, List<types.Message> messages) async {
     await messageBox.delete(group.id);
 
     ProviderDependency.userHome.updateGroupLocally(
@@ -125,7 +221,7 @@ MemberEntity member = MemberEntity(
   isAdmin: true,
 );
 
-List<ActivityEntity> activities = [
+List<ActivityEntity> _activities = [
   ActivityEntity(
     id: 455,
     groupId: 5,
@@ -221,7 +317,7 @@ List<ActivityEntity> activities = [
   ),
 ];
 
-List<DirectoryEntity> directories = [
+List<DirectoryEntity> _directories = [
   DirectoryEntity(
     id: 9,
     name: 'مش معايا',
