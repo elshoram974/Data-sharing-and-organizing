@@ -133,7 +133,7 @@ void showActivityActions(
       actions.insertAll(
         0,
         [
-          if (activity.createdBy.user.id != ProviderDependency.userMain.user.id && !activity.createdBy.isAdmin)
+          if (!activity.createdBy.isAdmin)
             TextButton(
               onPressed: () => c.blockUserInteraction(activity.createdBy.user, _),
               child: Text(S.of(_).blockThisUser),
@@ -184,7 +184,7 @@ void showDirectoryActions(
       actions.insertAll(
         0,
         [
-          if (dir.createdBy.user.id != ProviderDependency.userMain.user.id && !dir.createdBy.isAdmin)
+          if (!dir.createdBy.isAdmin)
             TextButton(
               onPressed: () => c.blockUserInteraction(dir.createdBy.user, _),
               child: Text(S.of(_).blockThisUser),
