@@ -33,10 +33,10 @@ abstract class BOTCubit extends Cubit<BOTState> {
 
   void addMessage(types.Message message);
   void addMessages(List<types.Message> messages);
+  void botReply(List<ActivityEntity> activities);
   void handleMessageTap(BuildContext _, types.Message message);
   void handleMessageDoubleTap(BuildContext _, types.Message message);
-  void handlePreviewDataFetched(
-      types.TextMessage message, types.PreviewData previewData);
+  void handlePreviewDataFetched(types.TextMessage message, types.PreviewData previewData);
   void handleSendPressed(types.PartialText message, [types.Status? status]);
 
   void approvedActivity(ActivityEntity activity, BuildContext _);
@@ -73,6 +73,22 @@ class BOTCubitImp extends BOTCubit {
     botMessages.insertAll(0, messages.reversed);
     await botRepo.saveBotMessages(groupCubit.group, botMessages);
     emit(SetState(_i++));
+  }
+
+  @override
+  void botReply(List<ActivityEntity> activities) {
+    final List<types.Message> temp = [];
+    for (final ActivityEntity e in activities) {
+      temp.add(
+        e.copyWith(createdAt: DateTime.now()).toMessage().copyWith(
+              author: types.User(
+                id: "bot ${groupCubit.group.id}",
+                firstName: "BOT",
+              ),
+            ),
+      );
+    }
+    addMessages(temp);
   }
 
   @override
@@ -128,7 +144,7 @@ class BOTCubitImp extends BOTCubit {
   }
 
   @override
-  void handleSendPressed(types.PartialText message, [types.Status? status]) {
+  void handleSendPressed(types.PartialText message, [types.Status? status]) async{
     ProviderDependency.group.closeFloatingButton();
     final ActivityModel activityTemp = ActivityModel.fromEntity(
       ActivityEntity(
@@ -151,20 +167,25 @@ class BOTCubitImp extends BOTCubit {
     );
 
     addMessage(textMessage);
+    await botRepo.saveBotMessages(groupCubit.group, botMessages);
+    emit(SetState(_i++));
 
-    if (textMessage.status == types.Status.sending) {
-      Future.delayed(const Duration(seconds: 3), () async {
-        final int index =
-            botMessages.indexWhere((element) => element.id == textMessage.id);
-        final types.Message updatedMessage =
-            botMessages[index].copyWith(status: types.Status.seen);
-
-        botMessages[index] = updatedMessage;
-        await botRepo.saveBotMessages(groupCubit.group, botMessages);
-
-        emit(SetState(_i++));
-      });
-    }
+    final int i = botMessages.indexWhere((element) => element.id == textMessage.id);
+    await handleStatusEmit<List<ActivityEntity>>(
+      dismissLoadingOnTap: null,
+      statusFunction: () => botRepo.askAI(activityTemp),
+      successFunction: (activities) {
+        final types.Message updatedMessage = botMessages[i].copyWith(status: types.Status.seen);
+        botMessages[i] = updatedMessage;
+        botReply(activities);
+      },
+      failureFunction: (){
+        final types.Message updatedMessage = botMessages[i].copyWith(status: types.Status.error);
+        botMessages[i] = updatedMessage;
+      }
+    );
+    await botRepo.saveBotMessages(groupCubit.group, botMessages);
+    emit(SetState(_i++));
   }
 
   // * activity edit

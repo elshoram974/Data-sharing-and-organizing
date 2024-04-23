@@ -50,8 +50,6 @@ abstract class DirectoryCubit extends Cubit<DirectoryState> {
   void makeDirectoryApproved(DirectoryEntity dir, BuildContext _);
   void blockUserInteraction(DirectoryEntity dir, BuildContext _);
 
-  void botReply(List<ActivityEntity> activities);
-
   void onPopInvoked(bool didPop);
 }
 
@@ -153,7 +151,7 @@ class DirectoryCubitImp extends DirectoryCubit {
         if (status is Success<DataInDirectory>) {
           if (lDir == _directoriesStack.lastOrNull) {
             currentDirectories = status.data.directories;
-            botReply(status.data.activities);
+            botCubit.botReply(status.data.activities);
           }
         } else {
           if (!canDirectoryPop) {
@@ -235,22 +233,6 @@ class DirectoryCubitImp extends DirectoryCubit {
   }
 
   // ------------------
-
-  @override
-  void botReply(List<ActivityEntity> activities) {
-    final List<types.Message> temp = [];
-    for (final ActivityEntity e in activities) {
-      temp.add(
-        e.copyWith(createdAt: DateTime.now()).toMessage().copyWith(
-              author: types.User(
-                id: "bot ${groupCubit.group.id}",
-                firstName: "BOT",
-              ),
-            ),
-      );
-    }
-    botCubit.addMessages(temp);
-  }
 
   @override
   void onPopInvoked(bool didPop) {

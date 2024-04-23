@@ -13,11 +13,11 @@ Future<void> handleStatusEmit<T>({
   required final Future<Status<T>> Function() statusFunction,
   required void Function(T data) successFunction,
   void Function()? failureFunction,
-  bool dismissLoadingOnTap = false,
+  bool? dismissLoadingOnTap = false,
 }) async {
-  EasyLoading.show(dismissOnTap: dismissLoadingOnTap);
+  if(dismissLoadingOnTap != null) EasyLoading.show(dismissOnTap: dismissLoadingOnTap);
   final Status<T> status = await statusFunction();
-  await EasyLoading.dismiss();
+  if(dismissLoadingOnTap != null) await EasyLoading.dismiss();
   if (status is Success<T>) {
     successFunction(status.data);
   } else {
