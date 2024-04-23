@@ -1,6 +1,8 @@
 import 'package:data_sharing_organizing/core/status/status.dart';
 import 'package:data_sharing_organizing/core/status/success/success.dart';
 import 'package:data_sharing_organizing/core/utils/functions/execute_and_handle_remote_errors.dart';
+import 'package:data_sharing_organizing/features/chat/domain/entities/activity_entity.dart';
+import 'package:data_sharing_organizing/features/chat/domain/entities/member_entity.dart';
 import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
 
 import '../../../user_home/domain/entities/group_home_entity.dart';
@@ -46,5 +48,32 @@ class BOTRepositoriesImp extends BOTRepositories {
   @override
   List<types.Message> loadBotMessages(int groupId) {
     return localDataSource.getBotMessages(groupId);
+  }
+
+  @override
+  Future<Status<void>> approveActivity(MemberEntity currentMember, ActivityEntity activity, bool makeApproved) {
+    return executeAndHandleErrors<void>(
+      () async {
+        final bool isUploaded = await remoteDataSource.approveActivity(
+          activity: activity,
+          currentMember: currentMember,
+          makeApproved: makeApproved,
+        );
+        if(isUploaded) await localDataSource.approveActivity(activity,makeApproved);
+      },
+    );
+  }
+
+  @override
+  Future<Status<void>> deleteActivity(MemberEntity currentMember, ActivityEntity activity) {
+    return executeAndHandleErrors<void>(
+      () async {
+        final bool isDeleted = await remoteDataSource.deleteActivity(
+          activity: activity,
+          currentMember: currentMember,
+        );
+        if(isDeleted) await localDataSource.deleteActivity(activity);
+      },
+    );
   }
 }
