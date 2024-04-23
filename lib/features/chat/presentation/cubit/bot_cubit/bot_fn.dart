@@ -135,7 +135,7 @@ void showActivityActions(
         [
           if (!activity.createdBy.isAdmin)
             TextButton(
-              onPressed: () => c.blockUserInteraction(activity.createdBy.user, _),
+              onPressed: () => c.botCubit.blockUserInteraction(activity, _),
               child: Text(S.of(_).blockThisUser),
             ),
           TextButton(
@@ -186,7 +186,7 @@ void showDirectoryActions(
         [
           if (!dir.createdBy.isAdmin)
             TextButton(
-              onPressed: () => c.blockUserInteraction(dir.createdBy.user, _),
+              onPressed: () => c.blockUserInteraction(dir, _),
               child: Text(S.of(_).blockThisUser),
             ),
           TextButton(
