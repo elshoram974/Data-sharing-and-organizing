@@ -15,13 +15,16 @@ class HomeData {
     return 'HomeData(status: $status, groups: $groups, user: $user)';
   }
 
-  factory HomeData.fromMap(Map<String, dynamic> data) => HomeData(
-        status: data['status'] as String,
-        groups: (data['groups'] as List<dynamic>)
-            .map((e) => GroupDetails.fromMap(e))
-            .toList(),
-        user: User.fromMap(data['user'] as Map<String, dynamic>),
-      );
+  factory HomeData.fromMap(Map<String, dynamic> data) {
+    final User user = User.fromMap(data['user'] as Map<String, dynamic>);
+    return HomeData(
+      status: data['status'] as String,
+      groups: (data['groups'] as List<dynamic>)
+          .map((e) => GroupDetails.fromMap(e,user))
+          .toList(),
+      user: user,
+    );
+  }
 
   Map<String, dynamic> toMap() => {
         'status': status,

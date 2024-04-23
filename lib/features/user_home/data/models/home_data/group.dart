@@ -7,11 +7,12 @@ import 'package:data_sharing_organizing/core/utils/enums/home/group_status_enum.
 import 'package:data_sharing_organizing/core/utils/enums/home/group_type_enum.dart';
 import 'package:data_sharing_organizing/core/utils/enums/home/group_visibility_enum.dart';
 import 'package:data_sharing_organizing/core/utils/enums/message_type/message_type.dart';
+import 'package:data_sharing_organizing/core/utils/enums/notification_enum.dart';
 
+import '../../../../auth/domain/entities/auth_user_entity.dart';
 import '../../../../chat/data/models/activity_model.dart';
 import '../../../../chat/data/models/member_model.dart';
 import '../../../../chat/domain/entities/activity_entity.dart';
-import '../../../../chat/domain/entities/member_entity.dart';
 import '../../../domain/entities/group_home_entity.dart';
 
 class GroupDetails extends GroupHomeEntity {
@@ -60,23 +61,35 @@ class GroupDetails extends GroupHomeEntity {
     return 'Group(groupId: $groupId, groupName: $groupName, groupOwnerId: $groupOwnerId, groupCreationDate: $createdAt, groupDescription: $groupDescription, groupVisibility: $groupVisibility, groupAccessType: $accessType, groupCategory: $groupCategory, groupImage: $groupImage, groupType: $groupType, groupDiscussionType: $discussion, groupStatus: $groupStatus, groupStatusMessage: $groupStatusMessage, isSelected: $isSelected, isMuted: $isMute, unReadCounter: $unReadCounter, lastActivity: $lastActivity , member: $memberEntity)';
   }
 
-  factory GroupDetails.fromMap(Map<String, dynamic> data) => GroupDetails(
-        groupId: data['group_id'] as int,
-        groupName: data['group_name'] as String,
-        groupOwnerId: data['group_owner_id'] as int,
-        createdAt: DateTime.parse(data['group_creation_date'] as String),
-        groupDescription: data['group_description'] as String?,
-        groupVisibility: GroupVisibility.fromString(data['group_visibility'] as String?),
-        accessType: GroupAccessType.fromString(data['group_access_type'] as String?),
-        groupCategory: GroupCategory.fromString(data['group_category'] as String?),
-        groupImage: data['group_image'] as String?,
-        groupType: GroupType.fromString(data['group_type'] as String?),
-        discussion: GroupDiscussionType.fromString(data['group_discussion_type'] as String?),
-        groupStatus: GroupStatus.fromString(data['group_status'] as String?),
-        groupStatusMessage: data['group_status_message'] as String?,
-        lastActivityModel: data['last_activity'] == null ? null : ActivityModel.fromMap(data['last_activity'] as Map<String, dynamic>),
-        memberModel:  MemberModel.fromEntity(MemberEntity.newEmpty()), // TODO: متنساش تعمله ب ال model
-      );
+  factory GroupDetails.fromMap(Map<String, dynamic> data, AuthUserEntity user) {
+    final int groupId =  data['group_id'] as int; 
+    return GroupDetails(
+      groupId: groupId,
+      groupName: data['group_name'] as String,
+      groupOwnerId: data['group_owner_id'] as int,
+      createdAt: DateTime.parse(data['group_creation_date'] as String),
+      groupDescription: data['group_description'] as String?,
+      groupVisibility: GroupVisibility.fromString(data['group_visibility'] as String?),
+      accessType: GroupAccessType.fromString(data['group_access_type'] as String?),
+      groupCategory: GroupCategory.fromString(data['group_category'] as String?),
+      groupImage: data['group_image'] as String?,
+      groupType: GroupType.fromString(data['group_type'] as String?),
+      discussion: GroupDiscussionType.fromString(data['group_discussion_type'] as String?),
+      groupStatus: GroupStatus.fromString(data['group_status'] as String?),
+      groupStatusMessage: data['group_status_message'] as String?,
+      lastActivityModel: data['last_activity'] == null
+                            ? null
+                            : ActivityModel.fromMap(data['last_activity'] as Map<String, dynamic>),
+      memberModel: MemberModel(
+        user: user,
+        groupId: groupId,
+        canInteract: data['member_can_interaction'] as int == 1,
+        notification: NotificationEnum.fromString(data['member_notification'] as String),
+        joinDate: DateTime.parse(data['member_join_date'] as String),
+        isAdmin: data['member_is_admin'] as int == 1,
+      ),
+    );
+  }
 
   Map<String, dynamic> toMap() => {
         'group_id': groupId,
@@ -93,14 +106,18 @@ class GroupDetails extends GroupHomeEntity {
         'group_status': groupStatus.inString,
         'group_status_message': groupStatusMessage,
         'last_activity': lastActivityModel?.toMap(),
-        'member': memberModel.toMap(),
+        'member_id': memberModel.user.id,
+        'member_can_interaction': memberModel.canInteract,
+        'member_notification': memberModel.notification.inString,
+        'member_join_date': memberModel.joinDate.toIso8601String(),
+        'member_is_admin': memberModel.isAdmin? 1 : 0,
       };
 
   /// `dart:convert`
   ///
   /// Parses the string and returns the resulting Json object as [GroupDetails].
-  factory GroupDetails.fromJson(String data) {
-    return GroupDetails.fromMap(json.decode(data) as Map<String, dynamic>);
+  factory GroupDetails.fromJson(String data, AuthUserEntity user) {
+    return GroupDetails.fromMap(json.decode(data) as Map<String, dynamic>, user);
   }
 
   /// `dart:convert`
@@ -152,7 +169,9 @@ class GroupDetails extends GroupHomeEntity {
       groupStatusMessage: groupStatusMessage ?? this.groupStatusMessage,
       isMute: isMute ?? this.isMute,
       isSelected: isSelected ?? this.isSelected,
-      lastActivityModel: lastActivity != null ? ActivityModel.fromEntity(lastActivity) : lastActivityModel,
+      lastActivityModel: lastActivity != null
+          ? ActivityModel.fromEntity(lastActivity)
+          : lastActivityModel,
       unReadCounter: unReadCounter ?? this.unReadCounter,
       bottomHeight: bottomHeight ?? this.bottomHeight,
       memberModel: member ?? memberModel,

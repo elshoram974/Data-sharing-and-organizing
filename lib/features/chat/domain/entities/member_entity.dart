@@ -74,7 +74,7 @@ class MemberEntity extends Equatable {
       groupId: -1,
       canInteract: true,
       joinDate: DateTime.now(),
-      isAdmin: true,
+      isAdmin: false,
     );
   }
 

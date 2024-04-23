@@ -30,7 +30,7 @@ class UserNotificationCubit extends Cubit<UserNotificationState> {
 
 final list = [
   GroupNotificationEntity(
-      memberEntity: MemberEntity.newEmpty(),
+      memberEntity: MemberEntity.newEmpty().copyWith(joinDate: DateTime(2001, 2, 3)),
       id: 0,
       createdAt: DateTime(2001, 2, 3),
       
