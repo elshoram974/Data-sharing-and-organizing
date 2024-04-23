@@ -21,6 +21,7 @@ abstract final class AppLinks {
   static const String removeGroups = '$_home/removeGroups.php';
   
   // * group
+  static String askAI = 'http://127.0.0.1:5000/api/chatbot';
   static const String _chat = '$_home/chat';
   static const String getDirectoriesInside = '$_chat/directions_and_activities.php';
   static const String deleteActivity = '$_chat/deleteActivity.php';

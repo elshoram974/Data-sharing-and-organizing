@@ -36,6 +36,8 @@ abstract class DirectoriesRemoteDataSource {
     required MemberEntity currentMember,
   });
   Future<bool> blockUserWithDir({required DirectoryEntity directory});
+
+  Future<List<ActivityEntity>> askAI({required ActivityEntity activity});
 }
 
 class DirectoriesRemoteDataSourceImp extends DirectoriesRemoteDataSource {
@@ -141,7 +143,7 @@ class DirectoriesRemoteDataSourceImp extends DirectoriesRemoteDataSource {
     // TODO: write code of getting directories here and Link don't forget
     throw UnimplementedError(response.toString());
   }
-  
+
   @override
   Future<bool> blockUserWithDir({required DirectoryEntity directory}) async {
     Map<String, dynamic> response = await service.post(
@@ -151,6 +153,16 @@ class DirectoriesRemoteDataSourceImp extends DirectoriesRemoteDataSource {
         'group_id': '${directory.groupId}',
         'user_id_blocked': '${directory.createdBy.user.id}',
       },
+    );
+    // TODO: implement blockUserWithActivity and Link don't forget
+    throw UnimplementedError(response.toString());
+  }
+
+  @override
+  Future<List<ActivityEntity>> askAI({required ActivityEntity activity}) async {
+    Map<String, dynamic> response = await service.post(
+      AppLinks.askAI,
+      {'message': activity.content},
     );
     // TODO: implement blockUserWithActivity and Link don't forget
     throw UnimplementedError(response.toString());
