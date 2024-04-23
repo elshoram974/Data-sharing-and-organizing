@@ -1,4 +1,6 @@
 import 'package:data_sharing_organizing/core/status/status.dart';
+import 'package:data_sharing_organizing/features/chat/domain/entities/activity_entity.dart';
+import 'package:data_sharing_organizing/features/chat/domain/entities/member_entity.dart';
 import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
 
 import '../../../user_home/domain/entities/group_home_entity.dart';
@@ -9,4 +11,7 @@ abstract class BOTRepositories {
   List<types.Message> loadBotMessages(int groupId);
   Future<void> saveBotMessages(GroupHomeEntity group, List<types.Message> messages);
   Stream<Status<DataInDirectory>> getDirActInside({int? dirId, required int groupId});
+
+  Future<Status<void>> approveActivity(MemberEntity currentMember, ActivityEntity activity, bool makeApproved);
+  Future<Status<void>> deleteActivity(MemberEntity currentMember, ActivityEntity activity);
 }
