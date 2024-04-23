@@ -22,6 +22,8 @@ abstract final class AppLinks {
   // * group
   static const String _chat = '$_home/chat';
   static const String getDirectoriesInside = '$_chat/directions_and_activities.php';
+  static const String deleteActivity = '$_chat/deleteActivity.php';
+  static const String approveActivity = '$_chat/approveActivity.php';
 
 
 
