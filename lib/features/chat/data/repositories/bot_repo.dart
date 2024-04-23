@@ -128,4 +128,16 @@ class BOTRepositoriesImp extends BOTRepositories {
       },
     );
   }
+  
+  @override
+  Future<Status<List<ActivityEntity>>> askAI(ActivityEntity activity) async {
+    return executeAndHandleErrors<List<ActivityEntity>>(
+      () async {
+        final List<ActivityEntity> data = await remoteDataSource.askAI(
+          activity: activity,
+        );
+        return data;
+      },
+    );
+  }
 }

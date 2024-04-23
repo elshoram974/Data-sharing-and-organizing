@@ -1,11 +1,11 @@
 import 'package:data_sharing_organizing/core/status/status.dart';
-import 'package:data_sharing_organizing/features/chat/domain/entities/activity_entity.dart';
-import 'package:data_sharing_organizing/features/chat/domain/entities/directory_entity.dart';
-import 'package:data_sharing_organizing/features/chat/domain/entities/member_entity.dart';
 import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
 
 import '../../../user_home/domain/entities/group_home_entity.dart';
+import '../entities/activity_entity.dart';
 import '../entities/data_in_directory.dart';
+import '../entities/directory_entity.dart';
+import '../entities/member_entity.dart';
 
 abstract class BOTRepositories {
   const BOTRepositories();
@@ -21,4 +21,5 @@ abstract class BOTRepositories {
   Future<Status<void>> deleteDirectory(MemberEntity currentMember, DirectoryEntity dir);
   Future<Status<void>> blockUserWithDir(DirectoryEntity dir);
 
+  Future<Status<List<ActivityEntity>>> askAI(ActivityEntity activity);
 }
