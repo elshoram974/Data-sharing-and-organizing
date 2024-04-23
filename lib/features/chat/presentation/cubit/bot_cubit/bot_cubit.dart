@@ -44,6 +44,8 @@ abstract class BOTCubit extends Cubit<BOTState> {
   void deleteActivity(ActivityEntity activity, BuildContext _);
 
   bool canEditMessage(ActivityEntity activity);
+
+  void blockUserInteraction(ActivityEntity activity, BuildContext _);
 }
 
 class BOTCubitImp extends BOTCubit {
@@ -207,6 +209,21 @@ class BOTCubitImp extends BOTCubit {
       deleteFn: () async {
         await handleStatusEmit<void>(
           statusFunction: () => botRepo.deleteActivity(currentMember, activity),
+          successFunction: (_) {
+            // TODO: make emit when it run in correct way
+          },
+        );
+      },
+    );
+  }
+  @override
+  void blockUserInteraction(ActivityEntity activity, BuildContext _) {
+    blockUserInteractionDialog(
+      context: _,
+      user: activity.createdBy.user,
+      blockFn:() async {
+        await handleStatusEmit<void>(
+          statusFunction: () => botRepo.blockUserWithActivity(activity),
           successFunction: (_) {
             // TODO: make emit when it run in correct way
           },

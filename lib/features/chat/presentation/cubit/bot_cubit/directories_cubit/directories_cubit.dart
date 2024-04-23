@@ -5,7 +5,7 @@ import 'package:data_sharing_organizing/core/status/success/success.dart';
 import 'package:data_sharing_organizing/core/utils/config/locale/generated/l10n.dart';
 import 'package:data_sharing_organizing/core/utils/config/routes/routes.dart';
 import 'package:data_sharing_organizing/core/utils/enums/message_type/message_type.dart';
-import 'package:data_sharing_organizing/core/utils/functions/failure_status_dialog_emit.dart';
+import 'package:data_sharing_organizing/core/utils/functions/handle_status_emit.dart';
 import 'package:data_sharing_organizing/core/utils/services/dependency/provider_dependency.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
@@ -14,7 +14,6 @@ import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:uuid/uuid.dart';
 
-import '../../../../../auth/domain/entities/auth_user_entity.dart';
 import '../../../../data/models/activity_model.dart';
 import '../../../../data/models/directory_model.dart';
 import '../../../../domain/entities/activity_entity.dart';
@@ -49,7 +48,7 @@ abstract class DirectoryCubit extends Cubit<DirectoryState> {
   void deleteDirectory(DirectoryEntity dir, BuildContext _);
   void hideDirectory(DirectoryEntity dir, BuildContext _);
   void makeDirectoryApproved(DirectoryEntity dir, BuildContext _);
-  void blockUserInteraction(AuthUserEntity createdBy, BuildContext _);
+  void blockUserInteraction(DirectoryEntity dir, BuildContext _);
 
   void botReply(List<ActivityEntity> activities);
 
@@ -176,7 +175,14 @@ class DirectoryCubitImp extends DirectoryCubit {
     deleteDirectoryDialog(
       context: _,
       dir: dir,
-      deleteFn: () {},
+      deleteFn: () async {
+        await handleStatusEmit<void>(
+          statusFunction: () => botRepo.deleteDirectory(botCubit.currentMember, dir),
+          successFunction: (_) {
+            // TODO: make emit when it run in correct way
+          },
+        );
+      },
     );
   }
 
@@ -185,7 +191,14 @@ class DirectoryCubitImp extends DirectoryCubit {
     hideDirectoryDialog(
       context: _,
       dir: dir,
-      hideFn: () {},
+      hideFn: () async {
+        await handleStatusEmit<void>(
+          statusFunction: () => botRepo.approveDirectory(botCubit.currentMember, dir, false),
+          successFunction: (_) {
+            // TODO: make emit when it run in correct way
+          },
+        );
+      },
     );
   }
 
@@ -194,16 +207,30 @@ class DirectoryCubitImp extends DirectoryCubit {
     makeDirectoryApprovedDialog(
       context: _,
       dir: dir,
-      approveFn: () {},
+      approveFn: () async {
+        await handleStatusEmit<void>(
+          statusFunction: () => botRepo.approveDirectory(botCubit.currentMember, dir, true),
+          successFunction: (_) {
+            // TODO: make emit when it run in correct way
+          },
+        );
+      },
     );
   }
 
   @override
-  void blockUserInteraction(AuthUserEntity createdBy, BuildContext _) {
+  void blockUserInteraction(DirectoryEntity dir, BuildContext _) {
     blockUserInteractionDialog(
       context: _,
-      user: createdBy,
-      blockFn: () {},
+      user: dir.createdBy.user,
+      blockFn:() async {
+        await handleStatusEmit<void>(
+          statusFunction: () => botRepo.blockUserWithDir(dir),
+          successFunction: (_) {
+            // TODO: make emit when it run in correct way
+          },
+        );
+      },
     );
   }
 
