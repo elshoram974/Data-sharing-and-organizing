@@ -2,6 +2,7 @@ import 'package:data_sharing_organizing/core/status/status.dart';
 import 'package:data_sharing_organizing/core/status/success/success.dart';
 import 'package:data_sharing_organizing/core/utils/functions/execute_and_handle_remote_errors.dart';
 import 'package:data_sharing_organizing/features/chat/domain/entities/activity_entity.dart';
+import 'package:data_sharing_organizing/features/chat/domain/entities/directory_entity.dart';
 import 'package:data_sharing_organizing/features/chat/domain/entities/member_entity.dart';
 import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
 
@@ -73,6 +74,57 @@ class BOTRepositoriesImp extends BOTRepositories {
           currentMember: currentMember,
         );
         if(isDeleted) await localDataSource.deleteActivity(activity);
+      },
+    );
+  }
+
+  @override
+  Future<Status<void>> blockUserWithActivity(ActivityEntity activity) {
+    return executeAndHandleErrors<void>(
+      () async {
+        final bool isBlocked = await remoteDataSource.blockUserWithActivity(
+          activity: activity,
+        );
+        if(isBlocked) await localDataSource.deleteActivity(activity);
+      },
+    );
+  }
+
+  @override
+  Future<Status<void>> approveDirectory(MemberEntity currentMember, DirectoryEntity dir, bool makeApproved) {
+    return executeAndHandleErrors<void>(
+      () async {
+        final bool isUploaded = await remoteDataSource.approveDirectory(
+          directory: dir,
+          currentMember: currentMember,
+          makeApproved: makeApproved,
+        );
+        if(isUploaded) await localDataSource.approveDirectory(dir,makeApproved);
+      },
+    );
+  }
+
+  @override
+  Future<Status<void>> deleteDirectory(MemberEntity currentMember, DirectoryEntity dir) {
+    return executeAndHandleErrors<void>(
+      () async {
+        final bool isDeleted = await remoteDataSource.deleteDirectory(
+          directory: dir,
+          currentMember: currentMember,
+        );
+        if(isDeleted) await localDataSource.deleteDirectory(dir);
+      },
+    );
+  }
+
+  @override
+  Future<Status<void>> blockUserWithDir(DirectoryEntity dir) {
+    return executeAndHandleErrors<void>(
+      () async {
+        final bool isBlocked = await remoteDataSource.blockUserWithDir(
+          directory: dir,
+        );
+        if(isBlocked) await localDataSource.deleteDirectory(dir);
       },
     );
   }
