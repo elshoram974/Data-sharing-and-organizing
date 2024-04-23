@@ -1,5 +1,6 @@
 import 'package:data_sharing_organizing/core/status/status.dart';
 import 'package:data_sharing_organizing/features/chat/domain/entities/activity_entity.dart';
+import 'package:data_sharing_organizing/features/chat/domain/entities/directory_entity.dart';
 import 'package:data_sharing_organizing/features/chat/domain/entities/member_entity.dart';
 import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
 
@@ -14,4 +15,10 @@ abstract class BOTRepositories {
 
   Future<Status<void>> approveActivity(MemberEntity currentMember, ActivityEntity activity, bool makeApproved);
   Future<Status<void>> deleteActivity(MemberEntity currentMember, ActivityEntity activity);
+  Future<Status<void>> blockUserWithActivity(ActivityEntity activity);
+
+  Future<Status<void>> approveDirectory(MemberEntity currentMember, DirectoryEntity dir, bool makeApproved);
+  Future<Status<void>> deleteDirectory(MemberEntity currentMember, DirectoryEntity dir);
+  Future<Status<void>> blockUserWithDir(DirectoryEntity dir);
+
 }
