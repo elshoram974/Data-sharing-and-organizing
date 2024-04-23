@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:data_sharing_organizing/core/utils/enums/message_type/message_type.dart';
+import 'package:data_sharing_organizing/core/utils/functions/handle_status_emit.dart';
 import 'package:data_sharing_organizing/core/utils/functions/handle_tapped_message.dart';
 import 'package:data_sharing_organizing/core/utils/services/dependency/provider_dependency.dart';
 import 'package:equatable/equatable.dart';
@@ -171,7 +172,14 @@ class BOTCubitImp extends BOTCubit {
     makeActivityApprovedDialog(
       context: _,
       activity: activity,
-      approveFn: () {},
+      approveFn: () async {
+        await handleStatusEmit<void>(
+          statusFunction: () => botRepo.approveActivity(currentMember, activity, true),
+          successFunction: (_) {
+            // TODO: make emit when it run in correct way
+          },
+        );
+      },
     );
   }
 
@@ -180,7 +188,14 @@ class BOTCubitImp extends BOTCubit {
     hideActivityDialog(
       context: _,
       activity: activity,
-      hideFn: () {},
+      hideFn: () async {
+        await handleStatusEmit<void>(
+          statusFunction: () => botRepo.approveActivity(currentMember, activity, false),
+          successFunction: (_) {
+            // TODO: make emit when it run in correct way
+          },
+        );
+      },
     );
   }
 
@@ -189,7 +204,14 @@ class BOTCubitImp extends BOTCubit {
     deleteActivityDialog(
       context: _,
       activity: activity,
-      deleteFn: () {},
+      deleteFn: () async {
+        await handleStatusEmit<void>(
+          statusFunction: () => botRepo.deleteActivity(currentMember, activity),
+          successFunction: (_) {
+            // TODO: make emit when it run in correct way
+          },
+        );
+      },
     );
   }
 }
