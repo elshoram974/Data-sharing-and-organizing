@@ -22,9 +22,8 @@ class BotFAB extends StatelessWidget {
         buildWhen: (p, c) => c is GroupChooseScreenState,
         builder: (context, state) {
           return c.currentScreen == 0 &&
-                  (c.group.accessType != GroupAccessType.onlyRead ||
-                      c.isAdmin) &&
-                  c.group.memberEntity.canInteract &&
+                  ((c.group.accessType != GroupAccessType.onlyRead &&
+                  c.group.memberEntity.canInteract) || c.isAdmin) &&
                   !isKeyboardVisible
               ? ExpandableFab(
                   distance: 70,
@@ -38,14 +37,12 @@ class BotFAB extends StatelessWidget {
                   children: [
                     ActionButton(
                       tooltip: S.of(context).addDirectory,
-                      onPressed: () =>
-                          _showAction(context, "U can add directory here"),
+                      onPressed: () => _showAction(context, c.isAdmin? "Add directory Now because u r admin" : "U can add directory here but release that group accessType is ${c.group.accessType.toString()}"),
                       icon: const Icon(Icons.create_new_folder_outlined),
                     ),
                     ActionButton(
                       tooltip: S.of(context).addFileOrMessage,
-                      onPressed: () =>
-                          _showAction(context, "U can add file here"),
+                      onPressed: () => _showAction(context, c.isAdmin? "Add activity Now because u r admin" : "U can add file here but release that group accessType is ${c.group.accessType.toString()}"),
                       icon: const MyAttachmentButtonIcon(iconColor: null),
                     ),
                   ],
