@@ -19,12 +19,16 @@ abstract final class AppLinks {
   static const String _home = '$_userLink/home';
   static const String userHome = '$_home/home.php';
   static const String removeGroups = '$_home/removeGroups.php';
+  
   // * group
   static const String _chat = '$_home/chat';
   static const String getDirectoriesInside = '$_chat/directions_and_activities.php';
   static const String deleteActivity = '$_chat/deleteActivity.php';
   static const String approveActivity = '$_chat/approveActivity.php';
-
+  static const String blockUserWithActivity = '$_chat/blockUserWithActivity.php';
+  static const String approveDirectory = '$_chat/approveDirectory.php';
+  static const String deleteDirectory = '$_chat/deleteDirectory.php';
+  static const String blockUserWithDir = '$_chat/blockUserWithDir.php';
 
 
   // * user profile
