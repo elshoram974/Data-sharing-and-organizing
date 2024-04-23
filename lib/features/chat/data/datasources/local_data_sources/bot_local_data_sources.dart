@@ -29,6 +29,9 @@ abstract class BOTLocalDataSource {
 
   Future<void> approveActivity(ActivityEntity activity, bool makeApproved);
   Future<void> deleteActivity(ActivityEntity activity);
+
+  Future<void> approveDirectory(DirectoryEntity dir, bool makeApproved);
+  Future<void> deleteDirectory(DirectoryEntity dir);
 }
 
 class BOTLocalDataSourceImp extends BOTLocalDataSource {
@@ -211,7 +214,7 @@ class BOTLocalDataSourceImp extends BOTLocalDataSource {
     final Iterable<ActivityEntity> oldActivities = activitiesBox.values;
     final List<ActivityEntity> activitiesToSave = [];
 
-    for (var a in oldActivities) {
+    for (ActivityEntity a in oldActivities) {
       if(a.id == activity.id){
         activitiesToSave.add(a.copyWith(isApproved: makeApproved));
       }else{
@@ -232,6 +235,34 @@ class BOTLocalDataSourceImp extends BOTLocalDataSource {
 
     await activitiesBox.clear();
     await activitiesBox.addAll(activitiesToSave);
+  }
+  
+  @override
+  Future<void> approveDirectory(DirectoryEntity dir, bool makeApproved) async{
+    final Iterable<DirectoryEntity> oldDirectories = directoriesBox.values;
+    final List<DirectoryEntity> directoriesToSave = [];
+
+    for (DirectoryEntity a in oldDirectories) {
+      if(a.id == dir.id){
+        directoriesToSave.add(a.copyWith(isApproved: makeApproved));
+      }else{
+        directoriesToSave.add(a);
+      }
+    }
+
+    await directoriesBox.clear();
+    await directoriesBox.addAll(directoriesToSave);
+  }
+  
+  @override
+  Future<void> deleteDirectory(DirectoryEntity dir) async{
+    final List<DirectoryEntity> directoriesToSave = [];
+    directoriesToSave.addAll(directoriesBox.values);
+
+    directoriesToSave.removeWhere((a) => a.id == dir.id);
+
+    await directoriesBox.clear();
+    await directoriesBox.addAll(directoriesToSave);
   }
 }
 
