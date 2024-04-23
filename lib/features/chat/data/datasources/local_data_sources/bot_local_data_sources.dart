@@ -26,6 +26,9 @@ abstract class BOTLocalDataSource {
 
   Future<void> saveBotMessages(GroupHomeEntity group, List<types.Message> messages);
   List<types.Message> getBotMessages(int groupId);
+
+  Future<void> approveActivity(ActivityEntity activity, bool makeApproved);
+  Future<void> deleteActivity(ActivityEntity activity);
 }
 
 class BOTLocalDataSourceImp extends BOTLocalDataSource {
@@ -122,7 +125,6 @@ class BOTLocalDataSourceImp extends BOTLocalDataSource {
     }
 
     activitiesToSave.addAll(data.activities);
-    print("activitiesToSave ${activitiesToSave.length}");
 
     await activitiesBox.clear();
     await activitiesBox.addAll(activitiesToSave);
@@ -202,6 +204,34 @@ class BOTLocalDataSourceImp extends BOTLocalDataSource {
     }
 
     return messages;
+  }
+  
+  @override
+  Future<void> approveActivity(ActivityEntity activity, bool makeApproved) async{
+    final Iterable<ActivityEntity> oldActivities = activitiesBox.values;
+    final List<ActivityEntity> activitiesToSave = [];
+
+    for (var a in oldActivities) {
+      if(a.id == activity.id){
+        activitiesToSave.add(a.copyWith(isApproved: makeApproved));
+      }else{
+        activitiesToSave.add(a);
+      }
+    }
+
+    await activitiesBox.clear();
+    await activitiesBox.addAll(activitiesToSave);
+  }
+  
+  @override
+  Future<void> deleteActivity(ActivityEntity activity) async{
+    final List<ActivityEntity> activitiesToSave = [];
+    activitiesToSave.addAll(activitiesBox.values);
+
+    activitiesToSave.removeWhere((a) => a.id == activity.id);
+
+    await activitiesBox.clear();
+    await activitiesBox.addAll(activitiesToSave);
   }
 }
 
