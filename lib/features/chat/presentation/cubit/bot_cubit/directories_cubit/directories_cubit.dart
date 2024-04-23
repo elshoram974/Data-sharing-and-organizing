@@ -173,13 +173,13 @@ class DirectoryCubitImp extends DirectoryCubit {
     deleteDirectoryDialog(
       context: _,
       dir: dir,
-      deleteFn: () async {
-        await handleStatusEmit<void>(
+      deleteFn: () {
+        handleStatusEmit<void>(
           statusFunction: () => botRepo.deleteDirectory(botCubit.currentMember, dir),
           successFunction: (_) {
             // TODO: make emit when it run in correct way
           },
-        );
+        ).then((v) => Navigator.of(_).pop());
       },
     );
   }
@@ -189,13 +189,13 @@ class DirectoryCubitImp extends DirectoryCubit {
     hideDirectoryDialog(
       context: _,
       dir: dir,
-      hideFn: () async {
-        await handleStatusEmit<void>(
+      hideFn: () {
+        handleStatusEmit<void>(
           statusFunction: () => botRepo.approveDirectory(botCubit.currentMember, dir, false),
           successFunction: (_) {
             // TODO: make emit when it run in correct way
           },
-        );
+        ).then((v) => Navigator.of(_).pop());
       },
     );
   }
@@ -205,13 +205,13 @@ class DirectoryCubitImp extends DirectoryCubit {
     makeDirectoryApprovedDialog(
       context: _,
       dir: dir,
-      approveFn: () async {
-        await handleStatusEmit<void>(
+      approveFn: () {
+        handleStatusEmit<void>(
           statusFunction: () => botRepo.approveDirectory(botCubit.currentMember, dir, true),
           successFunction: (_) {
             // TODO: make emit when it run in correct way
           },
-        );
+        ).then((v) => Navigator.of(_).pop());
       },
     );
   }
@@ -221,13 +221,13 @@ class DirectoryCubitImp extends DirectoryCubit {
     blockUserInteractionDialog(
       context: _,
       user: dir.createdBy.user,
-      blockFn:() async {
-        await handleStatusEmit<void>(
+      blockFn:() {
+        handleStatusEmit<void>(
           statusFunction: () => botRepo.blockUserWithDir(dir),
           successFunction: (_) {
             // TODO: make emit when it run in correct way
           },
-        );
+        ).then((v) => Navigator.of(_).pop());
       },
     );
   }

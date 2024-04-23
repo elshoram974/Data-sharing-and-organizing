@@ -520,6 +520,7 @@ List<DirectoryEntity> _directories = [
         password: '',
         userType: UserType.personal,
       ),
+      isAdmin: false,
     ),
   ),
   DirectoryEntity(

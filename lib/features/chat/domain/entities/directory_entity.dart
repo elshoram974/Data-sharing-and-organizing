@@ -40,6 +40,7 @@ class DirectoryEntity extends Equatable {
     String? name,
     int? insideDirectoryId,
     bool? isApproved,
+    MemberEntity? createdBy,
   }) {
     return DirectoryEntity(
       id: id ?? this.id,
