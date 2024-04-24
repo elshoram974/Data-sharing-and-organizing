@@ -7,6 +7,9 @@ import 'package:flutter/material.dart';
 import '../../../../auth/domain/entities/auth_user_entity.dart';
 import '../../../domain/entities/activity_entity.dart';
 import '../../../domain/entities/directory_entity.dart';
+import '../../widgets/bot_widgets/add_data/add_activity_directory_dialog_widget.dart';
+import '../../widgets/bot_widgets/add_data/add_activity_widget.dart';
+import '../../widgets/bot_widgets/add_data/add_directory_widget.dart';
 import '../group_cubit/group_cubit.dart';
 import 'bot_cubit.dart';
 import 'directories_cubit/directories_cubit.dart';
@@ -232,11 +235,11 @@ Future<void> _showDialog(
 void addNewActivity(BuildContext context) {
   final GroupCubit c = ProviderDependency.group;
   if (c.group.memberEntity.isAdmin) {
-    _addActivityDialog(context);
+    _addActivityDialog(context, c);
   } else {
     if(!c.group.memberEntity.canInteract) return;
     if (c.group.accessType == GroupAccessType.readWrite) {
-    _addActivityDialog(context);
+    _addActivityDialog(context, c);
     } else {
       _addDataDialogForNoAdmin(context:context, c: c, isDirectory: false);
     }
@@ -245,10 +248,10 @@ void addNewActivity(BuildContext context) {
 void addNewDirectory(BuildContext context) {
   final GroupCubit c = ProviderDependency.group;
   if (c.group.memberEntity.isAdmin) {
-    _addDirectoryDialog(context);
+    _addDirectoryDialog(context, c);
   } else {
     if (c.group.accessType == GroupAccessType.readWrite) {
-    _addDirectoryDialog(context);
+    _addDirectoryDialog(context, c);
     } else {
       _addDataDialogForNoAdmin(context:context, c: c, isDirectory: true);
     }
@@ -280,9 +283,9 @@ void _addDataDialogForNoAdmin({
               onPressed: () {
                 Navigator.of(context).pop();
                 if(isDirectory){
-                  _addDirectoryDialog(context);
+                  _addDirectoryDialog(context, c);
                 }else{
-                  _addActivityDialog(context);
+                  _addActivityDialog(context, c);
                 }
               },
               child: Text(isDirectory? S.of(context).addDirectory : S.of(context).addActivity),
@@ -297,42 +300,30 @@ void _addDataDialogForNoAdmin({
   );
 }
 
-void _addActivityDialog(BuildContext context) {
+void _addActivityDialog(BuildContext context, GroupCubit c) {
   showDialog<void>(
     context: context,
     builder: (context) {
-      return AlertDialog(
-        content: Text(S.of(context).addActivityMessageImageOrFile),
-        actions: [
-          TextButton(
-            onPressed: () {},
-            child: Text(S.of(context).addActivity),
-          ),
-          TextButton(
-            onPressed: () => Navigator.of(context).pop(),
-            child: Text(S.of(context).cancel),
-          ),
-        ],
+      return AddActivityOrDirectoryDialogWidget(
+        content: const AddActivityWidget(),
+        addButton: TextButton(
+          onPressed: c.addNewActivity,
+          child: Text(S.of(context).addActivity),
+        ),
       );
     },
   );
 }
-void _addDirectoryDialog(BuildContext context) {
+void _addDirectoryDialog(BuildContext context, GroupCubit c) {
   showDialog<void>(
     context: context,
     builder: (context) {
-      return AlertDialog(
-        content: Text(S.of(context).addDirectoryName),
-        actions: [
-          TextButton(
-            onPressed: () {},
+      return AddActivityOrDirectoryDialogWidget(
+        content: const AddDirectoryWidget(),
+        addButton:TextButton(
+            onPressed: c.addNewDirectory,
             child: Text(S.of(context).addDirectory),
           ),
-          TextButton(
-            onPressed: () => Navigator.of(context).pop(),
-            child: Text(S.of(context).cancel),
-          ),
-        ],
       );
     },
   );

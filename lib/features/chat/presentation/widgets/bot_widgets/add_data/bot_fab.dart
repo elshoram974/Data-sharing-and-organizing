@@ -7,9 +7,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 
-import '../../cubit/bot_cubit/bot_fn.dart';
-import '../../cubit/group_cubit/group_cubit.dart';
-import '../my_attachment_button.dart';
+import '../../../cubit/bot_cubit/bot_fn.dart';
+import '../../../cubit/group_cubit/group_cubit.dart';
+import '../../my_attachment_button.dart';
 
 class BotFAB extends StatelessWidget {
   const BotFAB({super.key});
