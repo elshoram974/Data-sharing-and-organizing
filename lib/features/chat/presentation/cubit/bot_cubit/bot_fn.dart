@@ -1,4 +1,5 @@
 import 'package:data_sharing_organizing/core/utils/config/locale/generated/l10n.dart';
+import 'package:data_sharing_organizing/core/utils/enums/home/group_access_type_enum.dart';
 import 'package:data_sharing_organizing/core/utils/functions/show_custom_dialog.dart';
 import 'package:data_sharing_organizing/core/utils/services/dependency/provider_dependency.dart';
 import 'package:flutter/material.dart';
@@ -6,6 +7,7 @@ import 'package:flutter/material.dart';
 import '../../../../auth/domain/entities/auth_user_entity.dart';
 import '../../../domain/entities/activity_entity.dart';
 import '../../../domain/entities/directory_entity.dart';
+import '../group_cubit/group_cubit.dart';
 import 'bot_cubit.dart';
 import 'directories_cubit/directories_cubit.dart';
 
@@ -129,7 +131,8 @@ void showActivityActions(
 
   if (ProviderDependency.group.isAdmin) {
     if (!activity.isApproved) {
-      content = S.of(_).userWantToAddActivity(activity.content, activity.createdBy.user.name);
+      content = S.of(_).userWantToAddActivity(
+          activity.content, activity.createdBy.user.name);
       actions.insertAll(
         0,
         [
@@ -221,6 +224,115 @@ Future<void> _showDialog(
       return AlertDialog(
         content: Text(content),
         actions: actions,
+      );
+    },
+  );
+}
+
+void addNewActivity(BuildContext context) {
+  final GroupCubit c = ProviderDependency.group;
+  if (c.group.memberEntity.isAdmin) {
+    _addActivityDialog(context);
+  } else {
+    if(!c.group.memberEntity.canInteract) return;
+    if (c.group.accessType == GroupAccessType.readWrite) {
+    _addActivityDialog(context);
+    } else {
+      _addDataDialogForNoAdmin(context:context, c: c, isDirectory: false);
+    }
+  }
+}
+void addNewDirectory(BuildContext context) {
+  final GroupCubit c = ProviderDependency.group;
+  if (c.group.memberEntity.isAdmin) {
+    _addDirectoryDialog(context);
+  } else {
+    if (c.group.accessType == GroupAccessType.readWrite) {
+    _addDirectoryDialog(context);
+    } else {
+      _addDataDialogForNoAdmin(context:context, c: c, isDirectory: true);
+    }
+  }
+}
+
+void _addDataDialogForNoAdmin({
+  required BuildContext context,
+  required GroupCubit c,
+  required bool isDirectory,
+}) {
+  final String text;
+
+  if (c.group.accessType == GroupAccessType.readWriteWithAdminPermission) {
+    text = "your data will be waited for admin approved";
+  } else if (c.group.accessType == GroupAccessType.onlyRead) {
+    text = "only admins can add new data";
+  } else {
+    text = "u can add anything now";
+  }
+  showDialog<void>(
+    context: context,
+    builder: (context) {
+      return AlertDialog(
+        content: Text(text),
+        actions: [
+          if (c.group.accessType != GroupAccessType.onlyRead)
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+                if(isDirectory){
+                  _addDirectoryDialog(context);
+                }else{
+                  _addActivityDialog(context);
+                }
+              },
+              child: Text(isDirectory? S.of(context).addDirectory : S.of(context).addActivity),
+            ),
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(),
+            child: Text(S.of(context).cancel),
+          ),
+        ],
+      );
+    },
+  );
+}
+
+void _addActivityDialog(BuildContext context) {
+  showDialog<void>(
+    context: context,
+    builder: (context) {
+      return AlertDialog(
+        content: Text('text field to add activity'),
+        actions: [
+          TextButton(
+            onPressed: () {},
+            child: Text(S.of(context).addActivity),
+          ),
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(),
+            child: Text(S.of(context).cancel),
+          ),
+        ],
+      );
+    },
+  );
+}
+void _addDirectoryDialog(BuildContext context) {
+  showDialog<void>(
+    context: context,
+    builder: (context) {
+      return AlertDialog(
+        content: Text('text field to add Directory name'),
+        actions: [
+          TextButton(
+            onPressed: () {},
+            child: Text(S.of(context).addDirectory),
+          ),
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(),
+            child: Text(S.of(context).cancel),
+          ),
+        ],
       );
     },
   );

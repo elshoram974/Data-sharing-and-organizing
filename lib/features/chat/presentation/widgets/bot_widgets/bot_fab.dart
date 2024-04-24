@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 
+import '../../cubit/bot_cubit/bot_fn.dart';
 import '../../cubit/group_cubit/group_cubit.dart';
 import '../my_attachment_button.dart';
 
@@ -23,7 +24,8 @@ class BotFAB extends StatelessWidget {
         builder: (context, state) {
           return c.currentScreen == 0 &&
                   ((c.group.accessType != GroupAccessType.onlyRead &&
-                  c.group.memberEntity.canInteract) || c.isAdmin) &&
+                          c.group.memberEntity.canInteract) ||
+                      c.isAdmin) &&
                   !isKeyboardVisible
               ? ExpandableFab(
                   distance: 70,
@@ -37,12 +39,12 @@ class BotFAB extends StatelessWidget {
                   children: [
                     ActionButton(
                       tooltip: S.of(context).addDirectory,
-                      onPressed: () => _showAction(context, c.isAdmin? "Add directory Now because u r admin" : "U can add directory here but release that group accessType is ${c.group.accessType.toString()}"),
+                      onPressed: () => addNewDirectory(context),
                       icon: const Icon(Icons.create_new_folder_outlined),
                     ),
                     ActionButton(
                       tooltip: S.of(context).addFileOrMessage,
-                      onPressed: () => _showAction(context, c.isAdmin? "Add activity Now because u r admin" : "U can add file here but release that group accessType is ${c.group.accessType.toString()}"),
+                      onPressed: () => addNewActivity(context),
                       icon: const MyAttachmentButtonIcon(iconColor: null),
                     ),
                   ],
@@ -51,27 +53,5 @@ class BotFAB extends StatelessWidget {
         },
       );
     });
-  }
-
-  void _showAction(BuildContext context, String title) {
-    final GroupAccessType accessType =
-        ProviderDependency.group.group.accessType;
-    final text = accessType == GroupAccessType.readWrite
-        ? "U can add data directly"
-        : "Your data will be wait for accepted from admins";
-    showDialog<void>(
-      context: context,
-      builder: (context) {
-        return AlertDialog(
-          content: Text("$title \n$text"),
-          actions: [
-            TextButton(
-              onPressed: () => Navigator.of(context).pop(),
-              child: Text(S.of(context).cancel),
-            ),
-          ],
-        );
-      },
-    );
   }
 }
