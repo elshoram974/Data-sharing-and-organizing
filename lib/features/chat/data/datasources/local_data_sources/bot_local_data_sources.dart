@@ -254,10 +254,28 @@ class BOTLocalDataSourceImp extends BOTLocalDataSource {
     await directoriesBox.addAll(directoriesToSave);
   }
   
+  Future<void> _deleteActivitiesInside(int? inside)async{
+    final List<ActivityEntity> activitiesToSave = [];
+    activitiesToSave.addAll(activitiesBox.values);
+
+    activitiesToSave.removeWhere((a) => a.insideDirectoryId == inside);
+
+    await activitiesBox.clear();
+    await activitiesBox.addAll(activitiesToSave);
+  }
+  Future<void> _deleteDirectoriesInside(int? inside)async{
+    final Iterable<DirectoryEntity> directories = directoriesBox.values;
+    for (DirectoryEntity d in directories) {
+      if(d.insideDirectoryId == inside) await deleteDirectory(d);
+    }
+  }
   @override
   Future<void> deleteDirectory(DirectoryEntity dir) async{
     final List<DirectoryEntity> directoriesToSave = [];
     directoriesToSave.addAll(directoriesBox.values);
+
+    await _deleteActivitiesInside(dir.id);
+    await _deleteDirectoriesInside(dir.id);
 
     directoriesToSave.removeWhere((a) => a.id == dir.id);
 
