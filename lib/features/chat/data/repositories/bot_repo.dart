@@ -136,7 +136,7 @@ class BOTRepositoriesImp extends BOTRepositories {
         final List<ActivityEntity> data = await remoteDataSource.askAI(
           activity: activity,
         );
-        return data;
+        return data; // TODO: make it  when get data from ai get activities from database
       },
     );
   }
