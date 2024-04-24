@@ -263,11 +263,11 @@ void _addDataDialogForNoAdmin({
   final String text;
 
   if (c.group.accessType == GroupAccessType.readWriteWithAdminPermission) {
-    text = "your data will be waited for admin approved";
+    text = S.of(context).yourDataWillBeAwaitingApproval;
   } else if (c.group.accessType == GroupAccessType.onlyRead) {
-    text = "only admins can add new data";
+    text = S.of(context).onlyAdminsCanAddNewData;
   } else {
-    text = "u can add anything now";
+    text = S.of(context).youCanNowAddAnything;
   }
   showDialog<void>(
     context: context,
@@ -302,7 +302,7 @@ void _addActivityDialog(BuildContext context) {
     context: context,
     builder: (context) {
       return AlertDialog(
-        content: Text('text field to add activity'),
+        content: Text(S.of(context).addActivityMessageImageOrFile),
         actions: [
           TextButton(
             onPressed: () {},
@@ -322,7 +322,7 @@ void _addDirectoryDialog(BuildContext context) {
     context: context,
     builder: (context) {
       return AlertDialog(
-        content: Text('text field to add Directory name'),
+        content: Text(S.of(context).addDirectoryName),
         actions: [
           TextButton(
             onPressed: () {},

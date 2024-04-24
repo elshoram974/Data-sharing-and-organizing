@@ -71,7 +71,11 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage(
                 "You have to choose the type of your account if it personal or business account."),
         "addActivity": MessageLookupByLibrary.simpleMessage("Add activity"),
+        "addActivityMessageImageOrFile": MessageLookupByLibrary.simpleMessage(
+            "Add activity: message, image, or file..."),
         "addDirectory": MessageLookupByLibrary.simpleMessage("Add directory"),
+        "addDirectoryName":
+            MessageLookupByLibrary.simpleMessage("Enter directory name"),
         "addFileOrMessage":
             MessageLookupByLibrary.simpleMessage("Add file or message"),
         "areYouSureAboutDeleteYourAccount":
@@ -189,6 +193,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "notification": MessageLookupByLibrary.simpleMessage("Notification"),
         "oR": MessageLookupByLibrary.simpleMessage("OR"),
         "onLockScreen": MessageLookupByLibrary.simpleMessage("On lock screen"),
+        "onlyAdminsCanAddNewData": MessageLookupByLibrary.simpleMessage(
+            "Only administrators are allowed to add new data."),
         "openCamera": MessageLookupByLibrary.simpleMessage("Open camera"),
         "openFiles": MessageLookupByLibrary.simpleMessage("Open files"),
         "openGallery": MessageLookupByLibrary.simpleMessage("Open gallery"),
@@ -298,9 +304,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "youCanNotUseSamePreviousPassword":
             MessageLookupByLibrary.simpleMessage(
                 "You can\'t use the same previous password."),
+        "youCanNowAddAnything": MessageLookupByLibrary.simpleMessage(
+            "You are now able to add anything."),
         "youHaveToConfirmYourAccount": MessageLookupByLibrary.simpleMessage(
             "You have to confirm your account"),
         "youWithColon": MessageLookupByLibrary.simpleMessage("You: "),
+        "yourDataWillBeAwaitingApproval": MessageLookupByLibrary.simpleMessage(
+            "Your data will be awaiting approval from the administrator."),
         "yourGroups": MessageLookupByLibrary.simpleMessage("Your groups"),
         "yourNewPasswordMustBeDifferentFromPreviously":
             MessageLookupByLibrary.simpleMessage(

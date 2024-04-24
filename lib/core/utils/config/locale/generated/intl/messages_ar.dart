@@ -70,7 +70,11 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage(
                 "عليك تحديد ان كان الحساب خاص أو لشركة"),
         "addActivity": MessageLookupByLibrary.simpleMessage("إضافة نشاط"),
+        "addActivityMessageImageOrFile": MessageLookupByLibrary.simpleMessage(
+            "أضف نشاطًا: رسالة، صورة، أو ملف..."),
         "addDirectory": MessageLookupByLibrary.simpleMessage("إضافة مجلد"),
+        "addDirectoryName":
+            MessageLookupByLibrary.simpleMessage("أدخل اسم المجلد"),
         "addFileOrMessage":
             MessageLookupByLibrary.simpleMessage("إضافة ملف أو رسالة"),
         "areYouSureAboutDeleteYourAccount":
@@ -191,6 +195,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "notification": MessageLookupByLibrary.simpleMessage("الإشعارات"),
         "oR": MessageLookupByLibrary.simpleMessage("أو"),
         "onLockScreen": MessageLookupByLibrary.simpleMessage("على شاشة القفل"),
+        "onlyAdminsCanAddNewData": MessageLookupByLibrary.simpleMessage(
+            "يُسمح فقط للمسؤولين بإضافة بيانات جديدة."),
         "openCamera": MessageLookupByLibrary.simpleMessage("فتح الكاميرا"),
         "openFiles": MessageLookupByLibrary.simpleMessage("فتح الملفات"),
         "openGallery": MessageLookupByLibrary.simpleMessage("فتح المعرض"),
@@ -300,9 +306,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "youCanNotUseSamePreviousPassword":
             MessageLookupByLibrary.simpleMessage(
                 "لا يمكنك استخدام نفس كلمة المرور السابقة."),
+        "youCanNowAddAnything": MessageLookupByLibrary.simpleMessage(
+            "أصبح بإمكانك الآن إضافة أي شيء."),
         "youHaveToConfirmYourAccount":
             MessageLookupByLibrary.simpleMessage("يجب تأكيد حسابك"),
         "youWithColon": MessageLookupByLibrary.simpleMessage("أنت: "),
+        "yourDataWillBeAwaitingApproval": MessageLookupByLibrary.simpleMessage(
+            "ستكون بياناتك في انتظار الموافقة من المسئول."),
         "yourGroups": MessageLookupByLibrary.simpleMessage("مجموعاتك"),
         "yourNewPasswordMustBeDifferentFromPreviously":
             MessageLookupByLibrary.simpleMessage(

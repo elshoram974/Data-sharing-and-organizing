@@ -262,5 +262,10 @@
             }
         }
     },
-    "youWithColon": "أنت: "
+    "youWithColon": "أنت: ",
+    "yourDataWillBeAwaitingApproval": "ستكون بياناتك في انتظار الموافقة من المسئول.",
+    "onlyAdminsCanAddNewData": "يُسمح فقط للمسؤولين بإضافة بيانات جديدة.",
+    "youCanNowAddAnything": "أصبح بإمكانك الآن إضافة أي شيء.",
+    "addActivityMessageImageOrFile": "أضف نشاطًا: رسالة، صورة، أو ملف...",
+    "addDirectoryName": "أدخل اسم المجلد"
 }

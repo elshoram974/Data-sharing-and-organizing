@@ -1613,6 +1613,56 @@ class S {
       args: [],
     );
   }
+
+  /// `Your data will be awaiting approval from the administrator.`
+  String get yourDataWillBeAwaitingApproval {
+    return Intl.message(
+      'Your data will be awaiting approval from the administrator.',
+      name: 'yourDataWillBeAwaitingApproval',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Only administrators are allowed to add new data.`
+  String get onlyAdminsCanAddNewData {
+    return Intl.message(
+      'Only administrators are allowed to add new data.',
+      name: 'onlyAdminsCanAddNewData',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You are now able to add anything.`
+  String get youCanNowAddAnything {
+    return Intl.message(
+      'You are now able to add anything.',
+      name: 'youCanNowAddAnything',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Add activity: message, image, or file...`
+  String get addActivityMessageImageOrFile {
+    return Intl.message(
+      'Add activity: message, image, or file...',
+      name: 'addActivityMessageImageOrFile',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter directory name`
+  String get addDirectoryName {
+    return Intl.message(
+      'Enter directory name',
+      name: 'addDirectoryName',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

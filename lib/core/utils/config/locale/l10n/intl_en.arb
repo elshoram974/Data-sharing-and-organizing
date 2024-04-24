@@ -262,5 +262,10 @@
             }
         }
     },
-    "youWithColon": "You: "
+    "youWithColon": "You: ",
+    "yourDataWillBeAwaitingApproval": "Your data will be awaiting approval from the administrator.",
+    "onlyAdminsCanAddNewData": "Only administrators are allowed to add new data.",
+    "youCanNowAddAnything": "You are now able to add anything.",
+    "addActivityMessageImageOrFile": "Add activity: message, image, or file...",
+    "addDirectoryName": "Enter directory name"
 }
