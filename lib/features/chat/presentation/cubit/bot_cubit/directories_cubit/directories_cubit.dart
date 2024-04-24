@@ -52,6 +52,9 @@ abstract class DirectoryCubit extends Cubit<DirectoryState> {
 
   void onPopInvoked(bool didPop);
 
+  GlobalKey<FormFieldState<dynamic>> directoryNameKey =
+      GlobalKey<FormFieldState<dynamic>>();
+  void addNewDirectoryOnSave(String val);
   void addNewDirectory();
 }
 
@@ -129,7 +132,8 @@ class DirectoryCubitImp extends DirectoryCubit {
 
         /// *  to know the directory from [_directoriesStack.lastOrNull]
         metadata: {
-          "directory": dir == null ? null : DirectoryModel.fromEntity(dir).toJson(),
+          "directory":
+              dir == null ? null : DirectoryModel.fromEntity(dir).toJson(),
           "activity": activityTemp.toJson()
         },
       ),
@@ -177,7 +181,8 @@ class DirectoryCubitImp extends DirectoryCubit {
       dir: dir,
       deleteFn: () {
         handleStatusEmit<void>(
-          statusFunction: () => botRepo.deleteDirectory(botCubit.currentMember, dir),
+          statusFunction: () =>
+              botRepo.deleteDirectory(botCubit.currentMember, dir),
           successFunction: (_) {
             // TODO: make emit when it run in correct way
           },
@@ -193,7 +198,8 @@ class DirectoryCubitImp extends DirectoryCubit {
       dir: dir,
       hideFn: () {
         handleStatusEmit<void>(
-          statusFunction: () => botRepo.approveDirectory(botCubit.currentMember, dir, false),
+          statusFunction: () =>
+              botRepo.approveDirectory(botCubit.currentMember, dir, false),
           successFunction: (_) {
             // TODO: make emit when it run in correct way
           },
@@ -209,7 +215,8 @@ class DirectoryCubitImp extends DirectoryCubit {
       dir: dir,
       approveFn: () {
         handleStatusEmit<void>(
-          statusFunction: () => botRepo.approveDirectory(botCubit.currentMember, dir, true),
+          statusFunction: () =>
+              botRepo.approveDirectory(botCubit.currentMember, dir, true),
           successFunction: (_) {
             // TODO: make emit when it run in correct way
           },
@@ -223,7 +230,7 @@ class DirectoryCubitImp extends DirectoryCubit {
     blockUserInteractionDialog(
       context: _,
       user: dir.createdBy.user,
-      blockFn:() {
+      blockFn: () {
         handleStatusEmit<void>(
           statusFunction: () => botRepo.blockUserWithDir(dir),
           successFunction: (_) {
@@ -236,14 +243,36 @@ class DirectoryCubitImp extends DirectoryCubit {
 
   // ------------------
 
+  String _directoryName = '';
+  @override
+  void addNewDirectoryOnSave(String val) => _directoryName = val;
+
+  @override
+  void addNewDirectory() {
+    if (directoryNameKey.currentState!.validate()) {
+      directoryNameKey.currentState!.save();
+      AppRoute.key.currentState?.pop();
+      List<DirectoryEntity> directories = [];
+      directories.addAll([
+        ...currentDirectories,
+        DirectoryEntity(
+          id: 1,
+          insideDirectoryId: _directoriesStack.lastOrNull?.id,
+          name: _directoryName,
+          groupId: groupCubit.group.id,
+          isApproved: false,
+          createdBy: botCubit.currentMember,
+        ),
+      ]);
+      currentDirectories = directories;
+      emit(OpenDirectoryState(currentDirectories));
+    }
+    // TODO: implement addNewDirectory
+  }
+
   @override
   void onPopInvoked(bool didPop) {
     if (_directoriesStack.isEmpty) return AppRoute.key.currentState?.pop();
     closeLastDirectory();
-  }
-  
-  @override
-  void addNewDirectory() {
-    // TODO: implement addNewDirectory
   }
 }
