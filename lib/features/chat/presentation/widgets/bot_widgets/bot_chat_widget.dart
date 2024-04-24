@@ -33,7 +33,6 @@ class BotChatWidget extends StatelessWidget {
           lastReadMessageId: c.botMessages.firstOrNull?.id,
         ),
         dateHeaderBuilder: (_) => DateHeaderWidget(_),
-        messageWidthRatio: 600,
         l10n: ProviderDependency.config.isArabic
             ? const ChatL10nAr(inputPlaceholder: "تحدث مع الذكاء الاصطناعي")
             : const ChatL10nEn(inputPlaceholder: "Ask AI..."),
