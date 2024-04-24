@@ -51,6 +51,8 @@ abstract class DirectoryCubit extends Cubit<DirectoryState> {
   void blockUserInteraction(DirectoryEntity dir, BuildContext _);
 
   void onPopInvoked(bool didPop);
+
+  void addNewDirectory();
 }
 
 class DirectoryCubitImp extends DirectoryCubit {
@@ -238,5 +240,10 @@ class DirectoryCubitImp extends DirectoryCubit {
   void onPopInvoked(bool didPop) {
     if (_directoriesStack.isEmpty) return AppRoute.key.currentState?.pop();
     closeLastDirectory();
+  }
+  
+  @override
+  void addNewDirectory() {
+    // TODO: implement addNewDirectory
   }
 }

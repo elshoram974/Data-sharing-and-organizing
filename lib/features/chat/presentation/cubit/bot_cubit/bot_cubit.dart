@@ -46,6 +46,8 @@ abstract class BOTCubit extends Cubit<BOTState> {
   bool canEditMessage(ActivityEntity activity);
 
   void blockUserInteraction(ActivityEntity activity, BuildContext _);
+
+  void addNewActivity();
 }
 
 class BOTCubitImp extends BOTCubit {
@@ -251,5 +253,10 @@ class BOTCubitImp extends BOTCubit {
         ).then((v) => Navigator.of(_).pop());
       },
     );
+  }
+  
+  @override
+  void addNewActivity() {
+    // TODO: implement addNewActivity
   }
 }

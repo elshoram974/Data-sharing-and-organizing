@@ -3,4 +3,5 @@ enum FieldType {
   email,
   password,
   rePassword,
+  other,
 }

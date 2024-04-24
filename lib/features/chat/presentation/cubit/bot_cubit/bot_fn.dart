@@ -219,8 +219,7 @@ void showDirectoryActions(
   _showDialog(_, content, actions);
 }
 
-Future<void> _showDialog(
-    BuildContext _, String content, List<TextButton> actions) {
+Future<void> _showDialog(BuildContext _, String content, List<TextButton> actions) {
   return showDialog<void>(
     context: _,
     builder: (context) {
@@ -232,38 +231,41 @@ Future<void> _showDialog(
   );
 }
 
+
+
+
 void addNewActivity(BuildContext context) {
   final GroupCubit c = ProviderDependency.group;
   if (c.group.memberEntity.isAdmin) {
-    _addActivityDialog(context, c);
+    _addActivityDialog(context);
   } else {
     if(!c.group.memberEntity.canInteract) return;
     if (c.group.accessType == GroupAccessType.readWrite) {
-    _addActivityDialog(context, c);
+    _addActivityDialog(context);
     } else {
-      _addDataDialogForNoAdmin(context:context, c: c, isDirectory: false);
+      _addDataDialogForNoAdmin(context:context, isDirectory: false);
     }
   }
 }
 void addNewDirectory(BuildContext context) {
   final GroupCubit c = ProviderDependency.group;
   if (c.group.memberEntity.isAdmin) {
-    _addDirectoryDialog(context, c);
+    _addDirectoryDialog(context);
   } else {
     if (c.group.accessType == GroupAccessType.readWrite) {
-    _addDirectoryDialog(context, c);
+    _addDirectoryDialog(context);
     } else {
-      _addDataDialogForNoAdmin(context:context, c: c, isDirectory: true);
+      _addDataDialogForNoAdmin(context:context, isDirectory: true);
     }
   }
 }
 
 void _addDataDialogForNoAdmin({
   required BuildContext context,
-  required GroupCubit c,
   required bool isDirectory,
 }) {
   final String text;
+  final GroupCubit c = ProviderDependency.group;
 
   if (c.group.accessType == GroupAccessType.readWriteWithAdminPermission) {
     text = S.of(context).yourDataWillBeAwaitingApproval;
@@ -283,9 +285,9 @@ void _addDataDialogForNoAdmin({
               onPressed: () {
                 Navigator.of(context).pop();
                 if(isDirectory){
-                  _addDirectoryDialog(context, c);
+                  _addDirectoryDialog(context);
                 }else{
-                  _addActivityDialog(context, c);
+                  _addActivityDialog(context);
                 }
               },
               child: Text(isDirectory? S.of(context).addDirectory : S.of(context).addActivity),
@@ -300,28 +302,28 @@ void _addDataDialogForNoAdmin({
   );
 }
 
-void _addActivityDialog(BuildContext context, GroupCubit c) {
+void _addActivityDialog(BuildContext context) {
   showDialog<void>(
     context: context,
     builder: (context) {
       return AddActivityOrDirectoryDialogWidget(
         content: const AddActivityWidget(),
         addButton: TextButton(
-          onPressed: c.addNewActivity,
+          onPressed: ProviderDependency.bot.addNewActivity,
           child: Text(S.of(context).addActivity),
         ),
       );
     },
   );
 }
-void _addDirectoryDialog(BuildContext context, GroupCubit c) {
+void _addDirectoryDialog(BuildContext context) {
   showDialog<void>(
     context: context,
     builder: (context) {
       return AddActivityOrDirectoryDialogWidget(
         content: const AddDirectoryWidget(),
         addButton:TextButton(
-            onPressed: c.addNewDirectory,
+            onPressed: ProviderDependency.directory.addNewDirectory,
             child: Text(S.of(context).addDirectory),
           ),
       );
