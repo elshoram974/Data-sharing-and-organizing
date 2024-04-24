@@ -22,8 +22,8 @@ class AddDirectoryWidget extends StatelessWidget {
         MyDefaultField(
           fieldKey: c.directoryNameKey,
           autofocus: true,
-          onSaved:(val)=> c.addNewDirectoryOnSave(val ?? 'empty'),
-          onFieldSubmitted:(_)=> c.addNewDirectory(),
+          onSaved: (val) => c.addNewDirectoryOnSave(val!),
+          onFieldSubmitted: (_) => c.addNewDirectory(),
           validator: (val) => AppValidator.auth(val, 3, 30, FieldType.other),
         ),
       ],

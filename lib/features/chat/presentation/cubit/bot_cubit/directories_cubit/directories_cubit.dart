@@ -245,7 +245,7 @@ class DirectoryCubitImp extends DirectoryCubit {
 
   String _directoryName = '';
   @override
-  void addNewDirectoryOnSave(String val) => _directoryName = val;
+  void addNewDirectoryOnSave(String val) => _directoryName = val.trim();
 
   @override
   void addNewDirectory() {
