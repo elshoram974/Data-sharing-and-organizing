@@ -309,7 +309,7 @@ void _addActivityDialog(BuildContext context) {
       return AddActivityOrDirectoryDialogWidget(
         content: const AddActivityWidget(),
         addButton: TextButton(
-          onPressed: ProviderDependency.bot.addNewActivity,
+          onPressed: ProviderDependency.directory.addNewActivity,
           child: Text(S.of(context).addActivity),
         ),
       );
