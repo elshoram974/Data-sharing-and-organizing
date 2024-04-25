@@ -22,4 +22,7 @@ abstract class BOTRepositories {
   Future<Status<void>> blockUserWithDir(DirectoryEntity dir);
 
   Future<Status<List<ActivityEntity>>> askAI(ActivityEntity activity);
+
+  Future<Status<DirectoryEntity>> addNewDir(DirectoryEntity newDir);
+  Future<Status<ActivityEntity>> addNewActivity(ActivityEntity newActivity);
 }

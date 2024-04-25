@@ -124,11 +124,11 @@ class BOTRepositoriesImp extends BOTRepositories {
         final bool isBlocked = await remoteDataSource.blockUserWithDir(
           directory: dir,
         );
-        if(isBlocked) await localDataSource.deleteDirectory(dir);
+        if (isBlocked) await localDataSource.deleteDirectory(dir);
       },
     );
   }
-  
+
   @override
   Future<Status<List<ActivityEntity>>> askAI(ActivityEntity activity) async {
     return executeAndHandleErrors<List<ActivityEntity>>(
@@ -137,6 +137,46 @@ class BOTRepositoriesImp extends BOTRepositories {
           activity: activity,
         );
         return data; // TODO: make it  when get data from ai get activities from database
+      },
+    );
+  }
+
+  @override
+  Future<Status<ActivityEntity>> addNewActivity(ActivityEntity newActivity) {
+    return executeAndHandleErrors<ActivityEntity>(
+      () async {
+        final ActivityEntity activity = await remoteDataSource.addNewActivity(
+          activity: newActivity,
+        );
+        await localDataSource.saveDirActInside(
+          DataInDirectory(
+            directories: const [],
+            activities: [activity],
+            groupId: activity.groupId,
+            insideDirectoryId: activity.insideDirectoryId,
+          ),
+        );
+        return activity;
+      },
+    );
+  }
+
+  @override
+  Future<Status<DirectoryEntity>> addNewDir(DirectoryEntity newDir) {
+    return executeAndHandleErrors<DirectoryEntity>(
+      () async {
+        final DirectoryEntity dir = await remoteDataSource.addNewDir(
+          dir: newDir,
+        );
+        await localDataSource.saveDirActInside(
+          DataInDirectory(
+            directories: [dir],
+            activities: const [],
+            groupId: dir.groupId,
+            insideDirectoryId: dir.insideDirectoryId,
+          ),
+        );
+        return dir;
       },
     );
   }
