@@ -226,8 +226,19 @@ class DirectoriesRemoteDataSourceImp extends DirectoriesRemoteDataSource {
   }
 
   @override
-  Future<DirectoryEntity> addNewDir({required DirectoryEntity dir}) {
+  Future<DirectoryEntity> addNewDir({required DirectoryEntity dir}) async {
+    final Map<String, String> body = {
+      'group_id': '${dir.groupId}',
+      'direction_address ': dir.name,
+      'direction_max_count_activity': '1000',
+      'activity_owner_id': '${dir.createdBy.user.id}',
+    };
+    if (dir.insideDirectoryId != null) body['inside_direction_id'] = '${dir.insideDirectoryId}';
+    Map<String, dynamic> response = await service.post(
+      AppLinks.addNewDir,
+      body,
+    );
     // TODO: implement addNewDir
-    throw UnimplementedError();
+    throw UnimplementedError("$response");
   }
 }
