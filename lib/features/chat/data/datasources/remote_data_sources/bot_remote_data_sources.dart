@@ -8,7 +8,6 @@ import 'package:data_sharing_organizing/features/chat/data/models/attachment_mod
 import 'package:data_sharing_organizing/features/chat/domain/entities/activity_entity.dart';
 import 'package:data_sharing_organizing/features/chat/domain/entities/directory_entity.dart';
 import 'package:data_sharing_organizing/features/chat/domain/entities/member_entity.dart';
-import 'package:flutter/material.dart';
 
 import '../../../domain/entities/data_in_directory.dart';
 
@@ -47,7 +46,10 @@ abstract class DirectoriesRemoteDataSource {
 
   Future<DirectoryEntity> addNewDir({required DirectoryEntity dir});
 
-  Future<ActivityEntity> addNewActivity({required ActivityEntity activity});
+  Future<ActivityEntity> addNewActivity({
+    required ActivityEntity activity,
+    required Uint8List? file,
+  });
 }
 
 class DirectoriesRemoteDataSourceImp extends DirectoriesRemoteDataSource {
@@ -181,6 +183,7 @@ class DirectoriesRemoteDataSourceImp extends DirectoriesRemoteDataSource {
   @override
   Future<ActivityEntity> addNewActivity({
     required ActivityEntity activity,
+    required Uint8List? file,
   }) async {
     Map<String, dynamic> response;
     final Map<String, String> body = {
@@ -195,15 +198,13 @@ class DirectoriesRemoteDataSourceImp extends DirectoriesRemoteDataSource {
     if (activity.insideDirectoryId != null) body['activity_direction_id'] = '${activity.insideDirectoryId}';
     final AttachmentModel? attachment = activity.attachment;
     if (attachment != null) {
-      final Uint8List bytes = Uint8List.fromList(attachment.file);
-      body['activity_attachments_size'] = '${bytes.length}';
+      body['activity_attachments_size'] = '${attachment.size}';
       body['activity_attachments_url'] = attachment.uri;
       body['activity_attachments_mimetype'] = attachment.mimeType!;
       switch (activity.type) {
         case MessageType.photo:
-          final image = await decodeImageFromList(bytes);
-          body['activity_attachments_height'] = '${image.height}';
-          body['activity_attachments_width'] = '${image.width}';
+          body['activity_attachments_height'] = '${attachment.height}';
+          body['activity_attachments_width'] = '${attachment.width}';
 
         default:
       }
@@ -214,7 +215,7 @@ class DirectoriesRemoteDataSourceImp extends DirectoriesRemoteDataSource {
           path: attachment.uri,
           type: attachment.mimeType!.split('/').last,
           ext: attachment.mimeType!.split('/').last,
-          file: bytes,
+          file: file!,
         ),
         body: body,
       );

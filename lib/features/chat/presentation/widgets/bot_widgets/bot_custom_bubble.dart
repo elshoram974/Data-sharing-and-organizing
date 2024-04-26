@@ -13,7 +13,7 @@ import '../../../data/models/activity_model.dart';
 import '../../../domain/entities/activity_entity.dart';
 import '../message_date.dart';
 
-class BotCustomBubble extends StatelessWidget {
+class BotCustomBubble extends StatefulWidget {
   const BotCustomBubble({
     super.key,
     required this.isTheUser,
@@ -27,32 +27,44 @@ class BotCustomBubble extends StatelessWidget {
   final bool nextMessageInGroup;
 
   @override
-  Widget build(BuildContext context) {
-    final bool isTextMessage = message is types.TextMessage;
-    final ActivityEntity? m;
-    late final bool canEdit;
-    if (message.metadata?.containsKey("activity") == true) {
-      m = ActivityModel.fromJson(message.metadata!["activity"]);
-      canEdit = ProviderDependency.bot.canEditMessage(m);
+  State<BotCustomBubble> createState() => _BotCustomBubbleState();
+}
+
+class _BotCustomBubbleState extends State<BotCustomBubble> {
+  late final bool isTextMessage = widget.message is types.TextMessage;
+  late final ActivityEntity? m;
+  late final bool canEdit;
+
+  @override
+  void initState() async{
+    super.initState();
+    if (widget.message.metadata?.containsKey("activity") == true) {
+      m = await ActivityModel.fromJson(widget.message.metadata!["activity"]);
+      canEdit = ProviderDependency.bot.canEditMessage(m!);
     } else {
       m = null;
       canEdit = false;
     }
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final bool isApproved = (m?.isApproved) != false;
     const double border = 5;
     if (!canEdit && !isApproved) return const SizedBox.shrink();
     return Directionality(
       textDirection: TextDirection.ltr,
       child: Column(
-        crossAxisAlignment:
-            isTheUser ? CrossAxisAlignment.end : CrossAxisAlignment.start,
+        crossAxisAlignment: widget.isTheUser
+            ? CrossAxisAlignment.end
+            : CrossAxisAlignment.start,
         children: [
           Visibility(
-            visible: !isTheUser || !isApproved,
+            visible: !widget.isTheUser || !isApproved,
             child: Padding(
               padding: const EdgeInsets.only(bottom: 2),
               child: Text(
-                "${message.author.firstName ?? ''} ${message.author.lastName ?? ''}",
+                "${widget.message.author.firstName ?? ''} ${widget.message.author.lastName ?? ''}",
                 style: AppStyle.styleBoldInika16.copyWith(fontSize: 10),
               ),
             ),
@@ -63,16 +75,16 @@ class BotCustomBubble extends StatelessWidget {
                 : const BubbleEdges.all(border),
             radius: const Radius.circular(0.5 * AppConst.borderRadius),
             color: isApproved
-                ? isTheUser
+                ? widget.isTheUser
                     ? AppColor.primary
                     : AppColor.grayLightDark(context).withOpacity(0.8)
                 : AppColor.background(context).withGreen(100),
             margin: null,
-            nip: isTheUser ? BubbleNip.rightTop : BubbleNip.leftTop,
+            nip: widget.isTheUser ? BubbleNip.rightTop : BubbleNip.leftTop,
             child: Column(
               children: [
                 Visibility(
-                  visible: !isTheUser && canEdit,
+                  visible: !widget.isTheUser && canEdit,
                   child: Text(
                     S.of(context).doubleTapToEdit,
                     style: AppStyle.styleBoldInika13.copyWith(fontSize: 9),
@@ -80,14 +92,17 @@ class BotCustomBubble extends StatelessWidget {
                 ),
                 Directionality(
                   textDirection: detectRtlDirectionality(
-                    isTextMessage ? (message as types.TextMessage).text : 'A',
+                    isTextMessage
+                        ? (widget.message as types.TextMessage).text
+                        : 'A',
                   ),
-                  child: child,
+                  child: widget.child,
                 ),
               ],
             ),
           ),
-          MessageDate(10, millisecondsSinceEpoch: message.createdAt ?? 0),
+          MessageDate(10,
+              millisecondsSinceEpoch: widget.message.createdAt ?? 0),
         ],
       ),
     );

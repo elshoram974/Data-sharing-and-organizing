@@ -1,4 +1,5 @@
 import 'dart:math';
+import 'dart:typed_data';
 
 import 'package:data_sharing_organizing/core/status/errors/failure.dart';
 import 'package:data_sharing_organizing/core/status/success/success.dart';
@@ -292,7 +293,7 @@ class DirectoryCubitImp extends DirectoryCubit {
     );
     
     handleStatusEmit<ActivityEntity>(
-      statusFunction: () => botRepo.addNewActivity(newActivity),
+      statusFunction: () => botRepo.addNewActivity(newActivity,Uint8List.fromList([])),
       successFunction: (_) => botCubit.botReply([_]),
     ).then((v) => AppRoute.key.currentState?.pop());
 }

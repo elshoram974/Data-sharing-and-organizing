@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:data_sharing_organizing/core/status/status.dart';
 import 'package:data_sharing_organizing/core/status/success/success.dart';
 import 'package:data_sharing_organizing/core/utils/functions/execute_and_handle_remote_errors.dart';
@@ -142,11 +144,12 @@ class BOTRepositoriesImp extends BOTRepositories {
   }
 
   @override
-  Future<Status<ActivityEntity>> addNewActivity(ActivityEntity newActivity) {
+  Future<Status<ActivityEntity>> addNewActivity(ActivityEntity newActivity, Uint8List? file) {
     return executeAndHandleErrors<ActivityEntity>(
       () async {
         final ActivityEntity activity = await remoteDataSource.addNewActivity(
           activity: newActivity,
+          file: file,
         );
         await localDataSource.saveDirActInside(
           DataInDirectory(

@@ -46,9 +46,16 @@ class ActivityModel extends ActivityEntity {
       insideDirectoryId: map['activity_direction_id'] as int?,
       repliedOn: map['activity_reply_on'] as int?,
       content: map['activity_content'] as String? ?? '',
-      attachment: map['attachment'] == null
-          ? null
-          : AttachmentModel.fromMap(map['attachment'] as Map<String, dynamic>),
+      attachment: map['activity_attachments_size'] == null
+        ? null
+        : AttachmentModel(
+            size: map['activity_attachments_size'] as double,
+            name: map['activity_content'] as String,
+            uri: map['activity_attachments_url'] as String,
+            mimeType: map['activity_attachments_mimetype'] as String?,
+            width: map['activity_attachments_width'] as double?,
+            height: map['activity_attachments_height'] as double?,
+          ),
       createdAt: DateTime.parse(map['activity_date'] as String),
       isApproved: map['activity_is_approved'] as int == 1,
       notifyOthers: NotificationEnum.fromString(map['activity_notify_others'] as String),

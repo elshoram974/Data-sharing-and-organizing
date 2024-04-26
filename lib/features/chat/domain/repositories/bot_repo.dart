@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:data_sharing_organizing/core/status/status.dart';
 import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
 
@@ -24,5 +26,5 @@ abstract class BOTRepositories {
   Future<Status<List<ActivityEntity>>> askAI(ActivityEntity activity);
 
   Future<Status<DirectoryEntity>> addNewDir(DirectoryEntity newDir);
-  Future<Status<ActivityEntity>> addNewActivity(ActivityEntity newActivity);
+  Future<Status<ActivityEntity>> addNewActivity(ActivityEntity newActivity,Uint8List? file);
 }

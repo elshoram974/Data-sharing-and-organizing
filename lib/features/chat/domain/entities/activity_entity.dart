@@ -127,6 +127,8 @@ class ActivityEntity extends Equatable {
           createdAt: createdAt.millisecondsSinceEpoch,
           remoteId: id.toString(),
           metadata: map,
+          height: attachment!.height,
+          width: attachment!.width,
         );
       default:
         return types.FileMessage(
