@@ -1,8 +1,14 @@
+import 'dart:typed_data';
+
 import 'package:data_sharing_organizing/core/utils/constants/app_links.dart';
+import 'package:data_sharing_organizing/core/utils/enums/message_type/message_type.dart';
 import 'package:data_sharing_organizing/core/utils/services/api_services.dart';
+import 'package:data_sharing_organizing/core/utils/services/pick_image.dart';
+import 'package:data_sharing_organizing/features/chat/data/models/attachment_model.dart';
 import 'package:data_sharing_organizing/features/chat/domain/entities/activity_entity.dart';
 import 'package:data_sharing_organizing/features/chat/domain/entities/directory_entity.dart';
 import 'package:data_sharing_organizing/features/chat/domain/entities/member_entity.dart';
+import 'package:flutter/material.dart';
 
 import '../../../domain/entities/data_in_directory.dart';
 
@@ -38,6 +44,10 @@ abstract class DirectoriesRemoteDataSource {
   Future<bool> blockUserWithDir({required DirectoryEntity directory});
 
   Future<List<ActivityEntity>> askAI({required ActivityEntity activity});
+
+  Future<DirectoryEntity> addNewDir({required DirectoryEntity dir});
+
+  Future<ActivityEntity> addNewActivity({required ActivityEntity activity});
 }
 
 class DirectoriesRemoteDataSourceImp extends DirectoriesRemoteDataSource {
@@ -166,5 +176,58 @@ class DirectoriesRemoteDataSourceImp extends DirectoriesRemoteDataSource {
     );
     // TODO: implement blockUserWithActivity and Link don't forget
     throw UnimplementedError(response.toString());
+  }
+
+  @override
+  Future<ActivityEntity> addNewActivity({
+    required ActivityEntity activity,
+  }) async {
+    Map<String, dynamic> response;
+    final Map<String, String> body = {
+      'activity_group_id': '${activity.groupId}',
+      'activity_type': activity.type.inString,
+      // 'activity_reply_on': 'null',
+      'activity_content': activity.content,
+      'activity_date': activity.createdAt.toIso8601String(),
+      'activity_notify_others': activity.notifyOthers.inString,
+      'activity_owner_id': '${activity.createdBy.user.id}',
+    };
+    if (activity.insideDirectoryId != null) body['activity_direction_id'] = '${activity.insideDirectoryId}';
+    final AttachmentModel? attachment = activity.attachment;
+    if (attachment != null) {
+      final Uint8List bytes = Uint8List.fromList(attachment.file);
+      body['activity_attachments_size'] = '${bytes.length}';
+      body['activity_attachments_url'] = attachment.uri;
+      body['activity_attachments_mimetype'] = attachment.mimeType!;
+      switch (activity.type) {
+        case MessageType.photo:
+          final image = await decodeImageFromList(bytes);
+          body['activity_attachments_height'] = '${image.height}';
+          body['activity_attachments_width'] = '${image.width}';
+
+        default:
+      }
+      response = await service.uploadFile(
+        link: AppLinks.addNewActivity,
+        fieldName: 'file', // TODO: u may have to change this
+        fileToUpload: MyFileData(
+          path: attachment.uri,
+          type: attachment.mimeType!.split('/').last,
+          ext: attachment.mimeType!.split('/').last,
+          file: bytes,
+        ),
+        body: body,
+      );
+    } else {
+      response = await service.post(AppLinks.addNewActivity, body);
+    }
+    // TODO: implement addNewActivity
+    throw UnimplementedError("$response");
+  }
+
+  @override
+  Future<DirectoryEntity> addNewDir({required DirectoryEntity dir}) {
+    // TODO: implement addNewDir
+    throw UnimplementedError();
   }
 }
