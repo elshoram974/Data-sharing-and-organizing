@@ -2,6 +2,8 @@ import 'dart:convert';
 
 import 'package:data_sharing_organizing/core/utils/enums/message_type/message_type.dart';
 import 'package:data_sharing_organizing/core/utils/enums/notification_enum.dart';
+import 'package:data_sharing_organizing/core/utils/enums/user_role/user_type_enum.dart';
+import 'package:data_sharing_organizing/features/auth/domain/entities/auth_user_entity.dart';
 
 import '../../data/models/attachment_model.dart';
 import '../../domain/entities/activity_entity.dart';
@@ -22,6 +24,37 @@ class ActivityModel extends ActivityEntity {
     required super.type,
   });
 
+  factory ActivityModel.fromAPI(Map<String, dynamic> map) {
+    return ActivityModel(
+      id: map['activity_id'] as int,
+      groupId: map['activity_group_id'] as int,
+      createdBy: MemberModel(
+        user: AuthUserEntity(
+          id: map['user_id'] as int,
+          image: map['user_image'] as String?,
+          name:'${map['user_first_name'] as String} ${map['user_last_name'] as String}',
+          email: map['user_email'] as String,
+          password: '',
+          userType: UserType.fromString(map['user_type'] as String?),
+        ),
+        groupId: map['group_id'] as int,
+        canInteract: map['member_can_interaction'] as int == 1,
+        notification: NotificationEnum.fromString(map['member_notification'] as String),
+        joinDate: DateTime.parse(map['member_join_date'] as String),
+        isAdmin: map['member_is_admin'] as int == 1,
+      ),
+      insideDirectoryId: map['activity_direction_id'] as int?,
+      repliedOn: map['activity_reply_on'] as int?,
+      content: map['activity_content'] as String? ?? '',
+      attachment: map['attachment'] == null
+          ? null
+          : AttachmentModel.fromMap(map['attachment'] as Map<String, dynamic>),
+      createdAt: DateTime.parse(map['activity_date'] as String),
+      isApproved: map['activity_is_approved'] as int == 1,
+      notifyOthers: NotificationEnum.fromString(map['activity_notify_others'] as String),
+      type: MessageType.fromString(map['activity_type'] as String),
+    );
+  }
   factory ActivityModel.fromMap(Map<String, dynamic> map) {
     return ActivityModel(
       id: map['id'] as int,
