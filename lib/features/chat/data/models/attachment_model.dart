@@ -13,26 +13,22 @@ class AttachmentModel extends Equatable {
   final double size;
 
   @HiveField(1)
-  final double? height; //image
-
-  @HiveField(2)
-  final double? width; //image
-
-  @HiveField(3)
   final String? mimeType; //file
 
-  @HiveField(4)
+  @HiveField(2)
   final String name;
 
-  @HiveField(5)
+  @HiveField(3)
   final String uri;
+
+  @HiveField(4)
+  final List<int> file;
 
   /// [height] and [width] for image and [mimeType] for files
 
   const AttachmentModel({
     required this.size,
-    this.height,
-    this.width,
+    required this.file,
     this.mimeType,
     required this.name,
     required this.uri,
@@ -40,6 +36,7 @@ class AttachmentModel extends Equatable {
 
   AttachmentModel copyWith({
     double? size,
+    List<int>? file,
     double? height,
     double? width,
     String? mimeType,
@@ -48,10 +45,9 @@ class AttachmentModel extends Equatable {
   }) {
     return AttachmentModel(
       size: size ?? this.size,
+      file: file ?? this.file,
       name: name ?? this.name,
       uri: uri ?? this.uri,
-      height: height ?? this.height,
-      width: width ?? this.width,
       mimeType: mimeType ?? this.mimeType,
     );
   }
@@ -63,10 +59,9 @@ class AttachmentModel extends Equatable {
   }) {
     return AttachmentModel(
       size: size,
+      file: file,
       name: name,
       uri: uri,
-      height: height,
-      width: width,
       mimeType: mimeType,
     );
   }
@@ -76,9 +71,8 @@ class AttachmentModel extends Equatable {
     return AttachmentModel(
       size: data['size'] as double,
       name: data['name'] as String,
+      file: data['file'] as List<int>,
       uri: uri,
-      height: data['height'] as double?,
-      width: data['width'] as double?,
       mimeType: data['mimeType'] as String? ?? lookupMimeType(uri),
     );
   }
@@ -86,9 +80,8 @@ class AttachmentModel extends Equatable {
   Map<String, dynamic> toMap() => {
         'size': size,
         'name': name,
+        'file':file,
         'uri': uri,
-        'height': height,
-        'width': width,
         'mimeType': mimeType ?? lookupMimeType(uri),
       };
 
@@ -105,5 +98,5 @@ class AttachmentModel extends Equatable {
   String toJson() => json.encode(toMap());
 
   @override
-  List<Object?> get props => [size, height, width, mimeType, name, uri];
+  List<Object?> get props => [size,file, mimeType, name, uri];
 }

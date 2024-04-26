@@ -18,30 +18,27 @@ class AttachmentModelAdapter extends TypeAdapter<AttachmentModel> {
     };
     return AttachmentModel(
       size: fields[0] as double,
-      height: fields[1] as double?,
-      width: fields[2] as double?,
-      mimeType: fields[3] as String?,
-      name: fields[4] as String,
-      uri: fields[5] as String,
+      file: (fields[4] as List).cast<int>(),
+      mimeType: fields[1] as String?,
+      name: fields[2] as String,
+      uri: fields[3] as String,
     );
   }
 
   @override
   void write(BinaryWriter writer, AttachmentModel obj) {
     writer
-      ..writeByte(6)
+      ..writeByte(5)
       ..writeByte(0)
       ..write(obj.size)
       ..writeByte(1)
-      ..write(obj.height)
-      ..writeByte(2)
-      ..write(obj.width)
-      ..writeByte(3)
       ..write(obj.mimeType)
-      ..writeByte(4)
+      ..writeByte(2)
       ..write(obj.name)
-      ..writeByte(5)
-      ..write(obj.uri);
+      ..writeByte(3)
+      ..write(obj.uri)
+      ..writeByte(4)
+      ..write(obj.file);
   }
 
   @override
