@@ -30,6 +30,8 @@ abstract final class AppLinks {
   static const String approveDirectory = '$_chat/approveDirectory.php';
   static const String deleteDirectory = '$_chat/deleteDirectory.php';
   static const String blockUserWithDir = '$_chat/blockUserWithDir.php';
+  static const String addNewActivity = '$_chat/addNewActivity.php';
+  static const String addNewDir = '$_chat/addNewDir.php';
 
 
   // * user profile
