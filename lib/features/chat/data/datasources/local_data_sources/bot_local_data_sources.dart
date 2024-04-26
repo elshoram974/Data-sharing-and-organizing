@@ -319,9 +319,8 @@ List<ActivityEntity> _activities = [
     isApproved: true,
     attachment: const AttachmentModel(
       size: 50000,
-      width: 3,
-      height: 4,
       name: 'File name',
+      file: [],
       uri:
           'https://pbs.twimg.com/profile_images/1744393322418802688/-ZF7VwbA_400x400.jpg',
       mimeType: 'image/jpeg',
@@ -337,9 +336,8 @@ List<ActivityEntity> _activities = [
     isApproved: true,
     attachment: const AttachmentModel(
       size: 50000,
-      width: 3,
-      height: 4,
       name: 'image name',
+      file: [],
       uri:
           'https://pbs.twimg.com/profile_images/1744393322418802688/-ZF7VwbA_400x400.jpg',
     ),
