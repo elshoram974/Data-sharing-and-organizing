@@ -4,6 +4,7 @@ import 'package:data_sharing_organizing/core/utils/constants/app_color.dart';
 import 'package:data_sharing_organizing/core/utils/entities/member_list_tile_entity.dart';
 import 'package:flutter/material.dart';
 
+import '../widgets/add_group_details/group_name_image.dart';
 import '../widgets/add_group_details/group_permissions_tile_widget.dart';
 import '../widgets/add_group_details/members_count_widget.dart';
 import '../widgets/new_group_app_bar.dart';
@@ -24,6 +25,7 @@ class AddGroupDetailsScreen extends StatelessWidget {
         physics: const BouncingScrollPhysics(),
         slivers: [
           const NewGroupAppBar(),
+          const GroupNameAndImage(),
           const GroupPermissionsTileWidget(),
           MembersCountWidget(selectedUsers: selectedUsers),
           SliverList(
