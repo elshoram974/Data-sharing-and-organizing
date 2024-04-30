@@ -1663,6 +1663,66 @@ class S {
       args: [],
     );
   }
+
+  /// `New group`
+  String get newGroup {
+    return Intl.message(
+      'New group',
+      name: 'newGroup',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `(Add members)`
+  String get addMembers {
+    return Intl.message(
+      '(Add members)',
+      name: 'addMembers',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Search here...`
+  String get searchHere {
+    return Intl.message(
+      'Search here...',
+      name: 'searchHere',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Group name...`
+  String get groupName {
+    return Intl.message(
+      'Group name...',
+      name: 'groupName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Group permissions`
+  String get groupPermissions {
+    return Intl.message(
+      'Group permissions',
+      name: 'groupPermissions',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Members: {count}`
+  String membersCount(int count) {
+    return Intl.message(
+      'Members: $count',
+      name: 'membersCount',
+      desc: '',
+      args: [count],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

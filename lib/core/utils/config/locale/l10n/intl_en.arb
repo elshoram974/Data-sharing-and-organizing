@@ -267,5 +267,18 @@
     "onlyAdminsCanAddNewData": "Only administrators are allowed to add new data.",
     "youCanNowAddAnything": "You are now able to add anything.",
     "addActivityMessageImageOrFile": "Add activity: message, image, or file...",
-    "addDirectoryName": "Enter directory name"
+    "addDirectoryName": "Enter directory name",
+    "newGroup": "New group",
+    "addMembers": "(Add members)",
+    "searchHere": "Search here...",
+    "groupName": "Group name...",
+    "groupPermissions": "Group permissions",
+    "membersCount": "Members: {count}",
+    "@membersCount": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    }
 }
