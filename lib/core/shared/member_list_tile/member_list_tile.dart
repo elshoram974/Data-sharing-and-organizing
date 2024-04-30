@@ -29,9 +29,11 @@ class MembersListTile extends StatelessWidget {
               isSelected: memberEntity.isSelected,
             ),
             const SizedBox(width: 0.5 * AppConst.defaultPadding),
-            MemberTileBodyWidget(
-              name: memberEntity.name,
-              lastLogin: memberEntity.lastLogin,
+            Flexible(
+              child: MemberTileBodyWidget(
+                name: memberEntity.name,
+                lastLogin: memberEntity.lastLogin,
+              ),
             )
           ],
         ),

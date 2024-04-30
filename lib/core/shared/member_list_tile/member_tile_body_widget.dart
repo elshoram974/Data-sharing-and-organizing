@@ -1,3 +1,5 @@
+import 'package:data_sharing_organizing/core/utils/config/locale/generated/l10n.dart';
+import 'package:data_sharing_organizing/core/utils/functions/convert_date_to_string.dart';
 import 'package:flutter/material.dart';
 
 import '../../utils/constants/app_color.dart';
@@ -18,14 +20,20 @@ class MemberTileBodyWidget extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          name,
-          style: AppStyle.styleBoldInika24.copyWith(fontSize: 16),
+        FittedBox(
+          fit: BoxFit.scaleDown,
+          child: Text(
+            name,
+            style: AppStyle.styleBoldInika24.copyWith(fontSize: 16),
+          ),
         ),
         const SizedBox(height: 2),
-        Text(
-          "Last login yesterday at $lastLogin",
-          style: AppStyle.styleBoldInika13.copyWith(color: AppColor.gray),
+        FittedBox(
+          fit: BoxFit.scaleDown,
+          child: Text(
+            S.of(context).lastLoginDateString(DateToString.lastLoginText(lastLogin)),
+            style: AppStyle.styleBoldInika13.copyWith(color: AppColor.gray),
+          ),
         ),
       ],
     );
