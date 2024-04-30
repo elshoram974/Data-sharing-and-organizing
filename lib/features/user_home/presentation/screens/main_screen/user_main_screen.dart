@@ -1,9 +1,11 @@
 import 'package:data_sharing_organizing/core/shared/responsive/in_many_device.dart';
+import 'package:data_sharing_organizing/core/utils/config/routes/routes.dart';
 import 'package:data_sharing_organizing/core/utils/constants/app_color.dart';
 import 'package:data_sharing_organizing/core/utils/services/dependency/locator.dart';
 import 'package:data_sharing_organizing/core/utils/services/dependency/provider_dependency.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../../auth/domain/entities/auth_user_entity.dart';
 import '../../../../auth/domain/usecases/log_out_use_case.dart';
@@ -56,15 +58,17 @@ class _UserMainScreens extends StatelessWidget {
   }
 }
 
-FloatingActionButton? getHomeNav(int navIndex) {
+Builder? getHomeNav(int navIndex) {
   switch (navIndex) {
     case 0:
-      return FloatingActionButton(
-        backgroundColor: AppColor.active,
-        foregroundColor: Colors.white,
-        child: const Icon(Icons.add),
-        onPressed: () {},
-      );
+      return Builder(builder: (context) {
+        return FloatingActionButton(
+          backgroundColor: AppColor.active,
+          foregroundColor: Colors.white,
+          child: const Icon(Icons.add),
+          onPressed: () => context.push(AppRoute.addMembers),
+        );
+      });
   }
   return null;
 }

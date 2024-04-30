@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../../../features/splash/presentation/screen/splash_screen.dart';
 import 'routes/authentication_routes.dart';
+import 'routes/new_group_routes.dart';
 import 'routes/user/user_routes.dart';
 
 abstract class AppRoute {
@@ -21,8 +22,7 @@ abstract class AppRoute {
 
   // * user screens *//
   static const String userHome = UserRoutes.userHome;
-  static const String userNotificationsSettings =
-      UserRoutes.notificationsSettings;
+  static const String userNotificationsSettings = UserRoutes.notificationsSettings;
   static const String userSettings = UserRoutes.userSettings;
   static const String userProfile = UserRoutes.userProfile;
   static const String userEditProfile = UserRoutes.userEditProfile;
@@ -31,6 +31,10 @@ abstract class AppRoute {
   static const String userMyGroups = UserRoutes.userMyGroups;
   static const String deleteAccount = UserRoutes.deleteAccount;
   static const String group = UserRoutes.group;
+  // * ------ End user screens ------ *//
+
+  // * new group screens *//
+  static const String addMembers = NewGroupRoutes.addMembers;
   // * ------ End user screens ------ *//
 
   static final GoRouter router = GoRouter(
@@ -44,6 +48,7 @@ abstract class AppRoute {
       ),
       AuthRoutes.call(),
       UserRoutes.call(),
+      NewGroupRoutes.call(),
     ],
   );
 }
