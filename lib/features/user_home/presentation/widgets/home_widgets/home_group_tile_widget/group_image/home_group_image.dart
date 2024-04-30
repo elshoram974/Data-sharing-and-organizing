@@ -3,8 +3,8 @@ import 'package:data_sharing_organizing/core/utils/services/dependency/provider_
 import 'package:flutter/material.dart';
 
 import '../../../../../domain/entities/group_home_entity.dart';
-import '../../../circular_image_widget.dart';
-import 'selected_icon.dart';
+import '../../../../../../../core/shared/image/circular_image_widget.dart';
+import '../../../../../../../core/shared/image/selected_icon.dart';
 
 class HomeGroupImage extends StatelessWidget {
   const HomeGroupImage({

@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../user_home/domain/entities/group_home_entity.dart';
-import '../../../user_home/presentation/widgets/circular_image_widget.dart';
+import '../../../../core/shared/image/circular_image_widget.dart';
 
 class GroupAppBar extends StatelessWidget implements PreferredSizeWidget {
   const GroupAppBar({super.key, required this.group});

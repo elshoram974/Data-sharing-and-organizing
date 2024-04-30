@@ -1,7 +1,7 @@
 import 'package:data_sharing_organizing/core/shared/image/group.dart';
 import 'package:flutter/material.dart';
 
-import '../../circular_image_widget.dart';
+import '../../../../../../core/shared/image/circular_image_widget.dart';
 
 class NotificationGroupImage extends StatelessWidget {
   const NotificationGroupImage({
