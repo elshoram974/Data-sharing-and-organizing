@@ -35,6 +35,7 @@ abstract class AppRoute {
 
   // * new group screens *//
   static const String addMembers = NewGroupRoutes.addMembers;
+  static const String addGroupDetails = NewGroupRoutes.addGroupDetails;
   // * ------ End user screens ------ *//
 
   static final GoRouter router = GoRouter(
