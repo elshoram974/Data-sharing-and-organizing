@@ -3,8 +3,10 @@ import 'package:data_sharing_organizing/core/utils/config/locale/generated/l10n.
 import 'package:data_sharing_organizing/core/utils/constants/app_color.dart';
 import 'package:data_sharing_organizing/core/utils/constants/app_constants.dart';
 import 'package:data_sharing_organizing/core/utils/extension/padding_ex.dart';
+import 'package:data_sharing_organizing/core/utils/services/pick_image.dart';
 import 'package:data_sharing_organizing/core/utils/styles.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 
 class GroupNameAndImage extends StatelessWidget {
   const GroupNameAndImage({super.key});
@@ -16,7 +18,7 @@ class GroupNameAndImage extends StatelessWidget {
         child: Row(
           children: [
             GestureDetector(
-              onTap: () {},
+              onTap: _changeImage,
               child: const CircleAvatar(
                 backgroundColor: AppColor.primary,
                 radius: 21,
@@ -49,4 +51,26 @@ class GroupNameAndImage extends StatelessWidget {
       ).horizontalPadding(AppConst.defaultPadding),
     );
   }
+}
+
+void _changeImage() async {
+  final MyFileData? image = await HandlePickedImage.pickImage(ImageSource.gallery);
+  if (image == null) return;
+  // errMessage(S.current.cancel);
+  // emit(const ProgressUploadingPhoto());
+  // final UploadFileEntity uploadedFile = UploadFileEntity(
+  //   user: ProviderDependency.userMain.user,
+  //   file: image,
+  // );
+  // Status<AuthUserEntity> status =
+  //     await editProfileRepo.changeImage(uploadedFile);
+  // if (status is Success<AuthUserEntity>) {
+  //   ProviderDependency.userMain.user = status.data;
+  //   imageLink = status.data.image;
+  //   emit(ChangePhotoSuccess(imageLink ?? ''));
+  // } else {
+  //   status as Failure<AuthUserEntity>;
+  //   emit(ChangePhotoFailure(status.failure.message));
+  //   errMessage(status.failure.message);
+  // }
 }
