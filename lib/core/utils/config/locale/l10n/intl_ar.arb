@@ -280,5 +280,40 @@
                 "type": "int"
             }
         }
+    },
+    "atTimeString": "في {timeString}",
+    "@atTimeString": {
+        "placeholders": {
+            "timeString": {
+                "type": "String"
+            }
+        }
+    },
+    "yesterdayAtTimeString": "أمس في {timeString}",
+    "@yesterdayAtTimeString": {
+        "placeholders": {
+            "timeString": {
+                "type": "String"
+            }
+        }
+    },
+    "dateTimeString": "{dateString} في {timeString}",
+    "@dateTimeString": {
+        "placeholders": {
+            "timeString": {
+                "type": "String"
+            },
+            "dateString": {
+                "type": "String"
+            }
+        }
+    },
+    "lastLoginDateString": "آخر تسجيل دخول {dateString}",
+    "@lastLoginDateString": {
+        "placeholders": {
+            "dateString": {
+                "type": "String"
+            }
+        }
     }
 }

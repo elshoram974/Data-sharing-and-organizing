@@ -280,5 +280,40 @@
                 "type": "int"
             }
         }
+    },
+    "atTimeString": "at {timeString}",
+    "@atTimeString": {
+        "placeholders": {
+            "timeString": {
+                "type": "String"
+            }
+        }
+    },
+    "yesterdayAtTimeString": "Yesterday at {timeString}",
+    "@yesterdayAtTimeString": {
+        "placeholders": {
+            "timeString": {
+                "type": "String"
+            }
+        }
+    },
+    "dateTimeString": "{dateString} at {timeString}",
+    "@dateTimeString": {
+        "placeholders": {
+            "timeString": {
+                "type": "String"
+            },
+            "dateString": {
+                "type": "String"
+            }
+        }
+    },
+    "lastLoginDateString": "Last logged in {dateString}",
+    "@lastLoginDateString": {
+        "placeholders": {
+            "dateString": {
+                "type": "String"
+            }
+        }
     }
 }

@@ -1723,6 +1723,46 @@ class S {
       args: [count],
     );
   }
+
+  /// `at {timeString}`
+  String atTimeString(String timeString) {
+    return Intl.message(
+      'at $timeString',
+      name: 'atTimeString',
+      desc: '',
+      args: [timeString],
+    );
+  }
+
+  /// `Yesterday at {timeString}`
+  String yesterdayAtTimeString(String timeString) {
+    return Intl.message(
+      'Yesterday at $timeString',
+      name: 'yesterdayAtTimeString',
+      desc: '',
+      args: [timeString],
+    );
+  }
+
+  /// `{dateString} at {timeString}`
+  String dateTimeString(String timeString, String dateString) {
+    return Intl.message(
+      '$dateString at $timeString',
+      name: 'dateTimeString',
+      desc: '',
+      args: [timeString, dateString],
+    );
+  }
+
+  /// `Last logged in {dateString}`
+  String lastLoginDateString(String dateString) {
+    return Intl.message(
+      'Last logged in $dateString',
+      name: 'lastLoginDateString',
+      desc: '',
+      args: [dateString],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
