@@ -4,6 +4,7 @@ import 'package:data_sharing_organizing/core/utils/constants/app_color.dart';
 import 'package:data_sharing_organizing/core/utils/entities/member_list_tile_entity.dart';
 import 'package:flutter/material.dart';
 
+import '../widgets/add_group_details/group_permissions_tile_widget.dart';
 import '../widgets/add_group_details/members_count_widget.dart';
 import '../widgets/new_group_app_bar.dart';
 
@@ -23,6 +24,7 @@ class AddGroupDetailsScreen extends StatelessWidget {
         physics: const BouncingScrollPhysics(),
         slivers: [
           const NewGroupAppBar(),
+          const GroupPermissionsTileWidget(),
           MembersCountWidget(selectedUsers: selectedUsers),
           SliverList(
             delegate: SliverChildBuilderDelegate(
@@ -32,9 +34,10 @@ class AddGroupDetailsScreen extends StatelessWidget {
                   child: MembersListTile(
                     memberEntity: MemberListTileEntity(
                       name: "Adel Eid -> ${i + 1}",
-                      imageLink: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcThOaoCj5ZMdS0xOCIYLMVT8ReRCVjCCzX01BPJH3MpsA&s',
+                      imageLink:
+                          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcThOaoCj5ZMdS0xOCIYLMVT8ReRCVjCCzX01BPJH3MpsA&s',
                       lastLogin: DateTime.now().subtract(Duration(days: i)),
-                      isSelected: false,
+                      isSelected: true,
                       onTileTapped: () {},
                     ),
                   ),
