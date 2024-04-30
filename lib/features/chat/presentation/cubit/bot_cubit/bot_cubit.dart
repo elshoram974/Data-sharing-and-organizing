@@ -106,9 +106,9 @@ class BOTCubitImp extends BOTCubit {
       DirectoryEntity? dir = json == null ? null : DirectoryModel.fromJson(json);
       ProviderDependency.directory.goToDirectory(dir);
     } else if (message.metadata?.containsKey("activity") == true) {
-      final ActivityEntity activity = await ActivityModel.fromJson(message.metadata!["activity"]);
+      final ActivityEntity activity = ActivityModel.fromJson(message.metadata!["activity"]);
       if (canEditMessage(activity) && "BOT" == message.author.firstName?.trim()) {
-        if (_.mounted) showActivityActions(_, activity);
+        showActivityActions(_, activity);
       }
     }
   }
