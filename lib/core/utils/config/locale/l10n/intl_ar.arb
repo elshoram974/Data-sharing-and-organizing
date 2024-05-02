@@ -273,6 +273,13 @@
     "searchHere": "ابحث هنا...",
     "groupName": "اسم المجموعة...",
     "groupPermissions": "صلاحيات المجموعة",
+    "groupDiscussionType": "نوع المحادثة في المجموعة",
+    "exist": "موجود",
+    "existButClosed": "موجود ولكن مغلق",
+    "notExist": "غير موجود",
+    "readWriteWithAdminAgreements": "قراءة وكتابة مع اتفاقيات المسؤول",
+    "readWrite": "قراءة وكتابة",
+    "readOnly": "فقط قراءة",
     "membersCount": "الأعضاء: {count}",
     "@membersCount": {
         "placeholders": {

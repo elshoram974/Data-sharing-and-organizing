@@ -1714,6 +1714,76 @@ class S {
     );
   }
 
+  /// `Group discussion type`
+  String get groupDiscussionType {
+    return Intl.message(
+      'Group discussion type',
+      name: 'groupDiscussionType',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Exist`
+  String get exist {
+    return Intl.message(
+      'Exist',
+      name: 'exist',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Exist but closed`
+  String get existButClosed {
+    return Intl.message(
+      'Exist but closed',
+      name: 'existButClosed',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Not exist`
+  String get notExist {
+    return Intl.message(
+      'Not exist',
+      name: 'notExist',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Read & write with admin agreements`
+  String get readWriteWithAdminAgreements {
+    return Intl.message(
+      'Read & write with admin agreements',
+      name: 'readWriteWithAdminAgreements',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Read & write`
+  String get readWrite {
+    return Intl.message(
+      'Read & write',
+      name: 'readWrite',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Only read`
+  String get readOnly {
+    return Intl.message(
+      'Only read',
+      name: 'readOnly',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Members: {count}`
   String membersCount(int count) {
     return Intl.message(

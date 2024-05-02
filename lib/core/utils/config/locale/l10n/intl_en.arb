@@ -273,6 +273,13 @@
     "searchHere": "Search here...",
     "groupName": "Group name...",
     "groupPermissions": "Group permissions",
+    "groupDiscussionType": "Group discussion type",
+    "exist": "Exist",
+    "existButClosed": "Exist but closed",
+    "notExist": "Not exist",
+    "readWriteWithAdminAgreements": "Read & write with admin agreements",
+    "readWrite": "Read & write",
+    "readOnly": "Only read",
     "membersCount": "Members: {count}",
     "@membersCount": {
         "placeholders": {

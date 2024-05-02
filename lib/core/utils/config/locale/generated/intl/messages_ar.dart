@@ -152,6 +152,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "error": MessageLookupByLibrary.simpleMessage("خطأ"),
         "errorInPassword":
             MessageLookupByLibrary.simpleMessage("خطأ في كلمة المرور"),
+        "exist": MessageLookupByLibrary.simpleMessage("موجود"),
+        "existButClosed":
+            MessageLookupByLibrary.simpleMessage("موجود ولكن مغلق"),
         "exitGroups":
             MessageLookupByLibrary.simpleMessage("الخروج من المجموعات"),
         "extraLarge": MessageLookupByLibrary.simpleMessage("كبير جداً"),
@@ -163,6 +166,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "goBack": MessageLookupByLibrary.simpleMessage("العودة"),
         "goTo": MessageLookupByLibrary.simpleMessage("اذهب الي"),
         "gotIt": MessageLookupByLibrary.simpleMessage("مفهوم"),
+        "groupDiscussionType":
+            MessageLookupByLibrary.simpleMessage("نوع المحادثة في المجموعة"),
         "groupName": MessageLookupByLibrary.simpleMessage("اسم المجموعة..."),
         "groupPermissions":
             MessageLookupByLibrary.simpleMessage("صلاحيات المجموعة"),
@@ -209,6 +214,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "noInternetConnection":
             MessageLookupByLibrary.simpleMessage("لا يوجد اتصال بالإنترنت"),
         "noNeed": MessageLookupByLibrary.simpleMessage("لا تحتاج للمساعدة؟ "),
+        "notExist": MessageLookupByLibrary.simpleMessage("غير موجود"),
         "notSamePass":
             MessageLookupByLibrary.simpleMessage("ليست نفس كلمة المرور"),
         "notification": MessageLookupByLibrary.simpleMessage("الإشعارات"),
@@ -233,6 +239,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "profile": MessageLookupByLibrary.simpleMessage("الملف الشخصي"),
         "reTypeNewPassword": MessageLookupByLibrary.simpleMessage(
             "أعد كتابة كلمة المرور الجديدة"),
+        "readOnly": MessageLookupByLibrary.simpleMessage("فقط قراءة"),
+        "readWrite": MessageLookupByLibrary.simpleMessage("قراءة وكتابة"),
+        "readWriteWithAdminAgreements": MessageLookupByLibrary.simpleMessage(
+            "قراءة وكتابة مع اتفاقيات المسؤول"),
         "recover": MessageLookupByLibrary.simpleMessage("استعادة"),
         "recoverYourAccount":
             MessageLookupByLibrary.simpleMessage("استعادة حسابك"),

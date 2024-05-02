@@ -153,6 +153,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "error": MessageLookupByLibrary.simpleMessage("Error"),
         "errorInPassword":
             MessageLookupByLibrary.simpleMessage("Error in password"),
+        "exist": MessageLookupByLibrary.simpleMessage("Exist"),
+        "existButClosed":
+            MessageLookupByLibrary.simpleMessage("Exist but closed"),
         "exitGroups": MessageLookupByLibrary.simpleMessage("Exit groups"),
         "extraLarge": MessageLookupByLibrary.simpleMessage("Extra Large"),
         "fillField": MessageLookupByLibrary.simpleMessage("fill this field"),
@@ -163,6 +166,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "goBack": MessageLookupByLibrary.simpleMessage("Go back"),
         "goTo": MessageLookupByLibrary.simpleMessage("Go to"),
         "gotIt": MessageLookupByLibrary.simpleMessage("Got it"),
+        "groupDiscussionType":
+            MessageLookupByLibrary.simpleMessage("Group discussion type"),
         "groupName": MessageLookupByLibrary.simpleMessage("Group name..."),
         "groupPermissions":
             MessageLookupByLibrary.simpleMessage("Group permissions"),
@@ -207,6 +212,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "noInternetConnection":
             MessageLookupByLibrary.simpleMessage("No internet connection"),
         "noNeed": MessageLookupByLibrary.simpleMessage("No need ? "),
+        "notExist": MessageLookupByLibrary.simpleMessage("Not exist"),
         "notSamePass":
             MessageLookupByLibrary.simpleMessage("Not same password"),
         "notification": MessageLookupByLibrary.simpleMessage("Notification"),
@@ -232,6 +238,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "profile": MessageLookupByLibrary.simpleMessage("Profile"),
         "reTypeNewPassword":
             MessageLookupByLibrary.simpleMessage("Re-type new Password"),
+        "readOnly": MessageLookupByLibrary.simpleMessage("Only read"),
+        "readWrite": MessageLookupByLibrary.simpleMessage("Read & write"),
+        "readWriteWithAdminAgreements": MessageLookupByLibrary.simpleMessage(
+            "Read & write with admin agreements"),
         "recover": MessageLookupByLibrary.simpleMessage("Recover"),
         "recoverYourAccount":
             MessageLookupByLibrary.simpleMessage("Recover your account"),
