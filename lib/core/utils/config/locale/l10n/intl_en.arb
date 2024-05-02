@@ -277,6 +277,7 @@
     "exist": "Exist",
     "existButClosed": "Exist but closed",
     "notExist": "Not exist",
+    "groupAccessType": "Group access type",
     "readWriteWithAdminAgreements": "Read & write with admin agreements",
     "readWrite": "Read & write",
     "readOnly": "Only read",

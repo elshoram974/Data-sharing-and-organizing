@@ -166,6 +166,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "goBack": MessageLookupByLibrary.simpleMessage("Go back"),
         "goTo": MessageLookupByLibrary.simpleMessage("Go to"),
         "gotIt": MessageLookupByLibrary.simpleMessage("Got it"),
+        "groupAccessType":
+            MessageLookupByLibrary.simpleMessage("Group access type"),
         "groupDiscussionType":
             MessageLookupByLibrary.simpleMessage("Group discussion type"),
         "groupName": MessageLookupByLibrary.simpleMessage("Group name..."),

@@ -1754,6 +1754,16 @@ class S {
     );
   }
 
+  /// `Group access type`
+  String get groupAccessType {
+    return Intl.message(
+      'Group access type',
+      name: 'groupAccessType',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Read & write with admin agreements`
   String get readWriteWithAdminAgreements {
     return Intl.message(

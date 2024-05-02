@@ -166,6 +166,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "goBack": MessageLookupByLibrary.simpleMessage("العودة"),
         "goTo": MessageLookupByLibrary.simpleMessage("اذهب الي"),
         "gotIt": MessageLookupByLibrary.simpleMessage("مفهوم"),
+        "groupAccessType":
+            MessageLookupByLibrary.simpleMessage("نوع الوصول إلى المجموعة"),
         "groupDiscussionType":
             MessageLookupByLibrary.simpleMessage("نوع المحادثة في المجموعة"),
         "groupName": MessageLookupByLibrary.simpleMessage("اسم المجموعة..."),
@@ -242,7 +244,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "readOnly": MessageLookupByLibrary.simpleMessage("فقط قراءة"),
         "readWrite": MessageLookupByLibrary.simpleMessage("قراءة وكتابة"),
         "readWriteWithAdminAgreements": MessageLookupByLibrary.simpleMessage(
-            "قراءة وكتابة مع اتفاقيات المسؤول"),
+            "قراءة وإضافة مع موافقة المسؤول"),
         "recover": MessageLookupByLibrary.simpleMessage("استعادة"),
         "recoverYourAccount":
             MessageLookupByLibrary.simpleMessage("استعادة حسابك"),
