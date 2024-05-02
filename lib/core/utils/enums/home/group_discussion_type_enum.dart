@@ -1,4 +1,7 @@
+import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
+
+import '../../config/locale/generated/l10n.dart';
 
 part 'group_discussion_type_enum.g.dart';
 
@@ -21,5 +24,15 @@ enum GroupDiscussionType {
     }
 
     return map[stringRole] ?? notExist;
+  }
+
+  String typeName(BuildContext context) {
+    Map<GroupDiscussionType, String> map = {
+      exist: S.of(context).exist,
+      notExist: S.of(context).notExist,
+      existButClosed: S.of(context).existButClosed,
+    };
+
+    return map[this] ?? '';
   }
 }
