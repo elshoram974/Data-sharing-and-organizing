@@ -14,4 +14,5 @@ abstract final class AppAssets {
   static const String person = '$_images/person.svg';
   static const String group = '$_images/group.svg';
   static const String groupDiscussionMeeting = '$_images/group_discussion_meeting.svg';
+  static const String groupOpenAccess = '$_images/open_access.svg';
 }
