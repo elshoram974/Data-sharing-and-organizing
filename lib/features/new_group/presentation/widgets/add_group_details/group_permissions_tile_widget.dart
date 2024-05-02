@@ -1,8 +1,10 @@
 import 'package:data_sharing_organizing/core/shared/responsive/constrained_box.dart';
 import 'package:data_sharing_organizing/core/utils/config/locale/generated/l10n.dart';
+import 'package:data_sharing_organizing/core/utils/config/routes/routes.dart';
 import 'package:data_sharing_organizing/core/utils/constants/app_constants.dart';
 import 'package:data_sharing_organizing/core/utils/styles.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class GroupPermissionsTileWidget extends StatelessWidget {
   const GroupPermissionsTileWidget({super.key});
@@ -27,7 +29,7 @@ class GroupPermissionsTileWidget extends StatelessWidget {
                   ),
                   const Spacer(),
                   IconButton(
-                    onPressed: () {}, // TODO: go to permission screen
+                    onPressed: () => context.push(AppRoute.addGroupPermissions),
                     icon: const Icon(Icons.settings_outlined),
                   )
                 ],

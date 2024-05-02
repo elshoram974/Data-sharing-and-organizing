@@ -27,7 +27,7 @@ class AddMembersScreen extends StatelessWidget {
         physics: const BouncingScrollPhysics(),
         slivers: [
           NewGroupAppBar(
-            title: selectedUsers.isNotEmpty
+            subTitle: selectedUsers.isNotEmpty
                 ? S.of(context).selectedWithNumber(selectedUsers.length)
                 : S.of(context).addMembers,
           ),

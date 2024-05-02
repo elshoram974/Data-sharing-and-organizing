@@ -5,9 +5,10 @@ import 'package:data_sharing_organizing/core/utils/styles.dart';
 import 'package:flutter/material.dart';
 
 class NewGroupAppBar extends StatelessWidget {
-  const NewGroupAppBar({super.key, this.title});
+  const NewGroupAppBar({super.key, this.subTitle, this.title});
 
   final String? title;
+  final String? subTitle;
 
   @override
   Widget build(BuildContext context) {
@@ -25,13 +26,13 @@ class NewGroupAppBar extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                S.of(context).newGroup,
+                title ?? S.of(context).newGroup,
                 style: AppStyle.styleBoldInika24.copyWith(fontSize: 36),
               ),
               const SizedBox(height: 10),
-              if (title != null)
+              if (subTitle != null)
                 Text(
-                  title!,
+                  subTitle!,
                   style: AppStyle.styleBoldInika24.copyWith(fontSize: 12),
                 ),
             ],
