@@ -1,7 +1,7 @@
 import 'package:data_sharing_organizing/core/utils/config/locale/generated/l10n.dart';
 import 'package:data_sharing_organizing/core/utils/constants/app_strings.dart';
 import 'package:flutter/material.dart';
-import '../widgets/add_group_permissions/discussion_type/discussion_type_mode_widget.dart';
+import '../widgets/add_group_permissions/discussion_type/discussion_type_widget.dart';
 import '../widgets/new_group_app_bar.dart';
 
 class AddGroupPermissionsScreen extends StatelessWidget {
