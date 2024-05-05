@@ -66,7 +66,7 @@ class _CustomSliverAppBarDelegate extends SliverPersistentHeaderDelegate {
                 right: AppConst.defaultPadding,
               ),
               width: 77,
-              height: 74,
+              height: 46,
               child: const BackButtonLeading(
                   showBackButton: true, color: Colors.black),
             ),
@@ -83,6 +83,7 @@ class _CustomSliverAppBarDelegate extends SliverPersistentHeaderDelegate {
             PositionedDirectional(
               top: 30 + (8 + 110) * openedPercent,
               child: Container(
+                height: 38,
                 padding: EdgeInsets.only(
                   right: ProviderDependency.config.isArabic
                       ? imagePadding + 48
@@ -96,13 +97,23 @@ class _CustomSliverAppBarDelegate extends SliverPersistentHeaderDelegate {
                   ProviderDependency.config.isArabic ? percent : -percent,
                   percent,
                 ),
-                child: Container(
-                  color: Colors.green,
-                  child: Text(
-                    group.groupName,
-                    style: AppStyle.styleBoldInika24.copyWith(
-                      color: Colors.white,
-                    ),
+                child: Text(
+                  group.groupName,
+                  style: AppStyle.styleBoldInika24.copyWith(
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+            ),
+            PositionedDirectional(
+              top: 180,
+              child: SizedBox(
+                width: deviceWidth,
+                child: Text(
+                  "Group . 3 members",
+                  textAlign: TextAlign.center,
+                  style: AppStyle.styleBoldInika16.copyWith(
+                    color: Colors.white,
                   ),
                 ),
               ),
