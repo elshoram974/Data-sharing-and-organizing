@@ -34,6 +34,7 @@ abstract final class UserRoutes {
 
   // * group screens *//
   static const String group = GroupRoutes.group;
+  static const String groupDetails = GroupRoutes.groupDetails;
   // * ------ End group screens ------ *//
 
   static GoRoute call() {

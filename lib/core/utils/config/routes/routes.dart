@@ -31,6 +31,7 @@ abstract class AppRoute {
   static const String userMyGroups = UserRoutes.userMyGroups;
   static const String deleteAccount = UserRoutes.deleteAccount;
   static const String group = UserRoutes.group;
+  static const String groupDetails = UserRoutes.groupDetails;
   // * ------ End user screens ------ *//
 
   // * new group screens *//
