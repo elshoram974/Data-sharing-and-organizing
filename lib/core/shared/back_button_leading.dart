@@ -7,10 +7,12 @@ import 'package:go_router/go_router.dart';
 class BackButtonLeading extends StatelessWidget {
   const BackButtonLeading({
     super.key,
+    this.color,
     required this.showBackButton,
     this.onWillPop,
   });
 
+  final Color? color;
   final bool showBackButton;
   final void Function()? onWillPop;
 
@@ -24,10 +26,10 @@ class BackButtonLeading extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            const Icon(Icons.arrow_back_outlined),
+            Icon(Icons.arrow_back_outlined, color: color),
             Text(
               S.of(context).back,
-              style: AppStyle.styleBoldInika24.copyWith(fontSize: 20),
+              style: AppStyle.styleBoldInika24.copyWith(fontSize: 20, color: color),
             ),
           ],
         ),
