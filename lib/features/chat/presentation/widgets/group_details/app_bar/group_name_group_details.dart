@@ -25,7 +25,7 @@ class GroupNameGroupDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return PositionedDirectional(
-      top: 30 + (8 + 110) * openedPercent,
+      top: 5 + 118 * openedPercent,
       child: Container(
         height: 38,
         padding: EdgeInsets.only(

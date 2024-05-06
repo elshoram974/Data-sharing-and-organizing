@@ -12,7 +12,7 @@ class GroupMembersCountGroupDetails extends StatelessWidget {
     final double deviceWidth = MediaQuery.sizeOf(context).width;
 
     return PositionedDirectional(
-      top: 180,
+      top: 155,
       child: SizedBox(
         width: deviceWidth,
         child: Text(

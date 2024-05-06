@@ -31,30 +31,32 @@ class CustomSliverAppBarDelegate extends SliverPersistentHeaderDelegate {
     return SizedBox.expand(
       child: ColoredBox(
         color: AppColor.active,
-        child: Stack(
-          children: [
-            const BackButtonGroupDetails(),
-            PositionedDirectional(
-              top: 30,
-              start:
-                  openedPercent * (deviceWidth - dimension) / 2 + imagePadding,
-              child: CircularImageWidget(
-                imageLink: group.imageLink,
-                dimension: dimension,
-                errorWidget: const GroupImage(),
+        child: SafeArea(
+          child: Stack(
+            children: [
+              const BackButtonGroupDetails(),
+              PositionedDirectional(
+                top: 5,
+                start: openedPercent * (deviceWidth - dimension) / 2 +
+                    imagePadding,
+                child: CircularImageWidget(
+                  imageLink: group.imageLink,
+                  dimension: dimension,
+                  errorWidget: const GroupImage(),
+                ),
               ),
-            ),
-            GroupNameGroupDetails(
-              openedPercent: openedPercent,
-              imagePadding: imagePadding,
-              customPadding: customPadding,
-              deviceWidth: deviceWidth,
-              percent: percent,
-              group: group,
-            ),
-            if (membersCount != null)
-              GroupMembersCountGroupDetails(membersCount: membersCount),
-          ],
+              GroupNameGroupDetails(
+                openedPercent: openedPercent,
+                imagePadding: imagePadding,
+                customPadding: customPadding,
+                deviceWidth: deviceWidth,
+                percent: percent,
+                group: group,
+              ),
+              if (membersCount != null)
+                GroupMembersCountGroupDetails(membersCount: membersCount),
+            ],
+          ),
         ),
       ),
     );
@@ -71,4 +73,3 @@ class CustomSliverAppBarDelegate extends SliverPersistentHeaderDelegate {
     return false;
   }
 }
-

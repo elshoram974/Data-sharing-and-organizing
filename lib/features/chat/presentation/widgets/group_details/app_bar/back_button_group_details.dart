@@ -9,7 +9,7 @@ class BackButtonGroupDetails extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.only(
-        top: 28,
+        top: 5,
         left: AppConst.defaultPadding,
         right: AppConst.defaultPadding,
       ),
