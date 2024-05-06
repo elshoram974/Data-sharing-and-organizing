@@ -26,7 +26,6 @@ class CustomSliverAppBarDelegate extends SliverPersistentHeaderDelegate {
     final double dimension = (openedPercent * 68) + 42;
     final double deviceWidth = MediaQuery.sizeOf(context).width;
     final double imagePadding = percent * (AppConst.defaultPadding + 93);
-    final double customPadding = shrinkOffset >= 110 ? 0 : imagePadding + 48;
 
     return SizedBox.expand(
       child: ColoredBox(
@@ -48,7 +47,7 @@ class CustomSliverAppBarDelegate extends SliverPersistentHeaderDelegate {
               GroupNameGroupDetails(
                 openedPercent: openedPercent,
                 imagePadding: imagePadding,
-                customPadding: customPadding,
+                customPadding: shrinkOffset >= 110 ? 0 : imagePadding + 55,
                 deviceWidth: deviceWidth,
                 percent: percent,
                 group: group,

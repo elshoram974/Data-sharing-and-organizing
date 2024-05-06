@@ -25,16 +25,16 @@ class GroupNameGroupDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return PositionedDirectional(
-      top: 5 + 118 * openedPercent,
+      top: 3 + 118 * openedPercent,
       child: Container(
         height: 38,
         padding: EdgeInsets.only(
           right: ProviderDependency.config.isArabic
-              ? imagePadding + 48
+              ? imagePadding + 55
               : customPadding,
           left: ProviderDependency.config.isArabic
               ? customPadding
-              : imagePadding + 48,
+              : imagePadding + 55,
         ),
         width: deviceWidth,
         alignment: Alignment(
