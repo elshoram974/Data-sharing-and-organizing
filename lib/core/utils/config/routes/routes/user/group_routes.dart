@@ -28,7 +28,7 @@ abstract final class GroupRoutes {
         GoRoute(
           path: _groupDetails,
           pageBuilder: (context, state) => MyCustomTransition.slideTransition(
-            offset: const Offset(-1, 0),
+            offset: const Offset(0, -1),
             context: context,
             state: state,
             child: GroupDetailsScreen(group: state.extra as GroupHomeEntity),
