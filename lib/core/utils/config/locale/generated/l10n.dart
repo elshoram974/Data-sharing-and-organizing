@@ -1963,6 +1963,36 @@ class S {
       args: [],
     );
   }
+
+  /// `Remove`
+  String get remove {
+    return Intl.message(
+      'Remove',
+      name: 'remove',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Dismiss as admin`
+  String get dismissAsAdmin {
+    return Intl.message(
+      'Dismiss as admin',
+      name: 'dismissAsAdmin',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Promote to group admin`
+  String get promoteGroupAdmin {
+    return Intl.message(
+      'Promote to group admin',
+      name: 'promoteGroupAdmin',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

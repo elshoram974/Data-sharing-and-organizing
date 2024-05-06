@@ -356,5 +356,8 @@
             }
         }
     },
-    "exitGroup": "Exit group"
+    "exitGroup": "Exit group",
+    "remove": "Remove",
+    "dismissAsAdmin": "Dismiss as admin",
+    "promoteGroupAdmin": "Promote to group admin"
 }

@@ -140,6 +140,8 @@ class MessageLookup extends MessageLookupByLibrary {
                 "Deleting your account will remove all of your information from our database "),
         "deselectAll": MessageLookupByLibrary.simpleMessage("Deselect all"),
         "deviceMode": MessageLookupByLibrary.simpleMessage("Device mode"),
+        "dismissAsAdmin":
+            MessageLookupByLibrary.simpleMessage("Dismiss as admin"),
         "doNotHaveAnAccount":
             MessageLookupByLibrary.simpleMessage("Don\'t have an account ? "),
         "docs": MessageLookupByLibrary.simpleMessage("DOCS"),
@@ -258,6 +260,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "processHasBeenCancelled": MessageLookupByLibrary.simpleMessage(
             "The process has been cancelled"),
         "profile": MessageLookupByLibrary.simpleMessage("Profile"),
+        "promoteGroupAdmin":
+            MessageLookupByLibrary.simpleMessage("Promote to group admin"),
         "reTypeNewPassword":
             MessageLookupByLibrary.simpleMessage("Re-type new Password"),
         "readOnly": MessageLookupByLibrary.simpleMessage("Only read"),
@@ -268,6 +272,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "recoverYourAccount":
             MessageLookupByLibrary.simpleMessage("Recover your account"),
         "rememberMe": MessageLookupByLibrary.simpleMessage("Remember me"),
+        "remove": MessageLookupByLibrary.simpleMessage("Remove"),
         "resend": MessageLookupByLibrary.simpleMessage("Resend"),
         "save": MessageLookupByLibrary.simpleMessage("Save"),
         "searchHere": MessageLookupByLibrary.simpleMessage("Search here..."),

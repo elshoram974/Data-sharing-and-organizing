@@ -94,7 +94,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "addFileOrMessage":
             MessageLookupByLibrary.simpleMessage("إضافة ملف أو رسالة"),
         "addMembers": MessageLookupByLibrary.simpleMessage("إضافة أعضاء"),
-        "admin": MessageLookupByLibrary.simpleMessage("مسئول"),
+        "admin": MessageLookupByLibrary.simpleMessage("مسؤول"),
         "areYouSureAboutDeleteYourAccount":
             MessageLookupByLibrary.simpleMessage("هل أنت متأكد من حذف حسابك؟"),
         "areYouSureYouWantToReturnBack": MessageLookupByLibrary.simpleMessage(
@@ -137,6 +137,8 @@ class MessageLookup extends MessageLookupByLibrary {
                 "سيؤدي حذف حسابك إلى إزالة جميع معلوماتك من قاعدة بياناتنا"),
         "deselectAll": MessageLookupByLibrary.simpleMessage("إلغاء تحديد الكل"),
         "deviceMode": MessageLookupByLibrary.simpleMessage("وضع الجهاز"),
+        "dismissAsAdmin":
+            MessageLookupByLibrary.simpleMessage("إلغاء التصديق كمسؤول"),
         "doNotHaveAnAccount":
             MessageLookupByLibrary.simpleMessage("ليس لديك حساب ؟ "),
         "docs": MessageLookupByLibrary.simpleMessage("مستندات"),
@@ -259,6 +261,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "processHasBeenCancelled":
             MessageLookupByLibrary.simpleMessage("تم إلغاء العملية"),
         "profile": MessageLookupByLibrary.simpleMessage("الملف الشخصي"),
+        "promoteGroupAdmin":
+            MessageLookupByLibrary.simpleMessage("ترقية إلى مسؤول"),
         "reTypeNewPassword": MessageLookupByLibrary.simpleMessage(
             "أعد كتابة كلمة المرور الجديدة"),
         "readOnly": MessageLookupByLibrary.simpleMessage("فقط قراءة"),
@@ -269,6 +273,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "recoverYourAccount":
             MessageLookupByLibrary.simpleMessage("استعادة حسابك"),
         "rememberMe": MessageLookupByLibrary.simpleMessage("تذكرني"),
+        "remove": MessageLookupByLibrary.simpleMessage("إزالة"),
         "resend": MessageLookupByLibrary.simpleMessage("إعادة الإرسال"),
         "save": MessageLookupByLibrary.simpleMessage("حفظ"),
         "searchHere": MessageLookupByLibrary.simpleMessage("ابحث هنا..."),
