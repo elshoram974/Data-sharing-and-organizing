@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../../../features/chat/presentation/screens/group_details_screen.dart';
+import '../../../../../../features/chat/presentation/screens/group_permissions_screen.dart';
 import '../../../../../../features/user_home/domain/entities/group_home_entity.dart';
 import '../../../../../../features/chat/presentation/screens/group_screen.dart';
 import '../../my_custom_transition.dart';
@@ -14,6 +15,9 @@ abstract final class GroupRoutes {
 
   static const String _groupDetails = 'groupDetails';
   static const String groupDetails = '$group/$_groupDetails';
+
+  static const String _groupPermissions = 'groupPermissions';
+  static const String groupPermissions = '$group/$_groupPermissions';
 
   static GoRoute call() {
     return GoRoute(
@@ -33,7 +37,16 @@ abstract final class GroupRoutes {
             state: state,
             child: GroupDetailsScreen(group: state.extra as GroupHomeEntity),
           ),
-        )
+        ),
+        GoRoute(
+          path: _groupPermissions,
+          pageBuilder: (context, state) => MyCustomTransition.slideTransition(
+            offset: const Offset(-1, 0),
+            context: context,
+            state: state,
+            child: const GroupPermissionsScreen(),
+          ),
+        ),
       ],
     );
   }

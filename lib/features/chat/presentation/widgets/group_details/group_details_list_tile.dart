@@ -27,7 +27,7 @@ class GroupDetailsListTile extends StatelessWidget {
           contentPadding:
               const EdgeInsets.symmetric(horizontal: AppConst.defaultPadding),
           shape: context.isPhoneWidth
-              ? RoundedRectangleBorder(borderRadius: BorderRadius.circular(0))
+              ? const RoundedRectangleBorder(borderRadius: BorderRadius.zero)
               : null,
           title: Text(
             title,
