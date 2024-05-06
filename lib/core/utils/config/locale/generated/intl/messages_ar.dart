@@ -30,52 +30,54 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m4(groupName) => "الخروج من مجموعة \"${groupName}\"؟";
 
-  static String m5(activity) =>
+  static String m5(count) => "المجموعة • ${count} عضو";
+
+  static String m6(activity) =>
       "هذا الإجراء سيعتمد نشاط \'${activity}\'، مما يجعله مرئيًا لجميع الأعضاء.";
 
-  static String m6(directoryName) =>
+  static String m7(directoryName) =>
       "سيقوم هذا الإجراء بالموافقة على المجلد \'${directoryName}\'، مما يجعله مرئيًا لجميع الأعضاء.";
 
-  static String m7(activity) => "هذا الإجراء سيحذف نشاط \'${activity}\'.";
+  static String m8(activity) => "هذا الإجراء سيحذف نشاط \'${activity}\'.";
 
-  static String m8(directoryName) =>
+  static String m9(directoryName) =>
       "سيؤدي هذا الإجراء أيضًا إلى حذف جميع الأنشطة داخل \'${directoryName}\'.";
 
-  static String m9(activity) =>
+  static String m10(activity) =>
       "هذا الإجراء سيجعل نشاط \'${activity}\' غير معتمد ومخفي. يمكنك الموافقة عليه مرة أخرى لاحقًا.";
 
-  static String m10(directoryName) =>
+  static String m11(directoryName) =>
       "هذا الإجراء سيجعل المجلد \'${directoryName}\' غير معتمد ومخفي. يمكنك تفعيله مرة أخرى لاحقًا.";
 
-  static String m11(dateString) => "آخر تسجيل دخول ${dateString}";
+  static String m12(dateString) => "آخر تسجيل دخول ${dateString}";
 
-  static String m12(count) => "الأعضاء: ${count}";
+  static String m13(count) => "الأعضاء: ${count}";
 
-  static String m13(number) => "تم تحديد ${number}";
+  static String m14(number) => "تم تحديد ${number}";
 
-  static String m14(activityName, userName) =>
+  static String m15(activityName, userName) =>
       "طلب عضو يدعى \'${userName}\' إضافة نشاط \'${activityName}\' هنا.";
 
-  static String m15(directoryName, userName) =>
+  static String m16(directoryName, userName) =>
       "عضو بإسم \'${userName}\' طلب إضافة المجلد \'${directoryName}\' هنا.";
 
-  static String m16(count) => "عرض الكل (${count} إضافي)";
+  static String m17(count) => "عرض الكل (${count} إضافي)";
 
-  static String m17(directoryName) =>
+  static String m18(directoryName) =>
       "ما الإجراء الذي تود اتخاذه مع مجلد \'${directoryName}\'؟";
 
-  static String m18(activityName) =>
+  static String m19(activityName) =>
       "ما الإجراء الذي تود اتخاذه مع نشاط \'${activityName}\'؟";
 
-  static String m19(timeString) => "أمس في ${timeString}";
+  static String m20(timeString) => "أمس في ${timeString}";
 
-  static String m20(activityName) =>
+  static String m21(activityName) =>
       "لقد قمت بإضافة نشاط \'${activityName}\', لكنه في انتظار موافقة المسئول.";
 
-  static String m21(directoryName) =>
+  static String m22(directoryName) =>
       "لقد أضفت مجلد \'${directoryName}\', لكنه في انتظار موافقة المسئول.";
 
-  static String m22(userName, userEmail) =>
+  static String m23(userName, userEmail) =>
       "أنت على وشك حظر العضو \'${userName}\' الذي يحمل البريد الإلكتروني \'${userEmail}\'. سيمنع هذا الإجراء من إضافة أي شيء إلى الروبوت.";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
@@ -181,6 +183,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("نوع الوصول إلى المجموعة"),
         "groupDiscussionType":
             MessageLookupByLibrary.simpleMessage("نوع المحادثة في المجموعة"),
+        "groupMembersCount": m5,
         "groupName": MessageLookupByLibrary.simpleMessage("اسم المجموعة..."),
         "groupPermissions":
             MessageLookupByLibrary.simpleMessage("صلاحيات المجموعة"),
@@ -199,15 +202,15 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("رمز التحقيق غير صالح"),
         "invalidVerificationType":
             MessageLookupByLibrary.simpleMessage("نوع التحقق غير صالح"),
-        "itWillApproveActivity": m5,
-        "itWillApproveDirectoryNameDirectory": m6,
-        "itWillDeleteActivity": m7,
-        "itWillDeleteAllActivitiesInsideDirNameToo": m8,
-        "itWillMakeActivityNotApprovedHidden": m9,
-        "itWillMarkDirNameAsNotApprovedHidden": m10,
+        "itWillApproveActivity": m6,
+        "itWillApproveDirectoryNameDirectory": m7,
+        "itWillDeleteActivity": m8,
+        "itWillDeleteAllActivitiesInsideDirNameToo": m9,
+        "itWillMakeActivityNotApprovedHidden": m10,
+        "itWillMarkDirNameAsNotApprovedHidden": m11,
         "language": MessageLookupByLibrary.simpleMessage("اللغة"),
         "large": MessageLookupByLibrary.simpleMessage("كبير"),
-        "lastLoginDateString": m11,
+        "lastLoginDateString": m12,
         "lastName": MessageLookupByLibrary.simpleMessage("الاسم الأخير"),
         "lightMode": MessageLookupByLibrary.simpleMessage("الوضع الفاتح"),
         "login": MessageLookupByLibrary.simpleMessage("تسجيل الدخول"),
@@ -216,7 +219,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("وضع علامة كغير مقروء"),
         "media": MessageLookupByLibrary.simpleMessage("وسائط"),
         "mediaAndDocs": MessageLookupByLibrary.simpleMessage("وسائط ومستندات"),
-        "membersCount": m12,
+        "membersCount": m13,
         "menu": MessageLookupByLibrary.simpleMessage("القائمة"),
         "muteNotification":
             MessageLookupByLibrary.simpleMessage("كتم الإشعارات"),
@@ -269,7 +272,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "save": MessageLookupByLibrary.simpleMessage("حفظ"),
         "searchHere": MessageLookupByLibrary.simpleMessage("ابحث هنا..."),
         "selectAll": MessageLookupByLibrary.simpleMessage("تحديد الكل"),
-        "selectedWithNumber": m13,
+        "selectedWithNumber": m14,
         "sendRequest": MessageLookupByLibrary.simpleMessage("إرسال الطلب"),
         "serverTookTooLong": MessageLookupByLibrary.simpleMessage(
             "استغرق الخادم وقتًا طويلاً في إرسال الاستجابة. يرجى المحاولة مرة أخرى لاحقًا."),
@@ -333,24 +336,24 @@ class MessageLookup extends MessageLookupByLibrary {
                 "هذا المستخدم ليس مزودًا ببريد إلكتروني وكلمة مرور لإرسال رمز التحقق."),
         "userNotFound": MessageLookupByLibrary.simpleMessage(
             "لا يوجد مستخدم لهذا البريد الإلكتروني."),
-        "userWantToAddActivity": m14,
-        "userWantToAddDirectory": m15,
+        "userWantToAddActivity": m15,
+        "userWantToAddDirectory": m16,
         "verify": MessageLookupByLibrary.simpleMessage("التحقق"),
         "verifyIt": MessageLookupByLibrary.simpleMessage("تحقق منه"),
-        "viewAllCountMore": m16,
+        "viewAllCountMore": m17,
         "warning": MessageLookupByLibrary.simpleMessage("تحذير"),
         "weakPassword": MessageLookupByLibrary.simpleMessage(
             "كلمة المرور المقدمة ضعيفة جدًا."),
         "welcomeBack": MessageLookupByLibrary.simpleMessage("مرحبًا بعودتك!"),
-        "whatDoYouWantToDoWithDirNameDirectory": m17,
-        "whatDoYouWantToDoWithThisActivity": m18,
+        "whatDoYouWantToDoWithDirNameDirectory": m18,
+        "whatDoYouWantToDoWithThisActivity": m19,
         "wrongPassword": MessageLookupByLibrary.simpleMessage(
             "تم تقديم كلمة مرور خاطئة لهذا المستخدم."),
         "yesterday": MessageLookupByLibrary.simpleMessage("أمس"),
-        "yesterdayAtTimeString": m19,
-        "youAddedActivityName": m20,
-        "youAddedDirNameDirectory": m21,
-        "youAreAboutToBlockMember": m22,
+        "yesterdayAtTimeString": m20,
+        "youAddedActivityName": m21,
+        "youAddedDirNameDirectory": m22,
+        "youAreAboutToBlockMember": m23,
         "youCanMakeNewGroups": MessageLookupByLibrary.simpleMessage(
             "بإمكانك إنشاء مجموعات جديدة بحرية."),
         "youCanNotUseSamePreviousPassword":

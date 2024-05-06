@@ -16,7 +16,7 @@ class GroupMembersCountGroupDetails extends StatelessWidget {
       child: SizedBox(
         width: deviceWidth,
         child: Text(
-          S.of(context).membersCount(membersCount!),
+          S.of(context).groupMembersCount(membersCount!),
           textAlign: TextAlign.center,
           style: AppStyle.styleBoldInika16.copyWith(
             color: Colors.white,

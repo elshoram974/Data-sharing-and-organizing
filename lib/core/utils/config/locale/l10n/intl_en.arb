@@ -347,5 +347,13 @@
     },
     "groupPhoto": "Group photo",
     "changeGroupName": "Change group name",
-    "enterGroupName": "Enter group name"
+    "enterGroupName": "Enter group name",
+    "groupMembersCount": "Group • {count} members",
+    "@groupMembersCount": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    }
 }

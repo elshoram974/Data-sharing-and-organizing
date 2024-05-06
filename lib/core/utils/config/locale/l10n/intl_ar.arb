@@ -347,5 +347,13 @@
     },
     "groupPhoto": "صورة المجموعة",
     "changeGroupName": "تغيير اسم المجموعة",
-    "enterGroupName": "أدخل اسم المجموعة"
+    "enterGroupName": "أدخل اسم المجموعة",
+    "groupMembersCount": "المجموعة • {count} عضو",
+    "@groupMembersCount": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    }
 }

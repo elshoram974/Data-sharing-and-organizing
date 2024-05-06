@@ -1943,6 +1943,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Group • {count} members`
+  String groupMembersCount(int count) {
+    return Intl.message(
+      'Group • $count members',
+      name: 'groupMembersCount',
+      desc: '',
+      args: [count],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

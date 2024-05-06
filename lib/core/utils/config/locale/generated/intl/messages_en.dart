@@ -30,53 +30,55 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m4(groupName) => "Exit \"${groupName}\" group?";
 
-  static String m5(activity) =>
+  static String m5(count) => "Group • ${count} members";
+
+  static String m6(activity) =>
       "This action will approve the \'${activity}\' activity, making it visible to all members.";
 
-  static String m6(directoryName) =>
+  static String m7(directoryName) =>
       "This action will approve the \'${directoryName}\' directory, making it visible to all members.";
 
-  static String m7(activity) =>
+  static String m8(activity) =>
       "This action will delete the \'${activity}\' activity.";
 
-  static String m8(directoryName) =>
+  static String m9(directoryName) =>
       "This action will also delete all activities within \'${directoryName}\'.";
 
-  static String m9(activity) =>
+  static String m10(activity) =>
       "This action will mark the \'${activity}\' activity as not approved, hiding it. You can approve it again later.";
 
-  static String m10(directoryName) =>
+  static String m11(directoryName) =>
       "This action will mark the \'${directoryName}\' directory as not approved, hiding it. You can approve it again later.";
 
-  static String m11(dateString) => "Last logged in ${dateString}";
+  static String m12(dateString) => "Last logged in ${dateString}";
 
-  static String m12(count) => "Members: ${count}";
+  static String m13(count) => "Members: ${count}";
 
-  static String m13(number) => "${number} selected";
+  static String m14(number) => "${number} selected";
 
-  static String m14(activityName, userName) =>
+  static String m15(activityName, userName) =>
       "A member named \'${userName}\' has requested to add the \'${activityName}\' activity here.";
 
-  static String m15(directoryName, userName) =>
+  static String m16(directoryName, userName) =>
       "A member named \'${userName}\' has requested to add the \'${directoryName}\' directory here.";
 
-  static String m16(count) => "View all (${count} more)";
+  static String m17(count) => "View all (${count} more)";
 
-  static String m17(directoryName) =>
+  static String m18(directoryName) =>
       "What action would you like to take with the \'${directoryName}\' directory?";
 
-  static String m18(activityName) =>
+  static String m19(activityName) =>
       "What action would you like to take with the \'${activityName}\' activity?";
 
-  static String m19(timeString) => "Yesterday at ${timeString}";
+  static String m20(timeString) => "Yesterday at ${timeString}";
 
-  static String m20(activityName) =>
+  static String m21(activityName) =>
       "You\'ve added the \'${activityName}\' activity, but it\'s pending approval from the admin.";
 
-  static String m21(directoryName) =>
+  static String m22(directoryName) =>
       "You\'ve added the \'${directoryName}\' directory, but it\'s pending approval from the admin.";
 
-  static String m22(userName, userEmail) =>
+  static String m23(userName, userEmail) =>
       "You are about to block the member \'${userName}\' with the email \'${userEmail}\'. This action will prevent them from adding anything to the bot.";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
@@ -181,6 +183,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Group access type"),
         "groupDiscussionType":
             MessageLookupByLibrary.simpleMessage("Group discussion type"),
+        "groupMembersCount": m5,
         "groupName": MessageLookupByLibrary.simpleMessage("Group name..."),
         "groupPermissions":
             MessageLookupByLibrary.simpleMessage("Group permissions"),
@@ -198,15 +201,15 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Invalid verification code"),
         "invalidVerificationType":
             MessageLookupByLibrary.simpleMessage("Invalid verification type."),
-        "itWillApproveActivity": m5,
-        "itWillApproveDirectoryNameDirectory": m6,
-        "itWillDeleteActivity": m7,
-        "itWillDeleteAllActivitiesInsideDirNameToo": m8,
-        "itWillMakeActivityNotApprovedHidden": m9,
-        "itWillMarkDirNameAsNotApprovedHidden": m10,
+        "itWillApproveActivity": m6,
+        "itWillApproveDirectoryNameDirectory": m7,
+        "itWillDeleteActivity": m8,
+        "itWillDeleteAllActivitiesInsideDirNameToo": m9,
+        "itWillMakeActivityNotApprovedHidden": m10,
+        "itWillMarkDirNameAsNotApprovedHidden": m11,
         "language": MessageLookupByLibrary.simpleMessage("Language"),
         "large": MessageLookupByLibrary.simpleMessage("Large"),
-        "lastLoginDateString": m11,
+        "lastLoginDateString": m12,
         "lastName": MessageLookupByLibrary.simpleMessage("Last name"),
         "lightMode": MessageLookupByLibrary.simpleMessage("Light mode"),
         "login": MessageLookupByLibrary.simpleMessage("Login"),
@@ -214,7 +217,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "markAsUnRead": MessageLookupByLibrary.simpleMessage("Mark as unread"),
         "media": MessageLookupByLibrary.simpleMessage("MEDIA"),
         "mediaAndDocs": MessageLookupByLibrary.simpleMessage("Media, and docs"),
-        "membersCount": m12,
+        "membersCount": m13,
         "menu": MessageLookupByLibrary.simpleMessage("Menu"),
         "muteNotification":
             MessageLookupByLibrary.simpleMessage("Mute notification"),
@@ -268,7 +271,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "save": MessageLookupByLibrary.simpleMessage("Save"),
         "searchHere": MessageLookupByLibrary.simpleMessage("Search here..."),
         "selectAll": MessageLookupByLibrary.simpleMessage("Select all"),
-        "selectedWithNumber": m13,
+        "selectedWithNumber": m14,
         "sendRequest": MessageLookupByLibrary.simpleMessage("Send request"),
         "serverTookTooLong": MessageLookupByLibrary.simpleMessage(
             "The server took too long to send a response. Please try again later."),
@@ -331,24 +334,24 @@ class MessageLookup extends MessageLookupByLibrary {
                 "This user is not email and password provider to send verification code."),
         "userNotFound": MessageLookupByLibrary.simpleMessage(
             "No user found for that email."),
-        "userWantToAddActivity": m14,
-        "userWantToAddDirectory": m15,
+        "userWantToAddActivity": m15,
+        "userWantToAddDirectory": m16,
         "verify": MessageLookupByLibrary.simpleMessage("Verify"),
         "verifyIt": MessageLookupByLibrary.simpleMessage("Verify it"),
-        "viewAllCountMore": m16,
+        "viewAllCountMore": m17,
         "warning": MessageLookupByLibrary.simpleMessage("Warning"),
         "weakPassword": MessageLookupByLibrary.simpleMessage(
             "The password provided is too weak."),
         "welcomeBack": MessageLookupByLibrary.simpleMessage("Welcome back!"),
-        "whatDoYouWantToDoWithDirNameDirectory": m17,
-        "whatDoYouWantToDoWithThisActivity": m18,
+        "whatDoYouWantToDoWithDirNameDirectory": m18,
+        "whatDoYouWantToDoWithThisActivity": m19,
         "wrongPassword": MessageLookupByLibrary.simpleMessage(
             "Wrong password provided for that user."),
         "yesterday": MessageLookupByLibrary.simpleMessage("Yesterday"),
-        "yesterdayAtTimeString": m19,
-        "youAddedActivityName": m20,
-        "youAddedDirNameDirectory": m21,
-        "youAreAboutToBlockMember": m22,
+        "yesterdayAtTimeString": m20,
+        "youAddedActivityName": m21,
+        "youAddedDirNameDirectory": m22,
+        "youAreAboutToBlockMember": m23,
         "youCanMakeNewGroups": MessageLookupByLibrary.simpleMessage(
             "Feel free to create new groups."),
         "youCanNotUseSamePreviousPassword":
