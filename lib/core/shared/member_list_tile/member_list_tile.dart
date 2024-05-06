@@ -1,3 +1,6 @@
+import 'package:data_sharing_organizing/core/utils/config/locale/generated/l10n.dart';
+import 'package:data_sharing_organizing/core/utils/constants/app_color.dart';
+import 'package:data_sharing_organizing/core/utils/styles.dart';
 import 'package:flutter/material.dart';
 
 import '../../utils/constants/app_constants.dart';
@@ -7,34 +10,65 @@ import 'member_image_in_tile.dart';
 import 'member_tile_body_widget.dart';
 
 class MembersListTile extends StatelessWidget {
-  const MembersListTile({super.key, required this.memberEntity});
+  const MembersListTile({
+    super.key,
+    required this.memberEntity,
+    this.onTileTapped,
+    this.onTileTappedDown,
+  });
   final MemberListTileEntity memberEntity;
-
+  final void Function()? onTileTapped;
+  final Function(TapDownDetails)? onTileTappedDown;
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: memberEntity.onTileTapped,
+      onTap: onTileTapped,
+      onTapDown: onTileTappedDown,
       borderRadius: context.isPhoneWidth
           ? null
           : BorderRadius.circular(AppConst.borderRadius),
       child: Padding(
         padding: const EdgeInsets.symmetric(
-          vertical: 5,
+          vertical: 0.5 * AppConst.defaultPadding,
           horizontal: AppConst.defaultPadding,
         ),
         child: Row(
           children: [
-            MemberImageInTile(
-              imageLink: memberEntity.imageLink,
-              isSelected: memberEntity.isSelected,
-            ),
-            const SizedBox(width: 0.5 * AppConst.defaultPadding),
-            Flexible(
-              child: MemberTileBodyWidget(
-                name: memberEntity.name,
-                lastLogin: memberEntity.lastLogin,
+            Expanded(
+              child: Row(
+                children: [
+                  MemberImageInTile(
+                    imageLink: memberEntity.imageLink,
+                    isSelected: memberEntity.isSelected,
+                  ),
+                  const SizedBox(width: 0.5 * AppConst.defaultPadding),
+                  Flexible(
+                    child: MemberTileBodyWidget(
+                      name: memberEntity.name,
+                      lastLogin: memberEntity.lastLogin,
+                    ),
+                  ),
+                ],
               ),
-            )
+            ),
+            if (memberEntity.isAdmin)
+              Container(
+                decoration: BoxDecoration(
+                  color: AppColor.active,
+                  borderRadius: BorderRadius.circular(AppConst.borderRadius),
+                ),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: AppConst.defaultPadding,
+                  vertical: 4,
+                ),
+                child: Text(
+                  S.of(context).admin,
+                  style: AppStyle.styleBoldInika13.copyWith(
+                    color: Colors.white,
+                    fontSize: 12,
+                  ),
+                ),
+              ),
           ],
         ),
       ),
