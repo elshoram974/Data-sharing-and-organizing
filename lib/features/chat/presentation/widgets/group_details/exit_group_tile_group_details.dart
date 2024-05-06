@@ -1,5 +1,6 @@
 import 'package:data_sharing_organizing/core/utils/config/locale/generated/l10n.dart';
 import 'package:data_sharing_organizing/core/utils/constants/app_color.dart';
+import 'package:data_sharing_organizing/core/utils/constants/app_constants.dart';
 import 'package:flutter/material.dart';
 
 import 'group_details_list_tile.dart';
@@ -11,6 +12,7 @@ class ExitGroupTileGroupDetails extends StatelessWidget {
   Widget build(BuildContext context) {
     return GroupDetailsListTile(
       onTap: () {},
+      padding: const EdgeInsets.only(bottom: AppConst.defaultPadding),
       title: S.of(context).exitGroup,
       color: AppColor.active,
       leading: const Icon(
