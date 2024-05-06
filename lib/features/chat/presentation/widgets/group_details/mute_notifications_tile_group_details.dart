@@ -1,5 +1,6 @@
 import 'package:data_sharing_organizing/core/shared/switch/custom_switch.dart';
 import 'package:data_sharing_organizing/core/utils/config/locale/generated/l10n.dart';
+import 'package:data_sharing_organizing/core/utils/services/dependency/provider_dependency.dart';
 import 'package:flutter/material.dart';
 
 import 'group_details_list_tile.dart';
@@ -17,8 +18,8 @@ class MuteNotificationsTileGroupDetails extends StatelessWidget {
         color: Theme.of(context).textTheme.bodyLarge?.color,
       ),
       trailing: AbstractCustomSwitch(
-        value: true,
-        onChanged: (bool val) {},
+        value: ProviderDependency.group.group.isMute,
+        onChanged: (bool val) {}, // TODO: change mute in groups
       ),
     );
   }
