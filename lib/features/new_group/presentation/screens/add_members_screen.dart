@@ -29,7 +29,7 @@ class AddMembersScreen extends StatelessWidget {
           NewGroupAppBar(
             subTitle: selectedUsers.isNotEmpty
                 ? S.of(context).selectedWithNumber(selectedUsers.length)
-                : S.of(context).addMembers,
+                : "(${S.of(context).addMembers})",
           ),
           SliverPersistentHeader(pinned: true, delegate: SearchBarMembers()),
           SliverList(
@@ -40,7 +40,8 @@ class AddMembersScreen extends StatelessWidget {
                   child: MembersListTile(
                     memberEntity: MemberListTileEntity(
                       name: "Adel Eid -> ${i + 1}",
-                      imageLink: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcThOaoCj5ZMdS0xOCIYLMVT8ReRCVjCCzX01BPJH3MpsA&s',
+                      imageLink:
+                          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcThOaoCj5ZMdS0xOCIYLMVT8ReRCVjCCzX01BPJH3MpsA&s',
                       lastLogin: DateTime.now().subtract(Duration(days: i)),
                       isSelected: false,
                       onTileTapped: () {},

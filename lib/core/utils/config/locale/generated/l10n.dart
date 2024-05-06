@@ -1674,10 +1674,10 @@ class S {
     );
   }
 
-  /// `(Add members)`
+  /// `Add members`
   String get addMembers {
     return Intl.message(
-      '(Add members)',
+      'Add members',
       name: 'addMembers',
       desc: '',
       args: [],
@@ -1841,6 +1841,106 @@ class S {
       name: 'lastLoginDateString',
       desc: '',
       args: [dateString],
+    );
+  }
+
+  /// `Media, and docs`
+  String get mediaAndDocs {
+    return Intl.message(
+      'Media, and docs',
+      name: 'mediaAndDocs',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Admin`
+  String get admin {
+    return Intl.message(
+      'Admin',
+      name: 'admin',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `View all ({count} more)`
+  String viewAllCountMore(int count) {
+    return Intl.message(
+      'View all ($count more)',
+      name: 'viewAllCountMore',
+      desc: '',
+      args: [count],
+    );
+  }
+
+  /// `DOCS`
+  String get docs {
+    return Intl.message(
+      'DOCS',
+      name: 'docs',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `MEDIA`
+  String get media {
+    return Intl.message(
+      'MEDIA',
+      name: 'media',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Only group admins will know that you left the group.`
+  String get onlyGroupAdminsWillKnow {
+    return Intl.message(
+      'Only group admins will know that you left the group.',
+      name: 'onlyGroupAdminsWillKnow',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Exit "{groupName}" group?`
+  String exitGroupNameGroup(String groupName) {
+    return Intl.message(
+      'Exit "$groupName" group?',
+      name: 'exitGroupNameGroup',
+      desc: '',
+      args: [groupName],
+    );
+  }
+
+  /// `Group photo`
+  String get groupPhoto {
+    return Intl.message(
+      'Group photo',
+      name: 'groupPhoto',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Change group name`
+  String get changeGroupName {
+    return Intl.message(
+      'Change group name',
+      name: 'changeGroupName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter group name`
+  String get enterGroupName {
+    return Intl.message(
+      'Enter group name',
+      name: 'enterGroupName',
+      desc: '',
+      args: [],
     );
   }
 }

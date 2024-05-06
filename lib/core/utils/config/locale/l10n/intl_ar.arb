@@ -269,7 +269,7 @@
     "addActivityMessageImageOrFile": "أضف نشاطًا: رسالة، صورة، أو ملف...",
     "addDirectoryName": "أدخل اسم المجلد",
     "newGroup": "مجموعة جديدة",
-    "addMembers": "(إضافة أعضاء)",
+    "addMembers": "إضافة أعضاء",
     "searchHere": "ابحث هنا...",
     "groupName": "اسم المجموعة...",
     "groupPermissions": "صلاحيات المجموعة",
@@ -323,5 +323,29 @@
                 "type": "String"
             }
         }
-    }
+    },
+    "mediaAndDocs": "وسائط ومستندات",
+    "admin": "مسئول",
+    "viewAllCountMore": "عرض الكل ({count} إضافي)",
+    "@viewAllCountMore": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "docs": "مستندات",
+    "media": "وسائط",
+    "onlyGroupAdminsWillKnow": "فقط سيعرف مسؤولو المجموعة أنك غادرت المجموعة.",
+    "exitGroupNameGroup": "الخروج من مجموعة \"{groupName}\"؟",
+    "@exitGroupNameGroup": {
+        "placeholders": {
+            "groupName": {
+                "type": "String"
+            }
+        }
+    },
+    "groupPhoto": "صورة المجموعة",
+    "changeGroupName": "تغيير اسم المجموعة",
+    "enterGroupName": "أدخل اسم المجموعة"
 }

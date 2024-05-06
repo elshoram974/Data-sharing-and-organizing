@@ -269,7 +269,7 @@
     "addActivityMessageImageOrFile": "Add activity: message, image, or file...",
     "addDirectoryName": "Enter directory name",
     "newGroup": "New group",
-    "addMembers": "(Add members)",
+    "addMembers": "Add members",
     "searchHere": "Search here...",
     "groupName": "Group name...",
     "groupPermissions": "Group permissions",
@@ -323,5 +323,29 @@
                 "type": "String"
             }
         }
-    }
+    },
+    "mediaAndDocs": "Media, and docs",
+    "admin": "Admin",
+    "viewAllCountMore": "View all ({count} more)",
+    "@viewAllCountMore": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "docs": "DOCS",
+    "media": "MEDIA",
+    "onlyGroupAdminsWillKnow": "Only group admins will know that you left the group.",
+    "exitGroupNameGroup": "Exit \"{groupName}\" group?",
+    "@exitGroupNameGroup": {
+        "placeholders": {
+            "groupName": {
+                "type": "String"
+            }
+        }
+    },
+    "groupPhoto": "Group photo",
+    "changeGroupName": "Change group name",
+    "enterGroupName": "Enter group name"
 }

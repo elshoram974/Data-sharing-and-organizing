@@ -1,3 +1,4 @@
+import 'package:data_sharing_organizing/core/utils/config/locale/generated/l10n.dart';
 import 'package:flutter/material.dart';
 
 import 'group_details_list_tile.dart';
@@ -9,7 +10,7 @@ class MediaDocsTileGroupDetails extends StatelessWidget {
   Widget build(BuildContext context) {
     return GroupDetailsListTile(
       onTap: () {},
-      title: 'Media, and docs',
+      title: S.of(context).mediaAndDocs,
       trailing: ConstrainedBox(
         constraints: const BoxConstraints(maxWidth: 100),
         child: Row(
