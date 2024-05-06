@@ -38,13 +38,14 @@ class AddMembersScreen extends StatelessWidget {
               (BuildContext context, int i) {
                 return ResConstrainedBoxAlign(
                   child: MembersListTile(
+                    onTileTapped: () {},
                     memberEntity: MemberListTileEntity(
                       name: "Adel Eid -> ${i + 1}",
+                      isAdmin: false,
                       imageLink:
                           'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcThOaoCj5ZMdS0xOCIYLMVT8ReRCVjCCzX01BPJH3MpsA&s',
                       lastLogin: DateTime.now().subtract(Duration(days: i)),
                       isSelected: false,
-                      onTileTapped: () {},
                     ),
                   ),
                 );

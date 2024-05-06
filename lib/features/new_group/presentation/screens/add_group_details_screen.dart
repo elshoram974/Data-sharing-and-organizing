@@ -34,13 +34,14 @@ class AddGroupDetailsScreen extends StatelessWidget {
               (BuildContext context, int i) {
                 return ResConstrainedBoxAlign(
                   child: MembersListTile(
+                    onTileTapped: () {},
                     memberEntity: MemberListTileEntity(
+                      isAdmin: false,
                       name: "Adel Eid -> ${i + 1}",
                       imageLink:
                           'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcThOaoCj5ZMdS0xOCIYLMVT8ReRCVjCCzX01BPJH3MpsA&s',
                       lastLogin: DateTime.now().subtract(Duration(days: i)),
                       isSelected: true,
-                      onTileTapped: () {},
                     ),
                   ),
                 );
