@@ -355,5 +355,6 @@
                 "type": "int"
             }
         }
-    }
+    },
+    "exitGroup": "Exit group"
 }

@@ -168,6 +168,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "exist": MessageLookupByLibrary.simpleMessage("Exist"),
         "existButClosed":
             MessageLookupByLibrary.simpleMessage("Exist but closed"),
+        "exitGroup": MessageLookupByLibrary.simpleMessage("Exit group"),
         "exitGroupNameGroup": m4,
         "exitGroups": MessageLookupByLibrary.simpleMessage("Exit groups"),
         "extraLarge": MessageLookupByLibrary.simpleMessage("Extra Large"),

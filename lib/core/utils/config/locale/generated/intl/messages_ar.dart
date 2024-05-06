@@ -167,6 +167,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "exist": MessageLookupByLibrary.simpleMessage("موجود"),
         "existButClosed":
             MessageLookupByLibrary.simpleMessage("موجود ولكن مغلق"),
+        "exitGroup": MessageLookupByLibrary.simpleMessage("الخروج من المجموعة"),
         "exitGroupNameGroup": m4,
         "exitGroups":
             MessageLookupByLibrary.simpleMessage("الخروج من المجموعات"),

@@ -1953,6 +1953,16 @@ class S {
       args: [count],
     );
   }
+
+  /// `Exit group`
+  String get exitGroup {
+    return Intl.message(
+      'Exit group',
+      name: 'exitGroup',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
