@@ -8,6 +8,7 @@ import '../../../features/chat/data/models/attachment_model.dart';
 import '../../../features/chat/domain/entities/activity_entity.dart';
 import '../../../features/chat/domain/entities/directory_entity.dart';
 import '../../../features/chat/domain/entities/member_entity.dart';
+import '../enums/home/group_access_type_enum.dart';
 import '../enums/home/group_discussion_type_enum.dart';
 import '../enums/notification_enum.dart';
 import '../enums/message_type/message_type.dart';
@@ -38,6 +39,7 @@ void _registerAdapterFn() {
 
   Hive.registerAdapter<MessageType>(MessageTypeAdapter()); //* it in group entity
   Hive.registerAdapter<GroupDiscussionType>(GroupDiscussionTypeAdapter());//* it in group entity
+  Hive.registerAdapter<GroupAccessType>(GroupAccessTypeAdapter());//* it in group entity
 
   Hive.registerAdapter<NotificationEnum>(NotificationEnumAdapter()); //* it in member entity
   Hive.registerAdapter<MemberEntity>(MemberEntityAdapter());//* it in group and activity entity

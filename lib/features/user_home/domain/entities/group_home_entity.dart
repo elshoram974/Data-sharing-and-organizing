@@ -44,6 +44,7 @@ class GroupHomeEntity extends Equatable {
   @HiveField(10)
   final DateTime createdAt;
 
+  @HiveField(11)
   final GroupAccessType accessType;
 
   final bool isSelected;
