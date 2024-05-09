@@ -5,8 +5,8 @@ import 'package:flutter/material.dart';
 
 import '../../../../../user_home/domain/entities/group_home_entity.dart';
 import '../../../../../user_home/presentation/widgets/menu_widgets/settings/settings_tile_widget.dart';
+import '../name_and_arrow_in_tile.dart';
 import 'discussion_type_dialog.dart';
-import 'discussion_type_name_arrow.dart';
 
 class DiscussionTypeWidget extends StatelessWidget {
   const DiscussionTypeWidget({
@@ -28,19 +28,24 @@ class DiscussionTypeWidget extends StatelessWidget {
         style: style,
         icon: AppAssets.groupDiscussionMeeting,
         title: S.of(context).groupDiscussionType,
-        onTap: () => showThemeModeDialog(context, group),
-        trailing: DiscussionTypeNameAndArrow(group),
+        onTap: () => showDiscussionTypeDialog(context, group),
+        trailing: NameAndArrowInTile(group.discussion.typeName(context)),
       ),
     );
   }
 
-  void showThemeModeDialog(BuildContext context, GroupHomeEntity group) {
+  void showDiscussionTypeDialog(BuildContext context, GroupHomeEntity group) {
     showDialog(
       context: context,
       builder: (context) {
         return Dialog(
           clipBehavior: Clip.hardEdge,
-          child: DiscussionTypeDialog(group: group),
+          child: DiscussionTypeDialog(
+            group: group,
+            onSelect: (val) {
+              print(val.typeName(context));
+            },
+          ),
         );
       },
     );

@@ -3,19 +3,22 @@ import 'package:data_sharing_organizing/core/utils/config/locale/generated/l10n.
 import 'package:data_sharing_organizing/core/utils/constants/app_assets.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../../user_home/domain/entities/group_home_entity.dart';
 import '../../../../../user_home/presentation/widgets/menu_widgets/settings/settings_tile_widget.dart';
+import '../name_and_arrow_in_tile.dart';
 import 'access_type_dialog.dart';
-import 'access_type_name_arrow.dart';
 
 class AccessTypeWidget extends StatelessWidget {
   const AccessTypeWidget({
     super.key,
+    required this.group,
     required this.color,
     required this.style,
   });
 
   final Color color;
   final TextStyle? style;
+  final GroupHomeEntity group;
 
   @override
   Widget build(BuildContext context) {
@@ -25,19 +28,24 @@ class AccessTypeWidget extends StatelessWidget {
         style: style,
         icon: AppAssets.groupOpenAccess,
         title: S.of(context).groupAccessType,
-        onTap: () => showThemeModeDialog(context),
-        trailing: const AccessTypeNameAndArrow(),
+        onTap: () => showAccessTypeDialog(context, group),
+        trailing: NameAndArrowInTile(group.accessType.typeName(context)),
       ),
     );
   }
 
-  void showThemeModeDialog(BuildContext context) {
+  void showAccessTypeDialog(BuildContext context, GroupHomeEntity group) {
     showDialog(
       context: context,
       builder: (context) {
-        return const Dialog(
+        return Dialog(
           clipBehavior: Clip.hardEdge,
-          child: AccessTypeDialog(),
+          child: AccessTypeDialog(
+            group: group,
+            onSelect: (val) {
+              print(val.typeName(context));
+            },
+          ),
         );
       },
     );

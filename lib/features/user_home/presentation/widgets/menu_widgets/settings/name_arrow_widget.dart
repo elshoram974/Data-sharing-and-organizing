@@ -12,13 +12,12 @@ class NameAndArrowWidget extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.end,
       children: [
         Flexible(
-          child: FittedBox(
-            fit: BoxFit.scaleDown,
-            child: Text(
-              name,
-              style: AppStyle.styleBoldInika16,
-              textAlign: TextAlign.center,
-            ),
+          child: Text(
+            name,
+            style: AppStyle.styleBoldInika16.copyWith(height: 0.9),
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
+            textAlign: TextAlign.center,
           ),
         ),
         const SizedBox(width: AppConst.defaultPadding),

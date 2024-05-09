@@ -7,8 +7,10 @@ import '../../../../../user_home/domain/entities/group_home_entity.dart';
 import 'discussion_type_tile_in_dialog.dart';
 
 class DiscussionTypeDialog extends StatelessWidget {
-  const DiscussionTypeDialog({super.key, required this.group});
+  const DiscussionTypeDialog({super.key, required this.group, required this.onSelect});
   final GroupHomeEntity group;
+  final void Function(GroupDiscussionType) onSelect;
+
 
   @override
   Widget build(BuildContext context) {
@@ -21,17 +23,17 @@ class DiscussionTypeDialog extends StatelessWidget {
             DiscussionTypeTileInDialog(
               type: GroupDiscussionType.exist,
               value: group.discussion,
-              onSelect: () {},
+              onSelect: () => onSelect(GroupDiscussionType.exist),
             ),
             DiscussionTypeTileInDialog(
               type: GroupDiscussionType.notExist,
               value: group.discussion,
-              onSelect: () {},
+              onSelect: () => onSelect(GroupDiscussionType.notExist),
             ),
             DiscussionTypeTileInDialog(
               type: GroupDiscussionType.existButClosed,
               value: group.discussion,
-              onSelect: () {},
+              onSelect: () => onSelect(GroupDiscussionType.existButClosed),
             ),
           ],
         ),

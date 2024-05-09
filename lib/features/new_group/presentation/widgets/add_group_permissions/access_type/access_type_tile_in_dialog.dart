@@ -4,20 +4,29 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 class AccessTypeTileInDialog extends StatelessWidget {
-  const AccessTypeTileInDialog({super.key, required this.type});
+  const AccessTypeTileInDialog({
+    super.key,
+    required this.type,
+    required this.value,
+    required this.onSelect,
+  });
 
   final GroupAccessType type;
+  final GroupAccessType value;
+  final void Function() onSelect;
 
   @override
   Widget build(BuildContext context) {
-    const cubitVal = GroupAccessType.readWriteWithAdminPermission;
     return ChooseDialogListTile<GroupAccessType>(
       title: type.typeName(context),
-      value: cubitVal,
+      value: value,
       groupValue: type,
       onTap: () => onTap(context),
     );
   }
 
-  void onTap(BuildContext _) => {_.pop()}; // TODO:, cubit.changeMode(themeMode)
+  void onTap(BuildContext _) {
+    onSelect();
+    _.pop();
+  }
 }

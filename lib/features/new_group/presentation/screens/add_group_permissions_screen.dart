@@ -47,6 +47,7 @@ class AddGroupPermissionsScreen extends StatelessWidget {
           ),
           SliverToBoxAdapter(
             child: AccessTypeWidget(
+              group: g,
               color: color,
               style: style,
             ),
