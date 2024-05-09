@@ -16,18 +16,15 @@ class CircularImageWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Hero(
-      tag: imageLink ?? UniqueKey(),
-      child: Container(
-        height: dimension,
-        width: dimension,
-        clipBehavior: Clip.hardEdge,
-        decoration: const BoxDecoration(
-          color: AppColor.secondary,
-          shape: BoxShape.circle,
-        ),
-        child: OpenImage(imageLink: imageLink, errorWidget: errorWidget),
+    return Container(
+      height: dimension,
+      width: dimension,
+      clipBehavior: Clip.hardEdge,
+      decoration: const BoxDecoration(
+        color: AppColor.secondary,
+        shape: BoxShape.circle,
       ),
+      child: OpenImage(imageLink: imageLink, errorWidget: errorWidget),
     );
   }
 }
