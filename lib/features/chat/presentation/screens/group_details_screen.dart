@@ -22,7 +22,7 @@ class GroupDetailsScreen extends StatelessWidget {
     return Scaffold(
       body: CustomScrollView(
         slivers: [
-          AppBarGroupDetails(group: group),
+          AppBarGroupDetails(group: group, membersLength: list.length),
           const MediaDocsTileGroupDetails(),
           const MuteNotificationsTileGroupDetails(),
           const GroupPermissionsTileGroupDetails(),

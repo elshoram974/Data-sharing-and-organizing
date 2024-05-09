@@ -7,13 +7,19 @@ import 'package:flutter/material.dart';
 import '../../../user_home/domain/entities/group_home_entity.dart';
 
 class GroupTitle extends StatelessWidget {
-  const GroupTitle({super.key, required this.group});
+  const GroupTitle({
+    super.key,
+    required this.group,
+    this.mainAxisAlignment = MainAxisAlignment.start,
+  });
 
   final GroupHomeEntity group;
+  final MainAxisAlignment mainAxisAlignment;
 
   @override
   Widget build(BuildContext context) {
     return Row(
+      mainAxisAlignment: mainAxisAlignment,
       children: [
         CircularImageWidget(
           imageLink: group.imageLink,
