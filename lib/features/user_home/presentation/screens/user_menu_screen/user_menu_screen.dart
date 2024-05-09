@@ -1,7 +1,9 @@
 import 'package:data_sharing_organizing/core/utils/config/locale/generated/l10n.dart';
+import 'package:data_sharing_organizing/core/utils/functions/handle_status_emit.dart';
 import 'package:data_sharing_organizing/core/utils/services/dependency/provider_dependency.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../../../../core/utils/config/routes/routes.dart';
 import '../../widgets/main_screen_widgets/main_body.dart';
@@ -25,13 +27,14 @@ class UserMenuScreen extends StatelessWidget {
           title: S.of(context).notification,
           onTap: () => context.push(AppRoute.userNotificationsSettings),
         ),
-        MenuItemTile(
-          icon: Icons.security,
-          title: S.of(context).privacyAndSecurity,
-        ),
+        // MenuItemTile(
+        //   icon: Icons.security,
+        //   title: S.of(context).privacyAndSecurity,
+        // ),
         MenuItemTile(
           icon: Icons.headset_mic,
           title: S.of(context).support,
+          onTap: _sendEmail,
         ),
         MenuItemTile(
           icon: Icons.settings,
@@ -45,5 +48,19 @@ class UserMenuScreen extends StatelessWidget {
         ),
       ],
     );
+  }
+
+  void _sendEmail() async {
+    final Uri emailLaunchUri = Uri(
+      scheme: 'mailto',
+      path: 'sharikna@mrecode.com',
+      queryParameters: {'subject': 'sharikna support'},
+    );
+
+    if (await canLaunchUrl(emailLaunchUri)) {
+      await launchUrl(emailLaunchUri);
+    } else {
+      failureStatus(S.current.error, () {});
+    }
   }
 }
