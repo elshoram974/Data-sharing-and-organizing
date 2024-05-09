@@ -9,20 +9,10 @@ class GroupMembersCountGroupDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final double deviceWidth = MediaQuery.sizeOf(context).width;
-
-    return PositionedDirectional(
-      top: 155,
-      child: SizedBox(
-        width: deviceWidth,
-        child: Text(
-          S.of(context).groupMembersCount(membersCount!),
-          textAlign: TextAlign.center,
-          style: AppStyle.styleBoldInika16.copyWith(
-            color: Colors.white,
-          ),
-        ),
-      ),
+    return Text(
+      S.of(context).groupMembersCount(membersCount!),
+      textAlign: TextAlign.center,
+      style: AppStyle.styleBoldInika16.copyWith(color: Colors.white),
     );
   }
 }

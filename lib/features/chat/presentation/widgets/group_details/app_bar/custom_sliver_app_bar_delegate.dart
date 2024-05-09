@@ -21,7 +21,7 @@ class CustomSliverAppBarDelegate extends SliverPersistentHeaderDelegate {
     double shrinkOffset,
     bool overlapsContent,
   ) {
-    final double percent = shrinkOffset / 215;
+    final double percent = shrinkOffset / maxExtent;
     final double openedPercent = 1 - percent;
     final double dimension = (openedPercent * 68) + 42;
     final bool isClosed = openedPercent <= 0.6;
@@ -127,7 +127,6 @@ class _GroupName extends StatelessWidget {
           group.groupName,
           textAlign: TextAlign.center,
           style: AppStyle.styleBoldInika24.copyWith(
-            fontSize: 20,
             color: Colors.white,
           ),
         ),
@@ -146,9 +145,7 @@ class _MembersCount extends StatelessWidget {
     return Flexible(
       child: FittedBox(
         fit: BoxFit.scaleDown,
-        child: GroupMembersCountGroupDetails(
-          membersCount: membersCount,
-        ),
+        child: GroupMembersCountGroupDetails(membersCount: membersCount),
       ),
     );
   }
