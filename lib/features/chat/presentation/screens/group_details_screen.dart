@@ -25,7 +25,8 @@ class GroupDetailsScreen extends StatelessWidget {
           AppBarGroupDetails(group: group, membersLength: list.length),
           const MediaDocsTileGroupDetails(),
           const MuteNotificationsTileGroupDetails(),
-          const GroupPermissionsTileGroupDetails(),
+          if (group.memberEntity.isAdmin)
+            const GroupPermissionsTileGroupDetails(),
           MembersCountWidget(
             topPadding: 44,
             bottomPadding: 0,
