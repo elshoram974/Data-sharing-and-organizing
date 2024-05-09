@@ -4,20 +4,29 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 class DiscussionTypeTileInDialog extends StatelessWidget {
-  const DiscussionTypeTileInDialog({super.key, required this.type});
+  const DiscussionTypeTileInDialog({
+    super.key,
+    required this.type,
+    required this.value,
+    required this.onSelect,
+  });
 
   final GroupDiscussionType type;
+  final GroupDiscussionType value;
+  final void Function() onSelect;
 
   @override
   Widget build(BuildContext context) {
-    const cubitVal = GroupDiscussionType.exist;
     return ChooseDialogListTile<GroupDiscussionType>(
       title: type.typeName(context),
-      value: cubitVal,
+      value: value,
       groupValue: type,
       onTap: () => onTap(context),
     );
   }
 
-  void onTap(BuildContext _) => {_.pop()}; // TODO:, cubit.changeMode(themeMode)
+  void onTap(BuildContext _) {
+    onSelect();
+    _.pop();
+  }
 }

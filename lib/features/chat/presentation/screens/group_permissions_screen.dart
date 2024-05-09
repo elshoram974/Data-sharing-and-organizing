@@ -1,10 +1,11 @@
 import 'package:data_sharing_organizing/core/utils/config/locale/generated/l10n.dart';
 import 'package:data_sharing_organizing/core/utils/constants/app_strings.dart';
+import 'package:data_sharing_organizing/core/utils/services/dependency/provider_dependency.dart';
 import 'package:flutter/material.dart';
 
+import '../../../new_group/presentation/widgets/add_group_permissions/access_type/access_type_widget.dart';
+import '../../../new_group/presentation/widgets/add_group_permissions/discussion_type/discussion_type_widget.dart';
 import '../../../new_group/presentation/widgets/new_group_app_bar.dart';
-import '../widgets/group_details/group_permissions/access_type/access_type_widget.dart';
-import '../widgets/group_details/group_permissions/discussion_type/discussion_type_widget.dart';
 
 class GroupPermissionsScreen extends StatelessWidget {
   const GroupPermissionsScreen({super.key});
@@ -22,10 +23,17 @@ class GroupPermissionsScreen extends StatelessWidget {
         slivers: [
           NewGroupAppBar(title: S.of(context).groupPermissions),
           SliverToBoxAdapter(
-            child: DiscussionTypeWidget(color: color, style: style),
+            child: DiscussionTypeWidget(
+              group: ProviderDependency.group.group,
+              color: color,
+              style: style,
+            ),
           ),
           SliverToBoxAdapter(
-            child: AccessTypeWidget(color: color, style: style),
+            child: AccessTypeWidget(
+              color: color,
+              style: style,
+            ),
           ),
         ],
       ),

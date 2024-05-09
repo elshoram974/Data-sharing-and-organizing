@@ -27,6 +27,7 @@ class NewGroupAppBar extends StatelessWidget {
             children: [
               Text(
                 title ?? S.of(context).newGroup,
+                textAlign: TextAlign.center,
                 style: AppStyle.styleBoldInika24.copyWith(fontSize: 36),
               ),
               const SizedBox(height: 10),
