@@ -6,8 +6,6 @@ import 'package:flutter/material.dart';
 // ignore: implementation_imports
 import 'package:flutter_chat_ui/src/models/date_header.dart';
 
-
-
 class DateHeaderWidget extends StatelessWidget {
   const DateHeaderWidget(this.dateHeader, {super.key});
   final DateHeader dateHeader;

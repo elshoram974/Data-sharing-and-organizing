@@ -62,29 +62,35 @@ class GroupDetails extends GroupHomeEntity {
   }
 
   factory GroupDetails.fromMap(Map<String, dynamic> data, AuthUserEntity user) {
-    final int groupId =  data['group_id'] as int; 
+    final int groupId = data['group_id'] as int;
     return GroupDetails(
       groupId: groupId,
       groupName: data['group_name'] as String,
       groupOwnerId: data['group_owner_id'] as int,
       createdAt: DateTime.parse(data['group_creation_date'] as String),
       groupDescription: data['group_description'] as String?,
-      groupVisibility: GroupVisibility.fromString(data['group_visibility'] as String?),
-      accessType: GroupAccessType.fromString(data['group_access_type'] as String?),
-      groupCategory: GroupCategory.fromString(data['group_category'] as String?),
+      groupVisibility:
+          GroupVisibility.fromString(data['group_visibility'] as String?),
+      accessType:
+          GroupAccessType.fromString(data['group_access_type'] as String?),
+      groupCategory:
+          GroupCategory.fromString(data['group_category'] as String?),
       groupImage: data['group_image'] as String?,
       groupType: GroupType.fromString(data['group_type'] as String?),
-      discussion: GroupDiscussionType.fromString(data['group_discussion_type'] as String?),
+      discussion: GroupDiscussionType.fromString(
+          data['group_discussion_type'] as String?),
       groupStatus: GroupStatus.fromString(data['group_status'] as String?),
       groupStatusMessage: data['group_status_message'] as String?,
       lastActivityModel: data['last_activity'] == null
-                            ? null
-                            : ActivityModel.fromMap(data['last_activity'] as Map<String, dynamic>),
+          ? null
+          : ActivityModel.fromMap(
+              data['last_activity'] as Map<String, dynamic>),
       memberModel: MemberModel(
         user: user,
         groupId: groupId,
         canInteract: data['member_can_interaction'] as int == 1,
-        notification: NotificationEnum.fromString(data['member_notification'] as String),
+        notification:
+            NotificationEnum.fromString(data['member_notification'] as String),
         joinDate: DateTime.parse(data['member_join_date'] as String),
         isAdmin: data['member_is_admin'] as int == 1,
       ),
@@ -110,14 +116,15 @@ class GroupDetails extends GroupHomeEntity {
         'member_can_interaction': memberModel.canInteract,
         'member_notification': memberModel.notification.inString,
         'member_join_date': memberModel.joinDate.toIso8601String(),
-        'member_is_admin': memberModel.isAdmin? 1 : 0,
+        'member_is_admin': memberModel.isAdmin ? 1 : 0,
       };
 
   /// `dart:convert`
   ///
   /// Parses the string and returns the resulting Json object as [GroupDetails].
   factory GroupDetails.fromJson(String data, AuthUserEntity user) {
-    return GroupDetails.fromMap(json.decode(data) as Map<String, dynamic>, user);
+    return GroupDetails.fromMap(
+        json.decode(data) as Map<String, dynamic>, user);
   }
 
   /// `dart:convert`

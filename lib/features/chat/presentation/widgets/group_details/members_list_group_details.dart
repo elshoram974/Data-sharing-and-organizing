@@ -26,7 +26,8 @@ class MembersListGroupDetails extends StatelessWidget {
           return ResConstrainedBoxAlign(
             child: MembersListTile(
               onTileTappedDown: group.memberEntity.isAdmin && i != 0
-                  ? (_) => editMembersMenu(context, _, i == 0 || i == 5 || i == 8)
+                  ? (_) =>
+                      editMembersMenu(context, _, i == 0 || i == 5 || i == 8)
                   : null,
               memberEntity: MemberListTileEntity(
                 name: "Adel Eid -> ${i + 1}",

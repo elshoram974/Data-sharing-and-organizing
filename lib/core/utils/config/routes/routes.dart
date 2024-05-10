@@ -22,7 +22,8 @@ abstract class AppRoute {
 
   // * user screens *//
   static const String userHome = UserRoutes.userHome;
-  static const String userNotificationsSettings = UserRoutes.notificationsSettings;
+  static const String userNotificationsSettings =
+      UserRoutes.notificationsSettings;
   static const String userSettings = UserRoutes.userSettings;
   static const String userProfile = UserRoutes.userProfile;
   static const String userEditProfile = UserRoutes.userEditProfile;

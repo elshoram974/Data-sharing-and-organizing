@@ -29,7 +29,8 @@ class BackButtonLeading extends StatelessWidget {
             Icon(Icons.arrow_back_outlined, color: color),
             Text(
               S.of(context).back,
-              style: AppStyle.styleBoldInika24.copyWith(fontSize: 20, color: color),
+              style: AppStyle.styleBoldInika24
+                  .copyWith(fontSize: 20, color: color),
             ),
           ],
         ),

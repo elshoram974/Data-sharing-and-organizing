@@ -23,7 +23,8 @@ class GroupNameAndTimeTile extends StatelessWidget {
         ),
         Text(
           DateToString.call(
-            groupHomeEntity.lastActivity?.createdAt ?? groupHomeEntity.memberEntity.joinDate,
+            groupHomeEntity.lastActivity?.createdAt ??
+                groupHomeEntity.memberEntity.joinDate,
             false,
           ),
           style: TextStyle(

@@ -36,7 +36,8 @@ class AccessTypeDialog extends StatelessWidget {
             AccessTypeTileInDialog(
               type: GroupAccessType.readWriteWithAdminPermission,
               value: group.accessType,
-              onSelect: () => onSelect(GroupAccessType.readWriteWithAdminPermission),
+              onSelect: () =>
+                  onSelect(GroupAccessType.readWriteWithAdminPermission),
             ),
           ],
         ),

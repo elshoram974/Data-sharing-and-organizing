@@ -25,7 +25,8 @@ class GroupDetailsListTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return SliverToBoxAdapter(
       child: Padding(
-        padding: padding ?? const EdgeInsets.only(top: 0.5 * AppConst.defaultPadding),
+        padding: padding ??
+            const EdgeInsets.only(top: 0.5 * AppConst.defaultPadding),
         child: ResConstrainedBoxAlign(
           child: ListTile(
             onTap: onTap,

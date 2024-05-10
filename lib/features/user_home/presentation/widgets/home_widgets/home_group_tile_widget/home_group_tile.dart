@@ -29,7 +29,8 @@ class HomeGroupTile extends StatelessWidget {
       borderRadius: BorderRadius.circular(AppConst.borderRadius),
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 200),
-        padding: const EdgeInsets.only(left: 8, right: AppConst.defaultPadding, bottom: 7, top: 7),
+        padding: const EdgeInsets.only(
+            left: 8, right: AppConst.defaultPadding, bottom: 7, top: 7),
         decoration: BoxDecoration(
           color: groupHomeEntity.isSelected ? AppColor.selected(context) : null,
           borderRadius: BorderRadius.circular(AppConst.borderRadius),

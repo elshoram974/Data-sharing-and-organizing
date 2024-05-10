@@ -15,7 +15,8 @@ class GroupFloatingButtonWidget extends StatelessWidget {
     final GroupCubit c = ProviderDependency.group;
 
     return BlocBuilder<GroupCubit, GroupState>(
-      buildWhen: (p, c) => c is GroupOpenFloatingButtonState || c is GroupChooseScreenState,
+      buildWhen: (p, c) =>
+          c is GroupOpenFloatingButtonState || c is GroupChooseScreenState,
       builder: (context, state) {
         return AnimatedContainer(
           duration: const Duration(milliseconds: 300),

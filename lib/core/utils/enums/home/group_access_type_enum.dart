@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import '../../config/locale/generated/l10n.dart';
 import 'package:hive/hive.dart';
 
-
 part 'group_access_type_enum.g.dart';
 
 @HiveType(typeId: 11)
@@ -27,7 +26,7 @@ enum GroupAccessType {
     return map[stringRole] ?? readWriteWithAdminPermission;
   }
 
-    String typeName(BuildContext context) {
+  String typeName(BuildContext context) {
     Map<GroupAccessType, String> map = {
       onlyRead: S.of(context).readOnly,
       readWrite: S.of(context).readWrite,

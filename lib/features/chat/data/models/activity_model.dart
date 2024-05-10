@@ -3,105 +3,113 @@ import 'dart:convert';
 import 'package:data_sharing_organizing/core/utils/enums/message_type/message_type.dart';
 import 'package:data_sharing_organizing/core/utils/enums/notification_enum.dart';
 import 'package:data_sharing_organizing/core/utils/enums/user_role/user_type_enum.dart';
-import 'package:data_sharing_organizing/features/auth/domain/entities/auth_user_entity.dart';
+import 'package:data_sharing_organizing/core/utils/functions/separate_name.dart';
 
-import '../../data/models/attachment_model.dart';
+import '../../../auth/domain/entities/auth_user_entity.dart';
 import '../../domain/entities/activity_entity.dart';
-import 'member_model.dart';
+import '../../domain/entities/member_entity.dart';
+import 'attachment_model.dart';
 
 class ActivityModel extends ActivityEntity {
+  final DateTime? activityLastModified;
+
   const ActivityModel({
     required super.id,
     required super.groupId,
-    required super.createdBy,
-    required super.insideDirectoryId,
-    required super.repliedOn,
+    super.insideDirectoryId,
+    required super.type,
+    super.repliedOn,
     required super.content,
     required super.attachment,
     required super.createdAt,
     required super.isApproved,
-    required super.notifyOthers,
-    required super.type,
+    super.notifyOthers,
+    this.activityLastModified,
+    required super.createdBy,
   });
 
-  factory ActivityModel.fromAPI(Map<String, dynamic> map) {
-    return ActivityModel(
-      id: map['activity_id'] as int,
-      groupId: map['activity_group_id'] as int,
-      createdBy: MemberModel(
-        user: AuthUserEntity(
-          id: map['user_id'] as int,
-          image: map['user_image'] as String?,
-          name:'${map['user_first_name'] as String} ${map['user_last_name'] as String}',
-          email: map['user_email'] as String,
-          password: '',
-          userType: UserType.fromString(map['user_type'] as String?),
-        ),
-        groupId: map['group_id'] as int,
-        canInteract: map['member_can_interaction'] as int == 1,
-        notification: NotificationEnum.fromString(map['member_notification'] as String),
-        joinDate: DateTime.parse(map['member_join_date'] as String),
-        isAdmin: map['member_is_admin'] as int == 1,
-      ),
-      insideDirectoryId: map['activity_direction_id'] as int?,
-      repliedOn: map['activity_reply_on'] as int?,
-      content: map['activity_content'] as String? ?? '',
-      attachment: map['activity_attachments_size'] == null
-        ? null
-        : AttachmentModel(
-            size: map['activity_attachments_size'] as double,
-            name: map['activity_content'] as String,
-            uri: map['activity_attachments_url'] as String,
-            mimeType: map['activity_attachments_mimetype'] as String?,
-            width: map['activity_attachments_width'] as double?,
-            height: map['activity_attachments_height'] as double?,
-          ),
-      createdAt: DateTime.parse(map['activity_date'] as String),
-      isApproved: map['activity_is_approved'] as int == 1,
-      notifyOthers: NotificationEnum.fromString(map['activity_notify_others'] as String),
-      type: MessageType.fromString(map['activity_type'] as String),
+  factory ActivityModel.fromMap(Map<String, dynamic> data) {
+    final String tempContent = data['activity_content'] as String? ?? '';
+    final AttachmentModel? tempAttachment;
+    if (data['activity_attachments_url'] != null) {
+      tempAttachment = AttachmentModel(
+        size: data['activity_attachments_size'] as double,
+        name: tempContent,
+        uri: data['activity_attachments_url'] as String,
+        height: data['activity_attachments_height'] as double?,
+        width: data['activity_attachments_width'] as double?,
+        mimeType: data['activity_attachments_mimetype'] as String?,
+      );
+    } else {
+      tempAttachment = null;
+    }
+    final AuthUserEntity tempUser = AuthUserEntity(
+      id: data['user_id'] as int,
+      name: "${data['user_first_name'] as String} ${data['user_last_name'] as String}",
+      email: data['user_email'] as String,
+      password: '',
+      userType: UserType.fromString(data['user_type'] as String?),
+      image: data['user_image'] as String?,
     );
-  }
-  factory ActivityModel.fromMap(Map<String, dynamic> map) {
+    final MemberEntity tempCreatedBy = MemberEntity(
+      user: tempUser,
+      groupId: data['group_id'] as int,
+      canInteract: data['member_can_interaction'] as int == 1,
+      notification:
+          NotificationEnum.fromString(data['member_notification'] as String),
+      joinDate: DateTime.parse(data['member_join_date'] as String),
+      isAdmin: data['member_is_admin'] as int == 1,
+    );
     return ActivityModel(
-      id: map['id'] as int,
-      groupId: map['groupId'] as int,
-      createdBy: MemberModel.fromMap(map['createdBy'] as Map<String, dynamic>),
-      insideDirectoryId: map['insideDirectoryId'] as int?,
-      repliedOn: map['repliedOn'] as int?,
-      content: map['content'] as String,
-      attachment: map['attachment'] == null
+      id: data['activity_id'] as int,
+      groupId: data['activity_group_id'] as int,
+      insideDirectoryId: data['activity_direction_id'] as int?,
+      type: MessageType.fromString(data['activity_type'] as String),
+      repliedOn: data['activity_reply_on'] as int?,
+      content: tempContent,
+      attachment: tempAttachment,
+      createdAt: DateTime.parse(data['activity_date'] as String),
+      isApproved: data['activity_is_approved'] as int == 1,
+      notifyOthers:
+          NotificationEnum.fromString(data['activity_notify_others'] as String),
+      activityLastModified: data['activity_last_modified'] == null
           ? null
-          : AttachmentModel.fromMap(map['attachment'] as Map<String, dynamic>),
-      createdAt: DateTime.parse(map['createdAt'] as String),
-      isApproved: map['isApproved'] as bool,
-      notifyOthers: NotificationEnum.fromString(map['notifyOthers'] as String),
-      type: MessageType.fromString(map['type'] as String),
+          : DateTime.parse(data['activity_last_modified'] as String),
+      createdBy: tempCreatedBy,
     );
   }
 
   Map<String, dynamic> toMap() {
-    final Map<String, dynamic> createdByMap = MemberModel(
-            user: createdBy.user,
-            groupId: createdBy.groupId,
-            canInteract: createdBy.canInteract,
-            joinDate: createdBy.joinDate,
-            isAdmin: createdBy.isAdmin,
-            notification: createdBy.notification)
-        .toMap();
-
+    final ({String fName, String lName}) name = separateName(createdBy.user.name);
     return {
-      'id': id,
-      'groupId': groupId,
-      'createdBy': createdByMap,
-      'insideDirectoryId': insideDirectoryId,
-      'repliedOn': repliedOn,
-      'content': content,
-      'attachment': attachment?.toMap(),
-      'createdAt': createdAt.toIso8601String(),
-      'isApproved': isApproved,
-      'notifyOthers': notifyOthers.inString,
-      'type': type.inString,
+      'activity_id': id,
+      'activity_group_id': groupId,
+      'activity_direction_id': insideDirectoryId,
+      'activity_type': type.inString,
+      'activity_reply_on': repliedOn,
+      'activity_content': content,
+      'activity_attachments_url': attachment?.uri,
+      'activity_attachments_size': attachment?.size,
+      'activity_attachments_height': attachment?.height,
+      'activity_attachments_width': attachment?.width,
+      'activity_attachments_mimetype': attachment?.mimeType,
+      'activity_date': createdAt.toIso8601String(),
+      'activity_is_approved': isApproved ? 1 : 0,
+      'activity_notify_others': notifyOthers.inString,
+      'activity_owner_id': createdBy.user.id,
+      'activity_last_modified': activityLastModified?.toIso8601String(),
+      'user_id': createdBy.user.id,
+      'user_email': createdBy.user.email,
+      'user_first_name': name.fName,
+      'user_last_name': name.lName,
+      'user_image': createdBy.user.image,
+      'user_type': createdBy.user.userType.inString,
+      'group_id': groupId,
+      'member_id': createdBy.user.id,
+      'member_can_interaction': createdBy.canInteract ? 1 : 0,
+      'member_notification': createdBy.notification.inString,
+      'member_join_date': createdBy.joinDate.toIso8601String(),
+      'member_is_admin': createdBy.isAdmin ? 1 : 0,
     };
   }
 
@@ -134,5 +142,20 @@ class ActivityModel extends ActivityEntity {
   }
 
   @override
-  List<Object?> get props => [...super.props];
+  List<Object?> get props {
+    return [
+    id,
+    groupId,
+    insideDirectoryId,
+    type,
+    repliedOn,
+    content,
+    attachment,
+    createdAt,
+    isApproved,
+    notifyOthers,
+    activityLastModified,
+    createdBy,
+    ];
+  }
 }

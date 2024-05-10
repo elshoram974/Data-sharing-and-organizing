@@ -15,7 +15,7 @@ class DirectoryEntity extends Equatable {
     required this.createdBy,
     this.isApproved = false,
   });
-  
+
   @HiveField(0)
   final int id;
 
@@ -34,7 +34,7 @@ class DirectoryEntity extends Equatable {
   @HiveField(5)
   final bool isApproved;
 
-    DirectoryEntity copyWith({
+  DirectoryEntity copyWith({
     int? id,
     int? groupId,
     String? name,

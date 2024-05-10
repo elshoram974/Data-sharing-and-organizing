@@ -21,7 +21,8 @@ class SearchBarMembers extends SliverPersistentHeaderDelegate {
           fillColor: Colors.white,
           hintText: S.of(context).searchHere,
           hintStyle: textStyle,
-          contentPadding: const EdgeInsets.symmetric(horizontal: AppConst.defaultPadding),
+          contentPadding:
+              const EdgeInsets.symmetric(horizontal: AppConst.defaultPadding),
           enabledBorder: outlineInputBorder,
           border: outlineInputBorder,
           constraints: const BoxConstraints(maxWidth: AppConst.constraint),

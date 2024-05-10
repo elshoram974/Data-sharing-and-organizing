@@ -20,7 +20,7 @@ class HomeData {
     return HomeData(
       status: data['status'] as String,
       groups: (data['groups'] as List<dynamic>)
-          .map((e) => GroupDetails.fromMap(e,user))
+          .map((e) => GroupDetails.fromMap(e, user))
           .toList(),
       user: user,
     );

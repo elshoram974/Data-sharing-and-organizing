@@ -27,7 +27,8 @@ Future<void> handleTappedMessage({
         updateMessage(index, updatedMessage);
 
         final http.Client client = http.Client();
-        final http.Response request = await client.get(Uri.parse(tappedMessage.uri));
+        final http.Response request =
+            await client.get(Uri.parse(tappedMessage.uri));
         final Uint8List bytes = request.bodyBytes;
         final String documentsDir =
             (await getApplicationDocumentsDirectory()).path;

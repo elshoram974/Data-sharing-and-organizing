@@ -4,7 +4,6 @@ import 'package:equatable/equatable.dart';
 import 'package:mime/mime.dart';
 import 'package:hive/hive.dart';
 
-
 part 'attachment_model.g.dart';
 
 @HiveType(typeId: 10)

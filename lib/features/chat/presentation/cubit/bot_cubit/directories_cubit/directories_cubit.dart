@@ -54,11 +54,13 @@ abstract class DirectoryCubit extends Cubit<DirectoryState> {
 
   void onPopInvoked(bool didPop);
 
-  GlobalKey<FormFieldState<dynamic>> directoryNameKey = GlobalKey<FormFieldState<dynamic>>();
+  GlobalKey<FormFieldState<dynamic>> directoryNameKey =
+      GlobalKey<FormFieldState<dynamic>>();
   void addNewDirectoryOnSave(String val);
   void addNewDirectory();
 
-  GlobalKey<FormFieldState<dynamic>> activityKey = GlobalKey<FormFieldState<dynamic>>();
+  GlobalKey<FormFieldState<dynamic>> activityKey =
+      GlobalKey<FormFieldState<dynamic>>();
   void addNewActivity();
 }
 
@@ -81,7 +83,8 @@ class DirectoryCubitImp extends DirectoryCubit {
     } else if (bottomHeight > maxHeight) {
       bottomHeight = maxHeight;
     }
-    await ProviderDependency.userHome.updateGroupLocally(groupCubit.group.copyWith(bottomHeight: bottomHeight));
+    await ProviderDependency.userHome.updateGroupLocally(
+        groupCubit.group.copyWith(bottomHeight: bottomHeight));
 
     emit(ChangeDirectoryBottomHeightState(bottomHeight));
   }
@@ -254,7 +257,7 @@ class DirectoryCubitImp extends DirectoryCubit {
   void addNewDirectory() {
     if (directoryNameKey.currentState!.validate()) {
       directoryNameKey.currentState!.save();
-      final DirectoryEntity dir =  DirectoryEntity(
+      final DirectoryEntity dir = DirectoryEntity(
         id: 1,
         insideDirectoryId: _directoriesStack.lastOrNull?.id,
         name: _directoryName,
@@ -262,24 +265,24 @@ class DirectoryCubitImp extends DirectoryCubit {
         isApproved: false,
         createdBy: botCubit.currentMember,
       );
-      
+
       handleStatusEmit<DirectoryEntity>(
-          statusFunction: () => botRepo.addNewDir(dir),
-          successFunction: (newDir) {
-            List<DirectoryEntity> directories = [];
-            directories.addAll(currentDirectories);
-            directories.add(newDir);
-            currentDirectories = directories;
-            emit(OpenDirectoryState(currentDirectories));
-          },
-        ).then((v) => AppRoute.key.currentState?.pop());
+        statusFunction: () => botRepo.addNewDir(dir),
+        successFunction: (newDir) {
+          List<DirectoryEntity> directories = [];
+          directories.addAll(currentDirectories);
+          directories.add(newDir);
+          currentDirectories = directories;
+          emit(OpenDirectoryState(currentDirectories));
+        },
+      ).then((v) => AppRoute.key.currentState?.pop());
     }
   }
 
   @override
   void addNewActivity() {
     // TODO: add code here
-    final ActivityEntity newActivity =  ActivityEntity(
+    final ActivityEntity newActivity = ActivityEntity(
       id: -1,
       content: 'content',
       createdAt: DateTime.now(),
@@ -291,12 +294,13 @@ class DirectoryCubitImp extends DirectoryCubit {
       attachment: null,
       notifyOthers: NotificationEnum.withoutNotify,
     );
-    
+
     handleStatusEmit<ActivityEntity>(
-      statusFunction: () => botRepo.addNewActivity(newActivity,Uint8List.fromList([])),
+      statusFunction: () =>
+          botRepo.addNewActivity(newActivity, Uint8List.fromList([])),
       successFunction: (_) => botCubit.botReply([_]),
     ).then((v) => AppRoute.key.currentState?.pop());
-}
+  }
 
   @override
   void onPopInvoked(bool didPop) {

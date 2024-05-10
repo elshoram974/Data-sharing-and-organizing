@@ -30,25 +30,26 @@ class GroupNameAndTimeAndCounterTile extends StatelessWidget {
               ),
               const SizedBox(width: 8),
               if (groupNotificationEntity.unReadCounter != null) ...[
-                GroupUnreadCounter(unReadCounter: groupNotificationEntity.unReadCounter),
+                GroupUnreadCounter(
+                    unReadCounter: groupNotificationEntity.unReadCounter),
                 const SizedBox(width: 8),
               ],
             ],
           ),
         ),
-        
-          Text(
-            DateToString.call(
-              groupNotificationEntity.lastActivity?.createdAt ?? groupNotificationEntity.memberEntity.joinDate,
-              false,
-            ),
-            style: TextStyle(
-              color: groupNotificationEntity.unReadCounter != null
-                  ? AppColor.active
-                  : AppColor.gray,
-              fontSize: 10,
-            ),
+        Text(
+          DateToString.call(
+            groupNotificationEntity.lastActivity?.createdAt ??
+                groupNotificationEntity.memberEntity.joinDate,
+            false,
           ),
+          style: TextStyle(
+            color: groupNotificationEntity.unReadCounter != null
+                ? AppColor.active
+                : AppColor.gray,
+            fontSize: 10,
+          ),
+        ),
       ],
     );
   }

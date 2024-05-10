@@ -10,6 +10,7 @@ import 'package:data_sharing_organizing/features/chat/domain/entities/directory_
 import 'package:data_sharing_organizing/features/chat/domain/entities/member_entity.dart';
 
 import '../../../domain/entities/data_in_directory.dart';
+import '../../models/dir_activities_bot.dart';
 
 abstract class DirectoriesRemoteDataSource {
   const DirectoriesRemoteDataSource();
@@ -66,8 +67,15 @@ class DirectoriesRemoteDataSourceImp extends DirectoriesRemoteDataSource {
       AppLinks.getDirectoriesInside,
       {'direction_id': '$dirId', 'group_id': '$groupId'},
     );
-    // TODO: write code of getting directories here and Link don't forget
-    throw UnimplementedError(response.toString());
+    final DirActivitiesBot temp = DirActivitiesBot.fromMap(response);
+    print(temp.toString());
+    print(response.toString());
+    return DataInDirectory(
+      directories: temp.directories,
+      activities: temp.activities,
+      groupId: groupId,
+      insideDirectoryId: dirId,
+    );
   }
 
   @override
@@ -195,7 +203,8 @@ class DirectoriesRemoteDataSourceImp extends DirectoriesRemoteDataSource {
       'activity_notify_others': activity.notifyOthers.inString,
       'activity_owner_id': '${activity.createdBy.user.id}',
     };
-    if (activity.insideDirectoryId != null) body['activity_direction_id'] = '${activity.insideDirectoryId}';
+    if (activity.insideDirectoryId != null)
+      body['activity_direction_id'] = '${activity.insideDirectoryId}';
     final AttachmentModel? attachment = activity.attachment;
     if (attachment != null) {
       body['activity_attachments_size'] = '${attachment.size}';
@@ -234,7 +243,8 @@ class DirectoriesRemoteDataSourceImp extends DirectoriesRemoteDataSource {
       'direction_max_count_activity': '1000',
       'activity_owner_id': '${dir.createdBy.user.id}',
     };
-    if (dir.insideDirectoryId != null) body['inside_direction_id'] = '${dir.insideDirectoryId}';
+    if (dir.insideDirectoryId != null)
+      body['inside_direction_id'] = '${dir.insideDirectoryId}';
     Map<String, dynamic> response = await service.post(
       AppLinks.addNewDir,
       body,

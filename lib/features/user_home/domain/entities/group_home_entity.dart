@@ -130,5 +130,5 @@ class GroupHomeEntity extends Equatable {
   }
 
   @override
-  List<Object?> get props => [id, ownerId,memberEntity,createdAt];
+  List<Object?> get props => [id, ownerId, memberEntity, createdAt];
 }

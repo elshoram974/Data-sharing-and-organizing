@@ -22,10 +22,11 @@ abstract final class AppColor {
   static Color selected(BuildContext _) =>
       _.isDarkMode ? _selectedDark : _selectedLight;
   static Color grayLightDark(BuildContext _) => _.isDarkMode ? gray : grayLight;
-  
+
   static const Color _backgroundLight = Color(0xFFFFFFFF);
   static const Color backgroundDark = Color(0xFF373737);
-  static Color background(BuildContext _) => _.isDarkMode ? backgroundDark : _backgroundLight;
+  static Color background(BuildContext _) =>
+      _.isDarkMode ? backgroundDark : _backgroundLight;
 
   // static const int _activeLightInt = 0xFFFF0022;
   // static const Color activeLight = Color(_activeLightInt);

@@ -47,7 +47,8 @@ class DirectoriesButtons extends StatelessWidget {
                         height: 38,
                         child: MyFilledButton(
                           onPressed: () => c.openDirectory(dir),
-                          onLongPress: () => showDirectoryActions(context, dir, c),
+                          onLongPress: () =>
+                              showDirectoryActions(context, dir, c),
                           text: dir.name,
                           filledColor: dir.isApproved
                               ? null

@@ -32,12 +32,14 @@ abstract final class DateToString {
     final String timeString = DateFormat.jm().format(time);
 
     if (timeToday.isAtSameMomentAs(today)) {
-      return S.current.atTimeString(timeString) ;
+      return S.current.atTimeString(timeString);
     } else if (timeToday.isAtSameMomentAs(yesterday)) {
       return S.current.yesterdayAtTimeString(timeString);
     } else if (time.isAfter(now.subtract(const Duration(days: 8)))) {
-      return S.current.dateTimeString(timeString, DateFormat.EEEE().format(time));
+      return S.current
+          .dateTimeString(timeString, DateFormat.EEEE().format(time));
     }
-    return S.current.dateTimeString(timeString, DateFormat.yMMMd().format(time));
+    return S.current
+        .dateTimeString(timeString, DateFormat.yMMMd().format(time));
   }
 }

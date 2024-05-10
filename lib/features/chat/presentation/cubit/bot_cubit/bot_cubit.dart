@@ -36,7 +36,8 @@ abstract class BOTCubit extends Cubit<BOTState> {
   void botReply(List<ActivityEntity> activities);
   void handleMessageTap(BuildContext _, types.Message message);
   void handleMessageDoubleTap(BuildContext _, types.Message message);
-  void handlePreviewDataFetched(types.TextMessage message, types.PreviewData previewData);
+  void handlePreviewDataFetched(
+      types.TextMessage message, types.PreviewData previewData);
   void handleSendPressed(types.PartialText message, [types.Status? status]);
 
   void approvedActivity(ActivityEntity activity, BuildContext _);
@@ -103,11 +104,14 @@ class BOTCubitImp extends BOTCubit {
     ProviderDependency.group.closeFloatingButton();
     if (message.metadata?.containsKey("directory") == true) {
       final String? json = message.metadata!["directory"] as String?;
-      DirectoryEntity? dir = json == null ? null : DirectoryModel.fromJson(json);
+      DirectoryEntity? dir =
+          json == null ? null : DirectoryModel.fromJson(json);
       ProviderDependency.directory.goToDirectory(dir);
     } else if (message.metadata?.containsKey("activity") == true) {
-      final ActivityEntity activity = ActivityModel.fromJson(message.metadata!["activity"]);
-      if (canEditMessage(activity) && "BOT" == message.author.firstName?.trim()) {
+      final ActivityEntity activity =
+          ActivityModel.fromJson(message.metadata!["activity"]);
+      if (canEditMessage(activity) &&
+          "BOT" == message.author.firstName?.trim()) {
         showActivityActions(_, activity);
       }
     }
@@ -144,7 +148,8 @@ class BOTCubitImp extends BOTCubit {
   }
 
   @override
-  void handleSendPressed(types.PartialText message, [types.Status? status]) async{
+  void handleSendPressed(types.PartialText message,
+      [types.Status? status]) async {
     ProviderDependency.group.closeFloatingButton();
     final ActivityModel activityTemp = ActivityModel.fromEntity(
       ActivityEntity(
@@ -170,20 +175,22 @@ class BOTCubitImp extends BOTCubit {
     await botRepo.saveBotMessages(groupCubit.group, botMessages);
     emit(SetState(_i++));
 
-    final int i = botMessages.indexWhere((element) => element.id == textMessage.id);
+    final int i =
+        botMessages.indexWhere((element) => element.id == textMessage.id);
     await handleStatusEmit<List<ActivityEntity>>(
-      dismissLoadingOnTap: null,
-      statusFunction: () => botRepo.askAI(activityTemp),
-      successFunction: (activities) {
-        final types.Message updatedMessage = botMessages[i].copyWith(status: types.Status.seen);
-        botMessages[i] = updatedMessage;
-        botReply(activities);
-      },
-      failureFunction: (){
-        final types.Message updatedMessage = botMessages[i].copyWith(status: types.Status.error);
-        botMessages[i] = updatedMessage;
-      }
-    );
+        dismissLoadingOnTap: null,
+        statusFunction: () => botRepo.askAI(activityTemp),
+        successFunction: (activities) {
+          final types.Message updatedMessage =
+              botMessages[i].copyWith(status: types.Status.seen);
+          botMessages[i] = updatedMessage;
+          botReply(activities);
+        },
+        failureFunction: () {
+          final types.Message updatedMessage =
+              botMessages[i].copyWith(status: types.Status.error);
+          botMessages[i] = updatedMessage;
+        });
     await botRepo.saveBotMessages(groupCubit.group, botMessages);
     emit(SetState(_i++));
   }
@@ -197,7 +204,8 @@ class BOTCubitImp extends BOTCubit {
       activity: activity,
       approveFn: () {
         handleStatusEmit<void>(
-          statusFunction: () => botRepo.approveActivity(currentMember, activity, true),
+          statusFunction: () =>
+              botRepo.approveActivity(currentMember, activity, true),
           successFunction: (_) {
             // TODO: make emit when it run in correct way
           },
@@ -213,7 +221,8 @@ class BOTCubitImp extends BOTCubit {
       activity: activity,
       hideFn: () {
         handleStatusEmit<void>(
-          statusFunction: () => botRepo.approveActivity(currentMember, activity, false),
+          statusFunction: () =>
+              botRepo.approveActivity(currentMember, activity, false),
           successFunction: (_) {
             // TODO: make emit when it run in correct way
           },
@@ -237,12 +246,13 @@ class BOTCubitImp extends BOTCubit {
       },
     );
   }
+
   @override
   void blockUserInteraction(ActivityEntity activity, BuildContext _) {
     blockUserInteractionDialog(
       context: _,
       user: activity.createdBy.user,
-      blockFn:() {
+      blockFn: () {
         handleStatusEmit<void>(
           statusFunction: () => botRepo.blockUserWithActivity(activity),
           successFunction: (_) {

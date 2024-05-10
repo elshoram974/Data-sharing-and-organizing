@@ -54,7 +54,8 @@ class GroupNameAndImage extends StatelessWidget {
 }
 
 void _changeImage() async {
-  final MyFileData? image = await HandlePickedImage.pickImage(ImageSource.gallery);
+  final MyFileData? image =
+      await HandlePickedImage.pickImage(ImageSource.gallery);
   if (image == null) return;
   // errMessage(S.current.cancel);
   // emit(const ProgressUploadingPhoto());

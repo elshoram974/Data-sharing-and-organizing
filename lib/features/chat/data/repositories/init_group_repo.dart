@@ -9,5 +9,6 @@ class GroupInitRepositoriesImp extends GroupInitRepositories {
   double getButtonPlace() => localDataSource.getFloatingPlace() ?? 0;
 
   @override
-  Future<void> saveButtonPlace(double newTop) => localDataSource.saveFloatingPlace(newTop);
+  Future<void> saveButtonPlace(double newTop) =>
+      localDataSource.saveFloatingPlace(newTop);
 }

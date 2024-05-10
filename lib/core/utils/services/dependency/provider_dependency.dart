@@ -28,7 +28,7 @@ abstract class ProviderDependency {
   static late UserMainCubit userMain;
   static late UserHomeCubit userHome;
   static late UserNotificationCubit userNotification;
-  
+
   // * Group Cubits
   static late GroupCubit group;
   static late BOTCubit bot;

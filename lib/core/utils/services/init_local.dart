@@ -34,20 +34,30 @@ Future<void> localInstance() async {
 }
 
 void _registerAdapterFn() {
-  Hive.registerAdapter<UserType>(UserTypeAdapter());  //* it in auth user entity
-  Hive.registerAdapter<AuthUserEntity>(AuthUserEntityAdapter());//* it in group entity
+  Hive.registerAdapter<UserType>(UserTypeAdapter()); //* it in auth user entity
+  Hive.registerAdapter<AuthUserEntity>(
+      AuthUserEntityAdapter()); //* it in group entity
 
-  Hive.registerAdapter<MessageType>(MessageTypeAdapter()); //* it in group entity
-  Hive.registerAdapter<GroupDiscussionType>(GroupDiscussionTypeAdapter());//* it in group entity
-  Hive.registerAdapter<GroupAccessType>(GroupAccessTypeAdapter());//* it in group entity
+  Hive.registerAdapter<MessageType>(
+      MessageTypeAdapter()); //* it in group entity
+  Hive.registerAdapter<GroupDiscussionType>(
+      GroupDiscussionTypeAdapter()); //* it in group entity
+  Hive.registerAdapter<GroupAccessType>(
+      GroupAccessTypeAdapter()); //* it in group entity
 
-  Hive.registerAdapter<NotificationEnum>(NotificationEnumAdapter()); //* it in member entity
-  Hive.registerAdapter<MemberEntity>(MemberEntityAdapter());//* it in group and activity entity
+  Hive.registerAdapter<NotificationEnum>(
+      NotificationEnumAdapter()); //* it in member entity
+  Hive.registerAdapter<MemberEntity>(
+      MemberEntityAdapter()); //* it in group and activity entity
 
-  Hive.registerAdapter<AttachmentModel>(AttachmentModelAdapter());//* it in activity entity
+  Hive.registerAdapter<AttachmentModel>(
+      AttachmentModelAdapter()); //* it in activity entity
 
-  Hive.registerAdapter<ActivityEntity>(ActivityEntityAdapter());//* it in group entity
-  Hive.registerAdapter<DirectoryEntity>(DirectoryEntityAdapter());//* it in group entity
+  Hive.registerAdapter<ActivityEntity>(
+      ActivityEntityAdapter()); //* it in group entity
+  Hive.registerAdapter<DirectoryEntity>(
+      DirectoryEntityAdapter()); //* it in group entity
 
-  Hive.registerAdapter<GroupHomeEntity>(GroupHomeEntityAdapter()); //* it in member entity :(
+  Hive.registerAdapter<GroupHomeEntity>(
+      GroupHomeEntityAdapter()); //* it in member entity :(
 }

@@ -12,16 +12,14 @@ class BottomNavBar extends StatelessWidget {
   Widget build(BuildContext context) {
     Theme.of(context);
     return Container(
-      decoration: BoxDecoration(
-        boxShadow: [
-          BoxShadow(
-            blurRadius: 4,
-            spreadRadius: 4,
-            color: Colors.black.withOpacity(0.25),
-            offset: const Offset(0, 4),
-          ),
-        ]
-      ),
+      decoration: BoxDecoration(boxShadow: [
+        BoxShadow(
+          blurRadius: 4,
+          spreadRadius: 4,
+          color: Colors.black.withOpacity(0.25),
+          offset: const Offset(0, 4),
+        ),
+      ]),
       child: BottomNavigationBar(
         currentIndex: navIndex,
         showUnselectedLabels: false,

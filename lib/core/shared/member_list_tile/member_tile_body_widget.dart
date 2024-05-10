@@ -31,7 +31,9 @@ class MemberTileBodyWidget extends StatelessWidget {
         FittedBox(
           fit: BoxFit.scaleDown,
           child: Text(
-            S.of(context).lastLoginDateString(DateToString.lastLoginText(lastLogin)),
+            S
+                .of(context)
+                .lastLoginDateString(DateToString.lastLoginText(lastLogin)),
             style: AppStyle.styleBoldInika13.copyWith(color: AppColor.gray),
           ),
         ),

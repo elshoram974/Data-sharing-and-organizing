@@ -44,7 +44,8 @@ class BOTRepositoriesImp extends BOTRepositories {
   }
 
   @override
-  Future<void> saveBotMessages(GroupHomeEntity group, List<types.Message> messages) {
+  Future<void> saveBotMessages(
+      GroupHomeEntity group, List<types.Message> messages) {
     return localDataSource.saveBotMessages(group, messages);
   }
 
@@ -54,7 +55,8 @@ class BOTRepositoriesImp extends BOTRepositories {
   }
 
   @override
-  Future<Status<void>> approveActivity(MemberEntity currentMember, ActivityEntity activity, bool makeApproved) {
+  Future<Status<void>> approveActivity(
+      MemberEntity currentMember, ActivityEntity activity, bool makeApproved) {
     return executeAndHandleErrors<void>(
       () async {
         final bool isUploaded = await remoteDataSource.approveActivity(
@@ -62,20 +64,22 @@ class BOTRepositoriesImp extends BOTRepositories {
           currentMember: currentMember,
           makeApproved: makeApproved,
         );
-        if(isUploaded) await localDataSource.approveActivity(activity,makeApproved);
+        if (isUploaded)
+          await localDataSource.approveActivity(activity, makeApproved);
       },
     );
   }
 
   @override
-  Future<Status<void>> deleteActivity(MemberEntity currentMember, ActivityEntity activity) {
+  Future<Status<void>> deleteActivity(
+      MemberEntity currentMember, ActivityEntity activity) {
     return executeAndHandleErrors<void>(
       () async {
         final bool isDeleted = await remoteDataSource.deleteActivity(
           activity: activity,
           currentMember: currentMember,
         );
-        if(isDeleted) await localDataSource.deleteActivity(activity);
+        if (isDeleted) await localDataSource.deleteActivity(activity);
       },
     );
   }
@@ -87,13 +91,14 @@ class BOTRepositoriesImp extends BOTRepositories {
         final bool isBlocked = await remoteDataSource.blockUserWithActivity(
           activity: activity,
         );
-        if(isBlocked) await localDataSource.deleteActivity(activity);
+        if (isBlocked) await localDataSource.deleteActivity(activity);
       },
     );
   }
 
   @override
-  Future<Status<void>> approveDirectory(MemberEntity currentMember, DirectoryEntity dir, bool makeApproved) {
+  Future<Status<void>> approveDirectory(
+      MemberEntity currentMember, DirectoryEntity dir, bool makeApproved) {
     return executeAndHandleErrors<void>(
       () async {
         final bool isUploaded = await remoteDataSource.approveDirectory(
@@ -101,20 +106,22 @@ class BOTRepositoriesImp extends BOTRepositories {
           currentMember: currentMember,
           makeApproved: makeApproved,
         );
-        if(isUploaded) await localDataSource.approveDirectory(dir,makeApproved);
+        if (isUploaded)
+          await localDataSource.approveDirectory(dir, makeApproved);
       },
     );
   }
 
   @override
-  Future<Status<void>> deleteDirectory(MemberEntity currentMember, DirectoryEntity dir) {
+  Future<Status<void>> deleteDirectory(
+      MemberEntity currentMember, DirectoryEntity dir) {
     return executeAndHandleErrors<void>(
       () async {
         final bool isDeleted = await remoteDataSource.deleteDirectory(
           directory: dir,
           currentMember: currentMember,
         );
-        if(isDeleted) await localDataSource.deleteDirectory(dir);
+        if (isDeleted) await localDataSource.deleteDirectory(dir);
       },
     );
   }
@@ -144,7 +151,8 @@ class BOTRepositoriesImp extends BOTRepositories {
   }
 
   @override
-  Future<Status<ActivityEntity>> addNewActivity(ActivityEntity newActivity, Uint8List? file) {
+  Future<Status<ActivityEntity>> addNewActivity(
+      ActivityEntity newActivity, Uint8List? file) {
     return executeAndHandleErrors<ActivityEntity>(
       () async {
         final ActivityEntity activity = await remoteDataSource.addNewActivity(

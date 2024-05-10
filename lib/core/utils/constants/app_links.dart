@@ -19,20 +19,21 @@ abstract final class AppLinks {
   static const String _home = '$_userLink/home';
   static const String userHome = '$_home/home.php';
   static const String removeGroups = '$_home/removeGroups.php';
-  
+  static const String getDirectoriesInside =
+      '$_home/directions_and_activities.php';
+
   // * group
   static String askAI = 'http://127.0.0.1:5000/api/chatbot';
   static const String _chat = '$_home/chat';
-  static const String getDirectoriesInside = '$_chat/directions_and_activities.php';
   static const String deleteActivity = '$_chat/deleteActivity.php';
   static const String approveActivity = '$_chat/approveActivity.php';
-  static const String blockUserWithActivity = '$_chat/blockUserWithActivity.php';
+  static const String blockUserWithActivity =
+      '$_chat/blockUserWithActivity.php';
   static const String approveDirectory = '$_chat/approveDirectory.php';
   static const String deleteDirectory = '$_chat/deleteDirectory.php';
   static const String blockUserWithDir = '$_chat/blockUserWithDir.php';
   static const String addNewActivity = '$_chat/addNewActivity.php';
   static const String addNewDir = '$_chat/addNewDir.php';
-
 
   // * user profile
   static const String _changes = '$_userLink/changes';
@@ -41,5 +42,4 @@ abstract final class AppLinks {
   static const String deleteUser = '$_changes/deleteuser.php';
   static const String changeUserImage = '$_changes/changephoto.php';
   static const String deleteUserImage = '$_changes/deletephoto.php';
-
 }

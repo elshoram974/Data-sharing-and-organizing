@@ -7,10 +7,10 @@ import '../../../../../user_home/domain/entities/group_home_entity.dart';
 import 'discussion_type_tile_in_dialog.dart';
 
 class DiscussionTypeDialog extends StatelessWidget {
-  const DiscussionTypeDialog({super.key, required this.group, required this.onSelect});
+  const DiscussionTypeDialog(
+      {super.key, required this.group, required this.onSelect});
   final GroupHomeEntity group;
   final void Function(GroupDiscussionType) onSelect;
-
 
   @override
   Widget build(BuildContext context) {

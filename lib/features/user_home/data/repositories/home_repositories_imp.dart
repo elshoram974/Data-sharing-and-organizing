@@ -36,8 +36,8 @@ class HomeRepositoriesImp extends HomeRepositories {
   }
 
   @override
-  Stream<Status<List<GroupHomeEntity>>> getMyGroups(AuthUserEntity user) async* {
-    
+  Stream<Status<List<GroupHomeEntity>>> getMyGroups(
+      AuthUserEntity user) async* {
     yield Success(
       localDataSource
           .getAllGroups()
@@ -78,7 +78,7 @@ class HomeRepositoriesImp extends HomeRepositories {
     return executeAndHandleErrors<Iterable<int>>(
         () => localDataSource.markAsUnRead(groups));
   }
-  
+
   @override
   Future<void> updateGroupLocally(GroupHomeEntity groupUpdated) {
     return localDataSource.updateThisGroup(groupUpdated);
