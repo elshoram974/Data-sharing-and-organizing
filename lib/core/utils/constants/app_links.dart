@@ -33,7 +33,10 @@ abstract final class AppLinks {
   static const String deleteDirectory = '$_chat/deleteDirectory.php';
   static const String blockUserWithDir = '$_chat/blockUserWithDir.php';
   static const String addNewActivity = '$_chat/addNewActivity.php';
-  static const String addNewDir = '$_chat/addNewDir.php';
+
+  // * bot & chat
+  static const String _botChatChanges = '$_changes/bot&chat';
+  static const String addNewDir = '$_botChatChanges/adddirection.php';
 
   // * user profile
   static const String _changes = '$_userLink/changes';
