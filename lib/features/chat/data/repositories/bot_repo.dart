@@ -64,8 +64,7 @@ class BOTRepositoriesImp extends BOTRepositories {
           currentMember: currentMember,
           makeApproved: makeApproved,
         );
-        if (isUploaded)
-          await localDataSource.approveActivity(activity, makeApproved);
+        if (isUploaded) await localDataSource.approveActivity(activity, makeApproved);
       },
     );
   }
@@ -106,8 +105,7 @@ class BOTRepositoriesImp extends BOTRepositories {
           currentMember: currentMember,
           makeApproved: makeApproved,
         );
-        if (isUploaded)
-          await localDataSource.approveDirectory(dir, makeApproved);
+        if (isUploaded) await localDataSource.approveDirectory(dir, makeApproved);
       },
     );
   }

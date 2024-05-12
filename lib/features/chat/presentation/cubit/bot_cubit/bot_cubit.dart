@@ -79,6 +79,8 @@ class BOTCubitImp extends BOTCubit {
   @override
   void botReply(List<ActivityEntity> activities) {
     final List<types.Message> temp = [];
+    print("--------------------------------");
+    botMessages.reversed.map((e) => print(e.metadata));
     for (final ActivityEntity e in activities) {
       temp.add(
         e.copyWith(createdAt: DateTime.now()).toMessage().copyWith(

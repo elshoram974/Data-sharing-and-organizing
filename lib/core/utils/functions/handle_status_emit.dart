@@ -15,8 +15,7 @@ Future<void> handleStatusEmit<T>({
   void Function()? failureFunction,
   bool? dismissLoadingOnTap = false,
 }) async {
-  if (dismissLoadingOnTap != null)
-    EasyLoading.show(dismissOnTap: dismissLoadingOnTap);
+  if (dismissLoadingOnTap != null) EasyLoading.show(dismissOnTap: dismissLoadingOnTap);
   final Status<T> status = await statusFunction();
   if (dismissLoadingOnTap != null) await EasyLoading.dismiss();
   if (status is Success<T>) {

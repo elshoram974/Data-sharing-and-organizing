@@ -122,24 +122,24 @@ class ActivityEntity extends Equatable {
           author: createdBy.messageAuthor(),
           id: uid,
           name: content,
-          size: attachment!.size,
-          uri: attachment!.uri,
+          size: attachment?.size ?? 0,
+          uri: attachment?.uri ?? '',
           createdAt: createdAt.millisecondsSinceEpoch,
           remoteId: id.toString(),
           metadata: map,
-          height: attachment!.height,
-          width: attachment!.width,
+          height: attachment?.height ?? 0,
+          width: attachment?.width ?? 0,
         );
       default:
         return types.FileMessage(
           author: createdBy.messageAuthor(),
           id: uid,
           name: content,
-          size: attachment!.size,
-          uri: attachment!.uri,
+          size: attachment?.size ?? 0,
+          uri: attachment?.uri ?? '',
           createdAt: createdAt.millisecondsSinceEpoch,
           remoteId: id.toString(),
-          mimeType: attachment!.mimeType,
+          mimeType: attachment?.mimeType,
           metadata: map,
         );
     }

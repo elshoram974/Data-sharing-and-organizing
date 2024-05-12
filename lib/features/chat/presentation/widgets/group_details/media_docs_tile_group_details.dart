@@ -18,7 +18,7 @@ class MediaDocsTileGroupDetails extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Flexible(
+            const Flexible(
               child: Center(
                 child: FittedBox(
                   fit: BoxFit.scaleDown,

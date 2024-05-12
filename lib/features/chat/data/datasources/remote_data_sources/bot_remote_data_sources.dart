@@ -68,8 +68,6 @@ class DirectoriesRemoteDataSourceImp extends DirectoriesRemoteDataSource {
       {'direction_id': '$dirId', 'group_id': '$groupId'},
     );
     final DirActivitiesBot temp = DirActivitiesBot.fromMap(response);
-    print(temp.toString());
-    print(response.toString());
     return DataInDirectory(
       directories: temp.directories,
       activities: temp.activities,
@@ -203,8 +201,7 @@ class DirectoriesRemoteDataSourceImp extends DirectoriesRemoteDataSource {
       'activity_notify_others': activity.notifyOthers.inString,
       'activity_owner_id': '${activity.createdBy.user.id}',
     };
-    if (activity.insideDirectoryId != null)
-      body['activity_direction_id'] = '${activity.insideDirectoryId}';
+    if (activity.insideDirectoryId != null) body['activity_direction_id'] = '${activity.insideDirectoryId}';
     final AttachmentModel? attachment = activity.attachment;
     if (attachment != null) {
       body['activity_attachments_size'] = '${attachment.size}';
@@ -243,8 +240,7 @@ class DirectoriesRemoteDataSourceImp extends DirectoriesRemoteDataSource {
       'direction_max_count_activity': '1000',
       'activity_owner_id': '${dir.createdBy.user.id}',
     };
-    if (dir.insideDirectoryId != null)
-      body['inside_direction_id'] = '${dir.insideDirectoryId}';
+    if (dir.insideDirectoryId != null) body['inside_direction_id'] = '${dir.insideDirectoryId}';
     Map<String, dynamic> response = await service.post(
       AppLinks.addNewDir,
       body,

@@ -15,8 +15,7 @@ Future<Status<T>> executeAndHandleErrors<T>(
     T? data;
     if (functionWhenError != null) data = await functionWhenError();
 
-    if (e is MyHttpException)
-      return ServerFailure<T>.fromHttpException(e).copyWith(data: data);
+    if (e is MyHttpException) return ServerFailure<T>.fromHttpException(e).copyWith(data: data);
 
     return Failure<T>(FailureBody(message: e.toString()), data);
   }

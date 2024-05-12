@@ -31,7 +31,10 @@ class GroupAppBar extends StatelessWidget implements PreferredSizeWidget {
             background: SafeArea(
               child: Row(
                 children: [
-                  const BackButton(),
+                  IconButton(
+                    onPressed: context.pop,
+                    icon: const Icon(Icons.arrow_back),
+                  ),
                   Expanded(child: GroupTitle(group: group)),
                 ],
               ),
