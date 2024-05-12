@@ -246,7 +246,7 @@ class DirectoriesRemoteDataSourceImp extends DirectoriesRemoteDataSource {
       body,
     );
     return dir.copyWith(
-      id: response['response']['direction_id'] as int?,
+      id: response['response']['direction_id'] as int,
       isApproved: response['response']['direction_is_approved'] as int == 1,
     );
   }
