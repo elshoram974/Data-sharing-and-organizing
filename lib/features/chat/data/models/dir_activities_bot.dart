@@ -18,7 +18,7 @@ class DirActivitiesBot extends Equatable {
 
   factory DirActivitiesBot.fromMap(Map<String, dynamic> data) {
     return DirActivitiesBot(
-      status: data['status'] as String,
+      status: data['status'] as String? ?? "Success", //TODO: DELETE SUCCESS THIS
       activities: (data['activities'] as List<dynamic>)
           .map((e) => ActivityModel.fromMap(e as Map<String, dynamic>))
           .toList(),

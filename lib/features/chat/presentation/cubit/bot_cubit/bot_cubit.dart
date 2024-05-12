@@ -79,8 +79,18 @@ class BOTCubitImp extends BOTCubit {
   @override
   void botReply(List<ActivityEntity> activities) {
     final List<types.Message> temp = [];
-    print("--------------------------------");
-    botMessages.reversed.map((e) => print(e.metadata));
+    int? index;
+    ActivityEntity? toDelete;
+    for (int i = 0; i < botMessages.length; i++) {
+      index = i;
+      if (botMessages[i].author.firstName?.trim() != "BOT") break;
+      toDelete = ActivityModel.fromJson(botMessages[i].metadata?['activity']);
+    }
+
+    if (activities.firstOrNull?.insideDirectoryId == toDelete?.insideDirectoryId && botMessages.isNotEmpty && activities.isNotEmpty && index != null) {
+      botMessages.removeRange(0, index);
+    }
+
     for (final ActivityEntity e in activities) {
       temp.add(
         e.copyWith(createdAt: DateTime.now()).toMessage().copyWith(
@@ -106,14 +116,11 @@ class BOTCubitImp extends BOTCubit {
     ProviderDependency.group.closeFloatingButton();
     if (message.metadata?.containsKey("directory") == true) {
       final String? json = message.metadata!["directory"] as String?;
-      DirectoryEntity? dir =
-          json == null ? null : DirectoryModel.fromJson(json);
+      DirectoryEntity? dir = json == null ? null : DirectoryModel.fromJson(json);
       ProviderDependency.directory.goToDirectory(dir);
     } else if (message.metadata?.containsKey("activity") == true) {
-      final ActivityEntity activity =
-          ActivityModel.fromJson(message.metadata!["activity"]);
-      if (canEditMessage(activity) &&
-          "BOT" == message.author.firstName?.trim()) {
+      final ActivityEntity activity = ActivityModel.fromJson(message.metadata!["activity"]);
+      if (canEditMessage(activity) && "BOT" == message.author.firstName?.trim()) {
         showActivityActions(_, activity);
       }
     }

@@ -152,12 +152,10 @@ class DirectoryCubitImp extends DirectoryCubit {
   void _getDirectoriesAndActivities([DirectoryEntity? dir]) {
     final DirectoryEntity? lDir = _directoriesStack.lastOrNull;
     EasyLoading.show();
-    botRepo
-        .getDirActInside(
+    botRepo.getDirActInside(
       dirId: dir?.id,
       groupId: groupCubit.group.id,
-    )
-        .listen(
+    ).listen(
       (status) async {
         EasyLoading.dismiss();
         if (status is Success<DataInDirectory>) {
