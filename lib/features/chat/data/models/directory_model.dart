@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:data_sharing_organizing/core/utils/enums/notification_enum.dart';
 import 'package:data_sharing_organizing/core/utils/enums/user_role/user_type_enum.dart';
-import 'package:data_sharing_organizing/core/utils/functions/separate_name.dart';
 
 import '../../../auth/domain/entities/auth_user_entity.dart';
 import '../../domain/entities/directory_entity.dart';
@@ -52,7 +51,7 @@ class DirectoryModel extends DirectoryEntity {
 
   Map<String, dynamic> toMap() {
     final AuthUserEntity user = createdBy.user;
-    final ({String fName, String lName}) name = separateName(user.name);
+    final List<String> nameParts = user.name.split(" ");
 
     return {
       'direction_id': id,
@@ -64,8 +63,8 @@ class DirectoryModel extends DirectoryEntity {
       'direction_owner_id': user.id,
       'user_id': user.id,
       'user_email': user.email,
-      'user_first_name': name.fName,
-      'user_last_name': name.lName,
+      'user_first_name': nameParts.first.trim(),
+      'user_last_name': nameParts.sublist(1).join(" ").trim(),
       'user_image': user.image,
       'user_type': user.userType.inString,
       'member_id': user.id,
