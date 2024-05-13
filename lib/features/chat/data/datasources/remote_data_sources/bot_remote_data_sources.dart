@@ -88,7 +88,7 @@ class DirectoriesRemoteDataSourceImp extends DirectoriesRemoteDataSource {
         'activity_id': '${activity.id}',
         'group_id': '${activity.groupId}',
         'user_id': '${currentMember.user.id}',
-        'approved': makeApproved ? '1' : '0',
+        'approved': makeApproved ? '1' : "'0'",
       },
     );
     return true;
@@ -135,7 +135,7 @@ class DirectoriesRemoteDataSourceImp extends DirectoriesRemoteDataSource {
         'direction_id': '${directory.id}',
         'group_id': '${directory.groupId}',
         'user_id': '${currentMember.user.id}',
-        'approved': makeApproved ? '1' : '0',
+        'approved': makeApproved ? '1' : "'0'",
       },
     );
     return true;
