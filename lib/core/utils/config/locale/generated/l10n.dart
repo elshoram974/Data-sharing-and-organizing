@@ -1993,6 +1993,36 @@ class S {
       args: [],
     );
   }
+
+  /// `User does not have permission to perform this action.`
+  String get userNoPermission {
+    return Intl.message(
+      'User does not have permission to perform this action.',
+      name: 'userNoPermission',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Error deleting directory from database. Please try again later.`
+  String get errorDeletingDirectory {
+    return Intl.message(
+      'Error deleting directory from database. Please try again later.',
+      name: 'errorDeletingDirectory',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Error deleting activity from database. Please try again later.`
+  String get errorDeletingActivity {
+    return Intl.message(
+      'Error deleting activity from database. Please try again later.',
+      name: 'errorDeletingActivity',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

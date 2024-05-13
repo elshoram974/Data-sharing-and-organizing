@@ -99,10 +99,10 @@ class ServerFailure<T> extends Failure<T> {
           message: S.current
               .theUploadedFileExceedsTheMaximumAllowedSizePleaseUploadSmallerFile));
     }
-    return loginValid(res);
+    return notValid(res);
   }
 
-  static ServerFailure<T> loginValid<T>(FailureBody res) {
+  static ServerFailure<T> notValid<T>(FailureBody res) {
     switch (res.message) {
       case 'You have to confirm your account':
         return ServerFailure(
@@ -187,6 +187,16 @@ class ServerFailure<T> extends Failure<T> {
             message: S.current
                 .userIsNotActivePleaseContactSupportForFurtherAssistance,
           ),
+        );
+      case 'User does not have permission to perform this action.':
+        return ServerFailure(res.copyWith(message: S.current.userNoPermission));
+      case 'Error deleting direction from database. Please try again later.':
+        return ServerFailure(
+          res.copyWith(message: S.current.errorDeletingDirectory),
+        );
+      case 'Error deleting activity from database. Please try again later.':
+        return ServerFailure(
+          res.copyWith(message: S.current.errorDeletingActivity),
         );
       default:
         return ServerFailure(res);

@@ -164,6 +164,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "enterYourCredentialsToContinue": MessageLookupByLibrary.simpleMessage(
             "أدخل بيانات اعتمادك للمتابعة."),
         "error": MessageLookupByLibrary.simpleMessage("خطأ"),
+        "errorDeletingActivity": MessageLookupByLibrary.simpleMessage(
+            "حدث خطأ أثناء حذف النشاط من قاعدة البيانات. يرجى المحاولة مرة أخرى لاحقًا."),
+        "errorDeletingDirectory": MessageLookupByLibrary.simpleMessage(
+            "خطأ في حذف المجلد من قاعدة البيانات. يرجى المحاولة مرة أخرى لاحقًا."),
         "errorInPassword":
             MessageLookupByLibrary.simpleMessage("خطأ في كلمة المرور"),
         "exist": MessageLookupByLibrary.simpleMessage("موجود"),
@@ -335,6 +339,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "userIsNotActivePleaseContactSupportForFurtherAssistance":
             MessageLookupByLibrary.simpleMessage(
                 "المستخدم غير نشط. يرجى الاتصال بالدعم للمساعدة الإضافية."),
+        "userNoPermission": MessageLookupByLibrary.simpleMessage(
+            "المستخدم ليس لديه الإذن لأداء هذا الإجراء."),
         "userNotEmailPasswordToNewPass": MessageLookupByLibrary.simpleMessage(
             "المستخدم ليس عبارة عن حساب بالبريد الإلكتروني وكلمة مرور لتغيير كلمة المرور"),
         "userNotEmailPasswordToSendVerificationCode":

@@ -165,6 +165,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "enterYourCredentialsToContinue": MessageLookupByLibrary.simpleMessage(
             "Enter your credentials to continue."),
         "error": MessageLookupByLibrary.simpleMessage("Error"),
+        "errorDeletingActivity": MessageLookupByLibrary.simpleMessage(
+            "Error deleting activity from database. Please try again later."),
+        "errorDeletingDirectory": MessageLookupByLibrary.simpleMessage(
+            "Error deleting directory from database. Please try again later."),
         "errorInPassword":
             MessageLookupByLibrary.simpleMessage("Error in password"),
         "exist": MessageLookupByLibrary.simpleMessage("Exist"),
@@ -333,6 +337,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "userIsNotActivePleaseContactSupportForFurtherAssistance":
             MessageLookupByLibrary.simpleMessage(
                 "User is not active. Please contact support for further assistance."),
+        "userNoPermission": MessageLookupByLibrary.simpleMessage(
+            "User does not have permission to perform this action."),
         "userNotEmailPasswordToNewPass": MessageLookupByLibrary.simpleMessage(
             "User is not email_password to make new pass"),
         "userNotEmailPasswordToSendVerificationCode":
