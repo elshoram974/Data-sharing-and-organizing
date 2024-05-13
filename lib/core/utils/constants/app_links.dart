@@ -25,7 +25,6 @@ abstract final class AppLinks {
   // * group
   static String askAI = 'http://127.0.0.1:5000/api/chatbot';
   static const String _chat = '$_home/chat';
-  static const String approveDirectory = '$_chat/approveDirectory.php';
   static const String deleteDirectory = '$_chat/deleteDirectory.php';
   static const String addNewActivity = '$_chat/addNewActivity.php';
 
@@ -35,6 +34,7 @@ abstract final class AppLinks {
   static const String approveActivity = '$_botChatChanges/approvedactivity.php';
   static const String deleteActivity = '$_botChatChanges/deleteactivity.php';
   static const String blockUserGroup = '$_botChatChanges/blockuser.php';
+  static const String approveDirectory = '$_chat/approveddirection.php';
 
   // * user profile
   static const String _changes = '$_userLink/changes';

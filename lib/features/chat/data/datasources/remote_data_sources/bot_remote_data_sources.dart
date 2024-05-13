@@ -129,17 +129,16 @@ class DirectoriesRemoteDataSourceImp extends DirectoriesRemoteDataSource {
     required MemberEntity currentMember,
     required bool makeApproved,
   }) async {
-    Map<String, dynamic> response = await service.post(
+    await service.post(
       AppLinks.approveDirectory,
       {
-        'directory_id': '${directory.id}',
+        'direction_id': '${directory.id}',
         'group_id': '${directory.groupId}',
         'user_id': '${currentMember.user.id}',
-        'makeApproved': makeApproved ? '1' : '0',
+        'approved': makeApproved ? '1' : '0',
       },
     );
-    // TODO: write code of getting directories here and Link don't forget
-    throw UnimplementedError(response.toString());
+    return true;
   }
 
   @override
