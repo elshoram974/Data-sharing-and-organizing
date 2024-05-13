@@ -3,6 +3,7 @@ import 'package:data_sharing_organizing/core/utils/enums/home/group_access_type_
 import 'package:data_sharing_organizing/core/utils/functions/show_custom_dialog.dart';
 import 'package:data_sharing_organizing/core/utils/services/dependency/provider_dependency.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
 
 import '../../../../auth/domain/entities/auth_user_entity.dart';
 import '../../../domain/entities/activity_entity.dart';
@@ -117,13 +118,14 @@ void makeActivityApprovedDialog({
 void showActivityActions(
   BuildContext _,
   ActivityEntity activity,
+  types.Message message,
 ) {
   final DirectoryCubit c = ProviderDependency.directory;
   final BOTCubit bot = ProviderDependency.bot;
   final String content;
   final List<TextButton> actions = [
     TextButton(
-      onPressed: () => bot.deleteActivity(activity, _),
+      onPressed: () => bot.deleteActivity(message, _),
       child: Text(S.of(_).delete),
     ),
     TextButton(
@@ -145,7 +147,7 @@ void showActivityActions(
               child: Text(S.of(_).blockThisUser),
             ),
           TextButton(
-            onPressed: () => bot.approvedActivity(activity, _),
+            onPressed: () => bot.approvedActivity(message, _),
             child: Text(S.of(_).addActivity),
           ),
         ],
@@ -155,7 +157,7 @@ void showActivityActions(
       actions.insert(
         0,
         TextButton(
-          onPressed: () => bot.hideActivity(activity, _),
+          onPressed: () => bot.hideActivity(message, _),
           child: Text(S.of(_).hide),
         ),
       );

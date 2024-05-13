@@ -36,13 +36,12 @@ abstract class BOTCubit extends Cubit<BOTState> {
   void botReply(List<ActivityEntity> activities);
   void handleMessageTap(BuildContext _, types.Message message);
   void handleMessageDoubleTap(BuildContext _, types.Message message);
-  void handlePreviewDataFetched(
-      types.TextMessage message, types.PreviewData previewData);
+  void handlePreviewDataFetched(types.TextMessage message, types.PreviewData previewData);
   void handleSendPressed(types.PartialText message, [types.Status? status]);
 
-  void approvedActivity(ActivityEntity activity, BuildContext _);
-  void hideActivity(ActivityEntity activity, BuildContext _);
-  void deleteActivity(ActivityEntity activity, BuildContext _);
+  void approvedActivity(types.Message message, BuildContext _);
+  void hideActivity(types.Message message, BuildContext _);
+  void deleteActivity(types.Message message, BuildContext _);
 
   bool canEditMessage(ActivityEntity activity);
 
@@ -121,7 +120,7 @@ class BOTCubitImp extends BOTCubit {
     } else if (message.metadata?.containsKey("activity") == true) {
       final ActivityEntity activity = ActivityModel.fromJson(message.metadata!["activity"]);
       if (canEditMessage(activity) && "BOT" == message.author.firstName?.trim()) {
-        showActivityActions(_, activity);
+        showActivityActions(_, activity,message);
       }
     }
   }
@@ -157,8 +156,7 @@ class BOTCubitImp extends BOTCubit {
   }
 
   @override
-  void handleSendPressed(types.PartialText message,
-      [types.Status? status]) async {
+  void handleSendPressed(types.PartialText message, [types.Status? status]) async {
     ProviderDependency.group.closeFloatingButton();
     final ActivityModel activityTemp = ActivityModel.fromEntity(
       ActivityEntity(
@@ -184,14 +182,12 @@ class BOTCubitImp extends BOTCubit {
     await botRepo.saveBotMessages(groupCubit.group, botMessages);
     emit(SetState(_i++));
 
-    final int i =
-        botMessages.indexWhere((element) => element.id == textMessage.id);
+    final int i = botMessages.indexWhere((element) => element.id == textMessage.id);
     await handleStatusEmit<List<ActivityEntity>>(
         dismissLoadingOnTap: null,
         statusFunction: () => botRepo.askAI(activityTemp),
         successFunction: (activities) {
-          final types.Message updatedMessage =
-              botMessages[i].copyWith(status: types.Status.seen);
+          final types.Message updatedMessage = botMessages[i].copyWith(status: types.Status.seen);
           botMessages[i] = updatedMessage;
           botReply(activities);
         },
@@ -205,18 +201,23 @@ class BOTCubitImp extends BOTCubit {
   }
 
   // * activity edit
-  // TODO: make repo for activity edit functions
   @override
-  void approvedActivity(ActivityEntity activity, BuildContext _) {
+  void approvedActivity(types.Message message, BuildContext _) {
+    final ActivityEntity activity = ActivityModel.fromJson(message.metadata!["activity"]);
+
     makeActivityApprovedDialog(
       context: _,
       activity: activity,
       approveFn: () {
         handleStatusEmit<void>(
-          statusFunction: () =>
-              botRepo.approveActivity(currentMember, activity, true),
+          statusFunction: () => botRepo.approveActivity(currentMember, activity, true),
           successFunction: (_) {
-            // TODO: make emit when it run in correct way
+            final Map<String, dynamic> myMetaData = {};
+            myMetaData.addAll(message.metadata??{});
+            myMetaData['activity'] = activity.copyWith(isApproved: true);
+            final int i = botMessages.indexWhere((e) => e.id == message.id);
+            botMessages[i].copyWith(metadata: myMetaData);
+            emit(SetState(_i++));
           },
         ).then((v) => Navigator.of(_).pop());
       },
@@ -224,16 +225,21 @@ class BOTCubitImp extends BOTCubit {
   }
 
   @override
-  void hideActivity(ActivityEntity activity, BuildContext _) {
+  void hideActivity(types.Message message, BuildContext _) {
+    final ActivityEntity activity = ActivityModel.fromJson(message.metadata!["activity"]);
     hideActivityDialog(
       context: _,
       activity: activity,
       hideFn: () {
         handleStatusEmit<void>(
-          statusFunction: () =>
-              botRepo.approveActivity(currentMember, activity, false),
+          statusFunction: () => botRepo.approveActivity(currentMember, activity, false),
           successFunction: (_) {
-            // TODO: make emit when it run in correct way
+            final Map<String, dynamic> myMetaData = {};
+            myMetaData.addAll(message.metadata??{});
+            myMetaData['activity'] = activity.copyWith(isApproved: false);
+            final int i = botMessages.indexWhere((e) => e.id == message.id);
+            botMessages[i].copyWith(metadata: myMetaData);
+            emit(SetState(_i++));
           },
         ).then((v) => Navigator.of(_).pop());
       },
@@ -241,7 +247,8 @@ class BOTCubitImp extends BOTCubit {
   }
 
   @override
-  void deleteActivity(ActivityEntity activity, BuildContext _) {
+  void deleteActivity(types.Message message, BuildContext _) {
+    final ActivityEntity activity = ActivityModel.fromJson(message.metadata!["activity"]);
     deleteActivityDialog(
       context: _,
       activity: activity,
@@ -249,7 +256,8 @@ class BOTCubitImp extends BOTCubit {
         handleStatusEmit<void>(
           statusFunction: () => botRepo.deleteActivity(currentMember, activity),
           successFunction: (_) {
-            // TODO: make emit when it run in correct way
+            botMessages.removeWhere((e) => e.id == message.id);
+            emit(SetState(_i++));
           },
         ).then((v) => Navigator.of(_).pop());
       },
@@ -264,9 +272,7 @@ class BOTCubitImp extends BOTCubit {
       blockFn: () {
         handleStatusEmit<void>(
           statusFunction: () => botRepo.blockUserWithActivity(activity),
-          successFunction: (_) {
-            // TODO: make emit when it run in correct way
-          },
+          successFunction: (_) { },
         ).then((v) => Navigator.of(_).pop());
       },
     );
