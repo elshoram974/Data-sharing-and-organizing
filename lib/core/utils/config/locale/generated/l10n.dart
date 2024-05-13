@@ -2023,6 +2023,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Unblock this user`
+  String get unBlockThisUser {
+    return Intl.message(
+      'Unblock this user',
+      name: 'unBlockThisUser',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

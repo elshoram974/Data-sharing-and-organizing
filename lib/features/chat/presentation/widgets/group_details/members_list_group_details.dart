@@ -26,8 +26,8 @@ class MembersListGroupDetails extends StatelessWidget {
           return ResConstrainedBoxAlign(
             child: MembersListTile(
               onTileTappedDown: group.memberEntity.isAdmin && i != 0
-                  ? (_) =>
-                      editMembersMenu(context, _, i == 0 || i == 5 || i == 8)
+                  ? (_) => editMembersMenu(context, _,
+                      i == 0 || i == 5 || i == 8, i == 1 || i == 6 || i == 7)
                   : null,
               memberEntity: MemberListTileEntity(
                 name: "Adel Eid -> ${i + 1}",
@@ -49,6 +49,7 @@ void editMembersMenu(
   BuildContext context,
   TapDownDetails offset,
   bool isAdmin,
+  bool isBlocked,
 ) {
   final double x = offset.globalPosition.dx;
   final double y = offset.globalPosition.dy;
@@ -68,12 +69,23 @@ void editMembersMenu(
         PopupMenuItem(
           onTap: () {},
           child: Text(S.of(context).dismissAsAdmin),
-        ),
-      if (!isAdmin)
+        )
+      else ...[
+        if (isBlocked)
+          PopupMenuItem(
+            onTap: () {},
+            child: Text(S.of(context).unBlockThisUser),
+          )
+        else
+          PopupMenuItem(
+            onTap: () {},
+            child: Text(S.of(context).blockThisUser),
+          ),
         PopupMenuItem(
           onTap: () {},
           child: Text(S.of(context).promoteGroupAdmin),
         ),
+      ],
     ],
     elevation: 8.0,
   );

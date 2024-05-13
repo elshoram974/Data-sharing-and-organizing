@@ -332,6 +332,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "type": MessageLookupByLibrary.simpleMessage("النوع"),
         "uHaveToVerifyAccountFirst":
             MessageLookupByLibrary.simpleMessage("يجب التحقق من حسابك أولاً"),
+        "unBlockThisUser":
+            MessageLookupByLibrary.simpleMessage("إلغاء حظر هذا المستخدم"),
         "unknownErrorOccurred": MessageLookupByLibrary.simpleMessage(
             "حدث خطأ غير معروف. يرجى المحاولة مرة أخرى في وقت لاحق أو الاتصال بالدعم للمساعدة."),
         "unmuteNotification":

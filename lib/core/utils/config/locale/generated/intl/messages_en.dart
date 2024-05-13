@@ -330,6 +330,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "type": MessageLookupByLibrary.simpleMessage("Type"),
         "uHaveToVerifyAccountFirst": MessageLookupByLibrary.simpleMessage(
             "You have to verify your account first"),
+        "unBlockThisUser":
+            MessageLookupByLibrary.simpleMessage("Unblock this user"),
         "unknownErrorOccurred": MessageLookupByLibrary.simpleMessage(
             "An unknown error occurred. Please try again later or contact support for assistance."),
         "unmuteNotification":

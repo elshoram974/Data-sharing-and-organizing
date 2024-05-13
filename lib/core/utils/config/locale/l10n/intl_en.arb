@@ -362,5 +362,6 @@
     "promoteGroupAdmin": "Promote to group admin",
     "userNoPermission": "User does not have permission to perform this action.",
     "errorDeletingDirectory": "Error deleting directory from database. Please try again later.",
-    "errorDeletingActivity": "Error deleting activity from database. Please try again later."
+    "errorDeletingActivity": "Error deleting activity from database. Please try again later.",
+    "unBlockThisUser": "Unblock this user"
 }
