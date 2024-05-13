@@ -146,16 +146,15 @@ class DirectoriesRemoteDataSourceImp extends DirectoriesRemoteDataSource {
     required DirectoryEntity directory,
     required MemberEntity currentMember,
   }) async {
-    Map<String, dynamic> response = await service.post(
+    await service.post(
       AppLinks.deleteDirectory,
       {
-        'directory_id': '${directory.id}',
+        'direction_id': '${directory.id}',
         'group_id': '${directory.groupId}',
         'user_id': '${currentMember.user.id}',
       },
     );
-    // TODO: write code of getting directories here and Link don't forget
-    throw UnimplementedError(response.toString());
+    return true;
   }
 
   @override
