@@ -45,7 +45,7 @@ abstract class BOTCubit extends Cubit<BOTState> {
 
   bool canEditMessage(ActivityEntity activity);
 
-  void blockUserInteraction(ActivityEntity activity, BuildContext _);
+  void blockUserInteraction(types.Message message, BuildContext _);
 }
 
 class BOTCubitImp extends BOTCubit {
@@ -214,9 +214,9 @@ class BOTCubitImp extends BOTCubit {
           successFunction: (_) {
             final Map<String, dynamic> myMetaData = {};
             myMetaData.addAll(message.metadata??{});
-            myMetaData['activity'] = activity.copyWith(isApproved: true);
+            myMetaData['activity'] = ActivityModel.fromEntity(activity.copyWith(isApproved: true)).toJson();
             final int i = botMessages.indexWhere((e) => e.id == message.id);
-            botMessages[i].copyWith(metadata: myMetaData);
+            botMessages[i] = botMessages[i].copyWith(metadata: myMetaData);
             emit(SetState(_i++));
           },
         ).then((v) => Navigator.of(_).pop());
@@ -236,9 +236,9 @@ class BOTCubitImp extends BOTCubit {
           successFunction: (_) {
             final Map<String, dynamic> myMetaData = {};
             myMetaData.addAll(message.metadata??{});
-            myMetaData['activity'] = activity.copyWith(isApproved: false);
+            myMetaData['activity'] = ActivityModel.fromEntity(activity.copyWith(isApproved: false)).toJson();
             final int i = botMessages.indexWhere((e) => e.id == message.id);
-            botMessages[i].copyWith(metadata: myMetaData);
+            botMessages[i] = botMessages[i].copyWith(metadata: myMetaData);
             emit(SetState(_i++));
           },
         ).then((v) => Navigator.of(_).pop());
@@ -255,26 +255,28 @@ class BOTCubitImp extends BOTCubit {
       deleteFn: () {
         handleStatusEmit<void>(
           statusFunction: () => botRepo.deleteActivity(currentMember, activity),
-          successFunction: (_) {
-            botMessages.removeWhere((e) => e.id == message.id);
-            emit(SetState(_i++));
-          },
+          successFunction: (_) => removeMessage(message),
         ).then((v) => Navigator.of(_).pop());
       },
     );
   }
 
   @override
-  void blockUserInteraction(ActivityEntity activity, BuildContext _) {
+  void blockUserInteraction(types.Message message, BuildContext _) {
+    final ActivityEntity activity = ActivityModel.fromJson(message.metadata!["activity"]);
     blockUserInteractionDialog(
       context: _,
       user: activity.createdBy.user,
       blockFn: () {
         handleStatusEmit<void>(
           statusFunction: () => botRepo.blockUserWithActivity(activity),
-          successFunction: (_) { },
+          successFunction: (_) => removeMessage(message),
         ).then((v) => Navigator.of(_).pop());
       },
     );
+  }
+  void removeMessage(types.Message message){
+    botMessages.removeWhere((e) => e.id == message.id);
+    emit(SetState(_i++));
   }
 }

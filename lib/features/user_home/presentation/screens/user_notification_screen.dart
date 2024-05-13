@@ -13,8 +13,7 @@ class UserNotificationScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    UserNotificationCubit c = ProviderDependency.userNotification =
-        BlocProvider.of<UserNotificationCubit>(context);
+    UserNotificationCubit c = ProviderDependency.userNotification = BlocProvider.of<UserNotificationCubit>(context);
 
     return BlocBuilder<UserNotificationCubit, UserNotificationState>(
       builder: (context, state) {
@@ -27,9 +26,7 @@ class UserNotificationScreen extends StatelessWidget {
               (index) {
                 final notification = c.currentNotifications[index];
                 return NotificationTile(
-                  onTap: () => print('tapped on ${notification.groupName}'),
-                  onPressExpanded: (isExpanded) =>
-                      c.onPressExpanded(notification),
+                  onPressExpanded: (isExpanded) => c.onPressExpanded(notification),
                   groupNotificationEntity: notification,
                 );
               },

@@ -143,7 +143,7 @@ void showActivityActions(
         [
           if (!activity.createdBy.isAdmin)
             TextButton(
-              onPressed: () => c.botCubit.blockUserInteraction(activity, _),
+              onPressed: () => c.botCubit.blockUserInteraction(message, _),
               child: Text(S.of(_).blockThisUser),
             ),
           TextButton(

@@ -176,7 +176,7 @@ class DirectoriesRemoteDataSourceImp extends DirectoriesRemoteDataSource {
       AppLinks.askAI,
       {'message': activity.content},
     );
-    // TODO: implement blockUserWithActivity and Link don't forget
+    // TODO: implement askAI and Link don't forget
     throw UnimplementedError(response.toString());
   }
 
