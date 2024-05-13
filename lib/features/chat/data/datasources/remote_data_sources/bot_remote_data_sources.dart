@@ -112,16 +112,15 @@ class DirectoriesRemoteDataSourceImp extends DirectoriesRemoteDataSource {
 
   @override
   Future<bool> blockUserWithActivity({required ActivityEntity activity}) async {
-    Map<String, dynamic> response = await service.post(
-      AppLinks.blockUserWithActivity,
+    await service.post(
+      AppLinks.blockUserGroup,
       {
         'activity_id': '${activity.id}',
         'group_id': '${activity.groupId}',
-        'user_id_blocked': '${activity.createdBy.user.id}',
+        'user_id': '${activity.createdBy.user.id}',
       },
     );
-    // TODO: implement blockUserWithActivity and Link don't forget
-    throw UnimplementedError(response.toString());
+    return true;
   }
 
   @override
@@ -162,16 +161,15 @@ class DirectoriesRemoteDataSourceImp extends DirectoriesRemoteDataSource {
 
   @override
   Future<bool> blockUserWithDir({required DirectoryEntity directory}) async {
-    Map<String, dynamic> response = await service.post(
-      AppLinks.blockUserWithDir,
+     await service.post(
+      AppLinks.blockUserGroup,
       {
-        'directory_id': '${directory.id}',
+        'direction_id': '${directory.id}',
         'group_id': '${directory.groupId}',
-        'user_id_blocked': '${directory.createdBy.user.id}',
+        'user_id': '${directory.createdBy.user.id}',
       },
     );
-    // TODO: implement blockUserWithActivity and Link don't forget
-    throw UnimplementedError(response.toString());
+    return true;
   }
 
   @override
