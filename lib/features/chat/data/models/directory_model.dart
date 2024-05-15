@@ -59,7 +59,7 @@ class DirectoryModel extends DirectoryEntity {
       'direction_address': name,
       'direction_max_count_activity': directoryMaxCountActivity,
       'inside_direction_id': insideDirectoryId,
-      'direction_is_approved': isApproved,
+      'direction_is_approved': isApproved ? 1 : 0,
       'direction_owner_id': user.id,
       'user_id': user.id,
       'user_email': user.email,

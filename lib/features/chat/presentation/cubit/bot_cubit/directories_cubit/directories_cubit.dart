@@ -176,8 +176,6 @@ class DirectoryCubitImp extends DirectoryCubit {
   // ----------------------------------------------------------------
 
   // * crud Directories
-  // TODO: make repo for directory edit functions
-
   @override
   void deleteDirectory(DirectoryEntity dir, BuildContext _) {
     deleteDirectoryDialog(
@@ -185,10 +183,10 @@ class DirectoryCubitImp extends DirectoryCubit {
       dir: dir,
       deleteFn: () {
         handleStatusEmit<void>(
-          statusFunction: () =>
-              botRepo.deleteDirectory(botCubit.currentMember, dir),
+          statusFunction: () => botRepo.deleteDirectory(botCubit.currentMember, dir),
           successFunction: (_) {
-            // TODO: make emit when it run in correct way
+            currentDirectories.removeWhere((e) => e.id == dir.id);
+            emit(OpenDirectoryState(currentDirectories));
           },
         ).then((v) => Navigator.of(_).pop());
       },
@@ -202,10 +200,19 @@ class DirectoryCubitImp extends DirectoryCubit {
       dir: dir,
       hideFn: () {
         handleStatusEmit<void>(
-          statusFunction: () =>
-              botRepo.approveDirectory(botCubit.currentMember, dir, false),
+          statusFunction: () => botRepo.approveDirectory(botCubit.currentMember, dir, false),
           successFunction: (_) {
-            // TODO: make emit when it run in correct way
+            final List<DirectoryEntity> temp = [];
+            for (DirectoryEntity e in currentDirectories) {
+              if(e.id == dir.id){
+                temp.add(e.copyWith(isApproved: false));
+              }
+              else{
+                temp.add(e);
+              }
+            }
+            currentDirectories = temp;
+            emit(OpenDirectoryState(currentDirectories));
           },
         ).then((v) => Navigator.of(_).pop());
       },
@@ -219,10 +226,19 @@ class DirectoryCubitImp extends DirectoryCubit {
       dir: dir,
       approveFn: () {
         handleStatusEmit<void>(
-          statusFunction: () =>
-              botRepo.approveDirectory(botCubit.currentMember, dir, true),
+          statusFunction: () => botRepo.approveDirectory(botCubit.currentMember, dir, true),
           successFunction: (_) {
-            // TODO: make emit when it run in correct way
+            final List<DirectoryEntity> temp = [];
+            for (DirectoryEntity e in currentDirectories) {
+              if(e.id == dir.id){
+                temp.add(e.copyWith(isApproved: true));
+              }
+              else{
+                temp.add(e);
+              }
+            }
+            currentDirectories = temp;
+            emit(OpenDirectoryState(currentDirectories));
           },
         ).then((v) => Navigator.of(_).pop());
       },
@@ -238,7 +254,8 @@ class DirectoryCubitImp extends DirectoryCubit {
         handleStatusEmit<void>(
           statusFunction: () => botRepo.blockUserWithDir(dir),
           successFunction: (_) {
-            // TODO: make emit when it run in correct way
+            currentDirectories.removeWhere((e) => e.id == dir.id);
+            emit(OpenDirectoryState(currentDirectories));
           },
         ).then((v) => Navigator.of(_).pop());
       },

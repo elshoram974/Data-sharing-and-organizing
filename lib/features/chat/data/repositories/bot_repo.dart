@@ -111,8 +111,7 @@ class BOTRepositoriesImp extends BOTRepositories {
   }
 
   @override
-  Future<Status<void>> deleteDirectory(
-      MemberEntity currentMember, DirectoryEntity dir) {
+  Future<Status<void>> deleteDirectory(MemberEntity currentMember, DirectoryEntity dir) {
     return executeAndHandleErrors<void>(
       () async {
         final bool isDeleted = await remoteDataSource.deleteDirectory(
