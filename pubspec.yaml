@@ -97,6 +97,9 @@ dependencies:
   # to make flex wrap
   flex_list: ^1.0.0
 
+  # * Chat realtime
+  cloud_firestore: ^4.15.8
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
