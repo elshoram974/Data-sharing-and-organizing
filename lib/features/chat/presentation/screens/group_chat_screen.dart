@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:data_sharing_organizing/core/utils/constants/app_color.dart';
 import 'package:data_sharing_organizing/core/utils/constants/app_constants.dart';
 import 'package:data_sharing_organizing/core/utils/enums/home/group_discussion_type_enum.dart';
@@ -32,9 +33,12 @@ class GroupChatScreen extends StatefulWidget {
 
 class _GroupChatScreenState extends State<GroupChatScreen> {
   final GroupHomeEntity group = ProviderDependency.group.group;
-  late FirebaseFirestore db;
+  late final FirebaseFirestore db = FirebaseFirestore.instance;
   late DocumentReference<Map<String, dynamic>> dbGroup;
   late CollectionReference<Map<String, dynamic>> dbActivities;
+  late final Reference _storageRef = FirebaseStorage.instance.ref();
+  late final String filesPath = "${group.id}/files";
+  late final Reference filesRef = _storageRef.child(filesPath);
   List<types.Message> messages = [];
   final types.User _user =
       ProviderDependency.group.group.memberEntity.messageAuthor();
@@ -44,7 +48,6 @@ class _GroupChatScreenState extends State<GroupChatScreen> {
 
   @override
   void initState() {
-    db = FirebaseFirestore.instance;
     dbGroup = db.collection('Groups').doc(group.id.toString());
     dbActivities = dbGroup.collection('activities');
     _loadMessages();
@@ -135,7 +138,11 @@ class _GroupChatScreenState extends State<GroupChatScreen> {
       type: FileType.any,
     );
 
-    if (result != null && result.files.single.path != null) {
+    if (result != null) {
+      final mountainsRef = filesRef.child(result.files.single.name);
+      await mountainsRef.putData(await result.files.single.xFile.readAsBytes());
+
+      final String uri = await mountainsRef.getDownloadURL();
       final message = types.FileMessage(
           author: _user,
           createdAt: DateTime.now().millisecondsSinceEpoch,
@@ -143,7 +150,7 @@ class _GroupChatScreenState extends State<GroupChatScreen> {
           mimeType: lookupMimeType(result.files.single.path!),
           name: result.files.single.name,
           size: result.files.single.size,
-          uri: result.files.single.path!,
+          uri: uri,
           metadata: {"file": result.files.single.bytes?.toList()});
 
       _addMessage(message);
@@ -162,16 +169,21 @@ class _GroupChatScreenState extends State<GroupChatScreen> {
       final bytes = await result.readAsBytes();
       final image = await decodeImageFromList(bytes);
 
+      final mountainsRef = filesRef.child(result.name);
+      await mountainsRef.putData(bytes);
+
+      final String uri = await mountainsRef.getDownloadURL();
+
       final message = types.ImageMessage(
-          author: _user,
-          createdAt: DateTime.now().millisecondsSinceEpoch,
-          height: image.height.toDouble(),
-          id: const Uuid().v4(),
-          name: result.name,
-          size: bytes.length,
-          uri: result.path,
-          width: image.width.toDouble(),
-          metadata: {"image": bytes.toList()});
+        author: _user,
+        createdAt: DateTime.now().millisecondsSinceEpoch,
+        height: image.height.toDouble(),
+        id: const Uuid().v4(),
+        name: result.name,
+        size: bytes.length,
+        uri: uri,
+        width: image.width.toDouble(),
+      );
 
       _addMessage(message);
     }
