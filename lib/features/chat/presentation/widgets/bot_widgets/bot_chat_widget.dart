@@ -84,7 +84,9 @@ class BotChatWidget extends StatelessWidget {
       receivedMessageBodyTextStyle: AppStyle.styleBoldInika13,
       inputTextStyle: AppStyle.styleBoldInika13,
       inputElevation: 1,
-      inputPadding: EdgeInsets.zero,
+      inputPadding: AppConst.isWeb
+          ? const EdgeInsets.symmetric(vertical: 10)
+          : EdgeInsets.zero,
       inputBackgroundColor: AppColor.grayLightDark(context),
     );
   }

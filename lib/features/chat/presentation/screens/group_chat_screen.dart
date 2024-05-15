@@ -40,6 +40,7 @@ class _GroupChatScreenState extends State<GroupChatScreen> {
       ProviderDependency.group.group.memberEntity.messageAuthor();
 
   late final StreamSubscription<QuerySnapshot<Map<String, dynamic>>> stream;
+  bool firstOpen = true;
 
   @override
   void initState() {
@@ -52,7 +53,7 @@ class _GroupChatScreenState extends State<GroupChatScreen> {
         dbActivities.orderBy('createdAt', descending: true).snapshots().listen(
       (event) {
         for (var change in event.docChanges) {
-          if (change.type == DocumentChangeType.added) {
+          if (change.type == DocumentChangeType.added && !firstOpen) {
             final data = change.doc.data();
             if (data != null) {
               final message = types.Message.fromJson(data);
@@ -62,6 +63,7 @@ class _GroupChatScreenState extends State<GroupChatScreen> {
             }
           }
         }
+        firstOpen = false;
       },
     );
     super.initState();
@@ -82,7 +84,7 @@ class _GroupChatScreenState extends State<GroupChatScreen> {
   }
 
   void _handleAttachmentPressed() {
-    if (!enabled) return;
+    if (!(enabled || group.memberEntity.isAdmin)) return;
     ProviderDependency.group.closeFloatingButton();
 
     showModalBottomSheet<void>(
@@ -135,14 +137,14 @@ class _GroupChatScreenState extends State<GroupChatScreen> {
 
     if (result != null && result.files.single.path != null) {
       final message = types.FileMessage(
-        author: _user,
-        createdAt: DateTime.now().millisecondsSinceEpoch,
-        id: const Uuid().v4(),
-        mimeType: lookupMimeType(result.files.single.path!),
-        name: result.files.single.name,
-        size: result.files.single.size,
-        uri: result.files.single.path!,
-      );
+          author: _user,
+          createdAt: DateTime.now().millisecondsSinceEpoch,
+          id: const Uuid().v4(),
+          mimeType: lookupMimeType(result.files.single.path!),
+          name: result.files.single.name,
+          size: result.files.single.size,
+          uri: result.files.single.path!,
+          metadata: {"file": result.files.single.bytes?.toList()});
 
       _addMessage(message);
     }
@@ -161,15 +163,15 @@ class _GroupChatScreenState extends State<GroupChatScreen> {
       final image = await decodeImageFromList(bytes);
 
       final message = types.ImageMessage(
-        author: _user,
-        createdAt: DateTime.now().millisecondsSinceEpoch,
-        height: image.height.toDouble(),
-        id: const Uuid().v4(),
-        name: result.name,
-        size: bytes.length,
-        uri: result.path,
-        width: image.width.toDouble(),
-      );
+          author: _user,
+          createdAt: DateTime.now().millisecondsSinceEpoch,
+          height: image.height.toDouble(),
+          id: const Uuid().v4(),
+          name: result.name,
+          size: bytes.length,
+          uri: result.path,
+          width: image.width.toDouble(),
+          metadata: {"image": bytes.toList()});
 
       _addMessage(message);
     }
@@ -221,7 +223,7 @@ class _GroupChatScreenState extends State<GroupChatScreen> {
         .toList();
 
     setState(() {
-      messages.clear();
+      messages = [];
       messages.addAll(loadedMessages);
     });
   }
@@ -231,9 +233,7 @@ class _GroupChatScreenState extends State<GroupChatScreen> {
   @override
   Widget build(BuildContext context) {
     return Chat(
-      onAvatarTap: (user) {
-        ProviderDependency.group.closeFloatingButton();
-      },
+      onAvatarTap: (user) => ProviderDependency.group.closeFloatingButton(),
       onMessageLongPress: (context, message) {},
       onBackgroundTap: ProviderDependency.group.closeFloatingButton,
       messages: messages,
@@ -241,7 +241,7 @@ class _GroupChatScreenState extends State<GroupChatScreen> {
       onMessageTap: _handleMessageTap,
       onPreviewDataFetched: _handlePreviewDataFetched,
       onSendPressed: _handleSendPressed,
-      showUserAvatars: true,
+      showUserAvatars: !AppConst.isWeb,
       showUserNames: true,
       bubbleBuilder: customBubble,
       l10n: ProviderDependency.config.isArabic
@@ -249,8 +249,8 @@ class _GroupChatScreenState extends State<GroupChatScreen> {
           : const ChatL10nEn(),
       dateHeaderBuilder: (_) => DateHeaderWidget(_),
       inputOptions: InputOptions(
-        enabled: enabled,
-        sendButtonVisibilityMode: enabled
+        enabled: enabled || group.memberEntity.isAdmin,
+        sendButtonVisibilityMode: enabled || group.memberEntity.isAdmin
             ? SendButtonVisibilityMode.editing
             : SendButtonVisibilityMode.hidden,
         onTextFieldTap: ProviderDependency.group.closeFloatingButton,
