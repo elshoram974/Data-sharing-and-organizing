@@ -1,7 +1,10 @@
+import 'dart:async';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:data_sharing_organizing/core/utils/constants/app_color.dart';
 import 'package:data_sharing_organizing/core/utils/constants/app_constants.dart';
 import 'package:data_sharing_organizing/core/utils/enums/home/group_discussion_type_enum.dart';
+import 'package:data_sharing_organizing/core/utils/functions/handle_status_emit.dart';
 import 'package:data_sharing_organizing/core/utils/functions/handle_tapped_message.dart';
 import 'package:data_sharing_organizing/core/utils/services/dependency/provider_dependency.dart';
 import 'package:data_sharing_organizing/core/utils/styles.dart';
@@ -36,37 +39,45 @@ class _GroupChatScreenState extends State<GroupChatScreen> {
   final types.User _user =
       ProviderDependency.group.group.memberEntity.messageAuthor();
 
+  late final StreamSubscription<QuerySnapshot<Map<String, dynamic>>> stream;
+
   @override
   void initState() {
-    super.initState();
     db = FirebaseFirestore.instance;
     dbGroup = db.collection('Groups').doc(group.id.toString());
     dbActivities = dbGroup.collection('activities');
     _loadMessages();
 
-    dbActivities
-        .orderBy('createdAt', descending: true)
-        .snapshots()
-        .listen((event) {
-      for (var change in event.docChanges) {
-        if (change.type == DocumentChangeType.added) {
-          final data = change.doc.data();
-          if (data != null) {
-            final message = types.Message.fromJson(data);
-            setState(() {
-              messages.insert(0, message);
-            });
+    stream =
+        dbActivities.orderBy('createdAt', descending: true).snapshots().listen(
+      (event) {
+        for (var change in event.docChanges) {
+          if (change.type == DocumentChangeType.added) {
+            final data = change.doc.data();
+            if (data != null) {
+              final message = types.Message.fromJson(data);
+              setState(() {
+                messages.insert(0, message);
+              });
+            }
           }
         }
-      }
-    });
+      },
+    );
+    super.initState();
   }
 
-  void _addMessage(types.Message message) async {
+  @override
+  void dispose() {
+    stream.cancel();
+    super.dispose();
+  }
+
+  void _addMessage(types.Message message) {
     try {
-      await dbActivities.add(message.toJson());
+      dbActivities.add(message.toJson());
     } catch (e) {
-      print(e);
+      failureStatus(e.toString(), () {});
     }
   }
 
@@ -203,13 +214,15 @@ class _GroupChatScreenState extends State<GroupChatScreen> {
   }
 
   void _loadMessages() async {
-    final querySnapshot = await dbActivities.orderBy('createdAt', descending: true).get();
-    final loadedMessages = querySnapshot.docs
+    final QuerySnapshot<Map<String, dynamic>> querySnapshot =
+        await dbActivities.orderBy('createdAt', descending: true).get();
+    final List<types.Message> loadedMessages = querySnapshot.docs
         .map((doc) => types.Message.fromJson(doc.data()))
         .toList();
 
     setState(() {
-      messages = loadedMessages;
+      messages.clear();
+      messages.addAll(loadedMessages);
     });
   }
 
