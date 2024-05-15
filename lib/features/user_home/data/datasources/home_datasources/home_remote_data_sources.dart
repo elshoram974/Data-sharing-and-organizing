@@ -42,13 +42,10 @@ class HomeRemoteDataSourceImp extends HomeRemoteDataSource {
     for (final e in removedGroups) {
       groupsIds.add(e.id);
     }
-    Map<String, dynamic> response = await service.post(
+    await service.post(
       AppLinks.removeGroups,
-      {'userId': '${user.id}', 'removedGroupsIds': json.encode(groupsIds)},
+      {'user_id': '${user.id}', 'group_id': json.encode(groupsIds)},
     );
-    print(response);
-    // return response['status'] == 'success';
-    // it always returns true if the operation is done successfully
     return true;
   }
 }

@@ -65,8 +65,7 @@ class HomeRepositoriesImp extends HomeRepositories {
   ) {
     return executeAndHandleErrors<bool>(
       () async {
-        final bool isExit = await remoteDataSource.exitFromSomeGroups(
-            param.user, param.removedGroups);
+        final bool isExit = await remoteDataSource.exitFromSomeGroups(param.user, param.removedGroups);
         if (isExit) await localDataSource.removeSomeGroups(param.removedGroups);
         return isExit;
       },

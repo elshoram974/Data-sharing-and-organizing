@@ -18,7 +18,6 @@ abstract final class AppLinks {
   // * user home
   static const String _home = '$_userLink/home';
   static const String userHome = '$_home/home.php';
-  static const String removeGroups = '$_home/removeGroups.php';
   static const String getDirectoriesInside =
       '$_home/directions_and_activities.php';
 
@@ -43,4 +42,5 @@ abstract final class AppLinks {
   static const String deleteUser = '$_changes/deleteuser.php';
   static const String changeUserImage = '$_changes/changephoto.php';
   static const String deleteUserImage = '$_changes/deletephoto.php';
+  static const String removeGroups = '$_changes/delete_user_from_some_groups.php';
 }
