@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:data_sharing_organizing/core/utils/constants/app_color.dart';
 import 'package:data_sharing_organizing/core/utils/constants/app_constants.dart';
 import 'package:data_sharing_organizing/core/utils/enums/home/group_discussion_type_enum.dart';
@@ -6,16 +7,14 @@ import 'package:data_sharing_organizing/core/utils/services/dependency/provider_
 import 'package:data_sharing_organizing/core/utils/styles.dart';
 import 'package:flutter/material.dart';
 
-import 'dart:convert';
-
 import 'package:file_picker/file_picker.dart';
-import 'package:flutter/services.dart' show rootBundle;
 import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
 import 'package:flutter_chat_ui/flutter_chat_ui.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mime/mime.dart';
 import 'package:uuid/uuid.dart';
 
+import '../../../user_home/domain/entities/group_home_entity.dart';
 import '../cubit/const_values.dart';
 import '../widgets/chat_widgets/chat_custom_bubble.dart';
 import '../widgets/my_attachment_button.dart';
@@ -29,34 +28,46 @@ class GroupChatScreen extends StatefulWidget {
 }
 
 class _GroupChatScreenState extends State<GroupChatScreen> {
-  List<types.Message> _messages = [
-    types.TextMessage(
-      createdAt: DateTime(2024, 4, 7, 16, 44).millisecondsSinceEpoch,
-      text: 'Hi there!\ni\'m Mohammed El Shora',
-      author: const types.User(
-        firstName: "Mohammed",
-        lastName: "El Shora",
-        role: types.Role.admin,
-        id: 'Mohammed El Shora',
-      ),
-      // duration: Duration(seconds: 5),
-      id: "aaa",
-    )
-  ];
-  final _user = const types.User(
-    id: '82091008-a484-4a89-ae75-a22bf8d6f3ac',
-  );
+  final GroupHomeEntity group = ProviderDependency.group.group;
+  late FirebaseFirestore db;
+  late DocumentReference<Map<String, dynamic>> dbGroup;
+  late CollectionReference<Map<String, dynamic>> dbActivities;
+  List<types.Message> messages = [];
+  final types.User _user =
+      ProviderDependency.group.group.memberEntity.messageAuthor();
 
   @override
   void initState() {
     super.initState();
+    db = FirebaseFirestore.instance;
+    dbGroup = db.collection('Groups').doc(group.id.toString());
+    dbActivities = dbGroup.collection('activities');
     _loadMessages();
+
+    dbActivities
+        .orderBy('createdAt', descending: true)
+        .snapshots()
+        .listen((event) {
+      for (var change in event.docChanges) {
+        if (change.type == DocumentChangeType.added) {
+          final data = change.doc.data();
+          if (data != null) {
+            final message = types.Message.fromJson(data);
+            setState(() {
+              messages.insert(0, message);
+            });
+          }
+        }
+      }
+    });
   }
 
-  void _addMessage(types.Message message) {
-    setState(() {
-      _messages.insert(0, message);
-    });
+  void _addMessage(types.Message message) async {
+    try {
+      await dbActivities.add(message.toJson());
+    } catch (e) {
+      print(e);
+    }
   }
 
   void _handleAttachmentPressed() {
@@ -157,26 +168,24 @@ class _GroupChatScreenState extends State<GroupChatScreen> {
     ProviderDependency.group.closeFloatingButton();
     handleTappedMessage(
       tappedMessage: message,
-      messages: _messages,
+      messages: messages,
       updateMessage: (int index, types.Message updatedMessage) {
         setState(() {
-          _messages[index] = updatedMessage;
+          messages[index] = updatedMessage;
         });
       },
     );
   }
 
   void _handlePreviewDataFetched(
-    types.TextMessage message,
-    types.PreviewData previewData,
-  ) {
-    final index = _messages.indexWhere((element) => element.id == message.id);
-    final updatedMessage = (_messages[index] as types.TextMessage).copyWith(
+      types.TextMessage message, types.PreviewData previewData) {
+    final index = messages.indexWhere((element) => element.id == message.id);
+    final updatedMessage = (messages[index] as types.TextMessage).copyWith(
       previewData: previewData,
     );
 
     setState(() {
-      _messages[index] = updatedMessage;
+      messages[index] = updatedMessage;
     });
   }
 
@@ -194,18 +203,17 @@ class _GroupChatScreenState extends State<GroupChatScreen> {
   }
 
   void _loadMessages() async {
-    final response = await rootBundle.loadString('assets/messages.json');
-    final messages = (jsonDecode(response) as List)
-        .map((e) => types.Message.fromJson(e as Map<String, dynamic>))
+    final querySnapshot = await dbActivities.orderBy('createdAt', descending: true).get();
+    final loadedMessages = querySnapshot.docs
+        .map((doc) => types.Message.fromJson(doc.data()))
         .toList();
 
     setState(() {
-      _messages = messages;
+      messages = loadedMessages;
     });
   }
 
-  final bool enabled =
-      ProviderDependency.group.group.discussion == GroupDiscussionType.exist;
+  late final bool enabled = group.discussion == GroupDiscussionType.exist;
 
   @override
   Widget build(BuildContext context) {
@@ -215,7 +223,7 @@ class _GroupChatScreenState extends State<GroupChatScreen> {
       },
       onMessageLongPress: (context, message) {},
       onBackgroundTap: ProviderDependency.group.closeFloatingButton,
-      messages: _messages,
+      messages: messages,
       onAttachmentPressed: _handleAttachmentPressed,
       onMessageTap: _handleMessageTap,
       onPreviewDataFetched: _handlePreviewDataFetched,
