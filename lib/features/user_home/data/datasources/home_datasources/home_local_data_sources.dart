@@ -1,7 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:data_sharing_organizing/core/utils/constants/app_strings.dart';
+import 'package:data_sharing_organizing/core/utils/enums/notification_enum.dart';
 import 'package:data_sharing_organizing/core/utils/functions/sort_groups_by_last_activity_time.dart';
 import 'package:data_sharing_organizing/core/utils/services/dependency/provider_dependency.dart';
+import 'package:data_sharing_organizing/core/utils/services/notification_services.dart';
 import 'package:hive/hive.dart';
 
 import '../../../../auth/domain/entities/auth_user_entity.dart';
@@ -44,7 +46,6 @@ class HomeLocalDataSourceImp extends HomeLocalDataSource {
         if (ng.id == g.id) {
           groups.add(
             ng.copyWith(
-              isMute: g.isMute,
               unReadCounter: g.unReadCounter,
               bottomHeight: g.bottomHeight,
               lastActivity: g.lastActivity,
@@ -68,6 +69,14 @@ class HomeLocalDataSourceImp extends HomeLocalDataSource {
     groups.removeWhere((e) => removedGroups.contains(e));
     await removeAllGroups();
     await groupsBox.addAll(groups);
+    Stream.fromFutures(
+      List.generate(
+        removedGroups.length,
+        (i) => NotificationApi.firebase
+            .unsubscribeFromTopic('${removedGroups[i].id}'),
+      ),
+    );
+
     return 1;
   }
 
@@ -107,6 +116,13 @@ class HomeLocalDataSourceImp extends HomeLocalDataSource {
 
   @override
   Future<void> updateThisGroup(GroupHomeEntity groupUpdated) async {
+    switch (groupUpdated.memberEntity.notification) {
+      case NotificationEnum.notify:
+        NotificationApi.firebase.subscribeToTopic('${groupUpdated.id}');
+        break;
+      default:
+        NotificationApi.firebase.unsubscribeFromTopic('${groupUpdated.id}');
+    }
     final List<GroupHomeEntity> groups = [];
     groups.addAll(getAllGroups());
 

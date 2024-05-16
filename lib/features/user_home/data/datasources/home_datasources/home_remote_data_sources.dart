@@ -14,6 +14,8 @@ abstract class HomeRemoteDataSource {
     AuthUserEntity user,
     List<GroupHomeEntity> removedGroups,
   );
+
+  Future<bool> editNotification(GroupHomeEntity group);
 }
 
 class HomeRemoteDataSourceImp extends HomeRemoteDataSource {
@@ -45,6 +47,19 @@ class HomeRemoteDataSourceImp extends HomeRemoteDataSource {
     await service.post(
       AppLinks.removeGroups,
       {'user_id': '${user.id}', 'group_id': json.encode(groupsIds)},
+    );
+    return true;
+  }
+
+  @override
+  Future<bool> editNotification(GroupHomeEntity group) async {
+    await service.post(
+      'AppLinks.editNotification',
+      {
+        'member_id': '${group.memberEntity.user.id}',
+        'group_id': '${group.id}',
+        'notify': group.memberEntity.notification.inString,
+      },
     );
     return true;
   }
