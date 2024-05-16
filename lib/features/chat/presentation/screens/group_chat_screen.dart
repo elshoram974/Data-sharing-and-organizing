@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:data_sharing_organizing/core/utils/config/locale/generated/l10n.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:data_sharing_organizing/core/utils/constants/app_color.dart';
 import 'package:data_sharing_organizing/core/utils/constants/app_constants.dart';
@@ -14,6 +15,7 @@ import 'package:flutter/material.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
 import 'package:flutter_chat_ui/flutter_chat_ui.dart';
+import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mime/mime.dart';
 import 'package:uuid/uuid.dart';
@@ -64,6 +66,14 @@ class _GroupChatScreenState extends State<GroupChatScreen> {
                 messages.insert(0, message);
               });
             }
+          } else if (change.type == DocumentChangeType.removed) {
+            final data = change.doc.data();
+            if (data != null) {
+              final message = types.Message.fromJson(data);
+              setState(() {
+                messages.removeWhere((e) => e.id == message.id);
+              });
+            }
           }
         }
         firstOpen = false;
@@ -80,7 +90,7 @@ class _GroupChatScreenState extends State<GroupChatScreen> {
 
   void _addMessage(types.Message message) {
     try {
-      dbActivities.add(message.toJson());
+      dbActivities.doc(message.id).set(message.toJson());
     } catch (e) {
       failureStatus(e.toString(), () {});
     }
@@ -246,7 +256,8 @@ class _GroupChatScreenState extends State<GroupChatScreen> {
   Widget build(BuildContext context) {
     return Chat(
       onAvatarTap: (user) => ProviderDependency.group.closeFloatingButton(),
-      onMessageLongPress: (context, message) {},
+      onMessageDoubleTap: onEditMessage,
+      onMessageLongPress: onEditMessage,
       onBackgroundTap: ProviderDependency.group.closeFloatingButton,
       messages: messages,
       onAttachmentPressed: _handleAttachmentPressed,
@@ -315,6 +326,53 @@ class _GroupChatScreenState extends State<GroupChatScreen> {
         padding: EdgeInsets.symmetric(vertical: 10.0),
         child: MyAttachmentButtonIcon(),
       ),
+    );
+  }
+
+  void onEditMessage(BuildContext context, types.Message message) {
+    if (!group.memberEntity.isAdmin && message.author.id != _user.id) return;
+    showDialog<void>(
+      context: context,
+      builder: (context) {
+        return EditMessageDialogWidget(message, deleteMessage);
+      },
+    );
+  }
+
+  void deleteMessage(types.Message message) async {
+    await dbActivities.doc(message.id).delete();
+  }
+}
+
+class EditMessageDialogWidget extends StatelessWidget {
+  const EditMessageDialogWidget(
+    this.message,
+    this.deleteMessage, {
+    super.key,
+  });
+  final types.Message message;
+  final void Function(types.Message) deleteMessage;
+  @override
+  Widget build(BuildContext context) {
+    String? content;
+    if (message is types.TextMessage) {
+      content = (message as types.TextMessage).text;
+    }
+    return AlertDialog(
+      content: Text('what action u want to do with this "${content ?? ''}"'),
+      actions: [
+        TextButton(
+          onPressed: () {
+            deleteMessage(message);
+            context.pop();
+          },
+          child: Text(S.of(context).delete),
+        ),
+        TextButton(
+          onPressed: () => context.pop(),
+          child: Text(S.of(context).cancel),
+        ),
+      ],
     );
   }
 }
