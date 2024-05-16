@@ -154,14 +154,15 @@ class _GroupChatScreenState extends State<GroupChatScreen> {
 
       final String uri = await mountainsRef.getDownloadURL();
       final message = types.FileMessage(
-          author: _user,
-          createdAt: DateTime.now().millisecondsSinceEpoch,
-          id: const Uuid().v4(),
-          mimeType: lookupMimeType(result.files.single.path!),
-          name: result.files.single.name,
-          size: result.files.single.size,
-          uri: uri,
-          metadata: {"file": result.files.single.bytes?.toList()});
+        author: _user,
+        createdAt: DateTime.now().millisecondsSinceEpoch,
+        id: const Uuid().v4(),
+        mimeType: lookupMimeType(result.files.single.path!),
+        name: result.files.single.name,
+        size: result.files.single.size,
+        uri: uri,
+        metadata: {'name': result.files.single.name},
+      );
 
       _addMessage(message);
     }
@@ -193,6 +194,7 @@ class _GroupChatScreenState extends State<GroupChatScreen> {
         size: bytes.length,
         uri: uri,
         width: image.width.toDouble(),
+        metadata: {'name': result.name},
       );
 
       _addMessage(message);
@@ -340,7 +342,12 @@ class _GroupChatScreenState extends State<GroupChatScreen> {
   }
 
   void deleteMessage(types.Message message) async {
-    await dbActivities.doc(message.id).delete();
+    final Reference desertRef = filesRef.child(message.metadata?['name']);
+
+    Stream.fromFutures([
+      dbActivities.doc(message.id).delete(),
+      desertRef.delete(),
+    ]);
   }
 }
 
