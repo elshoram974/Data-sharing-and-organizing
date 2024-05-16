@@ -13,6 +13,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../../chat/data/models/member_model.dart';
 import '../../../domain/entities/group_home_entity.dart';
 import '../../../domain/repositories/home_repositories.dart';
 import '../../../domain/usecases/home_use_case/exit_from_some_groups.dart';
@@ -101,19 +102,23 @@ class UserHomeCubit extends Cubit<UserHomeState> {
     NotificationEnum notify,
     GroupHomeEntity group,
   ) async {
-    emit(const GetGroupsLoadingState(true));
+    emit(const UserHomeInitial());
     EasyLoading.show(dismissOnTap: false);
-    // await Future.delayed(Duration(seconds: 3));
-    final Status<GroupHomeEntity> status = await homeRepo.editNotification(group);
+    final temp = group.copyWith(
+      member: MemberModel.fromEntity(
+        group.memberEntity.copyWith(notification: notify),
+      ),
+    );
+    final Status<void> status = await homeRepo.editNotification(temp);
 
-    if (status is Success<GroupHomeEntity>) {
+    if (status is Success<void>) {
       final int i = currentGroups.indexWhere((e) => e.id == group.id);
-      currentGroups[i] = status.data;
-      emit(UserHomeUpdateGroup(status.data));
-      if (currentGroups.length < 10) getGroups();
-    } else if (status is Failure<GroupHomeEntity>) {
+      currentGroups[i] = temp;
+      emit(UserHomeUpdateGroup(temp));
+    } else if (status is Failure<void>) {
       _failureStatus(status.failure, true);
     }
+    _makeAllSelectedOrNot(false);
     EasyLoading.dismiss();
   }
 
