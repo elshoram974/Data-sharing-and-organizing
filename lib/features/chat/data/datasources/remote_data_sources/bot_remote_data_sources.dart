@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:typed_data';
 
 import 'package:data_sharing_organizing/core/utils/constants/app_links.dart';
@@ -10,6 +11,7 @@ import 'package:data_sharing_organizing/features/chat/domain/entities/directory_
 import 'package:data_sharing_organizing/features/chat/domain/entities/member_entity.dart';
 
 import '../../../domain/entities/data_in_directory.dart';
+import '../../../domain/entities/notification_data_entity.dart';
 import '../../models/dir_activities_bot.dart';
 
 abstract class DirectoriesRemoteDataSource {
@@ -51,6 +53,8 @@ abstract class DirectoriesRemoteDataSource {
     required ActivityEntity activity,
     required Uint8List? file,
   });
+
+  Future<bool> sendNotification(NotificationDataEntity data);
 }
 
 class DirectoriesRemoteDataSourceImp extends DirectoriesRemoteDataSource {
@@ -159,7 +163,7 @@ class DirectoriesRemoteDataSourceImp extends DirectoriesRemoteDataSource {
 
   @override
   Future<bool> blockUserWithDir({required DirectoryEntity directory}) async {
-     await service.post(
+    await service.post(
       AppLinks.blockUserGroup,
       {
         'direction_id': '${directory.id}',
@@ -195,7 +199,8 @@ class DirectoriesRemoteDataSourceImp extends DirectoriesRemoteDataSource {
       'activity_notify_others': activity.notifyOthers.inString,
       'activity_owner_id': '${activity.createdBy.user.id}',
     };
-    if (activity.insideDirectoryId != null) body['activity_direction_id'] = '${activity.insideDirectoryId}';
+    if (activity.insideDirectoryId != null)
+      body['activity_direction_id'] = '${activity.insideDirectoryId}';
     final AttachmentModel? attachment = activity.attachment;
     if (attachment != null) {
       body['activity_attachments_size'] = '${attachment.size}';
@@ -234,7 +239,8 @@ class DirectoriesRemoteDataSourceImp extends DirectoriesRemoteDataSource {
       'max_activity': '1000',
       'group_id': '${dir.groupId}',
     };
-    if (dir.insideDirectoryId != null) body['inside_dir_id'] = '${dir.insideDirectoryId}';
+    if (dir.insideDirectoryId != null)
+      body['inside_dir_id'] = '${dir.insideDirectoryId}';
     Map<String, dynamic> response = await service.post(
       AppLinks.addNewDir,
       body,
@@ -243,5 +249,19 @@ class DirectoriesRemoteDataSourceImp extends DirectoriesRemoteDataSource {
       id: response['response']['direction_id'] as int,
       isApproved: response['response']['direction_is_approved'] as int == 1,
     );
+  }
+
+  @override
+  Future<bool> sendNotification(NotificationDataEntity data) async {
+    await service.post(
+      AppLinks.sendNotification,
+      {
+        'title': data.title,
+        'message': data.message,
+        'topic': data.topic,
+        'data': jsonEncode(data.data),
+      },
+    );
+    return true;
   }
 }

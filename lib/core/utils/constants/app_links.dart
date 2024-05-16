@@ -1,10 +1,13 @@
 abstract final class AppLinks {
+
   const AppLinks();
 
   static const String appLink = 'https://sharikna.mrecode.com';
 
   static const String _baseLink = 'https://thiet.mrecode.com/api';
   static const String _userLink = '$_baseLink/user';
+
+  static const String sendNotification = '$_baseLink/libraries/notification/send_notification.php';
 
   // * authorization links
   static const String _auth = '$_userLink/auth';
