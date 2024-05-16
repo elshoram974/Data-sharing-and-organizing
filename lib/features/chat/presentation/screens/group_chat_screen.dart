@@ -300,6 +300,7 @@ class _GroupChatScreenState extends State<GroupChatScreen> {
       messages = [];
       messages.addAll(loadedMessages);
     });
+    updateHomeGroup(messages.first);
   }
 
   late final bool enabled = group.discussion == GroupDiscussionType.exist;
