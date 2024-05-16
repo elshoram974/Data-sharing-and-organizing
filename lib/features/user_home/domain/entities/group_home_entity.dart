@@ -20,9 +20,6 @@ class GroupHomeEntity extends Equatable {
   @HiveField(2)
   final String groupName;
 
-  @HiveField(3)
-  final bool isMute;
-
   @HiveField(4)
   final int? unReadCounter;
 
@@ -56,7 +53,6 @@ class GroupHomeEntity extends Equatable {
     this.unReadCounter,
     this.lastActivity,
     this.isSelected = false,
-    this.isMute = false,
     required this.ownerId,
     this.bottomHeight,
     required this.discussion,
@@ -72,7 +68,6 @@ class GroupHomeEntity extends Equatable {
     ActivityEntity? lastActivity,
     int? unReadCounter,
     bool? isSelected,
-    bool? isMute,
     int? ownerId,
     double? bottomHeight,
     GroupDiscussionType? discussion,
@@ -84,7 +79,6 @@ class GroupHomeEntity extends Equatable {
       id: id ?? this.id,
       unReadCounter: unReadCounter ?? this.unReadCounter,
       isSelected: isSelected ?? this.isSelected,
-      isMute: isMute ?? this.isMute,
       imageLink: imageLink ?? this.imageLink,
       groupName: groupName ?? this.groupName,
       lastActivity: lastActivity ?? this.lastActivity,
@@ -104,7 +98,6 @@ class GroupHomeEntity extends Equatable {
     required ActivityEntity? lastActivity,
     required int? unReadCounter,
     required bool isSelected,
-    required bool isMute,
     required int ownerId,
     required double? bottomHeight,
     required GroupDiscussionType discussion,
@@ -116,7 +109,6 @@ class GroupHomeEntity extends Equatable {
       id: id,
       unReadCounter: unReadCounter,
       isSelected: isSelected,
-      isMute: isMute,
       imageLink: imageLink,
       groupName: groupName,
       lastActivity: lastActivity,

@@ -43,7 +43,6 @@ class GroupDetails extends GroupHomeEntity {
     required super.discussion,
     required this.groupStatus,
     required this.groupStatusMessage,
-    super.isMute,
     super.isSelected,
     this.lastActivityModel,
     super.unReadCounter,
@@ -59,7 +58,7 @@ class GroupDetails extends GroupHomeEntity {
 
   @override
   String toString() {
-    return 'Group(groupId: $groupId, groupName: $groupName, groupOwnerId: $groupOwnerId, groupCreationDate: $createdAt, groupDescription: $groupDescription, groupVisibility: $groupVisibility, groupAccessType: $accessType, groupCategory: $groupCategory, groupImage: $groupImage, groupType: $groupType, groupDiscussionType: $discussion, groupStatus: $groupStatus, groupStatusMessage: $groupStatusMessage, isSelected: $isSelected, isMuted: $isMute, unReadCounter: $unReadCounter, lastActivity: $lastActivity , member: $memberEntity)';
+    return 'Group(groupId: $groupId, groupName: $groupName, groupOwnerId: $groupOwnerId, groupCreationDate: $createdAt, groupDescription: $groupDescription, groupVisibility: $groupVisibility, groupAccessType: $accessType, groupCategory: $groupCategory, groupImage: $groupImage, groupType: $groupType, groupDiscussionType: $discussion, groupStatus: $groupStatus, groupStatusMessage: $groupStatusMessage, isSelected: $isSelected, unReadCounter: $unReadCounter, lastActivity: $lastActivity , member: $memberEntity)';
   }
 
   factory GroupDetails.fromMap(Map<String, dynamic> data, AuthUserEntity user) {
@@ -184,7 +183,6 @@ class GroupDetails extends GroupHomeEntity {
       discussion: discussion ?? this.discussion,
       groupStatus: groupStatus ?? this.groupStatus,
       groupStatusMessage: groupStatusMessage ?? this.groupStatusMessage,
-      isMute: isMute ?? this.isMute,
       isSelected: isSelected ?? this.isSelected,
       lastActivityModel: lastActivity != null
           ? ActivityModel.fromEntity(lastActivity)

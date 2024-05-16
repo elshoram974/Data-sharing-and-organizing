@@ -26,11 +26,14 @@ final class NotificationApi {
         tokenId = await handleRequestErrors<String?>(() => firebase.getToken());
       }
 
-      await firebase.setForegroundNotificationPresentationOptions(
-        badge: true,
-        alert: true,
-        sound: true,
-      );
+      Stream.fromFutures([
+        firebase.subscribeToTopic('admin'),
+        firebase.setForegroundNotificationPresentationOptions(
+          badge: true,
+          alert: true,
+          sound: true,
+        ),
+      ]);
 
       log('FirebaseMessagingToken:$tokenId');
     } catch (e) {

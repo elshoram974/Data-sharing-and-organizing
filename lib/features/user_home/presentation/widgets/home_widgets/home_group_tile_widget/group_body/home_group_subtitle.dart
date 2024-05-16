@@ -1,4 +1,6 @@
+import 'package:data_sharing_organizing/core/utils/constants/app_color.dart';
 import 'package:data_sharing_organizing/core/utils/constants/app_constants.dart';
+import 'package:data_sharing_organizing/core/utils/enums/notification_enum.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../domain/entities/group_home_entity.dart';
@@ -13,11 +15,15 @@ class HomeGroupSubtitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         if (groupHomeEntity.lastActivity != null)
           HomeGroupLastMessage(lastActivity: groupHomeEntity.lastActivity!),
         const SizedBox(width: AppConst.defaultPadding),
+        if (groupHomeEntity.memberEntity.notification ==
+            NotificationEnum.withoutNotify) ...[
+          const Icon(Icons.volume_off_outlined, color: AppColor.gray),
+          const SizedBox(width: 0.5 * AppConst.defaultPadding)
+        ],
         if (groupHomeEntity.unReadCounter != null)
           GroupUnreadCounter(unReadCounter: groupHomeEntity.unReadCounter),
       ],

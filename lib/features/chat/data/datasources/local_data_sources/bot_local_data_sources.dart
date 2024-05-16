@@ -141,7 +141,6 @@ class BOTLocalDataSourceImp extends BOTLocalDataSource {
         lastActivity: ActivityEntity.fromMessage(messages.first),
         unReadCounter: null,
         isSelected: group.isSelected,
-        isMute: group.isMute,
         ownerId: group.ownerId,
         bottomHeight: group.bottomHeight,
         discussion: group.discussion,

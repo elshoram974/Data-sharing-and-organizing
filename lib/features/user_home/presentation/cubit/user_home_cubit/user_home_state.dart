@@ -20,7 +20,6 @@ final class UserHomeUpdateGroup extends UserHomeState {
   List<Object?> get props => [
         group.id,
         group.groupName,
-        group.isMute,
         group.ownerId,
         group.bottomHeight,
         group.lastActivity,

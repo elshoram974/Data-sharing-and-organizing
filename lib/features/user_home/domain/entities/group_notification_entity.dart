@@ -21,7 +21,7 @@ final class GroupNotificationEntity extends GroupHomeEntity {
     super.accessType,
     required super.memberEntity,
     required super.createdAt,
-  }) : super(isSelected: false, isMute: false);
+  }) : super(isSelected: false);
 
   @override
   GroupNotificationEntity copyWith({
@@ -32,7 +32,6 @@ final class GroupNotificationEntity extends GroupHomeEntity {
     int? unReadCounter,
     bool? isSelected,
     bool? isUnread,
-    bool? isMute,
     bool? isExpanded,
     int? ownerId,
     double? bottomHeight,

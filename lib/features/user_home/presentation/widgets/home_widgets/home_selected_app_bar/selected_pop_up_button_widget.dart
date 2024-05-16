@@ -1,6 +1,7 @@
 import 'package:data_sharing_organizing/core/utils/config/locale/generated/l10n.dart';
 import 'package:data_sharing_organizing/core/utils/constants/app_color.dart';
 import 'package:data_sharing_organizing/core/utils/constants/app_constants.dart';
+import 'package:data_sharing_organizing/core/utils/enums/notification_enum.dart';
 import 'package:data_sharing_organizing/core/utils/enums/selected_pop_up_enum.dart';
 import 'package:data_sharing_organizing/core/utils/functions/my_popup_button_item.dart';
 import 'package:flutter/material.dart';
@@ -32,11 +33,11 @@ class SelectedPopUpMenuButton extends StatelessWidget {
           myPopupButton(
               HomeSelectedPopUpItem.deselectAll, S.of(context).deselectAll),
         if (cubit.selectedGroups.length == 1 &&
-            !cubit.selectedGroups.first.isMute)
+            cubit.selectedGroups.first.memberEntity.notification == NotificationEnum.notify)
           myPopupButton(HomeSelectedPopUpItem.muteNotification,
               S.of(context).muteNotification),
         if (cubit.selectedGroups.length == 1 &&
-            cubit.selectedGroups.first.isMute)
+            cubit.selectedGroups.first.memberEntity.notification == NotificationEnum.withoutNotify)
           myPopupButton(HomeSelectedPopUpItem.unmuteNotification,
               S.of(context).unmuteNotification),
       ],

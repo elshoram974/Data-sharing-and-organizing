@@ -22,7 +22,6 @@ class GroupHomeEntityAdapter extends TypeAdapter<GroupHomeEntity> {
       groupName: fields[2] as String,
       unReadCounter: fields[4] as int?,
       lastActivity: fields[9] as ActivityEntity?,
-      isMute: fields[3] as bool,
       ownerId: fields[5] as int,
       bottomHeight: fields[6] as double?,
       discussion: fields[7] as GroupDiscussionType,
@@ -35,15 +34,13 @@ class GroupHomeEntityAdapter extends TypeAdapter<GroupHomeEntity> {
   @override
   void write(BinaryWriter writer, GroupHomeEntity obj) {
     writer
-      ..writeByte(12)
+      ..writeByte(11)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
       ..write(obj.imageLink)
       ..writeByte(2)
       ..write(obj.groupName)
-      ..writeByte(3)
-      ..write(obj.isMute)
       ..writeByte(4)
       ..write(obj.unReadCounter)
       ..writeByte(5)
