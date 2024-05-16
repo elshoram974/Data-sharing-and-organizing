@@ -1,7 +1,9 @@
 import 'dart:async';
+import 'dart:math';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:data_sharing_organizing/core/utils/config/locale/generated/l10n.dart';
+import 'package:data_sharing_organizing/core/utils/enums/message_type/message_type.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:data_sharing_organizing/core/utils/constants/app_color.dart';
 import 'package:data_sharing_organizing/core/utils/constants/app_constants.dart';
@@ -21,6 +23,8 @@ import 'package:mime/mime.dart';
 import 'package:uuid/uuid.dart';
 
 import '../../../user_home/domain/entities/group_home_entity.dart';
+import '../../domain/entities/activity_entity.dart';
+import '../../domain/entities/member_entity.dart';
 import '../cubit/const_values.dart';
 import '../widgets/chat_widgets/chat_custom_bubble.dart';
 import '../widgets/my_attachment_button.dart';
@@ -66,6 +70,8 @@ class _GroupChatScreenState extends State<GroupChatScreen> {
               setState(() {
                 messages.insert(0, message.copyWith(status: types.Status.sent));
               });
+
+              updateHomeGroup(message);
             }
           } else if (change.type == DocumentChangeType.removed) {
             final data = change.doc.data();
@@ -81,6 +87,36 @@ class _GroupChatScreenState extends State<GroupChatScreen> {
       },
     );
     super.initState();
+  }
+
+  void updateHomeGroup(types.Message message) {
+    late final String content;
+    late final MessageType type;
+    if (message is types.TextMessage) {
+      content = message.text;
+      type = MessageType.textMessage;
+    } else if (message is types.ImageMessage) {
+      content = message.name;
+      type = MessageType.photo;
+    } else {
+      message as types.FileMessage;
+      content = message.name;
+      type = MessageType.document;
+    }
+    ProviderDependency.userHome.updateGroupLocally(
+      group.copyWith(
+        lastActivity: ActivityEntity(
+          id: Random().nextInt(1000),
+          groupId: group.id,
+          createdBy: MemberEntity.fromAuthor(message.author),
+          content: content,
+          createdAt:
+              DateTime.fromMillisecondsSinceEpoch(message.createdAt ?? 0),
+          isApproved: true,
+          type: type,
+        ),
+      ),
+    );
   }
 
   @override
