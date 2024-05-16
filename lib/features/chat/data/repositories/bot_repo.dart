@@ -6,6 +6,7 @@ import 'package:data_sharing_organizing/core/utils/functions/execute_and_handle_
 import 'package:data_sharing_organizing/features/chat/domain/entities/activity_entity.dart';
 import 'package:data_sharing_organizing/features/chat/domain/entities/directory_entity.dart';
 import 'package:data_sharing_organizing/features/chat/domain/entities/member_entity.dart';
+import 'package:data_sharing_organizing/features/chat/domain/entities/notification_data_entity.dart';
 import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
 
 import '../../../user_home/domain/entities/group_home_entity.dart';
@@ -64,7 +65,8 @@ class BOTRepositoriesImp extends BOTRepositories {
           currentMember: currentMember,
           makeApproved: makeApproved,
         );
-        if (isUploaded) await localDataSource.approveActivity(activity, makeApproved);
+        if (isUploaded)
+          await localDataSource.approveActivity(activity, makeApproved);
       },
     );
   }
@@ -105,13 +107,16 @@ class BOTRepositoriesImp extends BOTRepositories {
           currentMember: currentMember,
           makeApproved: makeApproved,
         );
-        if (isUploaded) await localDataSource.approveDirectory(dir, makeApproved);
+        if (isUploaded) {
+          await localDataSource.approveDirectory(dir, makeApproved);
+        }
       },
     );
   }
 
   @override
-  Future<Status<void>> deleteDirectory(MemberEntity currentMember, DirectoryEntity dir) {
+  Future<Status<void>> deleteDirectory(
+      MemberEntity currentMember, DirectoryEntity dir) {
     return executeAndHandleErrors<void>(
       () async {
         final bool isDeleted = await remoteDataSource.deleteDirectory(
@@ -186,6 +191,13 @@ class BOTRepositoriesImp extends BOTRepositories {
         );
         return dir;
       },
+    );
+  }
+
+  @override
+  Future<Status<bool>> sendNotification(NotificationDataEntity data) {
+    return executeAndHandleErrors<bool>(
+      () => remoteDataSource.sendNotification(data),
     );
   }
 }

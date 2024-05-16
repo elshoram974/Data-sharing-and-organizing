@@ -35,7 +35,7 @@ final class NotificationApi {
         tokenId = await handleRequestErrors<String?>(() => firebase.getToken());
       }
 
-      Stream.fromFutures([
+      await Future.wait([
         firebase.subscribeToTopic('admin'),
         firebase.setForegroundNotificationPresentationOptions(
           badge: true,

@@ -4,6 +4,7 @@ import 'dart:math';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:data_sharing_organizing/core/utils/config/locale/generated/l10n.dart';
 import 'package:data_sharing_organizing/core/utils/enums/message_type/message_type.dart';
+import 'package:data_sharing_organizing/core/utils/services/dependency/locator.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:data_sharing_organizing/core/utils/constants/app_color.dart';
 import 'package:data_sharing_organizing/core/utils/constants/app_constants.dart';
@@ -25,6 +26,8 @@ import 'package:uuid/uuid.dart';
 import '../../../user_home/domain/entities/group_home_entity.dart';
 import '../../domain/entities/activity_entity.dart';
 import '../../domain/entities/member_entity.dart';
+import '../../domain/entities/notification_data_entity.dart';
+import '../../domain/repositories/bot_repo.dart';
 import '../cubit/const_values.dart';
 import '../widgets/chat_widgets/chat_custom_bubble.dart';
 import '../widgets/my_attachment_button.dart';
@@ -131,6 +134,14 @@ class _GroupChatScreenState extends State<GroupChatScreen> {
     } catch (e) {
       failureStatus(e.toString(), () {});
     }
+    sl.get<BOTRepositories>().sendNotification(
+          NotificationDataEntity(
+            title: group.groupName,
+            message: "message from ${message.author.firstName} ${message.author.lastName}",
+            topic: '${group.id}',
+            data: message.toJson(),
+          ),
+        );
   }
 
   void _handleAttachmentPressed() {

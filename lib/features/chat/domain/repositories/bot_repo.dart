@@ -8,6 +8,7 @@ import '../entities/activity_entity.dart';
 import '../entities/data_in_directory.dart';
 import '../entities/directory_entity.dart';
 import '../entities/member_entity.dart';
+import '../entities/notification_data_entity.dart';
 
 abstract class BOTRepositories {
   const BOTRepositories();
@@ -34,4 +35,6 @@ abstract class BOTRepositories {
   Future<Status<DirectoryEntity>> addNewDir(DirectoryEntity newDir);
   Future<Status<ActivityEntity>> addNewActivity(
       ActivityEntity newActivity, Uint8List? file);
+  
+  Future<Status<bool>> sendNotification(NotificationDataEntity data);
 }
