@@ -65,7 +65,8 @@ class HomeRepositoriesImp extends HomeRepositories {
   ) {
     return executeAndHandleErrors<bool>(
       () async {
-        final bool isExit = await remoteDataSource.exitFromSomeGroups(param.user, param.removedGroups);
+        final bool isExit = await remoteDataSource.exitFromSomeGroups(
+            param.user, param.removedGroups);
         if (isExit) await localDataSource.removeSomeGroups(param.removedGroups);
         return isExit;
       },
@@ -81,5 +82,15 @@ class HomeRepositoriesImp extends HomeRepositories {
   @override
   Future<void> updateGroupLocally(GroupHomeEntity groupUpdated) {
     return localDataSource.updateThisGroup(groupUpdated);
+  }
+
+  @override
+  Future<Status<void>> editNotification(GroupHomeEntity group) {
+    return executeAndHandleErrors<void>(
+      () async {
+        await remoteDataSource.editNotification(group);
+        await localDataSource.updateThisGroup(group);
+      },
+    );
   }
 }
