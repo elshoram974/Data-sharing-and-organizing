@@ -62,8 +62,9 @@ class _GroupChatScreenState extends State<GroupChatScreen> {
             final data = change.doc.data();
             if (data != null) {
               final message = types.Message.fromJson(data);
+              messages.removeWhere((e) => e.id == message.id);
               setState(() {
-                messages.insert(0, message);
+                messages.insert(0, message.copyWith(status: types.Status.sent));
               });
             }
           } else if (change.type == DocumentChangeType.removed) {
@@ -149,22 +150,29 @@ class _GroupChatScreenState extends State<GroupChatScreen> {
     );
 
     if (result != null) {
-      final mountainsRef = filesRef.child(result.files.single.name);
+      final String id = const Uuid().v4();
+      final String nameId = '${id}_MRE_${result.files.single.name}';
+
+      final types.FileMessage message = types.FileMessage(
+        author: _user,
+        createdAt: DateTime.now().millisecondsSinceEpoch,
+        id: id,
+        mimeType: lookupMimeType(result.files.single.path ?? ''),
+        name: result.files.single.name,
+        size: result.files.single.size,
+        uri: result.files.single.path ?? '',
+        metadata: {'name': nameId},
+      );
+      setState(() {
+        messages.insert(0, message.copyWith(status: types.Status.sending));
+      });
+
+      final mountainsRef = filesRef.child(nameId);
       await mountainsRef.putData(await result.files.single.xFile.readAsBytes());
 
       final String uri = await mountainsRef.getDownloadURL();
-      final message = types.FileMessage(
-        author: _user,
-        createdAt: DateTime.now().millisecondsSinceEpoch,
-        id: const Uuid().v4(),
-        mimeType: lookupMimeType(result.files.single.path!),
-        name: result.files.single.name,
-        size: result.files.single.size,
-        uri: uri,
-        metadata: {'name': result.files.single.name},
-      );
 
-      _addMessage(message);
+      _addMessage(message.copyWith(uri: uri));
     }
   }
 
@@ -177,27 +185,32 @@ class _GroupChatScreenState extends State<GroupChatScreen> {
     );
 
     if (result != null) {
+      final String id = const Uuid().v4();
+      final String nameId = '${id}_MRE_${result.name}';
+
       final bytes = await result.readAsBytes();
       final image = await decodeImageFromList(bytes);
+      final types.ImageMessage message = types.ImageMessage(
+        author: _user,
+        createdAt: DateTime.now().millisecondsSinceEpoch,
+        height: image.height.toDouble(),
+        id: id,
+        name: result.name,
+        size: bytes.length,
+        uri: result.path,
+        width: image.width.toDouble(),
+        metadata: {'name': nameId},
+      );
+      setState(() {
+        messages.insert(0, message.copyWith(status: types.Status.sending));
+      });
 
-      final mountainsRef = filesRef.child(result.name);
+      final mountainsRef = filesRef.child(nameId);
       await mountainsRef.putData(bytes);
 
       final String uri = await mountainsRef.getDownloadURL();
 
-      final message = types.ImageMessage(
-        author: _user,
-        createdAt: DateTime.now().millisecondsSinceEpoch,
-        height: image.height.toDouble(),
-        id: const Uuid().v4(),
-        name: result.name,
-        size: bytes.length,
-        uri: uri,
-        width: image.width.toDouble(),
-        metadata: {'name': result.name},
-      );
-
-      _addMessage(message);
+      _addMessage(message.copyWith(uri: uri));
     }
   }
 
@@ -243,7 +256,8 @@ class _GroupChatScreenState extends State<GroupChatScreen> {
     final QuerySnapshot<Map<String, dynamic>> querySnapshot =
         await dbActivities.orderBy('createdAt', descending: true).get();
     final List<types.Message> loadedMessages = querySnapshot.docs
-        .map((doc) => types.Message.fromJson(doc.data()))
+        .map((doc) => types.Message.fromJson(doc.data())
+            .copyWith(status: types.Status.sent))
         .toList();
 
     setState(() {
