@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 
 import '../constants/app_constants.dart';
 import '../functions/handle_request_errors.dart';
@@ -12,7 +13,15 @@ final class NotificationApi {
 
   Future<void> init() async {
     try {
-      await FirebaseMessaging.instance.requestPermission(provisional: true);
+      await FirebaseMessaging.instance.requestPermission(
+        alert: true,
+        announcement: false,
+        badge: true,
+        carPlay: false,
+        criticalAlert: false,
+        provisional: false,
+        sound: true,
+      );
 
       final String? tokenId;
 
@@ -39,5 +48,15 @@ final class NotificationApi {
     } catch (e) {
       log('Error in token: $e');
     }
+
+    FirebaseMessaging.onBackgroundMessage((message) async {
+      print('onBackgroundMessage: $message');
+    });
+    FirebaseMessaging.onMessage.listen(
+      (RemoteMessage remoteMessage) {
+        print('onMessage: $remoteMessage');
+        EasyLoading.showInfo(remoteMessage.toString());
+      },
+    );
   }
 }
