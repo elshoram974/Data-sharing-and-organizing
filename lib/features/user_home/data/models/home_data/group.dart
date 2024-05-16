@@ -8,6 +8,7 @@ import 'package:data_sharing_organizing/core/utils/enums/home/group_type_enum.da
 import 'package:data_sharing_organizing/core/utils/enums/home/group_visibility_enum.dart';
 import 'package:data_sharing_organizing/core/utils/enums/message_type/message_type.dart';
 import 'package:data_sharing_organizing/core/utils/enums/notification_enum.dart';
+import 'package:data_sharing_organizing/core/utils/services/notification_services.dart';
 
 import '../../../../auth/domain/entities/auth_user_entity.dart';
 import '../../../../chat/data/models/activity_model.dart';
@@ -63,6 +64,16 @@ class GroupDetails extends GroupHomeEntity {
 
   factory GroupDetails.fromMap(Map<String, dynamic> data, AuthUserEntity user) {
     final int groupId = data['group_id'] as int;
+
+    final NotificationEnum notify = NotificationEnum.fromString(data['member_notification'] as String);
+    switch (notify) {
+      case NotificationEnum.notify:
+        NotificationApi.firebase.subscribeToTopic('$groupId');
+        break;
+      default:
+      NotificationApi.firebase.unsubscribeFromTopic('$groupId');
+    }
+
     return GroupDetails(
       groupId: groupId,
       groupName: data['group_name'] as String,
@@ -89,8 +100,7 @@ class GroupDetails extends GroupHomeEntity {
         user: user,
         groupId: groupId,
         canInteract: data['member_can_interaction'] as int == 1,
-        notification:
-            NotificationEnum.fromString(data['member_notification'] as String),
+        notification: notify,
         joinDate: DateTime.parse(data['member_join_date'] as String),
         isAdmin: data['member_is_admin'] as int == 1,
       ),

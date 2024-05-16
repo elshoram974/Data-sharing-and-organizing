@@ -4,6 +4,7 @@ import 'package:data_sharing_organizing/core/status/status.dart';
 import 'package:data_sharing_organizing/core/status/success/success.dart';
 import 'package:data_sharing_organizing/core/utils/config/routes/routes.dart';
 import 'package:data_sharing_organizing/core/utils/enums/http_exception_type_enum.dart';
+import 'package:data_sharing_organizing/core/utils/enums/notification_enum.dart';
 import 'package:data_sharing_organizing/core/utils/enums/selected_pop_up_enum.dart';
 import 'package:data_sharing_organizing/core/utils/functions/sort_groups_by_last_activity_time.dart';
 import 'package:data_sharing_organizing/core/utils/services/dependency/provider_dependency.dart';
@@ -77,7 +78,7 @@ class UserHomeCubit extends Cubit<UserHomeState> {
   }
 
   // * exit from groups
-  Future<void> _exitGroups() async {
+  Future<void> exitGroups() async {
     emit(const GetGroupsLoadingState(true));
     EasyLoading.show(dismissOnTap: false);
     // await Future.delayed(Duration(seconds: 3));
@@ -90,6 +91,27 @@ class UserHomeCubit extends Cubit<UserHomeState> {
       emit(HomeSuccessState(currentGroups));
       if (currentGroups.length < 10) getGroups();
     } else if (status is Failure<bool>) {
+      _failureStatus(status.failure, true);
+    }
+    EasyLoading.dismiss();
+  }
+
+  // * Edit notification from groups
+  Future<void> editNotification(
+    NotificationEnum notify,
+    GroupHomeEntity group,
+  ) async {
+    emit(const GetGroupsLoadingState(true));
+    EasyLoading.show(dismissOnTap: false);
+    // await Future.delayed(Duration(seconds: 3));
+    final Status<GroupHomeEntity> status = await homeRepo.editNotification(group);
+
+    if (status is Success<GroupHomeEntity>) {
+      final int i = currentGroups.indexWhere((e) => e.id == group.id);
+      currentGroups[i] = status.data;
+      emit(UserHomeUpdateGroup(status.data));
+      if (currentGroups.length < 10) getGroups();
+    } else if (status is Failure<GroupHomeEntity>) {
       _failureStatus(status.failure, true);
     }
     EasyLoading.dismiss();
@@ -143,16 +165,16 @@ class UserHomeCubit extends Cubit<UserHomeState> {
   void onSelectPopUpItem(value) {
     switch (value) {
       case HomeSelectedPopUpItem.exitGroup:
-        _exitGroups();
+        exitGroups();
       case HomeSelectedPopUpItem.markAsUnRead:
         _markAsUnRead();
       case HomeSelectedPopUpItem.selectAll:
       case HomeSelectedPopUpItem.deselectAll:
         _makeAllSelectedOrNot(!isAllSelected);
       case HomeSelectedPopUpItem.muteNotification:
-        print('muteNotification');
+        editNotification(NotificationEnum.withoutNotify, selectedGroups.first);
       case HomeSelectedPopUpItem.unmuteNotification:
-        print('unmuteNotification');
+        editNotification(NotificationEnum.notify, selectedGroups.first);
     }
   }
 
