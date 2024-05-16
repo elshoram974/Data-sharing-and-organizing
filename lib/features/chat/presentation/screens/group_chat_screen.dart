@@ -342,7 +342,7 @@ class _GroupChatScreenState extends State<GroupChatScreen> {
   }
 
   void deleteMessage(types.Message message) async {
-    final Reference desertRef = filesRef.child(message.metadata?['name']);
+    final Reference desertRef = filesRef.child(message.metadata?['name'] ?? '');
 
     Stream.fromFutures([
       dbActivities.doc(message.id).delete(),
