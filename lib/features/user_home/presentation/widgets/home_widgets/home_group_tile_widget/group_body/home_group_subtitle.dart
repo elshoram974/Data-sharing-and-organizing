@@ -21,7 +21,7 @@ class HomeGroupSubtitle extends StatelessWidget {
         const SizedBox(width: AppConst.defaultPadding),
         if (groupHomeEntity.memberEntity.notification ==
             NotificationEnum.withoutNotify) ...[
-          const Icon(Icons.volume_off_outlined, color: AppColor.gray),
+          const Icon(Icons.notifications_off_outlined, color: AppColor.gray),
           const SizedBox(width: 0.5 * AppConst.defaultPadding)
         ],
         if (groupHomeEntity.unReadCounter != null)
