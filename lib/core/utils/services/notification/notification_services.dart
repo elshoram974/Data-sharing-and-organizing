@@ -6,13 +6,19 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_chat_types/flutter_chat_types.dart';
 import 'package:hive/hive.dart';
 
+import 'package:data_sharing_organizing/core/utils/enums/message_type/message_type.dart'
+    as t;
+
 import '../../../../features/auth/domain/entities/auth_user_entity.dart';
 import '../../../../features/chat/data/models/activity_model.dart';
+import '../../../../features/chat/domain/entities/member_entity.dart';
 import '../../../../features/chat/presentation/cubit/group_cubit/group_cubit.dart';
+import '../../../../features/user_home/data/datasources/home_datasources/notification_local_data_sources.dart';
 import '../../constants/app_constants.dart';
 import '../../constants/app_strings.dart';
 import '../../enums/notification_type.dart';
 import '../../functions/handle_request_errors.dart';
+import '../dependency/locator.dart';
 import '../dependency/provider_dependency.dart';
 import 'local_notification.dart';
 
@@ -67,12 +73,15 @@ final class NotificationApi {
 }
 
 Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+  initDependencies();
   await localInstance();
   await onReceivedMessage(message, false);
 }
 
 Future<void> onReceivedMessage(
-    RemoteMessage remoteMessage, bool appIsOpened) async {
+  RemoteMessage remoteMessage,
+  bool appIsOpened,
+) async {
   final Map<String, dynamic> data = remoteMessage.data['data'] != null
       ? jsonDecode(remoteMessage.data['data'])
       : {};
@@ -80,6 +89,7 @@ Future<void> onReceivedMessage(
     data['type'],
   );
   final Box<AuthUserEntity> user = Hive.box(AppStrings.userBox);
+  final NotificationLocalDataSource lDS = sl.get<NotificationLocalDataSource>();
   // TODO: Save Notification entity
 
   if (AppConst.isWeb) return;
@@ -92,16 +102,34 @@ Future<void> onReceivedMessage(
       final Message message = Message.fromJson(data[type.inString]);
       isSameUser = message.author.id == user.values.firstOrNull?.id.toString();
       groupId = message.metadata?['group_id'];
+      lDS.saveNotification(
+        screen: 0,
+        groupId: groupId!,
+        activity: ActivityModel(
+          id: -1,
+          groupId: groupId,
+          type: t.MessageType.textMessage,
+          content: remoteMessage.notification?.body ?? '',
+          attachment: null,
+          createdAt: DateTime.fromMillisecondsSinceEpoch(message.createdAt ?? 0),
+          isApproved: true,
+          createdBy: MemberEntity.fromAuthor(message.author),
+        ),
+      );
 
       final bool exit = cancelNotification(appIsOpened, groupId, 1);
       if (exit) return;
 
       break;
     case NotificationType.activity:
-      final ActivityModel activity =
-          ActivityModel.fromJson(data[type.inString]);
+      final ActivityModel activity = ActivityModel.fromJson(data[type.inString]);
       isSameUser = activity.createdBy.user.id == user.values.firstOrNull?.id;
       groupId = activity.groupId;
+      lDS.saveNotification(
+        screen: 0,
+        groupId: groupId,
+        activity: activity,
+      );
 
       final bool exit = cancelNotification(appIsOpened, groupId, 0);
       if (exit) return;
