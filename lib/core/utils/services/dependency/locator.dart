@@ -2,7 +2,7 @@ import 'package:data_sharing_organizing/core/utils/services/api_services.dart';
 import 'package:get_it/get_it.dart';
 import 'package:image_picker/image_picker.dart';
 
-import '../notification_services.dart';
+import '../notification/notification_services.dart';
 import '../social_services.dart';
 import 'cubit_dependency.dart';
 import 'data_source_dependency.dart';

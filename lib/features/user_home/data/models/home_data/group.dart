@@ -8,7 +8,7 @@ import 'package:data_sharing_organizing/core/utils/enums/home/group_type_enum.da
 import 'package:data_sharing_organizing/core/utils/enums/home/group_visibility_enum.dart';
 import 'package:data_sharing_organizing/core/utils/enums/message_type/message_type.dart';
 import 'package:data_sharing_organizing/core/utils/enums/notification_enum.dart';
-import 'package:data_sharing_organizing/core/utils/services/notification_services.dart';
+import 'package:data_sharing_organizing/core/utils/services/notification/notification_services.dart';
 
 import '../../../../auth/domain/entities/auth_user_entity.dart';
 import '../../../../chat/data/models/activity_model.dart';

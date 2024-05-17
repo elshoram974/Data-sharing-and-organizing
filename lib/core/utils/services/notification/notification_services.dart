@@ -3,8 +3,9 @@ import 'dart:developer';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 
-import '../constants/app_constants.dart';
-import '../functions/handle_request_errors.dart';
+import '../../constants/app_constants.dart';
+import '../../functions/handle_request_errors.dart';
+import 'local_notification.dart';
 
 final class NotificationApi {
   const NotificationApi();
@@ -14,13 +15,13 @@ final class NotificationApi {
   Future<void> init() async {
     try {
       await FirebaseMessaging.instance.requestPermission(
-        alert: true,
+        alert: AppConst.isWeb,
         announcement: false,
-        badge: true,
-        carPlay: false,
+        badge: AppConst.isWeb,
+        carPlay: AppConst.isWeb,
         criticalAlert: false,
         provisional: false,
-        sound: true,
+        sound: AppConst.isWeb,
       );
 
       final String? tokenId;
@@ -28,19 +29,21 @@ final class NotificationApi {
       if (AppConst.isWeb) {
         tokenId = await handleRequestErrors<String?>(
           () => firebase.getToken(
-              vapidKey:
-                  'BJGwxLCUYbKmEzMiniyeCQUiujtMuzXrBvSSsC-WVko2IafSagjp4eTA08InuqG4F5KvciBvW_xLsfzI1fM44UQ'),
+            vapidKey:
+                'BJGwxLCUYbKmEzMiniyeCQUiujtMuzXrBvSSsC-WVko2IafSagjp4eTA08InuqG4F5KvciBvW_xLsfzI1fM44UQ',
+          ),
         );
       } else {
         tokenId = await handleRequestErrors<String?>(() => firebase.getToken());
       }
 
       await Future.wait([
+        LocalNotification.initNotification(),
         firebase.subscribeToTopic('admin'),
         firebase.setForegroundNotificationPresentationOptions(
-          badge: true,
-          alert: true,
-          sound: true,
+          alert: AppConst.isWeb,
+          badge: AppConst.isWeb,
+          sound: AppConst.isWeb,
         ),
       ]);
 

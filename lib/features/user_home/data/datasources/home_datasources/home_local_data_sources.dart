@@ -3,7 +3,7 @@ import 'package:data_sharing_organizing/core/utils/constants/app_strings.dart';
 import 'package:data_sharing_organizing/core/utils/enums/notification_enum.dart';
 import 'package:data_sharing_organizing/core/utils/functions/sort_groups_by_last_activity_time.dart';
 import 'package:data_sharing_organizing/core/utils/services/dependency/provider_dependency.dart';
-import 'package:data_sharing_organizing/core/utils/services/notification_services.dart';
+import 'package:data_sharing_organizing/core/utils/services/notification/notification_services.dart';
 import 'package:hive/hive.dart';
 
 import '../../../../auth/domain/entities/auth_user_entity.dart';

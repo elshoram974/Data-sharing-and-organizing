@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:data_sharing_organizing/core/utils/config/locale/generated/l10n.dart';
 import 'package:data_sharing_organizing/core/utils/config/locale/locale_handler.dart';
 import 'package:data_sharing_organizing/core/utils/services/bloc_observer.dart';
-import 'package:data_sharing_organizing/core/utils/services/notification_services.dart';
+import 'package:data_sharing_organizing/core/utils/services/notification/notification_services.dart';
 import 'package:data_sharing_organizing/core/utils/services/social_services.dart';
 import 'package:data_sharing_organizing/data_sharing_material_app.dart';
 import 'package:data_sharing_organizing/core/utils/services/dependency/locator.dart';
