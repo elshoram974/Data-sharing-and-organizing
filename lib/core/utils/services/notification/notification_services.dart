@@ -1,7 +1,6 @@
 import 'dart:developer';
 
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:flutter_easyloading/flutter_easyloading.dart';
 
 import '../../constants/app_constants.dart';
 import '../../functions/handle_request_errors.dart';
@@ -52,14 +51,20 @@ final class NotificationApi {
       log('Error in token: $e');
     }
 
-    FirebaseMessaging.onBackgroundMessage((message) async {
-      print('onBackgroundMessage: $message');
-    });
-    FirebaseMessaging.onMessage.listen(
-      (RemoteMessage remoteMessage) {
-        print('onMessage: $remoteMessage');
-        EasyLoading.showInfo(remoteMessage.toString());
-      },
-    );
+    FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
+    FirebaseMessaging.onMessage.listen(onReceivedMessage);
   }
+}
+
+Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+  onReceivedMessage(message);
+}
+
+void onReceivedMessage(RemoteMessage remoteMessage) {
+  // TODO: make if user is the sender not show anything
+  LocalNotification.showNotification(
+    title: remoteMessage.notification?.title,
+    body: remoteMessage.notification?.body,
+    payLoad: remoteMessage.data,
+  );
 }

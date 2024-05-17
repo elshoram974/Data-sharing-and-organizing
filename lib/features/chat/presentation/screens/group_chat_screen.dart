@@ -4,6 +4,7 @@ import 'dart:math';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:data_sharing_organizing/core/utils/config/locale/generated/l10n.dart';
 import 'package:data_sharing_organizing/core/utils/enums/message_type/message_type.dart';
+import 'package:data_sharing_organizing/core/utils/enums/notification_type.dart';
 import 'package:data_sharing_organizing/core/utils/services/dependency/locator.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:data_sharing_organizing/core/utils/constants/app_color.dart';
@@ -139,7 +140,8 @@ class _GroupChatScreenState extends State<GroupChatScreen> {
             title: group.groupName,
             message: "message from ${message.author.firstName} ${message.author.lastName}",
             topic: '${group.id}',
-            data: message.toJson(),
+            type: NotificationType.message,
+            body: message.copyWith(metadata: {'group_id':group.id}).toJson(),
           ),
         );
   }
@@ -428,7 +430,7 @@ class EditMessageDialogWidget extends StatelessWidget {
       content = (message as types.TextMessage).text;
     }
     return AlertDialog(
-      content: Text('what action u want to do with this "${content ?? ''}"'),
+      content: Text('what action You want to do with this "${content ?? ''}"'), //TODO: add Localization to this
       actions: [
         TextButton(
           onPressed: () {
