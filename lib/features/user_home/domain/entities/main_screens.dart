@@ -1,4 +1,5 @@
 import 'package:data_sharing_organizing/core/utils/config/locale/generated/l10n.dart';
+import 'package:data_sharing_organizing/core/utils/services/dependency/locator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -47,7 +48,7 @@ class _UserNotificationScreenWithCubit extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => UserNotificationCubit(),
+      create: (context) => sl.get<UserNotificationCubit>(),
       child: const UserNotificationScreen(),
     );
   }

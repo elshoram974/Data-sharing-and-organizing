@@ -5,11 +5,13 @@ import '../../../../features/auth/presentation/cubit/login_cubit/login_cubit.dar
 import '../../../../features/splash/presentation/cubit/config_cubit.dart';
 import '../../../../features/user_home/domain/repositories/edit_profile_repositories.dart';
 import '../../../../features/user_home/domain/repositories/home_repositories.dart';
+import '../../../../features/user_home/domain/repositories/notification_repositories.dart';
 import '../../../../features/user_home/domain/usecases/home_use_case/exit_from_some_groups.dart';
 import '../../../../features/user_home/domain/usecases/home_use_case/get_groups.dart';
 import '../../../../features/user_home/domain/usecases/home_use_case/mark_as_un_read.dart';
 import '../../../../features/user_home/presentation/cubit/menu_cubits/change_photo/change_photo_cubit.dart';
 import '../../../../features/user_home/presentation/cubit/user_home_cubit/user_home_cubit.dart';
+import '../../../../features/user_home/presentation/cubit/user_notification_cubit/user_notification_cubit.dart';
 import 'locator.dart';
 
 void cubitDependency() {
@@ -36,5 +38,11 @@ void cubitDependency() {
 
   // * menu cubits
   sl.registerLazySingleton(
-      () => ChangePhotoCubit(sl.get<EditProfileRepositories>()));
+    () => ChangePhotoCubit(sl.get<EditProfileRepositories>()),
+  );
+
+  // * notifications cubit
+  sl.registerLazySingleton(
+    () => UserNotificationCubit(sl.get<NotificationRepositories>()),
+  );
 }

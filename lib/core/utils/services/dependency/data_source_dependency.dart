@@ -7,6 +7,7 @@ import '../../../../features/user_home/data/datasources/edit_profile_datasources
 import '../../../../features/user_home/data/datasources/edit_profile_datasources/edit_profile_remote_data_sources.dart';
 import '../../../../features/user_home/data/datasources/home_datasources/home_local_data_sources.dart';
 import '../../../../features/user_home/data/datasources/home_datasources/home_remote_data_sources.dart';
+import '../../../../features/user_home/data/datasources/home_datasources/notification_local_data_sources.dart';
 import '../api_services.dart';
 import 'locator.dart';
 
@@ -30,6 +31,10 @@ void dataSourceDependency() {
     EditProfileRemoteDataSourceImp(sl.get<APIServices>()),
   );
 
+  // notifications
+  sl.registerSingleton<NotificationLocalDataSource>(
+    NotificationLocalDataSourceImp(),
+  );
   // group
   sl.registerSingleton<GroupInitLocalDataSource>(
       const GroupInitLocalDataSourceImp());

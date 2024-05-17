@@ -12,10 +12,13 @@ import '../../../../features/user_home/data/datasources/edit_profile_datasources
 import '../../../../features/user_home/data/datasources/edit_profile_datasources/edit_profile_remote_data_sources.dart';
 import '../../../../features/user_home/data/datasources/home_datasources/home_local_data_sources.dart';
 import '../../../../features/user_home/data/datasources/home_datasources/home_remote_data_sources.dart';
+import '../../../../features/user_home/data/datasources/home_datasources/notification_local_data_sources.dart';
 import '../../../../features/user_home/data/repositories/edit_profile_repositories_imp.dart';
 import '../../../../features/user_home/data/repositories/home_repositories_imp.dart';
+import '../../../../features/user_home/data/repositories/notification_repositories_imp.dart';
 import '../../../../features/user_home/domain/repositories/edit_profile_repositories.dart';
 import '../../../../features/user_home/domain/repositories/home_repositories.dart';
+import '../../../../features/user_home/domain/repositories/notification_repositories.dart';
 import 'locator.dart';
 
 void repositoriesDependency() {
@@ -43,6 +46,10 @@ void repositoriesDependency() {
     ),
   );
 
+  // notifications
+  sl.registerSingleton<NotificationRepositories>(
+    NotificationRepositoriesImp(sl.get<NotificationLocalDataSource>()),
+  );
   // group
   sl.registerSingleton<GroupInitRepositories>(
     GroupInitRepositoriesImp(sl.get<GroupInitLocalDataSource>()),

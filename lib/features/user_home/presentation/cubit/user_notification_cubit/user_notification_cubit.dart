@@ -7,11 +7,13 @@ import 'package:equatable/equatable.dart';
 
 import '../../../../chat/domain/entities/member_entity.dart';
 import '../../../domain/entities/group_notification_entity.dart';
+import '../../../domain/repositories/notification_repositories.dart';
 
 part 'user_notification_state.dart';
 
 class UserNotificationCubit extends Cubit<UserNotificationState> {
-  UserNotificationCubit() : super(const UserNotificationInitial()) {
+  final NotificationRepositories repo;
+  UserNotificationCubit(this.repo) : super(const UserNotificationInitial()) {
     list.sort(compareLastActivity);
     currentNotifications.addAll(list);
   }
