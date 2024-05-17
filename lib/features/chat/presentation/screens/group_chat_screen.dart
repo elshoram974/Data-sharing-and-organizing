@@ -138,10 +138,10 @@ class _GroupChatScreenState extends State<GroupChatScreen> {
     sl.get<BOTRepositories>().sendNotification(
           NotificationDataEntity(
             title: group.groupName,
-            message: "message from ${message.author.firstName} ${message.author.lastName}",
+            message: notificationBody(message),
             topic: '${group.id}',
             type: NotificationType.message,
-            body: message.copyWith(metadata: {'group_id':group.id}).toJson(),
+            body: message.copyWith(metadata: {'group_id': group.id}).toJson(),
           ),
         );
   }
@@ -430,7 +430,8 @@ class EditMessageDialogWidget extends StatelessWidget {
       content = (message as types.TextMessage).text;
     }
     return AlertDialog(
-      content: Text('what action You want to do with this "${content ?? ''}"'), //TODO: add Localization to this
+      content: Text(
+          'what action You want to do with this "${content ?? ''}"'), //TODO: add Localization to this
       actions: [
         TextButton(
           onPressed: () {
@@ -445,5 +446,21 @@ class EditMessageDialogWidget extends StatelessWidget {
         ),
       ],
     );
+  }
+}
+
+String notificationBody(types.Message message) {
+  switch (message.type) {
+    case types.MessageType.text:
+      message as types.TextMessage;
+      return "${message.author.firstName} ${message.author.lastName}: ${message.text}";
+    case types.MessageType.image:
+      message as types.ImageMessage;
+      return "Image from ${message.author.firstName} ${message.author.lastName}: 🖼️${message.name}";
+    case types.MessageType.file:
+      message as types.FileMessage;
+      return "File from ${message.author.firstName} ${message.author.lastName}: 📄${message.name}";
+    default:
+      return "message from ${message.author.firstName} ${message.author.lastName}";
   }
 }

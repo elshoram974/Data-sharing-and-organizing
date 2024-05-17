@@ -1,8 +1,14 @@
 import 'dart:developer';
 
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter_chat_types/flutter_chat_types.dart';
+import 'package:hive/hive.dart';
 
+import '../../../../features/auth/domain/entities/auth_user_entity.dart';
+import '../../../../features/chat/data/models/activity_model.dart';
 import '../../constants/app_constants.dart';
+import '../../constants/app_strings.dart';
+import '../../enums/notification_type.dart';
 import '../../functions/handle_request_errors.dart';
 import 'local_notification.dart';
 
@@ -37,7 +43,7 @@ final class NotificationApi {
       }
 
       await Future.wait([
-        LocalNotification.initNotification(),
+        if (!AppConst.isWeb) LocalNotification.initNotification(),
         firebase.subscribeToTopic('admin'),
         firebase.setForegroundNotificationPresentationOptions(
           alert: AppConst.isWeb,
@@ -57,14 +63,50 @@ final class NotificationApi {
 }
 
 Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
-  onReceivedMessage(message);
+  await onReceivedMessage(message);
 }
 
-void onReceivedMessage(RemoteMessage remoteMessage) {
-  // TODO: make if user is the sender not show anything
-  LocalNotification.showNotification(
-    title: remoteMessage.notification?.title,
-    body: remoteMessage.notification?.body,
-    payLoad: remoteMessage.data,
+Future<void> onReceivedMessage(RemoteMessage remoteMessage) async {
+  final NotificationType type = NotificationType.fromString(
+    remoteMessage.data['type'],
   );
+
+  await Future.wait([
+    Hive.openBox<AuthUserEntity>(AppStrings.userBox),
+  ]);
+
+  final Box<AuthUserEntity> user = Hive.box(AppStrings.userBox);
+
+  if (AppConst.isWeb) return;
+
+  bool isSameUser = false;
+  int? groupId;
+
+  switch (type) {
+    case NotificationType.message:
+      final Message message = Message.fromJson(
+        remoteMessage.data[remoteMessage.data['type']],
+      );
+      isSameUser = message.author.id == user.values.firstOrNull?.id.toString();
+      groupId = message.metadata?['group_id'];
+      break;
+    case NotificationType.activity:
+      final ActivityModel activity = ActivityModel.fromJson(
+        remoteMessage.data[remoteMessage.data['type']],
+      );
+      isSameUser = activity.createdBy.user.id == user.values.firstOrNull?.id;
+      groupId = activity.groupId;
+      break;
+    case NotificationType.info:
+    default:
+      isSameUser = false;
+  }
+  if (!isSameUser) {
+    LocalNotification.showNotification(
+      id: groupId ?? 0,
+      title: remoteMessage.notification?.title,
+      body: remoteMessage.notification?.body,
+      payLoad: remoteMessage.data,
+    );
+  }
 }
