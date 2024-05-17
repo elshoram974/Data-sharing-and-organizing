@@ -3,26 +3,19 @@ import 'dart:convert';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:rxdart/subjects.dart';
 
-import '../../enums/notification_type.dart';
-
 abstract final class LocalNotification {
   const LocalNotification();
   static final FlutterLocalNotificationsPlugin instance =
       FlutterLocalNotificationsPlugin();
 
-  static final BehaviorSubject<String> onClick = BehaviorSubject<String>();
+  static final BehaviorSubject<Map<String, dynamic>> onClick =
+      BehaviorSubject<Map<String, dynamic>>();
 
   static void onNotificationTapped(NotificationResponse res) {
-
     if (res.payload != null) {
-      onClick.add(res.payload!);
-      final Map<String,dynamic> data = jsonDecode(res.payload!);
-      print(data);
-      final NotificationType type = NotificationType.fromString(data['type']);
-      print(NotificationType.goTo[type]);
-      print("GOTO -----------------------------------------");
+      onClick.add(jsonDecode(res.payload!));
     } else {
-      print("res.payload is null");
+      onClick.add({});
     }
   }
 
@@ -36,6 +29,7 @@ abstract final class LocalNotification {
     await instance.initialize(
       initSettings,
       onDidReceiveNotificationResponse: onNotificationTapped,
+      onDidReceiveBackgroundNotificationResponse: onNotificationTapped,
     );
   }
 

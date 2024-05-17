@@ -9,16 +9,20 @@ import '../../screens/group_chat_screen.dart';
 
 part 'group_state.dart';
 
+bool isGroupScreenOpened = false;
+
 class GroupCubit extends Cubit<GroupState> {
   final GroupInitRepositories initRepo;
   final GroupHomeEntity group;
-  GroupCubit(this.initRepo, this.group) : super(const GroupInitial());
+  GroupCubit(this.initRepo, this.group) : super(const GroupInitial()){
+    isGroupScreenOpened = true;
+  }
 
   late double top = initRepo.getButtonPlace();
 
   bool isOpened = false;
 
-  int currentScreen = 0;
+  late int currentScreen = group.screen;
 
   double _dragPositionX = 0.0;
 
@@ -66,6 +70,13 @@ class GroupCubit extends Cubit<GroupState> {
     isOpened = false;
     emit(GroupChooseScreenState(currentScreen));
   }
+
+  @override
+  Future<void> close() {
+    isGroupScreenOpened = false;
+    return super.close();
+  }
+
 }
 
 final List<Widget> screens = [

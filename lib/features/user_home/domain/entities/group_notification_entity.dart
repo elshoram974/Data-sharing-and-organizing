@@ -21,6 +21,7 @@ final class GroupNotificationEntity extends GroupHomeEntity {
     super.accessType,
     required super.memberEntity,
     required super.createdAt,
+    super.screen,
   }) : super(isSelected: false);
 
   @override
@@ -39,6 +40,7 @@ final class GroupNotificationEntity extends GroupHomeEntity {
     GroupAccessType? accessType,
     MemberModel? member,
     DateTime? createdAt,
+    int? screen,
   }) {
     return GroupNotificationEntity(
       id: id ?? this.id,
@@ -53,6 +55,7 @@ final class GroupNotificationEntity extends GroupHomeEntity {
       accessType: accessType ?? this.accessType,
       memberEntity: member ?? memberEntity,
       createdAt: createdAt ?? this.createdAt,
+      screen: screen ?? this.screen,
     );
   }
 

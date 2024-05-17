@@ -44,6 +44,8 @@ class GroupHomeEntity extends Equatable {
   @HiveField(11)
   final GroupAccessType accessType;
 
+  final int screen;
+
   final bool isSelected;
 
   const GroupHomeEntity({
@@ -59,6 +61,7 @@ class GroupHomeEntity extends Equatable {
     this.accessType = GroupAccessType.onlyRead,
     required this.memberEntity,
     required this.createdAt,
+    this.screen = 0,
   });
 
   GroupHomeEntity copyWith({
@@ -74,6 +77,7 @@ class GroupHomeEntity extends Equatable {
     GroupAccessType? accessType,
     MemberModel? member,
     DateTime? createdAt,
+    int? screen,
   }) {
     return GroupHomeEntity(
       id: id ?? this.id,
@@ -88,6 +92,7 @@ class GroupHomeEntity extends Equatable {
       accessType: accessType ?? this.accessType,
       memberEntity: member ?? memberEntity,
       createdAt: createdAt ?? this.createdAt,
+      screen: screen ?? this.screen,
     );
   }
 
@@ -104,6 +109,7 @@ class GroupHomeEntity extends Equatable {
     required GroupAccessType accessType,
     required MemberModel member,
     required DateTime createdAt,
+    required int screen,
   }) {
     return GroupHomeEntity(
       id: id,
@@ -122,5 +128,5 @@ class GroupHomeEntity extends Equatable {
   }
 
   @override
-  List<Object?> get props => [id, ownerId, memberEntity, createdAt];
+  List<Object?> get props => [id, ownerId, memberEntity, createdAt, screen];
 }

@@ -48,6 +48,7 @@ class GroupDetails extends GroupHomeEntity {
     super.unReadCounter,
     super.bottomHeight,
     required this.memberModel,
+    super.screen,
   }) : super(
           id: groupId,
           ownerId: groupOwnerId,
@@ -168,6 +169,7 @@ class GroupDetails extends GroupHomeEntity {
     int? ownerId,
     double? bottomHeight,
     MemberModel? member,
+    int? screen,
   }) {
     return GroupDetails(
       groupId: groupId ?? this.groupId,
@@ -190,6 +192,7 @@ class GroupDetails extends GroupHomeEntity {
       unReadCounter: unReadCounter ?? this.unReadCounter,
       bottomHeight: bottomHeight ?? this.bottomHeight,
       memberModel: member ?? memberModel,
+      screen: screen ?? this.screen,
     );
   }
 

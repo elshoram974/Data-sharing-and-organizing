@@ -147,6 +147,7 @@ class BOTLocalDataSourceImp extends BOTLocalDataSource {
         accessType: group.accessType,
         member: MemberModel.fromEntity(group.memberEntity),
         createdAt: group.createdAt,
+        screen: group.screen,
       ),
     );
 

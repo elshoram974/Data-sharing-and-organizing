@@ -65,8 +65,9 @@ class BOTRepositoriesImp extends BOTRepositories {
           currentMember: currentMember,
           makeApproved: makeApproved,
         );
-        if (isUploaded)
+        if (isUploaded) {
           await localDataSource.approveActivity(activity, makeApproved);
+        }
       },
     );
   }

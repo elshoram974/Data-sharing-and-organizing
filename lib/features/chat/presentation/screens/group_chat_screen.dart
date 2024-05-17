@@ -456,10 +456,10 @@ String notificationBody(types.Message message) {
       return "${message.author.firstName} ${message.author.lastName}: ${message.text}";
     case types.MessageType.image:
       message as types.ImageMessage;
-      return "Image from ${message.author.firstName} ${message.author.lastName}: 🖼️${message.name}";
+      return "${message.author.firstName} ${message.author.lastName}: 🖼️${message.name}";
     case types.MessageType.file:
       message as types.FileMessage;
-      return "File from ${message.author.firstName} ${message.author.lastName}: 📄${message.name}";
+      return "${message.author.firstName} ${message.author.lastName}: 📄${message.name}";
     default:
       return "message from ${message.author.firstName} ${message.author.lastName}";
   }
