@@ -15,4 +15,4 @@ For help getting started with Flutter development, view the
 [online documentation](https://docs.flutter.dev/), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
 
--last typeId = `11` in `GroupAccessType` for hive in `lib/core/utils/enums/home/group_access_type_enum.dart`
+-last typeId = `12` in `GroupNotificationEntity` for hive in `lib/features/user_home/domain/entities/group_notification_entity.dart`

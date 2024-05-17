@@ -8,6 +8,7 @@ import '../../../features/chat/data/models/attachment_model.dart';
 import '../../../features/chat/domain/entities/activity_entity.dart';
 import '../../../features/chat/domain/entities/directory_entity.dart';
 import '../../../features/chat/domain/entities/member_entity.dart';
+import '../../../features/user_home/domain/entities/group_notification_entity.dart';
 import '../enums/home/group_access_type_enum.dart';
 import '../enums/home/group_discussion_type_enum.dart';
 import '../enums/notification_enum.dart';
@@ -26,6 +27,7 @@ Future<void> localInstance() async {
     Hive.openBox<ActivityEntity>(AppStrings.activitiesBox),
     Hive.openBox<DirectoryEntity>(AppStrings.directoriesBox),
     Hive.openBox<GroupHomeEntity>(AppStrings.groupsBox),
+    Hive.openBox<GroupNotificationEntity>(AppStrings.notificationBox),
     Hive.openBox<String>(AppStrings.botMessagesBox),
     Hive.openBox<String>(AppStrings.localConfig),
   ]);
@@ -36,28 +38,42 @@ Future<void> localInstance() async {
 void _registerAdapterFn() {
   Hive.registerAdapter<UserType>(UserTypeAdapter()); //* it in auth user entity
   Hive.registerAdapter<AuthUserEntity>(
-      AuthUserEntityAdapter()); //* it in group entity
+    AuthUserEntityAdapter(),
+  ); //* it in group entity
 
   Hive.registerAdapter<MessageType>(
-      MessageTypeAdapter()); //* it in group entity
+    MessageTypeAdapter(),
+  ); //* it in group entity
   Hive.registerAdapter<GroupDiscussionType>(
-      GroupDiscussionTypeAdapter()); //* it in group entity
+    GroupDiscussionTypeAdapter(),
+  ); //* it in group entity
   Hive.registerAdapter<GroupAccessType>(
-      GroupAccessTypeAdapter()); //* it in group entity
+    GroupAccessTypeAdapter(),
+  ); //* it in group entity
 
   Hive.registerAdapter<NotificationEnum>(
-      NotificationEnumAdapter()); //* it in member entity
+    NotificationEnumAdapter(),
+  ); //* it in member entity
   Hive.registerAdapter<MemberEntity>(
-      MemberEntityAdapter()); //* it in group and activity entity
+    MemberEntityAdapter(),
+  ); //* it in group and activity entity
 
   Hive.registerAdapter<AttachmentModel>(
-      AttachmentModelAdapter()); //* it in activity entity
+    AttachmentModelAdapter(),
+  ); //* it in activity entity
 
   Hive.registerAdapter<ActivityEntity>(
-      ActivityEntityAdapter()); //* it in group entity
+    ActivityEntityAdapter(),
+  ); //* it in group entity
   Hive.registerAdapter<DirectoryEntity>(
-      DirectoryEntityAdapter()); //* it in group entity
+    DirectoryEntityAdapter(),
+  ); //* it in group entity
 
   Hive.registerAdapter<GroupHomeEntity>(
-      GroupHomeEntityAdapter()); //* it in member entity :(
+    GroupHomeEntityAdapter(),
+  ); //* it in member entity :(
+
+  Hive.registerAdapter<GroupNotificationEntity>(
+    GroupNotificationEntityAdapter(),
+  ); //* it in member entity :(
 }

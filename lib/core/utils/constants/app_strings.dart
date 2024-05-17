@@ -12,6 +12,7 @@ abstract final class AppStrings {
   static const String userBox = 'userBox';
 
   static const String groupsBox = 'groupsBox';
+  static const String notificationBox = 'notificationBox';
   static const String activitiesBox = 'activitiesBox';
   static const String directoriesBox = 'directoriesBox';
   static const String botMessagesBox = 'botMessagesBox';

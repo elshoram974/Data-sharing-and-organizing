@@ -1,10 +1,15 @@
 import 'package:data_sharing_organizing/core/utils/enums/home/group_access_type_enum.dart';
 import 'package:data_sharing_organizing/core/utils/enums/home/group_discussion_type_enum.dart';
+import 'package:hive/hive.dart';
 
 import '../../../chat/data/models/member_model.dart';
 import '../../../chat/domain/entities/activity_entity.dart';
+import '../../../chat/domain/entities/member_entity.dart';
 import 'group_home_entity.dart';
 
+part 'group_notification_entity.g.dart';
+
+@HiveType(typeId: 12)
 final class GroupNotificationEntity extends GroupHomeEntity {
   final bool isExpanded;
 
