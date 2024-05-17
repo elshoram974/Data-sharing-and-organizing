@@ -1,19 +1,18 @@
-import 'package:data_sharing_organizing/core/status/status.dart';
-
 import '../../domain/entities/group_notification_entity.dart';
 import '../../domain/repositories/notification_repositories.dart';
+import '../datasources/home_datasources/notification_local_data_sources.dart';
 
 class NotificationRepositoriesImp extends NotificationRepositories {
+  final NotificationLocalDataSource localDataSource;
+  const NotificationRepositoriesImp(this.localDataSource);
   @override
-  Status<List<GroupNotificationEntity>> getNotifications() {
-    // TODO: implement getNotifications
-    throw UnimplementedError();
+  List<GroupNotificationEntity> getNotifications() {
+   return localDataSource.getNotifications();
   }
 
   @override
-  Future<Status<GroupNotificationEntity>> updateNotifications(GroupNotificationEntity notification) {
-    // TODO: implement updateNotifications
-    throw UnimplementedError();
+  Future<GroupNotificationEntity> updateNotifications(GroupNotificationEntity notification) {
+    return localDataSource.updateNotifications(notification);
   }
 
 }
