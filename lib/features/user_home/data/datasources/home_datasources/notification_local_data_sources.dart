@@ -32,7 +32,7 @@ class NotificationLocalDataSourceImp extends NotificationLocalDataSource {
 
   @override
   List<GroupNotificationEntity> getNotifications() {
-    return notificationBox.values.toList();
+    return notificationBox.values.toList().reversed.toList();
   }
 
   @override

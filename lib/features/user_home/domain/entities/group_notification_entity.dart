@@ -65,5 +65,11 @@ final class GroupNotificationEntity extends GroupHomeEntity {
   }
 
   @override
-  List<Object?> get props => [...super.props];
+  List<Object?> get props => [
+        ...super.props,
+        isExpanded,
+        id,
+        lastActivity,
+        createdAt,
+      ];
 }

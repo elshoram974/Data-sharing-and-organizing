@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:data_sharing_organizing/core/utils/enums/message_type/message_type.dart';
 import 'package:data_sharing_organizing/core/utils/enums/notification_enum.dart';
 import 'package:equatable/equatable.dart';
@@ -150,6 +152,45 @@ class ActivityEntity extends Equatable {
     if (json == null) return null;
 
     return ActivityModel.fromJson(json).copyWith(
+      createdBy: MemberEntity.fromAuthor(message.author),
+    );
+  }
+
+  static ActivityEntity fromMessageAllData(types.Message message) {
+    final Map<types.MessageType, MessageType> type = {
+      types.MessageType.audio: MessageType.voiceMessage,
+      types.MessageType.file: MessageType.document,
+      types.MessageType.image: MessageType.photo,
+      types.MessageType.system: MessageType.instructions,
+      types.MessageType.text: MessageType.textMessage,
+      types.MessageType.video: MessageType.video,
+      types.MessageType.custom: MessageType.other,
+      types.MessageType.unsupported: MessageType.other,
+    };
+    late final String content;
+    switch (message.type) {
+      case types.MessageType.text:
+        message as types.TextMessage;
+        content = message.text;
+        break;
+      case types.MessageType.image:
+        message as types.ImageMessage;
+        content = message.name;
+        break;
+      case types.MessageType.file:
+        message as types.FileMessage;
+        content = message.name;
+      default:
+        content = "unknown message type";
+    }
+    return ActivityModel(
+      id: Random().nextInt(5000),
+      groupId: message.metadata?['groupId'] ?? -1,
+      type: type[message.type] ?? MessageType.other,
+      content: content,
+      attachment: null,
+      createdAt: DateTime.fromMillisecondsSinceEpoch(message.createdAt ?? 0),
+      isApproved: true,
       createdBy: MemberEntity.fromAuthor(message.author),
     );
   }

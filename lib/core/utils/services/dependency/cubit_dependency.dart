@@ -42,7 +42,7 @@ void cubitDependency() {
   );
 
   // * notifications cubit
-  sl.registerLazySingleton(
+  sl.registerFactory(
     () => UserNotificationCubit(sl.get<NotificationRepositories>()),
   );
 }

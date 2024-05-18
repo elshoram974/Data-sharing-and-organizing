@@ -13,9 +13,9 @@ final class UserNotificationInitial extends UserNotificationState {
 
 final class ExpandNotificationState extends UserNotificationState {
   final GroupNotificationEntity groupNotificationEntity;
-  const ExpandNotificationState(this.groupNotificationEntity);
+  final int index;
+  const ExpandNotificationState(this.groupNotificationEntity, this.index);
 
   @override
-  List<Object> get props =>
-      [groupNotificationEntity.id, groupNotificationEntity.isExpanded];
+  List<Object> get props => [groupNotificationEntity, index];
 }

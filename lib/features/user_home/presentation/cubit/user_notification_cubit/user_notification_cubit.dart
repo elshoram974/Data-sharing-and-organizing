@@ -13,19 +13,13 @@ class UserNotificationCubit extends Cubit<UserNotificationState> {
   }
   final List<GroupNotificationEntity> currentNotifications = [];
 
-  void onPressExpanded(GroupNotificationEntity notification) async{
-    final GroupNotificationEntity replaced = notification.copyWith(
+  void onPressExpanded(GroupNotificationEntity notification, int i) async {
+    GroupNotificationEntity replaced = notification.copyWith(
       isExpanded: !notification.isExpanded,
       isUnread: false,
       unReadCounter: null,
     );
-
-    final int index = currentNotifications.indexWhere(
-      (e) => e.lastActivity?.id == replaced.lastActivity?.id,
-    );
-    await repo.updateNotifications(replaced);
-    currentNotifications[index] = replaced;
-
-    emit(ExpandNotificationState(replaced));
+    currentNotifications[i] = await repo.updateNotifications(replaced);
+    emit(ExpandNotificationState(currentNotifications[i], i));
   }
 }
