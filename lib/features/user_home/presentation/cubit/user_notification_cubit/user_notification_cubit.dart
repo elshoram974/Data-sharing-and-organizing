@@ -71,4 +71,11 @@ class UserNotificationCubit extends Cubit<UserNotificationState> {
     isNotificationScreenOpened = false;
     return super.close();
   }
+
+  int _i = 0;
+  void updateUI() {
+    currentNotifications.clear();
+    currentNotifications.addAll(repo.getNotifications());
+    emit(UpdateUI(_i++));
+  }
 }

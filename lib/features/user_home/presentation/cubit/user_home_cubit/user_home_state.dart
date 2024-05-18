@@ -67,3 +67,12 @@ final class HomeFailureState extends UserHomeState {
   @override
   List<Object> get props => [error];
 }
+
+final class UpdateUI extends UserHomeState {
+  const UpdateUI(this.i);
+
+  final int? i;
+
+  @override
+  List<int?> get props => [i];
+}

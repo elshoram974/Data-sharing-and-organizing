@@ -19,3 +19,11 @@ final class UpdateNotificationState extends UserNotificationState {
   @override
   List<Object> get props => [groupNotificationEntity, index];
 }
+
+final class UpdateUI extends UserNotificationState {
+  final int i;
+  const UpdateUI(this.i);
+
+  @override
+  List<int> get props => [i];
+}

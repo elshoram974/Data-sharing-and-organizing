@@ -150,7 +150,21 @@ class HomeLocalDataSourceImp extends HomeLocalDataSource {
 
     for (int i = 0; i < groups.length; i++) {
       if (groupId == groups[i].id) {
-        groups[i] = groups[i].copyWith(unReadCounter: null);
+        groups[i] = GroupHomeEntity(
+          id: groups[i].id,
+          groupName: groups[i].groupName,
+          ownerId: groups[i].ownerId,
+          discussion: groups[i].discussion,
+          memberEntity: groups[i].memberEntity,
+          createdAt: groups[i].createdAt,
+          accessType: groups[i].accessType,
+          bottomHeight: groups[i].bottomHeight,
+          imageLink: groups[i].imageLink,
+          isSelected: groups[i].isSelected,
+          lastActivity: groups[i].lastActivity,
+          screen: groups[i].screen,
+          unReadCounter: null,
+        );
         break;
       }
     }

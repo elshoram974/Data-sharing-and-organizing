@@ -44,12 +44,20 @@ class UserHomeCubit extends Cubit<UserHomeState> {
   final List<GroupHomeEntity> currentGroups = [];
   final List<GroupHomeEntity> selectedGroups = [];
 
+  // * Update UI
+  int _i = 0;
+  void updateUI() {
+    currentGroups.clear();
+    currentGroups.addAll(homeRepo.getLocalGroups());
+    emit(UpdateUI(_i++));
+  }
+
   // * Update group here
   Future<void> updateLastActivityUI(ActivityEntity activity, int screen) async {
     GroupHomeEntity temp = currentGroups.first;
     for (int i = 0; i < currentGroups.length; i++) {
       if (activity.groupId == currentGroups[i].id) {
-         temp = currentGroups[i].copyWith(
+        temp = currentGroups[i].copyWith(
           lastActivity: activity,
           screen: screen,
           unReadCounter: (currentGroups[i].unReadCounter ?? 0) + 1,

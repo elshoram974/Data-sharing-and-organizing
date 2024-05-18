@@ -93,4 +93,9 @@ class HomeRepositoriesImp extends HomeRepositories {
       },
     );
   }
+
+  @override
+  List<GroupHomeEntity> getLocalGroups() {
+    return localDataSource.getAllGroups();
+  }
 }

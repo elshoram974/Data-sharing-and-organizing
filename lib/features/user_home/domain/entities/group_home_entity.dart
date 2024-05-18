@@ -44,6 +44,7 @@ class GroupHomeEntity extends Equatable {
   @HiveField(11)
   final GroupAccessType accessType;
 
+  @HiveField(12)
   final int screen;
 
   final bool isSelected;

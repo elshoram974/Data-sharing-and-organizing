@@ -12,4 +12,5 @@ abstract class HomeRepositories {
   Future<void> updateGroupLocally(GroupHomeEntity groupUpdated);
 
   Future<Status<void>> editNotification(GroupHomeEntity group);
+  List<GroupHomeEntity> getLocalGroups();
 }
