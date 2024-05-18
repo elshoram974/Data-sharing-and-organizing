@@ -62,7 +62,6 @@ final class NotificationApi {
       ]);
 
       log('FirebaseMessagingToken:$tokenId');
-      print('FirebaseMessagingToken:$tokenId');
     } catch (e) {
       log('Error in token: $e');
     }
@@ -74,8 +73,14 @@ final class NotificationApi {
 
 @pragma('vm:entry-point')
 Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
-  await localInstance();
-  initDependencies();
+  try {
+    if (!Hive.isAdapterRegistered(1)) {
+      await localInstance();
+      initDependencies();
+    }
+  } catch (e) {
+    log("Error :- aaa ---- $e");
+  }
   await onReceivedMessage(message, false);
 }
 
