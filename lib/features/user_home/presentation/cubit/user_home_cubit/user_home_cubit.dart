@@ -14,6 +14,7 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../chat/data/models/member_model.dart';
+import '../../../../chat/domain/entities/activity_entity.dart';
 import '../../../domain/entities/group_home_entity.dart';
 import '../../../domain/repositories/home_repositories.dart';
 import '../../../domain/usecases/home_use_case/exit_from_some_groups.dart';
@@ -42,6 +43,26 @@ class UserHomeCubit extends Cubit<UserHomeState> {
   final UserMainCubit userMain = ProviderDependency.userMain;
   final List<GroupHomeEntity> currentGroups = [];
   final List<GroupHomeEntity> selectedGroups = [];
+
+  // * Update group here
+  Future<void> updateLastActivityUI(ActivityEntity activity, int screen) async {
+    GroupHomeEntity temp = currentGroups.first;
+    for (int i = 0; i < currentGroups.length; i++) {
+      if (activity.groupId == currentGroups[i].id) {
+         temp = currentGroups[i].copyWith(
+          lastActivity: activity,
+          screen: screen,
+          unReadCounter: (currentGroups[i].unReadCounter ?? 0) + 1,
+        );
+        currentGroups[i] = temp;
+        break;
+      }
+    }
+
+    currentGroups.sort(compareLastActivity);
+
+    emit(UserHomeUpdateGroup(temp));
+  }
 
   // * Update group inside it
   Future<void> updateGroupLocally(GroupHomeEntity groupUpdated) async {
