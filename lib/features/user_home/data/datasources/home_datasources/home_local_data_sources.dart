@@ -8,6 +8,7 @@ import 'package:data_sharing_organizing/core/utils/services/notification/notific
 import 'package:hive/hive.dart';
 
 import '../../../../auth/domain/entities/auth_user_entity.dart';
+import '../../../../chat/domain/entities/activity_entity.dart';
 import '../../../domain/entities/group_home_entity.dart';
 
 abstract class HomeLocalDataSource {
@@ -20,6 +21,8 @@ abstract class HomeLocalDataSource {
   Future<Iterable<int>> markAsUnRead(List<GroupHomeEntity> groupsToEdit);
 
   Future<void> updateThisGroup(GroupHomeEntity groupUpdated);
+  Future<void> updateLastActivity(ActivityEntity activity, int screen);
+  Future<void> makeSeenToGroup(int groupId);
 }
 
 class HomeLocalDataSourceImp extends HomeLocalDataSource {
@@ -132,6 +135,42 @@ class HomeLocalDataSourceImp extends HomeLocalDataSource {
     for (int i = 0; i < groups.length; i++) {
       if (groupUpdated.id == groups[i].id) {
         groups[i] = groupUpdated;
+        break;
+      }
+    }
+
+    await removeAllGroups();
+    await groupsBox.addAll(groups);
+  }
+
+  @override
+  Future<void> makeSeenToGroup(int groupId) async {
+    final List<GroupHomeEntity> groups = [];
+    groups.addAll(getAllGroups());
+
+    for (int i = 0; i < groups.length; i++) {
+      if (groupId == groups[i].id) {
+        groups[i] = groups[i].copyWith(unReadCounter: null);
+        break;
+      }
+    }
+
+    await removeAllGroups();
+    await groupsBox.addAll(groups);
+  }
+
+  @override
+  Future<void> updateLastActivity(ActivityEntity activity, int screen) async {
+    final List<GroupHomeEntity> groups = [];
+    groups.addAll(getAllGroups());
+
+    for (int i = 0; i < groups.length; i++) {
+      if (activity.groupId == groups[i].id) {
+        groups[i] = groups[i].copyWith(
+          lastActivity: activity,
+          screen: screen,
+          unReadCounter: (groups[i].unReadCounter ?? 0) + 1,
+        );
         break;
       }
     }

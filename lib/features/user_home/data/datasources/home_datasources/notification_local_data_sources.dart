@@ -17,6 +17,8 @@ abstract class NotificationLocalDataSource {
     required ActivityModel activity,
   });
 
+  Future<void> makeSeenToGroup(int groupId);
+
   Future<GroupNotificationEntity> updateNotifications(
     GroupNotificationEntity notification,
   );
@@ -53,8 +55,9 @@ class NotificationLocalDataSourceImp extends NotificationLocalDataSource {
         memberEntity: g.memberEntity,
         createdAt: g.createdAt,
         imageLink: g.imageLink,
-        lastActivity: activity,
+        lastActivity: activity.copyWith(groupId: groupId),
         screen: screen,
+        unReadCounter: 1,
       ),
     );
   }
@@ -78,5 +81,32 @@ class NotificationLocalDataSourceImp extends NotificationLocalDataSource {
   @override
   Future<int> addNotifications(GroupNotificationEntity notification) {
     return notificationBox.add(notification);
+  }
+
+  @override
+  Future<void> makeSeenToGroup(int groupId) async {
+    final List<GroupNotificationEntity> temp = notificationBox.values.toList();
+    for (int i = 0; i < temp.length; i++) {
+      if (temp[i].lastActivity?.groupId == groupId) {
+        temp[i] = GroupNotificationEntity(
+          id: temp[i].id,
+          groupName: temp[i].groupName,
+          ownerId: temp[i].ownerId,
+          discussion: temp[i].discussion,
+          memberEntity: temp[i].memberEntity,
+          createdAt: temp[i].createdAt,
+          accessType: temp[i].accessType,
+          bottomHeight: temp[i].bottomHeight,
+          imageLink: temp[i].imageLink,
+          isExpanded: temp[i].isExpanded,
+          lastActivity: temp[i].lastActivity,
+          screen: temp[i].screen,
+          unReadCounter: null,
+        );
+      }
+    }
+
+    await notificationBox.clear();
+    notificationBox.addAll(temp);
   }
 }
