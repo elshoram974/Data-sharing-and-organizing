@@ -37,7 +37,6 @@ final class GroupNotificationEntity extends GroupHomeEntity {
     ActivityEntity? lastActivity,
     int? unReadCounter,
     bool? isSelected,
-    bool? isUnread,
     bool? isExpanded,
     int? ownerId,
     double? bottomHeight,

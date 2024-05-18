@@ -10,7 +10,9 @@ import '../../../../features/auth/domain/entities/auth_user_entity.dart';
 import '../../../../features/chat/data/models/activity_model.dart';
 import '../../../../features/chat/domain/entities/activity_entity.dart';
 import '../../../../features/chat/presentation/cubit/group_cubit/group_cubit.dart';
+import '../../../../features/user_home/data/datasources/home_datasources/home_local_data_sources.dart';
 import '../../../../features/user_home/data/datasources/home_datasources/notification_local_data_sources.dart';
+import '../../../../features/user_home/presentation/cubit/user_notification_cubit/user_notification_cubit.dart';
 import '../../constants/app_constants.dart';
 import '../../constants/app_strings.dart';
 import '../../enums/notification_type.dart';
@@ -95,7 +97,8 @@ Future<void> onReceivedMessage(
     data['type'],
   );
   final Box<AuthUserEntity> user = Hive.box(AppStrings.userBox);
-  final NotificationLocalDataSource lDS = sl.get<NotificationLocalDataSource>();
+  final NotificationLocalDataSource nLDS = sl.get<NotificationLocalDataSource>();
+  final HomeLocalDataSource hLDS = sl.get<HomeLocalDataSource>();
 
   bool isSameUser = false;
   int? groupId;
@@ -106,15 +109,18 @@ Future<void> onReceivedMessage(
       isSameUser = message.author.id == user.values.firstOrNull?.id.toString();
       groupId = message.metadata?['group_id'];
 
-      final bool exit = cancelNotification(appIsOpened, groupId, 1);
-      if (exit) return;
-      lDS.saveNotification(
-        screen: 0,
-        groupId: groupId!,
-        activity: ActivityModel.fromEntity(
-          ActivityEntity.fromMessageAllData(message),
-        ),
+      final ActivityModel activity = ActivityModel.fromEntity(
+        ActivityEntity.fromMessageAllData(message).copyWith(groupId: groupId),
       );
+
+      final bool exit = handleNotificationInApp(appIsOpened, activity, 1);
+      if (exit) return;
+      nLDS.saveNotification(
+        screen: 1,
+        groupId: groupId!,
+        activity: activity,
+      );
+      await hLDS.updateLastActivity(activity, 1);
 
       break;
     case NotificationType.activity:
@@ -123,14 +129,15 @@ Future<void> onReceivedMessage(
       isSameUser = activity.createdBy.user.id == user.values.firstOrNull?.id;
       groupId = activity.groupId;
 
-      final bool exit = cancelNotification(appIsOpened, groupId, 0);
+      final bool exit = handleNotificationInApp(appIsOpened, activity, 0);
       if (exit) return;
 
-      lDS.saveNotification(
+      nLDS.saveNotification(
         screen: 0,
         groupId: groupId,
         activity: activity,
       );
+      await hLDS.updateLastActivity(activity, 0);
 
       break;
     case NotificationType.info:
@@ -154,11 +161,23 @@ Future<void> onReceivedMessage(
   }
 }
 
-bool cancelNotification(bool appIsOpened, int? groupId, int screen) {
+bool handleNotificationInApp(
+  bool appIsOpened,
+  ActivityModel activity,
+  int screen,
+) {
   if (appIsOpened) {
+    ProviderDependency.userHome.updateLastActivityUI(activity, screen);
+
+    // * for show notifications in screen
+    if (isNotificationScreenOpened) {
+      ProviderDependency.userNotification.insertNew(activity, screen);
+    }
+
+    // * for cancel notifications
     if (!isGroupScreenOpened) return false;
     final GroupCubit c = ProviderDependency.group;
-    return c.group.id == groupId && screen == c.currentScreen;
+    return c.group.id == activity.groupId && screen == c.currentScreen;
   }
   return false;
 }
