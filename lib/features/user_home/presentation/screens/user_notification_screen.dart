@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../domain/entities/group_home_entity.dart';
 import '../cubit/user_notification_cubit/user_notification_cubit.dart';
 import '../widgets/main_screen_widgets/main_body.dart';
 import '../widgets/notification_widgets/notification_tile_widget.dart';
@@ -34,8 +35,13 @@ class UserNotificationScreen extends StatelessWidget {
                   onPressExpanded: (isExpanded) => c.onPressExpanded(notification, i),
                   groupNotificationEntity: notification,
                   onTap: () {
-                    c.onPressExpanded(notification, i);
-                    context.push(AppRoute.group, extra: notification);
+                    final groups = ProviderDependency.userHome.currentGroups;
+                    final GroupHomeEntity g = groups
+                        .where(
+                          (e) => e.id == notification.lastActivity?.groupId,
+                        )
+                        .first;
+                    context.push(AppRoute.group, extra: g);
                   },
                 );
               },

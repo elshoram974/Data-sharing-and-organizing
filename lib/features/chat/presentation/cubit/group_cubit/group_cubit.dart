@@ -1,3 +1,6 @@
+import 'package:data_sharing_organizing/core/utils/services/dependency/locator.dart';
+import 'package:data_sharing_organizing/core/utils/services/dependency/provider_dependency.dart';
+import 'package:data_sharing_organizing/features/user_home/presentation/cubit/user_notification_cubit/user_notification_cubit.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -14,9 +17,10 @@ bool isGroupScreenOpened = false;
 class GroupCubit extends Cubit<GroupState> {
   final GroupInitRepositories initRepo;
   final GroupHomeEntity group;
-  GroupCubit(this.initRepo, this.group) : super(const GroupInitial()){
+  GroupCubit(this.initRepo, this.group) : super(const GroupInitial()) {
     isGroupScreenOpened = true;
-    initRepo.makeSeenToGroup(group.id);
+    makeSeenTGroup(group.id);
+    print(group.id);
   }
 
   late double top = initRepo.getButtonPlace();
@@ -77,10 +81,17 @@ class GroupCubit extends Cubit<GroupState> {
     isGroupScreenOpened = false;
     return super.close();
   }
-
 }
 
 final List<Widget> screens = [
   const GroupBOTScreen(),
   const GroupChatScreen(),
 ];
+
+Future<void> makeSeenTGroup(int groupId) async {
+  await sl.get<GroupInitRepositories>().makeSeenToGroup(groupId);
+  ProviderDependency.userHome.updateUI();
+  if (isNotificationScreenOpened) {
+    ProviderDependency.userNotification.updateUI();
+  }
+}

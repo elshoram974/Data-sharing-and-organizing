@@ -60,6 +60,7 @@ class _GroupChatScreenState extends State<GroupChatScreen> {
   void initState() {
     dbGroup = db.collection('Groups').doc(group.id.toString());
     dbActivities = dbGroup.collection('activities');
+    print(ProviderDependency.group.group.id);
     _loadMessages();
 
     stream =
@@ -108,7 +109,19 @@ class _GroupChatScreenState extends State<GroupChatScreen> {
       type = MessageType.document;
     }
     ProviderDependency.userHome.updateGroupLocally(
-      group.copyWith(
+      GroupHomeEntity(
+        id: group.id,
+        groupName: group.groupName,
+        ownerId: group.ownerId,
+        discussion: group.discussion,
+        memberEntity: group.memberEntity,
+        createdAt: group.createdAt,
+        accessType: group.accessType,
+        bottomHeight: group.bottomHeight,
+        imageLink: group.imageLink,
+        isSelected: group.isSelected,
+        screen: group.screen,
+        unReadCounter: null,
         lastActivity: ActivityEntity(
           id: Random().nextInt(1000),
           groupId: group.id,
@@ -313,6 +326,7 @@ class _GroupChatScreenState extends State<GroupChatScreen> {
       messages = [];
       messages.addAll(loadedMessages);
     });
+    if (messages.isEmpty) return;
     updateHomeGroup(messages.first);
   }
 
