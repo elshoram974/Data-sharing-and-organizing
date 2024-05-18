@@ -87,9 +87,6 @@ Future<void> onReceivedMessage(
   );
   final Box<AuthUserEntity> user = Hive.box(AppStrings.userBox);
   final NotificationLocalDataSource lDS = sl.get<NotificationLocalDataSource>();
-  // TODO: Save Notification entity
-
-  if (AppConst.isWeb) return;
 
   bool isSameUser = false;
   int? groupId;
@@ -132,12 +129,18 @@ Future<void> onReceivedMessage(
       isSameUser = false;
   }
 
+  if (AppConst.isWeb) return;
+
   if (!isSameUser) {
     LocalNotification.showNotification(
       id: groupId ?? 0,
       title: remoteMessage.notification?.title,
       body: remoteMessage.notification?.body,
       payLoad: data,
+      floatingEnabled: config.get('floatingEnabled') != '0',
+      lockScreenVisibility: config.get('onLockScreen') == '1',
+      makeSilent: config.get('makeSilent') == '1',
+      vibrationEnabled: config.get('vibrationEnabled') == '1',
     );
   }
 }

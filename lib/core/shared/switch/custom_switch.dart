@@ -38,14 +38,18 @@ class AbstractCustomSwitch extends StatelessWidget {
         alignment: value ? Alignment.centerRight : Alignment.centerLeft,
         duration: const Duration(milliseconds: 150),
         decoration: BoxDecoration(
-          color: value ? AppColor.primary : const Color(0xffD9D9D9),
+          color: onChanged == null
+              ? Colors.grey.shade600
+              : value
+                  ? AppColor.primary
+                  : const Color(0xffD9D9D9),
           borderRadius: BorderRadius.circular(AppConst.borderRadius),
         ),
         child: Container(
           width: 20,
           height: 20,
           decoration: BoxDecoration(
-            color: Colors.white,
+            color: onChanged == null ? Colors.grey.shade400 : Colors.white,
             shape: BoxShape.circle,
             border: Border.all(),
           ),
