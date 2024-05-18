@@ -11,4 +11,8 @@ class GroupInitRepositoriesImp extends GroupInitRepositories {
   @override
   Future<void> saveButtonPlace(double newTop) =>
       localDataSource.saveFloatingPlace(newTop);
+
+  @override
+  Future<void> makeSeenToGroup(int groupId) =>
+      localDataSource.makeSeenToGroup(groupId);
 }
