@@ -430,8 +430,7 @@ class EditMessageDialogWidget extends StatelessWidget {
       content = (message as types.TextMessage).text;
     }
     return AlertDialog(
-      content: Text(
-          'what action You want to do with this "${content ?? ''}"'), //TODO: add Localization to this
+      content: Text(S.of(context).whatActionWithContent(content ?? '')),
       actions: [
         TextButton(
           onPressed: () {

@@ -28,7 +28,7 @@ class _UserNotificationsSettingsScreenState
       children: [
         NotificationItemWidget(
           value: makeSilent,
-          title: 'make silent',
+          title: S.of(context).muteNotification,
           onChanged: (val) async {
             await config.put('makeSilent', val ? '1' : '0');
             setState(() {});
@@ -46,7 +46,7 @@ class _UserNotificationsSettingsScreenState
         ),
         NotificationItemWidget(
           value: vibrationEnabled,
-          title: 'Enable vibration',
+          title: S.of(context).activateVibration,
           onChanged: makeSilent
               ? null
               : (val) async => await config.put(

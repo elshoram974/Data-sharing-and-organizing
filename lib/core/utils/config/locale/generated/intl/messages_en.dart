@@ -64,21 +64,24 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m17(count) => "View all (${count} more)";
 
-  static String m18(directoryName) =>
+  static String m18(content) =>
+      "What action do you want to perform with this \"${content}\"?";
+
+  static String m19(directoryName) =>
       "What action would you like to take with the \'${directoryName}\' directory?";
 
-  static String m19(activityName) =>
+  static String m20(activityName) =>
       "What action would you like to take with the \'${activityName}\' activity?";
 
-  static String m20(timeString) => "Yesterday at ${timeString}";
+  static String m21(timeString) => "Yesterday at ${timeString}";
 
-  static String m21(activityName) =>
+  static String m22(activityName) =>
       "You\'ve added the \'${activityName}\' activity, but it\'s pending approval from the admin.";
 
-  static String m22(directoryName) =>
+  static String m23(directoryName) =>
       "You\'ve added the \'${directoryName}\' directory, but it\'s pending approval from the admin.";
 
-  static String m23(userName, userEmail) =>
+  static String m24(userName, userEmail) =>
       "You are about to block the member \'${userName}\' with the email \'${userEmail}\'. This action will prevent them from adding anything to the bot.";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
@@ -86,6 +89,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "YouHaveChooseTypeOfAccountPersonalOrBusiness":
             MessageLookupByLibrary.simpleMessage(
                 "You have to choose the type of your account if it personal or business account."),
+        "activateVibration":
+            MessageLookupByLibrary.simpleMessage("Activate vibration"),
         "addActivity": MessageLookupByLibrary.simpleMessage("Add activity"),
         "addActivityMessageImageOrFile": MessageLookupByLibrary.simpleMessage(
             "Add activity: message, image, or file..."),
@@ -357,15 +362,16 @@ class MessageLookup extends MessageLookupByLibrary {
         "weakPassword": MessageLookupByLibrary.simpleMessage(
             "The password provided is too weak."),
         "welcomeBack": MessageLookupByLibrary.simpleMessage("Welcome back!"),
-        "whatDoYouWantToDoWithDirNameDirectory": m18,
-        "whatDoYouWantToDoWithThisActivity": m19,
+        "whatActionWithContent": m18,
+        "whatDoYouWantToDoWithDirNameDirectory": m19,
+        "whatDoYouWantToDoWithThisActivity": m20,
         "wrongPassword": MessageLookupByLibrary.simpleMessage(
             "Wrong password provided for that user."),
         "yesterday": MessageLookupByLibrary.simpleMessage("Yesterday"),
-        "yesterdayAtTimeString": m20,
-        "youAddedActivityName": m21,
-        "youAddedDirNameDirectory": m22,
-        "youAreAboutToBlockMember": m23,
+        "yesterdayAtTimeString": m21,
+        "youAddedActivityName": m22,
+        "youAddedDirNameDirectory": m23,
+        "youAreAboutToBlockMember": m24,
         "youCanMakeNewGroups": MessageLookupByLibrary.simpleMessage(
             "Feel free to create new groups."),
         "youCanNotUseSamePreviousPassword":

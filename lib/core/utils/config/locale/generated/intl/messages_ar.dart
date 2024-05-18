@@ -63,21 +63,23 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m17(count) => "عرض الكل (${count} إضافي)";
 
-  static String m18(directoryName) =>
+  static String m18(content) => "ما الإجراء الذي تريده مع هذا \"${content}\"؟";
+
+  static String m19(directoryName) =>
       "ما الإجراء الذي تود اتخاذه مع مجلد \'${directoryName}\'؟";
 
-  static String m19(activityName) =>
+  static String m20(activityName) =>
       "ما الإجراء الذي تود اتخاذه مع نشاط \'${activityName}\'؟";
 
-  static String m20(timeString) => "أمس في ${timeString}";
+  static String m21(timeString) => "أمس في ${timeString}";
 
-  static String m21(activityName) =>
+  static String m22(activityName) =>
       "لقد قمت بإضافة نشاط \'${activityName}\', لكنه في انتظار موافقة المسئول.";
 
-  static String m22(directoryName) =>
+  static String m23(directoryName) =>
       "لقد أضفت مجلد \'${directoryName}\', لكنه في انتظار موافقة المسئول.";
 
-  static String m23(userName, userEmail) =>
+  static String m24(userName, userEmail) =>
       "أنت على وشك حظر العضو \'${userName}\' الذي يحمل البريد الإلكتروني \'${userEmail}\'. سيمنع هذا الإجراء من إضافة أي شيء إلى الروبوت.";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
@@ -85,6 +87,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "YouHaveChooseTypeOfAccountPersonalOrBusiness":
             MessageLookupByLibrary.simpleMessage(
                 "عليك تحديد ان كان الحساب خاص أو لشركة"),
+        "activateVibration":
+            MessageLookupByLibrary.simpleMessage("تفعيل الاهتزاز"),
         "addActivity": MessageLookupByLibrary.simpleMessage("إضافة نشاط"),
         "addActivityMessageImageOrFile": MessageLookupByLibrary.simpleMessage(
             "أضف نشاطًا: رسالة، صورة، أو ملف..."),
@@ -359,15 +363,16 @@ class MessageLookup extends MessageLookupByLibrary {
         "weakPassword": MessageLookupByLibrary.simpleMessage(
             "كلمة المرور المقدمة ضعيفة جدًا."),
         "welcomeBack": MessageLookupByLibrary.simpleMessage("مرحبًا بعودتك!"),
-        "whatDoYouWantToDoWithDirNameDirectory": m18,
-        "whatDoYouWantToDoWithThisActivity": m19,
+        "whatActionWithContent": m18,
+        "whatDoYouWantToDoWithDirNameDirectory": m19,
+        "whatDoYouWantToDoWithThisActivity": m20,
         "wrongPassword": MessageLookupByLibrary.simpleMessage(
             "تم تقديم كلمة مرور خاطئة لهذا المستخدم."),
         "yesterday": MessageLookupByLibrary.simpleMessage("أمس"),
-        "yesterdayAtTimeString": m20,
-        "youAddedActivityName": m21,
-        "youAddedDirNameDirectory": m22,
-        "youAreAboutToBlockMember": m23,
+        "yesterdayAtTimeString": m21,
+        "youAddedActivityName": m22,
+        "youAddedDirNameDirectory": m23,
+        "youAreAboutToBlockMember": m24,
         "youCanMakeNewGroups": MessageLookupByLibrary.simpleMessage(
             "بإمكانك إنشاء مجموعات جديدة بحرية."),
         "youCanNotUseSamePreviousPassword":

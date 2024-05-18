@@ -363,5 +363,14 @@
     "userNoPermission": "User does not have permission to perform this action.",
     "errorDeletingDirectory": "Error deleting directory from database. Please try again later.",
     "errorDeletingActivity": "Error deleting activity from database. Please try again later.",
-    "unBlockThisUser": "Unblock this user"
+    "unBlockThisUser": "Unblock this user",
+    "activateVibration": "Activate vibration",
+    "whatActionWithContent": "What action do you want to perform with this \"{content}\"?",
+    "@whatActionWithContent": {
+        "placeholders": {
+            "content": {
+                "type": "String"
+            }
+        }
+    }
 }

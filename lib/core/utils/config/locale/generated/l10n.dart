@@ -2033,6 +2033,26 @@ class S {
       args: [],
     );
   }
+
+  /// `Activate vibration`
+  String get activateVibration {
+    return Intl.message(
+      'Activate vibration',
+      name: 'activateVibration',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `What action do you want to perform with this "{content}"?`
+  String whatActionWithContent(String content) {
+    return Intl.message(
+      'What action do you want to perform with this "$content"?',
+      name: 'whatActionWithContent',
+      desc: '',
+      args: [content],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
