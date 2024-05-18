@@ -23,7 +23,7 @@ class HomeGroupLastMessage extends StatelessWidget {
   Widget build(BuildContext context) {
     final IconData? icon = lastActivity.type.icon();
     final AuthUserEntity author = lastActivity.createdBy.user;
-    return Expanded(
+    return Flexible(
       child: AnimatedSize(
         alignment: Alignment.topCenter,
         duration: const Duration(milliseconds: 300),

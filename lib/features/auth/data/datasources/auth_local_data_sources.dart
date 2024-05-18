@@ -1,5 +1,6 @@
 import 'package:data_sharing_organizing/core/utils/constants/app_constants.dart';
 import 'package:data_sharing_organizing/core/utils/constants/app_strings.dart';
+import 'package:data_sharing_organizing/core/utils/services/notification/notification_services.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:hive/hive.dart';
 
@@ -30,9 +31,18 @@ class AuthLocalDataSourceImp extends AuthLocalDataSource {
 
   @override
   Future<void> logOut() async {
+    final Box<GroupHomeEntity> groupBox = Hive.box<GroupHomeEntity>(AppStrings.groupsBox);
+    if (!AppConst.isWeb) {
+      await Future.wait(
+        groupBox.values.map(
+          (e) => NotificationApi.firebase.unsubscribeFromTopic('${e.id}'),
+        ),
+      );
+    }
+
     await Future.wait([
       if (!AppConst.isWeb) DefaultCacheManager().emptyCache(),
-      Hive.box<GroupHomeEntity>(AppStrings.groupsBox).clear(),
+      groupBox.clear(),
       userBox.clear(),
     ]);
   }

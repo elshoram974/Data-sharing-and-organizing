@@ -15,17 +15,24 @@ class HomeGroupSubtitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         if (groupHomeEntity.lastActivity != null)
           HomeGroupLastMessage(lastActivity: groupHomeEntity.lastActivity!),
         const SizedBox(width: AppConst.defaultPadding),
-        if (groupHomeEntity.memberEntity.notification ==
-            NotificationEnum.withoutNotify) ...[
-          const Icon(Icons.notifications_off_outlined, color: AppColor.gray),
-          const SizedBox(width: 0.5 * AppConst.defaultPadding)
-        ],
-        if (groupHomeEntity.unReadCounter != null)
-          GroupUnreadCounter(unReadCounter: groupHomeEntity.unReadCounter),
+        Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            if (groupHomeEntity.memberEntity.notification ==
+                NotificationEnum.withoutNotify) ...[
+              const Icon(Icons.notifications_off_outlined,
+                  color: AppColor.gray),
+              const SizedBox(width: 0.5 * AppConst.defaultPadding)
+            ],
+            if (groupHomeEntity.unReadCounter != null)
+              GroupUnreadCounter(unReadCounter: groupHomeEntity.unReadCounter),
+          ],
+        )
       ],
     );
   }

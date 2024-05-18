@@ -50,8 +50,10 @@ final class NotificationApi {
       }
 
       await Future.wait([
-        if (!AppConst.isWeb) LocalNotification.initNotification(),
-        firebase.subscribeToTopic('admin'),
+        if (!AppConst.isWeb) ...[
+          LocalNotification.initNotification(),
+          firebase.subscribeToTopic('admin')
+        ],
         firebase.setForegroundNotificationPresentationOptions(
           alert: AppConst.isWeb,
           badge: AppConst.isWeb,
@@ -60,6 +62,7 @@ final class NotificationApi {
       ]);
 
       log('FirebaseMessagingToken:$tokenId');
+      print('FirebaseMessagingToken:$tokenId');
     } catch (e) {
       log('Error in token: $e');
     }
@@ -69,6 +72,7 @@ final class NotificationApi {
   }
 }
 
+@pragma('vm:entry-point')
 Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   await localInstance();
   initDependencies();

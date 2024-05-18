@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:data_sharing_organizing/core/utils/constants/app_constants.dart';
 import 'package:data_sharing_organizing/core/utils/enums/home/group_access_type_enum.dart';
 import 'package:data_sharing_organizing/core/utils/enums/home/group_category_enum.dart';
 import 'package:data_sharing_organizing/core/utils/enums/home/group_discussion_type_enum.dart';
@@ -65,13 +66,16 @@ class GroupDetails extends GroupHomeEntity {
   factory GroupDetails.fromMap(Map<String, dynamic> data, AuthUserEntity user) {
     final int groupId = data['group_id'] as int;
 
-    final NotificationEnum notify = NotificationEnum.fromString(data['member_notification'] as String);
-    switch (notify) {
-      case NotificationEnum.notify:
-        NotificationApi.firebase.subscribeToTopic('$groupId');
-        break;
-      default:
-      NotificationApi.firebase.unsubscribeFromTopic('$groupId');
+    final NotificationEnum notify =
+        NotificationEnum.fromString(data['member_notification'] as String);
+    if (!AppConst.isWeb) {
+      switch (notify) {
+        case NotificationEnum.notify:
+          NotificationApi.firebase.subscribeToTopic('$groupId');
+          break;
+        default:
+          NotificationApi.firebase.unsubscribeFromTopic('$groupId');
+      }
     }
 
     return GroupDetails(
