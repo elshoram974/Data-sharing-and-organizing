@@ -16,6 +16,7 @@ class GroupCubit extends Cubit<GroupState> {
   final GroupHomeEntity group;
   GroupCubit(this.initRepo, this.group) : super(const GroupInitial()){
     isGroupScreenOpened = true;
+    initRepo.makeSeenToGroup(group.id);
   }
 
   late double top = initRepo.getButtonPlace();
