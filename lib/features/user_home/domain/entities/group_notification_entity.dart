@@ -13,9 +13,13 @@ part 'group_notification_entity.g.dart';
 final class GroupNotificationEntity extends GroupHomeEntity {
   final bool isExpanded;
 
+  @HiveField(13)
+  final int notificationId;
+
   const GroupNotificationEntity({
     this.isExpanded = false,
-    required super.id,
+    required super.groupId,
+    required this.notificationId,
     super.imageLink,
     required super.groupName,
     super.lastActivity,
@@ -26,12 +30,13 @@ final class GroupNotificationEntity extends GroupHomeEntity {
     super.accessType,
     required super.memberEntity,
     required super.createdAt,
-    super.screen,
+    required super.screen,
   }) : super(isSelected: false);
 
   @override
   GroupNotificationEntity copyWith({
-    int? id,
+    int? groupId,
+    int? notificationId,
     String? imageLink,
     String? groupName,
     ActivityEntity? lastActivity,
@@ -47,7 +52,8 @@ final class GroupNotificationEntity extends GroupHomeEntity {
     int? screen,
   }) {
     return GroupNotificationEntity(
-      id: id ?? this.id,
+      groupId: groupId ?? this.groupId,
+      notificationId: notificationId ?? this.notificationId,
       lastActivity: lastActivity ?? this.lastActivity,
       unReadCounter: unReadCounter ?? this.unReadCounter,
       isExpanded: isExpanded ?? this.isExpanded,
@@ -67,7 +73,8 @@ final class GroupNotificationEntity extends GroupHomeEntity {
   List<Object?> get props => [
         ...super.props,
         isExpanded,
-        id,
+        notificationId,
+        groupId,
         lastActivity,
         createdAt,
       ];

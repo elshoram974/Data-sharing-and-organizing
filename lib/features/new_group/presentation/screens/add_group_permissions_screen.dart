@@ -15,7 +15,8 @@ class AddGroupPermissionsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final g = GroupHomeEntity(
-      id: -4,
+      groupId: -4,
+      screen: 0,
       groupName: 'groupName',
       ownerId: 1,
       discussion: GroupDiscussionType.exist,

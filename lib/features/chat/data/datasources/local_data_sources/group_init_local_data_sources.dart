@@ -29,7 +29,9 @@ class GroupInitLocalDataSourceImp extends GroupInitLocalDataSource {
   Future<void> makeSeenToGroup(int groupId) {
     return Future.wait([
       sl.get<HomeLocalDataSource>().makeSeenToGroup(groupId),
-      sl.get<NotificationLocalDataSource>().makeSeenToGroup(groupId),
+      sl
+          .get<NotificationLocalDataSource>()
+          .makeSeenToGroupNotifications(groupId),
     ]);
   }
 }

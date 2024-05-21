@@ -5,14 +5,14 @@ import '../datasources/home_datasources/notification_local_data_sources.dart';
 class NotificationRepositoriesImp extends NotificationRepositories {
   final NotificationLocalDataSource localDataSource;
   const NotificationRepositoriesImp(this.localDataSource);
+
   @override
   List<GroupNotificationEntity> getNotifications() {
-   return localDataSource.getNotifications();
+    return localDataSource.getNotifications();
   }
 
   @override
-  Future<GroupNotificationEntity> updateNotifications(GroupNotificationEntity notification) {
-    return localDataSource.updateNotifications(notification);
+  Future<void> makeSeenToNotification(int notificationId) {
+    return localDataSource.makeSeenToNotification(notificationId);
   }
-
 }

@@ -17,7 +17,7 @@ class GroupHomeEntityAdapter extends TypeAdapter<GroupHomeEntity> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return GroupHomeEntity(
-      id: fields[0] as int,
+      groupId: fields[0] as int,
       imageLink: fields[1] as String?,
       groupName: fields[2] as String,
       unReadCounter: fields[4] as int?,
@@ -37,7 +37,7 @@ class GroupHomeEntityAdapter extends TypeAdapter<GroupHomeEntity> {
     writer
       ..writeByte(12)
       ..writeByte(0)
-      ..write(obj.id)
+      ..write(obj.groupId)
       ..writeByte(1)
       ..write(obj.imageLink)
       ..writeByte(2)

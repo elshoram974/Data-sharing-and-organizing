@@ -18,7 +18,7 @@ final class UserHomeUpdateGroup extends UserHomeState {
 
   @override
   List<Object?> get props => [
-        group.id,
+        group.groupId,
         group.groupName,
         group.ownerId,
         group.bottomHeight,
@@ -30,6 +30,7 @@ final class UserHomeUpdateGroup extends UserHomeState {
         group.accessType,
         group.createdAt,
         group.imageLink,
+        group.screen,
       ];
 }
 

@@ -78,7 +78,7 @@ class UserMainCubit extends Cubit<UserMainState> {
             final types.Message message =
                 types.Message.fromJson(data[data['type']]);
             final extra = groups
-                .where((e) => e.id == message.metadata?['group_id'])
+                .where((e) => e.groupId == message.metadata?['group_id'])
                 .first
                 .copyWith(screen: 1);
             if (isGroupScreenOpened) {
@@ -97,7 +97,7 @@ class UserMainCubit extends Cubit<UserMainState> {
             final ActivityModel activity =
                 ActivityModel.fromJson(data[data['type']]);
             final extra = groups
-                .where((e) => e.id == activity.groupId)
+                .where((e) => e.groupId == activity.groupId)
                 .first
                 .copyWith(screen: 0);
             if (isGroupScreenOpened) {

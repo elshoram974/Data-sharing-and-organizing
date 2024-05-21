@@ -80,6 +80,11 @@ class HomeRepositoriesImp extends HomeRepositories {
   }
 
   @override
+  Future<void> updateScreen(int groupId, int screen) {
+    return localDataSource.updateScreen(groupId, screen);
+  }
+
+  @override
   Future<void> updateGroupLocally(GroupHomeEntity groupUpdated) {
     return localDataSource.updateThisGroup(groupUpdated);
   }

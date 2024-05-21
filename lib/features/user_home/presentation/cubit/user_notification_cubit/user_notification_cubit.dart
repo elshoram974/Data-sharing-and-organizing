@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:data_sharing_organizing/core/utils/services/dependency/provider_dependency.dart';
 import 'package:data_sharing_organizing/features/chat/data/models/activity_model.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -23,7 +21,8 @@ class UserNotificationCubit extends Cubit<UserNotificationState> {
 
   void onPressExpanded(GroupNotificationEntity notification, int i) async {
     GroupNotificationEntity replaced = GroupNotificationEntity(
-      id: notification.id,
+      notificationId: notification.notificationId,
+      groupId: notification.groupId,
       groupName: notification.groupName,
       ownerId: notification.ownerId,
       discussion: notification.discussion,
@@ -38,18 +37,21 @@ class UserNotificationCubit extends Cubit<UserNotificationState> {
       unReadCounter: null,
     );
 
-    currentNotifications[i] = await repo.updateNotifications(replaced);
+    await repo.makeSeenToNotification(replaced.notificationId);
+
+    currentNotifications[i] = replaced;
     emit(UpdateNotificationState(currentNotifications[i], i));
   }
 
-  void insertNew(ActivityModel activity, int screen) {
+  void insertNew(ActivityModel activity, int screen , int notificationId) {
     final groups = ProviderDependency.userHome.currentGroups;
     final GroupHomeEntity g =
-        groups.where((e) => e.id == activity.groupId).first;
+        groups.where((e) => e.groupId == activity.groupId).first;
     currentNotifications.insert(
       0,
       GroupNotificationEntity(
-        id: Random().nextInt(5000),
+        notificationId: notificationId,
+        groupId: g.groupId,
         groupName: g.groupName,
         ownerId: g.ownerId,
         discussion: g.discussion,

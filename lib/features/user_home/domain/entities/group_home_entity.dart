@@ -12,7 +12,7 @@ part 'group_home_entity.g.dart';
 @HiveType(typeId: 4)
 class GroupHomeEntity extends Equatable {
   @HiveField(0)
-  final int id;
+  final int groupId;
 
   @HiveField(1)
   final String? imageLink;
@@ -50,7 +50,7 @@ class GroupHomeEntity extends Equatable {
   final bool isSelected;
 
   const GroupHomeEntity({
-    required this.id,
+    required this.groupId,
     this.imageLink,
     required this.groupName,
     this.unReadCounter,
@@ -62,11 +62,24 @@ class GroupHomeEntity extends Equatable {
     this.accessType = GroupAccessType.onlyRead,
     required this.memberEntity,
     required this.createdAt,
-    this.screen = 0,
+    required this.screen,
   });
 
+  factory GroupHomeEntity.newEmpty() {
+    return GroupHomeEntity(
+      groupId: -1,
+      unReadCounter: null,
+      isSelected: false,
+      groupName: '',
+      ownerId: -1,
+      discussion: GroupDiscussionType.notExist,
+      memberEntity: MemberEntity.newEmpty(),
+      createdAt: DateTime.now(),
+      screen: 0,
+    );
+  }
   GroupHomeEntity copyWith({
-    int? id,
+    int? groupId,
     String? imageLink,
     String? groupName,
     ActivityEntity? lastActivity,
@@ -81,7 +94,7 @@ class GroupHomeEntity extends Equatable {
     int? screen,
   }) {
     return GroupHomeEntity(
-      id: id ?? this.id,
+      groupId: groupId ?? this.groupId,
       unReadCounter: unReadCounter ?? this.unReadCounter,
       isSelected: isSelected ?? this.isSelected,
       imageLink: imageLink ?? this.imageLink,
@@ -113,7 +126,7 @@ class GroupHomeEntity extends Equatable {
     required int screen,
   }) {
     return GroupHomeEntity(
-      id: id,
+      groupId: id,
       unReadCounter: unReadCounter,
       isSelected: isSelected,
       imageLink: imageLink,
@@ -125,9 +138,11 @@ class GroupHomeEntity extends Equatable {
       accessType: accessType,
       memberEntity: member,
       createdAt: createdAt,
+      screen: screen,
     );
   }
 
   @override
-  List<Object?> get props => [id, ownerId, memberEntity, createdAt, screen];
+  List<Object?> get props =>
+      [groupId, ownerId, memberEntity, createdAt, screen];
 }

@@ -42,7 +42,7 @@ class HomeRemoteDataSourceImp extends HomeRemoteDataSource {
   ) async {
     final List<int> groupsIds = [];
     for (final e in removedGroups) {
-      groupsIds.add(e.id);
+      groupsIds.add(e.groupId);
     }
     await service.post(
       AppLinks.removeGroups,
@@ -57,7 +57,7 @@ class HomeRemoteDataSourceImp extends HomeRemoteDataSource {
       'AppLinks.editNotification',
       {
         'member_id': '${group.memberEntity.user.id}',
-        'group_id': '${group.id}',
+        'group_id': '${group.groupId}',
         'notify': group.memberEntity.notification.inString,
       },
     );

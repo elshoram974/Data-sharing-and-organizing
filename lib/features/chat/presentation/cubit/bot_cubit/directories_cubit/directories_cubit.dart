@@ -121,7 +121,7 @@ class DirectoryCubitImp extends DirectoryCubit {
     final ActivityModel activityTemp = ActivityModel.fromEntity(
       ActivityEntity(
         id: Random().nextInt(9999999),
-        groupId: groupCubit.group.id,
+        groupId: groupCubit.group.groupId,
         createdBy: botCubit.currentMember,
         content: _directoriesStack.lastOrNull?.name ?? S.current.home,
         createdAt: DateTime.now(),
@@ -152,10 +152,12 @@ class DirectoryCubitImp extends DirectoryCubit {
   void _getDirectoriesAndActivities([DirectoryEntity? dir]) {
     final DirectoryEntity? lDir = _directoriesStack.lastOrNull;
     EasyLoading.show();
-    botRepo.getDirActInside(
+    botRepo
+        .getDirActInside(
       dirId: dir?.id,
-      groupId: groupCubit.group.id,
-    ).listen(
+      groupId: groupCubit.group.groupId,
+    )
+        .listen(
       (status) async {
         EasyLoading.dismiss();
         if (status is Success<DataInDirectory>) {
@@ -183,7 +185,8 @@ class DirectoryCubitImp extends DirectoryCubit {
       dir: dir,
       deleteFn: () {
         handleStatusEmit<void>(
-          statusFunction: () => botRepo.deleteDirectory(botCubit.currentMember, dir),
+          statusFunction: () =>
+              botRepo.deleteDirectory(botCubit.currentMember, dir),
           successFunction: (_) {
             currentDirectories.removeWhere((e) => e.id == dir.id);
             emit(OpenDirectoryState(currentDirectories));
@@ -200,14 +203,14 @@ class DirectoryCubitImp extends DirectoryCubit {
       dir: dir,
       hideFn: () {
         handleStatusEmit<void>(
-          statusFunction: () => botRepo.approveDirectory(botCubit.currentMember, dir, false),
+          statusFunction: () =>
+              botRepo.approveDirectory(botCubit.currentMember, dir, false),
           successFunction: (_) {
             final List<DirectoryEntity> temp = [];
             for (DirectoryEntity e in currentDirectories) {
-              if(e.id == dir.id){
+              if (e.id == dir.id) {
                 temp.add(e.copyWith(isApproved: false));
-              }
-              else{
+              } else {
                 temp.add(e);
               }
             }
@@ -226,14 +229,14 @@ class DirectoryCubitImp extends DirectoryCubit {
       dir: dir,
       approveFn: () {
         handleStatusEmit<void>(
-          statusFunction: () => botRepo.approveDirectory(botCubit.currentMember, dir, true),
+          statusFunction: () =>
+              botRepo.approveDirectory(botCubit.currentMember, dir, true),
           successFunction: (_) {
             final List<DirectoryEntity> temp = [];
             for (DirectoryEntity e in currentDirectories) {
-              if(e.id == dir.id){
+              if (e.id == dir.id) {
                 temp.add(e.copyWith(isApproved: true));
-              }
-              else{
+              } else {
                 temp.add(e);
               }
             }
@@ -276,7 +279,7 @@ class DirectoryCubitImp extends DirectoryCubit {
         id: 1,
         insideDirectoryId: _directoriesStack.lastOrNull?.id,
         name: _directoryName,
-        groupId: groupCubit.group.id,
+        groupId: groupCubit.group.groupId,
         isApproved: false,
         createdBy: botCubit.currentMember,
       );
@@ -302,7 +305,7 @@ class DirectoryCubitImp extends DirectoryCubit {
       content: 'content',
       createdAt: DateTime.now(),
       createdBy: botCubit.currentMember,
-      groupId: groupCubit.group.id,
+      groupId: groupCubit.group.groupId,
       isApproved: false,
       type: MessageType.textMessage,
       insideDirectoryId: _directoriesStack.lastOrNull?.id,

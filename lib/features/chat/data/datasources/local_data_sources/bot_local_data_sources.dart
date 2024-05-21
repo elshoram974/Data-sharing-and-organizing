@@ -131,11 +131,11 @@ class BOTLocalDataSourceImp extends BOTLocalDataSource {
   @override
   Future<void> saveBotMessages(
       GroupHomeEntity group, List<types.Message> messages) async {
-    await messageBox.delete(group.id);
+    await messageBox.delete(group.groupId);
 
     ProviderDependency.userHome.updateGroupLocally(
       group.copyWithNull(
-        id: group.id,
+        id: group.groupId,
         imageLink: group.imageLink,
         groupName: group.groupName,
         lastActivity: ActivityEntity.fromMessage(messages.first),
@@ -156,7 +156,7 @@ class BOTLocalDataSourceImp extends BOTLocalDataSource {
       json.add(jsonEncode(e.toJson()));
     }
 
-    return await messageBox.put(group.id, jsonEncode(json));
+    return await messageBox.put(group.groupId, jsonEncode(json));
   }
 
   @override

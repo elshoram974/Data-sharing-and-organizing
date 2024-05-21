@@ -10,18 +10,16 @@ abstract class NotificationLocalDataSource {
 
   List<GroupNotificationEntity> getNotifications();
 
-  void saveNotification({
-    int? id,
+  Future<void> saveNotification({
+    required int notificationId,
     required int screen,
     required int groupId,
     required ActivityModel activity,
   });
 
-  Future<void> makeSeenToGroup(int groupId);
+  Future<void> makeSeenToGroupNotifications(int groupId);
 
-  Future<GroupNotificationEntity> updateNotifications(
-    GroupNotificationEntity notification,
-  );
+  Future<void> makeSeenToNotification(int id);
 
   Future<int> addNotifications(GroupNotificationEntity notification);
 }
@@ -38,17 +36,19 @@ class NotificationLocalDataSourceImp extends NotificationLocalDataSource {
   }
 
   @override
-  void saveNotification({
-    int? id,
+  Future<void> saveNotification({
+    required int notificationId,
     required int screen,
     required int groupId,
     required ActivityModel activity,
-  }) {
+  }) async{
     final Box<GroupHomeEntity> groups = Hive.box(AppStrings.groupsBox);
-    final GroupHomeEntity g = groups.values.where((e) => e.id == groupId).first;
-    addNotifications(
+    final GroupHomeEntity g =
+        groups.values.where((e) => e.groupId == groupId).first;
+    await addNotifications(
       GroupNotificationEntity(
-        id: id ?? 0,
+        groupId: groupId,
+        notificationId: notificationId,
         groupName: g.groupName,
         ownerId: g.ownerId,
         discussion: g.discussion,
@@ -57,25 +57,37 @@ class NotificationLocalDataSourceImp extends NotificationLocalDataSource {
         imageLink: g.imageLink,
         lastActivity: activity.copyWith(groupId: groupId),
         screen: screen,
+        bottomHeight: g.bottomHeight,
+        accessType: g.accessType,
         unReadCounter: 1,
       ),
     );
   }
 
   @override
-  Future<GroupNotificationEntity> updateNotifications(
-    GroupNotificationEntity notification,
-  ) async {
+  Future<void> makeSeenToNotification(int id) async {
     final List<GroupNotificationEntity> temp = notificationBox.values.toList();
-    final int i = temp.indexWhere(
-      (e) => e.lastActivity?.id == notification.lastActivity?.id,
+    final int i = temp.indexWhere((e) => e.notificationId == id);
+
+    temp[i] = GroupNotificationEntity(
+      notificationId: temp[i].notificationId,
+      groupId: temp[i].groupId,
+      groupName: temp[i].groupName,
+      ownerId: temp[i].ownerId,
+      discussion: temp[i].discussion,
+      memberEntity: temp[i].memberEntity,
+      createdAt: temp[i].createdAt,
+      accessType: temp[i].accessType,
+      bottomHeight: temp[i].bottomHeight,
+      imageLink: temp[i].imageLink,
+      isExpanded: temp[i].isExpanded,
+      lastActivity: temp[i].lastActivity,
+      screen: temp[i].screen,
+      unReadCounter: null,
     );
 
-    temp[i] = notification;
-
     await notificationBox.clear();
-    notificationBox.addAll(temp);
-    return notification;
+    await notificationBox.addAll(temp);
   }
 
   @override
@@ -84,12 +96,13 @@ class NotificationLocalDataSourceImp extends NotificationLocalDataSource {
   }
 
   @override
-  Future<void> makeSeenToGroup(int groupId) async {
+  Future<void> makeSeenToGroupNotifications(int groupId) async {
     final List<GroupNotificationEntity> temp = notificationBox.values.toList();
     for (int i = 0; i < temp.length; i++) {
-      if (temp[i].lastActivity?.groupId == groupId) {
+      if (temp[i].groupId == groupId) {
         temp[i] = GroupNotificationEntity(
-          id: temp[i].id,
+          notificationId: temp[i].notificationId,
+          groupId: temp[i].groupId,
           groupName: temp[i].groupName,
           ownerId: temp[i].ownerId,
           discussion: temp[i].discussion,
@@ -107,6 +120,6 @@ class NotificationLocalDataSourceImp extends NotificationLocalDataSource {
     }
 
     await notificationBox.clear();
-    notificationBox.addAll(temp);
+    await notificationBox.addAll(temp);
   }
 }

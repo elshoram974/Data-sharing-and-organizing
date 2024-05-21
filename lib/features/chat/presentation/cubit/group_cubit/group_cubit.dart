@@ -16,18 +16,18 @@ bool isGroupScreenOpened = false;
 
 class GroupCubit extends Cubit<GroupState> {
   final GroupInitRepositories initRepo;
-  final GroupHomeEntity group;
+  GroupHomeEntity group;
   GroupCubit(this.initRepo, this.group) : super(const GroupInitial()) {
     isGroupScreenOpened = true;
-    makeSeenTGroup(group.id);
-    print(group.id);
+    makeSeenTGroup(group.groupId);
+    currentScreen = group.screen;
   }
 
   late double top = initRepo.getButtonPlace();
 
   bool isOpened = false;
 
-  late int currentScreen = group.screen;
+  late int currentScreen;
 
   double _dragPositionX = 0.0;
 
@@ -70,8 +70,11 @@ class GroupCubit extends Cubit<GroupState> {
     emit(GroupOpenFloatingButtonState(isOpened));
   }
 
-  void onChooseScreen(int chosenScreen) {
+  void onChooseScreen(int chosenScreen) async {
     currentScreen = chosenScreen;
+    group = group.copyWith(screen: currentScreen);
+    // await ProviderDependency.userHome
+    //     .updateScreen(group.groupId, currentScreen);
     isOpened = false;
     emit(GroupChooseScreenState(currentScreen));
   }

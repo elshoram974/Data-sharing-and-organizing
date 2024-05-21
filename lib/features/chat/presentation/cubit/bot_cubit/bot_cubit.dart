@@ -36,7 +36,8 @@ abstract class BOTCubit extends Cubit<BOTState> {
   void botReply(List<ActivityEntity> activities);
   void handleMessageTap(BuildContext _, types.Message message);
   void handleMessageDoubleTap(BuildContext _, types.Message message);
-  void handlePreviewDataFetched(types.TextMessage message, types.PreviewData previewData);
+  void handlePreviewDataFetched(
+      types.TextMessage message, types.PreviewData previewData);
   void handleSendPressed(types.PartialText message, [types.Status? status]);
 
   void approvedActivity(types.Message message, BuildContext _);
@@ -57,7 +58,7 @@ class BOTCubitImp extends BOTCubit {
   int _i = 0;
 
   void _loadMessages() async {
-    botMessages = botRepo.loadBotMessages(groupCubit.group.id);
+    botMessages = botRepo.loadBotMessages(groupCubit.group.groupId);
     emit(SetState(_i++));
   }
 
@@ -86,7 +87,11 @@ class BOTCubitImp extends BOTCubit {
       toDelete = ActivityModel.fromJson(botMessages[i].metadata?['activity']);
     }
 
-    if (activities.firstOrNull?.insideDirectoryId == toDelete?.insideDirectoryId && botMessages.isNotEmpty && activities.isNotEmpty && index != null) {
+    if (activities.firstOrNull?.insideDirectoryId ==
+            toDelete?.insideDirectoryId &&
+        botMessages.isNotEmpty &&
+        activities.isNotEmpty &&
+        index != null) {
       botMessages.removeRange(0, index);
     }
 
@@ -94,7 +99,7 @@ class BOTCubitImp extends BOTCubit {
       temp.add(
         e.copyWith(createdAt: DateTime.now()).toMessage().copyWith(
               author: types.User(
-                id: "bot ${groupCubit.group.id}",
+                id: "bot ${groupCubit.group.groupId}",
                 firstName: "BOT",
               ),
             ),
@@ -115,12 +120,15 @@ class BOTCubitImp extends BOTCubit {
     ProviderDependency.group.closeFloatingButton();
     if (message.metadata?.containsKey("directory") == true) {
       final String? json = message.metadata!["directory"] as String?;
-      DirectoryEntity? dir = json == null ? null : DirectoryModel.fromJson(json);
+      DirectoryEntity? dir =
+          json == null ? null : DirectoryModel.fromJson(json);
       ProviderDependency.directory.goToDirectory(dir);
     } else if (message.metadata?.containsKey("activity") == true) {
-      final ActivityEntity activity = ActivityModel.fromJson(message.metadata!["activity"]);
-      if (canEditMessage(activity) && "BOT" == message.author.firstName?.trim()) {
-        showActivityActions(_, activity,message);
+      final ActivityEntity activity =
+          ActivityModel.fromJson(message.metadata!["activity"]);
+      if (canEditMessage(activity) &&
+          "BOT" == message.author.firstName?.trim()) {
+        showActivityActions(_, activity, message);
       }
     }
   }
@@ -156,12 +164,13 @@ class BOTCubitImp extends BOTCubit {
   }
 
   @override
-  void handleSendPressed(types.PartialText message, [types.Status? status]) async {
+  void handleSendPressed(types.PartialText message,
+      [types.Status? status]) async {
     ProviderDependency.group.closeFloatingButton();
     final ActivityModel activityTemp = ActivityModel.fromEntity(
       ActivityEntity(
         id: Random().nextInt(9999999),
-        groupId: groupCubit.group.id,
+        groupId: groupCubit.group.groupId,
         createdBy: currentMember,
         content: message.text,
         createdAt: DateTime.now(),
@@ -182,12 +191,14 @@ class BOTCubitImp extends BOTCubit {
     await botRepo.saveBotMessages(groupCubit.group, botMessages);
     emit(SetState(_i++));
 
-    final int i = botMessages.indexWhere((element) => element.id == textMessage.id);
+    final int i =
+        botMessages.indexWhere((element) => element.id == textMessage.id);
     await handleStatusEmit<List<ActivityEntity>>(
         dismissLoadingOnTap: null,
         statusFunction: () => botRepo.askAI(activityTemp),
         successFunction: (activities) {
-          final types.Message updatedMessage = botMessages[i].copyWith(status: types.Status.seen);
+          final types.Message updatedMessage =
+              botMessages[i].copyWith(status: types.Status.seen);
           botMessages[i] = updatedMessage;
           botReply(activities);
         },
@@ -203,18 +214,22 @@ class BOTCubitImp extends BOTCubit {
   // * activity edit
   @override
   void approvedActivity(types.Message message, BuildContext _) {
-    final ActivityEntity activity = ActivityModel.fromJson(message.metadata!["activity"]);
+    final ActivityEntity activity =
+        ActivityModel.fromJson(message.metadata!["activity"]);
 
     makeActivityApprovedDialog(
       context: _,
       activity: activity,
       approveFn: () {
         handleStatusEmit<void>(
-          statusFunction: () => botRepo.approveActivity(currentMember, activity, true),
+          statusFunction: () =>
+              botRepo.approveActivity(currentMember, activity, true),
           successFunction: (_) {
             final Map<String, dynamic> myMetaData = {};
-            myMetaData.addAll(message.metadata??{});
-            myMetaData['activity'] = ActivityModel.fromEntity(activity.copyWith(isApproved: true)).toJson();
+            myMetaData.addAll(message.metadata ?? {});
+            myMetaData['activity'] =
+                ActivityModel.fromEntity(activity.copyWith(isApproved: true))
+                    .toJson();
             final int i = botMessages.indexWhere((e) => e.id == message.id);
             botMessages[i] = botMessages[i].copyWith(metadata: myMetaData);
             emit(SetState(_i++));
@@ -226,17 +241,21 @@ class BOTCubitImp extends BOTCubit {
 
   @override
   void hideActivity(types.Message message, BuildContext _) {
-    final ActivityEntity activity = ActivityModel.fromJson(message.metadata!["activity"]);
+    final ActivityEntity activity =
+        ActivityModel.fromJson(message.metadata!["activity"]);
     hideActivityDialog(
       context: _,
       activity: activity,
       hideFn: () {
         handleStatusEmit<void>(
-          statusFunction: () => botRepo.approveActivity(currentMember, activity, false),
+          statusFunction: () =>
+              botRepo.approveActivity(currentMember, activity, false),
           successFunction: (_) {
             final Map<String, dynamic> myMetaData = {};
-            myMetaData.addAll(message.metadata??{});
-            myMetaData['activity'] = ActivityModel.fromEntity(activity.copyWith(isApproved: false)).toJson();
+            myMetaData.addAll(message.metadata ?? {});
+            myMetaData['activity'] =
+                ActivityModel.fromEntity(activity.copyWith(isApproved: false))
+                    .toJson();
             final int i = botMessages.indexWhere((e) => e.id == message.id);
             botMessages[i] = botMessages[i].copyWith(metadata: myMetaData);
             emit(SetState(_i++));
@@ -248,7 +267,8 @@ class BOTCubitImp extends BOTCubit {
 
   @override
   void deleteActivity(types.Message message, BuildContext _) {
-    final ActivityEntity activity = ActivityModel.fromJson(message.metadata!["activity"]);
+    final ActivityEntity activity =
+        ActivityModel.fromJson(message.metadata!["activity"]);
     deleteActivityDialog(
       context: _,
       activity: activity,
@@ -263,7 +283,8 @@ class BOTCubitImp extends BOTCubit {
 
   @override
   void blockUserInteraction(types.Message message, BuildContext _) {
-    final ActivityEntity activity = ActivityModel.fromJson(message.metadata!["activity"]);
+    final ActivityEntity activity =
+        ActivityModel.fromJson(message.metadata!["activity"]);
     blockUserInteractionDialog(
       context: _,
       user: activity.createdBy.user,
@@ -275,7 +296,8 @@ class BOTCubitImp extends BOTCubit {
       },
     );
   }
-  void removeMessage(types.Message message){
+
+  void removeMessage(types.Message message) {
     botMessages.removeWhere((e) => e.id == message.id);
     emit(SetState(_i++));
   }

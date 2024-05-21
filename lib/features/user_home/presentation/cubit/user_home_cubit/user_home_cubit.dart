@@ -56,7 +56,7 @@ class UserHomeCubit extends Cubit<UserHomeState> {
   Future<void> updateLastActivityUI(ActivityEntity activity, int screen) async {
     GroupHomeEntity temp = currentGroups.first;
     for (int i = 0; i < currentGroups.length; i++) {
-      if (activity.groupId == currentGroups[i].id) {
+      if (activity.groupId == currentGroups[i].groupId) {
         temp = currentGroups[i].copyWith(
           lastActivity: activity,
           screen: screen,
@@ -73,9 +73,23 @@ class UserHomeCubit extends Cubit<UserHomeState> {
   }
 
   // * Update group inside it
+  Future<void> updateScreen(int groupId, int screen) async {
+    GroupHomeEntity temp = GroupHomeEntity.newEmpty();
+    for (int i = 0; i < currentGroups.length; i++) {
+      if (groupId == currentGroups[i].groupId) {
+        temp = currentGroups[i] = currentGroups[i].copyWith(screen: screen);
+        break;
+      }
+    }
+
+    await homeRepo.updateScreen(groupId, screen);
+
+    emit(UserHomeUpdateGroup(temp));
+  }
+
   Future<void> updateGroupLocally(GroupHomeEntity groupUpdated) async {
     for (int i = 0; i < currentGroups.length; i++) {
-      if (groupUpdated.id == currentGroups[i].id) {
+      if (groupUpdated.groupId == currentGroups[i].groupId) {
         currentGroups[i] = groupUpdated;
         break;
       }
@@ -141,7 +155,7 @@ class UserHomeCubit extends Cubit<UserHomeState> {
     final Status<void> status = await homeRepo.editNotification(temp);
 
     if (status is Success<void>) {
-      final int i = currentGroups.indexWhere((e) => e.id == group.id);
+      final int i = currentGroups.indexWhere((e) => e.groupId == group.groupId);
       currentGroups[i] = temp;
       emit(UserHomeUpdateGroup(temp));
     } else if (status is Failure<void>) {

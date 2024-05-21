@@ -31,11 +31,12 @@ class AuthLocalDataSourceImp extends AuthLocalDataSource {
 
   @override
   Future<void> logOut() async {
-    final Box<GroupHomeEntity> groupBox = Hive.box<GroupHomeEntity>(AppStrings.groupsBox);
+    final Box<GroupHomeEntity> groupBox =
+        Hive.box<GroupHomeEntity>(AppStrings.groupsBox);
     if (!AppConst.isWeb) {
       await Future.wait(
         groupBox.values.map(
-          (e) => NotificationApi.firebase.unsubscribeFromTopic('${e.id}'),
+          (e) => NotificationApi.firebase.unsubscribeFromTopic('${e.groupId}'),
         ),
       );
     }

@@ -47,7 +47,7 @@ class _GroupChatScreenState extends State<GroupChatScreen> {
   late DocumentReference<Map<String, dynamic>> dbGroup;
   late CollectionReference<Map<String, dynamic>> dbActivities;
   late final Reference _storageRef = FirebaseStorage.instance.ref();
-  late final String filesPath = "${group.id}/files";
+  late final String filesPath = "${group.groupId}/files";
   late final Reference filesRef = _storageRef.child(filesPath);
   List<types.Message> messages = [];
   final types.User _user =
@@ -58,9 +58,8 @@ class _GroupChatScreenState extends State<GroupChatScreen> {
 
   @override
   void initState() {
-    dbGroup = db.collection('Groups').doc(group.id.toString());
+    dbGroup = db.collection('Groups').doc(group.groupId.toString());
     dbActivities = dbGroup.collection('activities');
-    print(ProviderDependency.group.group.id);
     _loadMessages();
 
     stream =
@@ -110,7 +109,7 @@ class _GroupChatScreenState extends State<GroupChatScreen> {
     }
     ProviderDependency.userHome.updateGroupLocally(
       GroupHomeEntity(
-        id: group.id,
+        groupId: group.groupId,
         groupName: group.groupName,
         ownerId: group.ownerId,
         discussion: group.discussion,
@@ -124,7 +123,7 @@ class _GroupChatScreenState extends State<GroupChatScreen> {
         unReadCounter: null,
         lastActivity: ActivityEntity(
           id: Random().nextInt(1000),
-          groupId: group.id,
+          groupId: group.groupId,
           createdBy: MemberEntity.fromAuthor(message.author),
           content: content,
           createdAt:
@@ -152,9 +151,10 @@ class _GroupChatScreenState extends State<GroupChatScreen> {
           NotificationDataEntity(
             title: group.groupName,
             message: notificationBody(message),
-            topic: '${group.id}',
+            topic: '${group.groupId}',
             type: NotificationType.message,
-            body: message.copyWith(metadata: {'group_id': group.id}).toJson(),
+            body: message
+                .copyWith(metadata: {'group_id': group.groupId}).toJson(),
           ),
         );
   }

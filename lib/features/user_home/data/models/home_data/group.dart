@@ -18,7 +18,7 @@ import '../../../../chat/domain/entities/activity_entity.dart';
 import '../../../domain/entities/group_home_entity.dart';
 
 class GroupDetails extends GroupHomeEntity {
-  final int groupId;
+  final int groupIdDetails;
   final int groupOwnerId;
   final String? groupDescription;
   final GroupVisibility groupVisibility;
@@ -31,7 +31,7 @@ class GroupDetails extends GroupHomeEntity {
   final MemberModel memberModel;
 
   const GroupDetails({
-    required this.groupId,
+    required this.groupIdDetails,
     required super.groupName,
     required this.groupOwnerId,
     required super.createdAt,
@@ -49,9 +49,9 @@ class GroupDetails extends GroupHomeEntity {
     super.unReadCounter,
     super.bottomHeight,
     required this.memberModel,
-    super.screen,
+    super.screen = 0,
   }) : super(
-          id: groupId,
+          groupId: groupIdDetails,
           ownerId: groupOwnerId,
           imageLink: groupImage,
           lastActivity: lastActivityModel,
@@ -60,7 +60,7 @@ class GroupDetails extends GroupHomeEntity {
 
   @override
   String toString() {
-    return 'Group(groupId: $groupId, groupName: $groupName, groupOwnerId: $groupOwnerId, groupCreationDate: $createdAt, groupDescription: $groupDescription, groupVisibility: $groupVisibility, groupAccessType: $accessType, groupCategory: $groupCategory, groupImage: $groupImage, groupType: $groupType, groupDiscussionType: $discussion, groupStatus: $groupStatus, groupStatusMessage: $groupStatusMessage, isSelected: $isSelected, unReadCounter: $unReadCounter, lastActivity: $lastActivity , member: $memberEntity)';
+    return 'Group(groupId: $groupIdDetails, groupName: $groupName, groupOwnerId: $groupOwnerId, groupCreationDate: $createdAt, groupDescription: $groupDescription, groupVisibility: $groupVisibility, groupAccessType: $accessType, groupCategory: $groupCategory, groupImage: $groupImage, groupType: $groupType, groupDiscussionType: $discussion, groupStatus: $groupStatus, groupStatusMessage: $groupStatusMessage, isSelected: $isSelected, unReadCounter: $unReadCounter, lastActivity: $lastActivity , member: $memberEntity)';
   }
 
   factory GroupDetails.fromMap(Map<String, dynamic> data, AuthUserEntity user) {
@@ -79,7 +79,7 @@ class GroupDetails extends GroupHomeEntity {
     }
 
     return GroupDetails(
-      groupId: groupId,
+      groupIdDetails: groupId,
       groupName: data['group_name'] as String,
       groupOwnerId: data['group_owner_id'] as int,
       createdAt: DateTime.parse(data['group_creation_date'] as String),
@@ -112,7 +112,7 @@ class GroupDetails extends GroupHomeEntity {
   }
 
   Map<String, dynamic> toMap() => {
-        'group_id': groupId,
+        'group_id': groupIdDetails,
         'group_name': groupName,
         'group_owner_id': groupOwnerId,
         'group_creation_date': createdAt.toIso8601String(),
@@ -176,7 +176,7 @@ class GroupDetails extends GroupHomeEntity {
     int? screen,
   }) {
     return GroupDetails(
-      groupId: groupId ?? this.groupId,
+      groupIdDetails: groupId ?? groupIdDetails,
       groupName: groupName ?? this.groupName,
       groupOwnerId: groupOwnerId ?? this.groupOwnerId,
       createdAt: createdAt ?? this.createdAt,

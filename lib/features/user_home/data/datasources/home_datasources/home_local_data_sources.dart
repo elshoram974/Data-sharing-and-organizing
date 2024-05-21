@@ -20,6 +20,7 @@ abstract class HomeLocalDataSource {
   Future<int> removeSomeGroups(List<GroupHomeEntity> removedGroups);
   Future<Iterable<int>> markAsUnRead(List<GroupHomeEntity> groupsToEdit);
 
+  Future<void> updateScreen(int groupId , int screen);
   Future<void> updateThisGroup(GroupHomeEntity groupUpdated);
   Future<void> updateLastActivity(ActivityEntity activity, int screen);
   Future<void> makeSeenToGroup(int groupId);
@@ -47,17 +48,18 @@ class HomeLocalDataSourceImp extends HomeLocalDataSource {
     final List<GroupHomeEntity> savedGroups = getAllGroups();
     for (final GroupHomeEntity ng in newGroups) {
       for (final GroupHomeEntity g in savedGroups) {
-        if (ng.id == g.id) {
+        if (ng.groupId == g.groupId) {
           groups.add(
             ng.copyWith(
               unReadCounter: g.unReadCounter,
               bottomHeight: g.bottomHeight,
               lastActivity: g.lastActivity,
+              screen: g.screen,
             ),
           );
         }
       }
-      if (!groups.any((g) => ng.id == g.id)) groups.add(ng);
+      if (!groups.any((g) => ng.groupId == g.groupId)) groups.add(ng);
     }
 
     await Future.wait([_changeUser(userToReplace), removeAllGroups()]);
@@ -76,7 +78,7 @@ class HomeLocalDataSourceImp extends HomeLocalDataSource {
     if (!AppConst.isWeb) {
       await Future.wait(
         removedGroups.map(
-          (e) => NotificationApi.firebase.unsubscribeFromTopic('${e.id}'),
+          (e) => NotificationApi.firebase.unsubscribeFromTopic('${e.groupId}'),
         ),
       );
     }
@@ -123,18 +125,35 @@ class HomeLocalDataSourceImp extends HomeLocalDataSource {
     if (!AppConst.isWeb) {
       switch (groupUpdated.memberEntity.notification) {
         case NotificationEnum.notify:
-          NotificationApi.firebase.subscribeToTopic('${groupUpdated.id}');
+          NotificationApi.firebase.subscribeToTopic('${groupUpdated.groupId}');
           break;
         default:
-          NotificationApi.firebase.unsubscribeFromTopic('${groupUpdated.id}');
+          NotificationApi.firebase
+              .unsubscribeFromTopic('${groupUpdated.groupId}');
       }
     }
     final List<GroupHomeEntity> groups = [];
     groups.addAll(getAllGroups());
 
     for (int i = 0; i < groups.length; i++) {
-      if (groupUpdated.id == groups[i].id) {
+      if (groupUpdated.groupId == groups[i].groupId) {
         groups[i] = groupUpdated;
+        break;
+      }
+    }
+
+    await removeAllGroups();
+    await groupsBox.addAll(groups);
+  }
+
+  @override
+  Future<void> updateScreen(int groupId , int screen) async {
+    final List<GroupHomeEntity> groups = [];
+    groups.addAll(getAllGroups());
+
+    for (int i = 0; i < groups.length; i++) {
+      if (groupId == groups[i].groupId) {
+        groups[i] = groups[i].copyWith(screen: screen);
         break;
       }
     }
@@ -149,9 +168,9 @@ class HomeLocalDataSourceImp extends HomeLocalDataSource {
     groups.addAll(getAllGroups());
 
     for (int i = 0; i < groups.length; i++) {
-      if (groupId == groups[i].id) {
+      if (groupId == groups[i].groupId) {
         groups[i] = GroupHomeEntity(
-          id: groups[i].id,
+          groupId: groups[i].groupId,
           groupName: groups[i].groupName,
           ownerId: groups[i].ownerId,
           discussion: groups[i].discussion,
@@ -179,7 +198,7 @@ class HomeLocalDataSourceImp extends HomeLocalDataSource {
     groups.addAll(getAllGroups());
 
     for (int i = 0; i < groups.length; i++) {
-      if (activity.groupId == groups[i].id) {
+      if (activity.groupId == groups[i].groupId) {
         groups[i] = groups[i].copyWith(
           lastActivity: activity,
           screen: screen,

@@ -18,7 +18,8 @@ class GroupNotificationEntityAdapter
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return GroupNotificationEntity(
-      id: fields[0] as int,
+      groupId: fields[0] as int,
+      notificationId: fields[13] as int,
       imageLink: fields[1] as String?,
       groupName: fields[2] as String,
       lastActivity: fields[9] as ActivityEntity?,
@@ -36,9 +37,11 @@ class GroupNotificationEntityAdapter
   @override
   void write(BinaryWriter writer, GroupNotificationEntity obj) {
     writer
-      ..writeByte(12)
+      ..writeByte(13)
+      ..writeByte(13)
+      ..write(obj.notificationId)
       ..writeByte(0)
-      ..write(obj.id)
+      ..write(obj.groupId)
       ..writeByte(1)
       ..write(obj.imageLink)
       ..writeByte(2)

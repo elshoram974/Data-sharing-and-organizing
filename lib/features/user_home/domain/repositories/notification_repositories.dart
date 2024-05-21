@@ -4,7 +4,6 @@ abstract class NotificationRepositories {
   const NotificationRepositories();
 
   List<GroupNotificationEntity> getNotifications();
-  Future<GroupNotificationEntity> updateNotifications(
-    GroupNotificationEntity notification,
-  );
+
+  Future<void> makeSeenToNotification(int notificationId);
 }

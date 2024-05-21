@@ -9,6 +9,7 @@ abstract class HomeRepositories {
   Future<Status<bool>> exitFromSomeGroups(({AuthUserEntity user, List<GroupHomeEntity> removedGroups}) param);
   Future<Status<Iterable<int>>> markAsUnRead(List<GroupHomeEntity> groups);
 
+  Future<void> updateScreen(int groupId, int screen);
   Future<void> updateGroupLocally(GroupHomeEntity groupUpdated);
 
   Future<Status<void>> editNotification(GroupHomeEntity group);

@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:developer';
+import 'dart:math' as math;
 
 import 'package:data_sharing_organizing/core/utils/services/init_local.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -64,12 +65,11 @@ final class NotificationApi {
       ]);
 
       log('FirebaseMessagingToken:$tokenId');
+      FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
+      FirebaseMessaging.onMessage.listen((r) => onReceivedMessage(r, true));
     } catch (e) {
       log('Error in token: $e');
     }
-
-    FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
-    FirebaseMessaging.onMessage.listen((r) => onReceivedMessage(r, true));
   }
 }
 
@@ -80,10 +80,10 @@ Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
       await localInstance();
       initDependencies();
     }
+    await onReceivedMessage(message, false);
   } catch (e) {
     log("Error :- aaa ---- $e");
   }
-  await onReceivedMessage(message, false);
 }
 
 Future<void> onReceivedMessage(
@@ -97,11 +97,14 @@ Future<void> onReceivedMessage(
     data['type'],
   );
   final Box<AuthUserEntity> user = Hive.box(AppStrings.userBox);
-  final NotificationLocalDataSource nLDS = sl.get<NotificationLocalDataSource>();
+  final NotificationLocalDataSource nLDS =
+      sl.get<NotificationLocalDataSource>();
   final HomeLocalDataSource hLDS = sl.get<HomeLocalDataSource>();
 
   bool isSameUser = false;
   int? groupId;
+  final int notificationId =
+      math.Random().nextInt(4999) * math.Random().nextInt(4999);
 
   switch (type) {
     case NotificationType.message:
@@ -113,14 +116,22 @@ Future<void> onReceivedMessage(
         ActivityEntity.fromMessageAllData(message).copyWith(groupId: groupId),
       );
 
-      final bool exit = handleNotificationInApp(appIsOpened, activity, 1);
-      if (exit) return;
-      nLDS.saveNotification(
-        screen: 1,
-        groupId: groupId!,
-        activity: activity,
+      final bool exit = handleNotificationInApp(
+        notificationId,
+        appIsOpened,
+        activity,
+        1,
       );
-      await hLDS.updateLastActivity(activity, 1);
+      if (exit) return;
+      await Future.wait([
+        nLDS.saveNotification(
+          notificationId: notificationId,
+          screen: 1,
+          groupId: groupId!,
+          activity: activity,
+        ),
+        hLDS.updateLastActivity(activity, 1)
+      ]);
 
       break;
     case NotificationType.activity:
@@ -129,15 +140,23 @@ Future<void> onReceivedMessage(
       isSameUser = activity.createdBy.user.id == user.values.firstOrNull?.id;
       groupId = activity.groupId;
 
-      final bool exit = handleNotificationInApp(appIsOpened, activity, 0);
+      final bool exit = handleNotificationInApp(
+        notificationId,
+        appIsOpened,
+        activity,
+        0,
+      );
       if (exit) return;
 
-      nLDS.saveNotification(
-        screen: 0,
-        groupId: groupId,
-        activity: activity,
-      );
-      await hLDS.updateLastActivity(activity, 0);
+      await Future.wait([
+        nLDS.saveNotification(
+          notificationId: notificationId,
+          screen: 0,
+          groupId: groupId,
+          activity: activity,
+        ),
+        hLDS.updateLastActivity(activity, 0),
+      ]);
 
       break;
     case NotificationType.info:
@@ -149,7 +168,7 @@ Future<void> onReceivedMessage(
 
   if (!isSameUser) {
     LocalNotification.showNotification(
-      id: groupId ?? 0,
+      id: notificationId,
       title: remoteMessage.notification?.title,
       body: remoteMessage.notification?.body,
       payLoad: data,
@@ -162,6 +181,7 @@ Future<void> onReceivedMessage(
 }
 
 bool handleNotificationInApp(
+  int notificationId,
   bool appIsOpened,
   ActivityModel activity,
   int screen,
@@ -171,13 +191,17 @@ bool handleNotificationInApp(
 
     // * for show notifications in screen
     if (isNotificationScreenOpened) {
-      ProviderDependency.userNotification.insertNew(activity, screen);
+      ProviderDependency.userNotification.insertNew(
+        activity,
+        screen,
+        notificationId,
+      );
     }
 
     // * for cancel notifications
     if (!isGroupScreenOpened) return false;
     final GroupCubit c = ProviderDependency.group;
-    return c.group.id == activity.groupId && screen == c.currentScreen;
+    return c.group.groupId == activity.groupId && screen == c.currentScreen;
   }
   return false;
 }
