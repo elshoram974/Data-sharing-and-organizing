@@ -142,12 +142,12 @@ class UserHomeCubit extends Cubit<UserHomeState> {
   }
 
   // * Edit notification from groups
-  Future<void> editNotification(
+  Future<GroupHomeEntity> editNotification(
     NotificationEnum notify,
     GroupHomeEntity group,
   ) async {
     emit(const UserHomeInitial());
-    final temp = group.copyWith(
+    GroupHomeEntity temp = group.copyWith(
       member: MemberModel.fromEntity(
         group.memberEntity.copyWith(notification: notify),
       ),
@@ -161,9 +161,10 @@ class UserHomeCubit extends Cubit<UserHomeState> {
         currentGroups[i] = temp;
         emit(UserHomeUpdateGroup(temp));
       },
+      failureFunction: () => temp = group,
     );
     _makeAllSelectedOrNot(false);
-    EasyLoading.dismiss();
+    return temp;
   }
 
   // * GetGroups

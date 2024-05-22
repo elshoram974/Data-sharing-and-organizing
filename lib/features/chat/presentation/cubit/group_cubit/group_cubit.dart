@@ -1,3 +1,4 @@
+import 'package:data_sharing_organizing/core/utils/enums/notification_enum.dart';
 import 'package:data_sharing_organizing/core/utils/services/dependency/locator.dart';
 import 'package:data_sharing_organizing/core/utils/services/dependency/provider_dependency.dart';
 import 'package:data_sharing_organizing/features/user_home/presentation/cubit/user_notification_cubit/user_notification_cubit.dart';
@@ -32,6 +33,10 @@ class GroupCubit extends Cubit<GroupState> {
   double _dragPositionX = 0.0;
 
   late final bool isAdmin = group.memberEntity.isAdmin;
+
+  void editNotification(NotificationEnum notify) async {
+    group = await ProviderDependency.userHome.editNotification(notify, group);
+  }
 
   void onPanUpdate(DragUpdateDetails details, BuildContext _) async {
     top += details.delta.dy;

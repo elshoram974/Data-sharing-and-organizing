@@ -4,25 +4,48 @@ import 'package:data_sharing_organizing/core/utils/enums/notification_enum.dart'
 import 'package:data_sharing_organizing/core/utils/services/dependency/provider_dependency.dart';
 import 'package:flutter/material.dart';
 
+import '../../cubit/group_cubit/group_cubit.dart';
 import 'group_details_list_tile.dart';
 
-class MuteNotificationsTileGroupDetails extends StatelessWidget {
+class MuteNotificationsTileGroupDetails extends StatefulWidget {
   const MuteNotificationsTileGroupDetails({super.key});
+
+  @override
+  State<MuteNotificationsTileGroupDetails> createState() =>
+      _MuteNotificationsTileGroupDetailsState();
+}
+
+class _MuteNotificationsTileGroupDetailsState
+    extends State<MuteNotificationsTileGroupDetails> {
+  final GroupCubit c = ProviderDependency.group;
+  bool isMuted = ProviderDependency.group.group.memberEntity.notification ==
+      NotificationEnum.withoutNotify;
+
+  void changeType() {
+    NotificationEnum notify = c.group.memberEntity.notification;
+    if (notify == NotificationEnum.notify) {
+      c.editNotification(NotificationEnum.withoutNotify);
+    } else {
+      c.editNotification(NotificationEnum.notify);
+    }
+
+    isMuted =
+        c.group.memberEntity.notification == NotificationEnum.withoutNotify;
+    setState(() {});
+  }
 
   @override
   Widget build(BuildContext context) {
     return GroupDetailsListTile(
-      onTap: () {},
+      onTap: changeType,
       title: S.of(context).muteNotification,
       leading: Icon(
         Icons.notifications_none_outlined,
         color: Theme.of(context).textTheme.bodyLarge?.color,
       ),
       trailing: AbstractCustomSwitch(
-        value: ProviderDependency.group.group.memberEntity.notification == NotificationEnum.withoutNotify,
-        onChanged: (bool val) {
-          if(val){}
-        }, // TODO: change mute in groups
+        value: isMuted,
+        onChanged: (_) => changeType(),
       ),
     );
   }
