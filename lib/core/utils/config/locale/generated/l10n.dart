@@ -2053,6 +2053,26 @@ class S {
       args: [content],
     );
   }
+
+  /// `Are you sure you want to exit from the groups " {groupsName} "?`
+  String confirmExitGroups(String groupsName) {
+    return Intl.message(
+      'Are you sure you want to exit from the groups " $groupsName "?',
+      name: 'confirmExitGroups',
+      desc: '',
+      args: [groupsName],
+    );
+  }
+
+  /// `Are you sure you want to exit from the group " {groupName} "?`
+  String confirmExitGroup(String groupName) {
+    return Intl.message(
+      'Are you sure you want to exit from the group " $groupName "?',
+      name: 'confirmExitGroup',
+      desc: '',
+      args: [groupName],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

@@ -135,8 +135,8 @@ class UserHomeCubit extends Cubit<UserHomeState> {
     groupsName = groupsName.substring(0, groupsName.length - 3);
     return ShowCustomDialog.warning(
       context,
-      body: "r u sure u want to exit from ( $groupsName ) groups",
-      textConfirm: S.of(context).remove,
+      body: S.of(context).confirmExitGroups(groupsName),
+      textConfirm: S.of(context).exitGroups,
       onPressConfirm: () async {
         emit(const GetGroupsLoadingState(true));
         EasyLoading.show(dismissOnTap: false);
@@ -160,8 +160,8 @@ class UserHomeCubit extends Cubit<UserHomeState> {
     final BuildContext context = AppRoute.key.currentContext!;
     return ShowCustomDialog.warning(
       context,
-      body: "r u sure u want to exit from ${remove.groupName} group",
-      textConfirm: S.of(context).remove,
+      body: S.of(context).confirmExitGroup(remove.groupName),
+      textConfirm: S.of(context).exitGroup,
       onPressConfirm: () async {
         emit(const GetGroupsLoadingState(true));
         await handleStatusEmit<bool>(

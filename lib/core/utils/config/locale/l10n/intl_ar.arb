@@ -372,5 +372,21 @@
                 "type": "String"
             }
         }
+    },
+    "confirmExitGroups": "هل أنت متأكد أنك تريد الخروج من المجموعات \" {groupsName} \"؟",
+    "@confirmExitGroups": {
+        "placeholders": {
+            "groupsName": {
+                "type": "String"
+            }
+        }
+    },
+    "confirmExitGroup": "هل أنت متأكد أنك تريد الخروج من المجموعة \" {groupName} \"؟",
+    "@confirmExitGroup": {
+        "placeholders": {
+            "groupName": {
+                "type": "String"
+            }
+        }
     }
 }
