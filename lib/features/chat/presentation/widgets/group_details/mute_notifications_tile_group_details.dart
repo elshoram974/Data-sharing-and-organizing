@@ -23,10 +23,10 @@ class _MuteNotificationsTileGroupDetailsState
 
   void changeType() {
     NotificationEnum notify = c.group.memberEntity.notification;
-    if (notify == NotificationEnum.notify) {
-      c.editNotification(NotificationEnum.withoutNotify);
-    } else {
+    if (notify != NotificationEnum.notify) {
       c.editNotification(NotificationEnum.notify);
+    } else {
+      c.editNotification(NotificationEnum.withoutNotify);
     }
 
     isMuted =

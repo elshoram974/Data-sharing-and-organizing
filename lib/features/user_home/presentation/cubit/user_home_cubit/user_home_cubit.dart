@@ -2,14 +2,17 @@ import 'package:data_sharing_organizing/core/status/errors/failure.dart';
 import 'package:data_sharing_organizing/core/status/errors/failure_body.dart';
 import 'package:data_sharing_organizing/core/status/status.dart';
 import 'package:data_sharing_organizing/core/status/success/success.dart';
+import 'package:data_sharing_organizing/core/utils/config/locale/generated/l10n.dart';
 import 'package:data_sharing_organizing/core/utils/config/routes/routes.dart';
 import 'package:data_sharing_organizing/core/utils/enums/http_exception_type_enum.dart';
 import 'package:data_sharing_organizing/core/utils/enums/notification_enum.dart';
 import 'package:data_sharing_organizing/core/utils/enums/selected_pop_up_enum.dart';
 import 'package:data_sharing_organizing/core/utils/functions/handle_status_emit.dart';
+import 'package:data_sharing_organizing/core/utils/functions/show_custom_dialog.dart';
 import 'package:data_sharing_organizing/core/utils/functions/sort_groups_by_last_activity_time.dart';
 import 'package:data_sharing_organizing/core/utils/services/dependency/provider_dependency.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:go_router/go_router.dart';
@@ -123,22 +126,56 @@ class UserHomeCubit extends Cubit<UserHomeState> {
   }
 
   // * exit from groups
-  Future<void> exitGroups() async {
-    emit(const GetGroupsLoadingState(true));
-    EasyLoading.show(dismissOnTap: false);
-    // await Future.delayed(Duration(seconds: 3));
-    final Status<bool> status = await exitFromSomeGroups(
-        (removedGroups: selectedGroups, user: userMain.user));
-
-    if (status is Success<bool>) {
-      currentGroups.removeWhere((e) => selectedGroups.contains(e));
-      _makeAllSelectedOrNot(false);
-      emit(HomeSuccessState(currentGroups));
-      if (currentGroups.length < 10) getGroups();
-    } else if (status is Failure<bool>) {
-      _failureStatus(status.failure, true);
+  Future<void> exitGroups() {
+    final BuildContext context = AppRoute.key.currentContext!;
+    String groupsName = '';
+    for (var e in selectedGroups) {
+      groupsName += "'${e.groupName}' - ";
     }
-    EasyLoading.dismiss();
+    groupsName = groupsName.substring(0, groupsName.length - 3);
+    return ShowCustomDialog.warning(
+      context,
+      body: "r u sure u want to exit from ( $groupsName ) groups",
+      textConfirm: S.of(context).remove,
+      onPressConfirm: () async {
+        emit(const GetGroupsLoadingState(true));
+        EasyLoading.show(dismissOnTap: false);
+        final Status<bool> status = await exitFromSomeGroups(
+            (removedGroups: selectedGroups, user: userMain.user));
+
+        if (status is Success<bool>) {
+          currentGroups.removeWhere((e) => selectedGroups.contains(e));
+          _makeAllSelectedOrNot(false);
+          emit(HomeSuccessState(currentGroups));
+          if (currentGroups.length < 10) getGroups();
+        } else if (status is Failure<bool>) {
+          _failureStatus(status.failure, true);
+        }
+        EasyLoading.dismiss();
+      },
+    );
+  }
+
+  Future<void> exitGroup(GroupHomeEntity remove) {
+    final BuildContext context = AppRoute.key.currentContext!;
+    return ShowCustomDialog.warning(
+      context,
+      body: "r u sure u want to exit from ${remove.groupName} group",
+      textConfirm: S.of(context).remove,
+      onPressConfirm: () async {
+        emit(const GetGroupsLoadingState(true));
+        await handleStatusEmit<bool>(
+          statusFunction: () => exitFromSomeGroups(
+              (removedGroups: [remove], user: userMain.user)),
+          successFunction: (_) {
+            currentGroups.removeWhere((e) => remove.groupId == e.groupId);
+            _makeAllSelectedOrNot(false);
+            emit(HomeSuccessState(currentGroups));
+            context.go(AppRoute.userHome);
+          },
+        );
+      },
+    );
   }
 
   // * Edit notification from groups
