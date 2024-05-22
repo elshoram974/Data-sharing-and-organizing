@@ -6,6 +6,7 @@ import 'package:data_sharing_organizing/core/utils/config/routes/routes.dart';
 import 'package:data_sharing_organizing/core/utils/enums/http_exception_type_enum.dart';
 import 'package:data_sharing_organizing/core/utils/enums/notification_enum.dart';
 import 'package:data_sharing_organizing/core/utils/enums/selected_pop_up_enum.dart';
+import 'package:data_sharing_organizing/core/utils/functions/handle_status_emit.dart';
 import 'package:data_sharing_organizing/core/utils/functions/sort_groups_by_last_activity_time.dart';
 import 'package:data_sharing_organizing/core/utils/services/dependency/provider_dependency.dart';
 import 'package:equatable/equatable.dart';
@@ -146,21 +147,21 @@ class UserHomeCubit extends Cubit<UserHomeState> {
     GroupHomeEntity group,
   ) async {
     emit(const UserHomeInitial());
-    EasyLoading.show(dismissOnTap: false);
     final temp = group.copyWith(
       member: MemberModel.fromEntity(
         group.memberEntity.copyWith(notification: notify),
       ),
     );
-    final Status<void> status = await homeRepo.editNotification(temp);
 
-    if (status is Success<void>) {
-      final int i = currentGroups.indexWhere((e) => e.groupId == group.groupId);
-      currentGroups[i] = temp;
-      emit(UserHomeUpdateGroup(temp));
-    } else if (status is Failure<void>) {
-      _failureStatus(status.failure, true);
-    }
+    await handleStatusEmit<void>(
+      statusFunction: () => homeRepo.editNotification(temp),
+      successFunction: (_) {
+        final int i =
+            currentGroups.indexWhere((e) => e.groupId == group.groupId);
+        currentGroups[i] = temp;
+        emit(UserHomeUpdateGroup(temp));
+      },
+    );
     _makeAllSelectedOrNot(false);
     EasyLoading.dismiss();
   }
