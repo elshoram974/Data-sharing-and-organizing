@@ -199,8 +199,9 @@ class DirectoriesRemoteDataSourceImp extends DirectoriesRemoteDataSource {
       'activity_notify_others': activity.notifyOthers.inString,
       'activity_owner_id': '${activity.createdBy.user.id}',
     };
-    if (activity.insideDirectoryId != null)
+    if (activity.insideDirectoryId != null) {
       body['activity_direction_id'] = '${activity.insideDirectoryId}';
+    }
     final AttachmentModel? attachment = activity.attachment;
     if (attachment != null) {
       body['activity_attachments_size'] = '${attachment.size}';
@@ -239,8 +240,9 @@ class DirectoriesRemoteDataSourceImp extends DirectoriesRemoteDataSource {
       'max_activity': '1000',
       'group_id': '${dir.groupId}',
     };
-    if (dir.insideDirectoryId != null)
+    if (dir.insideDirectoryId != null) {
       body['inside_dir_id'] = '${dir.insideDirectoryId}';
+    }
     Map<String, dynamic> response = await service.post(
       AppLinks.addNewDir,
       body,
