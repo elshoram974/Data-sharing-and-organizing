@@ -34,6 +34,7 @@ abstract class AppRoute {
   static const String group = UserRoutes.group;
   static const String groupDetails = UserRoutes.groupDetails;
   static const String groupPermissions = UserRoutes.groupPermissions;
+  static const String groupMedia = UserRoutes.groupMedia;
   // * ------ End user screens ------ *//
 
   // * new group screens *//

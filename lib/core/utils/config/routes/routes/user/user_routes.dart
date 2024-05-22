@@ -36,6 +36,7 @@ abstract final class UserRoutes {
   static const String group = GroupRoutes.group;
   static const String groupDetails = GroupRoutes.groupDetails;
   static const String groupPermissions = GroupRoutes.groupPermissions;
+  static const String groupMedia = GroupRoutes.groupMedia;
   // * ------ End group screens ------ *//
 
   static GoRoute call() {

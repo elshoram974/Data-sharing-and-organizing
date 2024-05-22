@@ -1,9 +1,11 @@
 import 'package:data_sharing_organizing/core/utils/config/locale/generated/l10n.dart';
+import 'package:data_sharing_organizing/core/utils/config/routes/routes.dart';
 import 'package:data_sharing_organizing/core/utils/constants/app_constants.dart';
 import 'package:data_sharing_organizing/core/utils/services/dependency/provider_dependency.dart';
 import 'package:data_sharing_organizing/core/utils/styles.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../../user_home/domain/entities/group_home_entity.dart';
 import 'group_details_list_tile.dart';
@@ -32,7 +34,9 @@ class _MediaDocsTileGroupDetailsState extends State<MediaDocsTileGroupDetails> {
   @override
   Widget build(BuildContext context) {
     return GroupDetailsListTile(
-      onTap: result == null ? null : () {},
+      onTap: result == null
+          ? null
+          : () => context.push(AppRoute.groupMedia, extra: result),
       title: S.of(context).mediaAndDocs,
       trailing: ConstrainedBox(
         constraints: const BoxConstraints(maxWidth: 100),
