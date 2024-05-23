@@ -32,7 +32,16 @@ class NotificationLocalDataSourceImp extends NotificationLocalDataSource {
 
   @override
   List<GroupNotificationEntity> getNotifications() {
-    return notificationBox.values.toList().reversed.toList();
+    final Iterable<GroupNotificationEntity> notificationList =
+        notificationBox.values;
+    final List<GroupNotificationEntity> temp = [];
+    final Box<GroupHomeEntity> groups = Hive.box(AppStrings.groupsBox);
+    for (GroupHomeEntity e in groups.values) {
+      temp.addAll(
+        notificationList.where((element) => e.groupId == element.groupId),
+      );
+    }
+    return temp.reversed.toList();
   }
 
   @override
@@ -41,7 +50,7 @@ class NotificationLocalDataSourceImp extends NotificationLocalDataSource {
     required int screen,
     required int groupId,
     required ActivityModel activity,
-  }) async{
+  }) async {
     final Box<GroupHomeEntity> groups = Hive.box(AppStrings.groupsBox);
     final GroupHomeEntity g =
         groups.values.where((e) => e.groupId == groupId).first;

@@ -122,7 +122,7 @@ Future<void> onReceivedMessage(
         activity,
         1,
       );
-      if (exit) return;
+      if (exit || isSameUser) return;
       await Future.wait([
         nLDS.saveNotification(
           notificationId: notificationId,
@@ -146,7 +146,7 @@ Future<void> onReceivedMessage(
         activity,
         0,
       );
-      if (exit) return;
+      if (exit || isSameUser) return;
 
       await Future.wait([
         nLDS.saveNotification(
