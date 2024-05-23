@@ -11,15 +11,15 @@ import '../../../user_home/domain/entities/group_home_entity.dart';
 import '../widgets/group_details/media_docs/docs_widget.dart';
 import '../widgets/group_details/media_docs/media_widget.dart';
 
-class GroupMediaScreen extends StatefulWidget {
-  const GroupMediaScreen(this.messages, {super.key});
+class GroupMediaDocsScreen extends StatefulWidget {
+  const GroupMediaDocsScreen(this.messages, {super.key});
   final List<Message> messages;
 
   @override
-  State<GroupMediaScreen> createState() => _GroupMediaScreenState();
+  State<GroupMediaDocsScreen> createState() => _GroupMediaDocsScreenState();
 }
 
-class _GroupMediaScreenState extends State<GroupMediaScreen> {
+class _GroupMediaDocsScreenState extends State<GroupMediaDocsScreen> {
   final GroupHomeEntity group = ProviderDependency.group.group;
   List<ImageMessage> imageMessages = [];
   List<FileMessage> fileMessages = [];
@@ -107,5 +107,3 @@ class _GroupMediaScreenState extends State<GroupMediaScreen> {
     );
   }
 }
-
-
