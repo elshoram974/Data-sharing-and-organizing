@@ -12,7 +12,7 @@ import 'package:data_sharing_organizing/core/utils/functions/show_custom_dialog.
 import 'package:data_sharing_organizing/core/utils/functions/sort_groups_by_last_activity_time.dart';
 import 'package:data_sharing_organizing/core/utils/services/dependency/provider_dependency.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:go_router/go_router.dart';

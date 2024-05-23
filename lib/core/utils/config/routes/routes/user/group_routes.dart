@@ -1,5 +1,5 @@
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_chat_types/flutter_chat_types.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../../../features/chat/presentation/screens/group_details_screen.dart';
@@ -58,7 +58,7 @@ abstract final class GroupRoutes {
             offset: const Offset(-1, 0),
             context: context,
             state: state,
-            child:  GroupMediaScreen(results: state.extra as ListResult),
+            child: GroupMediaScreen(state.extra as List<Message>),
           ),
         ),
       ],
