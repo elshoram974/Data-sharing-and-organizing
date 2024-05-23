@@ -113,16 +113,20 @@ Future<void> onReceivedMessage(
       groupId = message.metadata?['group_id'];
 
       final ActivityModel activity = ActivityModel.fromEntity(
-        ActivityEntity.fromMessageAllData(message).copyWith(groupId: groupId),
+        ActivityEntity.fromMessageAllData(message).copyWith(
+          groupId: groupId,
+          createdAt: DateTime.now(),
+        ),
       );
 
       final bool exit = handleNotificationInApp(
+        isSameUser,
         notificationId,
         appIsOpened,
         activity,
         1,
       );
-      if (exit || isSameUser) return;
+      if (exit) return;
       await Future.wait([
         nLDS.saveNotification(
           notificationId: notificationId,
@@ -135,18 +139,21 @@ Future<void> onReceivedMessage(
 
       break;
     case NotificationType.activity:
-      final ActivityModel activity =
-          ActivityModel.fromJson(data[type.inString]);
+      final ActivityEntity activity =
+          ActivityModel.fromJson(data[type.inString]).copyWith(
+        createdAt: DateTime.now(),
+      );
       isSameUser = activity.createdBy.user.id == user.values.firstOrNull?.id;
       groupId = activity.groupId;
 
       final bool exit = handleNotificationInApp(
+        isSameUser,
         notificationId,
         appIsOpened,
         activity,
         0,
       );
-      if (exit || isSameUser) return;
+      if (exit) return;
 
       await Future.wait([
         nLDS.saveNotification(
@@ -169,6 +176,7 @@ Future<void> onReceivedMessage(
   if (!isSameUser) {
     LocalNotification.showNotification(
       id: notificationId,
+      groupId: groupId,
       title: remoteMessage.notification?.title,
       body: remoteMessage.notification?.body,
       payLoad: data,
@@ -181,11 +189,13 @@ Future<void> onReceivedMessage(
 }
 
 bool handleNotificationInApp(
+  bool isSameUser,
   int notificationId,
   bool appIsOpened,
-  ActivityModel activity,
+  ActivityEntity activity,
   int screen,
 ) {
+  if (isSameUser) return true;
   if (appIsOpened) {
     ProviderDependency.userHome.updateLastActivityUI(activity, screen);
 

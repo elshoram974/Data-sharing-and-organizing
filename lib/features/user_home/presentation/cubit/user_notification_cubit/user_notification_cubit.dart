@@ -1,8 +1,8 @@
 import 'package:data_sharing_organizing/core/utils/services/dependency/provider_dependency.dart';
-import 'package:data_sharing_organizing/features/chat/data/models/activity_model.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
 
+import '../../../../chat/domain/entities/activity_entity.dart';
 import '../../../domain/entities/group_home_entity.dart';
 import '../../../domain/entities/group_notification_entity.dart';
 import '../../../domain/repositories/notification_repositories.dart';
@@ -43,7 +43,7 @@ class UserNotificationCubit extends Cubit<UserNotificationState> {
     emit(UpdateNotificationState(currentNotifications[i], i));
   }
 
-  void insertNew(ActivityModel activity, int screen , int notificationId) {
+  void insertNew(ActivityEntity activity, int screen , int notificationId) {
     final groups = ProviderDependency.userHome.currentGroups;
     final GroupHomeEntity g =
         groups.where((e) => e.groupId == activity.groupId).first;
