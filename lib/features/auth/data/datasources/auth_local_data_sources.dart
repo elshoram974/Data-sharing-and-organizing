@@ -5,6 +5,7 @@ import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:hive/hive.dart';
 
 import '../../../user_home/domain/entities/group_home_entity.dart';
+import '../../../user_home/domain/entities/group_notification_entity.dart';
 import '../../domain/entities/auth_user_entity.dart';
 
 abstract class AuthLocalDataSource {
@@ -33,6 +34,8 @@ class AuthLocalDataSourceImp extends AuthLocalDataSource {
   Future<void> logOut() async {
     final Box<GroupHomeEntity> groupBox =
         Hive.box<GroupHomeEntity>(AppStrings.groupsBox);
+    final Box<GroupNotificationEntity> notification =
+        Hive.box<GroupNotificationEntity>(AppStrings.notificationBox);
     if (!AppConst.isWeb) {
       await Future.wait(
         groupBox.values.map(
@@ -44,6 +47,7 @@ class AuthLocalDataSourceImp extends AuthLocalDataSource {
     await Future.wait([
       if (!AppConst.isWeb) DefaultCacheManager().emptyCache(),
       groupBox.clear(),
+      notification.clear(),
       userBox.clear(),
     ]);
   }
