@@ -1,5 +1,4 @@
 abstract final class AppLinks {
-
   const AppLinks();
 
   static const String appLink = 'https://sharikna.mrecode.com';
@@ -7,7 +6,7 @@ abstract final class AppLinks {
   static const String _baseLink = 'https://thiet.mrecode.com/api';
   static const String _userLink = '$_baseLink/user';
 
-  static const String sendNotification = '$_baseLink/libraries/notification/send_notification.php';
+  static const String sendNotification = 'https://fcm.googleapis.com/fcm/send';
 
   // * authorization links
   static const String _auth = '$_userLink/auth';
@@ -35,7 +34,8 @@ abstract final class AppLinks {
   static const String approveActivity = '$_botChatChanges/approvedactivity.php';
   static const String deleteActivity = '$_botChatChanges/deleteactivity.php';
   static const String blockUserGroup = '$_botChatChanges/blockuser.php';
-  static const String approveDirectory = '$_botChatChanges/approveddirection.php';
+  static const String approveDirectory =
+      '$_botChatChanges/approveddirection.php';
   static const String deleteDirectory = '$_botChatChanges/deletedirection.php';
 
   // * user profile
@@ -45,5 +45,6 @@ abstract final class AppLinks {
   static const String deleteUser = '$_changes/deleteuser.php';
   static const String changeUserImage = '$_changes/changephoto.php';
   static const String deleteUserImage = '$_changes/deletephoto.php';
-  static const String removeGroups = '$_changes/delete_user_from_some_groups.php';
+  static const String removeGroups =
+      '$_changes/delete_user_from_some_groups.php';
 }

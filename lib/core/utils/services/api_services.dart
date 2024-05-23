@@ -10,6 +10,27 @@ import 'pick_image.dart';
 class APIServices {
   const APIServices();
 
+  Future<Map<String, dynamic>> postDynamic(
+    final String link,
+    final Object? body, [
+    final Map<String, String>? headers,
+  ]) async {
+    http.Response response = await handleRequestErrors<http.Response>(
+      () => http.post(Uri.parse(link), body: body, headers: headers),
+    );
+
+    final Map<String, dynamic> res = jsonDecode(response.body);
+
+    if (response.statusCode != 200) {
+      throw MyHttpException.badResponse(
+        statusCode: response.statusCode,
+        response: response,
+      );
+    }
+
+    return res;
+  }
+
   Future<Map<String, dynamic>> post(
     final String link,
     final Map<String, String?> body,

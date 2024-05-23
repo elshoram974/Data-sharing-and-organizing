@@ -255,13 +255,25 @@ class DirectoriesRemoteDataSourceImp extends DirectoriesRemoteDataSource {
 
   @override
   Future<bool> sendNotification(NotificationDataEntity data) async {
-    await service.post(
-      AppLinks.sendNotification,
-      {
+    final Map<String, Object> body = {
+      "to": '/topics/${data.topic}',
+      // 'priority': 'high',
+      'content_available': true,
+      'notification': {
         'title': data.title,
-        'message': data.message,
-        'topic': data.topic,
-        'data': jsonEncode(data.data),
+        'body': data.message,
+        'click_action': 'FLUTTER_NOTIFICATION_CLICK',
+        'sound': 'default'
+      },
+      'data': {'data': jsonEncode(data.data)},
+    };
+    await service.postDynamic(
+      AppLinks.sendNotification,
+      jsonEncode(body),
+      {
+        'Content-Type': 'application/json; charset=UTF-8',
+        'Authorization':
+            'key=AAAAbLVdcFU:APA91bHlT5QU-O2niatXjFVqEGCzJvVk8ltgKg6y3gVQzvyQNq1EDHIWgr4xFSeWrvY20r9gvg1rDKUneCLk_-VW6lg_1V-9ighrNm4F42JbFZiGj2-2ERee3rBeGPvI0yQYAvrjmMao',
       },
     );
     return true;
