@@ -343,6 +343,12 @@ class _GroupChatScreenState extends State<GroupChatScreen> {
       onAttachmentPressed: _handleAttachmentPressed,
       onMessageTap: _handleMessageTap,
       onPreviewDataFetched: _handlePreviewDataFetched,
+      imageMessageBuilder: (message, {required int messageWidth}) {
+        return ImageMessage(
+          message: message,
+          messageWidth: double.maxFinite.toInt(),
+        );
+      },
       onSendPressed: _handleSendPressed,
       showUserAvatars: !AppConst.isWeb,
       showUserNames: true,
