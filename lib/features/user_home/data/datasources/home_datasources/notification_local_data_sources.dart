@@ -1,4 +1,5 @@
 import 'package:data_sharing_organizing/core/utils/constants/app_strings.dart';
+import 'package:data_sharing_organizing/core/utils/functions/sort_groups_by_last_activity_time.dart';
 import 'package:data_sharing_organizing/core/utils/services/notification/local_notification.dart';
 import 'package:hive/hive.dart';
 
@@ -46,7 +47,7 @@ class NotificationLocalDataSourceImp extends NotificationLocalDataSource {
         notificationList.where((element) => e.groupId == element.groupId),
       );
     }
-    return temp.reversed.toList();
+    return temp..sort(compareLastActivity);
   }
 
   @override
