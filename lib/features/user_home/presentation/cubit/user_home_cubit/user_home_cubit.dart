@@ -151,7 +151,8 @@ class UserHomeCubit extends Cubit<UserHomeState> {
         } else if (status is Failure<bool>) {
           _failureStatus(status.failure, true);
         }
-        if (!context.mounted) context.pop();
+        await EasyLoading.dismiss();
+        if (context.mounted) context.pop();
       },
     );
   }
