@@ -197,8 +197,8 @@ class DirectoriesRemoteDataSourceImp extends DirectoriesRemoteDataSource {
       // 'activity_reply_on': 'null',
       'activity_content': activity.content,
       'activity_date': activity.createdAt.toIso8601String(),
-      'activity_notify_others': activity.notifyOthers.inString,
-      'activity_owner_id': '${activity.createdBy.user.id}',
+      // 'activity_notify_others': activity.notifyOthers.inString,
+      // 'activity_owner_id': '${activity.createdBy.user.id}',
     };
     if (activity.insideDirectoryId != null) {
       body['activity_direction_id'] = '${activity.insideDirectoryId}';
@@ -206,7 +206,7 @@ class DirectoriesRemoteDataSourceImp extends DirectoriesRemoteDataSource {
     final AttachmentModel? attachment = activity.attachment;
     if (attachment != null) {
       body['activity_attachments_size'] = '${attachment.size}';
-      body['activity_attachments_url'] = attachment.uri;
+      // body['activity_attachments_url'] = attachment.uri;
       body['activity_attachments_mimetype'] = attachment.mimeType!;
       switch (activity.type) {
         case MessageType.photo:
