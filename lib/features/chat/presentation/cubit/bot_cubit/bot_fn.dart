@@ -1,12 +1,20 @@
+import 'dart:math';
+import 'dart:typed_data';
+
 import 'package:data_sharing_organizing/core/utils/config/locale/generated/l10n.dart';
 import 'package:data_sharing_organizing/core/utils/enums/home/group_access_type_enum.dart';
+import 'package:data_sharing_organizing/core/utils/enums/message_type/message_type.dart';
 import 'package:data_sharing_organizing/core/utils/functions/show_custom_dialog.dart';
 import 'package:data_sharing_organizing/core/utils/services/dependency/provider_dependency.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
+import 'package:image_picker/image_picker.dart';
+import 'package:mime/mime.dart';
 
 import '../../../../auth/domain/entities/auth_user_entity.dart';
+import '../../../data/models/attachment_model.dart';
 import '../../../domain/entities/activity_entity.dart';
 import '../../../domain/entities/directory_entity.dart';
 import '../../widgets/bot_widgets/add_data/add_activity_directory_dialog_widget.dart';
@@ -344,4 +352,130 @@ void _addDirectoryDialog(BuildContext context) {
       );
     },
   );
+}
+
+Future<
+    ({
+      Uint8List file,
+      ActivityEntity activity,
+    })?> handleAttachmentPressed(BuildContext context) async {
+  ({
+    Uint8List file,
+    ActivityEntity activity,
+  })? temp;
+  await showModalBottomSheet(
+    context: context,
+    builder: (BuildContext context) => SafeArea(
+      child: SizedBox(
+        height: 144,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: <Widget>[
+            TextButton(
+              onPressed: () async {
+                Navigator.pop(context);
+                temp = await _handleImageSelection();
+              },
+              child: Align(
+                alignment: AlignmentDirectional.centerStart,
+                child: Text(S.of(context).photo),
+              ),
+            ),
+            TextButton(
+              onPressed: () async {
+                Navigator.pop(context);
+                temp = await _handleFileSelection();
+              },
+              child: Align(
+                alignment: AlignmentDirectional.centerStart,
+                child: Text(S.of(context).file),
+              ),
+            ),
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: Align(
+                alignment: AlignmentDirectional.centerStart,
+                child: Text(S.of(context).cancel),
+              ),
+            ),
+          ],
+        ),
+      ),
+    ),
+  );
+  return temp;
+}
+
+Future<
+    ({
+      Uint8List file,
+      ActivityEntity activity,
+    })?> _handleFileSelection() async {
+  final DirectoryCubit dirCubit = ProviderDependency.directory;
+  final FilePickerResult? result = await FilePicker.platform.pickFiles(
+    type: FileType.any,
+  );
+
+  if (result != null) {
+    return (
+      file: await result.files.single.xFile.readAsBytes(),
+      activity: ActivityEntity(
+        id: Random().nextInt(9999),
+        groupId: dirCubit.groupCubit.group.groupId,
+        createdBy: dirCubit.botCubit.currentMember,
+        content: result.files.single.name,
+        createdAt: DateTime.now(),
+        isApproved: false,
+        type: MessageType.other,
+        attachment: AttachmentModel(
+          size: result.files.single.size.toDouble(),
+          name: result.files.single.name,
+          uri: result.files.single.path ?? '',
+          mimeType: lookupMimeType(result.files.single.path ?? ''),
+        ),
+        insideDirectoryId: dirCubit.currentDirectories.lastOrNull?.id,
+      ),
+    );
+  }
+  return null;
+}
+
+Future<
+    ({
+      Uint8List file,
+      ActivityEntity activity,
+    })?> _handleImageSelection() async {
+  final DirectoryCubit dirCubit = ProviderDependency.directory;
+  final result = await ImagePicker().pickImage(
+    maxWidth: 1440,
+    source: ImageSource.gallery,
+  );
+
+  if (result != null) {
+    final bytes = await result.readAsBytes();
+    final image = await decodeImageFromList(bytes);
+
+    return (
+      file: bytes,
+      activity: ActivityEntity(
+        id: Random().nextInt(9999),
+        groupId: dirCubit.groupCubit.group.groupId,
+        createdBy: dirCubit.botCubit.currentMember,
+        content: result.name,
+        createdAt: DateTime.now(),
+        isApproved: false,
+        type: MessageType.photo,
+        attachment: AttachmentModel(
+          size: bytes.length.toDouble(),
+          height: image.height.toDouble(),
+          width: image.width.toDouble(),
+          name: result.name,
+          uri: result.path,
+          mimeType: lookupMimeType(result.path),
+        ),
+        insideDirectoryId: dirCubit.currentDirectories.lastOrNull?.id,
+      ),
+    );
+  }
+  return null;
 }
