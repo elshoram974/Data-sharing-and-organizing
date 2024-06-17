@@ -191,6 +191,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "exitGroupNameGroup": m6,
         "exitGroups": MessageLookupByLibrary.simpleMessage("Exit groups"),
         "extraLarge": MessageLookupByLibrary.simpleMessage("Extra Large"),
+        "file": MessageLookupByLibrary.simpleMessage("File"),
         "fillField": MessageLookupByLibrary.simpleMessage("fill this field"),
         "firstName": MessageLookupByLibrary.simpleMessage("First name"),
         "fontSize": MessageLookupByLibrary.simpleMessage("Font size"),
@@ -269,6 +270,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "password": MessageLookupByLibrary.simpleMessage("Password"),
         "personalAccount":
             MessageLookupByLibrary.simpleMessage("Personal account"),
+        "photo": MessageLookupByLibrary.simpleMessage("Photo"),
         "popUps": MessageLookupByLibrary.simpleMessage("Pop ups"),
         "pressAgainToExit":
             MessageLookupByLibrary.simpleMessage("Press again to exit"),

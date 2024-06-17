@@ -190,6 +190,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "exitGroups":
             MessageLookupByLibrary.simpleMessage("الخروج من المجموعات"),
         "extraLarge": MessageLookupByLibrary.simpleMessage("كبير جداً"),
+        "file": MessageLookupByLibrary.simpleMessage("ملف"),
         "fillField": MessageLookupByLibrary.simpleMessage("املأ هذا الحقل"),
         "firstName": MessageLookupByLibrary.simpleMessage("الاسم الأول"),
         "fontSize": MessageLookupByLibrary.simpleMessage("حجم الخط"),
@@ -269,6 +270,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "أو قم بتسجيل الدخول باستخدام"),
         "password": MessageLookupByLibrary.simpleMessage("كلمة المرور"),
         "personalAccount": MessageLookupByLibrary.simpleMessage("حساب خاص"),
+        "photo": MessageLookupByLibrary.simpleMessage("صورة"),
         "popUps": MessageLookupByLibrary.simpleMessage("النوافذ المنبثقة"),
         "pressAgainToExit":
             MessageLookupByLibrary.simpleMessage("اضغط مرة أخرى للخروج"),

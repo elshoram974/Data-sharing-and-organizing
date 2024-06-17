@@ -388,5 +388,7 @@
                 "type": "String"
             }
         }
-    }
+    },
+    "file": "File",
+    "photo": "Photo"
 }

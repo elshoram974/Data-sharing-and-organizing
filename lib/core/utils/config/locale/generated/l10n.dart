@@ -2073,6 +2073,26 @@ class S {
       args: [groupName],
     );
   }
+
+  /// `File`
+  String get file {
+    return Intl.message(
+      'File',
+      name: 'file',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Photo`
+  String get photo {
+    return Intl.message(
+      'Photo',
+      name: 'photo',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
