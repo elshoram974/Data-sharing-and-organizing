@@ -59,9 +59,17 @@ abstract class DirectoryCubit extends Cubit<DirectoryState> {
   void addNewDirectoryOnSave(String val);
   void addNewDirectory();
 
+  String content = '';
+  bool isValidActivity = false;
+
   GlobalKey<FormFieldState<dynamic>> activityKey =
       GlobalKey<FormFieldState<dynamic>>();
   void addNewActivity();
+  void onChangeAct(String val) {
+    content = val;
+    isValidActivity = activityKey.currentState?.isValid ?? false;
+    emit(ValidateActivityState(isValidActivity));
+  }
 }
 
 class DirectoryCubitImp extends DirectoryCubit {
@@ -299,10 +307,9 @@ class DirectoryCubitImp extends DirectoryCubit {
 
   @override
   void addNewActivity() {
-    // TODO: add code here
     final ActivityEntity newActivity = ActivityEntity(
       id: -1,
-      content: 'content',
+      content: content,
       createdAt: DateTime.now(),
       createdBy: botCubit.currentMember,
       groupId: groupCubit.group.groupId,

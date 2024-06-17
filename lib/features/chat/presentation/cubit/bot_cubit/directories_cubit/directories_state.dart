@@ -26,3 +26,11 @@ final class ChangeDirectoryBottomHeightState extends DirectoryState {
   @override
   List<double> get props => [newHeight];
 }
+
+final class ValidateActivityState extends DirectoryState {
+  const ValidateActivityState(this.isValid);
+  final bool isValid;
+
+  @override
+  List<bool> get props => [isValid];
+}

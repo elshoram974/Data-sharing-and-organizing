@@ -6,5 +6,6 @@
         "Sharikna",
         "THIET",
         "فملوش"
-    ]
+    ],
+    "easycode.maxTokens": 2000
 }

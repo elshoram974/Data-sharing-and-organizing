@@ -3,6 +3,7 @@ import 'package:data_sharing_organizing/core/utils/enums/home/group_access_type_
 import 'package:data_sharing_organizing/core/utils/functions/show_custom_dialog.dart';
 import 'package:data_sharing_organizing/core/utils/services/dependency/provider_dependency.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
 
 import '../../../../auth/domain/entities/auth_user_entity.dart';
@@ -313,9 +314,17 @@ void _addActivityDialog(BuildContext context) {
     builder: (context) {
       return AddActivityOrDirectoryDialogWidget(
         content: const AddActivityWidget(),
-        addButton: TextButton(
-          onPressed: ProviderDependency.directory.addNewActivity,
-          child: Text(S.of(context).addActivity),
+        addButton: BlocBuilder<DirectoryCubit, DirectoryState>(
+          buildWhen: (p, c) => c is ValidateActivityState,
+          bloc: ProviderDependency.directory,
+          builder: (context, state) {
+            return TextButton(
+              onPressed: ProviderDependency.directory.isValidActivity
+                  ? ProviderDependency.directory.addNewActivity
+                  : null,
+              child: Text(S.of(context).addActivity),
+            );
+          },
         ),
       );
     },
