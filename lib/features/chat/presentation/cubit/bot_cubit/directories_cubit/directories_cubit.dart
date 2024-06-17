@@ -64,7 +64,7 @@ abstract class DirectoryCubit extends Cubit<DirectoryState> {
 
   GlobalKey<FormFieldState<dynamic>> activityKey =
       GlobalKey<FormFieldState<dynamic>>();
-  void addNewActivity();
+  void addNewActivity([({Uint8List file, ActivityEntity activity})? file]);
   void onChangeAct(String val) {
     content = val;
     isValidActivity = activityKey.currentState?.isValid ?? false;
@@ -306,24 +306,36 @@ class DirectoryCubitImp extends DirectoryCubit {
   }
 
   @override
-  void addNewActivity() {
-    final ActivityEntity newActivity = ActivityEntity(
-      id: -1,
-      content: content,
-      createdAt: DateTime.now(),
-      createdBy: botCubit.currentMember,
-      groupId: groupCubit.group.groupId,
-      isApproved: false,
-      type: MessageType.textMessage,
-      insideDirectoryId: _directoriesStack.lastOrNull?.id,
-      attachment: null,
-      notifyOthers: NotificationEnum.withoutNotify,
-    );
+  void addNewActivity([({Uint8List file, ActivityEntity activity})? file]) {
+    late final ActivityEntity newActivity;
+    if (file == null) {
+      newActivity = ActivityEntity(
+        id: -1,
+        content: content,
+        createdAt: DateTime.now(),
+        createdBy: botCubit.currentMember,
+        groupId: groupCubit.group.groupId,
+        isApproved: false,
+        type: MessageType.textMessage,
+        insideDirectoryId: _directoriesStack.lastOrNull?.id,
+        attachment: null,
+        notifyOthers: NotificationEnum.withoutNotify,
+      );
+    } else {
+      newActivity = file.activity;
+    }
+    final message = newActivity.toMessage();
 
     handleStatusEmit<ActivityEntity>(
-      statusFunction: () =>
-          botRepo.addNewActivity(newActivity, Uint8List.fromList([])),
-      successFunction: (_) => botCubit.botReply([_]),
+      statusFunction: () {
+        botCubit.addMessage(message.copyWith(status: types.Status.sending));
+        return botRepo.addNewActivity(newActivity, file?.file);
+      },
+      successFunction: (_) => botCubit.updateMessage(
+        _.toMessage().copyWith(status: types.Status.sent, id: message.id),
+      ),
+      failureFunction: () =>
+          botCubit.updateMessage(message.copyWith(status: types.Status.error)),
     ).then((v) => AppRoute.key.currentState?.pop());
   }
 

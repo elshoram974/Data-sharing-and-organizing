@@ -36,6 +36,7 @@ abstract class BOTCubit extends Cubit<BOTState> {
   void botReply(List<ActivityEntity> activities);
   void handleMessageTap(BuildContext _, types.Message message);
   void handleMessageDoubleTap(BuildContext _, types.Message message);
+  void updateMessage(types.Message message);
   void handlePreviewDataFetched(
       types.TextMessage message, types.PreviewData previewData);
   void handleSendPressed(types.PartialText message, [types.Status? status]);
@@ -144,6 +145,15 @@ class BOTCubitImp extends BOTCubit {
         emit(SetState(_i++));
       },
     );
+  }
+
+  @override
+  void updateMessage(types.Message message) async {
+    final index = botMessages.indexWhere((element) => element.id == message.id);
+    
+    botMessages[index] = message;
+    await botRepo.saveBotMessages(groupCubit.group, botMessages);
+    emit(SetState(_i++));
   }
 
   @override

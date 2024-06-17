@@ -176,9 +176,9 @@ class _GroupChatScreenState extends State<GroupChatScreen> {
                   Navigator.pop(context);
                   _handleImageSelection();
                 },
-                child: const Align(
+                child: Align(
                   alignment: AlignmentDirectional.centerStart,
-                  child: Text('Photo'),
+                  child: Text(S.of(context).photo),
                 ),
               ),
               TextButton(
@@ -186,16 +186,16 @@ class _GroupChatScreenState extends State<GroupChatScreen> {
                   Navigator.pop(context);
                   _handleFileSelection();
                 },
-                child: const Align(
+                child: Align(
                   alignment: AlignmentDirectional.centerStart,
-                  child: Text('File'),
+                  child: Text(S.of(context).file),
                 ),
               ),
               TextButton(
                 onPressed: () => Navigator.pop(context),
-                child: const Align(
+                child: Align(
                   alignment: AlignmentDirectional.centerStart,
-                  child: Text('Cancel'),
+                  child: Text(S.of(context).cancel),
                 ),
               ),
             ],

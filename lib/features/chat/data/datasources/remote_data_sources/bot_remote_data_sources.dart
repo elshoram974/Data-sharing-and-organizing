@@ -197,7 +197,7 @@ class DirectoriesRemoteDataSourceImp extends DirectoriesRemoteDataSource {
       // 'activity_reply_on': 'null',
       'activity_content': activity.content,
       'activity_date': activity.createdAt.toIso8601String(),
-      // 'activity_notify_others': activity.notifyOthers.inString,
+      'activity_notify_others': activity.notifyOthers.inString,
       // 'activity_owner_id': '${activity.createdBy.user.id}',
     };
     if (activity.insideDirectoryId != null) {

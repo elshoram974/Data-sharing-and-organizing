@@ -48,7 +48,7 @@ class BotCustomBubble extends StatelessWidget {
             isTheUser ? CrossAxisAlignment.end : CrossAxisAlignment.start,
         children: [
           Visibility(
-            visible: !isTheUser || !isApproved,
+            visible: !isTheUser && !isApproved,
             child: Padding(
               padding: const EdgeInsets.only(bottom: 2),
               child: Text(

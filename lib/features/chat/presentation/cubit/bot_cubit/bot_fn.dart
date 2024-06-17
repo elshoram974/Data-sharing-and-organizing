@@ -359,11 +359,11 @@ Future<
       Uint8List file,
       ActivityEntity activity,
     })?> handleAttachmentPressed(BuildContext context) async {
-  ({
-    Uint8List file,
-    ActivityEntity activity,
-  })? temp;
-  await showModalBottomSheet(
+  return showModalBottomSheet<
+      ({
+        Uint8List file,
+        ActivityEntity activity,
+      })?>(
     context: context,
     builder: (BuildContext context) => SafeArea(
       child: SizedBox(
@@ -373,8 +373,7 @@ Future<
           children: <Widget>[
             TextButton(
               onPressed: () async {
-                Navigator.pop(context);
-                temp = await _handleImageSelection();
+                Navigator.pop(context, await _handleImageSelection());
               },
               child: Align(
                 alignment: AlignmentDirectional.centerStart,
@@ -383,8 +382,7 @@ Future<
             ),
             TextButton(
               onPressed: () async {
-                Navigator.pop(context);
-                temp = await _handleFileSelection();
+                Navigator.pop(context, await _handleFileSelection());
               },
               child: Align(
                 alignment: AlignmentDirectional.centerStart,
@@ -403,7 +401,6 @@ Future<
       ),
     ),
   );
-  return temp;
 }
 
 Future<
