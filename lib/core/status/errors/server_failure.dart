@@ -34,12 +34,14 @@ class ServerFailure<T> extends Failure<T> {
         );
 
       case HttpExceptionType.badResponse:
+        final String body = (e.response as Response).body.trim();
         return ServerFailure.fromBadResponse(
-          FailureBody.fromJson((e.response as Response).body).copyWith(
-            httpExceptionType: HttpExceptionType.badResponse,
-          ),
+          body == ''
+              ? const FailureBody(code: 500)
+              : FailureBody.fromJson(body).copyWith(
+                  httpExceptionType: HttpExceptionType.badResponse,
+                ),
         );
-
       case HttpExceptionType.cancel:
         return ServerFailure(
           res.copyWith(
