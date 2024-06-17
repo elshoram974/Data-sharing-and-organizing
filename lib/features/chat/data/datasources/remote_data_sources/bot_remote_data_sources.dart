@@ -191,6 +191,7 @@ class DirectoriesRemoteDataSourceImp extends DirectoriesRemoteDataSource {
   }) async {
     Map<String, dynamic> response;
     final Map<String, String> body = {
+      'user_id': '${activity.createdBy.user.id}',
       'activity_group_id': '${activity.groupId}',
       'activity_type': activity.type.inString,
       // 'activity_reply_on': 'null',
@@ -216,7 +217,7 @@ class DirectoriesRemoteDataSourceImp extends DirectoriesRemoteDataSource {
       }
       response = await service.uploadFile(
         link: AppLinks.addNewActivity,
-        fieldName: 'file', // TODO: u may have to change this
+        fieldName: 'file_request',
         fileToUpload: MyFileData(
           path: attachment.uri,
           type: attachment.mimeType!.split('/').last,
@@ -228,8 +229,9 @@ class DirectoriesRemoteDataSourceImp extends DirectoriesRemoteDataSource {
     } else {
       response = await service.post(AppLinks.addNewActivity, body);
     }
-    // TODO: implement addNewActivity
-    throw UnimplementedError("$response");
+    return activity.copyWith(
+      isApproved: response['response']['activity_is_approved'] == 1,
+    );
   }
 
   @override

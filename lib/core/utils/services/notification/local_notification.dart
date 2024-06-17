@@ -111,7 +111,6 @@ Future<Uint8List> getImageBytes(String imageUrl) async {
     final bytes = await fileInfo.file.readAsBytes();
     return bytes;
   } else {
-    print('Error getting image bytes: File not found');
     return Uint8List(0); // Handle error (e.g., return empty bytes)
   }
 }
