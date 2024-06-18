@@ -15,4 +15,4 @@ For help getting started with Flutter development, view the
 [online documentation](https://docs.flutter.dev/), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
 
--last typeId = `12` in `GroupNotificationEntity` for hive in `lib/features/user_home/domain/entities/group_notification_entity.dart`
+-last typeId = `13` in `GroupMember` for hive in `D:\my Aplications\data_sharing_organizing\lib\features\chat\data\models\group_details_members\group_members_model.dart`

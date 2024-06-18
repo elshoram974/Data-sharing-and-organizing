@@ -2,18 +2,33 @@ import 'dart:convert';
 
 import 'package:data_sharing_organizing/core/utils/enums/notification_enum.dart';
 import 'package:equatable/equatable.dart';
+import 'package:hive/hive.dart';
 
+part 'group_members_model.g.dart';
+
+@HiveType(typeId: 13)
 class GroupMember extends Equatable {
+  @HiveField(1)
   final int groupId;
+  @HiveField(2)
   final int memberId;
+  @HiveField(3)
   final bool canInteraction;
+  @HiveField(4)
   final NotificationEnum notification;
+  @HiveField(5)
   final DateTime joinDate;
+  @HiveField(6)
   final bool isAdmin;
+  @HiveField(7)
   final String email;
+  @HiveField(8)
   final String firstName;
+  @HiveField(9)
   final String lastName;
+  @HiveField(10)
   final DateTime lastLogin;
+  @HiveField(11)
   final String? image;
 
   const GroupMember({

@@ -5,6 +5,7 @@ import 'package:data_sharing_organizing/features/user_home/domain/entities/group
 import 'package:hive_flutter/hive_flutter.dart';
 
 import '../../../features/chat/data/models/attachment_model.dart';
+import '../../../features/chat/data/models/group_details_members/group_members_model.dart';
 import '../../../features/chat/domain/entities/activity_entity.dart';
 import '../../../features/chat/domain/entities/directory_entity.dart';
 import '../../../features/chat/domain/entities/member_entity.dart';
@@ -30,6 +31,7 @@ Future<void> localInstance() async {
     Hive.openBox<GroupNotificationEntity>(AppStrings.notificationBox),
     Hive.openBox<String>(AppStrings.botMessagesBox),
     Hive.openBox<String>(AppStrings.localConfig),
+    Hive.openBox<GroupMember>(AppStrings.groupsMembers),
   ]);
 
   config = Hive.box<String>(AppStrings.localConfig);
@@ -76,4 +78,6 @@ void _registerAdapterFn() {
   Hive.registerAdapter<GroupNotificationEntity>(
     GroupNotificationEntityAdapter(),
   ); //* it in member entity :(
+
+  Hive.registerAdapter<GroupMember>(GroupMemberAdapter());
 }
