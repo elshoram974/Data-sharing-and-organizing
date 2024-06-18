@@ -23,7 +23,7 @@ class GroupDetailsBody extends StatelessWidget {
   Widget build(BuildContext context) {
     final List list = [5, 6, 7, 8, 9, 10, 15, 16, 17, 18, 19, 20, 21, 22, 23];
 
-    ProviderDependency.groupDetails = BlocProvider.of<GroupDetailsCubit>(context);
+    ProviderDependency.groupDetails = BlocProvider.of<GroupDetailsCubitImp>(context);
 
     return CustomScrollView(
       slivers: [

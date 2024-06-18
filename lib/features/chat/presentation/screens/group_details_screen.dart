@@ -13,7 +13,7 @@ class GroupDetailsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => GroupDetailsCubit(),
+      create: (context) => GroupDetailsCubitImp(),
       child: Scaffold(
         body: GroupDetailsBody(group: group),
       ),
