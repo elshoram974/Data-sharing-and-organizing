@@ -13,7 +13,7 @@ import '../../../user_home/domain/entities/group_home_entity.dart';
 import '../../domain/entities/data_in_directory.dart';
 import '../../domain/repositories/bot_repo.dart';
 import '../datasources/local_data_sources/bot_local_data_sources.dart';
-import '../datasources/remote_data_sources/bot_remote_data_sources.dart';
+import '../datasources/remote_data_sources/directories_remote_data_sources.dart';
 
 class BOTRepositoriesImp extends BOTRepositories {
   const BOTRepositoriesImp({
