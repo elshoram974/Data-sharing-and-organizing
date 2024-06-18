@@ -4,6 +4,7 @@ import 'package:data_sharing_organizing/core/utils/constants/app_color.dart';
 import 'package:data_sharing_organizing/core/utils/entities/member_list_tile_entity.dart';
 import 'package:flutter/material.dart';
 
+import '../../../chat/data/models/group_details_members/group_members_model.dart';
 import '../widgets/add_group_details/group_name_image.dart';
 import '../widgets/add_group_details/group_permissions_tile_widget.dart';
 import '../widgets/add_group_details/members_count_widget.dart';
@@ -14,7 +15,7 @@ class AddGroupDetailsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final List selectedUsers = [5, 6, 9]; // TODO: selected users
+    final List<GroupMember> selectedUsers = []; // TODO: selected users
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         onPressed: () {}, // TODO: navigate to group screen

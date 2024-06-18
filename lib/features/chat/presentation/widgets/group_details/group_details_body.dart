@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../new_group/presentation/widgets/add_group_details/members_count_widget.dart';
 import '../../../../user_home/domain/entities/group_home_entity.dart';
+import '../../../data/models/group_details_members/group_members_model.dart';
 import '../../cubit/group_details/group_details_cubit.dart';
 import '../../widgets/group_details/add_members_tile_group_details.dart';
 import '../../widgets/group_details/app_bar/app_bar_group_details.dart';
@@ -21,30 +22,37 @@ class GroupDetailsBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final List list = [5, 6, 7, 8, 9, 10, 15, 16, 17, 18, 19, 20, 21, 22, 23];
+    ProviderDependency.groupDetails =
+        BlocProvider.of<GroupDetailsCubitImp>(context);
+    final GroupDetailsCubit c = ProviderDependency.groupDetails;
 
-    ProviderDependency.groupDetails = BlocProvider.of<GroupDetailsCubitImp>(context);
-
-    return CustomScrollView(
-      slivers: [
-        AppBarGroupDetails(group: group, membersLength: list.length),
-        const MediaDocsTileGroupDetails(),
-        const MuteNotificationsTileGroupDetails(),
-        if (group.memberEntity.isAdmin)
-          const GroupPermissionsTileGroupDetails(),
-        MembersCountWidget(
-          topPadding: 44,
-          bottomPadding: 0,
-          selectedUsers: list,
-        ),
-        if (group.memberEntity.isAdmin) const AddMembersTileGroupDetails(),
-        MembersListGroupDetails(
-          list: list.getRange(0, list.length >= 6 ? 6 : list.length),
-          group: group,
-        ),
-        if (list.length > 6) ViewAllMembersButton(list: list, group: group),
-        const ExitGroupTileGroupDetails(),
-      ],
+    return BlocBuilder<GroupDetailsCubitImp, GroupDetailsState>(
+      builder: (context, state) {
+        final List<GroupMember> members = c.members;
+        return CustomScrollView(
+          slivers: [
+            AppBarGroupDetails(group: group),
+            const MediaDocsTileGroupDetails(),
+            const MuteNotificationsTileGroupDetails(),
+            if (group.memberEntity.isAdmin)
+              const GroupPermissionsTileGroupDetails(),
+            MembersCountWidget(
+              topPadding: 44,
+              bottomPadding: 0,
+              selectedUsers: members,
+            ),
+            if (group.memberEntity.isAdmin) const AddMembersTileGroupDetails(),
+            MembersListGroupDetails(
+              list:
+                  members.getRange(0, members.length >= 6 ? 6 : members.length),
+              group: group,
+            ),
+            if (members.length > 6)
+              ViewAllMembersButton(list: members, group: group),
+            const ExitGroupTileGroupDetails(),
+          ],
+        );
+      },
     );
   }
 }

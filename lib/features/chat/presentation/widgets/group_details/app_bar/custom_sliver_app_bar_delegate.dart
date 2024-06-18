@@ -11,9 +11,8 @@ import 'group_members_count_group_details.dart';
 
 class CustomSliverAppBarDelegate extends SliverPersistentHeaderDelegate {
   final GroupHomeEntity group;
-  final int? membersCount;
 
-  CustomSliverAppBarDelegate({this.membersCount, required this.group});
+  CustomSliverAppBarDelegate({required this.group});
 
   @override
   Widget build(
@@ -50,8 +49,7 @@ class CustomSliverAppBarDelegate extends SliverPersistentHeaderDelegate {
               ),
               if (!isClosed) ...[
                 _GroupName(group: group),
-                if (membersCount != null)
-                  _MembersCount(membersCount: membersCount)
+                const _MembersCount(),
               ]
             ],
           ),
@@ -136,16 +134,14 @@ class _GroupName extends StatelessWidget {
 }
 
 class _MembersCount extends StatelessWidget {
-  const _MembersCount({required this.membersCount});
-
-  final int? membersCount;
+  const _MembersCount();
 
   @override
   Widget build(BuildContext context) {
-    return Flexible(
+    return const Flexible(
       child: FittedBox(
         fit: BoxFit.scaleDown,
-        child: GroupMembersCountGroupDetails(membersCount: membersCount),
+        child: GroupMembersCountGroupDetails(),
       ),
     );
   }

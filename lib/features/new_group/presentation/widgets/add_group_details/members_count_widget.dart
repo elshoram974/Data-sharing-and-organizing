@@ -4,6 +4,8 @@ import 'package:data_sharing_organizing/core/utils/constants/app_constants.dart'
 import 'package:data_sharing_organizing/core/utils/styles.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../chat/data/models/group_details_members/group_members_model.dart';
+
 class MembersCountWidget extends StatelessWidget {
   const MembersCountWidget({
     super.key,
@@ -12,7 +14,7 @@ class MembersCountWidget extends StatelessWidget {
     this.bottomPadding = 15,
   });
 
-  final List selectedUsers;
+  final List<GroupMember> selectedUsers;
   final double topPadding;
   final double bottomPadding;
 
