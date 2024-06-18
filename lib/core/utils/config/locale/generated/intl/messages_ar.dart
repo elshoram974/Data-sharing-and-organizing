@@ -268,6 +268,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "openGallery": MessageLookupByLibrary.simpleMessage("فتح المعرض"),
         "orConnectUsing": MessageLookupByLibrary.simpleMessage(
             "أو قم بتسجيل الدخول باستخدام"),
+        "owner": MessageLookupByLibrary.simpleMessage("المالك"),
         "password": MessageLookupByLibrary.simpleMessage("كلمة المرور"),
         "personalAccount": MessageLookupByLibrary.simpleMessage("حساب خاص"),
         "photo": MessageLookupByLibrary.simpleMessage("صورة"),
@@ -380,6 +381,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "تم تقديم كلمة مرور خاطئة لهذا المستخدم."),
         "yesterday": MessageLookupByLibrary.simpleMessage("أمس"),
         "yesterdayAtTimeString": m23,
+        "you": MessageLookupByLibrary.simpleMessage("أنت"),
         "youAddedActivityName": m24,
         "youAddedDirNameDirectory": m25,
         "youAreAboutToBlockMember": m26,

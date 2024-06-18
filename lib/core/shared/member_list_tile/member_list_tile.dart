@@ -65,7 +65,7 @@ class MembersListTile extends StatelessWidget {
                 ),
                 child: Text(
                   memberEntity.id == ownerId
-                      ? "Owner"
+                      ? S.of(context).owner
                       : S.of(context).admin,
                   style: AppStyle.styleBoldInika13.copyWith(
                     color: Colors.white,

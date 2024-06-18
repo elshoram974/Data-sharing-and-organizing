@@ -390,5 +390,7 @@
         }
     },
     "file": "File",
-    "photo": "Photo"
+    "photo": "Photo",
+    "owner": "Owner",
+    "you": "You"
 }

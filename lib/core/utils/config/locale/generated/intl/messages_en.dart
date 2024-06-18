@@ -267,6 +267,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "openGallery": MessageLookupByLibrary.simpleMessage("Open gallery"),
         "orConnectUsing":
             MessageLookupByLibrary.simpleMessage("Or connect using"),
+        "owner": MessageLookupByLibrary.simpleMessage("Owner"),
         "password": MessageLookupByLibrary.simpleMessage("Password"),
         "personalAccount":
             MessageLookupByLibrary.simpleMessage("Personal account"),
@@ -379,6 +380,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Wrong password provided for that user."),
         "yesterday": MessageLookupByLibrary.simpleMessage("Yesterday"),
         "yesterdayAtTimeString": m23,
+        "you": MessageLookupByLibrary.simpleMessage("You"),
         "youAddedActivityName": m24,
         "youAddedDirNameDirectory": m25,
         "youAreAboutToBlockMember": m26,

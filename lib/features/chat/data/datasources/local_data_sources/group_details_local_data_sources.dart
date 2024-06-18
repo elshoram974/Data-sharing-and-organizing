@@ -1,3 +1,4 @@
+import 'package:data_sharing_organizing/core/utils/config/locale/generated/l10n.dart';
 import 'package:data_sharing_organizing/core/utils/constants/app_strings.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
@@ -35,7 +36,7 @@ class GroupDetailsLocalDataSourceImp extends GroupDetailsLocalDataSource {
 
     final int i = list.indexWhere((e) => e.memberId == userId);
     final GroupMember thisUser = list.removeAt(i).copyWith(
-          firstName: 'You',
+          firstName: S.current.you,
           lastName: '',
         );
 

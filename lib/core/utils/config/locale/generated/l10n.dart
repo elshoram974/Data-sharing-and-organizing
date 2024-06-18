@@ -2093,6 +2093,26 @@ class S {
       args: [],
     );
   }
+
+  /// `Owner`
+  String get owner {
+    return Intl.message(
+      'Owner',
+      name: 'owner',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You`
+  String get you {
+    return Intl.message(
+      'You',
+      name: 'you',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
