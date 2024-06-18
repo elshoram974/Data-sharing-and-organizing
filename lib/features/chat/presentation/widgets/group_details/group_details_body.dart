@@ -43,8 +43,9 @@ class GroupDetailsBody extends StatelessWidget {
             ),
             if (group.memberEntity.isAdmin) const AddMembersTileGroupDetails(),
             MembersListGroupDetails(
-              list:
-                  members.getRange(0, members.length >= 6 ? 6 : members.length),
+              list: members
+                  .getRange(0, members.length >= 6 ? 6 : members.length)
+                  .toList(),
               group: group,
             ),
             if (members.length > 6)

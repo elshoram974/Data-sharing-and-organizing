@@ -34,7 +34,10 @@ class GroupDetailsLocalDataSourceImp extends GroupDetailsLocalDataSource {
     if (list == null || list.isEmpty) return [];
 
     final int i = list.indexWhere((e) => e.memberId == userId);
-    final GroupMember thisUser = list.removeAt(i);
+    final GroupMember thisUser = list.removeAt(i).copyWith(
+          firstName: 'You',
+          lastName: '',
+        );
 
     List<GroupMember> admins = list.where((e) => e.isAdmin).toList();
     admins.sort(_groupMemberComparator);

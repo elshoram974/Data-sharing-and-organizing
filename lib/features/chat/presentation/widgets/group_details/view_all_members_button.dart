@@ -3,6 +3,7 @@ import 'package:data_sharing_organizing/core/utils/constants/app_color.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../user_home/domain/entities/group_home_entity.dart';
+import '../../../data/models/group_details_members/group_members_model.dart';
 import 'members_list_group_details.dart';
 
 class ViewAllMembersButton extends StatelessWidget {
@@ -12,7 +13,7 @@ class ViewAllMembersButton extends StatelessWidget {
     required this.group,
   });
 
-  final List list;
+  final List<GroupMember> list;
   final GroupHomeEntity group;
 
   @override
@@ -43,7 +44,7 @@ class _AllMembersScreen extends StatelessWidget {
   });
 
   final GroupHomeEntity group;
-  final List list;
+  final List<GroupMember> list;
 
   @override
   Widget build(BuildContext context) {

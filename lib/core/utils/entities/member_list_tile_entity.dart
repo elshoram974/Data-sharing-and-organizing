@@ -1,6 +1,7 @@
 import 'package:equatable/equatable.dart';
 
 class MemberListTileEntity extends Equatable {
+  final int id;
   final String name;
   final bool isAdmin;
   final String? imageLink;
@@ -8,6 +9,7 @@ class MemberListTileEntity extends Equatable {
   final bool isSelected;
 
   const MemberListTileEntity({
+    required this.id,
     required this.name,
     required this.isAdmin,
     required this.imageLink,
@@ -16,6 +18,7 @@ class MemberListTileEntity extends Equatable {
   });
   @override
   List<Object?> get props => [
+        id,
         name,
         isAdmin,
         imageLink,

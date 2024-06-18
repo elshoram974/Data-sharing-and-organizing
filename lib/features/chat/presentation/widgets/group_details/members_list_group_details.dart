@@ -6,6 +6,7 @@ import 'package:data_sharing_organizing/core/utils/entities/member_list_tile_ent
 import 'package:flutter/material.dart';
 
 import '../../../../user_home/domain/entities/group_home_entity.dart';
+import '../../../data/models/group_details_members/group_members_model.dart';
 
 class MembersListGroupDetails extends StatelessWidget {
   const MembersListGroupDetails({
@@ -14,7 +15,7 @@ class MembersListGroupDetails extends StatelessWidget {
     required this.group,
   });
 
-  final Iterable list;
+  final List<GroupMember> list;
   final GroupHomeEntity group;
 
   @override
@@ -25,16 +26,21 @@ class MembersListGroupDetails extends StatelessWidget {
         (BuildContext context, int i) {
           return ResConstrainedBoxAlign(
             child: MembersListTile(
+              ownerId: group.ownerId,
               onTileTappedDown: group.memberEntity.isAdmin && i != 0
-                  ? (_) => editMembersMenu(context, _,
-                      i == 0 || i == 5 || i == 8, i == 1 || i == 6 || i == 7)
+                  ? (_) => editMembersMenu(
+                        context,
+                        _,
+                        list[i].isAdmin,
+                        !list[i].canInteraction,
+                      )
                   : null,
               memberEntity: MemberListTileEntity(
-                name: "Adel Eid -> ${i + 1}",
-                isAdmin: i == 0 || i == 5 || i == 8,
-                imageLink:
-                    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcThOaoCj5ZMdS0xOCIYLMVT8ReRCVjCCzX01BPJH3MpsA&s',
-                lastLogin: DateTime.now().subtract(Duration(days: i)),
+                id: list[i].memberId,
+                name: "${list[i].firstName} ${list[i].lastName}",
+                isAdmin: list[i].isAdmin,
+                imageLink: list[i].image,
+                lastLogin: list[i].lastLogin,
                 isSelected: false,
               ),
             ),

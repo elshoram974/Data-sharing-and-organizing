@@ -40,11 +40,12 @@ class AddMembersScreen extends StatelessWidget {
                   child: MembersListTile(
                     onTileTapped: () {},
                     memberEntity: MemberListTileEntity(
-                      name: "Adel Eid -> ${i + 1}",
-                      isAdmin: false,
-                      imageLink:
-                          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcThOaoCj5ZMdS0xOCIYLMVT8ReRCVjCCzX01BPJH3MpsA&s',
-                      lastLogin: DateTime.now().subtract(Duration(days: i)),
+                      id: selectedUsers[i].memberId,
+                      isAdmin: selectedUsers[i].isAdmin,
+                      name:
+                          '${selectedUsers[i].firstName} ${selectedUsers[i].lastName}}',
+                      imageLink: selectedUsers[i].image,
+                      lastLogin: selectedUsers[i].lastLogin,
                       isSelected: false,
                     ),
                   ),

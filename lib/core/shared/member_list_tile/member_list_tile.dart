@@ -12,10 +12,12 @@ import 'member_tile_body_widget.dart';
 class MembersListTile extends StatelessWidget {
   const MembersListTile({
     super.key,
+    this.ownerId,
     required this.memberEntity,
     this.onTileTapped,
     this.onTileTappedDown,
   });
+  final int? ownerId;
   final MemberListTileEntity memberEntity;
   final void Function()? onTileTapped;
   final Function(TapDownDetails)? onTileTappedDown;
@@ -62,7 +64,9 @@ class MembersListTile extends StatelessWidget {
                   vertical: 4,
                 ),
                 child: Text(
-                  S.of(context).admin,
+                  memberEntity.id == ownerId
+                      ? "Owner"
+                      : S.of(context).admin,
                   style: AppStyle.styleBoldInika13.copyWith(
                     color: Colors.white,
                     fontSize: 12,
