@@ -2,11 +2,15 @@ import '../../../../features/auth/data/datasources/auth_local_data_sources.dart'
 import '../../../../features/auth/data/datasources/auth_remote_data_sources.dart';
 import '../../../../features/auth/data/repositories/auth_repositories_imp.dart';
 import '../../../../features/chat/data/datasources/local_data_sources/bot_local_data_sources.dart';
+import '../../../../features/chat/data/datasources/local_data_sources/group_details_local_data_sources.dart';
 import '../../../../features/chat/data/datasources/local_data_sources/group_init_local_data_sources.dart';
-import '../../../../features/chat/data/datasources/remote_data_sources/bot_remote_data_sources.dart';
+import '../../../../features/chat/data/datasources/remote_data_sources/directories_remote_data_sources.dart';
+import '../../../../features/chat/data/datasources/remote_data_sources/group_details_remote_data_sources.dart';
 import '../../../../features/chat/data/repositories/bot_repo.dart';
+import '../../../../features/chat/data/repositories/group_details_repo_imp.dart';
 import '../../../../features/chat/data/repositories/init_group_repo.dart';
 import '../../../../features/chat/domain/repositories/bot_repo.dart';
+import '../../../../features/chat/domain/repositories/group_details_repo.dart';
 import '../../../../features/chat/domain/repositories/init_group_repo.dart';
 import '../../../../features/user_home/data/datasources/edit_profile_datasources/edit_profile_local_data_sources.dart';
 import '../../../../features/user_home/data/datasources/edit_profile_datasources/edit_profile_remote_data_sources.dart';
@@ -58,6 +62,12 @@ void repositoriesDependency() {
     BOTRepositoriesImp(
       localDataSource: sl.get<BOTLocalDataSource>(),
       remoteDataSource: sl.get<DirectoriesRemoteDataSource>(),
+    ),
+  );
+  sl.registerSingleton<GroupDetailsRepositories>(
+    GroupDetailsRepositoriesImp(
+      localDataSource: sl.get<GroupDetailsLocalDataSource>(),
+      remoteDataSource: sl.get<GroupDetailsRemoteDataSource>(),
     ),
   );
 }
