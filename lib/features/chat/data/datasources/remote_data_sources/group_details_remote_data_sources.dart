@@ -21,6 +21,6 @@ class GroupDetailsRemoteDataSourceImp extends GroupDetailsRemoteDataSource {
       AppLinks.groupMembers,
       {'group_id': '$groupId'},
     );
-    return GroupDetailsMembers.fromMap(response).members!;
+    return GroupDetailsMembers.fromMap(response).members;
   }
 }

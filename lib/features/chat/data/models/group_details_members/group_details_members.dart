@@ -1,27 +1,38 @@
 import 'dart:convert';
 
+import 'package:hive/hive.dart';
 import 'package:equatable/equatable.dart';
 
 import 'group_members_model.dart';
 
-class GroupDetailsMembers extends Equatable {
-  final String? status;
-  final List<GroupMember>? members;
+part 'group_details_members.g.dart';
 
-  const GroupDetailsMembers({this.status, this.members});
+@HiveType(typeId: 14)
+class GroupDetailsMembers extends Equatable {
+  
+  @HiveField(1)
+  final String status;
+
+  @HiveField(2)
+  final List<GroupMember> members;
+
+  const GroupDetailsMembers({
+    required this.status,
+    required this.members,
+  });
 
   factory GroupDetailsMembers.fromMap(Map<String, dynamic> data) {
     return GroupDetailsMembers(
-      status: data['status'] as String?,
-      members: (data['users'] as List<dynamic>?)
-          ?.map((e) => GroupMember.fromMap(e as Map<String, dynamic>))
+      status: data['status'] as String,
+      members: (data['users'] as List<dynamic>)
+          .map((e) => GroupMember.fromMap(e as Map<String, dynamic>))
           .toList(),
     );
   }
 
   Map<String, dynamic> toMap() => {
         'status': status,
-        'users': members?.map((e) => e.toMap()).toList(),
+        'users': members.map((e) => e.toMap()).toList(),
       };
 
   /// `dart:convert`
@@ -39,11 +50,11 @@ class GroupDetailsMembers extends Equatable {
 
   GroupDetailsMembers copyWith({
     String? status,
-    List<GroupMember>? users,
+    List<GroupMember>? members,
   }) {
     return GroupDetailsMembers(
       status: status ?? this.status,
-      members: users ?? this.members,
+      members: members ?? this.members,
     );
   }
 
