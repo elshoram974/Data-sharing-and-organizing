@@ -48,7 +48,7 @@ void dataSourceDependency() {
     DirectoriesRemoteDataSourceImp(sl.get<APIServices>()),
   );
   sl.registerSingleton<GroupDetailsLocalDataSource>(
-    const GroupDetailsLocalDataSourceImp(),
+    GroupDetailsLocalDataSourceImp(),
   );
   sl.registerSingleton<GroupDetailsRemoteDataSource>(
     GroupDetailsRemoteDataSourceImp(sl.get<APIServices>()),

@@ -31,6 +31,7 @@ class GroupDetailsRepositoriesImp extends GroupDetailsRepositories {
           final List<GroupMember> members = await remoteDataSource.getGroupMembers(groupId);
           return await localDataSource.saveGroupMembers(
             groupId: groupId,
+            userId: userId,
             members: members,
           );
         },

@@ -31,7 +31,7 @@ Future<void> localInstance() async {
     Hive.openBox<GroupNotificationEntity>(AppStrings.notificationBox),
     Hive.openBox<String>(AppStrings.botMessagesBox),
     Hive.openBox<String>(AppStrings.localConfig),
-    Hive.openBox<GroupMember>(AppStrings.groupsMembers),
+    Hive.openBox<List<GroupMember>>(AppStrings.groupsMembers),
   ]);
 
   config = Hive.box<String>(AppStrings.localConfig);
