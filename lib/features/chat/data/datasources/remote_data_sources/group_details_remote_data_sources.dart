@@ -105,7 +105,7 @@ class GroupDetailsRemoteDataSourceImp extends GroupDetailsRemoteDataSource {
         'user_id': '${group.memberEntity.user.id}',
         'group_id': '${group.groupId}',
         'member_id': '${member.memberId}',
-        'can_interaction': makeAdmin.toString(),
+        'is_admin': makeAdmin.toString(),
       },
     );
   }
