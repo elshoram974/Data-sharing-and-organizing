@@ -110,8 +110,8 @@ class GroupDetailsRepositoriesImp extends GroupDetailsRepositories {
   }
 
   @override
-  Future<Status<void>> editGroup(EditGroupParams params) {
-    return executeAndHandleErrors<void>(
+  Future<Status<String?>> editGroup(EditGroupParams params) {
+    return executeAndHandleErrors<String?>(
       () => remoteDataSource.editGroup(params),
     );
   }

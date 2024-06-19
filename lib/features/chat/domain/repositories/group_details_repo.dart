@@ -41,7 +41,7 @@ abstract class GroupDetailsRepositories {
 
   Future<Status<void>> changePermissions(GroupPermissionsParams params);
 
-  Future<Status<void>> editGroup(EditGroupParams params);
+  Future<Status<String?>> editGroup(EditGroupParams params);
   Future<Status<void>> removeGroupImage({
     required int adminId,
     required int groupId,

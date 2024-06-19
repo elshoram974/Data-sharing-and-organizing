@@ -39,7 +39,7 @@ abstract class GroupDetailsRemoteDataSource {
 
   Future<void> changePermissions(GroupPermissionsParams params);
 
-  Future<void> editGroup(EditGroupParams params);
+  Future<String?> editGroup(EditGroupParams params);
   Future<void> removeGroupImage({required int adminId, required int groupId});
 }
 
@@ -151,7 +151,8 @@ class GroupDetailsRemoteDataSourceImp extends GroupDetailsRemoteDataSource {
   }
 
   @override
-  Future<void> editGroup(EditGroupParams params) async {
+  Future<String?> editGroup(EditGroupParams params) async {
+    String? imageLink;
     final Map<String, String> body = {
       'user_id': '${params.adminId}',
       'group_id': '${params.groupId}',
@@ -160,15 +161,17 @@ class GroupDetailsRemoteDataSourceImp extends GroupDetailsRemoteDataSource {
       body['name'] = params.groupName!;
       await service.post(AppLinks.editGroupData, body);
     } else if (params.groupImage != null) {
-      await service.uploadFile(
+      final res = await service.uploadFile(
         link: AppLinks.editGroupData,
         fieldName: 'image',
         fileToUpload: params.groupImage!,
         body: body,
       );
+      imageLink = res['group']['group_image'] as String?;
     } else {
       throw "Can't make groupName and groupImage null";
     }
+    return imageLink;
   }
 
   @override
