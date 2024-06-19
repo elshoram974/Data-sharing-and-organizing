@@ -28,7 +28,8 @@ class GroupDetailsRepositoriesImp extends GroupDetailsRepositories {
     yield* Stream.fromFuture(
       executeAndHandleErrors<List<GroupMember>>(
         () async {
-          final List<GroupMember> members = await remoteDataSource.getGroupMembers(groupId);
+          final List<GroupMember> members =
+              await remoteDataSource.getGroupMembers(groupId);
           return await localDataSource.saveGroupMembers(
             groupId: groupId,
             userId: userId,

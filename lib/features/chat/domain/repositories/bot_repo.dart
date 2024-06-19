@@ -35,6 +35,6 @@ abstract class BOTRepositories {
   Future<Status<DirectoryEntity>> addNewDir(DirectoryEntity newDir);
   Future<Status<ActivityEntity>> addNewActivity(
       ActivityEntity newActivity, Uint8List? file);
-  
+
   Future<Status<bool>> sendNotification(NotificationDataEntity data);
 }

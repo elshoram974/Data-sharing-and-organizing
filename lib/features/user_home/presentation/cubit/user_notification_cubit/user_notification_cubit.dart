@@ -43,7 +43,7 @@ class UserNotificationCubit extends Cubit<UserNotificationState> {
     emit(UpdateNotificationState(currentNotifications[i], i));
   }
 
-  void insertNew(ActivityEntity activity, int screen , int notificationId) {
+  void insertNew(ActivityEntity activity, int screen, int notificationId) {
     final groups = ProviderDependency.userHome.currentGroups;
     final GroupHomeEntity g =
         groups.where((e) => e.groupId == activity.groupId).first;

@@ -12,7 +12,14 @@ class SearchMembersBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<SearchedMemberModel> list = [];
+    List<SearchedMemberModel> list = [
+      SearchedMemberModel(
+        userId: 1,
+        firstName: 'firstName',
+        lastName: 'lastName',
+        lastLogin: DateTime.now(),
+      ),
+    ];
     return Scaffold(
       appBar: AppBar(
         leading: const BackButtonLeading(showBackButton: true),
@@ -38,7 +45,7 @@ class SearchMembersBody extends StatelessWidget {
                       id: searchedMember.userId,
                       isAdmin: false,
                       name:
-                          '${searchedMember.firstName} ${searchedMember.lastName}}',
+                          '${searchedMember.firstName} ${searchedMember.lastName}',
                       imageLink: searchedMember.image,
                       lastLogin: searchedMember.lastLogin,
                       isSelected: false,

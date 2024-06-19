@@ -45,7 +45,8 @@ class ActivityModel extends ActivityEntity {
     }
     final AuthUserEntity tempUser = AuthUserEntity(
       id: data['user_id'] as int,
-      name: "${data['user_first_name'] as String} ${data['user_last_name'] as String}",
+      name:
+          "${data['user_first_name'] as String} ${data['user_last_name'] as String}",
       email: data['user_email'] as String,
       password: '',
       userType: UserType.fromString(data['user_type'] as String?),
@@ -80,7 +81,8 @@ class ActivityModel extends ActivityEntity {
   }
 
   Map<String, dynamic> toMap() {
-    final ({String fName, String lName}) name = separateName(createdBy.user.name);
+    final ({String fName, String lName}) name =
+        separateName(createdBy.user.name);
     return {
       'activity_id': id,
       'activity_group_id': groupId,
@@ -144,18 +146,18 @@ class ActivityModel extends ActivityEntity {
   @override
   List<Object?> get props {
     return [
-    id,
-    groupId,
-    insideDirectoryId,
-    type,
-    repliedOn,
-    content,
-    attachment,
-    createdAt,
-    isApproved,
-    notifyOthers,
-    activityLastModified,
-    createdBy,
+      id,
+      groupId,
+      insideDirectoryId,
+      type,
+      repliedOn,
+      content,
+      attachment,
+      createdAt,
+      isApproved,
+      notifyOthers,
+      activityLastModified,
+      createdBy,
     ];
   }
 }

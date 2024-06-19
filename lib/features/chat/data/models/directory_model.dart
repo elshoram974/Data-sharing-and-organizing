@@ -23,7 +23,8 @@ class DirectoryModel extends DirectoryEntity {
   factory DirectoryModel.fromMap(Map<String, dynamic> data) {
     final AuthUserEntity tempUser = AuthUserEntity(
       id: data['user_id'] as int,
-      name: "${data['user_first_name'] as String} ${data['user_last_name'] as String}",
+      name:
+          "${data['user_first_name'] as String} ${data['user_last_name'] as String}",
       email: data['user_email'] as String,
       password: '',
       userType: UserType.fromString(data['user_type'] as String?),

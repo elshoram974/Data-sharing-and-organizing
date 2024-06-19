@@ -33,11 +33,13 @@ class SelectedPopUpMenuButton extends StatelessWidget {
           myPopupButton(
               HomeSelectedPopUpItem.deselectAll, S.of(context).deselectAll),
         if (cubit.selectedGroups.length == 1 &&
-            cubit.selectedGroups.first.memberEntity.notification == NotificationEnum.notify)
+            cubit.selectedGroups.first.memberEntity.notification ==
+                NotificationEnum.notify)
           myPopupButton(HomeSelectedPopUpItem.muteNotification,
               S.of(context).muteNotification),
         if (cubit.selectedGroups.length == 1 &&
-            cubit.selectedGroups.first.memberEntity.notification == NotificationEnum.withoutNotify)
+            cubit.selectedGroups.first.memberEntity.notification ==
+                NotificationEnum.withoutNotify)
           myPopupButton(HomeSelectedPopUpItem.unmuteNotification,
               S.of(context).unmuteNotification),
       ],

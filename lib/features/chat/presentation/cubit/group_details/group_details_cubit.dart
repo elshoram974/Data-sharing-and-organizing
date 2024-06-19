@@ -33,10 +33,12 @@ class GroupDetailsCubitImp extends GroupDetailsCubit {
   Future<void> getMembers() async {
     emit(const MembersLoadingState());
     Status<List<GroupMember>>? status;
-    groupDetailsRepo.getMembers(
+    groupDetailsRepo
+        .getMembers(
       groupId: group.groupId,
       userId: group.memberEntity.user.id,
-    ).listen((tempStatus) {
+    )
+        .listen((tempStatus) {
       status = tempStatus;
       if (tempStatus is Success<List<GroupMember>>) {
         members.clear();
@@ -49,7 +51,7 @@ class GroupDetailsCubitImp extends GroupDetailsCubit {
       if (status is Failure<List<GroupMember>>) {
         failureStatus(
           (status as Failure<List<GroupMember>>).failure.message,
-          (){},
+          () {},
         );
       } else {
         emit(GetMembersSuccessState(members));

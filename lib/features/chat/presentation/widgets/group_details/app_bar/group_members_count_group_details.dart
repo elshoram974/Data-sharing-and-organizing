@@ -14,7 +14,9 @@ class GroupMembersCountGroupDetails extends StatelessWidget {
     return BlocBuilder<GroupDetailsCubitImp, GroupDetailsState>(
       builder: (context, state) {
         return Text(
-          S.of(context).groupMembersCount(ProviderDependency.groupDetails.members.length),
+          S.of(context).groupMembersCount(
+                ProviderDependency.groupDetails.members.length,
+              ),
           textAlign: TextAlign.center,
           style: AppStyle.styleBoldInika16.copyWith(color: Colors.white),
         );

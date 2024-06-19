@@ -9,7 +9,6 @@ part 'group_details_members.g.dart';
 
 @HiveType(typeId: 14)
 class GroupDetailsMembers extends Equatable {
-  
   @HiveField(1)
   final String status;
 

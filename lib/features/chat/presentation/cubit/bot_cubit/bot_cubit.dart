@@ -150,7 +150,7 @@ class BOTCubitImp extends BOTCubit {
   @override
   void updateMessage(types.Message message) async {
     final index = botMessages.indexWhere((element) => element.id == message.id);
-    
+
     botMessages[index] = message;
     await botRepo.saveBotMessages(groupCubit.group, botMessages);
     emit(SetState(_i++));

@@ -20,7 +20,7 @@ abstract class HomeLocalDataSource {
   Future<int> removeSomeGroups(List<GroupHomeEntity> removedGroups);
   Future<Iterable<int>> markAsUnRead(List<GroupHomeEntity> groupsToEdit);
 
-  Future<void> updateScreen(int groupId , int screen);
+  Future<void> updateScreen(int groupId, int screen);
   Future<void> updateThisGroup(GroupHomeEntity groupUpdated);
   Future<void> updateLastActivity(ActivityEntity activity, int screen);
   Future<void> makeSeenToGroup(int groupId);
@@ -147,7 +147,7 @@ class HomeLocalDataSourceImp extends HomeLocalDataSource {
   }
 
   @override
-  Future<void> updateScreen(int groupId , int screen) async {
+  Future<void> updateScreen(int groupId, int screen) async {
     final List<GroupHomeEntity> groups = [];
     groups.addAll(getAllGroups());
 
