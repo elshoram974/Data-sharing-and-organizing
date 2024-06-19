@@ -14,14 +14,16 @@ const textStyle = TextStyle(
 );
 
 class SearchSuffixIcon extends StatelessWidget {
-  const SearchSuffixIcon({super.key});
+  const SearchSuffixIcon({super.key, this.onPressed});
+
+  final void Function()? onPressed;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 1.0),
       child: IconButton(
-        onPressed: () {},
+        onPressed: onPressed,
         color: Colors.white,
         iconSize: 21,
         style: IconButton.styleFrom(

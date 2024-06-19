@@ -9,12 +9,12 @@ class SearchBarMember extends StatelessWidget {
   const SearchBarMember({
     super.key,
     this.onChanged,
-    this.onSubmitted,
+    this.onSearch,
     this.maxHeight = double.infinity,
   });
   final double maxHeight;
   final void Function(String)? onChanged;
-  final void Function(String)? onSubmitted;
+  final void Function()? onSearch;
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +24,7 @@ class SearchBarMember extends StatelessWidget {
       alignment: Alignment.center,
       child: TextField(
         decoration: InputDecoration(
-          suffixIcon: const SearchSuffixIcon(),
+          suffixIcon: SearchSuffixIcon(onPressed: onSearch),
           filled: true,
           fillColor: Colors.white,
           hintText: S.of(context).searchHere,
@@ -39,7 +39,7 @@ class SearchBarMember extends StatelessWidget {
           ),
         ),
         onChanged: onChanged,
-        onSubmitted: onSubmitted,
+        onSubmitted: onSearch != null ? (val) => onSearch!() : null,
       ),
     );
   }
