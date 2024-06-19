@@ -43,6 +43,18 @@ class GroupDetailsRepositoriesImp extends GroupDetailsRepositories {
   }
 
   @override
+  Future<List<GroupMember>> updateMembersLocal(
+    List<GroupMember> members,
+    GroupHomeEntity group,
+  ) {
+    return localDataSource.saveGroupMembers(
+      groupId: group.groupId,
+      userId: group.memberEntity.user.id,
+      members: members,
+    );
+  }
+
+  @override
   Future<Status<List<SearchedUserModel>>> searchMembers(String query) {
     return executeAndHandleErrors<List<SearchedUserModel>>(
       () => remoteDataSource.searchMembers(query),

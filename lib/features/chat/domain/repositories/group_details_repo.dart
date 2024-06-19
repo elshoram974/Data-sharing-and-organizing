@@ -13,6 +13,11 @@ abstract class GroupDetailsRepositories {
 
   Future<Status<List<SearchedUserModel>>> searchMembers(String query);
 
+  Future<List<GroupMember>> updateMembersLocal(
+    List<GroupMember> members,
+    GroupHomeEntity group,
+  );
+
   Future<Status<void>> addMember(
     SearchedUserModel member,
     GroupHomeEntity group,

@@ -19,6 +19,8 @@ abstract class GroupDetailsCubit extends Cubit<GroupDetailsState> {
 
   Future<void> getMembers();
 
+  Future<void> updateMembersLocal(List<GroupMember> updated);
+
   Future<void> removeMember(GroupMember member);
 
   Future<void> changeAdmin(bool makeAdmin, GroupMember member);
@@ -69,12 +71,22 @@ class GroupDetailsCubitImp extends GroupDetailsCubit {
   }
 
   @override
+  Future<void> updateMembersLocal(List<GroupMember> updated) async {
+    List<GroupMember> newMembers = await repo.updateMembersLocal(
+      updated,
+      group,
+    );
+    members = newMembers;
+    emit(GetMembersSuccessState(members));
+  }
+
+  @override
   Future<void> removeMember(GroupMember member) async {
     await handleStatusEmit<void>(
       statusFunction: () => repo.removeMember(member, group),
       successFunction: (_) {
         members.remove(member);
-        getMembers();
+        updateMembersLocal(members);
       },
     );
   }
@@ -83,15 +95,29 @@ class GroupDetailsCubitImp extends GroupDetailsCubit {
   Future<void> changeAdmin(bool makeAdmin, GroupMember member) async {
     await handleStatusEmit<void>(
       statusFunction: () => repo.changeAdmin(makeAdmin, member, group),
-      successFunction: (_) => getMembers(),
+      successFunction: (_) {
+        int i = members.indexWhere((e) => e.memberId == member.memberId);
+        members[i] = members[i].copyWith(isAdmin: makeAdmin);
+
+        updateMembersLocal(members);
+      },
     );
   }
 
   @override
   Future<void> changeInteraction(bool canInteract, int memberId) async {
     await handleStatusEmit<void>(
-      statusFunction: () => repo.changeInteraction(canInteract, memberId, group),
-      successFunction:(_) => getMembers(),
+      statusFunction: () => repo.changeInteraction(
+        canInteract,
+        memberId,
+        group,
+      ),
+      successFunction: (_) {
+        int i = members.indexWhere((e) => e.memberId == memberId);
+        members[i] = members[i].copyWith(canInteraction: canInteract);
+
+        updateMembersLocal(members);
+      },
     );
   }
 }
