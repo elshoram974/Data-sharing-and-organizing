@@ -18,23 +18,29 @@ abstract class GroupDetailsCubit extends Cubit<GroupDetailsState> {
   List<GroupMember> members = [];
 
   Future<void> getMembers();
+
+  Future<void> removeMember(GroupMember member);
+
+  Future<void> changeAdmin(bool makeAdmin, GroupMember member);
+
+  Future<void> changeInteraction(bool canInteract, int memberId);
 }
 
 class GroupDetailsCubitImp extends GroupDetailsCubit {
   GroupDetailsCubitImp({
     required this.group,
-    required this.groupDetailsRepo,
+    required this.repo,
   }) {
     getMembers();
   }
   final GroupHomeEntity group;
-  final GroupDetailsRepositories groupDetailsRepo;
+  final GroupDetailsRepositories repo;
 
   @override
   Future<void> getMembers() async {
     emit(const MembersLoadingState());
     Status<List<GroupMember>>? status;
-    groupDetailsRepo
+    repo
         .getMembers(
       groupId: group.groupId,
       userId: group.memberEntity.user.id,
@@ -60,5 +66,32 @@ class GroupDetailsCubitImp extends GroupDetailsCubit {
         emit(GetMembersSuccessState(members));
       }
     });
+  }
+
+  @override
+  Future<void> removeMember(GroupMember member) async {
+    await handleStatusEmit<void>(
+      statusFunction: () => repo.removeMember(member, group),
+      successFunction: (_) {
+        members.remove(member);
+        getMembers();
+      },
+    );
+  }
+
+  @override
+  Future<void> changeAdmin(bool makeAdmin, GroupMember member) async {
+    await handleStatusEmit<void>(
+      statusFunction: () => repo.changeAdmin(makeAdmin, member, group),
+      successFunction: (_) => getMembers(),
+    );
+  }
+
+  @override
+  Future<void> changeInteraction(bool canInteract, int memberId) async {
+    await handleStatusEmit<void>(
+      statusFunction: () => repo.changeInteraction(canInteract, memberId, group),
+      successFunction:(_) => getMembers(),
+    );
   }
 }

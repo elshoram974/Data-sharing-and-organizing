@@ -18,7 +18,7 @@ abstract class _SearchMembersCubit extends Cubit<SearchMembersState> {
   _SearchMembersCubit() : super(const SearchMembersInitial());
 
   final GroupDetailsCubitImp detailsCubit = ProviderDependency.groupDetails;
-  late final GroupDetailsRepositories repo = detailsCubit.groupDetailsRepo;
+  late final GroupDetailsRepositories repo = detailsCubit.repo;
 
   List<SearchedUserModel> currentSearched = [];
 

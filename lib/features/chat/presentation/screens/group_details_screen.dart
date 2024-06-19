@@ -17,7 +17,7 @@ class GroupDetailsScreen extends StatelessWidget {
     return BlocProvider(
       create: (context) => GroupDetailsCubitImp(
         group: group,
-        groupDetailsRepo: sl.get<GroupDetailsRepositories>(),
+        repo: sl.get<GroupDetailsRepositories>(),
       ),
       child: Scaffold(
         body: GroupDetailsBody(group: group),
