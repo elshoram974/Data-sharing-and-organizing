@@ -13,26 +13,35 @@ class MembersListTile extends StatelessWidget {
   const MembersListTile({
     super.key,
     this.ownerId,
+    this.thisUserIsAdmin,
     required this.memberEntity,
     this.onTileTapped,
     this.onTileTappedDown,
   });
   final int? ownerId;
+  final bool? thisUserIsAdmin;
   final MemberListTileEntity memberEntity;
   final void Function()? onTileTapped;
   final Function(TapDownDetails)? onTileTappedDown;
   @override
   Widget build(BuildContext context) {
+    final BorderRadius? borderRadius = context.isPhoneWidth
+        ? null
+        : BorderRadius.circular(AppConst.borderRadius);
     return InkWell(
       onTap: onTileTapped,
       onTapDown: onTileTappedDown,
-      borderRadius: context.isPhoneWidth
-          ? null
-          : BorderRadius.circular(AppConst.borderRadius),
-      child: Padding(
+      borderRadius: borderRadius,
+      child: Container(
         padding: const EdgeInsets.symmetric(
           vertical: 0.5 * AppConst.defaultPadding,
           horizontal: AppConst.defaultPadding,
+        ),
+        decoration: BoxDecoration(
+          color: memberEntity.isBlocked && thisUserIsAdmin == true
+              ? Colors.redAccent.shade100
+              : Colors.transparent,
+          borderRadius: borderRadius,
         ),
         child: Row(
           children: [

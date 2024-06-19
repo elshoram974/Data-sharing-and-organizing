@@ -45,6 +45,7 @@ class AddMembersScreen extends StatelessWidget {
                     memberEntity: MemberListTileEntity(
                       id: selectedUsers[i].memberId,
                       isAdmin: selectedUsers[i].isAdmin,
+                      isBlocked: false,
                       name:
                           '${selectedUsers[i].firstName} ${selectedUsers[i].lastName}}',
                       imageLink: selectedUsers[i].image,

@@ -39,6 +39,7 @@ class AddGroupDetailsScreen extends StatelessWidget {
                     memberEntity: MemberListTileEntity(
                       id: selectedUsers[i].memberId,
                       isAdmin: selectedUsers[i].isAdmin,
+                      isBlocked: !selectedUsers[i].canInteraction,
                       name:
                           '${selectedUsers[i].firstName} ${selectedUsers[i].lastName}}',
                       imageLink: selectedUsers[i].image,

@@ -47,6 +47,7 @@ class SearchedMembersList extends StatelessWidget {
                         memberEntity: MemberListTileEntity(
                           id: searchedMember.userId,
                           isAdmin: false,
+                          isBlocked: false,
                           name:
                               '${searchedMember.firstName} ${searchedMember.lastName}',
                           imageLink: searchedMember.image,

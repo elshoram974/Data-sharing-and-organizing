@@ -4,6 +4,7 @@ class MemberListTileEntity extends Equatable {
   final int id;
   final String name;
   final bool isAdmin;
+  final bool isBlocked;
   final String? imageLink;
   final DateTime lastLogin;
   final bool isSelected;
@@ -12,6 +13,7 @@ class MemberListTileEntity extends Equatable {
     required this.id,
     required this.name,
     required this.isAdmin,
+    required this.isBlocked,
     required this.imageLink,
     required this.lastLogin,
     required this.isSelected,
@@ -21,6 +23,7 @@ class MemberListTileEntity extends Equatable {
         id,
         name,
         isAdmin,
+        isBlocked,
         imageLink,
         lastLogin,
         isSelected,

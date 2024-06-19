@@ -27,6 +27,7 @@ class MembersListGroupDetails extends StatelessWidget {
           return ResConstrainedBoxAlign(
             child: MembersListTile(
               ownerId: group.ownerId,
+              thisUserIsAdmin: group.memberEntity.isAdmin,
               onTileTappedDown: group.memberEntity.isAdmin && i != 0
                   ? (_) => editMembersMenu(
                         context,
@@ -39,6 +40,7 @@ class MembersListGroupDetails extends StatelessWidget {
                 id: list[i].memberId,
                 name: "${list[i].firstName} ${list[i].lastName}",
                 isAdmin: list[i].isAdmin,
+                isBlocked: !list[i].canInteraction,
                 imageLink: list[i].image,
                 lastLogin: list[i].lastLogin,
                 isSelected: false,
