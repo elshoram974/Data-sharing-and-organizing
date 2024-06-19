@@ -42,3 +42,15 @@ class ChangePermissionsSuccessState extends GroupDetailsState {
   @override
   List<Object?> get props => [params];
 }
+
+class ChangeGroupDataLoadingState extends GroupDetailsState {
+  const ChangeGroupDataLoadingState();
+}
+
+class ChangeGroupDataSuccessState extends GroupDetailsState {
+  const ChangeGroupDataSuccessState(this.params);
+  final EditGroupParams params;
+
+  @override
+  List<Object?> get props => [params];
+}

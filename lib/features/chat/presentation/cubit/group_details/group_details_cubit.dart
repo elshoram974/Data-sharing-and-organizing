@@ -11,6 +11,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../user_home/domain/entities/group_home_entity.dart';
 import '../../../data/models/group_details_members/group_members_model.dart';
+import '../../../domain/entities/edit_group_params.dart';
 import '../../../domain/entities/group_permissions_params.dart';
 import '../../../domain/repositories/group_details_repo.dart';
 
@@ -35,6 +36,9 @@ abstract class GroupDetailsCubit extends Cubit<GroupDetailsState> {
     GroupDiscussionType? discussionType,
     GroupAccessType? accessType,
   );
+
+  Future<void> editGroup(EditGroupParams params);
+  Future<void> removeGroupImage({required int adminId, required int groupId});
 }
 
 class GroupDetailsCubitImp extends GroupDetailsCubit {
@@ -152,6 +156,62 @@ class GroupDetailsCubitImp extends GroupDetailsCubit {
         );
         await ProviderDependency.group.updateGroup(group);
         emit(ChangePermissionsSuccessState(params));
+      },
+    );
+  }
+
+  @override
+  Future<void> editGroup(EditGroupParams params) async {
+    emit(const ChangeGroupDataLoadingState());
+    await handleStatusEmit<String?>(
+      dismissLoadingOnTap: true,
+      statusFunction: () => repo.editGroup(params),
+      successFunction: (_) async {
+        group = group.copyWith(groupName: params.groupName, imageLink: _);
+        await ProviderDependency.group.updateGroup(group);
+        emit(ChangeGroupDataSuccessState(params));
+      },
+    );
+  }
+
+  @override
+  Future<void> removeGroupImage({
+    required int adminId,
+    required int groupId,
+  }) async {
+    emit(const ChangeGroupDataLoadingState());
+    await handleStatusEmit<void>(
+      dismissLoadingOnTap: true,
+      statusFunction: () => repo.removeGroupImage(
+        adminId: adminId,
+        groupId: groupId,
+      ),
+      successFunction: (_) async {
+        group = GroupHomeEntity(
+          groupId: group.groupId,
+          groupName: group.groupName,
+          ownerId: group.ownerId,
+          discussion: group.discussion,
+          memberEntity: group.memberEntity,
+          createdAt: group.createdAt,
+          screen: group.screen,
+          accessType: group.accessType,
+          bottomHeight: group.bottomHeight,
+          imageLink: null,
+          lastActivity: group.lastActivity,
+          unReadCounter: group.unReadCounter,
+        );
+        await ProviderDependency.group.updateGroup(group);
+        emit(
+          ChangeGroupDataSuccessState(
+            EditGroupParams(
+              adminId: adminId,
+              groupId: groupId,
+              groupName: group.groupName,
+              groupImage: null,
+            ),
+          ),
+        );
       },
     );
   }
