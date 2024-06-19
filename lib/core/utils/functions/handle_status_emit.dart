@@ -1,6 +1,7 @@
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 
 import '../../status/errors/failure.dart';
+import '../../status/errors/failure_body.dart';
 import '../../status/status.dart';
 import '../../status/success/success.dart';
 
@@ -12,7 +13,7 @@ void failureStatus(String error, void Function() emit) {
 Future<void> handleStatusEmit<T>({
   required final Future<Status<T>> Function() statusFunction,
   required void Function(T data) successFunction,
-  void Function()? failureFunction,
+  void Function(FailureBody failure)? failureFunction,
   bool? dismissLoadingOnTap = false,
 }) async {
   if (dismissLoadingOnTap != null) {
@@ -24,6 +25,10 @@ Future<void> handleStatusEmit<T>({
     successFunction(status.data);
   } else {
     status as Failure<T>;
-    failureStatus(status.failure.message, failureFunction ?? () {});
+    if (failureFunction != null) failureFunction(status.failure);
+    EasyLoading.showError(
+      status.failure.message,
+      duration: const Duration(seconds: 5),
+    );
   }
 }

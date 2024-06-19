@@ -212,7 +212,7 @@ class BOTCubitImp extends BOTCubit {
           botMessages[i] = updatedMessage;
           botReply(activities);
         },
-        failureFunction: () {
+        failureFunction: (f) {
           final types.Message updatedMessage =
               botMessages[i].copyWith(status: types.Status.error);
           botMessages[i] = updatedMessage;

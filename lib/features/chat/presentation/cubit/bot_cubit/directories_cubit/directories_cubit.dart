@@ -334,7 +334,7 @@ class DirectoryCubitImp extends DirectoryCubit {
       successFunction: (_) => botCubit.updateMessage(
         _.toMessage().copyWith(status: types.Status.sent, id: message.id),
       ),
-      failureFunction: () =>
+      failureFunction: (f) =>
           botCubit.updateMessage(message.copyWith(status: types.Status.error)),
     ).then((v) => AppRoute.key.currentState?.pop());
   }

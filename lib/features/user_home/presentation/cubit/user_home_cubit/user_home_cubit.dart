@@ -199,7 +199,7 @@ class UserHomeCubit extends Cubit<UserHomeState> {
         currentGroups[i] = temp;
         emit(UserHomeUpdateGroup(temp));
       },
-      failureFunction: () => temp = group,
+      failureFunction: (f) => temp = group,
     );
     _makeAllSelectedOrNot(false);
     return temp;
