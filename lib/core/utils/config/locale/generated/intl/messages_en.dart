@@ -253,6 +253,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Name changed successfully"),
         "newGroup": MessageLookupByLibrary.simpleMessage("New group"),
         "newPassword": MessageLookupByLibrary.simpleMessage("New password"),
+        "noAccountFoundMatchingThisQuery": MessageLookupByLibrary.simpleMessage(
+            "No account found matching this query."),
         "noCodeReceived":
             MessageLookupByLibrary.simpleMessage("No code received? "),
         "noInternetConnection":

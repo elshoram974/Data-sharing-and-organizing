@@ -2163,6 +2163,16 @@ class S {
       args: [],
     );
   }
+
+  /// `No account found matching this query.`
+  String get noAccountFoundMatchingThisQuery {
+    return Intl.message(
+      'No account found matching this query.',
+      name: 'noAccountFoundMatchingThisQuery',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

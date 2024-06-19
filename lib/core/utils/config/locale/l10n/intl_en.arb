@@ -404,5 +404,6 @@
     "uCanNtChangeRoleOfTheOwnerOfGroup": "You cannot change the role of the group owner.",
     "uCanNtRemoveOwnerOfGroup": "You cannot remove the owner of the group.",
     "uCanNtBlockAdmins": "You cannot block administrators.",
-    "errorChangingUserRoleTryAgainLater": "Error changing user role. Please try again later."
+    "errorChangingUserRoleTryAgainLater": "Error changing user role. Please try again later.",
+    "noAccountFoundMatchingThisQuery": "No account found matching this query."
 }

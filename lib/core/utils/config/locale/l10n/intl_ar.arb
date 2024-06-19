@@ -404,5 +404,6 @@
     "uCanNtChangeRoleOfTheOwnerOfGroup": "لا يمكنك تغيير دور مالك المجموعة.",
     "uCanNtRemoveOwnerOfGroup": "لا يمكنك إزالة مالك المجموعة.",
     "uCanNtBlockAdmins": "لا يمكنك حظر المسؤولين.",
-    "errorChangingUserRoleTryAgainLater": "حدث خطأ أثناء تغيير دور المستخدم. يرجى المحاولة مرة أخرى لاحقًا."
+    "errorChangingUserRoleTryAgainLater": "حدث خطأ أثناء تغيير دور المستخدم. يرجى المحاولة مرة أخرى لاحقًا.",
+    "noAccountFoundMatchingThisQuery": "لم يتم العثور على حساب يطابق هذا الاستعلام."
 }
