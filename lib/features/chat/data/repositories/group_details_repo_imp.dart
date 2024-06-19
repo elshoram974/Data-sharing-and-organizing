@@ -2,6 +2,7 @@ import 'package:data_sharing_organizing/core/status/status.dart';
 import 'package:data_sharing_organizing/core/status/success/success.dart';
 import 'package:data_sharing_organizing/core/utils/functions/execute_and_handle_remote_errors.dart';
 import 'package:data_sharing_organizing/features/chat/data/models/search_member_model/searched_user_model.dart';
+import 'package:data_sharing_organizing/features/chat/domain/entities/group_permissions_params.dart';
 
 import '../../../user_home/domain/entities/group_home_entity.dart';
 import '../../domain/repositories/group_details_repo.dart';
@@ -97,6 +98,13 @@ class GroupDetailsRepositoriesImp extends GroupDetailsRepositories {
   ) {
     return executeAndHandleErrors<void>(
       () => remoteDataSource.changeInteraction(canInteract, memberId, group),
+    );
+  }
+
+  @override
+  Future<Status<void>> changePermissions(GroupPermissionsParams params) {
+    return executeAndHandleErrors<void>(
+      () => remoteDataSource.changePermissions(params),
     );
   }
 }
