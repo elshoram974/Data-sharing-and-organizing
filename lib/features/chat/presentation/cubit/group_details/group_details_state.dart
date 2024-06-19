@@ -22,3 +22,11 @@ final class GetMembersSuccessState extends GroupDetailsState {
   @override
   List<Object?> get props => [members];
 }
+
+class GetMembersFailureState extends GroupDetailsState {
+  const GetMembersFailureState(this.failure);
+  final FailureBody failure;
+
+  @override
+  List<Object?> get props => [failure];
+}

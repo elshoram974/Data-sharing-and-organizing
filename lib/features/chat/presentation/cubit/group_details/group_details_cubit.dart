@@ -1,4 +1,5 @@
 import 'package:data_sharing_organizing/core/status/errors/failure.dart';
+import 'package:data_sharing_organizing/core/status/errors/failure_body.dart';
 import 'package:data_sharing_organizing/core/status/status.dart';
 import 'package:data_sharing_organizing/core/status/success/success.dart';
 import 'package:data_sharing_organizing/core/utils/functions/handle_status_emit.dart';
@@ -49,9 +50,11 @@ class GroupDetailsCubitImp extends GroupDetailsCubit {
       }
     }).onDone(() {
       if (status is Failure<List<GroupMember>>) {
+        final FailureBody failure =
+            (status as Failure<List<GroupMember>>).failure;
         failureStatus(
-          (status as Failure<List<GroupMember>>).failure.message,
-          () {},
+          failure.message,
+          () => emit(GetMembersFailureState(failure)),
         );
       } else {
         emit(GetMembersSuccessState(members));
