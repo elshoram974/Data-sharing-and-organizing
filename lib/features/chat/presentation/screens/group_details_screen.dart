@@ -19,9 +19,7 @@ class GroupDetailsScreen extends StatelessWidget {
         group: group,
         repo: sl.get<GroupDetailsRepositories>(),
       ),
-      child: Scaffold(
-        body: GroupDetailsBody(group: group),
-      ),
+      child: const Scaffold(body: GroupDetailsBody()),
     );
   }
 }

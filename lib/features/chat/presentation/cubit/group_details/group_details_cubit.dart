@@ -2,12 +2,17 @@ import 'package:data_sharing_organizing/core/status/errors/failure.dart';
 import 'package:data_sharing_organizing/core/status/errors/failure_body.dart';
 import 'package:data_sharing_organizing/core/status/status.dart';
 import 'package:data_sharing_organizing/core/status/success/success.dart';
+import 'package:data_sharing_organizing/core/utils/config/locale/generated/l10n.dart';
+import 'package:data_sharing_organizing/core/utils/config/routes/routes.dart';
 import 'package:data_sharing_organizing/core/utils/enums/home/group_access_type_enum.dart';
 import 'package:data_sharing_organizing/core/utils/enums/home/group_discussion_type_enum.dart';
 import 'package:data_sharing_organizing/core/utils/functions/handle_status_emit.dart';
+import 'package:data_sharing_organizing/core/utils/functions/show_custom_dialog.dart';
 import 'package:data_sharing_organizing/core/utils/services/dependency/provider_dependency.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../../user_home/domain/entities/group_home_entity.dart';
 import '../../../data/models/group_details_members/group_members_model.dart';
@@ -172,6 +177,28 @@ class GroupDetailsCubitImp extends GroupDetailsCubit {
         emit(ChangeGroupDataSuccessState(params));
       },
     );
+  }
+
+  late String newGroupName = group.groupName;
+  late GlobalKey<FormFieldState> fieldKey = GlobalKey<FormFieldState>();
+  Future<void> changeGroupName() async {
+    if (!fieldKey.currentState!.isValid) return;
+    final BuildContext context = AppRoute.key.currentContext!;
+    if (newGroupName.trim() == group.groupName) {
+      return ShowCustomDialog.warning(
+        context,
+        body: S.current.changeGroupName,
+      );
+    }
+    await editGroup(
+      EditGroupParams(
+        adminId: group.memberEntity.user.id,
+        groupId: group.groupId,
+        groupName: newGroupName,
+        groupImage: null,
+      ),
+    );
+    if (context.mounted) context.pop();
   }
 
   @override
