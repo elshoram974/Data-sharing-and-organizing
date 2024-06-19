@@ -48,9 +48,9 @@ class ChangeGroupDataLoadingState extends GroupDetailsState {
 }
 
 class ChangeGroupDataSuccessState extends GroupDetailsState {
-  const ChangeGroupDataSuccessState(this.params);
-  final EditGroupParams params;
+  const ChangeGroupDataSuccessState(this.newData);
+  final String? newData;
 
   @override
-  List<Object?> get props => [params];
+  List<Object?> get props => [newData];
 }

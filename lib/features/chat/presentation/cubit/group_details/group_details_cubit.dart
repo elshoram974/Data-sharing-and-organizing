@@ -173,10 +173,23 @@ class GroupDetailsCubitImp extends GroupDetailsCubit {
     await handleStatusEmit<String?>(
       dismissLoadingOnTap: true,
       statusFunction: () => repo.editGroup(params),
-      successFunction: (_) async {
-        group = group.copyWith(groupName: params.groupName, imageLink: _);
+      successFunction: (image) async {
+        group = GroupHomeEntity(
+          groupId: group.groupId,
+          groupName: params.groupName ?? group.groupName,
+          ownerId: group.ownerId,
+          discussion: group.discussion,
+          memberEntity: group.memberEntity,
+          createdAt: group.createdAt,
+          screen: group.screen,
+          accessType: group.accessType,
+          bottomHeight: group.bottomHeight,
+          imageLink: image ?? group.imageLink,
+          lastActivity: group.lastActivity,
+          unReadCounter: group.unReadCounter,
+        );
         await ProviderDependency.group.updateGroup(group);
-        emit(ChangeGroupDataSuccessState(params));
+        emit(ChangeGroupDataSuccessState(image));
       },
     );
   }
@@ -259,16 +272,7 @@ class GroupDetailsCubitImp extends GroupDetailsCubit {
           unReadCounter: group.unReadCounter,
         );
         await ProviderDependency.group.updateGroup(group);
-        emit(
-          ChangeGroupDataSuccessState(
-            EditGroupParams(
-              adminId: adminId,
-              groupId: groupId,
-              groupName: group.groupName,
-              groupImage: null,
-            ),
-          ),
-        );
+        emit(const ChangeGroupDataSuccessState(null));
       },
     );
   }
