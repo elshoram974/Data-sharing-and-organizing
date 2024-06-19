@@ -26,7 +26,6 @@ class AddActivityWidget extends StatelessWidget {
           suffix: IconButton(
             onPressed: () async {
               final temp = await handleAttachmentPressed(context);
-              print(temp?.activity.attachment?.uri);
               if (temp != null) c.addNewActivity(temp);
             },
             icon: const MyAttachmentButtonIcon(),

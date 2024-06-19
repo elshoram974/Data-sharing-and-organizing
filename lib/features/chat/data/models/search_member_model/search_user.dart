@@ -41,11 +41,11 @@ class SearchUser extends Equatable {
 
   SearchUser copyWith({
     String? status,
-    List<SearchedUserModel>? users,
+    List<SearchedUserModel>? searchedUsers,
   }) {
     return SearchUser(
       status: status ?? this.status,
-      searchedUsers: users ?? this.searchedUsers,
+      searchedUsers: searchedUsers ?? this.searchedUsers,
     );
   }
 

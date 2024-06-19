@@ -2,18 +2,19 @@ import 'package:data_sharing_organizing/core/shared/image/circular_image_widget.
 import 'package:data_sharing_organizing/core/shared/image/group.dart';
 import 'package:data_sharing_organizing/core/utils/constants/app_color.dart';
 import 'package:data_sharing_organizing/core/utils/constants/app_constants.dart';
+import 'package:data_sharing_organizing/core/utils/services/dependency/provider_dependency.dart';
 import 'package:data_sharing_organizing/core/utils/styles.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../user_home/domain/entities/group_home_entity.dart';
+import '../../../cubit/group_details/group_details_cubit.dart';
 import 'back_button_group_details.dart';
 import 'group_details_popup_button.dart';
 import 'group_members_count_group_details.dart';
 
 class CustomSliverAppBarDelegate extends SliverPersistentHeaderDelegate {
-  final GroupHomeEntity group;
-
-  CustomSliverAppBarDelegate({required this.group});
+  CustomSliverAppBarDelegate();
 
   @override
   Widget build(
@@ -30,32 +31,39 @@ class CustomSliverAppBarDelegate extends SliverPersistentHeaderDelegate {
       child: ColoredBox(
         color: AppColor.active,
         child: SafeArea(
-          child: Column(
-            children: [
-              Expanded(
-                flex: 4,
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const BackButtonGroupDetails(),
-                    Expanded(
-                      child: _GroupImageAndName(
-                        group: group,
-                        dimension: dimension,
-                        isClosed: isClosed,
-                        isAdmin: group.memberEntity.isAdmin,
-                      ),
+          child: BlocBuilder<GroupDetailsCubitImp, GroupDetailsState>(
+            buildWhen: (p, c) => c is ChangeGroupDataSuccessState,
+            builder: (context, state) {
+              final GroupHomeEntity group =
+                  ProviderDependency.groupDetails.group;
+              return Column(
+                children: [
+                  Expanded(
+                    flex: 4,
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const BackButtonGroupDetails(),
+                        Expanded(
+                          child: _GroupImageAndName(
+                            group: group,
+                            dimension: dimension,
+                            isClosed: isClosed,
+                            isAdmin: group.memberEntity.isAdmin,
+                          ),
+                        ),
+                        if (group.memberEntity.isAdmin)
+                          const GroupDetailsPopupButton()
+                      ],
                     ),
-                    if (group.memberEntity.isAdmin)
-                      const GroupDetailsPopupButton()
-                  ],
-                ),
-              ),
-              if (!isClosed) ...[
-                _GroupName(group: group),
-                const _MembersCount(),
-              ]
-            ],
+                  ),
+                  if (!isClosed) ...[
+                    _GroupName(group: group),
+                    const _MembersCount(),
+                  ]
+                ],
+              );
+            },
           ),
         ),
       ),

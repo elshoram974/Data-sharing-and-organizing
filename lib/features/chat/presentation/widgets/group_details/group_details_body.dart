@@ -17,22 +17,21 @@ import '../../widgets/group_details/mute_notifications_tile_group_details.dart';
 import '../../widgets/group_details/view_all_members_button.dart';
 
 class GroupDetailsBody extends StatelessWidget {
-  const GroupDetailsBody({super.key, required this.group});
-
-  final GroupHomeEntity group;
+  const GroupDetailsBody({super.key});
 
   @override
   Widget build(BuildContext context) {
     ProviderDependency.groupDetails =
         BlocProvider.of<GroupDetailsCubitImp>(context);
-    final GroupDetailsCubit c = ProviderDependency.groupDetails;
+    final GroupDetailsCubitImp c = ProviderDependency.groupDetails;
 
     return BlocBuilder<GroupDetailsCubitImp, GroupDetailsState>(
       builder: (context, state) {
+        final GroupHomeEntity group = c.group;
         final List<GroupMember> members = c.members;
         return CustomScrollView(
           slivers: [
-            AppBarGroupDetails(group: group),
+            const AppBarGroupDetails(),
             const MediaDocsTileGroupDetails(),
             const MuteNotificationsTileGroupDetails(),
             if (group.memberEntity.isAdmin)
