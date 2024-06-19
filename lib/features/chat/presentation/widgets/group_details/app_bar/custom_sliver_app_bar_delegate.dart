@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../../user_home/domain/entities/group_home_entity.dart';
 import 'back_button_group_details.dart';
+import 'group_details_popup_button.dart';
 import 'group_members_count_group_details.dart';
 
 class CustomSliverAppBarDelegate extends SliverPersistentHeaderDelegate {
@@ -42,8 +43,11 @@ class CustomSliverAppBarDelegate extends SliverPersistentHeaderDelegate {
                         group: group,
                         dimension: dimension,
                         isClosed: isClosed,
+                        isAdmin: group.memberEntity.isAdmin,
                       ),
                     ),
+                    if (group.memberEntity.isAdmin)
+                      const GroupDetailsPopupButton()
                   ],
                 ),
               ),
@@ -75,11 +79,13 @@ class _GroupImageAndName extends StatelessWidget {
     required this.group,
     required this.dimension,
     required this.isClosed,
+    required this.isAdmin,
   });
 
   final GroupHomeEntity group;
   final double dimension;
   final bool isClosed;
+  final bool isAdmin;
 
   @override
   Widget build(BuildContext context) {
@@ -104,7 +110,7 @@ class _GroupImageAndName extends StatelessWidget {
               ),
             ),
           if (!isClosed)
-            const SizedBox(width: 77 + 2 * AppConst.defaultPadding),
+            SizedBox(width: (isAdmin ? 28 : 77) + 2 * AppConst.defaultPadding),
         ],
       ),
     );
