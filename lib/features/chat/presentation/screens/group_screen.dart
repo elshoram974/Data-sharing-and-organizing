@@ -38,22 +38,21 @@ class UserGroupScreen extends StatelessWidget {
             create: (_) => ChatCubit(),
           ),
         ],
-        child: _UserGroupScreen(group: group),
+        child: const _UserGroupScreen(),
       ),
     );
   }
 }
 
 class _UserGroupScreen extends StatelessWidget {
-  const _UserGroupScreen({required this.group});
-  final GroupHomeEntity group;
+  const _UserGroupScreen();
 
   @override
   Widget build(BuildContext context) {
     ProviderDependency.group = BlocProvider.of<GroupCubit>(context);
     final GroupCubit c = ProviderDependency.group;
     return Scaffold(
-      appBar: GroupAppBar(group: group),
+      appBar: const GroupAppBar(),
       floatingActionButtonLocation:
           FloatingActionButtonLocation.miniCenterDocked,
       floatingActionButton: const BotFAB(),

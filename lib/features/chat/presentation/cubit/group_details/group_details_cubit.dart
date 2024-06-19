@@ -150,8 +150,7 @@ class GroupDetailsCubitImp extends GroupDetailsCubit {
           accessType: accessType,
           discussion: discussionType,
         );
-        ProviderDependency.group.group = group;
-        await ProviderDependency.userHome.updateGroupLocally(group);
+        await ProviderDependency.group.updateGroup(group);
         emit(ChangePermissionsSuccessState(params));
       },
     );

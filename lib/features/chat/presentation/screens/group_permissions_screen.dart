@@ -31,7 +31,7 @@ class GroupPermissionsScreen extends StatelessWidget {
               NewGroupAppBar(title: S.of(context).groupPermissions),
               SliverToBoxAdapter(
                 child: DiscussionTypeWidget(
-                  group: ProviderDependency.group.group,
+                  group: c.group,
                   color: color,
                   style: style,
                   onSelect: (d) => c.changePermissions(d, null),
@@ -39,7 +39,7 @@ class GroupPermissionsScreen extends StatelessWidget {
               ),
               SliverToBoxAdapter(
                 child: AccessTypeWidget(
-                  group: ProviderDependency.group.group,
+                  group: c.group,
                   color: color,
                   style: style,
                   onSelect: (a) => c.changePermissions(null, a),

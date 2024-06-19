@@ -1,21 +1,23 @@
 import 'package:data_sharing_organizing/core/utils/config/routes/routes.dart';
 import 'package:data_sharing_organizing/core/utils/constants/app_color.dart';
+import 'package:data_sharing_organizing/core/utils/services/dependency/provider_dependency.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../../user_home/domain/entities/group_home_entity.dart';
 import 'group_title.dart';
 
 class GroupAppBar extends StatelessWidget implements PreferredSizeWidget {
-  const GroupAppBar({super.key, required this.group});
-
-  final GroupHomeEntity group;
+  const GroupAppBar({super.key});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () =>
-          GoRouter.of(context).push(AppRoute.groupDetails, extra: group),
+      onTap: () {
+        GoRouter.of(context).push(
+          AppRoute.groupDetails,
+          extra: ProviderDependency.group.group,
+        );
+      },
       child: Container(
         decoration: BoxDecoration(
           color: AppColor.background(context),
@@ -35,7 +37,7 @@ class GroupAppBar extends StatelessWidget implements PreferredSizeWidget {
                     onPressed: context.pop,
                     icon: const Icon(Icons.arrow_back),
                   ),
-                  Expanded(child: GroupTitle(group: group)),
+                  const Expanded(child: GroupTitle()),
                 ],
               ),
             ),

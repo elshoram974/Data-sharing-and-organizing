@@ -31,3 +31,10 @@ class GroupChangeButtonPlaceState extends GroupState {
   @override
   List<double> get props => [top];
 }
+
+class GroupUpdateGroupDetails extends GroupState {
+  const GroupUpdateGroupDetails(this.group);
+  final GroupHomeEntity group;
+  @override
+  List<Object> get props => [group];
+}

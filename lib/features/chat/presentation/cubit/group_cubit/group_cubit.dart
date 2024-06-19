@@ -1,3 +1,4 @@
+import 'package:data_sharing_organizing/core/utils/enums/home/group_discussion_type_enum.dart';
 import 'package:data_sharing_organizing/core/utils/enums/notification_enum.dart';
 import 'package:data_sharing_organizing/core/utils/services/dependency/locator.dart';
 import 'package:data_sharing_organizing/core/utils/services/dependency/provider_dependency.dart';
@@ -21,7 +22,11 @@ class GroupCubit extends Cubit<GroupState> {
   GroupCubit(this.initRepo, this.group) : super(const GroupInitial()) {
     isGroupScreenOpened = true;
     makeSeenTGroup(group.groupId);
-    currentScreen = group.screen;
+    if (group.discussion == GroupDiscussionType.notExist) {
+      currentScreen = 0;
+    } else {
+      currentScreen = group.screen;
+    }
   }
 
   late double top = initRepo.getButtonPlace();
@@ -33,6 +38,14 @@ class GroupCubit extends Cubit<GroupState> {
   double _dragPositionX = 0.0;
 
   late final bool isAdmin = group.memberEntity.isAdmin;
+
+  Future<void> updateGroup(GroupHomeEntity updatedGroup) async {
+    group = updatedGroup;
+    await ProviderDependency.userHome.updateGroupLocally(updatedGroup);
+    print("group.accessType ${group.accessType}");
+    print("group.discussion ${group.discussion}");
+    emit(GroupUpdateGroupDetails(updatedGroup));
+  }
 
   Future<void> editNotification(NotificationEnum notify) async {
     group = await ProviderDependency.userHome.editNotification(notify, group);
