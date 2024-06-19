@@ -97,7 +97,7 @@ class SearchMembersCubit extends _SearchMembersCubit {
   Future<void> addMember(SearchedUserModel user) async {
     emit(const AddMemberLoadingState());
     await handleStatusEmit<void>(
-      statusFunction: () => repo.addMember(user),
+      statusFunction: () => repo.addMember(user, detailsCubit.group),
       successFunction: (_) async {
         await detailsCubit.getMembers();
         currentSearched.remove(user);
