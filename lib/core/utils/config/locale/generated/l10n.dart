@@ -2113,6 +2113,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Do you want to add '{name}'`
+  String doYouWantToAddName(String name) {
+    return Intl.message(
+      'Do you want to add \'$name\'',
+      name: 'doYouWantToAddName',
+      desc: '',
+      args: [name],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

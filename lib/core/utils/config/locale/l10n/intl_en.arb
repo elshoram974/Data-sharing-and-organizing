@@ -392,5 +392,13 @@
     "file": "File",
     "photo": "Photo",
     "owner": "Owner",
-    "you": "You"
+    "you": "You",
+    "doYouWantToAddName": "Do you want to add '{name}'",
+    "@doYouWantToAddName": {
+        "placeholders": {
+            "name": {
+                "type": "String"
+            }
+        }
+    }
 }

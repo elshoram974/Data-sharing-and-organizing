@@ -392,5 +392,13 @@
     "file": "ملف",
     "photo": "صورة",
     "owner": "المالك",
-    "you": "أنت"
+    "you": "أنت",
+    "doYouWantToAddName": "هل تريد إضافة '{name}'؟",
+    "@doYouWantToAddName": {
+        "placeholders": {
+            "name": {
+                "type": "String"
+            }
+        }
+    }
 }
