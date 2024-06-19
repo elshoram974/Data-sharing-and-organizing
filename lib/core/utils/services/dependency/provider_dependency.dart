@@ -34,5 +34,5 @@ abstract class ProviderDependency {
   static late GroupCubit group;
   static late BOTCubit bot;
   static late DirectoryCubit directory;
-  static late GroupDetailsCubit groupDetails;
+  static late GroupDetailsCubitImp groupDetails;
 }
