@@ -42,6 +42,12 @@ class GroupDetailsBody extends StatelessWidget {
               selectedUsers: members,
             ),
             if (group.memberEntity.isAdmin) const AddMembersTileGroupDetails(),
+            if (state is MembersLoadingState)
+              const SliverToBoxAdapter(
+                child: Align(
+                  child: CircularProgressIndicator(),
+                ),
+              ),
             MembersListGroupDetails(
               list: members
                   .getRange(0, members.length >= 6 ? 6 : members.length)

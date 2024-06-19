@@ -43,7 +43,7 @@ class GroupDetailsCubitImp extends GroupDetailsCubit {
         members.addAll(tempStatus.data);
 
         emit(GetMembersSuccessState(tempStatus.data));
-        // emit(const MembersLoadingState());
+        emit(const MembersLoadingState());
       }
     }).onDone(() {
       if (status is Failure<List<GroupMember>>) {
