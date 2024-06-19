@@ -39,10 +39,14 @@ abstract final class AppLinks {
   static const String groupMembers = '$_botChatChanges/group_members.php';
   static const String searchUsers = '$_botChatChanges/search_users.php';
   static const String addMember = '$_botChatChanges/add_member.php';
-  static const String blockUserDirectly = '$_botChatChanges/blockuser_directly.php';
+  static const String blockUserDirectly =
+      '$_botChatChanges/blockuser_directly.php';
   static const String changeAdmin = '$_botChatChanges/promate_member.php';
   static const String removeMember = '$_botChatChanges/remove_member.php';
-  static const String memberNotification = '$_botChatChanges/member_notification.php';
+  static const String memberNotification =
+      '$_botChatChanges/member_notification.php';
+  static const String editGroupPermissions =
+      '$_botChatChanges/group_permissions.php';
 
   // * user profile
   static const String _changes = '$_userLink/changes';

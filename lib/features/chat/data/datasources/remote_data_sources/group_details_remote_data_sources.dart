@@ -4,6 +4,7 @@ import 'package:data_sharing_organizing/core/utils/constants/app_links.dart';
 import 'package:data_sharing_organizing/core/utils/services/api_services.dart';
 
 import '../../../../user_home/domain/entities/group_home_entity.dart';
+import '../../../domain/entities/group_permissions_params.dart';
 import '../../models/group_details_members/group_details_members.dart';
 import '../../models/group_details_members/group_members_model.dart';
 import '../../models/search_member_model/search_user.dart';
@@ -34,6 +35,8 @@ abstract class GroupDetailsRemoteDataSource {
     int memberId,
     GroupHomeEntity group,
   );
+
+  Future<void> changePermissions(GroupPermissionsParams params);
 }
 
 class GroupDetailsRemoteDataSourceImp extends GroupDetailsRemoteDataSource {
@@ -125,5 +128,21 @@ class GroupDetailsRemoteDataSourceImp extends GroupDetailsRemoteDataSource {
         'can_interaction': canInteract ? '1' : "'0'",
       },
     );
+  }
+
+  @override
+  Future<void> changePermissions(GroupPermissionsParams params) async {
+    final Map<String, String> body = {
+      'user_id': '${params.adminId}',
+      'group_id': '${params.groupId}',
+    };
+    if (params.discussionType != null) {
+      body['discussion_type'] = params.discussionType!.inString;
+    } else if (params.accessType != null) {
+      body['access_type'] = params.accessType!.inString;
+    } else {
+      throw "Can't make discussion_type and access_type null";
+    }
+    await service.post(AppLinks.editGroupPermissions, body);
   }
 }
