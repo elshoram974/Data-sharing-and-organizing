@@ -6,9 +6,11 @@ import 'package:data_sharing_organizing/core/utils/config/locale/generated/l10n.
 import 'package:data_sharing_organizing/core/utils/config/routes/routes.dart';
 import 'package:data_sharing_organizing/core/utils/enums/home/group_access_type_enum.dart';
 import 'package:data_sharing_organizing/core/utils/enums/home/group_discussion_type_enum.dart';
+import 'package:data_sharing_organizing/core/utils/enums/selected_pop_up_enum.dart';
 import 'package:data_sharing_organizing/core/utils/functions/handle_status_emit.dart';
 import 'package:data_sharing_organizing/core/utils/functions/show_custom_dialog.dart';
 import 'package:data_sharing_organizing/core/utils/services/dependency/provider_dependency.dart';
+import 'package:data_sharing_organizing/core/utils/services/pick_image.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -196,6 +198,37 @@ class GroupDetailsCubitImp extends GroupDetailsCubit {
         groupId: group.groupId,
         groupName: newGroupName,
         groupImage: null,
+      ),
+    );
+    if (context.mounted) context.pop();
+  }
+
+  MyFileData? imageData;
+  void changeImage(EditPhotoSelectedPopUpItem popupValue) async {
+    switch (popupValue) {
+      case EditPhotoSelectedPopUpItem.deletePhoto:
+        removeGroupImage(
+          adminId: group.memberEntity.user.id,
+          groupId: group.groupId,
+        );
+
+      default:
+        _changeImage(popupValue);
+    }
+  }
+
+  Future<void> _changeImage(EditPhotoSelectedPopUpItem pickFrom) async {
+    imageData = await HandlePickedImage.pickImage(pickFrom.pickFrom());
+    if (imageData == null) return failureStatus(S.current.cancel, () {});
+    emit(const ProgressUploadingPhoto());
+
+    final BuildContext context = AppRoute.key.currentContext!;
+    await editGroup(
+      EditGroupParams(
+        adminId: group.memberEntity.user.id,
+        groupId: group.groupId,
+        groupName: null,
+        groupImage: imageData,
       ),
     );
     if (context.mounted) context.pop();

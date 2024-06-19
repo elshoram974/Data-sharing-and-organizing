@@ -54,3 +54,11 @@ class ChangeGroupDataSuccessState extends GroupDetailsState {
   @override
   List<Object?> get props => [params];
 }
+
+final class ProgressUploadingPhoto extends GroupDetailsState {
+  const ProgressUploadingPhoto([this.value]);
+  final double? value;
+
+  @override
+  List<Object?> get props => [value];
+}
