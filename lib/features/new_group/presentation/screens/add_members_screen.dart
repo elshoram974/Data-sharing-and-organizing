@@ -7,7 +7,7 @@ import 'package:data_sharing_organizing/core/utils/entities/member_list_tile_ent
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-import '../widgets/add_member/search_bar_members.dart';
+import '../widgets/add_member/search_bar_widget/search_bar_members_persistent_header.dart';
 import '../widgets/new_group_app_bar.dart';
 
 class AddMembersScreen extends StatelessWidget {
@@ -31,7 +31,10 @@ class AddMembersScreen extends StatelessWidget {
                 ? S.of(context).selectedWithNumber(selectedUsers.length)
                 : "(${S.of(context).addMembers})",
           ),
-          SliverPersistentHeader(pinned: true, delegate: SearchBarMembers()),
+          SliverPersistentHeader(
+            pinned: true,
+            delegate: SearchBarMembersPersistentHeader(),
+          ),
           SliverList(
             delegate: SliverChildBuilderDelegate(
               childCount: 370,
