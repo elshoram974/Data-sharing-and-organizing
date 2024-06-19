@@ -20,6 +20,20 @@ abstract class GroupDetailsRemoteDataSource {
     List<SearchedUserModel> newMembers,
     GroupHomeEntity group,
   );
+
+  Future<void> removeMember(GroupMember member, GroupHomeEntity group);
+
+  Future<void> changeAdmin(
+    bool makeAdmin,
+    GroupMember member,
+    GroupHomeEntity group,
+  );
+
+  Future<void> changeInteraction(
+    bool canInteract,
+    int memberId,
+    GroupHomeEntity group,
+  );
 }
 
 class GroupDetailsRemoteDataSourceImp extends GroupDetailsRemoteDataSource {
@@ -60,6 +74,55 @@ class GroupDetailsRemoteDataSourceImp extends GroupDetailsRemoteDataSource {
         'user_id': '${group.memberEntity.user.id}',
         'group_id': '${group.groupId}',
         'list_users_id': jsonEncode(usersId),
+      },
+    );
+  }
+
+  @override
+  Future<void> removeMember(
+    GroupMember member,
+    GroupHomeEntity group,
+  ) async {
+    await service.post(
+      AppLinks.removeMember,
+      {
+        'user_id': '${group.memberEntity.user.id}',
+        'group_id': '${group.groupId}',
+        'member_id': '${member.memberId}',
+      },
+    );
+  }
+
+  @override
+  Future<void> changeAdmin(
+    bool makeAdmin,
+    GroupMember member,
+    GroupHomeEntity group,
+  ) async {
+    await service.post(
+      AppLinks.changeAdmin,
+      {
+        'user_id': '${group.memberEntity.user.id}',
+        'group_id': '${group.groupId}',
+        'member_id': '${member.memberId}',
+        'can_interaction': makeAdmin.toString(),
+      },
+    );
+  }
+
+  @override
+  Future<void> changeInteraction(
+    bool canInteract,
+    int memberId,
+    GroupHomeEntity group,
+  ) async {
+    await service.post(
+      AppLinks.blockUserDirectly,
+      {
+        'user_id': '$memberId',
+        'admin_id': '${group.memberEntity.user.id}',
+        'group_id': '${group.groupId}',
+        'can_interaction': canInteract ? '1' : "'0'",
       },
     );
   }
