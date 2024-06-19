@@ -10,7 +10,7 @@ class SearchMembersScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => SearchMembersCubitImp(),
+      create: (_) => SearchMembersCubit(),
       child: const SearchMembersBody(),
     );
   }

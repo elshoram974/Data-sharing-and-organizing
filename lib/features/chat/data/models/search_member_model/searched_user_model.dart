@@ -2,14 +2,14 @@ import 'dart:convert';
 
 import 'package:equatable/equatable.dart';
 
-class SearchedMemberModel extends Equatable {
+class SearchedUserModel extends Equatable {
   final int userId;
   final String firstName;
   final String lastName;
   final DateTime lastLogin;
   final String? image;
 
-  const SearchedMemberModel({
+  const SearchedUserModel({
     required this.userId,
     required this.firstName,
     required this.lastName,
@@ -17,8 +17,8 @@ class SearchedMemberModel extends Equatable {
     this.image,
   });
 
-  factory SearchedMemberModel.fromMap(Map<String, dynamic> data) =>
-      SearchedMemberModel(
+  factory SearchedUserModel.fromMap(Map<String, dynamic> data) =>
+      SearchedUserModel(
         userId: data['user_id'] as int,
         firstName: data['user_first_name'] as String,
         lastName: data['user_last_name'] as String,
@@ -36,25 +36,24 @@ class SearchedMemberModel extends Equatable {
 
   /// `dart:convert`
   ///
-  /// Parses the string and returns the resulting Json object as [SearchedMemberModel].
-  factory SearchedMemberModel.fromJson(String data) {
-    return SearchedMemberModel.fromMap(
-        json.decode(data) as Map<String, dynamic>);
+  /// Parses the string and returns the resulting Json object as [SearchedUserModel].
+  factory SearchedUserModel.fromJson(String data) {
+    return SearchedUserModel.fromMap(json.decode(data) as Map<String, dynamic>);
   }
 
   /// `dart:convert`
   ///
-  /// Converts [SearchedMemberModel] to a JSON string.
+  /// Converts [SearchedUserModel] to a JSON string.
   String toJson() => json.encode(toMap());
 
-  SearchedMemberModel copyWith({
+  SearchedUserModel copyWith({
     int? userId,
     String? firstName,
     String? lastName,
     DateTime? lastLogin,
     String? image,
   }) {
-    return SearchedMemberModel(
+    return SearchedUserModel(
       userId: userId ?? this.userId,
       firstName: firstName ?? this.firstName,
       lastName: lastName ?? this.lastName,

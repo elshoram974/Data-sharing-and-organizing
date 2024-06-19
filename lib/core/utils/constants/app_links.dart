@@ -37,6 +37,7 @@ abstract final class AppLinks {
   static const String deleteDirectory = '$_botChatChanges/deletedirection.php';
   static const String addNewActivity = '$_botChatChanges/addactivity.php';
   static const String groupMembers = '$_botChatChanges/group_members.php';
+  static const String searchUsers = '$_botChatChanges/search_users.php';
 
   // * user profile
   static const String _changes = '$_userLink/changes';
