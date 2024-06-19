@@ -34,7 +34,7 @@ class GroupCubit extends Cubit<GroupState> {
 
   late final bool isAdmin = group.memberEntity.isAdmin;
 
-  void editNotification(NotificationEnum notify) async {
+  Future<void> editNotification(NotificationEnum notify) async {
     group = await ProviderDependency.userHome.editNotification(notify, group);
   }
 

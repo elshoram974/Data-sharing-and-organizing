@@ -21,12 +21,12 @@ class _MuteNotificationsTileGroupDetailsState
   bool isMuted = ProviderDependency.group.group.memberEntity.notification ==
       NotificationEnum.withoutNotify;
 
-  void changeType() {
+  void changeType() async {
     NotificationEnum notify = c.group.memberEntity.notification;
     if (notify != NotificationEnum.notify) {
-      c.editNotification(NotificationEnum.notify);
+      await c.editNotification(NotificationEnum.notify);
     } else {
-      c.editNotification(NotificationEnum.withoutNotify);
+      await c.editNotification(NotificationEnum.withoutNotify);
     }
 
     isMuted =

@@ -54,11 +54,11 @@ class HomeRemoteDataSourceImp extends HomeRemoteDataSource {
   @override
   Future<bool> editNotification(GroupHomeEntity group) async {
     await service.post(
-      'AppLinks.editNotification',
+      AppLinks.memberNotification,
       {
-        'member_id': '${group.memberEntity.user.id}',
+        'user_id': '${group.memberEntity.user.id}',
         'group_id': '${group.groupId}',
-        'notify': group.memberEntity.notification.inString,
+        'notification': group.memberEntity.notification.inString,
       },
     );
     return true;
