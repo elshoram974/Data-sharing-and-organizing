@@ -13,4 +13,6 @@ abstract final class AppConst {
   static const int maxTablet = 900;
 
   static const bool isWeb = kIsWeb;
+
+  static const Duration durationBeforeSearch = Duration(milliseconds: 800);
 }

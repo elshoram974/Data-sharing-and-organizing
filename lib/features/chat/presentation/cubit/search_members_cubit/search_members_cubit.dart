@@ -1,4 +1,7 @@
+import 'dart:async';
+
 import 'package:data_sharing_organizing/core/status/errors/failure_body.dart';
+import 'package:data_sharing_organizing/core/utils/constants/app_constants.dart';
 import 'package:data_sharing_organizing/core/utils/functions/handle_status_emit.dart';
 import 'package:data_sharing_organizing/core/utils/services/dependency/provider_dependency.dart';
 import 'package:equatable/equatable.dart';
@@ -22,6 +25,8 @@ abstract class _SearchMembersCubit extends Cubit<SearchMembersState> {
   String query = " ";
 
   void searchMembers();
+
+  void onChangeQuery(String q);
 }
 
 class SearchMembersCubit extends _SearchMembersCubit {
@@ -61,5 +66,31 @@ class SearchMembersCubit extends _SearchMembersCubit {
       },
       failureFunction: (f) => emit(SearchMembersFailureState(f)),
     );
+  }
+
+  Timer? _timer;
+
+  @override
+  void onChangeQuery(String q) {
+    q = q.trim();
+    if (q.trim().isEmpty) q = " ";
+
+    if (_timer?.isActive ?? false) _timer?.cancel();
+    _timer = Timer.periodic(
+      AppConst.durationBeforeSearch,
+      (timer) {
+        if (query != q) {
+          query = q;
+          searchMembers();
+        }
+        timer.cancel();
+      },
+    );
+  }
+
+  @override
+  close() {
+    _timer?.cancel();
+    return super.close();
   }
 }
