@@ -72,6 +72,7 @@ class GroupDetailsCubitImp extends GroupDetailsCubit {
 
   @override
   Future<void> updateMembersLocal(List<GroupMember> updated) async {
+    emit(const GroupDetailsInitial());
     List<GroupMember> newMembers = await repo.updateMembersLocal(
       updated,
       group,

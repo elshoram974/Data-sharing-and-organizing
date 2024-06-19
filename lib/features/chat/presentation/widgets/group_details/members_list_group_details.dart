@@ -3,10 +3,12 @@ import 'package:data_sharing_organizing/core/shared/responsive/constrained_box.d
 import 'package:data_sharing_organizing/core/utils/config/locale/generated/l10n.dart';
 import 'package:data_sharing_organizing/core/utils/constants/app_constants.dart';
 import 'package:data_sharing_organizing/core/utils/entities/member_list_tile_entity.dart';
+import 'package:data_sharing_organizing/core/utils/services/dependency/provider_dependency.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../user_home/domain/entities/group_home_entity.dart';
 import '../../../data/models/group_details_members/group_members_model.dart';
+import '../../cubit/group_details/group_details_cubit.dart';
 
 class MembersListGroupDetails extends StatelessWidget {
   const MembersListGroupDetails({
@@ -28,13 +30,10 @@ class MembersListGroupDetails extends StatelessWidget {
             child: MembersListTile(
               ownerId: group.ownerId,
               thisUserIsAdmin: group.memberEntity.isAdmin,
-              onTileTappedDown: group.memberEntity.isAdmin && i != 0
-                  ? (_) => editMembersMenu(
-                        context,
-                        _,
-                        list[i].isAdmin,
-                        !list[i].canInteraction,
-                      )
+              onTileTappedDown: group.memberEntity.isAdmin &&
+                      i != 0 &&
+                      !(list[i].memberId == group.ownerId && list[i].isAdmin)
+                  ? (_) => editMembersMenu(context, _, list[i])
                   : null,
               memberEntity: MemberListTileEntity(
                 id: list[i].memberId,
@@ -56,12 +55,13 @@ class MembersListGroupDetails extends StatelessWidget {
 void editMembersMenu(
   BuildContext context,
   TapDownDetails offset,
-  bool isAdmin,
-  bool isBlocked,
+  GroupMember member,
 ) {
   final double x = offset.globalPosition.dx;
   final double y = offset.globalPosition.dy;
   final Size size = MediaQuery.sizeOf(context);
+
+  final GroupDetailsCubitImp c = ProviderDependency.groupDetails;
   showMenu(
     context: context,
     position: RelativeRect.fromLTRB(x, y, size.width - x, size.height - y),
@@ -70,27 +70,27 @@ void editMembersMenu(
     ),
     items: [
       PopupMenuItem(
-        onTap: () {},
+        onTap: () => c.removeMember(member),
         child: Text(S.of(context).remove),
       ),
-      if (isAdmin)
+      if (member.isAdmin)
         PopupMenuItem(
-          onTap: () {},
+          onTap: () => c.changeAdmin(false, member),
           child: Text(S.of(context).dismissAsAdmin),
         )
       else ...[
-        if (isBlocked)
+        if (!member.canInteraction)
           PopupMenuItem(
-            onTap: () {},
+            onTap: () => c.changeInteraction(true, member.memberId),
             child: Text(S.of(context).unBlockThisUser),
           )
         else
           PopupMenuItem(
-            onTap: () {},
+            onTap: () => c.changeInteraction(false, member.memberId),
             child: Text(S.of(context).blockThisUser),
           ),
         PopupMenuItem(
-          onTap: () {},
+          onTap: () => c.changeAdmin(true, member),
           child: Text(S.of(context).promoteGroupAdmin),
         ),
       ],
