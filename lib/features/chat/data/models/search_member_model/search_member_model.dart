@@ -6,17 +6,17 @@ import 'searched_member_model.dart';
 
 class SearchMemberModel extends Equatable {
   final String status;
-  final List<SearchedMemberModel> users;
+  final List<SearchedMemberModel> searchedMembers;
 
   const SearchMemberModel({
     required this.status,
-    required this.users,
+    required this.searchedMembers,
   });
 
   factory SearchMemberModel.fromMap(Map<String, dynamic> data) {
     return SearchMemberModel(
       status: data['status'] as String,
-      users: (data['users'] as List<dynamic>)
+      searchedMembers: (data['users'] as List<dynamic>)
           .map((e) => SearchedMemberModel.fromMap(e as Map<String, dynamic>))
           .toList(),
     );
@@ -24,7 +24,7 @@ class SearchMemberModel extends Equatable {
 
   Map<String, dynamic> toMap() => {
         'status': status,
-        'users': users.map((e) => e.toMap()).toList(),
+        'users': searchedMembers.map((e) => e.toMap()).toList(),
       };
 
   /// `dart:convert`
@@ -45,7 +45,7 @@ class SearchMemberModel extends Equatable {
   }) {
     return SearchMemberModel(
       status: status ?? this.status,
-      users: users ?? this.users,
+      searchedMembers: users ?? this.searchedMembers,
     );
   }
 
@@ -53,5 +53,5 @@ class SearchMemberModel extends Equatable {
   bool get stringify => true;
 
   @override
-  List<Object?> get props => [status, users];
+  List<Object?> get props => [status, searchedMembers];
 }
