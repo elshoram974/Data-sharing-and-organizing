@@ -179,6 +179,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "enterYourCredentialsToContinue": MessageLookupByLibrary.simpleMessage(
             "أدخل بيانات اعتمادك للمتابعة."),
         "error": MessageLookupByLibrary.simpleMessage("خطأ"),
+        "errorChangingUserRoleTryAgainLater": MessageLookupByLibrary.simpleMessage(
+            "حدث خطأ أثناء تغيير دور المستخدم. يرجى المحاولة مرة أخرى لاحقًا."),
         "errorDeletingActivity": MessageLookupByLibrary.simpleMessage(
             "حدث خطأ أثناء حذف النشاط من قاعدة البيانات. يرجى المحاولة مرة أخرى لاحقًا."),
         "errorDeletingDirectory": MessageLookupByLibrary.simpleMessage(
@@ -348,6 +350,13 @@ class MessageLookup extends MessageLookupByLibrary {
             "هذا البريد الإلكتروني مستخدم بالفعل."),
         "today": MessageLookupByLibrary.simpleMessage("اليوم"),
         "type": MessageLookupByLibrary.simpleMessage("النوع"),
+        "uCanNtBlockAdmins":
+            MessageLookupByLibrary.simpleMessage("لا يمكنك حظر المسؤولين."),
+        "uCanNtChangeRoleOfTheOwnerOfGroup":
+            MessageLookupByLibrary.simpleMessage(
+                "لا يمكنك تغيير دور مالك المجموعة."),
+        "uCanNtRemoveOwnerOfGroup": MessageLookupByLibrary.simpleMessage(
+            "لا يمكنك إزالة مالك المجموعة."),
         "uHaveToVerifyAccountFirst":
             MessageLookupByLibrary.simpleMessage("يجب التحقق من حسابك أولاً"),
         "unBlockThisUser":

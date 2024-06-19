@@ -181,6 +181,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "enterYourCredentialsToContinue": MessageLookupByLibrary.simpleMessage(
             "Enter your credentials to continue."),
         "error": MessageLookupByLibrary.simpleMessage("Error"),
+        "errorChangingUserRoleTryAgainLater":
+            MessageLookupByLibrary.simpleMessage(
+                "Error changing user role. Please try again later."),
         "errorDeletingActivity": MessageLookupByLibrary.simpleMessage(
             "Error deleting activity from database. Please try again later."),
         "errorDeletingDirectory": MessageLookupByLibrary.simpleMessage(
@@ -347,6 +350,13 @@ class MessageLookup extends MessageLookupByLibrary {
             "This email is already in use."),
         "today": MessageLookupByLibrary.simpleMessage("Today"),
         "type": MessageLookupByLibrary.simpleMessage("Type"),
+        "uCanNtBlockAdmins": MessageLookupByLibrary.simpleMessage(
+            "You cannot block administrators."),
+        "uCanNtChangeRoleOfTheOwnerOfGroup":
+            MessageLookupByLibrary.simpleMessage(
+                "You cannot change the role of the group owner."),
+        "uCanNtRemoveOwnerOfGroup": MessageLookupByLibrary.simpleMessage(
+            "You cannot remove the owner of the group."),
         "uHaveToVerifyAccountFirst": MessageLookupByLibrary.simpleMessage(
             "You have to verify your account first"),
         "unBlockThisUser":

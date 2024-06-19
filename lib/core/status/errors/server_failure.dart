@@ -200,6 +200,23 @@ class ServerFailure<T> extends Failure<T> {
         return ServerFailure(
           res.copyWith(message: S.current.errorDeletingActivity),
         );
+      case 'you can not change the permissions of owner of group.':
+        return ServerFailure(
+          res.copyWith(message: S.current.uCanNtChangeRoleOfTheOwnerOfGroup),
+        );
+      case 'you can not remove the owner of group.':
+        return ServerFailure(
+          res.copyWith(message: S.current.uCanNtRemoveOwnerOfGroup),
+        );
+      case 'Cannot block a user who is an admin.':
+        return ServerFailure(
+          res.copyWith(message: S.current.uCanNtBlockAdmins),
+        );
+      case 'Error changing the user status. Please try again later.':
+        return ServerFailure(
+          res.copyWith(message: S.current.errorChangingUserRoleTryAgainLater),
+        );
+
       default:
         return ServerFailure(res);
     }

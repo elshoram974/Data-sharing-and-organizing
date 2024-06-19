@@ -2123,6 +2123,46 @@ class S {
       args: [name],
     );
   }
+
+  /// `You cannot change the role of the group owner.`
+  String get uCanNtChangeRoleOfTheOwnerOfGroup {
+    return Intl.message(
+      'You cannot change the role of the group owner.',
+      name: 'uCanNtChangeRoleOfTheOwnerOfGroup',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You cannot remove the owner of the group.`
+  String get uCanNtRemoveOwnerOfGroup {
+    return Intl.message(
+      'You cannot remove the owner of the group.',
+      name: 'uCanNtRemoveOwnerOfGroup',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You cannot block administrators.`
+  String get uCanNtBlockAdmins {
+    return Intl.message(
+      'You cannot block administrators.',
+      name: 'uCanNtBlockAdmins',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Error changing user role. Please try again later.`
+  String get errorChangingUserRoleTryAgainLater {
+    return Intl.message(
+      'Error changing user role. Please try again later.',
+      name: 'errorChangingUserRoleTryAgainLater',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
