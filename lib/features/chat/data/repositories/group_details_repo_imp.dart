@@ -47,4 +47,10 @@ class GroupDetailsRepositoriesImp extends GroupDetailsRepositories {
       () => remoteDataSource.searchMembers(query),
     );
   }
+
+    @override
+  Future<Status<void>> addMember(SearchedMemberModel member) {
+    // TODO: implement addMember
+    throw UnimplementedError();
+  }
 }

@@ -11,4 +11,5 @@ abstract class GroupDetailsRepositories {
   });
 
   Future<Status<List<SearchedMemberModel>>> searchMembers(String query);
+  Future<Status<void>> addMember(SearchedMemberModel member);
 }
