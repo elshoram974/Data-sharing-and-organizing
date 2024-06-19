@@ -1,10 +1,9 @@
+import 'package:data_sharing_organizing/core/shared/group_name_text_field.dart';
 import 'package:data_sharing_organizing/core/shared/responsive/constrained_box.dart';
-import 'package:data_sharing_organizing/core/utils/config/locale/generated/l10n.dart';
 import 'package:data_sharing_organizing/core/utils/constants/app_color.dart';
 import 'package:data_sharing_organizing/core/utils/constants/app_constants.dart';
 import 'package:data_sharing_organizing/core/utils/extension/padding_ex.dart';
 import 'package:data_sharing_organizing/core/utils/services/pick_image.dart';
-import 'package:data_sharing_organizing/core/utils/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -31,20 +30,7 @@ class GroupNameAndImage extends StatelessWidget {
             ),
             const SizedBox(width: 10),
             Flexible(
-              child: TextField(
-                decoration: InputDecoration(
-                  enabledBorder: const UnderlineInputBorder(
-                    borderSide: BorderSide(color: AppColor.primary),
-                  ),
-                  contentPadding: const EdgeInsets.symmetric(vertical: 8),
-                  hintStyle: AppStyle.styleBoldInika16,
-                  hintText: S.of(context).groupName,
-                  constraints: const BoxConstraints(
-                    maxWidth: 232,
-                    maxHeight: 21,
-                  ),
-                ),
-              ),
+              child: GroupNameTextField(),
             ),
           ],
         ),
