@@ -2173,6 +2173,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Change group image`
+  String get changeGroupImage {
+    return Intl.message(
+      'Change group image',
+      name: 'changeGroupImage',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

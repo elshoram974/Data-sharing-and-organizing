@@ -123,6 +123,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
         "cantBeLessThan": m1,
         "cantBeMoreThan": m2,
+        "changeGroupImage":
+            MessageLookupByLibrary.simpleMessage("Change group image"),
         "changeGroupName":
             MessageLookupByLibrary.simpleMessage("Change group name"),
         "changeName": MessageLookupByLibrary.simpleMessage("Change name"),

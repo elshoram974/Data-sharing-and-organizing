@@ -16,8 +16,8 @@ class GroupDetailsPopupButton extends StatelessWidget {
       onSelected: (value) {},
       itemBuilder: (context) {
         return [
-          myPopupButton(GroupEditEnum.image, S.of(context).photo),
-          myPopupButton(GroupEditEnum.name, S.of(context).name),
+          myPopupButton(GroupEditEnum.image, S.of(context).changeGroupImage),
+          myPopupButton(GroupEditEnum.name, S.of(context).changeGroupName),
         ];
       },
     );
