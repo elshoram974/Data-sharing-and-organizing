@@ -1,5 +1,6 @@
 import 'package:data_sharing_organizing/core/shared/circular_loading_indicator.dart';
 import 'package:data_sharing_organizing/core/shared/member_list_tile/member_list_tile.dart';
+import 'package:data_sharing_organizing/core/shared/no_account_found_widget.dart';
 import 'package:data_sharing_organizing/core/shared/responsive/constrained_box.dart';
 import 'package:data_sharing_organizing/core/utils/config/locale/generated/l10n.dart';
 import 'package:data_sharing_organizing/core/utils/entities/member_list_tile_entity.dart';
@@ -18,6 +19,10 @@ class SearchedMembersList extends StatelessWidget {
     final SearchMembersCubit c = BlocProvider.of<SearchMembersCubit>(context);
     return BlocBuilder<SearchMembersCubit, SearchMembersState>(
       builder: (context, state) {
+        if (c.currentSearched.isEmpty) {
+          return const Expanded(child: NoAccountFoundWidget());
+        }
+
         return Expanded(
           child: Column(
             children: [
