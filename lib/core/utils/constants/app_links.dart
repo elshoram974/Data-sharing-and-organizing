@@ -47,6 +47,9 @@ abstract final class AppLinks {
       '$_botChatChanges/member_notification.php';
   static const String editGroupPermissions =
       '$_botChatChanges/group_permissions.php';
+  static const String editGroupData = '$_botChatChanges/edit_group.php';
+  static const String removeGroupImage =
+      '$_botChatChanges/remove_group_image.php';
 
   // * user profile
   static const String _changes = '$_userLink/changes';

@@ -41,10 +41,8 @@ class GroupCubit extends Cubit<GroupState> {
 
   Future<void> updateGroup(GroupHomeEntity updatedGroup) async {
     group = updatedGroup;
-    await ProviderDependency.userHome.updateGroupLocally(updatedGroup);
-    print("group.accessType ${group.accessType}");
-    print("group.discussion ${group.discussion}");
     emit(GroupUpdateGroupDetails(updatedGroup));
+    await ProviderDependency.userHome.updateGroupLocally(updatedGroup);
   }
 
   Future<void> editNotification(NotificationEnum notify) async {

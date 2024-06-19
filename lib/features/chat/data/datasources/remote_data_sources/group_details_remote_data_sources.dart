@@ -4,6 +4,7 @@ import 'package:data_sharing_organizing/core/utils/constants/app_links.dart';
 import 'package:data_sharing_organizing/core/utils/services/api_services.dart';
 
 import '../../../../user_home/domain/entities/group_home_entity.dart';
+import '../../../domain/entities/edit_group_params.dart';
 import '../../../domain/entities/group_permissions_params.dart';
 import '../../models/group_details_members/group_details_members.dart';
 import '../../models/group_details_members/group_members_model.dart';
@@ -37,6 +38,9 @@ abstract class GroupDetailsRemoteDataSource {
   );
 
   Future<void> changePermissions(GroupPermissionsParams params);
+
+  Future<void> editGroup(EditGroupParams params);
+  Future<void> removeGroupImage({required int adminId, required int groupId});
 }
 
 class GroupDetailsRemoteDataSourceImp extends GroupDetailsRemoteDataSource {
@@ -144,5 +148,40 @@ class GroupDetailsRemoteDataSourceImp extends GroupDetailsRemoteDataSource {
       throw "Can't make discussion_type and access_type null";
     }
     await service.post(AppLinks.editGroupPermissions, body);
+  }
+
+  @override
+  Future<void> editGroup(EditGroupParams params) async {
+    final Map<String, String> body = {
+      'user_id': '${params.adminId}',
+      'group_id': '${params.groupId}',
+    };
+    if (params.groupName != null) {
+      body['name'] = params.groupName!;
+      await service.post(AppLinks.editGroupData, body);
+    } else if (params.groupImage != null) {
+      await service.uploadFile(
+        link: AppLinks.editGroupData,
+        fieldName: 'image',
+        fileToUpload: params.groupImage!,
+        body: body,
+      );
+    } else {
+      throw "Can't make groupName and groupImage null";
+    }
+  }
+
+  @override
+  Future<void> removeGroupImage({
+    required int adminId,
+    required int groupId,
+  }) async {
+    await service.post(
+      AppLinks.removeGroupImage,
+      {
+        'user_id': '$adminId',
+        'group_id': '$groupId',
+      },
+    );
   }
 }
