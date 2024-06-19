@@ -263,7 +263,10 @@ class DirectoryCubitImp extends DirectoryCubit {
       user: dir.createdBy.user,
       blockFn: () {
         handleStatusEmit<void>(
-          statusFunction: () => botRepo.blockUserWithDir(dir),
+          statusFunction: () => botRepo.blockUserWithDir(
+            dir,
+            groupCubit.group.memberEntity.user.id,
+          ),
           successFunction: (_) {
             currentDirectories.removeWhere((e) => e.id == dir.id);
             emit(OpenDirectoryState(currentDirectories));

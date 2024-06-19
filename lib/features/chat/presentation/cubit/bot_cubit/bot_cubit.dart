@@ -300,7 +300,10 @@ class BOTCubitImp extends BOTCubit {
       user: activity.createdBy.user,
       blockFn: () {
         handleStatusEmit<void>(
-          statusFunction: () => botRepo.blockUserWithActivity(activity),
+          statusFunction: () => botRepo.blockUserWithActivity(
+            activity,
+            groupCubit.group.memberEntity.user.id,
+          ),
           successFunction: (_) => removeMessage(message),
         ).then((v) => Navigator.of(_).pop());
       },

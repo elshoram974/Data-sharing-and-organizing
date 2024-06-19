@@ -22,13 +22,14 @@ abstract class BOTRepositories {
       MemberEntity currentMember, ActivityEntity activity, bool makeApproved);
   Future<Status<void>> deleteActivity(
       MemberEntity currentMember, ActivityEntity activity);
-  Future<Status<void>> blockUserWithActivity(ActivityEntity activity);
+  Future<Status<void>> blockUserWithActivity(
+      ActivityEntity activity, int adminId);
 
   Future<Status<void>> approveDirectory(
       MemberEntity currentMember, DirectoryEntity dir, bool makeApproved);
   Future<Status<void>> deleteDirectory(
       MemberEntity currentMember, DirectoryEntity dir);
-  Future<Status<void>> blockUserWithDir(DirectoryEntity dir);
+  Future<Status<void>> blockUserWithDir(DirectoryEntity dir, int adminId);
 
   Future<Status<List<ActivityEntity>>> askAI(ActivityEntity activity);
 

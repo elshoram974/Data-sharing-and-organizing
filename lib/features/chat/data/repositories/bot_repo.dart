@@ -87,11 +87,15 @@ class BOTRepositoriesImp extends BOTRepositories {
   }
 
   @override
-  Future<Status<void>> blockUserWithActivity(ActivityEntity activity) {
+  Future<Status<void>> blockUserWithActivity(
+    ActivityEntity activity,
+    int adminId,
+  ) {
     return executeAndHandleErrors<void>(
       () async {
         final bool isBlocked = await remoteDataSource.blockUserWithActivity(
           activity: activity,
+          adminId: adminId,
         );
         if (isBlocked) await localDataSource.deleteActivity(activity);
       },
@@ -130,11 +134,12 @@ class BOTRepositoriesImp extends BOTRepositories {
   }
 
   @override
-  Future<Status<void>> blockUserWithDir(DirectoryEntity dir) {
+  Future<Status<void>> blockUserWithDir(DirectoryEntity dir, int adminId) {
     return executeAndHandleErrors<void>(
       () async {
         final bool isBlocked = await remoteDataSource.blockUserWithDir(
           directory: dir,
+          adminId: adminId,
         );
         if (isBlocked) await localDataSource.deleteDirectory(dir);
       },

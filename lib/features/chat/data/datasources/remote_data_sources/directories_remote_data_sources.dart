@@ -32,7 +32,10 @@ abstract class DirectoriesRemoteDataSource {
     required MemberEntity currentMember,
   });
 
-  Future<bool> blockUserWithActivity({required ActivityEntity activity});
+  Future<bool> blockUserWithActivity({
+    required ActivityEntity activity,
+    required int adminId,
+  });
 
   Future<bool> approveDirectory({
     required DirectoryEntity directory,
@@ -43,7 +46,10 @@ abstract class DirectoriesRemoteDataSource {
     required DirectoryEntity directory,
     required MemberEntity currentMember,
   });
-  Future<bool> blockUserWithDir({required DirectoryEntity directory});
+  Future<bool> blockUserWithDir({
+    required DirectoryEntity directory,
+    required int adminId,
+  });
 
   Future<List<ActivityEntity>> askAI({required ActivityEntity activity});
 
@@ -115,10 +121,14 @@ class DirectoriesRemoteDataSourceImp extends DirectoriesRemoteDataSource {
   }
 
   @override
-  Future<bool> blockUserWithActivity({required ActivityEntity activity}) async {
+  Future<bool> blockUserWithActivity({
+    required ActivityEntity activity,
+    required int adminId,
+  }) async {
     await service.post(
       AppLinks.blockUserGroup,
       {
+        'admin_id': '$adminId',
         'activity_id': '${activity.id}',
         'group_id': '${activity.groupId}',
         'user_id': '${activity.createdBy.user.id}',
@@ -162,10 +172,14 @@ class DirectoriesRemoteDataSourceImp extends DirectoriesRemoteDataSource {
   }
 
   @override
-  Future<bool> blockUserWithDir({required DirectoryEntity directory}) async {
+  Future<bool> blockUserWithDir({
+    required DirectoryEntity directory,
+    required int adminId,
+  }) async {
     await service.post(
       AppLinks.blockUserGroup,
       {
+        'admin_id': '$adminId',
         'direction_id': '${directory.id}',
         'group_id': '${directory.groupId}',
         'user_id': '${directory.createdBy.user.id}',
