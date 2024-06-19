@@ -220,9 +220,7 @@ class GroupDetailsCubitImp extends GroupDetailsCubit {
   Future<void> _changeImage(EditPhotoSelectedPopUpItem pickFrom) async {
     imageData = await HandlePickedImage.pickImage(pickFrom.pickFrom());
     if (imageData == null) return failureStatus(S.current.cancel, () {});
-    emit(const ProgressUploadingPhoto());
 
-    final BuildContext context = AppRoute.key.currentContext!;
     await editGroup(
       EditGroupParams(
         adminId: group.memberEntity.user.id,
@@ -231,7 +229,6 @@ class GroupDetailsCubitImp extends GroupDetailsCubit {
         groupImage: imageData,
       ),
     );
-    if (context.mounted) context.pop();
   }
 
   @override

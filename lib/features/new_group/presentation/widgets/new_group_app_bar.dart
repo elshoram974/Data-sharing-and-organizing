@@ -5,10 +5,11 @@ import 'package:data_sharing_organizing/core/utils/styles.dart';
 import 'package:flutter/material.dart';
 
 class NewGroupAppBar extends StatelessWidget {
-  const NewGroupAppBar({super.key, this.subTitle, this.title});
+  const NewGroupAppBar({super.key, this.subTitle, this.title, this.actions});
 
   final String? title;
   final String? subTitle;
+  final List<Widget>? actions;
 
   @override
   Widget build(BuildContext context) {
@@ -17,6 +18,7 @@ class NewGroupAppBar extends StatelessWidget {
       leading: const BackButtonLeading(showBackButton: true),
       elevation: 0,
       scrolledUnderElevation: 0,
+      actions: actions,
       flexibleSpace: SafeArea(
         top: true,
         bottom: true,

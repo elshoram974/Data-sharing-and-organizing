@@ -2,6 +2,7 @@ import 'package:data_sharing_organizing/core/utils/config/locale/generated/l10n.
 import 'package:data_sharing_organizing/core/utils/functions/my_popup_button_item.dart';
 import 'package:flutter/material.dart';
 
+import '../../../screens/group_change_image.dart';
 import '../../../screens/group_change_name.dart';
 
 class GroupDetailsPopupButton extends StatelessWidget {
@@ -18,12 +19,12 @@ class GroupDetailsPopupButton extends StatelessWidget {
           myPopupButton(
             null,
             S.of(context).changeGroupImage,
-            // () => Navigator.push(
-            //   context,
-            //   MaterialPageRoute(
-            //     builder: (context) => const ChangeGroupNameScreen(),
-            //   ),
-            // ),
+            () => Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const ChangeGroupImageScreen(),
+              ),
+            ),
           ),
           myPopupButton(
             null,
