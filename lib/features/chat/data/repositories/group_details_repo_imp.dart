@@ -58,4 +58,33 @@ class GroupDetailsRepositoriesImp extends GroupDetailsRepositories {
       () => remoteDataSource.addMembers([member], group),
     );
   }
+
+  @override
+  Future<Status<void>> removeMember(GroupMember member, GroupHomeEntity group) {
+    return executeAndHandleErrors<void>(
+      () => remoteDataSource.removeMember(member, group),
+    );
+  }
+
+  @override
+  Future<Status<void>> changeAdmin(
+    bool makeAdmin,
+    GroupMember member,
+    GroupHomeEntity group,
+  ) {
+    return executeAndHandleErrors<void>(
+      () => remoteDataSource.changeAdmin(makeAdmin, member, group),
+    );
+  }
+
+  @override
+  Future<Status<void>> changeInteraction(
+    bool canInteract,
+    int memberId,
+    GroupHomeEntity group,
+  ) {
+    return executeAndHandleErrors<void>(
+      () => remoteDataSource.changeInteraction(canInteract, memberId, group),
+    );
+  }
 }

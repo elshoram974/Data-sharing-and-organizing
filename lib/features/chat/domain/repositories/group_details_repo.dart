@@ -12,8 +12,23 @@ abstract class GroupDetailsRepositories {
   });
 
   Future<Status<List<SearchedUserModel>>> searchMembers(String query);
+
   Future<Status<void>> addMember(
     SearchedUserModel member,
+    GroupHomeEntity group,
+  );
+
+  Future<Status<void>> removeMember(GroupMember member, GroupHomeEntity group);
+
+  Future<Status<void>> changeAdmin(
+    bool makeAdmin,
+    GroupMember member,
+    GroupHomeEntity group,
+  );
+
+  Future<Status<void>> changeInteraction(
+    bool canInteract,
+    int memberId,
     GroupHomeEntity group,
   );
 }
