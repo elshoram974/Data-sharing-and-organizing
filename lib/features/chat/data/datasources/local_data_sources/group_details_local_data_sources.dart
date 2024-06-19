@@ -68,8 +68,8 @@ class GroupDetailsLocalDataSourceImp extends GroupDetailsLocalDataSource {
 }
 
 int _groupMemberComparator(GroupMember a, GroupMember b) {
-  String sortedNameA = a.firstName + a.lastName;
-  String sortedNameB = b.firstName + b.lastName;
+  String sortedNameA = '${a.firstName} ${a.lastName}'.toLowerCase();
+  String sortedNameB = '${b.firstName} ${b.lastName}'.toLowerCase();
 
   return sortedNameA.compareTo(sortedNameB);
 }
