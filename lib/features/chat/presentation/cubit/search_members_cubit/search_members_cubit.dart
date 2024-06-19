@@ -5,45 +5,46 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../data/models/group_details_members/group_members_model.dart';
-import '../../../data/models/search_member_model/searched_member_model.dart';
+import '../../../data/models/search_member_model/searched_user_model.dart';
 import '../../../domain/repositories/group_details_repo.dart';
 import '../group_details/group_details_cubit.dart';
 
 part 'search_members_state.dart';
 
-abstract class SearchMembersCubit extends Cubit<SearchMembersState> {
-  SearchMembersCubit() : super(const SearchMembersInitial());
+abstract class _SearchMembersCubit extends Cubit<SearchMembersState> {
+  _SearchMembersCubit() : super(const SearchMembersInitial());
 
   final GroupDetailsCubitImp detailsCubit = ProviderDependency.groupDetails;
   late final GroupDetailsRepositories repo = detailsCubit.groupDetailsRepo;
 
-  List<SearchedMemberModel> currentSearched = [];
+  List<SearchedUserModel> currentSearched = [];
 
   String query = " ";
 
   void searchMembers();
 }
 
-class SearchMembersCubitImp extends SearchMembersCubit {
-  SearchMembersCubitImp(){
+class SearchMembersCubit extends _SearchMembersCubit {
+  SearchMembersCubit() {
     searchMembers();
   }
 
   @override
   void searchMembers() {
     emit(const SearchMembersLoadingState());
-    handleStatusEmit<List<SearchedMemberModel>>(
+    handleStatusEmit<List<SearchedUserModel>>(
+      dismissLoadingOnTap: null,
       statusFunction: () => repo.searchMembers(query),
       successFunction: (_) {
-        final List<SearchedMemberModel> temp = [];
+        final List<SearchedUserModel> temp = [];
 
         outer:
         for (GroupMember e in detailsCubit.members) {
-          for (SearchedMemberModel s in _) {
+          for (SearchedUserModel s in _) {
             if (s.userId == e.memberId) continue outer;
           }
           temp.add(
-            SearchedMemberModel(
+            SearchedUserModel(
               userId: e.memberId,
               firstName: e.firstName,
               lastName: e.lastName,

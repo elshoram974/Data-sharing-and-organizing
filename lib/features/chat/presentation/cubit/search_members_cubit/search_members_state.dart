@@ -17,7 +17,7 @@ class SearchMembersLoadingState extends SearchMembersState {
 
 class SearchMembersSuccessState extends SearchMembersState {
   const SearchMembersSuccessState(this.members);
-  final List<SearchedMemberModel> members;
+  final List<SearchedUserModel> members;
 
   @override
   List<Object?> get props => [members];
