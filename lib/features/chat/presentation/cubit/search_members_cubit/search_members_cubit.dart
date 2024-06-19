@@ -24,9 +24,14 @@ abstract class _SearchMembersCubit extends Cubit<SearchMembersState> {
 
   String query = " ";
 
-  void searchMembers();
+  Future<void> searchMembers();
 
   void onChangeQuery(String q);
+
+  Future<void> addMember(SearchedUserModel user);
+
+  @override
+  close();
 }
 
 class SearchMembersCubit extends _SearchMembersCubit {
@@ -35,7 +40,7 @@ class SearchMembersCubit extends _SearchMembersCubit {
   }
 
   @override
-  void searchMembers() {
+  Future<void> searchMembers() async {
     emit(const SearchMembersLoadingState());
     handleStatusEmit<List<SearchedUserModel>>(
       dismissLoadingOnTap: null,
@@ -85,6 +90,20 @@ class SearchMembersCubit extends _SearchMembersCubit {
         }
         timer.cancel();
       },
+    );
+  }
+
+  @override
+  Future<void> addMember(SearchedUserModel user) async {
+    emit(const AddMemberLoadingState());
+    await handleStatusEmit<void>(
+      statusFunction: () => repo.addMember(user),
+      successFunction: (_) async {
+        await detailsCubit.getMembers();
+        currentSearched.remove(user);
+        emit(AddMemberSuccessState(user));
+      },
+      failureFunction: (f) => emit(AddMemberFailureState(f)),
     );
   }
 

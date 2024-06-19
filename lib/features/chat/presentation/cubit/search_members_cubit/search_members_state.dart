@@ -30,3 +30,23 @@ class SearchMembersFailureState extends SearchMembersState {
   @override
   List<Object?> get props => [failure];
 }
+
+class AddMemberLoadingState extends SearchMembersState {
+  const AddMemberLoadingState();
+}
+
+class AddMemberSuccessState extends SearchMembersState {
+  const AddMemberSuccessState(this.member);
+  final SearchedUserModel member;
+
+  @override
+  List<Object?> get props => [member];
+}
+
+class AddMemberFailureState extends SearchMembersState {
+  const AddMemberFailureState(this.failure);
+  final FailureBody failure;
+
+  @override
+  List<Object?> get props => [failure];
+}
