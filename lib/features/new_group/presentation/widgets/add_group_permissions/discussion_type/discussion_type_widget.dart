@@ -1,6 +1,7 @@
 import 'package:data_sharing_organizing/core/shared/responsive/constrained_box.dart';
 import 'package:data_sharing_organizing/core/utils/config/locale/generated/l10n.dart';
 import 'package:data_sharing_organizing/core/utils/constants/app_assets.dart';
+import 'package:data_sharing_organizing/core/utils/enums/home/group_discussion_type_enum.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../user_home/domain/entities/group_home_entity.dart';
@@ -14,11 +15,13 @@ class DiscussionTypeWidget extends StatelessWidget {
     required this.color,
     required this.style,
     required this.group,
+    required this.onSelect,
   });
 
   final Color color;
   final TextStyle? style;
   final GroupHomeEntity group;
+  final void Function(GroupDiscussionType) onSelect;
 
   @override
   Widget build(BuildContext context) {
@@ -42,9 +45,7 @@ class DiscussionTypeWidget extends StatelessWidget {
           clipBehavior: Clip.hardEdge,
           child: DiscussionTypeDialog(
             group: group,
-            onSelect: (val) {
-              print(val.typeName(context));
-            },
+            onSelect: onSelect,
           ),
         );
       },

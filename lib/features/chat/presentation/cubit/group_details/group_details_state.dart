@@ -30,3 +30,15 @@ class GetMembersFailureState extends GroupDetailsState {
   @override
   List<Object?> get props => [failure];
 }
+
+class ChangePermissionsLoadingState extends GroupDetailsState {
+  const ChangePermissionsLoadingState();
+}
+
+class ChangePermissionsSuccessState extends GroupDetailsState {
+  const ChangePermissionsSuccessState(this.params);
+  final GroupPermissionsParams params;
+
+  @override
+  List<Object?> get props => [params];
+}

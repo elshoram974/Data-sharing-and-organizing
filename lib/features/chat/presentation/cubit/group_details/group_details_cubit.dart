@@ -2,12 +2,16 @@ import 'package:data_sharing_organizing/core/status/errors/failure.dart';
 import 'package:data_sharing_organizing/core/status/errors/failure_body.dart';
 import 'package:data_sharing_organizing/core/status/status.dart';
 import 'package:data_sharing_organizing/core/status/success/success.dart';
+import 'package:data_sharing_organizing/core/utils/enums/home/group_access_type_enum.dart';
+import 'package:data_sharing_organizing/core/utils/enums/home/group_discussion_type_enum.dart';
 import 'package:data_sharing_organizing/core/utils/functions/handle_status_emit.dart';
+import 'package:data_sharing_organizing/core/utils/services/dependency/provider_dependency.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../user_home/domain/entities/group_home_entity.dart';
 import '../../../data/models/group_details_members/group_members_model.dart';
+import '../../../domain/entities/group_permissions_params.dart';
 import '../../../domain/repositories/group_details_repo.dart';
 
 part 'group_details_state.dart';
@@ -26,6 +30,11 @@ abstract class GroupDetailsCubit extends Cubit<GroupDetailsState> {
   Future<void> changeAdmin(bool makeAdmin, GroupMember member);
 
   Future<void> changeInteraction(bool canInteract, int memberId);
+
+  Future<void> changePermissions(
+    GroupDiscussionType? discussionType,
+    GroupAccessType? accessType,
+  );
 }
 
 class GroupDetailsCubitImp extends GroupDetailsCubit {
@@ -35,7 +44,7 @@ class GroupDetailsCubitImp extends GroupDetailsCubit {
   }) {
     getMembers();
   }
-  final GroupHomeEntity group;
+  GroupHomeEntity group;
   final GroupDetailsRepositories repo;
 
   @override
@@ -118,6 +127,32 @@ class GroupDetailsCubitImp extends GroupDetailsCubit {
         members[i] = members[i].copyWith(canInteraction: canInteract);
 
         updateMembersLocal(members);
+      },
+    );
+  }
+
+  @override
+  Future<void> changePermissions(
+    GroupDiscussionType? discussionType,
+    GroupAccessType? accessType,
+  ) async {
+    emit(const ChangePermissionsLoadingState());
+    final GroupPermissionsParams params = GroupPermissionsParams(
+      adminId: group.memberEntity.user.id,
+      groupId: group.groupId,
+      discussionType: discussionType,
+      accessType: accessType,
+    );
+    await handleStatusEmit<void>(
+      statusFunction: () => repo.changePermissions(params),
+      successFunction: (_) async {
+        group = group.copyWith(
+          accessType: accessType,
+          discussion: discussionType,
+        );
+        ProviderDependency.group.group = group;
+        await ProviderDependency.userHome.updateGroupLocally(group);
+        emit(ChangePermissionsSuccessState(params));
       },
     );
   }
