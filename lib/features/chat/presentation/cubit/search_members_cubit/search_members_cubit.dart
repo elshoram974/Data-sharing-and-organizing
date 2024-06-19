@@ -36,14 +36,10 @@ class SearchMembersCubit extends _SearchMembersCubit {
       dismissLoadingOnTap: null,
       statusFunction: () => repo.searchMembers(query),
       successFunction: (_) {
-        final List<SearchedUserModel> temp = [];
-
-        outer:
+        final List<SearchedUserModel> temp = _;
+        final List<SearchedUserModel> members = [];
         for (GroupMember e in detailsCubit.members) {
-          for (SearchedUserModel s in _) {
-            if (s.userId == e.memberId) continue outer;
-          }
-          temp.add(
+          members.add(
             SearchedUserModel(
               userId: e.memberId,
               firstName: e.firstName,
@@ -52,6 +48,12 @@ class SearchMembersCubit extends _SearchMembersCubit {
               image: e.image,
             ),
           );
+        }
+
+        temp.removeWhere((e) => e.userId == members[0].userId);
+
+        for (var e in members) {
+          if (temp.contains(e)) temp.remove(e);
         }
 
         currentSearched = temp;

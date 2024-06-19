@@ -3,23 +3,20 @@ import 'package:data_sharing_organizing/core/shared/member_list_tile/member_list
 import 'package:data_sharing_organizing/core/shared/responsive/constrained_box.dart';
 import 'package:data_sharing_organizing/core/utils/entities/member_list_tile_entity.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../new_group/presentation/widgets/add_member/search_bar_widget/search_bar_members.dart';
-import '../../../data/models/search_member_model/searched_member_model.dart';
+import '../../../data/models/search_member_model/searched_user_model.dart';
+import '../../cubit/search_members_cubit/search_members_cubit.dart';
+import 'searched_members_list.dart';
 
 class SearchMembersBody extends StatelessWidget {
   const SearchMembersBody({super.key});
 
   @override
   Widget build(BuildContext context) {
-    List<SearchedMemberModel> list = [
-      SearchedMemberModel(
-        userId: 1,
-        firstName: 'firstName',
-        lastName: 'lastName',
-        lastLogin: DateTime.now(),
-      ),
-    ];
+    final SearchMembersCubit c = BlocProvider.of<SearchMembersCubit>(context);
+    
     return Scaffold(
       appBar: AppBar(
         leading: const BackButtonLeading(showBackButton: true),
@@ -32,29 +29,7 @@ class SearchMembersBody extends StatelessWidget {
             onChanged: (val) {},
             onSubmitted: (val) {},
           ),
-          Expanded(
-            child: ListView.builder(
-              itemCount: list.length,
-              padding: const EdgeInsets.symmetric(vertical: 50),
-              itemBuilder: (context, index) {
-                final SearchedMemberModel searchedMember = list[index];
-                return ResConstrainedBoxAlign(
-                  child: MembersListTile(
-                    onTileTapped: () {},
-                    memberEntity: MemberListTileEntity(
-                      id: searchedMember.userId,
-                      isAdmin: false,
-                      name:
-                          '${searchedMember.firstName} ${searchedMember.lastName}',
-                      imageLink: searchedMember.image,
-                      lastLogin: searchedMember.lastLogin,
-                      isSelected: false,
-                    ),
-                  ),
-                );
-              },
-            ),
-          ),
+          const SearchedMembersList(),
         ],
       ),
     );
