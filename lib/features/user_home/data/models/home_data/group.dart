@@ -113,6 +113,47 @@ class GroupDetails extends GroupHomeEntity {
     );
   }
 
+  factory GroupDetails.fromMapNewGroup(
+    Map<String, dynamic> data,
+    AuthUserEntity user,
+  ) {
+    final int groupId = data['group_id'] as int;
+
+    if (!AppConst.isWeb) NotificationApi.firebase.subscribeToTopic('$groupId');
+
+    return GroupDetails(
+      groupIdDetails: groupId,
+      groupName: data['group_name'] as String,
+      groupOwnerId: data['group_owner_id'] as int,
+      createdAt: DateTime.parse(data['group_creation_date'] as String),
+      groupDescription: data['group_description'] as String?,
+      groupVisibility:
+          GroupVisibility.fromString(data['group_visibility'] as String?),
+      accessType:
+          GroupAccessType.fromString(data['group_access_type'] as String?),
+      groupCategory:
+          GroupCategory.fromString(data['group_category'] as String?),
+      groupImage: data['group_image'] as String?,
+      groupType: GroupType.fromString(data['group_type'] as String?),
+      discussion: GroupDiscussionType.fromString(
+          data['group_discussion_type'] as String?),
+      groupStatus: GroupStatus.fromString(data['group_status'] as String?),
+      groupStatusMessage: data['group_status_message'] as String?,
+      lastActivityModel: data['last_activity'] == null
+          ? null
+          : ActivityModel.fromMap(
+              data['last_activity'] as Map<String, dynamic>),
+      memberModel: MemberModel(
+        user: user,
+        groupId: groupId,
+        canInteract: true,
+        notification: NotificationEnum.notify,
+        joinDate: DateTime.now(),
+        isAdmin: true,
+      ),
+    );
+  }
+
   Map<String, dynamic> toMap() => {
         'group_id': groupIdDetails,
         'group_name': groupName,

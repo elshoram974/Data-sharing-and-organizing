@@ -50,6 +50,7 @@ abstract final class AppLinks {
   static const String editGroupData = '$_botChatChanges/edit_group.php';
   static const String removeGroupImage =
       '$_botChatChanges/remove_group_image.php';
+  static const String makeNewGroup = '$_botChatChanges/addgroup.php';
 
   // * user profile
   static const String _changes = '$_userLink/changes';
