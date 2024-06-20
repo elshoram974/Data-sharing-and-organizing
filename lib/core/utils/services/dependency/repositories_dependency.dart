@@ -12,6 +12,9 @@ import '../../../../features/chat/data/repositories/init_group_repo.dart';
 import '../../../../features/chat/domain/repositories/bot_repo.dart';
 import '../../../../features/chat/domain/repositories/group_details_repo.dart';
 import '../../../../features/chat/domain/repositories/init_group_repo.dart';
+import '../../../../features/new_group/data/datasources/new_group_remote_data_source.dart';
+import '../../../../features/new_group/data/repositories/new_group_repositories_imp.dart';
+import '../../../../features/new_group/domain/repositories/new_group_repositories.dart';
 import '../../../../features/user_home/data/datasources/edit_profile_datasources/edit_profile_local_data_sources.dart';
 import '../../../../features/user_home/data/datasources/edit_profile_datasources/edit_profile_remote_data_sources.dart';
 import '../../../../features/user_home/data/datasources/home_datasources/home_local_data_sources.dart';
@@ -68,6 +71,13 @@ void repositoriesDependency() {
     GroupDetailsRepositoriesImp(
       localDataSource: sl.get<GroupDetailsLocalDataSource>(),
       remoteDataSource: sl.get<GroupDetailsRemoteDataSource>(),
+    ),
+  );
+  // new group
+  sl.registerSingleton<NewGroupRepositories>(
+    NewGroupRepositoriesImp(
+      localDataSource: sl.get<HomeLocalDataSource>(),
+      remoteDataSource: sl.get<NewGroupRemoteDataSource>(),
     ),
   );
 }
