@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../../../features/auth/domain/entities/auth_user_entity.dart';
 import '../../../../../features/new_group/presentation/screens/add_group_details_screen.dart';
 import '../../../../../features/new_group/presentation/screens/add_group_permissions_screen.dart';
 import '../../../../../features/new_group/presentation/screens/add_members_screen.dart';
@@ -23,7 +24,7 @@ abstract final class NewGroupRoutes {
         offset: const Offset(0, -1),
         context: context,
         state: state,
-        child: const AddMembersScreen(),
+        child: AddMembersScreen(user: state.extra as AuthUserEntity),
       ),
       routes: [
         GoRoute(

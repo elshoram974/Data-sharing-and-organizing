@@ -48,17 +48,19 @@ class _UserMainScreens extends StatelessWidget {
       buildWhen: (p, c) => c is UserMainChangeNavBar,
       builder: (context, state) {
         final int navIndex = ProviderDependency.userMain.navIndex;
+        final AuthUserEntity user = ProviderDependency.userMain.user;
+
         return InManyDevice(
-          phone: UserMainScreensInPhone(navIndex: navIndex),
-          tablet: UserMainScreensInTablet(navIndex: navIndex),
-          desktop: UserMainScreensInDesktop(navIndex: navIndex),
+          phone: UserMainScreensInPhone(navIndex: navIndex, user: user),
+          tablet: UserMainScreensInTablet(navIndex: navIndex, user: user),
+          desktop: UserMainScreensInDesktop(navIndex: navIndex, user: user),
         );
       },
     );
   }
 }
 
-Builder? getHomeNav(int navIndex) {
+Builder? getHomeNav(int navIndex, AuthUserEntity user) {
   switch (navIndex) {
     case 0:
       return Builder(builder: (context) {
@@ -66,7 +68,7 @@ Builder? getHomeNav(int navIndex) {
           backgroundColor: AppColor.active,
           foregroundColor: Colors.white,
           child: const Icon(Icons.add),
-          onPressed: () => context.push(AppRoute.addMembers),
+          onPressed: () => context.push(AppRoute.addMembers, extra: user),
         );
       });
   }

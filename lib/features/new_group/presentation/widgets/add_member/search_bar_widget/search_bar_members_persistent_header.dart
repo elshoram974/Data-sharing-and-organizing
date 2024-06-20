@@ -1,5 +1,7 @@
+import 'package:data_sharing_organizing/core/utils/services/dependency/provider_dependency.dart';
 import 'package:flutter/material.dart';
 
+import '../../../cubit/new_group_cubit.dart';
 import 'search_bar_members.dart';
 
 class SearchBarMembersPersistentHeader extends SliverPersistentHeaderDelegate {
@@ -9,7 +11,12 @@ class SearchBarMembersPersistentHeader extends SliverPersistentHeaderDelegate {
     double shrinkOffset,
     bool overlapsContent,
   ) {
-    return const SearchBarMember();
+    final NewGroupCubit c = ProviderDependency.newGroup;
+    return SearchBarMember(
+      maxHeight: 40,
+      onSearch: c.searchMembers,
+      onChanged: c.onChangeQuery,
+    );
   }
 
   @override
