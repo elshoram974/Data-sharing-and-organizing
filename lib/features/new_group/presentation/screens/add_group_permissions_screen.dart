@@ -1,3 +1,5 @@
+import 'package:data_sharing_organizing/core/shared/group_permission_edit/access_type/access_type_widget.dart';
+import 'package:data_sharing_organizing/core/shared/group_permission_edit/discussion_type/discussion_type_widget.dart';
 import 'package:data_sharing_organizing/core/utils/config/locale/generated/l10n.dart';
 import 'package:data_sharing_organizing/core/utils/constants/app_strings.dart';
 import 'package:data_sharing_organizing/core/utils/enums/home/group_discussion_type_enum.dart';
@@ -6,8 +8,6 @@ import 'package:data_sharing_organizing/core/utils/services/dependency/provider_
 import 'package:data_sharing_organizing/features/chat/domain/entities/member_entity.dart';
 import 'package:data_sharing_organizing/features/user_home/domain/entities/group_home_entity.dart';
 import 'package:flutter/material.dart';
-import '../widgets/add_group_permissions/access_type/access_type_widget.dart';
-import '../widgets/add_group_permissions/discussion_type/discussion_type_widget.dart';
 import '../widgets/new_group_app_bar.dart';
 
 class AddGroupPermissionsScreen extends StatelessWidget {
@@ -44,7 +44,7 @@ class AddGroupPermissionsScreen extends StatelessWidget {
           NewGroupAppBar(title: S.of(context).groupPermissions),
           SliverToBoxAdapter(
             child: DiscussionTypeWidget(
-              group: g,
+              discussion: g.discussion,
               color: color,
               style: style,
               onSelect: (d) {},
@@ -52,7 +52,7 @@ class AddGroupPermissionsScreen extends StatelessWidget {
           ),
           SliverToBoxAdapter(
             child: AccessTypeWidget(
-              group: g,
+              accessType: g.accessType,
               color: color,
               style: style,
               onSelect: (a) {},

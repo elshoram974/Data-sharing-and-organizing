@@ -3,16 +3,15 @@ import 'package:data_sharing_organizing/core/utils/constants/app_constants.dart'
 import 'package:data_sharing_organizing/core/utils/enums/home/group_access_type_enum.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../../user_home/domain/entities/group_home_entity.dart';
 import 'access_type_tile_in_dialog.dart';
 
 class AccessTypeDialog extends StatelessWidget {
   const AccessTypeDialog({
     super.key,
-    required this.group,
+    required this.value,
     required this.onSelect,
   });
-  final GroupHomeEntity group;
+  final GroupAccessType value;
   final void Function(GroupAccessType) onSelect;
 
   @override
@@ -25,17 +24,17 @@ class AccessTypeDialog extends StatelessWidget {
           children: [
             AccessTypeTileInDialog(
               type: GroupAccessType.onlyRead,
-              value: group.accessType,
+              value: value,
               onSelect: () => onSelect(GroupAccessType.onlyRead),
             ),
             AccessTypeTileInDialog(
               type: GroupAccessType.readWrite,
-              value: group.accessType,
+              value: value,
               onSelect: () => onSelect(GroupAccessType.readWrite),
             ),
             AccessTypeTileInDialog(
               type: GroupAccessType.readWriteWithAdminPermission,
-              value: group.accessType,
+              value: value,
               onSelect: () =>
                   onSelect(GroupAccessType.readWriteWithAdminPermission),
             ),

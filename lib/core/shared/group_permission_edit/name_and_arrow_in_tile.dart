@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../../user_home/presentation/widgets/menu_widgets/settings/name_arrow_widget.dart';
+import '../../../features/user_home/presentation/widgets/menu_widgets/settings/name_arrow_widget.dart';
 
 class NameAndArrowInTile extends StatelessWidget {
   const NameAndArrowInTile(this.name, {super.key});
