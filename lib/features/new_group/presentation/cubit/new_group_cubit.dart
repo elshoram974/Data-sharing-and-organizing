@@ -27,10 +27,10 @@ abstract class _NewGroupCubit extends Cubit<NewGroupState> {
   List<MemberListTileEntity> selectedMembers = [];
 
   String query = " ";
-
   Future<void> searchMembers();
-
   void onChangeQuery(String q);
+
+  void onTapUser(int index);
 
   @override
   close();
@@ -63,6 +63,12 @@ class NewGroupCubit extends _NewGroupCubit {
           temp.add(MemberListTileEntity.fromSearch(e));
         }
 
+        for (int i = 0; i < temp.length; i++) {
+          if (selectedMembers.contains(temp[i])) {
+            temp[i] = temp[i].copyWith(isSelected: true);
+          }
+        }
+
         currentMembers = temp;
         emit(SearchMembersSuccessState(currentMembers));
       },
@@ -88,6 +94,19 @@ class NewGroupCubit extends _NewGroupCubit {
         timer.cancel();
       },
     );
+  }
+
+  @override
+  void onTapUser(int index) {
+    if (currentMembers[index].isSelected) {
+      currentMembers[index] = currentMembers[index].copyWith(isSelected: false);
+      selectedMembers.removeWhere((e) => e.id == currentMembers[index].id);
+    } else {
+      currentMembers[index] = currentMembers[index].copyWith(isSelected: true);
+      selectedMembers.add(currentMembers[index]);
+    }
+
+    emit(SelectMemberState(currentMembers[index]));
   }
 
   @override

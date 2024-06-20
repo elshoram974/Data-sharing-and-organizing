@@ -30,3 +30,11 @@ class SearchMembersFailureState extends NewGroupState {
   @override
   List<Object?> get props => [failure];
 }
+
+class SelectMemberState extends NewGroupState {
+  const SelectMemberState(this.member);
+  final MemberListTileEntity member;
+
+  @override
+  List<Object?> get props => [member, member.isSelected];
+}

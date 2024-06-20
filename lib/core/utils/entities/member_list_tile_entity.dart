@@ -61,6 +61,5 @@ class MemberListTileEntity extends Equatable {
         isBlocked,
         imageLink,
         lastLogin,
-        isSelected,
       ];
 }

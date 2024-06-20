@@ -36,7 +36,7 @@ class AddMembersBody extends StatelessWidget {
                 (BuildContext context, int i) {
                   return ResConstrainedBoxAlign(
                     child: MembersListTile(
-                      onTileTapped: () {},
+                      onTileTapped: () => c.onTapUser(i),
                       memberEntity: c.currentMembers[i],
                     ),
                   );
