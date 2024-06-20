@@ -23,6 +23,7 @@ class SearchBarMember extends StatelessWidget {
       color: AppColor.background(context),
       alignment: Alignment.center,
       child: TextField(
+        style: textStyle,
         decoration: InputDecoration(
           suffixIcon: SearchSuffixIcon(onPressed: onSearch),
           filled: true,

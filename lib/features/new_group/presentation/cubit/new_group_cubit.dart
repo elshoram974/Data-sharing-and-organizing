@@ -7,6 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:data_sharing_organizing/core/utils/constants/app_constants.dart';
 import 'package:data_sharing_organizing/core/utils/functions/handle_status_emit.dart';
 
+import '../../../../core/utils/entities/member_list_tile_entity.dart';
 import '../../../auth/domain/entities/auth_user_entity.dart';
 import '../../../chat/data/models/search_member_model/searched_user_model.dart';
 import '../../../chat/domain/repositories/group_details_repo.dart';
@@ -22,7 +23,8 @@ abstract class _NewGroupCubit extends Cubit<NewGroupState> {
   final GroupDetailsRepositories groupDetailsRepo;
   final AuthUserEntity user;
 
-  List<SearchedUserModel> currentSearched = [];
+  List<MemberListTileEntity> currentMembers = [];
+  List<MemberListTileEntity> selectedMembers = [];
 
   String query = " ";
 
@@ -49,16 +51,20 @@ class NewGroupCubit extends _NewGroupCubit {
       dismissLoadingOnTap: null,
       statusFunction: () => groupDetailsRepo.searchMembers(query),
       successFunction: (_) {
-        final List<SearchedUserModel> temp = _;
-        for (SearchedUserModel e in temp) {
+        for (SearchedUserModel e in _) {
           if (e.userId == user.id) {
-            temp.remove(e);
+            _.remove(e);
             break;
           }
         }
 
-        currentSearched = temp;
-        emit(SearchMembersSuccessState(currentSearched));
+        final List<MemberListTileEntity> temp = [];
+        for (SearchedUserModel e in _) {
+          temp.add(MemberListTileEntity.fromSearch(e));
+        }
+
+        currentMembers = temp;
+        emit(SearchMembersSuccessState(currentMembers));
       },
       failureFunction: (f) => emit(SearchMembersFailureState(f)),
     );
