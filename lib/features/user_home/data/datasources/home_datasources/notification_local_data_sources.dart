@@ -43,9 +43,28 @@ class NotificationLocalDataSourceImp extends NotificationLocalDataSource {
     final List<GroupNotificationEntity> temp = [];
     final Box<GroupHomeEntity> groups = Hive.box(AppStrings.groupsBox);
     for (GroupHomeEntity e in groups.values) {
-      temp.addAll(
-        notificationList.where((element) => e.groupId == element.groupId),
-      );
+      for (GroupNotificationEntity n in notificationList) {
+        if (e.groupId == n.groupId) {
+          temp.add(
+            GroupNotificationEntity(
+              groupId: n.groupId,
+              notificationId: n.notificationId,
+              ownerId: n.ownerId,
+              createdAt: n.createdAt,
+              screen: n.screen,
+              unReadCounter: n.unReadCounter,
+              isExpanded: n.isExpanded,
+              lastActivity: n.lastActivity,
+              groupName: e.groupName,
+              discussion: e.discussion,
+              accessType: e.accessType,
+              memberEntity: e.memberEntity,
+              bottomHeight: e.bottomHeight,
+              imageLink: e.imageLink,
+            ),
+          );
+        }
+      }
     }
     return temp..sort(compareLastActivity);
   }
