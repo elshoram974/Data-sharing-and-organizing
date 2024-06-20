@@ -24,6 +24,8 @@ abstract class HomeLocalDataSource {
   Future<void> updateThisGroup(GroupHomeEntity groupUpdated);
   Future<void> updateLastActivity(ActivityEntity activity, int screen);
   Future<void> makeSeenToGroup(int groupId);
+
+  Future<List<GroupHomeEntity>> saveNewGroup(GroupHomeEntity group);
 }
 
 class HomeLocalDataSourceImp extends HomeLocalDataSource {
@@ -43,7 +45,9 @@ class HomeLocalDataSourceImp extends HomeLocalDataSource {
 
   @override
   Future<List<GroupHomeEntity>> saveGroups(
-      List<GroupHomeEntity> newGroups, AuthUserEntity userToReplace) async {
+    List<GroupHomeEntity> newGroups,
+    AuthUserEntity userToReplace,
+  ) async {
     final List<GroupHomeEntity> groups = [];
     final List<GroupHomeEntity> savedGroups = getAllGroups();
     for (final GroupHomeEntity ng in newGroups) {
@@ -212,5 +216,15 @@ class HomeLocalDataSourceImp extends HomeLocalDataSource {
 
     await removeAllGroups();
     await groupsBox.addAll(groups);
+  }
+
+  @override
+  Future<List<GroupHomeEntity>> saveNewGroup(GroupHomeEntity group) async {
+    final List<GroupHomeEntity> groups = [group, ...getAllGroups()];
+
+    await removeAllGroups();
+    await groupsBox.addAll(groups);
+
+    return groups;
   }
 }
