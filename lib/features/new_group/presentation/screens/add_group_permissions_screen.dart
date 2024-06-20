@@ -2,12 +2,10 @@ import 'package:data_sharing_organizing/core/shared/group_permission_edit/access
 import 'package:data_sharing_organizing/core/shared/group_permission_edit/discussion_type/discussion_type_widget.dart';
 import 'package:data_sharing_organizing/core/utils/config/locale/generated/l10n.dart';
 import 'package:data_sharing_organizing/core/utils/constants/app_strings.dart';
-import 'package:data_sharing_organizing/core/utils/enums/home/group_discussion_type_enum.dart';
-import 'package:data_sharing_organizing/core/utils/enums/home/group_status_enum.dart';
 import 'package:data_sharing_organizing/core/utils/services/dependency/provider_dependency.dart';
-import 'package:data_sharing_organizing/features/chat/domain/entities/member_entity.dart';
-import 'package:data_sharing_organizing/features/user_home/domain/entities/group_home_entity.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../cubit/new_group_cubit.dart';
 import '../widgets/new_group_app_bar.dart';
 
 class AddGroupPermissionsScreen extends StatelessWidget {
@@ -15,47 +13,43 @@ class AddGroupPermissionsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final g = GroupHomeEntity(
-      groupId: -4,
-      screen: 0,
-      groupName: 'groupName',
-      ownerId: 1,
-      discussion: GroupDiscussionType.exist,
-      status: GroupStatus.active,
-      statusMessage: null,
-      memberEntity: MemberEntity(
-        user: ProviderDependency.userMain.user,
-        groupId: -4,
-        canInteract: false,
-        joinDate: DateTime.now(),
-        isAdmin: true,
-      ),
-      createdAt: DateTime.now(),
-    );
     final TextStyle? style = Theme.of(context)
         .textTheme
         .titleLarge
         ?.copyWith(fontFamily: AppStrings.inika, fontSize: 20);
     final Color color = style?.color ?? Colors.black;
+    final NewGroupCubit c = ProviderDependency.newGroup;
     return Scaffold(
       body: CustomScrollView(
         physics: const BouncingScrollPhysics(),
         slivers: [
           NewGroupAppBar(title: S.of(context).groupPermissions),
           SliverToBoxAdapter(
-            child: DiscussionTypeWidget(
-              discussion: g.discussion,
-              color: color,
-              style: style,
-              onSelect: (d) {},
+            child: BlocBuilder<NewGroupCubit, NewGroupState>(
+              bloc: c,
+              buildWhen: (p, c) => c is ChangeGroupDiscussionType,
+              builder: (context, state) {
+                return DiscussionTypeWidget(
+                  discussion: c.discussionType,
+                  color: color,
+                  style: style,
+                  onSelect: c.changeDiscussionType,
+                );
+              },
             ),
           ),
           SliverToBoxAdapter(
-            child: AccessTypeWidget(
-              accessType: g.accessType,
-              color: color,
-              style: style,
-              onSelect: (a) {},
+            child: BlocBuilder<NewGroupCubit, NewGroupState>(
+              bloc: c,
+              buildWhen: (p, c) => c is ChangeGroupAccessType,
+              builder: (context, state) {
+                return AccessTypeWidget(
+                  accessType: c.accessType,
+                  color: color,
+                  style: style,
+                  onSelect: c.changeAccessType,
+                );
+              },
             ),
           ),
         ],

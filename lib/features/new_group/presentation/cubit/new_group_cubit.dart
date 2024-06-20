@@ -2,6 +2,8 @@ import 'dart:async';
 
 import 'package:data_sharing_organizing/core/status/errors/failure_body.dart';
 import 'package:data_sharing_organizing/core/utils/config/locale/generated/l10n.dart';
+import 'package:data_sharing_organizing/core/utils/enums/home/group_access_type_enum.dart';
+import 'package:data_sharing_organizing/core/utils/enums/home/group_discussion_type_enum.dart';
 import 'package:data_sharing_organizing/core/utils/services/pick_image.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
@@ -33,6 +35,8 @@ abstract class _NewGroupCubit extends Cubit<NewGroupState> {
   late GlobalKey<FormFieldState> fieldKey = GlobalKey<FormFieldState>();
   String newGroupName = '';
   MyFileData? imageData;
+  GroupDiscussionType discussionType = GroupDiscussionType.exist;
+  GroupAccessType accessType = GroupAccessType.readWriteWithAdminPermission;
 
   String query = " ";
   Future<void> searchMembers();
@@ -42,6 +46,9 @@ abstract class _NewGroupCubit extends Cubit<NewGroupState> {
   void cancelSelected(int index);
 
   Future<void> changeImage();
+
+  void changeDiscussionType(GroupDiscussionType discussion);
+  void changeAccessType(GroupAccessType access);
 
   void createNewGroup();
 
@@ -137,6 +144,18 @@ class NewGroupCubit extends _NewGroupCubit {
     imageData = await HandlePickedImage.pickImage(ImageSource.gallery);
     if (imageData == null) return failureStatus(S.current.cancel, () {});
     emit(SelectImageState(imageData?.path));
+  }
+
+  @override
+  void changeDiscussionType(GroupDiscussionType discussion) {
+    discussionType = discussion;
+    emit(ChangeGroupDiscussionType(discussionType));
+  }
+
+  @override
+  void changeAccessType(GroupAccessType access) {
+    accessType = access;
+    emit(ChangeGroupAccessType(accessType));
   }
 
   @override

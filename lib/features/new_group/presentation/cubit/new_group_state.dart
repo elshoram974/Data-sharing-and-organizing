@@ -46,3 +46,19 @@ class SelectImageState extends NewGroupState {
   @override
   List<Object?> get props => [path];
 }
+
+class ChangeGroupAccessType extends NewGroupState {
+  const ChangeGroupAccessType(this.accessType);
+  final GroupAccessType accessType;
+
+  @override
+  List<Object?> get props => [accessType];
+}
+
+class ChangeGroupDiscussionType extends NewGroupState {
+  const ChangeGroupDiscussionType(this.discussionType);
+  final GroupDiscussionType discussionType;
+
+  @override
+  List<Object?> get props => [discussionType];
+}
