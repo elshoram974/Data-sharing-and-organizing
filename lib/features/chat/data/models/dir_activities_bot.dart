@@ -19,12 +19,14 @@ class DirActivitiesBot extends Equatable {
   factory DirActivitiesBot.fromMap(Map<String, dynamic> data) {
     return DirActivitiesBot(
       status: data['status'] as String,
-      activities: (data['activities'] as List<dynamic>)
-          .map((e) => ActivityModel.fromMap(e as Map<String, dynamic>))
-          .toList(),
-      directories: (data['directions'] as List<dynamic>)
-          .map((e) => DirectoryModel.fromMap(e as Map<String, dynamic>))
-          .toList(),
+      activities: (data['activities'] as List<dynamic>?)
+              ?.map((e) => ActivityModel.fromMap(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+      directories: (data['directions'] as List<dynamic>?)
+              ?.map((e) => DirectoryModel.fromMap(e as Map<String, dynamic>))
+              .toList() ??
+          [],
     );
   }
 
