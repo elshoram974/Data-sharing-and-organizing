@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import '../../../chat/data/models/group_details_members/group_members_model.dart';
 import '../widgets/add_group_details/group_name_image.dart';
 import '../widgets/add_group_details/group_permissions_tile_widget.dart';
-import '../widgets/add_group_details/members_count_widget.dart';
+import '../../../../core/shared/members_count_widget.dart';
 import '../widgets/new_group_app_bar.dart';
 
 class AddGroupDetailsScreen extends StatelessWidget {

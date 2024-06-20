@@ -3,7 +3,7 @@ import 'package:data_sharing_organizing/core/utils/services/dependency/provider_
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../new_group/presentation/widgets/add_group_details/members_count_widget.dart';
+import '../../../../../core/shared/members_count_widget.dart';
 import '../../../../user_home/domain/entities/group_home_entity.dart';
 import '../../../data/models/group_details_members/group_members_model.dart';
 import '../../cubit/group_details/group_details_cubit.dart';

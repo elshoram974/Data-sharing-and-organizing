@@ -4,7 +4,7 @@ import 'package:data_sharing_organizing/core/utils/constants/app_constants.dart'
 import 'package:data_sharing_organizing/core/utils/styles.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../chat/data/models/group_details_members/group_members_model.dart';
+import '../../features/chat/data/models/group_details_members/group_members_model.dart';
 
 class MembersCountWidget extends StatelessWidget {
   const MembersCountWidget({
