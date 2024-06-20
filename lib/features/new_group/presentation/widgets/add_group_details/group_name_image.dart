@@ -26,6 +26,7 @@ class GroupNameAndImage extends StatelessWidget {
             const SizedBox(width: 10),
             Flexible(
               child: GroupNameTextField(
+                key: c.fieldKey,
                 onChanged: (val) => c.newGroupName = val.trim(),
               ),
             ),

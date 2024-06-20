@@ -20,7 +20,7 @@ class AddGroupDetailsScreen extends StatelessWidget {
 
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-        onPressed: () {}, // TODO: navigate to group screen
+        onPressed: c.createNewGroup,
         backgroundColor: AppColor.active,
         child: const Icon(Icons.check_rounded, color: Colors.white),
       ),

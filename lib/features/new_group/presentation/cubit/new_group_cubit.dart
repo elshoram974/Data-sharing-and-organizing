@@ -161,6 +161,8 @@ class NewGroupCubit extends _NewGroupCubit {
   @override
   void createNewGroup() {
     if (!fieldKey.currentState!.isValid) return;
+    print("valid");
+    print(newGroupName);
   }
 
   @override

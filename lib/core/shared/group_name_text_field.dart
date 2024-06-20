@@ -15,6 +15,7 @@ class GroupNameTextField extends TextFormField {
     super.onEditingComplete,
     super.initialValue,
   }) : super(
+          autovalidateMode: AutovalidateMode.onUserInteraction,
           validator: (val) => AppValidator.auth(val, 3, 30, FieldType.name),
           decoration: InputDecoration(
             enabledBorder: const UnderlineInputBorder(
@@ -25,7 +26,7 @@ class GroupNameTextField extends TextFormField {
             hintText: S.current.groupName,
             constraints: const BoxConstraints(
               maxWidth: 232,
-              maxHeight: 21,
+              maxHeight: 50,
             ),
           ),
         );
