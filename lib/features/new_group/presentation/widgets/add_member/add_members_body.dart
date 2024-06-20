@@ -1,3 +1,4 @@
+import 'package:data_sharing_organizing/core/shared/circular_loading_indicator.dart';
 import 'package:data_sharing_organizing/core/shared/member_list_tile/member_list_tile.dart';
 import 'package:data_sharing_organizing/core/shared/responsive/constrained_box.dart';
 import 'package:data_sharing_organizing/core/utils/config/locale/generated/l10n.dart';
@@ -30,6 +31,8 @@ class AddMembersBody extends StatelessWidget {
               pinned: true,
               delegate: SearchBarMembersPersistentHeader(),
             ),
+            if (state is SearchMembersLoadingState)
+              const SliverToBoxAdapter(child: CircularLoadingIndicator()),
             SliverList(
               delegate: SliverChildBuilderDelegate(
                 childCount: c.currentMembers.length,
