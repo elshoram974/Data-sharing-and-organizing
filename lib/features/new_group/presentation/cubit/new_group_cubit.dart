@@ -31,6 +31,7 @@ abstract class _NewGroupCubit extends Cubit<NewGroupState> {
   void onChangeQuery(String q);
 
   void onTapUser(int index);
+  void cancelSelected(int index);
 
   @override
   close();
@@ -107,6 +108,16 @@ class NewGroupCubit extends _NewGroupCubit {
     }
 
     emit(SelectMemberState(currentMembers[index]));
+  }
+
+  @override
+  void cancelSelected(int index) {
+    final MemberListTileEntity temp = selectedMembers.removeAt(index);
+
+    final int i = currentMembers.indexWhere((e) => e.id == temp.id);
+    currentMembers[i] = currentMembers[i].copyWith(isSelected: false);
+
+    emit(SelectMemberState(currentMembers[i]));
   }
 
   @override

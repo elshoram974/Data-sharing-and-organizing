@@ -1,10 +1,11 @@
 import 'package:data_sharing_organizing/core/shared/member_list_tile/member_list_tile.dart';
 import 'package:data_sharing_organizing/core/shared/responsive/constrained_box.dart';
 import 'package:data_sharing_organizing/core/utils/constants/app_color.dart';
-import 'package:data_sharing_organizing/core/utils/entities/member_list_tile_entity.dart';
+import 'package:data_sharing_organizing/core/utils/services/dependency/provider_dependency.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../chat/data/models/group_details_members/group_members_model.dart';
+import '../cubit/new_group_cubit.dart';
 import '../widgets/add_group_details/group_name_image.dart';
 import '../widgets/add_group_details/group_permissions_tile_widget.dart';
 import '../../../../core/shared/members_count_widget.dart';
@@ -15,43 +16,40 @@ class AddGroupDetailsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final List<GroupMember> selectedUsers = []; // TODO: selected users
+    final NewGroupCubit c = ProviderDependency.newGroup;
+
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         onPressed: () {}, // TODO: navigate to group screen
         backgroundColor: AppColor.active,
         child: const Icon(Icons.check_rounded, color: Colors.white),
       ),
-      body: CustomScrollView(
-        physics: const BouncingScrollPhysics(),
-        slivers: [
-          const NewGroupAppBar(),
-          const GroupNameAndImage(),
-          const GroupPermissionsTileWidget(),
-          MembersCountWidget(selectedUsers: selectedUsers),
-          SliverList(
-            delegate: SliverChildBuilderDelegate(
-              childCount: selectedUsers.length,
-              (BuildContext context, int i) {
-                return ResConstrainedBoxAlign(
-                  child: MembersListTile(
-                    onTileTapped: () {},
-                    memberEntity: MemberListTileEntity(
-                      id: selectedUsers[i].memberId,
-                      isAdmin: selectedUsers[i].isAdmin,
-                      isBlocked: !selectedUsers[i].canInteraction,
-                      name:
-                          '${selectedUsers[i].firstName} ${selectedUsers[i].lastName}}',
-                      imageLink: selectedUsers[i].image,
-                      lastLogin: selectedUsers[i].lastLogin,
-                      isSelected: true,
-                    ),
-                  ),
-                );
-              },
-            ),
-          ),
-        ],
+      body: BlocBuilder<NewGroupCubit, NewGroupState>(
+        bloc: c,
+        builder: (context, state) {
+          return CustomScrollView(
+            physics: const BouncingScrollPhysics(),
+            slivers: [
+              const NewGroupAppBar(),
+              const GroupNameAndImage(),
+              const GroupPermissionsTileWidget(),
+              MembersCountWidget(selectedUsersLength: c.selectedMembers.length),
+              SliverList(
+                delegate: SliverChildBuilderDelegate(
+                  childCount: c.selectedMembers.length,
+                  (BuildContext context, int i) {
+                    return ResConstrainedBoxAlign(
+                      child: MembersListTile(
+                        onTileTapped: () => c.cancelSelected(i),
+                        memberEntity: c.selectedMembers[i],
+                      ),
+                    );
+                  },
+                ),
+              ),
+            ],
+          );
+        },
       ),
     );
   }

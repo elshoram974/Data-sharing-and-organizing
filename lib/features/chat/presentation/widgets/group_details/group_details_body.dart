@@ -39,7 +39,7 @@ class GroupDetailsBody extends StatelessWidget {
             MembersCountWidget(
               topPadding: 44,
               bottomPadding: 0,
-              selectedUsers: members,
+              selectedUsersLength: members.length,
             ),
             if (group.memberEntity.isAdmin) const AddMembersTileGroupDetails(),
             if (state is MembersLoadingState)

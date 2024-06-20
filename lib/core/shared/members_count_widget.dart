@@ -4,17 +4,15 @@ import 'package:data_sharing_organizing/core/utils/constants/app_constants.dart'
 import 'package:data_sharing_organizing/core/utils/styles.dart';
 import 'package:flutter/material.dart';
 
-import '../../features/chat/data/models/group_details_members/group_members_model.dart';
-
 class MembersCountWidget extends StatelessWidget {
   const MembersCountWidget({
     super.key,
-    required this.selectedUsers,
+    required this.selectedUsersLength,
     this.topPadding = 0,
     this.bottomPadding = 15,
   });
 
-  final List<GroupMember> selectedUsers;
+  final int selectedUsersLength;
   final double topPadding;
   final double bottomPadding;
 
@@ -32,7 +30,7 @@ class MembersCountWidget extends StatelessWidget {
           child: SizedBox(
             width: double.maxFinite,
             child: Text(
-              S.of(context).membersCount(selectedUsers.length),
+              S.of(context).membersCount(selectedUsersLength),
               style: AppStyle.styleBoldInika16.copyWith(
                 fontSize: 12,
                 color: Theme.of(context).textTheme.bodyLarge?.color,
