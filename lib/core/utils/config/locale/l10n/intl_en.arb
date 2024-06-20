@@ -406,5 +406,6 @@
     "uCanNtBlockAdmins": "You cannot block administrators.",
     "errorChangingUserRoleTryAgainLater": "Error changing user role. Please try again later.",
     "noAccountFoundMatchingThisQuery": "No account found matching this query.",
-    "changeGroupImage": "Change group image"
+    "changeGroupImage": "Change group image",
+    "groupIsCurrentlyInActive": "This group is currently inactive."
 }

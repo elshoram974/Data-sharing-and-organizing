@@ -212,6 +212,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Group access type"),
         "groupDiscussionType":
             MessageLookupByLibrary.simpleMessage("Group discussion type"),
+        "groupIsCurrentlyInActive": MessageLookupByLibrary.simpleMessage(
+            "This group is currently inactive."),
         "groupMembersCount": m8,
         "groupName": MessageLookupByLibrary.simpleMessage("Group name..."),
         "groupPermissions":

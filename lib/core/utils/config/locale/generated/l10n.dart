@@ -2183,6 +2183,16 @@ class S {
       args: [],
     );
   }
+
+  /// `This group is currently inactive.`
+  String get groupIsCurrentlyInActive {
+    return Intl.message(
+      'This group is currently inactive.',
+      name: 'groupIsCurrentlyInActive',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

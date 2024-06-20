@@ -406,5 +406,6 @@
     "uCanNtBlockAdmins": "لا يمكنك حظر المسؤولين.",
     "errorChangingUserRoleTryAgainLater": "حدث خطأ أثناء تغيير دور المستخدم. يرجى المحاولة مرة أخرى لاحقًا.",
     "noAccountFoundMatchingThisQuery": "لم يتم العثور على حساب يطابق هذا الاستعلام.",
-    "changeGroupImage": "تغيير صورة المجموعة"
+    "changeGroupImage": "تغيير صورة المجموعة",
+    "groupIsCurrentlyInActive": "هذه المجموعة غير نشطة حاليًا."
 }
