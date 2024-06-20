@@ -38,3 +38,11 @@ class SelectMemberState extends NewGroupState {
   @override
   List<Object?> get props => [member, member.isSelected];
 }
+
+class SelectImageState extends NewGroupState {
+  const SelectImageState(this.path);
+  final String? path;
+
+  @override
+  List<Object?> get props => [path];
+}

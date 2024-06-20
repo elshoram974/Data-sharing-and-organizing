@@ -1,11 +1,15 @@
 import 'dart:async';
 
 import 'package:data_sharing_organizing/core/status/errors/failure_body.dart';
+import 'package:data_sharing_organizing/core/utils/config/locale/generated/l10n.dart';
+import 'package:data_sharing_organizing/core/utils/services/pick_image.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:data_sharing_organizing/core/utils/constants/app_constants.dart';
 import 'package:data_sharing_organizing/core/utils/functions/handle_status_emit.dart';
+import 'package:image_picker/image_picker.dart';
 
 import '../../../../core/utils/entities/member_list_tile_entity.dart';
 import '../../../auth/domain/entities/auth_user_entity.dart';
@@ -26,12 +30,20 @@ abstract class _NewGroupCubit extends Cubit<NewGroupState> {
   List<MemberListTileEntity> currentMembers = [];
   List<MemberListTileEntity> selectedMembers = [];
 
+  late GlobalKey<FormFieldState> fieldKey = GlobalKey<FormFieldState>();
+  String newGroupName = '';
+  MyFileData? imageData;
+
   String query = " ";
   Future<void> searchMembers();
   void onChangeQuery(String q);
 
   void onTapUser(int index);
   void cancelSelected(int index);
+
+  Future<void> changeImage();
+
+  void createNewGroup();
 
   @override
   close();
@@ -118,6 +130,18 @@ class NewGroupCubit extends _NewGroupCubit {
     currentMembers[i] = currentMembers[i].copyWith(isSelected: false);
 
     emit(SelectMemberState(currentMembers[i]));
+  }
+
+  @override
+  Future<void> changeImage() async {
+    imageData = await HandlePickedImage.pickImage(ImageSource.gallery);
+    if (imageData == null) return failureStatus(S.current.cancel, () {});
+    emit(SelectImageState(imageData?.path));
+  }
+
+  @override
+  void createNewGroup() {
+    if (!fieldKey.currentState!.isValid) return;
   }
 
   @override
