@@ -2,8 +2,10 @@ import 'dart:async';
 
 import 'package:data_sharing_organizing/core/status/errors/failure_body.dart';
 import 'package:data_sharing_organizing/core/utils/config/locale/generated/l10n.dart';
+import 'package:data_sharing_organizing/core/utils/config/routes/routes.dart';
 import 'package:data_sharing_organizing/core/utils/enums/home/group_access_type_enum.dart';
 import 'package:data_sharing_organizing/core/utils/enums/home/group_discussion_type_enum.dart';
+import 'package:data_sharing_organizing/core/utils/services/dependency/provider_dependency.dart';
 import 'package:data_sharing_organizing/core/utils/services/pick_image.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
@@ -11,22 +13,28 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:data_sharing_organizing/core/utils/constants/app_constants.dart';
 import 'package:data_sharing_organizing/core/utils/functions/handle_status_emit.dart';
+import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '../../../../core/utils/entities/member_list_tile_entity.dart';
 import '../../../auth/domain/entities/auth_user_entity.dart';
 import '../../../chat/data/models/search_member_model/searched_user_model.dart';
 import '../../../chat/domain/repositories/group_details_repo.dart';
+import '../../../user_home/domain/entities/group_home_entity.dart';
+import '../../domain/entities/new_group_remote_param.dart';
+import '../../domain/repositories/new_group_repositories.dart';
 
 part 'new_group_state.dart';
 
 abstract class _NewGroupCubit extends Cubit<NewGroupState> {
   _NewGroupCubit({
     required this.user,
-    required this.groupDetailsRepo,
+    required this.repo,
+    required this.searchRepo,
   }) : super(const NewGroupInitial());
 
-  final GroupDetailsRepositories groupDetailsRepo;
+  final NewGroupRepositories repo;
+  final GroupDetailsRepositories searchRepo;
   final AuthUserEntity user;
 
   List<MemberListTileEntity> currentMembers = [];
@@ -59,7 +67,8 @@ abstract class _NewGroupCubit extends Cubit<NewGroupState> {
 class NewGroupCubit extends _NewGroupCubit {
   NewGroupCubit({
     required super.user,
-    required super.groupDetailsRepo,
+    required super.repo,
+    required super.searchRepo,
   }) {
     searchMembers();
   }
@@ -69,7 +78,7 @@ class NewGroupCubit extends _NewGroupCubit {
     emit(const SearchMembersLoadingState());
     handleStatusEmit<List<SearchedUserModel>>(
       dismissLoadingOnTap: null,
-      statusFunction: () => groupDetailsRepo.searchMembers(query),
+      statusFunction: () => searchRepo.searchMembers(query),
       successFunction: (_) {
         for (SearchedUserModel e in _) {
           if (e.userId == user.id) {
@@ -159,10 +168,31 @@ class NewGroupCubit extends _NewGroupCubit {
   }
 
   @override
-  void createNewGroup() {
+  void createNewGroup() async {
     if (!fieldKey.currentState!.isValid) return;
-    print("valid");
-    print(newGroupName);
+    final List<int> usersToAdd = [];
+    for (MemberListTileEntity e in selectedMembers) {
+      usersToAdd.add(e.id);
+    }
+    final NewGroupRemoteParams params = NewGroupRemoteParams(
+      user: user,
+      groupName: newGroupName,
+      image: imageData,
+      accessType: accessType,
+      discussionType: discussionType,
+      usersToAdd: usersToAdd,
+    );
+    await handleStatusEmit<GroupHomeEntity>(
+      statusFunction: () => repo.createNewGroup(params),
+      successFunction: (group) async {
+        ProviderDependency.userHome.updateUI();
+        final GoRouter router = GoRouter.of(AppRoute.key.currentContext!);
+        // Remove the top two pages
+        router.pop(); // Pop the last page
+        // pushReplacement the new route
+        router.pushReplacement(AppRoute.group, extra: group);
+      },
+    );
   }
 
   @override

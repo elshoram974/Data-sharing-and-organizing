@@ -17,13 +17,13 @@ class NewGroupRepositoriesImp extends NewGroupRepositories {
   });
 
   @override
-  Future<Status<List<GroupHomeEntity>>> createNewGroup(
-    NewGroupRemoteParams params,
-  ) {
-    return executeAndHandleErrors<List<GroupHomeEntity>>(
+  Future<Status<GroupHomeEntity>> createNewGroup(NewGroupRemoteParams params) {
+    return executeAndHandleErrors<GroupHomeEntity>(
       () async {
         final GroupHomeEntity g = await remoteDataSource.createNewGroup(params);
-        return await localDataSource.saveNewGroup(g);
+        await localDataSource.saveNewGroup(g);
+
+        return g;
       },
     );
   }

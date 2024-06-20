@@ -7,6 +7,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../../auth/domain/entities/auth_user_entity.dart';
 import '../../../chat/domain/repositories/group_details_repo.dart';
+import '../../domain/repositories/new_group_repositories.dart';
 import '../cubit/new_group_cubit.dart';
 import '../widgets/add_member/add_members_body.dart';
 
@@ -20,7 +21,8 @@ class AddMembersScreen extends StatelessWidget {
     return BlocProvider(
       create: (context) => NewGroupCubit(
         user: user,
-        groupDetailsRepo: sl.get<GroupDetailsRepositories>(),
+        repo: sl.get<NewGroupRepositories>(),
+        searchRepo: sl.get<GroupDetailsRepositories>(),
       ),
       child: Scaffold(
         floatingActionButton: FloatingActionButton(

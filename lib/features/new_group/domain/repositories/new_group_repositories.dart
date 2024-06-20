@@ -6,7 +6,5 @@ import '../entities/new_group_remote_param.dart';
 abstract class NewGroupRepositories {
   const NewGroupRepositories();
 
-  Future<Status<List<GroupHomeEntity>>> createNewGroup(
-    NewGroupRemoteParams params,
-  );
+  Future<Status<GroupHomeEntity>> createNewGroup(NewGroupRemoteParams params);
 }

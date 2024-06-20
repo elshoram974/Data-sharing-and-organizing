@@ -38,6 +38,6 @@ class NewGroupRemoteDataSourceImp extends NewGroupRemoteDataSource {
     } else {
       response = await service.post(AppLinks.makeNewGroup, body);
     }
-    return GroupDetails.fromMapNewGroup(response, params.user);
+    return GroupDetails.fromMapNewGroup(response['group'], params.user);
   }
 }
