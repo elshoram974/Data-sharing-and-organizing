@@ -1,5 +1,8 @@
+import 'package:data_sharing_organizing/core/utils/config/routes/routes.dart';
 import 'package:data_sharing_organizing/core/utils/enums/home/group_discussion_type_enum.dart';
+import 'package:data_sharing_organizing/core/utils/enums/home/group_status_enum.dart';
 import 'package:data_sharing_organizing/core/utils/enums/notification_enum.dart';
+import 'package:data_sharing_organizing/core/utils/functions/show_custom_dialog.dart';
 import 'package:data_sharing_organizing/core/utils/services/dependency/locator.dart';
 import 'package:data_sharing_organizing/core/utils/services/dependency/provider_dependency.dart';
 import 'package:data_sharing_organizing/features/user_home/presentation/cubit/user_notification_cubit/user_notification_cubit.dart';
@@ -22,10 +25,24 @@ class GroupCubit extends Cubit<GroupState> {
   GroupCubit(this.initRepo, this.group) : super(const GroupInitial()) {
     isGroupScreenOpened = true;
     makeSeenTGroup(group.groupId);
+    getCurrentScreen();
+  }
+
+  void getCurrentScreen() {
     if (group.discussion == GroupDiscussionType.notExist) {
       currentScreen = 0;
     } else {
       currentScreen = group.screen;
+    }
+  }
+
+  void allowOpenGroup() {
+    if (group.status != GroupStatus.active) {
+      final BuildContext context = AppRoute.key.currentContext!;
+      ShowCustomDialog.error(
+        context,
+        body: "this group is not active\n${group.status}",
+      ); // TODO: make lang for this
     }
   }
 

@@ -182,6 +182,8 @@ class HomeLocalDataSourceImp extends HomeLocalDataSource {
           isSelected: groups[i].isSelected,
           lastActivity: groups[i].lastActivity,
           screen: groups[i].screen,
+          status: groups[i].status,
+          statusMessage: groups[i].statusMessage,
           unReadCounter: null,
         );
         break;

@@ -34,6 +34,8 @@ class UserNotificationCubit extends Cubit<UserNotificationState> {
       isExpanded: !notification.isExpanded,
       lastActivity: notification.lastActivity,
       screen: notification.screen,
+      status: notification.status,
+      statusMessage: notification.statusMessage,
       unReadCounter: null,
     );
 
@@ -60,6 +62,8 @@ class UserNotificationCubit extends Cubit<UserNotificationState> {
         accessType: g.accessType,
         bottomHeight: g.bottomHeight,
         imageLink: g.imageLink,
+        status: g.status,
+        statusMessage: g.statusMessage,
         lastActivity: activity,
         screen: screen,
         unReadCounter: 1,

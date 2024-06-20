@@ -29,13 +29,16 @@ class GroupHomeEntityAdapter extends TypeAdapter<GroupHomeEntity> {
       memberEntity: fields[8] as MemberEntity,
       createdAt: fields[10] as DateTime,
       screen: fields[12] as int,
+      status:
+          fields[14] == null ? GroupStatus.active : fields[14] as GroupStatus,
+      statusMessage: fields[15] as String?,
     );
   }
 
   @override
   void write(BinaryWriter writer, GroupHomeEntity obj) {
     writer
-      ..writeByte(12)
+      ..writeByte(14)
       ..writeByte(0)
       ..write(obj.groupId)
       ..writeByte(1)
@@ -59,7 +62,11 @@ class GroupHomeEntityAdapter extends TypeAdapter<GroupHomeEntity> {
       ..writeByte(11)
       ..write(obj.accessType)
       ..writeByte(12)
-      ..write(obj.screen);
+      ..write(obj.screen)
+      ..writeByte(14)
+      ..write(obj.status)
+      ..writeByte(15)
+      ..write(obj.statusMessage);
   }
 
   @override

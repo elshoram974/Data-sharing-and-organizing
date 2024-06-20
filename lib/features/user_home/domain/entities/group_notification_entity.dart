@@ -1,5 +1,6 @@
 import 'package:data_sharing_organizing/core/utils/enums/home/group_access_type_enum.dart';
 import 'package:data_sharing_organizing/core/utils/enums/home/group_discussion_type_enum.dart';
+import 'package:data_sharing_organizing/core/utils/enums/home/group_status_enum.dart';
 import 'package:hive/hive.dart';
 
 import '../../../chat/data/models/member_model.dart';
@@ -31,6 +32,8 @@ final class GroupNotificationEntity extends GroupHomeEntity {
     required super.memberEntity,
     required super.createdAt,
     required super.screen,
+    required super.status,
+    required super.statusMessage,
   }) : super(isSelected: false);
 
   @override
@@ -50,6 +53,8 @@ final class GroupNotificationEntity extends GroupHomeEntity {
     MemberModel? member,
     DateTime? createdAt,
     int? screen,
+    GroupStatus? status,
+    String? statusMessage,
   }) {
     return GroupNotificationEntity(
       groupId: groupId ?? this.groupId,
@@ -66,6 +71,8 @@ final class GroupNotificationEntity extends GroupHomeEntity {
       memberEntity: member ?? memberEntity,
       createdAt: createdAt ?? this.createdAt,
       screen: screen ?? this.screen,
+      status: status ?? this.status,
+      statusMessage: statusMessage ?? this.statusMessage,
     );
   }
 

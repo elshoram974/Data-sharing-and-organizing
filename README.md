@@ -15,4 +15,4 @@ For help getting started with Flutter development, view the
 [online documentation](https://docs.flutter.dev/), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
 
--last typeId = `14` in `GroupDetailsMembers` for hive in `lib/features/chat/data/models/group_details_members/group_details_members.dart`
+-last typeId = `15` in `GroupStatus` for hive in `lib/core/utils/enums/home/group_status_enum.dart`

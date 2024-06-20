@@ -1,6 +1,7 @@
 import 'package:data_sharing_organizing/core/utils/config/locale/generated/l10n.dart';
 import 'package:data_sharing_organizing/core/utils/constants/app_strings.dart';
 import 'package:data_sharing_organizing/core/utils/enums/home/group_discussion_type_enum.dart';
+import 'package:data_sharing_organizing/core/utils/enums/home/group_status_enum.dart';
 import 'package:data_sharing_organizing/core/utils/services/dependency/provider_dependency.dart';
 import 'package:data_sharing_organizing/features/chat/domain/entities/member_entity.dart';
 import 'package:data_sharing_organizing/features/user_home/domain/entities/group_home_entity.dart';
@@ -20,6 +21,8 @@ class AddGroupPermissionsScreen extends StatelessWidget {
       groupName: 'groupName',
       ownerId: 1,
       discussion: GroupDiscussionType.exist,
+      status: GroupStatus.active,
+      statusMessage: null,
       memberEntity: MemberEntity(
         user: ProviderDependency.userMain.user,
         groupId: -4,

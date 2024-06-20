@@ -130,7 +130,9 @@ class BOTLocalDataSourceImp extends BOTLocalDataSource {
 
   @override
   Future<void> saveBotMessages(
-      GroupHomeEntity group, List<types.Message> messages) async {
+    GroupHomeEntity group,
+    List<types.Message> messages,
+  ) async {
     await messageBox.delete(group.groupId);
 
     ProviderDependency.userHome.updateGroupLocally(
@@ -148,6 +150,8 @@ class BOTLocalDataSourceImp extends BOTLocalDataSource {
         member: MemberModel.fromEntity(group.memberEntity),
         createdAt: group.createdAt,
         screen: group.screen,
+        status: group.status,
+        statusMessage: group.statusMessage,
       ),
     );
 

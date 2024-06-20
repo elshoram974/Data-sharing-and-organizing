@@ -13,6 +13,7 @@ import '../../../features/chat/domain/entities/member_entity.dart';
 import '../../../features/user_home/domain/entities/group_notification_entity.dart';
 import '../enums/home/group_access_type_enum.dart';
 import '../enums/home/group_discussion_type_enum.dart';
+import '../enums/home/group_status_enum.dart';
 import '../enums/notification_enum.dart';
 import '../enums/message_type/message_type.dart';
 
@@ -52,6 +53,9 @@ void _registerAdapterFn() {
   ); //* it in group entity
   Hive.registerAdapter<GroupAccessType>(
     GroupAccessTypeAdapter(),
+  ); //* it in group entity
+  Hive.registerAdapter<GroupStatus>(
+    GroupStatusAdapter(),
   ); //* it in group entity
 
   Hive.registerAdapter<NotificationEnum>(

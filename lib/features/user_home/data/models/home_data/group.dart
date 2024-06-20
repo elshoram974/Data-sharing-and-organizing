@@ -56,6 +56,8 @@ class GroupDetails extends GroupHomeEntity {
           imageLink: groupImage,
           lastActivity: lastActivityModel,
           memberEntity: memberModel,
+          status: groupStatus,
+          statusMessage: groupStatusMessage,
         );
 
   @override
@@ -174,6 +176,8 @@ class GroupDetails extends GroupHomeEntity {
     double? bottomHeight,
     MemberModel? member,
     int? screen,
+    GroupStatus? status,
+    String? statusMessage,
   }) {
     return GroupDetails(
       groupIdDetails: groupId ?? groupIdDetails,

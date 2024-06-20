@@ -31,13 +31,16 @@ class GroupNotificationEntityAdapter
       memberEntity: fields[8] as MemberEntity,
       createdAt: fields[10] as DateTime,
       screen: fields[12] as int,
+      status:
+          fields[14] == null ? GroupStatus.active : fields[14] as GroupStatus,
+      statusMessage: fields[15] as String?,
     );
   }
 
   @override
   void write(BinaryWriter writer, GroupNotificationEntity obj) {
     writer
-      ..writeByte(13)
+      ..writeByte(15)
       ..writeByte(13)
       ..write(obj.notificationId)
       ..writeByte(0)
@@ -63,7 +66,11 @@ class GroupNotificationEntityAdapter
       ..writeByte(11)
       ..write(obj.accessType)
       ..writeByte(12)
-      ..write(obj.screen);
+      ..write(obj.screen)
+      ..writeByte(14)
+      ..write(obj.status)
+      ..writeByte(15)
+      ..write(obj.statusMessage);
   }
 
   @override

@@ -120,6 +120,8 @@ class _GroupChatScreenState extends State<GroupChatScreen> {
         imageLink: group.imageLink,
         isSelected: group.isSelected,
         screen: group.screen,
+        status: group.status, 
+        statusMessage: group.statusMessage,
         unReadCounter: null,
         lastActivity: ActivityEntity(
           id: Random().nextInt(1000),

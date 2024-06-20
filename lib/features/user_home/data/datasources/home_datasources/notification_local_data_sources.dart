@@ -61,6 +61,8 @@ class NotificationLocalDataSourceImp extends NotificationLocalDataSource {
               memberEntity: e.memberEntity,
               bottomHeight: e.bottomHeight,
               imageLink: e.imageLink,
+              status: e.status,
+              statusMessage: e.statusMessage,
             ),
           );
         }
@@ -94,6 +96,8 @@ class NotificationLocalDataSourceImp extends NotificationLocalDataSource {
         bottomHeight: g.bottomHeight,
         accessType: g.accessType,
         unReadCounter: 1,
+        status: g.status,
+        statusMessage: g.statusMessage,
       ),
     );
   }
@@ -118,6 +122,8 @@ class NotificationLocalDataSourceImp extends NotificationLocalDataSource {
       isExpanded: temp[i].isExpanded,
       lastActivity: temp[i].lastActivity,
       screen: temp[i].screen,
+      status: temp[i].status,
+      statusMessage: temp[i].statusMessage,
       unReadCounter: null,
     );
 
@@ -151,6 +157,8 @@ class NotificationLocalDataSourceImp extends NotificationLocalDataSource {
           isExpanded: temp[i].isExpanded,
           lastActivity: temp[i].lastActivity,
           screen: temp[i].screen,
+          status: temp[i].status,
+          statusMessage: temp[i].statusMessage,
           unReadCounter: null,
         );
       }

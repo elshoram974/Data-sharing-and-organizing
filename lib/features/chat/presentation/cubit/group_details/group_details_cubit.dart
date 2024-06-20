@@ -187,6 +187,8 @@ class GroupDetailsCubitImp extends GroupDetailsCubit {
           imageLink: image ?? group.imageLink,
           lastActivity: group.lastActivity,
           unReadCounter: group.unReadCounter,
+          status: group.status,
+          statusMessage: group.statusMessage,
         );
         await ProviderDependency.group.updateGroup(group);
         emit(ChangeGroupDataSuccessState(image));
@@ -270,6 +272,8 @@ class GroupDetailsCubitImp extends GroupDetailsCubit {
           imageLink: null,
           lastActivity: group.lastActivity,
           unReadCounter: group.unReadCounter,
+          status: group.status,
+          statusMessage: group.statusMessage,
         );
         await ProviderDependency.group.updateGroup(group);
         emit(const ChangeGroupDataSuccessState(null));

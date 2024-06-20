@@ -1,5 +1,6 @@
 import 'package:data_sharing_organizing/core/utils/enums/home/group_access_type_enum.dart';
 import 'package:data_sharing_organizing/core/utils/enums/home/group_discussion_type_enum.dart';
+import 'package:data_sharing_organizing/core/utils/enums/home/group_status_enum.dart';
 import 'package:equatable/equatable.dart';
 import 'package:hive/hive.dart';
 
@@ -47,6 +48,12 @@ class GroupHomeEntity extends Equatable {
   @HiveField(12)
   final int screen;
 
+  @HiveField(14, defaultValue: GroupStatus.active)
+  final GroupStatus status;
+
+  @HiveField(15)
+  final String? statusMessage;
+
   final bool isSelected;
 
   const GroupHomeEntity({
@@ -63,6 +70,8 @@ class GroupHomeEntity extends Equatable {
     required this.memberEntity,
     required this.createdAt,
     required this.screen,
+    this.status = GroupStatus.active,
+    this.statusMessage,
   });
 
   factory GroupHomeEntity.newEmpty() {
@@ -76,6 +85,7 @@ class GroupHomeEntity extends Equatable {
       memberEntity: MemberEntity.newEmpty(),
       createdAt: DateTime.now(),
       screen: 0,
+      status: GroupStatus.active,
     );
   }
   GroupHomeEntity copyWith({
@@ -92,6 +102,8 @@ class GroupHomeEntity extends Equatable {
     MemberModel? member,
     DateTime? createdAt,
     int? screen,
+    GroupStatus? status,
+    String? statusMessage,
   }) {
     return GroupHomeEntity(
       groupId: groupId ?? this.groupId,
@@ -107,6 +119,8 @@ class GroupHomeEntity extends Equatable {
       memberEntity: member ?? memberEntity,
       createdAt: createdAt ?? this.createdAt,
       screen: screen ?? this.screen,
+      status: status ?? this.status,
+      statusMessage: statusMessage ?? this.statusMessage,
     );
   }
 
@@ -124,6 +138,8 @@ class GroupHomeEntity extends Equatable {
     required MemberModel member,
     required DateTime createdAt,
     required int screen,
+    required GroupStatus status,
+    required String? statusMessage,
   }) {
     return GroupHomeEntity(
       groupId: id,
@@ -139,6 +155,8 @@ class GroupHomeEntity extends Equatable {
       memberEntity: member,
       createdAt: createdAt,
       screen: screen,
+      status: status,
+      statusMessage: statusMessage,
     );
   }
 
