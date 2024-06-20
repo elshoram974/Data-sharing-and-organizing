@@ -19,6 +19,14 @@ final class OpenDirectoryState extends DirectoryState {
   List<DirectoryEntity> get props => currentDirectories;
 }
 
+final class DeleteDirectoryState extends DirectoryState {
+  const DeleteDirectoryState(this.dir);
+  final DirectoryEntity dir;
+
+  @override
+  List<DirectoryEntity> get props => [dir];
+}
+
 final class ChangeDirectoryBottomHeightState extends DirectoryState {
   const ChangeDirectoryBottomHeightState(this.newHeight);
   final double newHeight;

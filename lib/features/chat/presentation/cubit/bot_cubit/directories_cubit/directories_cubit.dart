@@ -197,7 +197,7 @@ class DirectoryCubitImp extends DirectoryCubit {
               botRepo.deleteDirectory(botCubit.currentMember, dir),
           successFunction: (_) {
             currentDirectories.removeWhere((e) => e.id == dir.id);
-            emit(OpenDirectoryState(currentDirectories));
+            emit(DeleteDirectoryState(dir));
           },
         ).then((v) => Navigator.of(_).pop());
       },

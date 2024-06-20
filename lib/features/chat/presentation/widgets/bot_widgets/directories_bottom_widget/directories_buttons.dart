@@ -28,7 +28,8 @@ class DirectoriesButtons extends StatelessWidget {
           right: AppConst.defaultPadding,
         ),
         child: BlocBuilder<DirectoryCubit, DirectoryState>(
-          buildWhen: (p, c) => c is OpenDirectoryState,
+          buildWhen: (p, c) =>
+              c is OpenDirectoryState || c is DeleteDirectoryState,
           builder: (context, state) {
             return FlexList(
               horizontalSpacing: 0.5 * AppConst.defaultPadding,
