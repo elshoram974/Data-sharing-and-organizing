@@ -1,5 +1,6 @@
 import 'package:data_sharing_organizing/core/utils/constants/app_color.dart';
 import 'package:data_sharing_organizing/core/utils/constants/app_constants.dart';
+import 'package:data_sharing_organizing/core/utils/enums/home/group_status_enum.dart';
 import 'package:data_sharing_organizing/core/utils/extension/padding_ex.dart';
 import 'package:flutter/material.dart';
 
@@ -32,6 +33,9 @@ class NotificationTile extends StatelessWidget {
           top: 7,
         ),
         decoration: BoxDecoration(
+          color: groupNotificationEntity.status != GroupStatus.active
+              ? AppColor.error
+              : null,
           border: Border.all(
               color: groupNotificationEntity.unReadCounter != null
                   ? AppColor.primary

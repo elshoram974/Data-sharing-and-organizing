@@ -10,6 +10,7 @@ class DialogBody extends StatelessWidget {
     required this.crossAxisAlignment,
     required this.customBody,
     required this.body,
+    required this.bodyAlign,
     required this.onPressConfirm,
     required this.showCancelButton,
     required this.onPressCancel,
@@ -20,6 +21,7 @@ class DialogBody extends StatelessWidget {
   final CrossAxisAlignment crossAxisAlignment;
   final Widget? customBody;
   final String body;
+  final TextAlign? bodyAlign;
   final void Function()? onPressConfirm;
   final bool showCancelButton;
   final void Function()? onPressCancel;
@@ -39,7 +41,11 @@ class DialogBody extends StatelessWidget {
           Visibility(
             visible: customBody == null,
             replacement: customBody ?? const SizedBox.shrink(),
-            child: Text(body, style: Theme.of(context).textTheme.bodyMedium),
+            child: Text(
+              body,
+              style: Theme.of(context).textTheme.bodyMedium,
+              textAlign: bodyAlign,
+            ),
           ).verticalPadding(2 * AppConst.defaultPadding),
           DialogButtons(
             onPressConfirm: onPressConfirm,

@@ -9,6 +9,7 @@ abstract final class ShowCustomDialog {
   static Future<T?> warning<T>(
     BuildContext context, {
     required String body,
+    TextAlign? bodyAlign,
     String? textConfirm,
     String? textCancel,
     void Function()? onPressConfirm,
@@ -25,6 +26,7 @@ abstract final class ShowCustomDialog {
           title: S.of(context).warning,
           crossAxisAlignment: CrossAxisAlignment.center,
           body: body,
+          bodyAlign: bodyAlign,
         );
       },
     );

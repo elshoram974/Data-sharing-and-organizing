@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 
 abstract final class AppColor {
   const AppColor();
+  static Color error = Colors.redAccent.shade100;
+
   static const int _primaryInt = 0xFFF5576C;
   static const Color primary = Color(_primaryInt);
 

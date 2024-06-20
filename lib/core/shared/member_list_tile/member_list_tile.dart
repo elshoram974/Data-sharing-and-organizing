@@ -39,8 +39,8 @@ class MembersListTile extends StatelessWidget {
         ),
         decoration: BoxDecoration(
           color: memberEntity.isBlocked && thisUserIsAdmin == true
-              ? Colors.redAccent.shade100
-              : Colors.transparent,
+              ? AppColor.error
+              : null,
           borderRadius: borderRadius,
         ),
         child: Row(

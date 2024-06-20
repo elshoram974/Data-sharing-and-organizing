@@ -1,3 +1,4 @@
+import 'package:data_sharing_organizing/core/utils/config/locale/generated/l10n.dart';
 import 'package:data_sharing_organizing/core/utils/config/routes/routes.dart';
 import 'package:data_sharing_organizing/core/utils/enums/home/group_discussion_type_enum.dart';
 import 'package:data_sharing_organizing/core/utils/enums/home/group_status_enum.dart';
@@ -9,6 +10,7 @@ import 'package:data_sharing_organizing/features/user_home/presentation/cubit/us
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../../user_home/domain/entities/group_home_entity.dart';
 import '../../../domain/repositories/init_group_repo.dart';
@@ -26,6 +28,7 @@ class GroupCubit extends Cubit<GroupState> {
     isGroupScreenOpened = true;
     makeSeenTGroup(group.groupId);
     getCurrentScreen();
+    allowOpenGroup();
   }
 
   void getCurrentScreen() {
@@ -36,14 +39,23 @@ class GroupCubit extends Cubit<GroupState> {
     }
   }
 
-  void allowOpenGroup() {
-    if (group.status != GroupStatus.active) {
-      final BuildContext context = AppRoute.key.currentContext!;
-      ShowCustomDialog.error(
-        context,
-        body: "this group is not active\n${group.status}",
-      ); // TODO: make lang for this
-    }
+  void allowOpenGroup() async {
+    if (group.status == GroupStatus.active) return;
+    final BuildContext context = AppRoute.key.currentContext!;
+    WidgetsBinding.instance.addPostFrameCallback(
+      (_) async {
+        String body = S.of(context).groupIsCurrentlyInActive;
+        if (group.statusMessage != null) body += "\n${group.statusMessage}";
+
+        await ShowCustomDialog.warning(
+          context,
+          body: body,
+          bodyAlign: TextAlign.center,
+          textCancel: S.of(context).gotIt,
+        );
+        if (context.mounted) context.pop();
+      },
+    );
   }
 
   late double top = initRepo.getButtonPlace();

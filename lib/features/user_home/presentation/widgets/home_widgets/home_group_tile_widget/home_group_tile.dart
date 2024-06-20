@@ -1,5 +1,6 @@
 import 'package:data_sharing_organizing/core/utils/constants/app_color.dart';
 import 'package:data_sharing_organizing/core/utils/constants/app_constants.dart';
+import 'package:data_sharing_organizing/core/utils/enums/home/group_status_enum.dart';
 import 'package:data_sharing_organizing/core/utils/extension/padding_ex.dart';
 import 'package:flutter/material.dart';
 
@@ -21,6 +22,14 @@ class HomeGroupTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Color? selectedColor;
+    Color? unSelectedColor;
+    if (groupHomeEntity.status == GroupStatus.active) {
+      selectedColor = AppColor.selected(context);
+    } else {
+      unSelectedColor = AppColor.error;
+      selectedColor = AppColor.selected(context).withBlue(150).withGreen(150);
+    }
     return InkWell(
       onTap: onTap,
       onLongPress: onLongPress,
@@ -32,7 +41,7 @@ class HomeGroupTile extends StatelessWidget {
         padding: const EdgeInsets.only(
             left: 8, right: AppConst.defaultPadding, bottom: 7, top: 7),
         decoration: BoxDecoration(
-          color: groupHomeEntity.isSelected ? AppColor.selected(context) : null,
+          color: groupHomeEntity.isSelected ? selectedColor : unSelectedColor,
           borderRadius: BorderRadius.circular(AppConst.borderRadius),
           border: Border.all(color: getBorderColor()),
         ),

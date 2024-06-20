@@ -9,6 +9,7 @@ class CustomDialog extends StatelessWidget {
     super.key,
     this.title = 'Title',
     this.body = 'This is my Body',
+    this.bodyAlign,
     this.crossAxisAlignment = CrossAxisAlignment.stretch,
     this.customBody,
     this.onPressCancel,
@@ -23,6 +24,7 @@ class CustomDialog extends StatelessWidget {
   final String? textCancel;
   final bool showCancelButton;
   final Widget? customBody;
+  final TextAlign? bodyAlign;
   final CrossAxisAlignment crossAxisAlignment;
   final void Function()? onPressCancel;
   final void Function()? onPressConfirm;
@@ -46,6 +48,7 @@ class CustomDialog extends StatelessWidget {
               crossAxisAlignment: crossAxisAlignment,
               customBody: customBody,
               body: body,
+              bodyAlign: bodyAlign,
               onPressConfirm: onPressConfirm,
               showCancelButton: showCancelButton,
               onPressCancel: onPressCancel,
