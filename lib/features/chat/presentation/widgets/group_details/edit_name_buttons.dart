@@ -7,7 +7,6 @@ import 'package:data_sharing_organizing/core/utils/services/dependency/provider_
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-
 class EditNameButtons extends StatelessWidget {
   const EditNameButtons({super.key});
 

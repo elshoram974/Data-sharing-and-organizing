@@ -37,6 +37,6 @@ abstract class ProviderDependency {
   static late DirectoryCubit directory;
   static late GroupDetailsCubitImp groupDetails;
 
-  // *new group 
+  // *new group
   static late NewGroupCubit newGroup;
 }

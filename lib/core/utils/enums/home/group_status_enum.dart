@@ -3,7 +3,6 @@ import 'package:hive/hive.dart';
 part 'group_status_enum.g.dart';
 
 @HiveType(typeId: 15)
-
 enum GroupStatus {
   @HiveField(1)
   active('active'),
