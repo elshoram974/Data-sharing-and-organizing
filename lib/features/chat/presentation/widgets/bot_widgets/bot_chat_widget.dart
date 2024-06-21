@@ -40,6 +40,9 @@ class BotChatWidget extends StatelessWidget {
           sendButtonVisibilityMode: SendButtonVisibilityMode.always,
           onTextFieldTap: ProviderDependency.group.closeFloatingButton,
         ),
+        typingIndicatorOptions: TypingIndicatorOptions(
+          typingUsers: c.typingUsers,
+        ),
         user: c.currentMember.messageAuthor(),
         theme: botChatTheme(context),
       ),
@@ -84,10 +87,27 @@ class BotChatWidget extends StatelessWidget {
       receivedMessageBodyTextStyle: AppStyle.styleBoldInika13,
       inputTextStyle: AppStyle.styleBoldInika13,
       inputElevation: 1,
+      typingIndicatorTheme: typingIndicatorTheme(context),
       inputPadding: AppConst.isWeb
           ? const EdgeInsets.symmetric(vertical: 10)
           : EdgeInsets.zero,
       inputBackgroundColor: AppColor.grayLightDark(context),
+    );
+  }
+
+  TypingIndicatorTheme typingIndicatorTheme(BuildContext context) {
+    return TypingIndicatorTheme(
+      animatedCirclesColor: neutral1,
+      animatedCircleSize: 5.0,
+      bubbleBorder: const BorderRadius.all(Radius.circular(27.0)),
+      bubbleColor: AppColor.background(context),
+      countAvatarColor: primary,
+      countTextColor: secondary,
+      multipleUserTextStyle: const TextStyle(
+        fontSize: 12,
+        fontWeight: FontWeight.w500,
+        color: neutral2,
+      ),
     );
   }
 }

@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:math';
 
 import 'package:data_sharing_organizing/core/status/errors/failure.dart';
@@ -36,6 +37,7 @@ abstract class BOTCubit extends Cubit<BOTState> {
     imageUrl: groupCubit.group.imageLink,
   );
 
+  late List<types.User> typingUsers = [];
   late List<types.Message> botMessages = [];
 
   void addMessage(types.Message message);
@@ -52,7 +54,7 @@ abstract class BOTCubit extends Cubit<BOTState> {
   void hideActivity(types.Message message, BuildContext _);
   void deleteActivity(types.Message message, BuildContext _);
 
-  bool canEditMessage(ActivityEntity activity);
+  bool canEditMessage(ActivityEntity activity, String? noEditJson);
 
   void blockUserInteraction(types.Message message, BuildContext _);
 }
@@ -114,10 +116,14 @@ class BOTCubitImp extends BOTCubit {
   }
 
   @override
-  bool canEditMessage(ActivityEntity activity) {
+  bool canEditMessage(ActivityEntity activity, String? noEditJson) {
+    final bool noEditB = noEditJson != null ? jsonDecode(noEditJson) : false;
+
     return (ProviderDependency.group.isAdmin ||
-        (activity.createdBy.user.id == ProviderDependency.userMain.user.id &&
-            !activity.isApproved));
+            (activity.createdBy.user.id ==
+                    ProviderDependency.userMain.user.id &&
+                !activity.isApproved)) &&
+        !noEditB;
   }
 
   @override
@@ -131,7 +137,7 @@ class BOTCubitImp extends BOTCubit {
     } else if (message.metadata?.containsKey("activity") == true) {
       final ActivityEntity activity =
           ActivityModel.fromJson(message.metadata!["activity"]);
-      if (canEditMessage(activity) &&
+      if (canEditMessage(activity, message.metadata?["noEdit"]) &&
           "BOT" == message.author.firstName?.trim()) {
         showActivityActions(_, activity, message);
       }
@@ -218,21 +224,22 @@ class BOTCubitImp extends BOTCubit {
               status: types.Status.seen,
             );
             botMessages[i] = updatedMessage;
+            typingUsers.add(botAuthor);
             inFirstReply = false;
           }
 
           final List<types.Message> temp = [];
           for (final ActivityEntity e in status.data) {
             temp.add(
-              e.copyWith(createdAt: DateTime.now()).toMessage().copyWith(
-                    author: botAuthor,
-                  ),
+              e
+                  .copyWith(createdAt: DateTime.now())
+                  .toMessage(noEdit: true)
+                  .copyWith(author: botAuthor),
             );
           }
           addMessages(temp);
         } else {
           status as Failure<List<ActivityEntity>>;
-
           failureStatus(status.failure.message, () {
             final types.Message updatedMessage = botMessages[i].copyWith(
               status: types.Status.error,
@@ -243,7 +250,10 @@ class BOTCubitImp extends BOTCubit {
         await botRepo.saveBotMessages(groupCubit.group, botMessages);
         emit(SetState(_i++));
       },
-      onDone: () {},
+      onDone: () {
+        typingUsers.clear();
+        emit(SetState(_i++));
+      },
     );
   }
 

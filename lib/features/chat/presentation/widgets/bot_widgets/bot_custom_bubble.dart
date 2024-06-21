@@ -33,7 +33,9 @@ class BotCustomBubble extends StatelessWidget {
     late final bool canEdit;
     if (message.metadata?.containsKey("activity") == true) {
       m = ActivityModel.fromJson(message.metadata!["activity"]);
-      canEdit = ProviderDependency.bot.canEditMessage(m);
+
+      canEdit =
+          ProviderDependency.bot.canEditMessage(m, message.metadata?["noEdit"]);
     } else {
       m = null;
       canEdit = false;

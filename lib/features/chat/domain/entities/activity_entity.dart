@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:math';
 
 import 'package:data_sharing_organizing/core/utils/enums/message_type/message_type.dart';
@@ -102,11 +103,12 @@ class ActivityEntity extends Equatable {
     );
   }
 
-  types.Message toMessage([String? directory]) {
+  types.Message toMessage({String? directory, bool? noEdit}) {
     final Map<String, String?> map = {
       "activity": ActivityModel.fromEntity(this).toJson(),
     };
     if (directory != null) map["directory"] = directory;
+    if (noEdit != null) map['noEdit'] = jsonEncode(noEdit);
 
     final String uid = const Uuid().v4();
     switch (type) {
