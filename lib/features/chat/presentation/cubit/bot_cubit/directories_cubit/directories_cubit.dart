@@ -5,6 +5,7 @@ import 'package:data_sharing_organizing/core/status/errors/failure.dart';
 import 'package:data_sharing_organizing/core/status/success/success.dart';
 import 'package:data_sharing_organizing/core/utils/config/locale/generated/l10n.dart';
 import 'package:data_sharing_organizing/core/utils/config/routes/routes.dart';
+import 'package:data_sharing_organizing/core/utils/enums/home/group_access_type_enum.dart';
 import 'package:data_sharing_organizing/core/utils/enums/message_type/message_type.dart';
 import 'package:data_sharing_organizing/core/utils/enums/notification_enum.dart';
 import 'package:data_sharing_organizing/core/utils/functions/handle_status_emit.dart';
@@ -300,7 +301,13 @@ class DirectoryCubitImp extends DirectoryCubit {
         successFunction: (newDir) {
           List<DirectoryEntity> directories = [];
           directories.addAll(currentDirectories);
-          directories.add(newDir);
+          directories.add(
+            newDir.copyWith(
+              isApproved:
+                  groupCubit.group.accessType == GroupAccessType.readWrite ||
+                      groupCubit.group.memberEntity.isAdmin,
+            ),
+          );
           currentDirectories = directories;
           emit(OpenDirectoryState(currentDirectories));
         },
@@ -334,8 +341,15 @@ class DirectoryCubitImp extends DirectoryCubit {
         botCubit.addMessage(message.copyWith(status: types.Status.sending));
         return botRepo.addNewActivity(newActivity, file?.file);
       },
-      successFunction: (_) => botCubit.updateMessage(
-        _.toMessage().copyWith(status: types.Status.sent, id: message.id),
+      successFunction: (addedActivity) => botCubit.updateMessage(
+        addedActivity
+            .copyWith(
+              isApproved:
+                  groupCubit.group.accessType == GroupAccessType.readWrite ||
+                      groupCubit.group.memberEntity.isAdmin,
+            )
+            .toMessage()
+            .copyWith(status: types.Status.sent, id: message.id),
       ),
       failureFunction: (f) =>
           botCubit.updateMessage(message.copyWith(status: types.Status.error)),
