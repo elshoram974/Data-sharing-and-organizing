@@ -31,7 +31,10 @@ abstract class BOTRepositories {
       MemberEntity currentMember, DirectoryEntity dir);
   Future<Status<void>> blockUserWithDir(DirectoryEntity dir, int adminId);
 
-  Future<Status<List<ActivityEntity>>> askAI(ActivityEntity activity);
+  Stream<Status<List<ActivityEntity>>> askAI(
+    ActivityEntity activity,
+    MemberEntity bot,
+  );
 
   Future<Status<DirectoryEntity>> addNewDir(DirectoryEntity newDir);
   Future<Status<ActivityEntity>> addNewActivity(

@@ -16,6 +16,7 @@ import '../../domain/entities/data_in_directory.dart';
 import '../../domain/repositories/bot_repo.dart';
 import '../datasources/local_data_sources/bot_local_data_sources.dart';
 import '../datasources/remote_data_sources/directories_remote_data_sources.dart';
+import '../models/ai_response/ai_reply.dart';
 
 class BOTRepositoriesImp extends BOTRepositories {
   const BOTRepositoriesImp({
@@ -149,23 +150,54 @@ class BOTRepositoriesImp extends BOTRepositories {
   }
 
   @override
-  Future<Status<List<ActivityEntity>>> askAI(ActivityEntity activity) async {
-    return executeAndHandleErrors<List<ActivityEntity>>(
-      () async {
-        final AiResponse ai = await remoteDataSource.askAI(activity: activity);
-        return [
-          ActivityEntity(
-            id: -1,
-            groupId: -1,
-            createdBy: activity.createdBy,
-            content: ai.aiReplies?[0].message ?? 'ss',
-            createdAt: DateTime.now(),
-            isApproved: true,
-            type: MessageType.textMessage,
-          )
-        ]; // TODO: make it  when get data from ai get activities from database
-      },
-    );
+  Stream<Status<List<ActivityEntity>>> askAI(
+    ActivityEntity activity,
+    MemberEntity bot,
+  ) async* {
+    final AiResponse ai = await remoteDataSource.askAI(activity: activity);
+
+    for (AiReply e in ai.aiReplies ?? []) {
+      yield* Stream.fromFuture(
+        executeAndHandleErrors<List<ActivityEntity>>(
+          () async {
+            List<ActivityEntity> activities = [];
+            if (e.message != null) {
+              activities.add(
+                ActivityEntity(
+                  id: -1,
+                  groupId: activity.groupId,
+                  createdBy: bot,
+                  content: e.message!,
+                  createdAt: DateTime.now(),
+                  isApproved: true,
+                  type: MessageType.textMessage,
+                ),
+              );
+            }
+            if (e.activities?.isNotEmpty == true) {
+              // TODO: Get from database
+              await Future.delayed(
+                const Duration(seconds: 2),
+                () {
+                  activities.add(
+                    ActivityEntity(
+                      id: -1,
+                      groupId: activity.groupId,
+                      createdBy: bot,
+                      content: e.activities.toString(),
+                      createdAt: DateTime.now(),
+                      isApproved: true,
+                      type: MessageType.textMessage,
+                    ),
+                  );
+                },
+              );
+            }
+            return activities;
+          },
+        ),
+      );
+    }
   }
 
   @override
