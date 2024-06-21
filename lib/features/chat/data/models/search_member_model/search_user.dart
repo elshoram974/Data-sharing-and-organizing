@@ -16,9 +16,10 @@ class SearchUser extends Equatable {
   factory SearchUser.fromMap(Map<String, dynamic> data) {
     return SearchUser(
       status: data['status'] as String,
-      searchedUsers: (data['users'] as List<dynamic>)
-          .map((e) => SearchedUserModel.fromMap(e as Map<String, dynamic>))
-          .toList(),
+      searchedUsers: (data['users'] as List<dynamic>?)
+              ?.map((e) => SearchedUserModel.fromMap(e as Map<String, dynamic>))
+              .toList() ??
+          [],
     );
   }
 

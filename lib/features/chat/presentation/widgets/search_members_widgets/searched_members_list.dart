@@ -20,7 +20,16 @@ class SearchedMembersList extends StatelessWidget {
     return BlocBuilder<SearchMembersCubit, SearchMembersState>(
       builder: (context, state) {
         if (c.currentSearched.isEmpty) {
-          return const Expanded(child: NoAccountFoundWidget());
+          return Expanded(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                if (state is SearchMembersLoadingState)
+                  const CircularLoadingIndicator(),
+                const NoAccountFoundWidget(),
+              ],
+            ),
+          );
         }
 
         return Expanded(
