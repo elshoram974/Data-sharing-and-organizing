@@ -9,13 +9,13 @@ part 'attachment_model.g.dart';
 @HiveType(typeId: 10)
 class AttachmentModel extends Equatable {
   @HiveField(0)
-  final double size;
+  final num size;
 
   @HiveField(1)
-  final double? height; //image
+  final num? height; //image
 
   @HiveField(2)
-  final double? width; //image
+  final num? width; //image
 
   @HiveField(3)
   final String? mimeType; //file
@@ -38,9 +38,9 @@ class AttachmentModel extends Equatable {
   });
 
   AttachmentModel copyWith({
-    double? size,
-    double? height,
-    double? width,
+    num? size,
+    num? height,
+    num? width,
     String? mimeType,
     String? name,
     String? uri,

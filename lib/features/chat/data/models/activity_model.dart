@@ -33,11 +33,11 @@ class ActivityModel extends ActivityEntity {
     final AttachmentModel? tempAttachment;
     if (data['activity_attachments_url'] != null) {
       tempAttachment = AttachmentModel(
-        size: data['activity_attachments_size'] as double,
+        size: data['activity_attachments_size'] as num,
         name: tempContent,
         uri: data['activity_attachments_url'] as String,
-        height: data['activity_attachments_height'] as double?,
-        width: data['activity_attachments_width'] as double?,
+        height: data['activity_attachments_height'] as num?,
+        width: data['activity_attachments_width'] as num?,
         mimeType: data['activity_attachments_mimetype'] as String?,
       );
     } else {

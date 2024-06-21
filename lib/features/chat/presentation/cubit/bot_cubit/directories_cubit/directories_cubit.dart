@@ -320,7 +320,7 @@ class DirectoryCubitImp extends DirectoryCubit {
     late final ActivityEntity newActivity;
     if (file == null) {
       newActivity = ActivityEntity(
-        id: -1,
+        id: Random().nextInt(99999),
         content: content,
         createdAt: DateTime.now(),
         createdBy: botCubit.currentMember,
@@ -332,11 +332,25 @@ class DirectoryCubitImp extends DirectoryCubit {
         notifyOthers: NotificationEnum.withoutNotify,
       );
     } else {
-      newActivity = file.activity;
+      newActivity = ActivityEntity(
+        id: Random().nextInt(99999),
+        content: file.activity.content,
+        createdAt: DateTime.now(),
+        createdBy: botCubit.currentMember,
+        groupId: groupCubit.group.groupId,
+        isApproved: false,
+        type: file.activity.type,
+        insideDirectoryId: _directoriesStack.lastOrNull?.id,
+        attachment: file.activity.attachment,
+        notifyOthers: NotificationEnum.withoutNotify,
+      );
     }
     final message = newActivity.toMessage();
 
+    AppRoute.key.currentState?.pop();
+
     handleStatusEmit<ActivityEntity>(
+      dismissLoadingOnTap: null,
       statusFunction: () {
         botCubit.addMessage(message.copyWith(status: types.Status.sending));
         return botRepo.addNewActivity(newActivity, file?.file);
@@ -353,7 +367,7 @@ class DirectoryCubitImp extends DirectoryCubit {
       ),
       failureFunction: (f) =>
           botCubit.updateMessage(message.copyWith(status: types.Status.error)),
-    ).then((v) => AppRoute.key.currentState?.pop());
+    );
   }
 
   @override
