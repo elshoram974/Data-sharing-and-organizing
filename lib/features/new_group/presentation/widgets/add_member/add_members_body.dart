@@ -1,7 +1,9 @@
 import 'package:data_sharing_organizing/core/shared/circular_loading_indicator.dart';
 import 'package:data_sharing_organizing/core/shared/member_list_tile/member_list_tile.dart';
+import 'package:data_sharing_organizing/core/shared/no_account_found_widget.dart';
 import 'package:data_sharing_organizing/core/shared/responsive/constrained_box.dart';
 import 'package:data_sharing_organizing/core/utils/config/locale/generated/l10n.dart';
+import 'package:data_sharing_organizing/core/utils/extension/padding_ex.dart';
 import 'package:data_sharing_organizing/core/utils/services/dependency/provider_dependency.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -20,6 +22,7 @@ class AddMembersBody extends StatelessWidget {
     return BlocBuilder<NewGroupCubit, NewGroupState>(
       builder: (context, state) {
         return CustomScrollView(
+          controller: c.scrollController,
           physics: const BouncingScrollPhysics(),
           slivers: [
             NewGroupAppBar(
@@ -31,8 +34,12 @@ class AddMembersBody extends StatelessWidget {
               pinned: true,
               delegate: SearchBarMembersPersistentHeader(),
             ),
-            if (state is SearchMembersLoadingState)
+            if (state is SearchMembersLoadingState && state.page == 1)
               const SliverToBoxAdapter(child: CircularLoadingIndicator()),
+            if (c.currentMembers.isEmpty)
+              SliverToBoxAdapter(
+                child: const NoAccountFoundWidget().topPadding(100),
+              ),
             SliverList(
               delegate: SliverChildBuilderDelegate(
                 childCount: c.currentMembers.length,
@@ -46,6 +53,8 @@ class AddMembersBody extends StatelessWidget {
                 },
               ),
             ),
+            if (state is SearchMembersLoadingState && state.page != 1)
+              const SliverToBoxAdapter(child: CircularLoadingIndicator()),
           ],
         );
       },

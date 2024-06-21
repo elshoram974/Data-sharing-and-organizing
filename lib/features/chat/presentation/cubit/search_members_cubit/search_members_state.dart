@@ -12,7 +12,11 @@ class SearchMembersInitial extends SearchMembersState {
 }
 
 class SearchMembersLoadingState extends SearchMembersState {
-  const SearchMembersLoadingState();
+  const SearchMembersLoadingState(this.page);
+  final int page;
+
+  @override
+  List<Object?> get props => [page];
 }
 
 class SearchMembersSuccessState extends SearchMembersState {

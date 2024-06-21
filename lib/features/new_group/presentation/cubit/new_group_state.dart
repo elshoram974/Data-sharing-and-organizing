@@ -12,7 +12,11 @@ class NewGroupInitial extends NewGroupState {
 }
 
 class SearchMembersLoadingState extends NewGroupState {
-  const SearchMembersLoadingState();
+  const SearchMembersLoadingState(this.page);
+  final int page;
+
+  @override
+  List<Object?> get props => [page];
 }
 
 class SearchMembersSuccessState extends NewGroupState {

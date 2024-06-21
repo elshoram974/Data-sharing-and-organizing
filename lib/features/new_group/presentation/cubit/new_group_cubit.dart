@@ -37,6 +37,8 @@ abstract class _NewGroupCubit extends Cubit<NewGroupState> {
   final GroupDetailsRepositories searchRepo;
   final AuthUserEntity user;
 
+  late final ScrollController scrollController;
+
   List<MemberListTileEntity> currentMembers = [];
   List<MemberListTileEntity> selectedMembers = [];
 
@@ -71,14 +73,16 @@ class NewGroupCubit extends _NewGroupCubit {
     required super.searchRepo,
   }) {
     searchMembers();
+    scrollController = ScrollController();
+    scrollController.addListener(_onScroll);
   }
 
   @override
   Future<void> searchMembers() async {
-    emit(const SearchMembersLoadingState());
+    emit(SearchMembersLoadingState(_currentPage));
     handleStatusEmit<List<SearchedUserModel>>(
       dismissLoadingOnTap: null,
-      statusFunction: () => searchRepo.searchMembers(query),
+      statusFunction: () => searchRepo.searchMembers(query, _currentPage),
       successFunction: (_) {
         for (SearchedUserModel e in _) {
           if (e.userId == user.id) {
@@ -98,7 +102,11 @@ class NewGroupCubit extends _NewGroupCubit {
           }
         }
 
-        currentMembers = temp;
+        if (_currentPage == 1) {
+          currentMembers = temp;
+        } else {
+          currentMembers.addAll(temp);
+        }
         emit(SearchMembersSuccessState(currentMembers));
       },
       failureFunction: (f) => emit(SearchMembersFailureState(f)),
@@ -106,6 +114,18 @@ class NewGroupCubit extends _NewGroupCubit {
   }
 
   Timer? _timer;
+
+  // * helper functions
+  int _currentPage = 1;
+  void _onScroll() {
+    if (scrollController.position.pixels ==
+        scrollController.position.maxScrollExtent) {
+      if (state is! SearchMembersLoadingState) {
+        _currentPage++;
+        searchMembers();
+      }
+    }
+  }
 
   @override
   void onChangeQuery(String q) {
@@ -118,6 +138,7 @@ class NewGroupCubit extends _NewGroupCubit {
       (timer) {
         if (query != q) {
           query = q;
+          _currentPage = 1;
           searchMembers();
         }
         timer.cancel();
@@ -198,6 +219,8 @@ class NewGroupCubit extends _NewGroupCubit {
   @override
   close() {
     _timer?.cancel();
+    scrollController.removeListener(_onScroll);
+    scrollController.dispose();
     return super.close();
   }
 }

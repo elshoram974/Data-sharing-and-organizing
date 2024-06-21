@@ -35,10 +35,11 @@ class SearchedMembersList extends StatelessWidget {
         return Expanded(
           child: Column(
             children: [
-              if (state is SearchMembersLoadingState)
+              if (state is SearchMembersLoadingState && state.page == 1)
                 const CircularLoadingIndicator(),
               Expanded(
                 child: ListView.builder(
+                  controller: c.scrollController,
                   itemCount: c.currentSearched.length,
                   padding: const EdgeInsets.symmetric(vertical: 50),
                   itemBuilder: (context, index) {
@@ -73,6 +74,8 @@ class SearchedMembersList extends StatelessWidget {
                   },
                 ),
               ),
+              if (state is SearchMembersLoadingState && state.page != 1)
+                const CircularLoadingIndicator(),
             ],
           ),
         );
