@@ -32,10 +32,10 @@ class AiResponse extends Equatable {
   String toJson() => json.encode(toMap());
 
   AiResponse copyWith({
-    List<AiReply>? responses,
+    List<AiReply>? aiReplies,
   }) {
     return AiResponse(
-      aiReplies: responses ?? this.aiReplies,
+      aiReplies: aiReplies ?? this.aiReplies,
     );
   }
 
