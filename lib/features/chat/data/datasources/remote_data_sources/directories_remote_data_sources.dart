@@ -12,6 +12,7 @@ import 'package:data_sharing_organizing/features/chat/domain/entities/member_ent
 
 import '../../../domain/entities/data_in_directory.dart';
 import '../../../domain/entities/notification_data_entity.dart';
+import '../../models/ai_response/ai_response.dart';
 import '../../models/dir_activities_bot.dart';
 
 abstract class DirectoriesRemoteDataSource {
@@ -51,7 +52,7 @@ abstract class DirectoriesRemoteDataSource {
     required int adminId,
   });
 
-  Future<List<ActivityEntity>> askAI({required ActivityEntity activity});
+  Future<AiResponse> askAI({required ActivityEntity activity});
 
   Future<DirectoryEntity> addNewDir({required DirectoryEntity dir});
 
@@ -189,13 +190,12 @@ class DirectoriesRemoteDataSourceImp extends DirectoriesRemoteDataSource {
   }
 
   @override
-  Future<List<ActivityEntity>> askAI({required ActivityEntity activity}) async {
+  Future<AiResponse> askAI({required ActivityEntity activity}) async {
     Map<String, dynamic> response = await service.post(
       AppLinks.askAI,
       {'message': activity.content},
     );
-    // TODO: implement askAI and Link don't forget
-    throw UnimplementedError(response.toString());
+    return AiResponse.fromMap(response);
   }
 
   @override

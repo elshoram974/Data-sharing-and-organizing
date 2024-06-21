@@ -1,3 +1,5 @@
+import 'app_constants.dart';
+
 abstract final class AppLinks {
   const AppLinks();
 
@@ -24,7 +26,10 @@ abstract final class AppLinks {
       '$_home/directions_and_activities.php';
 
   // * group
-  static String askAI = 'http://127.0.0.1:5000/api/chatbot';
+  static const String _android = '10.0.2.2';
+  static const String _web = '127.0.0.1';
+  static const String _ip = AppConst.isWeb ? _web : _android;
+  static String askAI = 'http://$_ip:5000/api/chatbot';
 
   // * bot & chat
   static const String _botChatChanges = '$_changes/bot&chat';

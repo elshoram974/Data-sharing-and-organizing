@@ -9,7 +9,7 @@ class AiReply extends Equatable {
   const AiReply({this.activities, this.message});
 
   factory AiReply.fromMap(Map<String, dynamic> data) => AiReply(
-        activities: data['activities'] as List<int>?,
+        activities: (data['activities'] as List<dynamic>?)?.cast<int>(),
         message: data['message'] as String?,
       );
 

@@ -2,7 +2,9 @@ import 'dart:typed_data';
 
 import 'package:data_sharing_organizing/core/status/status.dart';
 import 'package:data_sharing_organizing/core/status/success/success.dart';
+import 'package:data_sharing_organizing/core/utils/enums/message_type/message_type.dart';
 import 'package:data_sharing_organizing/core/utils/functions/execute_and_handle_remote_errors.dart';
+import 'package:data_sharing_organizing/features/chat/data/models/ai_response/ai_response.dart';
 import 'package:data_sharing_organizing/features/chat/domain/entities/activity_entity.dart';
 import 'package:data_sharing_organizing/features/chat/domain/entities/directory_entity.dart';
 import 'package:data_sharing_organizing/features/chat/domain/entities/member_entity.dart';
@@ -150,10 +152,18 @@ class BOTRepositoriesImp extends BOTRepositories {
   Future<Status<List<ActivityEntity>>> askAI(ActivityEntity activity) async {
     return executeAndHandleErrors<List<ActivityEntity>>(
       () async {
-        final List<ActivityEntity> data = await remoteDataSource.askAI(
-          activity: activity,
-        );
-        return data; // TODO: make it  when get data from ai get activities from database
+        final AiResponse ai = await remoteDataSource.askAI(activity: activity);
+        return [
+          ActivityEntity(
+            id: -1,
+            groupId: -1,
+            createdBy: activity.createdBy,
+            content: ai.aiReplies?[0].message ?? 'ss',
+            createdAt: DateTime.now(),
+            isApproved: true,
+            type: MessageType.textMessage,
+          )
+        ]; // TODO: make it  when get data from ai get activities from database
       },
     );
   }
