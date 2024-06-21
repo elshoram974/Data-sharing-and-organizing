@@ -1,5 +1,7 @@
 import 'dart:math';
 
+import 'package:data_sharing_organizing/core/status/errors/failure.dart';
+import 'package:data_sharing_organizing/core/status/success/success.dart';
 import 'package:data_sharing_organizing/core/utils/enums/message_type/message_type.dart';
 import 'package:data_sharing_organizing/core/utils/functions/handle_status_emit.dart';
 import 'package:data_sharing_organizing/core/utils/functions/handle_tapped_message.dart';
@@ -28,6 +30,11 @@ abstract class BOTCubit extends Cubit<BOTState> {
   final GroupCubit groupCubit = ProviderDependency.group;
   late final MemberEntity currentMember = groupCubit.group.memberEntity
       .copyWith(user: ProviderDependency.userMain.user);
+  late final types.User botAuthor = types.User(
+    id: "bot ${groupCubit.group.groupId}",
+    firstName: "BOT",
+    imageUrl: groupCubit.group.imageLink,
+  );
 
   late List<types.Message> botMessages = [];
 
@@ -99,10 +106,7 @@ class BOTCubitImp extends BOTCubit {
     for (final ActivityEntity e in activities) {
       temp.add(
         e.copyWith(createdAt: DateTime.now()).toMessage().copyWith(
-              author: types.User(
-                id: "bot ${groupCubit.group.groupId}",
-                firstName: "BOT",
-              ),
+              author: botAuthor,
             ),
       );
     }
@@ -203,22 +207,44 @@ class BOTCubitImp extends BOTCubit {
 
     final int i =
         botMessages.indexWhere((element) => element.id == textMessage.id);
-    await handleStatusEmit<List<ActivityEntity>>(
-        dismissLoadingOnTap: null,
-        statusFunction: () => botRepo.askAI(activityTemp),
-        successFunction: (activities) {
-          final types.Message updatedMessage =
-              botMessages[i].copyWith(status: types.Status.seen);
-          botMessages[i] = updatedMessage;
-          botReply(activities);
-        },
-        failureFunction: (f) {
-          final types.Message updatedMessage =
-              botMessages[i].copyWith(status: types.Status.error);
-          botMessages[i] = updatedMessage;
-        });
-    await botRepo.saveBotMessages(groupCubit.group, botMessages);
-    emit(SetState(_i++));
+
+    bool inFirstReply = true;
+
+    botRepo.askAI(activityTemp, MemberEntity.fromAuthor(botAuthor)).listen(
+      (status) async {
+        if (status is Success<List<ActivityEntity>>) {
+          if (inFirstReply) {
+            final types.Message updatedMessage = botMessages[i].copyWith(
+              status: types.Status.seen,
+            );
+            botMessages[i] = updatedMessage;
+            inFirstReply = false;
+          }
+
+          final List<types.Message> temp = [];
+          for (final ActivityEntity e in status.data) {
+            temp.add(
+              e.copyWith(createdAt: DateTime.now()).toMessage().copyWith(
+                    author: botAuthor,
+                  ),
+            );
+          }
+          addMessages(temp);
+        } else {
+          status as Failure<List<ActivityEntity>>;
+
+          failureStatus(status.failure.message, () {
+            final types.Message updatedMessage = botMessages[i].copyWith(
+              status: types.Status.error,
+            );
+            botMessages[i] = updatedMessage;
+          });
+        }
+        await botRepo.saveBotMessages(groupCubit.group, botMessages);
+        emit(SetState(_i++));
+      },
+      onDone: () {},
+    );
   }
 
   // * activity edit

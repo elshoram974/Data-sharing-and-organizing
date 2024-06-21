@@ -1,3 +1,4 @@
+import 'dart:math';
 import 'dart:typed_data';
 
 import 'package:data_sharing_organizing/core/status/status.dart';
@@ -164,7 +165,7 @@ class BOTRepositoriesImp extends BOTRepositories {
             if (e.message != null) {
               activities.add(
                 ActivityEntity(
-                  id: -1,
+                  id: Random().nextInt(9999),
                   groupId: activity.groupId,
                   createdBy: bot,
                   content: e.message!,
@@ -181,7 +182,7 @@ class BOTRepositoriesImp extends BOTRepositories {
                 () {
                   activities.add(
                     ActivityEntity(
-                      id: -1,
+                      id: Random().nextInt(9999),
                       groupId: activity.groupId,
                       createdBy: bot,
                       content: e.activities.toString(),
