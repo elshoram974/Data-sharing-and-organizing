@@ -57,9 +57,12 @@ class GroupDetailsRepositoriesImp extends GroupDetailsRepositories {
   }
 
   @override
-  Future<Status<List<SearchedUserModel>>> searchMembers(String query) {
+  Future<Status<List<SearchedUserModel>>> searchMembers(
+    String query,
+    int page,
+  ) {
     return executeAndHandleErrors<List<SearchedUserModel>>(
-      () => remoteDataSource.searchMembers(query),
+      () => remoteDataSource.searchMembers(query, page, 20),
     );
   }
 

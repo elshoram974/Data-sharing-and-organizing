@@ -16,7 +16,11 @@ abstract class GroupDetailsRemoteDataSource {
 
   Future<List<GroupMember>> getGroupMembers(int groupId);
 
-  Future<List<SearchedUserModel>> searchMembers(String query);
+  Future<List<SearchedUserModel>> searchMembers(
+    String query,
+    int page,
+    int limit,
+  );
 
   Future<void> addMembers(
     List<SearchedUserModel> newMembers,
@@ -58,10 +62,14 @@ class GroupDetailsRemoteDataSourceImp extends GroupDetailsRemoteDataSource {
   }
 
   @override
-  Future<List<SearchedUserModel>> searchMembers(String query) async {
+  Future<List<SearchedUserModel>> searchMembers(
+    String query,
+    int page,
+    int limit,
+  ) async {
     Map<String, dynamic> response = await service.post(
       AppLinks.searchUsers,
-      {'quere': query},
+      {'quere': query, 'page': '$page', 'limit': '$limit'},
     );
     return SearchUser.fromMap(response).searchedUsers;
   }

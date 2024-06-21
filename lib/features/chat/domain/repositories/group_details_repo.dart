@@ -13,7 +13,7 @@ abstract class GroupDetailsRepositories {
     required int userId,
   });
 
-  Future<Status<List<SearchedUserModel>>> searchMembers(String query);
+  Future<Status<List<SearchedUserModel>>> searchMembers(String query, int page);
 
   Future<List<GroupMember>> updateMembersLocal(
     List<GroupMember> members,
