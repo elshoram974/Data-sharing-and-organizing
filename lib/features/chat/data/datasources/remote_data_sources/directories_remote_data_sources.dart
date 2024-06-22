@@ -204,7 +204,7 @@ class DirectoriesRemoteDataSourceImp extends DirectoriesRemoteDataSource {
   Future<List<ActivityEntity>> getActivities(List<int> activities) async {
     Map<String, dynamic> response = await service.post(
       AppLinks.getActivities,
-      {'user_id': jsonEncode(activities)},
+      {'activite_id': jsonEncode(activities)},
     );
     return DirActivitiesBot.fromMap(response).activities;
   }
