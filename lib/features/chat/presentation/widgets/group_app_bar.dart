@@ -1,7 +1,6 @@
 import 'package:data_sharing_organizing/core/utils/config/routes/routes.dart';
 import 'package:data_sharing_organizing/core/utils/constants/app_color.dart';
 import 'package:data_sharing_organizing/core/utils/constants/app_constants.dart';
-import 'package:data_sharing_organizing/core/utils/extension/padding_ex.dart';
 import 'package:data_sharing_organizing/core/utils/services/dependency/provider_dependency.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -35,13 +34,14 @@ class GroupAppBar extends StatelessWidget implements PreferredSizeWidget {
             background: SafeArea(
               child: Row(
                 children: [
-                  GestureDetector(
-                    onTap: context.pop,
-                    child: const Icon(Icons.arrow_back),
+                  IconButton(
+                    onPressed: context.pop,
+                    icon: const Icon(Icons.arrow_back),
                   ),
                   const Expanded(child: GroupTitle()),
+                  const SizedBox(width: AppConst.defaultPadding)
                 ],
-              ).horizontalPadding(AppConst.defaultPadding),
+              ),
             ),
           ),
           forceMaterialTransparency: true,
