@@ -41,7 +41,7 @@ abstract final class LocalNotification {
       onDidReceiveNotificationResponse: onNotificationTapped,
       onDidReceiveBackgroundNotificationResponse: onNotificationTapped,
     );
-    await instance.cancelAll();
+    // await instance.cancelAll();
   }
 
   static Future<NotificationDetails> notificationDetails({
