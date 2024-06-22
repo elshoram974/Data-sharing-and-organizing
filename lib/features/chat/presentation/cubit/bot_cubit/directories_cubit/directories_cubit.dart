@@ -350,8 +350,8 @@ class DirectoryCubitImp extends DirectoryCubit {
     final message = newActivity.toMessage();
 
     AppRoute.key.currentState?.pop();
-    content = '';
-    isValidActivity = false;
+
+    onChangeAct(" ");
 
     handleStatusEmit<ActivityEntity>(
       dismissLoadingOnTap: null,
