@@ -319,6 +319,8 @@ class DirectoryCubitImp extends DirectoryCubit {
   void addNewActivity([({Uint8List file, ActivityEntity activity})? file]) {
     late final ActivityEntity newActivity;
     if (file == null) {
+      _fixContentEmptyLines();
+
       newActivity = ActivityEntity(
         id: Random().nextInt(99999),
         content: content,
@@ -348,6 +350,8 @@ class DirectoryCubitImp extends DirectoryCubit {
     final message = newActivity.toMessage();
 
     AppRoute.key.currentState?.pop();
+    content = '';
+    isValidActivity = false;
 
     handleStatusEmit<ActivityEntity>(
       dismissLoadingOnTap: null,
@@ -368,6 +372,24 @@ class DirectoryCubitImp extends DirectoryCubit {
       failureFunction: (f) =>
           botCubit.updateMessage(message.copyWith(status: types.Status.error)),
     );
+  }
+
+  void _fixContentEmptyLines() {
+    // Split the content into lines
+    List<String> lines = content.split('\n');
+
+    // Remove empty lines from the beginning
+    while (lines.isNotEmpty && lines.first.trim().isEmpty) {
+      lines.removeAt(0);
+    }
+
+    // Remove empty lines from the end
+    while (lines.isNotEmpty && lines.last.trim().isEmpty) {
+      lines.removeLast();
+    }
+
+    // Join the lines back into a single string
+    content = lines.join('\n').trim();
   }
 
   @override
