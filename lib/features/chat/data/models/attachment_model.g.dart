@@ -17,9 +17,9 @@ class AttachmentModelAdapter extends TypeAdapter<AttachmentModel> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return AttachmentModel(
-      size: fields[0] as double,
-      height: fields[1] as double?,
-      width: fields[2] as double?,
+      size: fields[0] as num,
+      height: fields[1] as num?,
+      width: fields[2] as num?,
       mimeType: fields[3] as String?,
       name: fields[4] as String,
       uri: fields[5] as String,
