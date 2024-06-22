@@ -32,9 +32,14 @@ class GroupTitle extends StatelessWidget {
               errorWidget: const GroupImage(),
             ),
             const SizedBox(width: .5 * AppConst.defaultPadding),
-            Text(
-              group.groupName,
-              style: AppStyle.styleBoldInika24.copyWith(fontSize: 20),
+            Flexible(
+              child: SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Text(
+                  group.groupName,
+                  style: AppStyle.styleBoldInika24.copyWith(fontSize: 20),
+                ),
+              ),
             ),
           ],
         );

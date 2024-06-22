@@ -2,6 +2,7 @@ import 'package:data_sharing_organizing/core/shared/image/circular_image_widget.
 import 'package:data_sharing_organizing/core/shared/image/group.dart';
 import 'package:data_sharing_organizing/core/utils/constants/app_color.dart';
 import 'package:data_sharing_organizing/core/utils/constants/app_constants.dart';
+import 'package:data_sharing_organizing/core/utils/extension/padding_ex.dart';
 import 'package:data_sharing_organizing/core/utils/services/dependency/provider_dependency.dart';
 import 'package:data_sharing_organizing/core/utils/styles.dart';
 import 'package:flutter/material.dart';
@@ -141,7 +142,7 @@ class _GroupName extends StatelessWidget {
           style: AppStyle.styleBoldInika24.copyWith(
             color: Colors.white,
           ),
-        ),
+        ).horizontalPadding(AppConst.defaultPadding),
       ),
     );
   }
