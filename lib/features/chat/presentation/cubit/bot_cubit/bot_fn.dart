@@ -319,6 +319,7 @@ void _addDataDialogForNoAdmin({
 void _addActivityDialog(BuildContext context) {
   showDialog<void>(
     context: context,
+    barrierDismissible: false,
     builder: (context) {
       return AddActivityOrDirectoryDialogWidget(
         content: const AddActivityWidget(),
@@ -336,7 +337,7 @@ void _addActivityDialog(BuildContext context) {
         ),
       );
     },
-  );
+  ).then((_) => ProviderDependency.directory.onChangeAct(" "));
 }
 
 void _addDirectoryDialog(BuildContext context) {

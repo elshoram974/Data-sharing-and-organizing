@@ -15,6 +15,7 @@ class DirectoriesBackButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Visibility(
       visible: cubit.canDirectoryPop,
+      replacement: const SizedBox(height: 0, width: double.maxFinite),
       child: SizedBox(
         height: 38,
         width: double.infinity,

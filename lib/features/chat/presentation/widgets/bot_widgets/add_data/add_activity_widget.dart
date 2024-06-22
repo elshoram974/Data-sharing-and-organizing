@@ -23,6 +23,7 @@ class AddActivityWidget extends StatelessWidget {
         const SizedBox(height: AppConst.defaultPadding),
         MyDefaultField(
           fieldKey: c.activityKey,
+          autofocus: true,
           suffix: IconButton(
             onPressed: () async {
               final temp = await handleAttachmentPressed(context);

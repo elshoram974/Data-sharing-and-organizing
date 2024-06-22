@@ -61,15 +61,14 @@ abstract class DirectoryCubit extends Cubit<DirectoryState> {
   void addNewDirectory();
 
   String content = '';
-  bool isValidActivity = false;
+  bool get isValidActivity => activityKey.currentState?.isValid ?? false;
 
   GlobalKey<FormFieldState<dynamic>> activityKey =
       GlobalKey<FormFieldState<dynamic>>();
   void addNewActivity([({Uint8List file, ActivityEntity activity})? file]);
   void onChangeAct(String val) {
     content = val;
-    isValidActivity = activityKey.currentState?.isValid ?? false;
-    emit(ValidateActivityState(isValidActivity));
+    emit(ValidateActivityState(isValidActivity, val));
   }
 }
 
@@ -319,6 +318,7 @@ class DirectoryCubitImp extends DirectoryCubit {
   void addNewActivity([({Uint8List file, ActivityEntity activity})? file]) {
     late final ActivityEntity newActivity;
     if (file == null) {
+      if (!isValidActivity) return;
       _fixContentEmptyLines();
 
       newActivity = ActivityEntity(
@@ -350,8 +350,6 @@ class DirectoryCubitImp extends DirectoryCubit {
     final message = newActivity.toMessage();
 
     AppRoute.key.currentState?.pop();
-
-    onChangeAct(" ");
 
     handleStatusEmit<ActivityEntity>(
       dismissLoadingOnTap: null,
