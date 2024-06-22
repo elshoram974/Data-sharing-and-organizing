@@ -54,6 +54,8 @@ abstract class DirectoriesRemoteDataSource {
 
   Future<AiResponse> askAI({required ActivityEntity activity});
 
+  Future<List<ActivityEntity>> getActivities(List<int> activities);
+
   Future<DirectoryEntity> addNewDir({required DirectoryEntity dir});
 
   Future<ActivityEntity> addNewActivity({
@@ -196,6 +198,15 @@ class DirectoriesRemoteDataSourceImp extends DirectoriesRemoteDataSource {
       {'message': activity.content},
     );
     return AiResponse.fromMap(response);
+  }
+
+  @override
+  Future<List<ActivityEntity>> getActivities(List<int> activities) async {
+    Map<String, dynamic> response = await service.post(
+      AppLinks.getActivities,
+      {'user_id': jsonEncode(activities)},
+    );
+    return DirActivitiesBot.fromMap(response).activities;
   }
 
   @override

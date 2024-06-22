@@ -24,6 +24,7 @@ abstract final class AppLinks {
   static const String userHome = '$_home/home.php';
   static const String getDirectoriesInside =
       '$_home/directions_and_activities.php';
+  static const String getActivities = '$_home/get_activities.php';
 
   // * group
   static const String _android = '10.0.2.2';

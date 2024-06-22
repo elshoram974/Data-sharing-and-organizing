@@ -176,22 +176,8 @@ class BOTRepositoriesImp extends BOTRepositories {
               );
             }
             if (e.activities?.isNotEmpty == true) {
-              // TODO: Get from database
-              await Future.delayed(
-                const Duration(seconds: 2),
-                () {
-                  activities.add(
-                    ActivityEntity(
-                      id: Random().nextInt(9999),
-                      groupId: activity.groupId,
-                      createdBy: bot,
-                      content: e.activities.toString(),
-                      createdAt: DateTime.now(),
-                      isApproved: true,
-                      type: MessageType.textMessage,
-                    ),
-                  );
-                },
+              activities.addAll(
+                await remoteDataSource.getActivities(e.activities ?? []),
               );
             }
             return activities;
