@@ -35,6 +35,7 @@ class GroupTitle extends StatelessWidget {
             Flexible(
               child: SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
+                reverse: ProviderDependency.config.isArabic,
                 child: Text(
                   group.groupName,
                   style: AppStyle.styleBoldInika24.copyWith(fontSize: 20),
