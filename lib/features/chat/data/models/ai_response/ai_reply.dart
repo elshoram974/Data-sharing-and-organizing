@@ -5,17 +5,20 @@ import 'package:equatable/equatable.dart';
 class AiReply extends Equatable {
   final List<int>? activities;
   final String? message;
+  final int? groupId;
 
-  const AiReply({this.activities, this.message});
+  const AiReply({this.activities, this.message, required this.groupId});
 
   factory AiReply.fromMap(Map<String, dynamic> data) => AiReply(
         activities: (data['activities'] as List<dynamic>?)?.cast<int>(),
         message: data['message'] as String?,
+        groupId: data['group_id'] as int?,
       );
 
   Map<String, dynamic> toMap() => {
         'activities': activities,
         'message': message,
+        'group_id': groupId,
       };
 
   /// `dart:convert`
@@ -33,10 +36,12 @@ class AiReply extends Equatable {
   AiReply copyWith({
     List<int>? activities,
     String? message,
+    int? groupId,
   }) {
     return AiReply(
       activities: activities ?? this.activities,
       message: message ?? this.message,
+      groupId: groupId ?? this.groupId,
     );
   }
 
@@ -44,5 +49,5 @@ class AiReply extends Equatable {
   bool get stringify => true;
 
   @override
-  List<Object?> get props => [activities, message];
+  List<Object?> get props => [activities, message, groupId];
 }

@@ -162,23 +162,25 @@ class BOTRepositoriesImp extends BOTRepositories {
         executeAndHandleErrors<List<ActivityEntity>>(
           () async {
             List<ActivityEntity> activities = [];
-            if (e.message != null) {
-              activities.add(
-                ActivityEntity(
-                  id: Random().nextInt(9999),
-                  groupId: activity.groupId,
-                  createdBy: bot,
-                  content: e.message!,
-                  createdAt: DateTime.now(),
-                  isApproved: true,
-                  type: MessageType.textMessage,
-                ),
-              );
-            }
-            if (e.activities?.isNotEmpty == true) {
-              activities.addAll(
-                await remoteDataSource.getActivities(e.activities ?? []),
-              );
+            if (e.groupId == activity.groupId || e.groupId == null) {
+              if (e.message != null) {
+                activities.add(
+                  ActivityEntity(
+                    id: Random().nextInt(9999),
+                    groupId: activity.groupId,
+                    createdBy: bot,
+                    content: e.message!,
+                    createdAt: DateTime.now(),
+                    isApproved: true,
+                    type: MessageType.textMessage,
+                  ),
+                );
+              }
+              if (e.activities?.isNotEmpty == true) {
+                activities.addAll(
+                  await remoteDataSource.getActivities(e.activities ?? []),
+                );
+              }
             }
             return activities;
           },
