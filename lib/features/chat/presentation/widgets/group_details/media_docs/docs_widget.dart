@@ -27,21 +27,15 @@ class _DocsWidgetState extends State<DocsWidget> {
 
         return ResConstrainedBoxAlign(
           child: ListTile(
-            onTap: () {
-              setState(() {
-                widget.files[i] =
-                    widget.files[i].copyWith(isLoading: true) as FileMessage;
-              });
-              handleTappedMessage(
-                tappedMessage: message,
-                messages: widget.files,
-                updateMessage: (index, updatedMessage) {
-                  setState(() {
-                    widget.files[index] = updatedMessage as FileMessage;
-                  });
-                },
-              );
-            },
+            onTap: () => handleTappedMessage(
+              tappedMessage: message,
+              messages: widget.files,
+              updateMessage: (index, updatedMessage) {
+                setState(() {
+                  widget.files[index] = updatedMessage as FileMessage;
+                });
+              },
+            ),
             shape: context.isPhoneWidth
                 ? const RoundedRectangleBorder(borderRadius: BorderRadius.zero)
                 : null,

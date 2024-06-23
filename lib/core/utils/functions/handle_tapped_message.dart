@@ -1,11 +1,13 @@
 import 'dart:io';
 import 'dart:typed_data';
 
+import 'package:data_sharing_organizing/core/utils/constants/app_constants.dart';
 import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
 import 'package:http/http.dart' as http;
 import 'package:open_filex/open_filex.dart';
 
 import 'package:path_provider/path_provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 Future<void> handleTappedMessage({
   required types.Message tappedMessage,
@@ -14,9 +16,18 @@ Future<void> handleTappedMessage({
 }) async {
   if (tappedMessage is types.FileMessage) {
     String localPath = tappedMessage.uri;
-    final String documentsDir = (await getApplicationDocumentsDirectory()).path;
 
     if (tappedMessage.uri.startsWith('http')) {
+      if (AppConst.isWeb) {
+        launchUrl(
+          Uri.parse(tappedMessage.uri),
+          mode: LaunchMode.platformDefault,
+        );
+        return;
+      }
+
+      final String documentsDir =
+          (await getApplicationDocumentsDirectory()).path;
       localPath = '$documentsDir/${tappedMessage.name}';
       if (!File(localPath).existsSync()) {
         try {
