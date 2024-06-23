@@ -1,5 +1,6 @@
 import 'package:data_sharing_organizing/core/utils/constants/app_color.dart';
 import 'package:data_sharing_organizing/core/utils/constants/app_constants.dart';
+import 'package:data_sharing_organizing/core/utils/functions/handle_image_in_chat.dart';
 import 'package:data_sharing_organizing/core/utils/services/dependency/provider_dependency.dart';
 import 'package:data_sharing_organizing/core/utils/styles.dart';
 import 'package:flutter/material.dart';
@@ -24,6 +25,7 @@ class BotChatWidget extends StatelessWidget {
         messages: c.botMessages,
         onBackgroundTap: ProviderDependency.group.closeFloatingButton,
         onMessageTap: c.handleMessageTap,
+        imageProviderBuilder: imageProviderBuilder,
         onMessageLongPress: c.handleMessageDoubleTap,
         onMessageDoubleTap: c.handleMessageDoubleTap,
         onPreviewDataFetched: c.handlePreviewDataFetched,

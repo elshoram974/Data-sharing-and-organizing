@@ -5,6 +5,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:data_sharing_organizing/core/utils/config/locale/generated/l10n.dart';
 import 'package:data_sharing_organizing/core/utils/enums/message_type/message_type.dart';
 import 'package:data_sharing_organizing/core/utils/enums/notification_type.dart';
+import 'package:data_sharing_organizing/core/utils/functions/handle_image_in_chat.dart';
 import 'package:data_sharing_organizing/core/utils/services/dependency/locator.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:data_sharing_organizing/core/utils/constants/app_color.dart';
@@ -340,6 +341,7 @@ class _GroupChatScreenState extends State<GroupChatScreen> {
       onAvatarTap: (user) => ProviderDependency.group.closeFloatingButton(),
       onMessageDoubleTap: onEditMessage,
       onMessageLongPress: onEditMessage,
+      imageProviderBuilder: imageProviderBuilder,
       onBackgroundTap: ProviderDependency.group.closeFloatingButton,
       messages: messages,
       onAttachmentPressed: _handleAttachmentPressed,
