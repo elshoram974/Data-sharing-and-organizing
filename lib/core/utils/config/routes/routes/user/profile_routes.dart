@@ -61,8 +61,8 @@ abstract final class ProfileRoutes {
         ),
         GoRoute(
           path: _userMyGroups,
-          onExit: (_) => onCloseApp(
-            context: _,
+          onExit: (context,_) => onCloseApp(
+            context: context,
             canGoTo: [],
             currentRoute: userMyGroups,
           ),

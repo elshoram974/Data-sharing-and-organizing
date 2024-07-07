@@ -52,7 +52,7 @@ final class HandlePickedImage {
     if (aspectRatioPresets != null) aspects.addAll(aspectRatioPresets);
     return ImageCropper().cropImage(
       sourcePath: image.path,
-      aspectRatioPresets: aspects,
+      aspectRatio: CropAspectRatio(ratioX: aspects.first.data?.$1.toDouble() ?? 0.0, ratioY: aspects.first.data?.$2.toDouble() ?? 0.0,),
       uiSettings: [
         AndroidUiSettings(
           toolbarTitle: S.current.edit,
@@ -66,12 +66,10 @@ final class HandlePickedImage {
         ),
         WebUiSettings(
           context: AppRoute.key.currentContext!,
-          enableZoom: true,
-          enableResize: aspectRatioPresets != null,
-          mouseWheelZoom: true,
-          showZoomer: true,
-          enableExif: true,
-          presentStyle: CropperPresentStyle.page,
+          zoomable: true,
+          scalable: true,
+          zoomOnWheel: true,
+          presentStyle: WebPresentStyle.page,
         ),
       ],
     );

@@ -34,8 +34,8 @@ abstract final class AuthRoutes {
   static GoRoute call() {
     return GoRoute(
       path: login,
-      onExit: (_) => onCloseApp(
-        context: _,
+      onExit: (context,_) => onCloseApp(
+        context: context,
         canGoTo: [AppRoute.userHome],
         currentRoute: login,
       ),

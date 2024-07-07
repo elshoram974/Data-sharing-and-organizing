@@ -25,8 +25,8 @@ class ChooseDialogListTile<T> extends StatelessWidget {
       contentPadding:
           const EdgeInsets.symmetric(horizontal: AppConst.defaultPadding),
       leading: Radio<T>(
-        fillColor: MaterialStateProperty.resolveWith(
-          (s) => s.contains(MaterialState.selected)
+        fillColor: WidgetStateProperty.resolveWith(
+          (s) => s.contains(WidgetState.selected)
               ? AppColor.primary
               : Colors.white,
         ),
